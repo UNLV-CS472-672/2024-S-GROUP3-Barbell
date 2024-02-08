@@ -1,1 +1,3 @@
-# 2024-S-GROUP3-Barbell
+# Barbell, Group 3.
+
+

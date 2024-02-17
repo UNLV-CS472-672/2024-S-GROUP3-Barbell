@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
+    "build": "prisma generate && next build",
+    "prisma": "npx prisma studio",
+    "postinstall": "prisma generate",
     "lint": "next lint",
     "lint-fix": "next lint --fix",
     "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx,mdx}\" --cache",

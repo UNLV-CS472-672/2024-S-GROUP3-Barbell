@@ -1,10 +1,44 @@
 # Barbell Project - Group 3
 
-The repository for the Barbell project, Group 3. 
+The repository for the Barbell project, Group 3.
 
 Quickstart:
+
 - [Installation](https://scribehow.com/shared/Quickstart_Barbell___I7R2_mESL68FTCAMcbF8w)
-- 
+- [Issue Board + Development](https://scribehow.com/shared/Issue_and_start_working_on_Barbell__ibGJtJNdRfqZ1aucOCC0sg)
+- [When you fininishing your issue](#)
+
+There will be merge conflicts, so do check out the resources here of how to resolve them:
+
+- [youtube Vid](https://www.youtube.com/watch?v=QmKdodJU-js)
+- [blog](https://leonardomontini.dev/merge-conflict-vscode/)
+- [vscode docs](https://code.visualstudio.com/docs/sourcecontrol/overview)
+
+Whenever you want to sync with the main branch, get the latest main branch and then merge it with your branch. This will help you to avoid merge conflicts.
+
+```bash
+# in your local branch, even if your changes doens't affect the main
+# we would still do this to not stash changes
+git add .
+git commit -m "messages"
+git push
+
+# after clean the status of your local, now check out the main branch
+git checkout main
+git fetch && git pull
+
+# now go back to your branch and merge the main branch
+git checkout your-branch
+
+# at this point you have two options
+# 1. merge the main branch with your branch
+git merge --no-ff main
+
+# 2. rebase the main branch with your branch
+git rebase main
+```
+
+That's it! You are now up to date with the main branch. Now submit and write that sweet PR.
 
 ## Git Commit Convention
 
@@ -44,10 +78,9 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 
 # Template for Issues
 
-For opening up an issue, you can follow the following template: 
+For opening up an issue, you can follow the following template:
 
 ```markdown
-
 ## Description
 
 Provide a concise summary of the issue, highlighting the core aspect that needs attention or resolution. Elaborate on the issue, including what prompted it, its impact, and any relevant details that will aid in understanding the scope and urgency of the problem.
@@ -61,22 +94,21 @@ Include any links, documents, or resources that could provide further context or
 
 Outline the specific objectives and requirements needed to finish the issue. Clearly state what success looks like for this issue.
 
-- [ ] Requirement 1: 
-- [ ] Requirement 2: 
-- [ ] Requirement 3: 
-- [ ] Requirement 4: 
+- [ ] Requirement 1:
+- [ ] Requirement 2:
+- [ ] Requirement 3:
+- [ ] Requirement 4:
 
 ## (Optional)
 
 If you have potential solutions or approaches in mind, please outline them here. This section is optional and can include any preliminary ideas or alternative strategies.
 
-1. **Solution 1**: 
-2. **Solution 2**: 
+1. **Solution 1**:
+2. **Solution 2**:
 
 ## Further Comments
 
 Add any additional comments or notes that haven't been covered above. This could include concerns, observations, or any other relevant information.
-
 ```
 
 # Template for Pull Request / Code Review
@@ -88,4 +120,3 @@ TBD
 <div align="center" style="background-color: #000000; border-radius: 8px; padding: 20px; margin: 20px 0;">
   <strong>Note:</strong> This README is a work in progress and will be updated as the project progresses. Not strictly enforced, just a template for you to START with.
 </div>
-

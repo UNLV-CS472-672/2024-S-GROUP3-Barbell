@@ -112,10 +112,6 @@ If you have potential solutions or approaches in mind, please outline them here.
 Add any additional comments or notes that haven't been covered above. This could include concerns, observations, or any other relevant information.
 ```
 
-# Template for Pull Request / Code Review
-
-TBD
-
 ---
 
 <div align="center" style="background-color: #000000; border-radius: 8px; padding: 20px; margin: 20px 0;">

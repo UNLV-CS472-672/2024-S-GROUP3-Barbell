@@ -41,15 +41,16 @@ git rebase main
 That's it! You are now up to date with the main branch. Now submit and write that sweet PR.
 
 ## Git Commit Convention
-
-- ✨ **feat / feature**: Introduces completely new code or new features.
-- 🐛 **fix**: Implements changes that fix a bug. Ideally, reference an issue if present.
-- ♻️ **refactor**: Includes any code-related change that is neither a fix nor a feature.
-- ✅ **build**: Encompasses all changes related to the build of the software, including changes to dependencies or the addition of new ones.
-- ⚡️ **test**: Pertains to all changes regarding tests, whether adding new tests or modifying existing ones.
-- 🚰 **ci**: Involves all changes related to the configuration of continuous integration, such as GitHub Actions or other CI systems.
-- 📚 **docs**: Includes all changes to documentation, such as README files, or any other documentation present in the repository.
-- 🗑️ **chore**: Captures all changes to the repository that do not fit into the above categories.
+1. Use present tense in your commit messages. For example, use "✨feature: Add xyz to component qrs" instead of "✨feature: Added xyz to component qrs". ([Source](https://stackoverflow.com/questions/3580013/should-i-use-past-or-present-tense-in-git-commit-messages))
+2. Use the emojis below to distinguish what type of change you have made in your commit. This will help keep commit messages consistent and easier to read. For example, "📚docs: Update commit conventions in README.md".
+- ✨**feature**: Introduces completely new code or new features.
+- 🐛**fix**: Implements changes that fix a bug. Ideally, reference an issue if present.
+- ♻️**refactor**: Includes any code-related change that is neither a fix nor a feature.
+- ✅**build**: Encompasses all changes related to the build of the software, including changes to dependencies or the addition of new ones.
+- ⚡️**test**: Pertains to all changes regarding tests, whether adding new tests or modifying existing ones.
+- 🚰**ci**: Involves all changes related to the configuration of continuous integration, such as GitHub Actions or other CI systems.
+- 📚**docs**: Includes all changes to documentation, such as README files, or any other documentation present in the repository.
+- 🗑️**chore**: Captures all changes to the repository that do not fit into the above categories.
 
 ## Fields for GitHub Issue Boards
 

@@ -1,3 +1,6 @@
+For pull request template, you can copy this
+
+```markdown
 # What type of PR is this? (Check all that apply)
 - [ ] ✨**feature**: Introduces completely new code or new features.
 - [ ] 🐛**fix**: Implements changes that fix a bug. Ideally, reference an issue if present.
@@ -34,3 +37,5 @@ Link to external documentation:
 # [Optional] Are there any post-deployment tasks we need to perform?
 
 # Additional notes
+
+```

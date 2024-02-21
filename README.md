@@ -10,11 +10,12 @@ Quickstart:
 
 There will be merge conflicts, so do check out the resources here of how to resolve them:
 
-- [youtube Vid](https://www.youtube.com/watch?v=QmKdodJU-js)
+- [youtube vid](https://www.youtube.com/watch?v=QmKdodJU-js)
 - [blog](https://leonardomontini.dev/merge-conflict-vscode/)
 - [vscode docs](https://code.visualstudio.com/docs/sourcecontrol/overview)
 
-Whenever you want to sync with the main branch, get the latest main branch and then merge it with your branch. This will help you to avoid merge conflicts.
+Whenever you want to sync with the main branch, get the latest main branch and then merge it with your branch. This will help you to avoid merge conflicts. There is some funny tools can help you with this 
+as well.
 
 ```bash
 # in your local branch, even if your changes doens't affect the main
@@ -41,6 +42,7 @@ git rebase main
 That's it! You are now up to date with the main branch. Now submit and write that sweet PR.
 
 ## Git Commit Convention
+
 1. Use present tense in your commit messages. For example, use "✨feature: Add xyz to component qrs" instead of "✨feature: Added xyz to component qrs". ([Source](https://stackoverflow.com/questions/3580013/should-i-use-past-or-present-tense-in-git-commit-messages))
 2. Use the emojis below to distinguish what type of change you have made in your commit. This will help keep commit messages consistent and easier to read. For example, "📚docs: Update commit conventions in README.md".
 - ✨feature: Introduces completely new code or new features.

@@ -1,24 +1,28 @@
 {
-  "name": "create-t3-turbo",
+  "name": "barbell",
   "private": true,
   "engines": {
     "node": ">=18.18.2"
   },
   "packageManager": "pnpm@8.11.0",
   "scripts": {
-    "build": "turbo build",
-    "clean": "git clean -xdf node_modules",
+    "build"           : "turbo build",
+    "clean"           : "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
-    "postinstall": "pnpm lint:ws",
-    "db:push": "pnpm -F db push",
-    "db:studio": "pnpm -F db studio",
-    "dev": "turbo dev --parallel --filter=!@acme/expo",
-    "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
-    "format:fix": "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
-    "lint": "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
-    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
-    "lint:ws": "pnpm dlx sherif@latest",
-    "typecheck": "turbo typecheck"
+
+    "dev"             : "turbo dev --parallel --filter=!@acme/expo",
+    "db:studio"       : "pnpm db:prisma && cd packages/prisma && pnpm dotenv -e ../../.env prisma studio",
+    "db:prisma"       : "cd packages/prisma && pnpm prisma generate && pnpm dotenv -e ../../.env prisma studio",
+    
+    "format"          : "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
+    "format:fix"      : "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
+    
+    "lint"            : "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:fix"        : "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:ws"         : "pnpm dlx sherif@latest",
+
+    "typecheck"       : "turbo typecheck",
+    "postinstall"     : "pnpm lint:ws"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:^",
@@ -26,11 +30,6 @@
     "prettier": "^3.2.5",
     "turbo": "^1.12.4",
     "typescript": "^5.3.3"
-  },
-  "pnpm": {
-    "overrides": {
-      "@auth/core": "0.18.0"
-    }
   },
   "prettier": "@acme/prettier-config"
 }

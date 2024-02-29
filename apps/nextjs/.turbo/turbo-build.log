@@ -1,0 +1,38 @@
+
+> @acme/nextjs@0.1.0 build C:\Users\nvktv\Downloads\expo-dev-b566223dd6d591d93f48d77de57cec2eb222e577\apps\nextjs
+> pnpm with-env next build
+
+
+> @acme/nextjs@0.1.0 with-env C:\Users\nvktv\Downloads\expo-dev-b566223dd6d591d93f48d77de57cec2eb222e577\apps\nextjs
+> dotenv -e ../../.env -- "next" "build"
+
+   ▲ Next.js 14.0.3
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/4) ...
+   Generating static pages (1/4) 
+   Generating static pages (2/4) 
+   Generating static pages (3/4) 
+ ✓ Generating static pages (4/4) 
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ λ /                                    1.25 kB         100 kB
+├ λ /_not-found                          868 B          84.8 kB
+├ λ /api/trpc/[trpc]                     0 B                0 B
+├ λ /sign-in/[[...sign-in]]              193 B           103 kB
+└ λ /sign-up/[[...sign-up]]              193 B           103 kB
++ First Load JS shared by all            84 kB
+  ├ chunks/1dd3208c-2604574b38066eb0.js  53.3 kB
+  ├ chunks/53-b06d6fbc3c9f04f5.js        28.7 kB
+  ├ chunks/main-app-612549c73a22d8b8.js  218 B
+  └ chunks/webpack-4b2fff46233f6669.js   1.71 kB
+
+
+λ  (Dynamic)  server-rendered on demand using Node.js
+

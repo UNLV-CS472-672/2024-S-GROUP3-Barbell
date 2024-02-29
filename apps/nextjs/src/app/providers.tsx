@@ -1,17 +1,18 @@
-"use client"
+'use client'
 
-import { env } from "@/env.mjs"
-import { api } from "@/utils/api"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental"
-import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client"
-import { useState } from "react"
-import superjson from "superjson"
+import { useState } from 'react'
+import { env } from '@/env.mjs'
+import { api } from '@/utils/api'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
+import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client'
+import superjson from 'superjson'
+import SuperJSON from 'superjson'
 
 const getBaseUrl = () => {
   // browser should use relative url
-  if (typeof window !== "undefined") return ""
+  if (typeof window !== 'undefined') return ''
 
   // SSR should use vercel url
   if (env.VERCEL_URL) return env.VERCEL_URL
@@ -39,19 +40,19 @@ export function TRPCReactProvider(props: {
   /*  */
   const [trpcClient] = useState(() =>
     api.createClient({
-      transformer: superjson,
       links: [
         loggerLink({
-          enabled: (opts) =>
-            process.env.NODE_ENV === "development" ||
-            (opts.direction === "down" && opts.result instanceof Error),
+          enabled: (op) =>
+            process.env.NODE_ENV === 'development' ||
+            (op.direction === 'down' && op.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({
-          url: `${getBaseUrl()}/api/trpc`,
-          headers() {
-            const headers = new Map(props.headers)
-            headers.set("x-trpc-source", "nextjs-react")
-            return Object.fromEntries(headers)
+          transformer: SuperJSON,
+          url: getBaseUrl() + '/api/trpc',
+          async headers() {
+            const headers = new Headers()
+            headers.set('x-trpc-source', 'nextjs-react')
+            return headers
           },
         }),
       ],
@@ -59,13 +60,10 @@ export function TRPCReactProvider(props: {
   )
 
   return (
-    <api.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryStreamedHydration transformer={superjson}>
-          {props.children}
-        </ReactQueryStreamedHydration>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </api.Provider>
+    <QueryClientProvider client={queryClient}>
+      <api.Provider client={trpcClient} queryClient={queryClient}>
+        {props.children}
+      </api.Provider>
+    </QueryClientProvider>
   )
 }

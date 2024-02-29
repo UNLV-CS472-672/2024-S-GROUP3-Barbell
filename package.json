@@ -10,7 +10,7 @@
     "clean"           : "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
 
-    "dev"             : "turbo dev --parallel --filter=!@acme/expo",
+    "dev"             : "pnpm db:studio && turbo dev --parallel --filter=!@acme/expo",
     "db:studio"       : "pnpm db:prisma && cd packages/prisma && pnpm dotenv -e ../../.env prisma studio",
     "db:prisma"       : "cd packages/prisma && pnpm prisma generate && pnpm dotenv -e ../../.env prisma studio",
     

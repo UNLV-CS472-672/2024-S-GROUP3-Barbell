@@ -7,12 +7,12 @@
  * The pieces you will need to use are documented accordingly near the end
  */
 // import type { inferAsyncReturnType } from "@trpc/server"
-import { initTRPC } from "@trpc/server"
-import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
-import superjson from "superjson"
-import { ZodError } from "zod"
+import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
+import { initTRPC } from '@trpc/server'
+import superjson from 'superjson'
+import { ZodError } from 'zod'
 
-import { prisma } from "@acme/prisma"
+import { prisma } from '@acme/prisma'
 
 /**
  * 1. CONTEXT
@@ -91,17 +91,6 @@ const t = initTRPC
     },
   })
 
-// const t = initTRPC.context<typeof createTRPCContext>().create({
-//   transformer: superjson,
-//   errorFormatter: ({ shape, error }) => ({
-//     ...shape,
-//     data: {
-//       ...shape.data,
-//       zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
-//     },
-//   }),
-// })
-
 /**
  * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
  *
@@ -128,6 +117,7 @@ export const publicProcedure = t.procedure
  * Reusable middleware that enforces users are logged in before running the
  * procedure
  */
+
 // const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
 //   if (!ctx.session?.user) {
 //     throw new TRPCError({ code: "UNAUTHORIZED" })

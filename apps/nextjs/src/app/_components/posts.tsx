@@ -1,20 +1,19 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-
-import type { RouterOutputs } from "@/utils/api"
-import { api } from "@/utils/api"
+import type { RouterOutputs } from '@/utils/api'
+import { useState } from 'react'
+import { api } from '@/utils/api'
 
 export function CreatePostForm() {
   const utils = api.useUtils()
 
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
 
   const { mutateAsync: createPost, error } = api.post.create.useMutation({
     async onSuccess() {
-      setTitle("")
-      setContent("")
+      setTitle('')
+      setContent('')
       await utils.post.all.invalidate()
     },
   })
@@ -29,8 +28,8 @@ export function CreatePostForm() {
             title,
             content,
           })
-          setTitle("")
-          setContent("")
+          setTitle('')
+          setContent('')
           await utils.post.all.invalidate()
         } catch {
           // noop
@@ -63,7 +62,7 @@ export function CreatePostForm() {
       <button type="submit" className="rounded bg-pink-400 p-2 font-bold">
         Create
       </button>
-      {error?.data?.code === "UNAUTHORIZED" && (
+      {error?.data?.code === 'UNAUTHORIZED' && (
         <span className="mt-2 text-red-500">You must be logged in to post</span>
       )}
     </form>
@@ -71,6 +70,8 @@ export function CreatePostForm() {
 }
 
 export function PostList() {
+  // Posts are already in the cache from our RSC pre-fetch,
+  // so this will not fetch until the data goes stale
   const [posts] = api.post.all.useSuspenseQuery()
 
   if (posts.length === 0) {
@@ -97,7 +98,7 @@ export function PostList() {
 }
 
 export function PostCard(props: {
-  post: RouterOutputs["post"]["all"][number]
+  post: RouterOutputs['post']['all'][number]
 }) {
   const utils = api.useUtils()
   const deletePost = api.post.delete.useMutation()
@@ -130,14 +131,14 @@ export function PostCardSkeleton(props: { pulse?: boolean }) {
       <div className="flex-grow">
         <h2
           className={`w-1/4 rounded bg-pink-400 text-2xl font-bold ${
-            pulse && "animate-pulse"
+            pulse && 'animate-pulse'
           }`}
         >
           &nbsp;
         </h2>
         <p
           className={`mt-2 w-1/3 rounded bg-current text-sm ${
-            pulse && "animate-pulse"
+            pulse && 'animate-pulse'
           }`}
         >
           &nbsp;

@@ -15,6 +15,7 @@ const defineConfig = (): ExpoConfig => ({
   },
   updates: {
     fallbackToCacheTimeout: 0,
+    // FIXME: update this when we deploy our app
     url: 'https://u.expo.dev/a5b98934-bf53-4573-ba91-972c22a6759a',
   },
   assetBundlePatterns: ['**/*'],
@@ -29,11 +30,6 @@ const defineConfig = (): ExpoConfig => ({
       backgroundColor: '#1F104A',
     },
   },
-  // extra: {
-  //   eas: {
-  //     projectId: "your-eas-project-id",
-  //   },
-  // },
   extra: {
     eas: {
       projectId: 'a5b98934-bf53-4573-ba91-972c22a6759a',

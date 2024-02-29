@@ -1,17 +1,17 @@
-import React from "react"
-import Constants from "expo-constants"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { httpBatchLink, loggerLink } from "@trpc/client"
-import { createTRPCReact } from "@trpc/react-query"
-import superjson from "superjson"
+import React from 'react'
+import Constants from 'expo-constants'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { httpBatchLink, loggerLink } from '@trpc/client'
+import { createTRPCReact } from '@trpc/react-query'
+import superjson from 'superjson'
 
-import type { AppRouter } from "@acme/api"
+import type { AppRouter } from '@acme/api'
 
 /**
  * A set of typesafe hooks for consuming your API.
  */
 export const api = createTRPCReact<AppRouter>()
-export { type RouterInputs, type RouterOutputs } from "@acme/api"
+export { type RouterInputs, type RouterOutputs } from '@acme/api'
 
 /**
  * Extend this function when going to production by
@@ -28,12 +28,11 @@ const getBaseUrl = () => {
    */
 
   const debuggerHost = Constants.expoConfig?.hostUri
-  const localhost = debuggerHost?.split(":")[0]
+  const localhost = debuggerHost?.split(':')[0]
 
   if (!localhost) {
-    // return "https://turbo.t3.gg";
     throw new Error(
-      "Failed to get localhost. Please point to your production server.",
+      'Failed to get localhost. Please point to your production server.',
     )
   }
   return `http://${localhost}:3000`
@@ -45,27 +44,36 @@ const getBaseUrl = () => {
  */
 
 export function TRPCProvider(props: { children: React.ReactNode }) {
-  const [queryClient] = React.useState(() => new QueryClient())
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            // Since queries are prefetched on the server, we set a stale time so that
+            // queries aren't immediately refetched on the client
+            staleTime: 60 * 1000,
+          },
+        },
+      }),
+  )
+
   const [trpcClient] = React.useState(() =>
-    /*  */
     api.createClient({
-      // @ts-ignore
-      transformer: superjson,
       links: [
-        // @ts-ignore
+        loggerLink({
+          enabled: (opts) =>
+            process.env.NODE_ENV === 'development' ||
+            (opts.direction === 'down' && opts.result instanceof Error),
+          colorMode: 'ansi',
+        }),
         httpBatchLink({
+          transformer: superjson,
           url: `${getBaseUrl()}/api/trpc`,
           headers() {
             const headers = new Map<string, string>()
-            headers.set("x-trpc-source", "expo-react")
+            headers.set('x-trpc-source', 'expo-react')
             return Object.fromEntries(headers)
           },
-        }),
-        loggerLink({
-          enabled: (opts) =>
-            process.env.NODE_ENV === "development" ||
-            (opts.direction === "down" && opts.result instanceof Error),
-          colorMode: "ansi",
         }),
       ],
     }),

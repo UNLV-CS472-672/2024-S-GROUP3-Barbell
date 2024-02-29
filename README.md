@@ -2,7 +2,7 @@
 
 The repository for the Barbell project, Group 3.
 
-Quickstart:
+Quickstart (Deprecated):
 
 - [Installation](https://scribehow.com/shared/Quickstart_Barbell___I7R2_mESL68FTCAMcbF8w)
 - [Issue Board + Development](https://scribehow.com/shared/Issue_and_start_working_on_Barbell__ibGJtJNdRfqZ1aucOCC0sg)

@@ -5,6 +5,8 @@ import { Link, Stack } from 'expo-router'
 import { SignedIn, SignedOut } from '@clerk/clerk-expo'
 import { FlashList } from '@shopify/flash-list'
 
+
+
 import type { RouterOutputs } from '~/utils/api'
 import SignInWithOAuth from '~/components/auth/sign-in-w-oauth'
 import { SignOut } from '~/components/auth/sign-out'
@@ -99,7 +101,7 @@ function CreatePost() {
   )
 }
 
-const StartPage = () => {
+const Index = () => {
   const utils = api.useUtils()
 
   const postQuery = api.post.all.useQuery()
@@ -142,7 +144,6 @@ const StartPage = () => {
         />
 
         <CreatePost />
-
         <SignedIn>
           <Text>You are Signed in</Text>
           <SignOut />
@@ -155,4 +156,4 @@ const StartPage = () => {
   )
 }
 
-export default StartPage
+export default Index

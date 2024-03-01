@@ -38,13 +38,13 @@ const SignInWithOAuth = () => {
       const { createdSessionId, setActive } = await startOAuthFlow()
 
 
-      if (createdSessionId && setActive) {
-        setActive({ session: createdSessionId })
-
+      if (createdSessionId) {
+        setActive?.({ session: createdSessionId });
         // so it naviagates back here, but it doesnt reg that,
-        // router.push('/'); // Router push to the landing page
+        // router.replace("/");
+        // alert('Sign in successful')
       } else {
-        // Handle the case where additional steps are needed
+        alert('Sign in failed')
       }
     } catch (err: any) {
       Alert.alert(

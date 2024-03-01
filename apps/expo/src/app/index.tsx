@@ -101,7 +101,7 @@ function CreatePost() {
   )
 }
 
-const Index = () => {
+const App = () => {
   const utils = api.useUtils()
 
   const postQuery = api.post.all.useQuery()
@@ -156,4 +156,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default App

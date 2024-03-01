@@ -288,7 +288,7 @@ importers:
   packages/prisma:
     dependencies:
       '@prisma/client':
-        specifier: 5.7.0
+        specifier: ^5.7.0
         version: 5.7.0(prisma@5.10.2)
       prisma:
         specifier: ^5.10.2

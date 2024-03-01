@@ -12,7 +12,7 @@
 
     "dev"             : "turbo dev --parallel --filter=!@acme/expo",
     "db:studio"       : "pnpm db:prisma && cd packages/prisma && pnpm dotenv -e ../../.env prisma studio",
-    "db:prisma"       : "cd packages/prisma && pnpm prisma generate && pnpm dotenv -e ../../.env prisma studio",
+    "db:prisma"       : "cd packages/prisma && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push",
     
     "format"          : "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
     "format:fix"      : "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",

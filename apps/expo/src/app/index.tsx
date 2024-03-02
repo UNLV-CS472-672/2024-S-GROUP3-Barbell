@@ -101,7 +101,7 @@ function CreatePost() {
   )
 }
 
-const App = () => {
+const StartPage = () => {
   const utils = api.useUtils()
 
   const postQuery = api.post.all.useQuery()
@@ -156,4 +156,4 @@ const App = () => {
   )
 }
 
-export default App
+export default StartPage

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Alert, Button, StyleSheet, View } from 'react-native'
+import { router } from 'expo-router'
 import * as WebBrowser from 'expo-web-browser'
 import { useOAuth } from '@clerk/clerk-expo'
-import { router } from 'expo-router';
 
 import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
 
@@ -15,7 +15,7 @@ const SignInWithOAuth = () => {
 
   const { startOAuthFlow: startGoogleOAuthFlow } = useOAuth({
     strategy: 'oauth_google',
-    // redirectUrl: '/', 
+    // redirectUrl: '/',
   })
   const { startOAuthFlow: startFacebookOAuthFlow } = useOAuth({
     strategy: 'oauth_facebook',
@@ -37,9 +37,8 @@ const SignInWithOAuth = () => {
 
       const { createdSessionId, setActive } = await startOAuthFlow()
 
-
       if (createdSessionId) {
-        setActive?.({ session: createdSessionId });
+        setActive?.({ session: createdSessionId })
         // so it naviagates back here, but it doesnt reg that,
         // router.replace("/");
         // alert('Sign in successful')

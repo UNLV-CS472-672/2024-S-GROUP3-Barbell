@@ -11,7 +11,7 @@
     "clean:workspaces": "turbo clean",
 
     "dev"             : "turbo dev --parallel --filter=!@acme/expo",
-    "db:studio"       : "pnpm db:prisma && cd packages/prisma && pnpm dotenv -e ../../.env prisma studio",
+    "db:studio"       : "pnpm db:prisma && cd packages/prisma && pnpm dotenv -e ../../.env -- prisma studio -p 6969",
     "db:prisma"       : "cd packages/prisma && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push",
     
     "format"          : "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",

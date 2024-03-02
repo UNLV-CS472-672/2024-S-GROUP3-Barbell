@@ -85,3 +85,15 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 <div align="center" style="background-color: #000000; border-radius: 8px; padding: 20px; margin: 20px 0;">
   <strong>Note:</strong> This README is a work in progress and will be updated as the project progresses. Not strictly enforced, just a template for you to START with.
 </div>
+
+
+# Commons Bugs Encountered
+
+[SKD Not found](https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-location-with-sdk-dir-in-the-local-properties-fil)
+[expo-router not found](https://github.com/expo/router/issues/748)
+[Unmatched Route with Clerk -- Window only](https://github.com/expo/router/issues/457)
+
+In case you encountered, Failed to get localhost. Please point to your production server.
+
++ Check the entire constants from expo-constants and see if it exist the hostUri
++ If it doens't exist, you can add it manually.

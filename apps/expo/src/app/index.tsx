@@ -5,8 +5,6 @@ import { Link, Stack } from 'expo-router'
 import { SignedIn, SignedOut } from '@clerk/clerk-expo'
 import { FlashList } from '@shopify/flash-list'
 
-
-
 import type { RouterOutputs } from '~/utils/api'
 import SignInWithOAuth from '~/components/auth/sign-in-w-oauth'
 import { SignOut } from '~/components/auth/sign-out'
@@ -157,3 +155,5 @@ const StartPage = () => {
 }
 
 export default StartPage
+
+

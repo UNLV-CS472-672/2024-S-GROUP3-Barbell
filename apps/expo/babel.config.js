@@ -10,7 +10,7 @@ module.exports = (api) => {
     plugins: [
       require.resolve('expo-router/babel'),
       ['module:react-native-dotenv'],
-      require.resolve("react-native-reanimated/plugin"),
+      require.resolve('react-native-reanimated/plugin'),
     ],
   }
 }

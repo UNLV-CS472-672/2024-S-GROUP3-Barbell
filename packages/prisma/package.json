@@ -22,7 +22,7 @@
     "db:studio": "dotenv -e ../../.env -- prisma studio -p 6969"
   },
   "dependencies": {
-    "@prisma/client": "^5.7.0",
+    "@prisma/client": "^5.10.2",
     "prisma": "^5.10.2",
     "tiny-invariant": "^1.3.3"
   },

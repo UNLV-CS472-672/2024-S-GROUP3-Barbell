@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@acme/api": "workspace:^0.1.0",
-    "@acme/prisma": "workspace:^0.1.0",
+    "@acme/db": "workspace:^0.1.0",
     "@acme/ui": "workspace:^0.1.0",
     "@acme/validators": "workspace:^0.1.0",
     "@clerk/nextjs": "^4.29.7",

@@ -55,9 +55,9 @@
 //
 // Read this bad boi: https://pris.ly/d/help/next-js-best-practices
 
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from '@prisma/client'
 
-import { env } from "./env.mjs"
+import { env } from './env.mjs'
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
@@ -67,11 +67,11 @@ export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
     log:
-      process.env.NODE_ENV === "development" &&
-      (process.env.LOG === undefined || process.env.LOG === "true")
-        ? ["query", "error", "warn"]
-        : ["error"],
-    errorFormat: "pretty",
+      process.env.NODE_ENV === 'development' &&
+      (process.env.LOG === undefined || process.env.LOG === 'true')
+        ? ['query', 'error', 'warn']
+        : ['error'],
+    errorFormat: 'pretty',
     datasourceUrl: env.DATABASE_URL,
   })
 
@@ -81,4 +81,4 @@ export const prisma =
 
 // export const prisma = globalForPrisma.prisma ?? new PrismaClient()
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma

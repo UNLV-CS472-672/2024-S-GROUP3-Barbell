@@ -162,9 +162,9 @@ importers:
       '@acme/api':
         specifier: workspace:^0.1.0
         version: link:../../packages/api
-      '@acme/prisma':
+      '@acme/db':
         specifier: workspace:^0.1.0
-        version: link:../../packages/prisma
+        version: link:../../packages/db
       '@acme/ui':
         specifier: workspace:^0.1.0
         version: link:../../packages/ui
@@ -253,9 +253,9 @@ importers:
 
   packages/api:
     dependencies:
-      '@acme/prisma':
+      '@acme/db':
         specifier: workspace:^0.1.0
-        version: link:../prisma
+        version: link:../db
       '@trpc/client':
         specifier: next
         version: 11.0.0-alpha-next-2023-10-26-15-15-56.93(@trpc/server@11.0.0-next-beta.297)
@@ -291,7 +291,7 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
-  packages/prisma:
+  packages/db:
     dependencies:
       '@prisma/client':
         specifier: ^5.10.2
@@ -6841,6 +6841,7 @@ packages:
   /eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    hasBin: true
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
       '@eslint-community/regexpp': 4.10.0
@@ -10801,6 +10802,7 @@ packages:
   /prisma@5.10.2:
     resolution: {integrity: sha512-hqb/JMz9/kymRE25pMWCxkdyhbnIWrq+h7S6WysJpdnCvhstbJSNP/S6mScEcqiB8Qv2F+0R3yG+osRaWqZacQ==}
     engines: {node: '>=16.13'}
+    hasBin: true
     requiresBuild: true
     dependencies:
       '@prisma/engines': 5.10.2

@@ -12,7 +12,7 @@ import { initTRPC } from '@trpc/server'
 import superjson from 'superjson'
 import { ZodError } from 'zod'
 
-import { prisma } from '@acme/prisma'
+import { prisma } from '@acme/db'
 
 /**
  * 1. CONTEXT

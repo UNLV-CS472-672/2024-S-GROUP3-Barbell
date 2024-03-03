@@ -90,8 +90,13 @@ const t = initTRPC
       }
     },
   })
-  
+
 /* ------------------------------------------------------------------------ */
+/**
+ * Create a server-side caller
+ * @see https://trpc.io/docs/server/server-side-calls
+ */
+export const createCallerFactory = t.createCallerFactory
 
 /**
  * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
@@ -119,7 +124,6 @@ export const publicProcedure = t.procedure
  * Reusable middleware that enforces users are logged in before running the
  * procedure
  */
-
 
 /* ------------------------------------------------------------------------ */
 

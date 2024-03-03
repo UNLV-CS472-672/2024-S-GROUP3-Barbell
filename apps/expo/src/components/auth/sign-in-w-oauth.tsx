@@ -3,7 +3,6 @@ import { Alert, Button, StyleSheet, View } from 'react-native'
 import { router } from 'expo-router'
 import * as WebBrowser from 'expo-web-browser'
 import { useOAuth } from '@clerk/clerk-expo'
-
 import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
 
 WebBrowser.maybeCompleteAuthSession()
@@ -15,16 +14,14 @@ const SignInWithOAuth = () => {
 
   const { startOAuthFlow: startGoogleOAuthFlow } = useOAuth({
     strategy: 'oauth_google',
-    // redirectUrl: '/',
   })
   const { startOAuthFlow: startFacebookOAuthFlow } = useOAuth({
     strategy: 'oauth_facebook',
-    // redirectUrl: '/',
   })
   const { startOAuthFlow: startAppleOAuthFlow } = useOAuth({
     strategy: 'oauth_apple',
-    // redirectUrl: '/',
   })
+  // add mores strategies here
 
   const onPressOAuth = React.useCallback(async (provider: string) => {
     try {
@@ -39,9 +36,9 @@ const SignInWithOAuth = () => {
 
       if (createdSessionId) {
         setActive?.({ session: createdSessionId })
+
         // so it naviagates back here, but it doesnt reg that,
-        // router.replace("/");
-        // alert('Sign in successful')
+        router.replace("/");
       } else {
         alert('Sign in failed')
       }

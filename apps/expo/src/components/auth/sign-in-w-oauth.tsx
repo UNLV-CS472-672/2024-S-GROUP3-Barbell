@@ -1,8 +1,9 @@
 import React from 'react'
-import { Button } from 'react-native'
+import { Alert, Button, StyleSheet, View } from 'react-native'
+import { router } from 'expo-router'
 import * as WebBrowser from 'expo-web-browser'
-import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
 import { useOAuth } from '@clerk/clerk-expo'
+import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -11,26 +12,71 @@ const SignInWithOAuth = () => {
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser()
 
-  const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' })
+  const { startOAuthFlow: startGoogleOAuthFlow } = useOAuth({
+    strategy: 'oauth_google',
+  })
+  const { startOAuthFlow: startFacebookOAuthFlow } = useOAuth({
+    strategy: 'oauth_facebook',
+  })
+  const { startOAuthFlow: startAppleOAuthFlow } = useOAuth({
+    strategy: 'oauth_apple',
+  })
+  // add mores strategies here
 
-  const onPress = React.useCallback(async () => {
+  const onPressOAuth = React.useCallback(async (provider: string) => {
     try {
-      const { createdSessionId, signIn, signUp, setActive } =
-        await startOAuthFlow()
+      const startOAuthFlow =
+        provider === 'google'
+          ? startGoogleOAuthFlow
+          : provider === 'facebook'
+            ? startFacebookOAuthFlow
+            : startAppleOAuthFlow
 
-      if (createdSessionId && setActive) {
-        setActive({ session: createdSessionId })
+      const { createdSessionId, setActive } = await startOAuthFlow()
+
+      if (createdSessionId) {
+        setActive?.({ session: createdSessionId })
+
+        // so it naviagates back here, but it doesnt reg that,
+        router.replace("/");
       } else {
-        // Use signIn or signUp for next steps such as MFA
-        // signIn()
-        // signUp()
-        signUp
+        alert('Sign in failed')
       }
-    } catch (err) {
+    } catch (err: any) {
+      Alert.alert(
+        'OAuth Error',
+        `An error occurred during the OAuth process: ${err.message || err}`,
+      )
       console.error('OAuth error', err)
     }
   }, [])
 
-  return <Button title="Sign in with Google" onPress={onPress} />
+  return (
+    <View style={styles.container}>
+      <Button
+        title="Sign in with Google"
+        onPress={() => onPressOAuth('google')}
+      />
+      <Button
+        title="Sign in with Facebook"
+        onPress={() => onPressOAuth('facebook')}
+      />
+      <Button
+        title="Sign in with Apple"
+        onPress={() => onPressOAuth('apple')}
+      />
+    </View>
+  )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  // Additional styles can be added here if needed
+})
+
 export default SignInWithOAuth

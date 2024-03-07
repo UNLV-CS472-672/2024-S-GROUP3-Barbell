@@ -34,15 +34,15 @@ export default function RootLayout() {
   const { colorScheme } = useColorScheme()
 
   return (
-    <ClerkProvider
-      publishableKey={CLERK_PUBLISHABLE_KEY!}
-      tokenCache={tokenCache}
-    >
-      <TRPCProvider>
-        {/*
-          The Stack component displays the current page.
-          It also allows you to configure your screens 
-        */}
+    <TRPCProvider>
+      {/*
+        The Stack component displays the current page.
+        It also allows you to configure your screens 
+      */}
+      <ClerkProvider
+        publishableKey={CLERK_PUBLISHABLE_KEY!}
+        tokenCache={tokenCache}
+      >
         <Stack
           screenOptions={{
             headerStyle: {
@@ -54,7 +54,7 @@ export default function RootLayout() {
           }}
         />
         <StatusBar />
-      </TRPCProvider>
-    </ClerkProvider>
+      </ClerkProvider>
+    </TRPCProvider>
   )
 }

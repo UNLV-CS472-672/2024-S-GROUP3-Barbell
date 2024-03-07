@@ -8,7 +8,8 @@ const config = {
   transpilePackages: [
     "@acme/ui",
     "@acme/api",
-    "@acme/prisma",
+    // "@acme/prisma",
+    "@acme/db",
     "@acme/validators",
   ],
   /** We already do linting and typechecking as separate tasks in CI */

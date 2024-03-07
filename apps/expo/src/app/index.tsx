@@ -142,7 +142,6 @@ const StartPage = () => {
         />
 
         <CreatePost />
-
         <SignedIn>
           <Text>You are Signed in</Text>
           <SignOut />
@@ -156,3 +155,5 @@ const StartPage = () => {
 }
 
 export default StartPage
+
+

@@ -1,5 +1,5 @@
 /** @type {import("@babel/core").ConfigFunction} */
-module.exports = function (api) {
+module.exports = (api) => {
   api.cache.forever()
 
   return {
@@ -10,7 +10,7 @@ module.exports = function (api) {
     plugins: [
       require.resolve('expo-router/babel'),
       ['module:react-native-dotenv'],
-      require.resolve("react-native-reanimated/plugin"),
+      require.resolve('react-native-reanimated/plugin'),
     ],
   }
 }

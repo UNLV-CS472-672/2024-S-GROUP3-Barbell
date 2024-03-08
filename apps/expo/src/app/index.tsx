@@ -128,6 +128,14 @@ const StartPage = () => {
           color={'#000000'}
         />
 
+        <Button
+          onPress={() => {
+            router.push('/auth')
+          }}
+          title="Go Auth"
+          color={'#000000'}
+        />
+
         <View className="py-2">
           <Text className="font-semibold italic text-black">
             Press on a post
@@ -160,5 +168,3 @@ const StartPage = () => {
 }
 
 export default StartPage
-
-

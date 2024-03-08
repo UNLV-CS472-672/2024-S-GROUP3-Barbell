@@ -7,7 +7,7 @@ export const postRouter = createTRPCRouter({
     return ctx.prisma.post.findMany({ orderBy: { id: 'desc' } })
   }),
   byId: publicProcedure
-    .input(z.object({ id: z.string() }))
+    .input(z.object({ id: z.number() }))
     .query(({ ctx, input }) => {
       return ctx.prisma.post.findFirst({ where: { id: input.id } })
     }),
@@ -21,7 +21,7 @@ export const postRouter = createTRPCRouter({
     .mutation(({ ctx, input }) => {
       return ctx.prisma.post.create({ data: input })
     }),
-  delete: publicProcedure.input(z.string()).mutation(({ ctx, input }) => {
-    return ctx.prisma.post.delete({ where: { id: input } })
+  delete: publicProcedure.input(z.number()).mutation(({ ctx, input }) => {
+    return ctx.prisma.post.delete({ where: { id: (input) } })
   }),
 })

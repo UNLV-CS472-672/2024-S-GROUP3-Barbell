@@ -2,6 +2,7 @@
   "extends": "@acme/tsconfig/base.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "strict": true,
     "paths": {
       "~/*": ["./src/*"],
       "assets/*": ["./assets/*"]

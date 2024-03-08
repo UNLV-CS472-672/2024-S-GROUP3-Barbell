@@ -7,10 +7,10 @@ import { TRPCProvider } from '~/utils/api'
 import 'expo-dev-client'
 import '~/styles.css'
 
+import { useEffect } from 'react'
 import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { useColorScheme } from 'nativewind'
-import { useEffect } from 'react'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -31,7 +31,7 @@ const tokenCache = {
   },
 }
 // Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync()
+// SplashScreen.preventAutoHideAsync()
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
@@ -42,9 +42,7 @@ export default function RootLayout() {
   // fonts
   let [fontsLoaded] = useFonts({
     Koulen_400Regular,
-    koulen: '../../assets/fonts/Koulen.ttf',
   })
-
 
   if (!fontsLoaded) {
     return null

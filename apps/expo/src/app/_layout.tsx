@@ -1,14 +1,15 @@
-import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { TRPCProvider } from '~/utils/api';
+import { useFonts } from 'expo-font'
+import { SplashScreen, Stack } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 
-import '~/styles.css';
+import { TRPCProvider } from '~/utils/api'
 
-import { ClerkProvider } from '@clerk/clerk-expo';
-import * as SecureStore from 'expo-secure-store';
-import { useColorScheme } from 'nativewind';
-import { useEffect } from 'react';
+import '~/styles.css'
+
+import { useEffect } from 'react'
+import * as SecureStore from 'expo-secure-store'
+import { ClerkProvider } from '@clerk/clerk-expo'
+import { useColorScheme } from 'nativewind'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -33,28 +34,26 @@ const tokenCache = {
 // It wraps your pages with the providers they need
 export default function RootLayout() {
   // fonts
+  const [loaded, error] = useFonts({
+    koulen    : require('assets/fonts/Koulen.ttf'),
+    'koulen-r': require('assets/fonts/Koulen-Regular.ttf'),
+  })
 
-  // const [loaded, error] = useFonts({
-  //   mon: require(''),
-  //   'mon-sb': require('../assets/fonts/Montserrat-SemiBold.ttf'),
-  //   'mon-b': require('../assets/fonts/Montserrat-Bold.ttf'),
-  // })
+  // Expo Router uses Error Boundaries
+  // to catch errors in the navigation tree.
+  useEffect(() => {
+    if (error) throw error
+  }, [error])
 
-  // // Expo Router uses Error Boundaries
-  // // to catch errors in the navigation tree.
-  // useEffect(() => {
-  //   if (error) throw error
-  // }, [error])
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync()
+    }
+  }, [loaded])
 
-  // useEffect(() => {
-  //   if (loaded) {
-  //     SplashScreen.hideAsync()
-  //   }
-  // }, [loaded])
-
-  // if (!loaded) {
-  //   return null
-  // }
+  if (!loaded) {
+    return null
+  }
 
   // themes
   const { colorScheme } = useColorScheme()

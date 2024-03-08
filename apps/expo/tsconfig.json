@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "assets/*": ["../expo/assets/*"]
     },
     // "paths": { "@/*": ["./src/*"] },
     "jsx": "react-native",

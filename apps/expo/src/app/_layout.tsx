@@ -1,13 +1,14 @@
-import { Stack } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
+import { useFonts } from "expo-font";
+import { SplashScreen, Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { TRPCProvider } from '~/utils/api';
 
-import { TRPCProvider } from '~/utils/api'
+import '~/styles.css';
 
-import '~/styles.css'
-
-import * as SecureStore from 'expo-secure-store'
-import { ClerkProvider } from '@clerk/clerk-expo'
-import { useColorScheme } from 'nativewind'
+import { ClerkProvider } from '@clerk/clerk-expo';
+import * as SecureStore from 'expo-secure-store';
+import { useColorScheme } from 'nativewind';
+import { useEffect } from 'react';
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -31,6 +32,31 @@ const tokenCache = {
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
+  // fonts
+
+  // const [loaded, error] = useFonts({
+  //   mon: require(''),
+  //   'mon-sb': require('../assets/fonts/Montserrat-SemiBold.ttf'),
+  //   'mon-b': require('../assets/fonts/Montserrat-Bold.ttf'),
+  // })
+
+  // // Expo Router uses Error Boundaries
+  // // to catch errors in the navigation tree.
+  // useEffect(() => {
+  //   if (error) throw error
+  // }, [error])
+
+  // useEffect(() => {
+  //   if (loaded) {
+  //     SplashScreen.hideAsync()
+  //   }
+  // }, [loaded])
+
+  // if (!loaded) {
+  //   return null
+  // }
+
+  // themes
   const { colorScheme } = useColorScheme()
 
   return (

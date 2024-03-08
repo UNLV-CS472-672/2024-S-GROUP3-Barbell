@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Pressable, Text, TextInput, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link, Stack } from 'expo-router'
+import { Link, router, Stack } from 'expo-router'
 import { SignedIn, SignedOut } from '@clerk/clerk-expo'
 import { FlashList } from '@shopify/flash-list'
 
@@ -123,6 +123,14 @@ const StartPage = () => {
           color={'#000000'}
         />
 
+        <Button
+          onPress={() => {
+            router.push('/auth')
+          }}
+          title="Go Auth"
+          color={'#000000'}
+        />
+
         <View className="py-2">
           <Text className="font-semibold italic text-black">
             Press on a post
@@ -155,5 +163,3 @@ const StartPage = () => {
 }
 
 export default StartPage
-
-

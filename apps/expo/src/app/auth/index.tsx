@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { ImageBackground, Text, TouchableOpacity, View } from 'react-native'
 
 const AuthScreen = () => {
   const handleSignUp = () => {
@@ -11,23 +11,40 @@ const AuthScreen = () => {
   }
 
   return (
-    <View className="flex-1 items-center justify-center bg-black">
-      <View className="rounded-lg bg-white p-6">
-        <Text className="mb-6 text-center text-3xl font-bold">BARBELL</Text>
-        <TouchableOpacity
-          onPress={handleSignIn}
-          className="mb-4 rounded-md bg-black py-3"
-        >
-          <Text className="text-center font-bold text-white">SIGN IN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleSignUp}
-          className="rounded-md bg-purple-600 py-3"
-        >
-          <Text className="text-center font-bold text-white">SIGN UP</Text>
-        </TouchableOpacity>
+    <ImageBackground
+      source={require('assets/auth/background.png')}
+      style={{ flex: 1, backgroundColor: '#1E1E1E' }}
+      resizeMode="cover"
+    >
+      <View className="flex-1 items-center justify-center">
+        <View className="scale-150 rounded-lg bg-white p-12">
+          <Text
+            className=" text-center text-5xl font-semibold"
+            style={{ fontFamily: 'Koulen_400Regular' }}
+          >
+            BARBELL
+          </Text>
+
+          <TouchableOpacity
+            onPress={handleSignIn}
+            className="mb-8 rounded-md bg-black py-5"
+          >
+            <Text className="font-koulen text-center text-2xl font-semibold text-white">
+              SIGN IN
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={handleSignUp}
+            className="rounded-md bg-[#48476D] py-5"
+          >
+            <Text className="font-koulen text-center text-2xl font-semibold text-white">
+              SIGN UP
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   )
 }
 

@@ -1,15 +1,8 @@
 import React from 'react'
 import { ImageBackground, Text, TouchableOpacity, View } from 'react-native'
+import SignInWithGoogle from '~/components/auth/sign-in-w-google'
 
 const AuthScreen = () => {
-  const handleSignUp = () => {
-    // Sign up logic goes here
-  }
-
-  const handleSignIn = () => {
-    // Sign in logic goes here
-  }
-
   return (
     <ImageBackground
       source={require('assets/auth/background.png')}
@@ -17,31 +10,13 @@ const AuthScreen = () => {
       resizeMode="cover"
     >
       <View className="flex-1 items-center justify-center rounded-md">
-        <View className="scale-150 rounded-lg bg-white px-12 py-8">
+        <View className="scale-150 rounded-lg bg-white p-7">
           <Text
-            className="font-koulen mb-1 pt-10 text-center text-5xl font-semibold"
-            // style={{ fontFamily: 'Koulen_400Regular' }}
+            className="font-koulen mb-1 text-center text-[3.70rem] m-2 font-semibold"
           >
             BARBELL
           </Text>
-
-          <TouchableOpacity
-            onPress={handleSignIn}
-            className="mb-3 rounded-xl bg-black px-14 py-1"
-          >
-            <Text className="font-koulen pt-2 text-center text-xl font-semibold text-white">
-              SIGN IN
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={handleSignUp}
-            className="rounded-xl bg-[#48476D] px-14 py-1"
-          >
-            <Text className="font-koulen pt-2 text-center text-xl font-semibold text-white">
-              SIGN UP
-            </Text>
-          </TouchableOpacity>
+          <SignInWithGoogle />
         </View>
       </View>
     </ImageBackground>

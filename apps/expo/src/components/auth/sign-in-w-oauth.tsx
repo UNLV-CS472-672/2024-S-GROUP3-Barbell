@@ -21,8 +21,8 @@ const SignInWithOAuth = () => {
   const { startOAuthFlow: startAppleOAuthFlow } = useOAuth({
     strategy: 'oauth_apple',
   })
+  
   // add mores strategies here
-
   const onPressOAuth = React.useCallback(async (provider: string) => {
     try {
       const startOAuthFlow =

@@ -1,13 +1,15 @@
+import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 
 import { TRPCProvider } from '~/utils/api'
 
+import 'expo-dev-client'
 import '~/styles.css'
 
-import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
-import { useColorScheme } from 'nativewind'
+import * as SecureStore from 'expo-secure-store'
+// import { useColorScheme } from 'nativewind'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -27,11 +29,23 @@ const tokenCache = {
     }
   },
 }
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+// SplashScreen.preventAutoHideAsync()
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
-  const { colorScheme } = useColorScheme()
+  // themes
+  // const { colorScheme } = useColorScheme()
+
+  // fonts
+  let [fontsLoaded] = useFonts({
+    Koulen_400Regular,
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
 
   return (
     <TRPCProvider>
@@ -45,12 +59,12 @@ export default function RootLayout() {
       >
         <Stack
           screenOptions={{
-            headerStyle: {
-              backgroundColor: '#f472b6',
-            },
-            contentStyle: {
-              backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
-            },
+            // headerStyle: {
+            //   backgroundColor: '#f472b6',
+            // },
+            // contentStyle: {
+            //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
+            // },
           }}
         />
         <StatusBar />

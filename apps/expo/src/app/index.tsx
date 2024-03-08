@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Pressable, Text, TextInput, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link, Stack } from 'expo-router'
+import { Link, Stack, router } from 'expo-router'
 import { SignedIn, SignedOut } from '@clerk/clerk-expo'
 import { FlashList } from '@shopify/flash-list'
 
@@ -118,8 +118,21 @@ const StartPage = () => {
         </Text>
 
         <Button
+          onPress={() => { router.push('/nav') }}
+          title="directory"
+          color={'#4444FF'}
+        />
+        <Button
           onPress={() => void utils.post.all.invalidate()}
           title="Refresh posts"
+          color={'#000000'}
+        />
+
+        <Button
+          onPress={() => {
+            router.push('/auth')
+          }}
+          title="Go Auth"
           color={'#000000'}
         />
 
@@ -155,5 +168,3 @@ const StartPage = () => {
 }
 
 export default StartPage
-
-

@@ -2,8 +2,10 @@
   "extends": "@acme/tsconfig/base.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "strict": true,
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "assets/*": ["./assets/*"]
     },
     // "paths": { "@/*": ["./src/*"] },
     "jsx": "react-native",

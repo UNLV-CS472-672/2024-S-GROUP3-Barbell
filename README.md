@@ -89,9 +89,10 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 
 # Commons Bugs Encountered
 
-[SKD Not found](https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-location-with-sdk-dir-in-the-local-properties-fil)
-[expo-router not found](https://github.com/expo/router/issues/748)
-[Unmatched Route with Clerk -- Window only](https://github.com/expo/router/issues/457)
+- [ ] [SKD Not found](https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-location-with-sdk-dir-in-the-local-properties-fil)
+- [ ] [expo-router not found](https://github.com/expo/router/issues/748)
+- [ ] [Unmatched Route with Clerk -- Window only](https://github.com/expo/router/issues/457)
+- [ ] [Ah yes, you can only for android OS on an Apple OS](https://github.com/expo/eas-cli/issues/1726)
 
 In case you encountered, Failed to get localhost. Please point to your production server.
 

@@ -28,6 +28,7 @@ const defineConfig = (): ExpoConfig => ({
       foregroundImage: './assets/icon.png',
       backgroundColor: '#1F104A',
     },
+    jsEngine: 'hermes',
   },
   // extra: {
   //   eas: {
@@ -36,9 +37,9 @@ const defineConfig = (): ExpoConfig => ({
   // },
   extra: {
     // this is commented out so you don't have to log in to run expo start locally
-    // eas: {
-    //   projectId: 'a5b98934-bf53-4573-ba91-972c22a6759a',
-    // },
+    eas: {
+      projectId: 'a5b98934-bf53-4573-ba91-972c22a6759a',
+    },
     clerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
     expoPublicClerkPublishableKey:
       process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
@@ -50,7 +51,12 @@ const defineConfig = (): ExpoConfig => ({
     tsconfigPaths: true,
     typedRoutes: true,
   },
-  plugins: ['expo-router', './expo-plugins/with-modify-gradle.js'],
+  // jsEngine: 'hermes',
+  plugins: [
+    /* don't touch this */
+    'expo-router',
+    './expo-plugins/with-modify-gradle.js',
+  ],
 })
 
 export default defineConfig

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, Text, TouchableOpacity, View } from 'react-native'
+import { ImageBackground, Text, View } from 'react-native'
 import SignInWithGoogle from '~/components/auth/sign-in-w-google'
 
 const AuthScreen = () => {

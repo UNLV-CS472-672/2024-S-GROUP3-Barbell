@@ -1,16 +1,15 @@
-import { SplashScreen, Stack } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
 import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
+import { Stack } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 
 import { TRPCProvider } from '~/utils/api'
 
 import 'expo-dev-client'
 import '~/styles.css'
 
-import { useEffect } from 'react'
-import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
-import { useColorScheme } from 'nativewind'
+import * as SecureStore from 'expo-secure-store'
+// import { useColorScheme } from 'nativewind'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -37,7 +36,7 @@ const tokenCache = {
 // It wraps your pages with the providers they need
 export default function RootLayout() {
   // themes
-  const { colorScheme } = useColorScheme()
+  // const { colorScheme } = useColorScheme()
 
   // fonts
   let [fontsLoaded] = useFonts({

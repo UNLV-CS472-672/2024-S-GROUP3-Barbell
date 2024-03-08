@@ -20,7 +20,6 @@ next-env.d.ts
 # expo
 .expo/
 dist/
-expo-env.d.ts
 apps/expo/.gitignore
 
 # production
@@ -51,3 +50,7 @@ yarn-error.log*
 
 # expo
 .expo
+
+# expo simulator build files
+apps/expo/android
+apps/expo/ios

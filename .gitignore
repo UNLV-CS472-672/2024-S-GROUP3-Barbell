@@ -52,5 +52,5 @@ yarn-error.log*
 .expo
 
 # expo simulator build files
-apps/expo/android/*
-apps/expo/ios/*
+apps/expo/android
+apps/expo/ios

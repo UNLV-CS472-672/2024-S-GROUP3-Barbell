@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1C1B1B',
   },
   header: {
-    fontSize: 25,
+    fontSize: 20,
     color: '#CACACA',
   },
 });

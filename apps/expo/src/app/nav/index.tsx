@@ -1,7 +1,7 @@
+import type { Route } from 'expo-router'
 import React from 'react'
+import { Button, FlatList, StyleSheet, View } from 'react-native'
 import { router } from 'expo-router'
-import { StyleSheet, Button, Text, View, FlatList } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 const styles = StyleSheet.create({
   container: {
@@ -13,20 +13,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
-});
+})
 
 const Nav = () => {
   return (
     <View style={styles.container}>
       <FlatList
         data={[
-            // add your component routes here
-          {key: 'Home', route: '/'},
+          // add your component routes here
+          { key: 'Home', route: '/' },
         ]}
-        renderItem={({item}) => <Button style={styles.btn} title={item.key} onPress={() => router.push(item.route)}/>}
+        renderItem={({ item }) => (
+          <Button
+            title={item.key}
+            onPress={() => router.push(item.route as Route<string>)}
+          />
+        )}
       />
     </View>
-  );
-};
+  )
+}
 
 export default Nav

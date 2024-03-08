@@ -1,14 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import BackArrow from '~/app/public/icons/back_arrow/BackArrow';
-import WriteMessage from '~/app/public/icons/write_message_icon/WriteMessage';
+import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 export default function MiscNotifScreen() {
   return (
     <View style={styles.container}>
-      <BackArrow />
+      <Ionicons name="chevron-back" size={24} color="#CACACA" />
       <Text style={styles.header}>Notifications</Text>
-      <WriteMessage />
     </View>
   );
 }

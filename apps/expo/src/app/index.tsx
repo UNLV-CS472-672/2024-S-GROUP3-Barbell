@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Pressable, Text, TextInput, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link, router, Stack } from 'expo-router'
+import { Link, Stack, router } from 'expo-router'
 import { SignedIn, SignedOut } from '@clerk/clerk-expo'
 import { FlashList } from '@shopify/flash-list'
 
@@ -117,6 +117,11 @@ const StartPage = () => {
           Create <Text className="text-black">T3</Text> Turbo
         </Text>
 
+        <Button
+          onPress={() => { router.push('/nav') }}
+          title="directory"
+          color={'#4444FF'}
+        />
         <Button
           onPress={() => void utils.post.all.invalidate()}
           title="Refresh posts"

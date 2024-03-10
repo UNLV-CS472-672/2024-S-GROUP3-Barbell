@@ -2,15 +2,11 @@
 
 The repository for the Barbell project, Group 3.
 
-Quickstart (Deprecated):
-
-- [Installation](https://scribehow.com/shared/Quickstart_Barbell___I7R2_mESL68FTCAMcbF8w)
-- [Issue Board + Development](https://scribehow.com/shared/Issue_and_start_working_on_Barbell__ibGJtJNdRfqZ1aucOCC0sg)
-- [When you fininishing your issue](#)
+## Resolve Merge Conflicts
 
 There will be merge conflicts, so do check out the resources here of how to resolve them:
 
-- [youtube vid](https://www.youtube.com/watch?v=QmKdodJU-js)
+- [youtube](https://www.youtube.com/watch?v=QmKdodJU-js)
 - [blog](https://leonardomontini.dev/merge-conflict-vscode/)
 - [vscode docs](https://code.visualstudio.com/docs/sourcecontrol/overview)
 

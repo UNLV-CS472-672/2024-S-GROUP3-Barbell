@@ -138,9 +138,17 @@ const StartPage = () => {
 
         <Button
           onPress={() => {
+            router.push('/notif/dm')
+          }}
+          title="Notif/dm"
+          color={'#000000'}
+        />
+
+        <Button
+          onPress={() => {
             router.push('/notif/misc')
           }}
-          title="Go Notif (Misc)"
+          title="Notif/misc"
           color={'#000000'}
         />
 

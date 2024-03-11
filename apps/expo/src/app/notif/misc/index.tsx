@@ -1,31 +1,28 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { SvgXml } from 'react-native-svg';
-
-const svgXml = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/></svg>`;
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function MiscNotifScreen() {
   return (
-    <View style={styles.container}>
-      <Ionicons name="chevron-back" size={24} color="#CACACA" />
-      <Text style={styles.header}>Notifications</Text>
-      <SvgXml xml={svgXml} width={24} height={24} />
+    <View style={{backgroundColor: "#1C1B1B", flex: 1}}>
+      {/*header w/ back and new message*/}
+      <View className="flex flex-row justify-between pt-5 px-5">
+        <Ionicons name="chevron-back" size={24} color="#CACACA" />
+        <Text style={{color: "#CACACA", fontSize: 20}}>Notifications</Text>
+        <MaterialCommunityIcons name="message-plus-outline" size={24} color="#CACACA" />
+      </View>
+      {/*notif nav buttons*/}
+      <View className="flex flex-row items-center m-2">
+        <View className="font-bold py-2 px-4 rounded-lg flex-1 m-1" style={{backgroundColor: "#48476D"}}>
+          <Text style={{color: "#CACACA", textAlign: "center"}}>Notifications</Text>
+        </View>
+        <View className="font-bold py-2 px-4 rounded-lg flex-1 m-1" style={{backgroundColor: "#CACACA"}}>
+          <Text style={{color: "#1C1B1B", textAlign: "center"}}>Direct</Text>
+        </View>
+        <View className="font-bold py-2 px-4 rounded-lg flex-1 m-1" style={{backgroundColor: "#CACACA"}}>
+          <Text style={{color: "#1C1B1B", textAlign: "center"}}>Group</Text>
+        </View>
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 20,
-    paddingHorizontal: 20,
-    backgroundColor: '#1C1B1B',
-  },
-  header: {
-    fontSize: 20,
-    color: '#CACACA',
-  },
-});

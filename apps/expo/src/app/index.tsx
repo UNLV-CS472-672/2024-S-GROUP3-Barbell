@@ -144,6 +144,14 @@ const StartPage = () => {
           color={'#000000'}
         />
 
+        <Button
+          onPress={() => {
+            router.push('/notif/misc')
+          }}
+          title="Notif/misc"
+          color={'#000000'}
+        />
+
         <View className="py-2">
           <Text className="font-semibold italic text-black">
             Press on a post

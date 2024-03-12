@@ -23,6 +23,7 @@ const Nav = () => {
           { key: 'Notif/misc', route: '/notif/misc' },
           { key: 'Message Input', route: '/messages'},
           { key: 'Create New Workout', route: '/workout/createNew' },
+          { key: 'Profile', route: '/profile'}
         ]}
         renderItem={({ item }) => (
           <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />

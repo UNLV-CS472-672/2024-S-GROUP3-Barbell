@@ -8,11 +8,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 12,
   },
-  btn: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
 })
 
 const Nav = () => {
@@ -22,12 +17,12 @@ const Nav = () => {
         data={[
           // add your component routes here
           { key: 'Home', route: '/' },
+          { key: 'Go Auth', route: '/auth' },
+          { key: 'Notif/dm', route: '/notif/dm' },
+          { key: 'Notif/misc', route: '/notif/misc' }
         ]}
         renderItem={({ item }) => (
-          <Button
-            title={item.key}
-            onPress={() => router.push(item.route as Route<string>)}
-          />
+          <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />
         )}
       />
     </View>

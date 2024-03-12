@@ -8,45 +8,10 @@ import DmNotifs from '~/components/notif/dmNotifs';
 import GcNotifs from '~/components/notif/gcNotifs';
 
 export type notifsType = "misc" | "dm" | "gc"
-type colorType = "#48476D" | "#CACACA"
-type textColorType = "#1C1B1B" | "#CACACA"
 
 export default function MiscNotifScreen() {
   
   const [visibleNotifs, setVisibleNotifs] = useState<notifsType>("misc");
-  const [miscColor, setMiscColor] = useState<colorType>("#48476D");
-  const [miscTextColor, setMiscTextColor] = useState<textColorType>("#CACACA");
-  const [dmColor, setDmColor] = useState<colorType>("#CACACA");
-  const [dmTextColor, setDmTextColor] = useState<textColorType>("#1C1B1B");
-  const [gcColor, setGcColor] = useState<colorType>("#CACACA");
-  const [gcTextColor, setGcTextColor] = useState<textColorType>("#1C1B1B");
-
-  useEffect(() => {
-    if(visibleNotifs == "misc"){
-      setMiscColor("#48476D");
-      setMiscTextColor("#CACACA");
-      setDmColor("#CACACA");
-      setDmTextColor("#1C1B1B");
-      setGcColor("#CACACA");
-      setGcTextColor("#1C1B1B")
-    }
-    else if(visibleNotifs == "dm"){
-      setMiscColor("#CACACA");
-      setMiscTextColor("#1C1B1B");
-      setDmColor("#48476D");
-      setDmTextColor("#CACACA");
-      setGcColor("#CACACA");
-      setGcTextColor("#1C1B1B");
-    }
-    else if(visibleNotifs == "gc"){
-      setMiscColor("#CACACA");
-      setMiscTextColor("#1C1B1B")
-      setDmColor("#CACACA");
-      setDmTextColor("#1C1B1B")
-      setGcColor("#48476D");
-      setGcTextColor("#CACACA")
-    }
-  }, [visibleNotifs])
   
   return (
     <View style={{backgroundColor: "#1C1B1B", flex: 1}}>
@@ -59,17 +24,17 @@ export default function MiscNotifScreen() {
 
       {/*notif nav buttons*/}
       <View className="flex flex-row items-center m-2" >
-        <TouchableOpacity className="font-bold py-2 px-4 rounded-lg flex-1 ml-1 mr-1 mt-1" style={{backgroundColor: miscColor}}
+        <TouchableOpacity className="font-bold py-2 px-4 rounded-lg flex-1 ml-1 mr-1 mt-1" style={{backgroundColor: visibleNotifs == "misc" ? "#48476D" : "#CACACA"}}
         onPress={() => {setVisibleNotifs("misc")}}>
-          <Text style={{color: miscTextColor, textAlign: "center"}}>Notifications</Text>
+          <Text style={{color: visibleNotifs == "misc" ? "#CACACA" : "#1C1B1B", textAlign: "center"}}>Notifications</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="font-bold py-2 px-4 rounded-lg flex-1 ml-1 mr-1 mt-1" style={{backgroundColor: dmColor}}
+        <TouchableOpacity className="font-bold py-2 px-4 rounded-lg flex-1 ml-1 mr-1 mt-1" style={{backgroundColor: visibleNotifs == "dm" ? "#48476D" : "#CACACA"}}
         onPress={() => {setVisibleNotifs("dm")}}>
-          <Text style={{color: dmTextColor, textAlign: "center"}}>Direct</Text>
+          <Text style={{color: visibleNotifs == "dm" ? "#CACACA" : "#1C1B1B", textAlign: "center"}}>Direct</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="font-bold py-2 px-4 rounded-lg flex-1 ml-1 mr-1 mt-1" style={{backgroundColor: gcColor}}
+        <TouchableOpacity className="font-bold py-2 px-4 rounded-lg flex-1 ml-1 mr-1 mt-1" style={{backgroundColor: visibleNotifs == "gc" ? "#48476D" : "#CACACA"}}
         onPress={() => {setVisibleNotifs("gc")}}>
-          <Text style={{color: gcTextColor, textAlign: "center"}}>Group</Text>
+          <Text style={{color: visibleNotifs == "gc" ? "#CACACA" : "#1C1B1B", textAlign: "center"}}>Group</Text>
         </TouchableOpacity>
       </View>
 

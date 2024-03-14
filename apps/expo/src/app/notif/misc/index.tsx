@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import { router } from 'expo-router'
-import MiscNotifs from '~/components/notif/miscNotifs';
+import MiscNotifs from '~/components/notif/miscNotifs/miscNotifs';
 import DmNotifs from '~/components/notif/dmNotifs';
 import GcNotifs from '~/components/notif/gcNotifs';
 

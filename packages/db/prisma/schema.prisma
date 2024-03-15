@@ -246,6 +246,6 @@ model Notification {
   receiver   User @relation("NotificationReceiver", fields: [receiverId], references: [id])
   receiverId Int
 
-  sender   User @relation("NotificationSender", fields: [senderId], references: [id])
-  senderId Int
+  sender   User? @relation("NotificationSender", fields: [senderId], references: [id])
+  senderId Int?
 }

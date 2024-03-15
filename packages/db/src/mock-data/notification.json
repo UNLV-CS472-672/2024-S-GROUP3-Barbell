@@ -1,22 +1,82 @@
 [
   {
-    "id": 1,
-    "createdAt": "2024-03-15T08:30:00Z",
-    "content": "userTwo commented on your post.",
-    "type": "MISC",
-    "subtype": "NUDGE",
+    "id": 3,
+    "createdAt": "2024-03-17T10:15:00Z",
+    "content": "Join us for a group run this Sunday!",
+    "type": "GROUP",
+    "subtype": "FRIEND_REQUEST",
     "read": false,
-    "receiverId": 1,
+    "receiverId": 4,
     "senderId": 2
   },
   {
-    "id": 2,
-    "createdAt": "2024-03-16T09:45:00Z",
-    "content": "userThree liked your workout.",
+    "id": 4,
+    "createdAt": "2024-03-18T11:00:00Z",
+    "content": "Congratulations on hitting a new personal record!",
+    "type": "MISC",
+    "subtype": "NUDGE",
+    "read": true,
+    "receiverId": 3,
+    "senderId": 1
+  },
+  {
+    "id": 5,
+    "createdAt": "2024-03-19T12:30:00Z",
+    "content": "Reminder: Yoga class at 6 PM tomorrow.",
+    "type": "MISC",
+    "subtype": "SYS",
+    "read": false,
+    "receiverId": 5,
+    "senderId": 6
+  },
+  {
+    "id": 6,
+    "createdAt": "2024-03-20T13:45:00Z",
+    "content": "New message from userSeven: Can you share your workout plan?",
+    "type": "DM",
+    "subtype": "SYS",
+    "read": false,
+    "receiverId": 7,
+    "senderId": 4
+  },
+  {
+    "id": 7,
+    "createdAt": "2024-03-21T14:30:00Z",
+    "content": "userEight has joined your fitness challenge.",
+    "type": "GROUP",
+    "subtype": "NUDGE",
+    "read": true,
+    "receiverId": 8,
+    "senderId": 3
+  },
+  {
+    "id": 8,
+    "createdAt": "2024-03-22T15:00:00Z",
+    "content": "Your friend userNine is back after a break! Send them a welcome message.",
     "type": "MISC",
     "subtype": "FRIEND_REQUEST",
+    "read": false,
+    "receiverId": 9,
+    "senderId": 5
+  },
+  {
+    "id": 9,
+    "createdAt": "2024-03-23T16:20:00Z",
+    "content": "Check out the new workout plans added today!",
+    "type": "MISC",
+    "subtype": "SYS",
     "read": true,
-    "receiverId": 2,
-    "senderId": 3
+    "receiverId": 10,
+    "senderId": 6
+  },
+  {
+    "id": 10,
+    "createdAt": "2024-03-24T17:30:00Z",
+    "content": "userTen shared a post with you.",
+    "type": "DM",
+    "subtype": "SYS",
+    "read": false,
+    "receiverId": 1,
+    "senderId": 10
   }
 ]

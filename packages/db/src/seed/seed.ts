@@ -17,6 +17,9 @@ const logger = (type: string, collection: string) => {
     case 'add':
       console.log(`Added ${collection} data`)
       break
+    case 'divider':
+      console.log('----------------------------------')
+      break
   }
 }
 
@@ -58,6 +61,11 @@ const loaddb = async () => {
     await prisma.user.deleteMany()
     logger('delete', 'user')
 
+    /// < DIVIDER > ///
+    logger('divider', '')
+    logger('divider', '')
+    logger('divider', '')
+    /// < DIVIDER > ///
 
     /// < SEED PROCEDURE > ///
     /*  */

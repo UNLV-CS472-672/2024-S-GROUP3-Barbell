@@ -21,6 +21,7 @@ enum NotificaitonSubtype {
   SYS
   NUDGE
   FRIEND_REQUEST
+  LIKE
 }
 
 enum SetType {

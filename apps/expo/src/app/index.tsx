@@ -1,12 +1,11 @@
 import React from 'react'
 import { Button, Pressable, Text, TextInput, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link, Stack, router } from 'expo-router'
-import { SignedIn, SignedOut } from '@clerk/clerk-expo'
+import { Link, router, Stack } from 'expo-router'
+import { SignedIn } from '@clerk/clerk-expo'
 import { FlashList } from '@shopify/flash-list'
 
 import type { RouterOutputs } from '~/utils/api'
-import SignInWithOAuth from '~/components/auth/sign-in-w-oauth'
 import { SignOut } from '~/components/auth/sign-out'
 import { api } from '~/utils/api'
 
@@ -118,7 +117,9 @@ const StartPage = () => {
         </Text>
 
         <Button
-          onPress={() => { router.push('/nav') }}
+          onPress={() => {
+            router.push('/nav')
+          }}
           title="screens"
           color={'#4444FF'}
         />
@@ -150,9 +151,6 @@ const StartPage = () => {
           <Text>You are Signed in</Text>
           <SignOut />
         </SignedIn>
-        <SignedOut>
-          <SignInWithOAuth />
-        </SignedOut>
       </View>
     </SafeAreaView>
   )

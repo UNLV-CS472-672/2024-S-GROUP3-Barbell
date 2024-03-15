@@ -1,4 +1,8 @@
 import { prisma } from '..'
+import users from '../mock-data/user.json'
+
+
+
 
 /**
  * @param type logging type

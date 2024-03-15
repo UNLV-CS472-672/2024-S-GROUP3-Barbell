@@ -54,6 +54,13 @@ enum Category {
   OTHER
 }
 
+enum UserStatus {
+  ACTIVE
+  BUSY
+  OFFLINE
+  ONLINE
+}
+
 model Post {
   id        Int     @id @default(autoincrement())
   title     String
@@ -66,6 +73,8 @@ model Post {
 // ******************************************************************************************
 // * id: Auto-incremented unique identifier.
 // * username: Unique username for the user, restricted to 20 characters.
+// * email: Unique email address for the user.
+// * name: Optional name of the user.
 // * status: Optional status of the user (e.g., "active", "busy").
 // * streak: Represents a count, potentially tracking user engagement or achievement streaks.
 // * posts: A list of posts created by the user.
@@ -77,11 +86,14 @@ model Post {
 // * sentMessages: Notifications sent by the user.
 // ******************************************************************************************
 model User {
-  id       Int     @id @default(autoincrement())
-  username String  @db.Char(20)
-  status   String?
-  streak   Int
-  posts    Post[]
+  id       Int         @id @default(autoincrement())
+  username String      @db.Char(20)
+  email    String      @unique
+  name     String?
+  status   UserStatus?
+
+  streak Int
+  posts  Post[]
 
   friends Friend[] @relation("UserFriends")
 
@@ -91,6 +103,7 @@ model User {
   notifications Notification[] @relation("NotificationReceiver")
   sentMessages  Notification[] @relation("NotificationSender")
 }
+
 
 // ******************************************************************************************
 // * Friends Collectio

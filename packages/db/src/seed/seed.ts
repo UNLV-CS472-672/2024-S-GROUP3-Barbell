@@ -1,5 +1,11 @@
 import { prisma } from '..'
+
+/* json */
 import users from '../mock-data/user.json'
+
+
+
+
 
 
 
@@ -20,13 +26,12 @@ const logger = (type: string, collection: string) => {
 }
 
 /**
- * Load seed data
+ * resetdb seed data
  * Procedure:
  * 1. Delete all the existing data before?
- * 2. Add data to the collection (seed data, for testing purposes)
  * @thienguen
  */
-const load = async () => {
+const resetdb = async () => {
   try {
     /// < DELETE PROCEDURE > ///
 
@@ -51,32 +56,11 @@ const load = async () => {
     await prisma.friend.deleteMany()
     logger('delete', 'friend')
 
-    /* Keep this data since it doens't related to our app */
-    /* so use it for testing our db is alive and well */
-    // await prisma.post.deleteMany()
+    await prisma.post.deleteMany()
     logger('delete', 'post')
 
     await prisma.user.deleteMany()
     logger('delete', 'user')
-
-
-
-
-
-
-
-
-
-    /// < SEED PROCEDURE > ///
-
-    // Add data to the collection
-    await prisma.post.create({
-      data: {
-        title: 'Hello World',
-        content: 'This is the first post',
-      },
-    })
-    logger('add', 'post')
   } catch (error) {
     console.error(error)
     process.exit(1)
@@ -85,4 +69,23 @@ const load = async () => {
   }
 }
 
-load().catch((e) => console.error(e))
+/**
+ * loaddb data
+ * Procedure:
+ * 1. Add data to the database
+ * @thienguen
+ */
+const loaddb = async () => {
+  try {
+    /// < SEED PROCEDURE > ///
+  } catch (error) {
+    console.error(error)
+    process.exit(1)
+  } finally {
+    await prisma.$disconnect()
+  }
+}
+
+/* main */
+resetdb().catch((e) => console.error(e))
+loaddb().catch((e) => console.error(e))

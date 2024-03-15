@@ -1,0 +1,78 @@
+[
+  {
+    "id": 3,
+    "createdAt": "2024-03-14T10:15:00Z",
+    "content": "wants to be your friend.",
+    "type": "MISC",
+    "subtype": "FRIEND_REQUEST",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 2
+  },
+  {
+    "id": 4,
+    "createdAt": "2024-03-13T10:15:00Z",
+    "content": "Hi everyone! Let's do cardio today.",
+    "type": "GROUP",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 3
+  },
+  {
+    "id": 5,
+    "createdAt": "2024-03-12T09:10:00Z",
+    "content": "Hi! We should bench today.",
+    "type": "DM",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 5
+  },
+  {
+    "id": 6,
+    "createdAt": "2024-03-11T10:15:00Z",
+    "content": "nudged you!",
+    "type": "MISC",
+    "subtype": "NUDGE",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 6
+  },
+  {
+    "id": 7,
+    "createdAt": "2024-03-10T10:15:00Z",
+    "content": "liked your workout plan.",
+    "type": "MISC",
+    "subtype": "LIKE",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 7
+  },
+  {
+    "id": 8,
+    "createdAt": "2024-03-09T10:15:00Z",
+    "content": "Legs today, anyone?",
+    "type": "GROUP",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 8
+  },
+  {
+    "id": 9,
+    "createdAt": "2024-03-08T10:15:00Z",
+    "content": "wants to be your friend.",
+    "type": "MISC",
+    "subtype": "FRIEND_REQUEST",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 9
+  },
+  {
+    "id": 10,
+    "createdAt": "2024-03-07T10:15:00Z",
+    "content": "Welcome to Barbell.",
+    "type": "MISC",
+    "subtype": "SYS",
+    "read": false,
+    "receiverId": 4
+  }
+]

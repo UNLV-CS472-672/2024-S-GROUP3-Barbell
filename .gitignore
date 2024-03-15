@@ -54,3 +54,6 @@ yarn-error.log*
 # expo simulator build files
 apps/expo/android
 apps/expo/ios
+
+# tamagui
+**/.tamagui/*

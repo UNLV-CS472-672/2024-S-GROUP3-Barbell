@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity } from "react-native"
 // friend request imports
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import TimeAgo from "~/components/timeAgo/TimeAgo";
-import { useEffect } from "react";
 
 const currentUTCTime = new Date().toISOString();
 

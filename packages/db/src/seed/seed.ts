@@ -1,14 +1,9 @@
+import { Prisma } from '@prisma/client'
+
 import { prisma } from '..'
-
-/* json */
+import notification from '../mock-data/notification.json'
+import post from '../mock-data/post.json'
 import users from '../mock-data/user.json'
-
-
-
-
-
-
-
 
 /**
  * @param type logging type
@@ -26,12 +21,13 @@ const logger = (type: string, collection: string) => {
 }
 
 /**
- * resetdb seed data
+ * loaddb seed data
  * Procedure:
  * 1. Delete all the existing data before?
+ * 2. Add the seed data
  * @thienguen
  */
-const resetdb = async () => {
+const loaddb = async () => {
   try {
     /// < DELETE PROCEDURE > ///
 
@@ -61,23 +57,29 @@ const resetdb = async () => {
 
     await prisma.user.deleteMany()
     logger('delete', 'user')
-  } catch (error) {
-    console.error(error)
-    process.exit(1)
-  } finally {
-    await prisma.$disconnect()
-  }
-}
 
-/**
- * loaddb data
- * Procedure:
- * 1. Add data to the database
- * @thienguen
- */
-const loaddb = async () => {
-  try {
+
     /// < SEED PROCEDURE > ///
+    /*  */
+    await prisma.user.createMany({
+      data: users as Prisma.UserCreateManyInput[],
+    })
+    logger('add', 'user')
+
+    /*  */
+    await prisma.post.createMany({ data: post })
+    logger('add', 'post')
+
+    /*  */
+    await prisma.notification.createMany({
+      data: notification as Prisma.NotificationCreateManyInput[],
+    })
+    logger('add', 'notification')
+
+    /*  */
+
+    /*  */
+
   } catch (error) {
     console.error(error)
     process.exit(1)
@@ -87,5 +89,4 @@ const loaddb = async () => {
 }
 
 /* main */
-resetdb().catch((e) => console.error(e))
 loaddb().catch((e) => console.error(e))

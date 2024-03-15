@@ -106,7 +106,7 @@ model User {
 
 
 // ******************************************************************************************
-// * Friends Collectio
+// * Friends Collection
 // * id: Auto-incremented unique identifier.
 // * user: The User model representing one side of the friendship.
 // * userId: The identifier for the user, establishing the relation to the User model.

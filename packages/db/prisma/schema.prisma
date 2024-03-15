@@ -32,7 +32,8 @@ model User {
   log           Log[]
   workouts      Workout[]
   awards        Award[]
-  notifications Notification[]
+  notifications Notification[] @relation("NotificationReceiver")
+  sentMessages  Notification[] @relation("NotificationSender")
 }
 
 model Friend {
@@ -109,12 +110,11 @@ model Notification {
   subtype   NotificaitonSubtype
   read      Boolean             @default(false)
 
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+  receiver   User @relation("NotificationReceiver", fields: [receiverId], references: [id])
+  receiverId Int
 
-  // FIXME:  
-  // Full relation hasn't been made yet, its giving errors so just adding the sender user id for now
-  userSenderId String?
+  sender   User @relation("NotificationSender", fields: [senderId], references: [id])
+  senderId Int
 }
 
 enum NotificationType {

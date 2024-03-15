@@ -1,9 +1,9 @@
 [
   {
     "id": 3,
-    "createdAt": "2024-03-17T10:15:00Z",
-    "content": "Join us for a group run this Sunday!",
-    "type": "GROUP",
+    "createdAt": "2024-03-14T10:15:00Z",
+    "content": "wants to be your friend.",
+    "type": "MISC",
     "subtype": "FRIEND_REQUEST",
     "read": false,
     "receiverId": 4,
@@ -11,72 +11,68 @@
   },
   {
     "id": 4,
-    "createdAt": "2024-03-18T11:00:00Z",
-    "content": "Congratulations on hitting a new personal record!",
-    "type": "MISC",
-    "subtype": "NUDGE",
-    "read": true,
-    "receiverId": 3,
-    "senderId": 1
-  },
-  {
-    "id": 5,
-    "createdAt": "2024-03-19T12:30:00Z",
-    "content": "Reminder: Yoga class at 6 PM tomorrow.",
-    "type": "MISC",
-    "subtype": "SYS",
-    "read": false,
-    "receiverId": 5,
-    "senderId": 6
-  },
-  {
-    "id": 6,
-    "createdAt": "2024-03-20T13:45:00Z",
-    "content": "New message from userSeven: Can you share your workout plan?",
-    "type": "DM",
-    "subtype": "SYS",
-    "read": false,
-    "receiverId": 7,
-    "senderId": 4
-  },
-  {
-    "id": 7,
-    "createdAt": "2024-03-21T14:30:00Z",
-    "content": "userEight has joined your fitness challenge.",
+    "createdAt": "2024-03-13T10:15:00Z",
+    "content": "Hi everyone! Let's do cardio today.",
     "type": "GROUP",
-    "subtype": "NUDGE",
-    "read": true,
-    "receiverId": 8,
+    "read": false,
+    "receiverId": 4,
     "senderId": 3
   },
   {
-    "id": 8,
-    "createdAt": "2024-03-22T15:00:00Z",
-    "content": "Your friend userNine is back after a break! Send them a welcome message.",
-    "type": "MISC",
-    "subtype": "FRIEND_REQUEST",
+    "id": 5,
+    "createdAt": "2024-03-12T09:10:00Z",
+    "content": "Hi! We should bench today.",
+    "type": "DM",
     "read": false,
-    "receiverId": 9,
+    "receiverId": 4,
     "senderId": 5
   },
   {
-    "id": 9,
-    "createdAt": "2024-03-23T16:20:00Z",
-    "content": "Check out the new workout plans added today!",
+    "id": 6,
+    "createdAt": "2024-03-11T10:15:00Z",
+    "content": "nudged you!",
     "type": "MISC",
-    "subtype": "SYS",
-    "read": true,
-    "receiverId": 10,
+    "subtype": "NUDGE",
+    "read": false,
+    "receiverId": 4,
     "senderId": 6
   },
   {
+    "id": 7,
+    "createdAt": "2024-03-10T10:15:00Z",
+    "content": "liked your workout plan.",
+    "type": "MISC",
+    "subtype": "LIKE",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 7
+  },
+  {
+    "id": 8,
+    "createdAt": "2024-03-09T10:15:00Z",
+    "content": "Legs today, anyone?",
+    "type": "GROUP",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 8
+  },
+  {
+    "id": 9,
+    "createdAt": "2024-03-08T10:15:00Z",
+    "content": "wants to be your friend.",
+    "type": "MISC",
+    "subtype": "FRIEND_REQUEST",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 9
+  },
+  {
     "id": 10,
-    "createdAt": "2024-03-24T17:30:00Z",
-    "content": "userTen shared a post with you.",
-    "type": "DM",
+    "createdAt": "2024-03-07T10:15:00Z",
+    "content": "Welcome to Barbell.",
+    "type": "MISC",
     "subtype": "SYS",
     "read": false,
-    "receiverId": 1,
-    "senderId": 10
+    "receiverId": 4
   }
 ]

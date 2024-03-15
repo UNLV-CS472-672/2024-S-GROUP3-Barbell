@@ -89,7 +89,6 @@ model Post {
 model User {
   id       Int         @id @default(autoincrement())
   username String      @db.Char(20)
-  email    String      @unique
   name     String?
   status   UserStatus?
 

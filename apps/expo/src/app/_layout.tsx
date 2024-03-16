@@ -1,21 +1,18 @@
 import { useColorScheme } from 'react-native'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { TRPCProvider } from '@/apps/expo/src/api/api'
 import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from '@react-navigation/native'
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
 
 import { UIProvider } from '~/provider/ui-provider'
-import { TRPCProvider } from '@/apps/expo/src/api/api'
 
 import 'expo-dev-client'
 import '~/styles.css'
 
 import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
 // import { useColorScheme } from 'nativewind'
 
@@ -57,14 +54,13 @@ export default function RootLayout() {
 
   return (
     <TRPCProvider>
-      <ClerkProvider
-        publishableKey={CLERK_PUBLISHABLE_KEY!}
-        tokenCache={tokenCache}
-      >
+      <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
         <UIProvider>
           <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <Stack />
-            <StatusBar />
+            <BottomSheetModalProvider>
+              <Stack />
+              <StatusBar />
+            </BottomSheetModalProvider>
           </ThemeProvider>
         </UIProvider>
       </ClerkProvider>

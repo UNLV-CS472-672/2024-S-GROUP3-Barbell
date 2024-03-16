@@ -1,10 +1,8 @@
 import { View, Text } from "react-native"
 import calculateTimeAgo from "~/utils/calculateTime"
 
-type notification = {type: string, subType: string, content: string, sender?: string, timeSent: string}
-
-export default function TimeAgo({ notif }: { notif: notification }) {
-  const timeAgo = calculateTimeAgo(notif.timeSent)
+export default function TimeAgo({ notif }: { notif: any }) {
+  const timeAgo = calculateTimeAgo(notif.createdAt)
   // this is just further error checking/bug prevention. if there is something wrong with the timeAgo calculation then we want 
   // to just return an empty view component so we don't get any weird "NaN ago" outputs or weird spacing. This can occur if 
   // the notification object doesn't have a time / if the time zone is wrong and the date is in the future.

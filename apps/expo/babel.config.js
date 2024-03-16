@@ -13,6 +13,15 @@ module.exports = (api) => {
       require.resolve('react-native-reanimated/plugin'),
 
       /* more about tamagui here */
+      [
+        '@tamagui/babel-plugin',
+        {
+          components: ['@acme/ui', 'tamagui'],
+          config: '../../packages/ui/tamagui.config.ts',
+          logTimings: true,
+          disableExtraction: process.env.NODE_ENV === 'development',
+        },
+      ],
     ],
   }
 }

@@ -4,9 +4,9 @@
     "baseUrl": "../..",
     "strict": true,
     "paths": {
-      "~/*": ["./apps/expo/src/*"], // expo folder root
+      "@/*": ["./*"], 
+      "~/*": ["./apps/expo/src/*"], 
       "assets/*": ["./apps/expo/assets/*"], 
-      "@/*": ["./*"], // Monorepo root
     },
     "jsx": "react-native",
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",

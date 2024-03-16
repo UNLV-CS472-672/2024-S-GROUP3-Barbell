@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 
 import { headers } from 'next/headers'
-import { TRPCReactProvider } from '@/app/providers'
+import { TRPCReactProvider } from '#/app/providers'
 import { ClerkProvider } from '@clerk/nextjs'
 
 const fontSans = Inter({

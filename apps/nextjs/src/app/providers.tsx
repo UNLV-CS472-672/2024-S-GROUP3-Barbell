@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { env } from '@/env.mjs'
-import { api } from '@/utils/api'
+import { env } from '#/env.mjs'
+import { api } from '#/utils/api'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'

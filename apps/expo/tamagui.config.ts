@@ -1,6 +1,7 @@
 import { shorthands } from '@tamagui/shorthands'
 import { themes, tokens } from '@tamagui/themes'
 import { createTamagui } from 'tamagui'
+import { animations } from '@/apps/expo/src/utils/animation'
 
 const appConfig = createTamagui({
   // custom usage of tamagui
@@ -12,6 +13,7 @@ const appConfig = createTamagui({
   // },
   // default initialization
   themes,
+  animations,
   media: {
     xs: { maxWidth: 660 },
     sm: { maxWidth: 800 },
@@ -28,19 +30,16 @@ const appConfig = createTamagui({
     hoverNone: { hover: 'none' },
     pointerCoarse: { pointer: 'coarse' },
   },
-  // more custom usage options
-  // tokens: {
-  // 	define your design tokens here
-  // },
-  // shorthands: {
-  // 	define your shorthands here
-  // },
-  // more default usage
+
+  // highly recommended to turn this on if you are using shorthands
+  // to avoid having multiple valid style keys that do the same thing
+  // we leave it off by default because it can be confusing as you onboard.
+  onlyAllowShorthands: false,
   tokens,
   shorthands,
 })
 
-export type AppConfig = typeof appConfig
+type AppConfig = typeof appConfig
 
 // overrides TamaguiCustomConfig so your custom types
 // work everywhere you import `tamagui`
@@ -48,4 +47,5 @@ declare module 'tamagui' {
   interface TamaguiCustomConfig extends AppConfig {}
 }
 
+// so the compiler can find it
 export default appConfig

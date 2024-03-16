@@ -1,5 +1,6 @@
 {
   "extends": "@acme/tsconfig/base.json",
+  "baseUrl": ".",
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },

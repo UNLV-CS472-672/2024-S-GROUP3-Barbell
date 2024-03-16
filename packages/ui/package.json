@@ -9,7 +9,7 @@
   },
   "scripts": {
     "add": "pnpm dlx shadcn-ui add",
-    "clean": "rm -rf .turbo node_modules",
+    "clean": "git clean -xdf .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -31,6 +31,7 @@
     "@tamagui/toast": "^1.91.4",
     "@tamagui/shorthands": "^1.91.4",
     "@tamagui/themes": "^1.91.4",
+    "@tamagui/colors": "^1.91.4",
     "tamagui": "^1.91.4"
   },
   "devDependencies": {

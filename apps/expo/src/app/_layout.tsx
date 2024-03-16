@@ -1,14 +1,22 @@
-import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
+import { useColorScheme } from 'react-native'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from '@react-navigation/native'
 
-import { TRPCProvider } from '~/utils/api'
+import { UIProvider } from '~/provider/ui-provider'
+import { TRPCProvider } from '@/apps/expo/src/api/api'
 
 import 'expo-dev-client'
 import '~/styles.css'
 
-import { ClerkProvider } from '@clerk/clerk-expo'
 import * as SecureStore from 'expo-secure-store'
+import { ClerkProvider } from '@clerk/clerk-expo'
+
 // import { useColorScheme } from 'nativewind'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
@@ -36,7 +44,7 @@ const tokenCache = {
 // It wraps your pages with the providers they need
 export default function RootLayout() {
   // themes
-  // const { colorScheme } = useColorScheme()
+  const scheme = useColorScheme()
 
   // fonts
   let [fontsLoaded] = useFonts({
@@ -49,25 +57,16 @@ export default function RootLayout() {
 
   return (
     <TRPCProvider>
-      {/*
-        The Stack component displays the current page.
-        It also allows you to configure your screens 
-      */}
       <ClerkProvider
         publishableKey={CLERK_PUBLISHABLE_KEY!}
         tokenCache={tokenCache}
       >
-        <Stack
-          screenOptions={{
-            // headerStyle: {
-            //   backgroundColor: '#f472b6',
-            // },
-            // contentStyle: {
-            //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
-            // },
-          }}
-        />
-        <StatusBar />
+        <UIProvider>
+          <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+            <Stack />
+            <StatusBar />
+          </ThemeProvider>
+        </UIProvider>
       </ClerkProvider>
     </TRPCProvider>
   )

@@ -46,10 +46,13 @@
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.1",
     "react-native-svg": "^13.9.0",
-    "superjson": "2.2.1"
+    "superjson": "2.2.1",
+    "@tamagui/toast": "^1.91.4",
+    "@tamagui/themes": "^1.91.4",
+    "@tamagui/colors": "^1.91.4",
+    "tamagui": "^1.91.4"
   },
   "devDependencies": {
-    "@acme/ui": "workspace:^",
     "@acme/api": "workspace:^",
     "@acme/eslint-config": "workspace:^",
     "@acme/prettier-config": "workspace:^",
@@ -65,7 +68,8 @@
     "prettier": "^3.1.0",
     "react-devtools-core": "^5.0.0",
     "tailwindcss": "3.3.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "@tamagui/build": "^1.91.4"
   },
   "eslintConfig": {
     "root": true,

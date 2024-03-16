@@ -33,6 +33,7 @@ const config = {
   importOrderTypeScriptVersion: "4.4.0",
   semi: false,
   singleQuote: true,
+  printWidth: 120,
 }
 
 export default config

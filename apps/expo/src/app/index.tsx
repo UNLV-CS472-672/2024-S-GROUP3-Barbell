@@ -5,9 +5,9 @@ import { Link, router, Stack } from 'expo-router'
 import { SignedIn } from '@clerk/clerk-expo'
 import { FlashList } from '@shopify/flash-list'
 
-import type { RouterOutputs } from '~/utils/api'
+import type { RouterOutputs } from '@/apps/expo/src/api/api'
 import { SignOut } from '~/components/auth/sign-out'
-import { api } from '~/utils/api'
+import { api } from '@/apps/expo/src/api/api'
 
 function PostCard(props: {
   post: RouterOutputs['post']['all'][number]

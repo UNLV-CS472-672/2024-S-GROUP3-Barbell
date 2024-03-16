@@ -1,17 +1,92 @@
-// import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
-import { Anchor, Paragraph } from 'tamagui'
+import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
+import { useState } from 'react'
+import { Anchor,
+  Button,
+  H1,
+  Paragraph,
+  Separator,
+  Sheet,
+  XStack,
+  YStack, } from 'tamagui'
 
 export function HomeScreen() {
   return (
-    <Paragraph ta="center" className='font-koulen'>
-      Made by{' '}
-      <Anchor href="" target="_blank" className='font-koulen'>
-        thienguen
-      </Anchor>
-      ,{' '}
-      <Anchor href="" target="_blank" rel="noreferrer" className='font-koulen'>
-        what chu gonna do about it
-      </Anchor>
-    </Paragraph>
+    <YStack f={1} jc="center" ai="center" p="$4" >
+      <YStack bc="$background">
+        <H1 ta="center">Welcome to Tamagui.</H1>
+        <Paragraph ta="center">
+          Here's a basic starter to show navigating from one screen to another. This screen uses the
+          same code on Next.js and React Native.
+        </Paragraph>
+
+        <Separator />
+        <Paragraph ta="center">
+          Made by{' '}
+          <Anchor color="$color12" href="https://twitter.com/natebirdman" target="_blank">
+            @natebirdman
+          </Anchor>
+          ,{' '}
+          <Anchor
+            color="$color12"
+            href="https://github.com/tamagui/tamagui"
+            target="_blank"
+            rel="noreferrer"
+          >
+            give it a ⭐️
+          </Anchor>
+        </Paragraph>
+      </YStack>
+
+      <XStack>
+        <Button >Link to user</Button>
+      </XStack>
+
+      <SheetDemo />
+    </YStack>
+  )
+}
+
+
+
+function SheetDemo() {
+  const [open, setOpen] = useState(false)
+  const [position, setPosition] = useState(0)
+  // const toast = useToastController()
+
+  return (
+    <>
+      <Button
+        size="$6"
+        // icon={open ? ChevronDown : ChevronUp}
+        circular
+        onPress={() => setOpen((x) => !x)}
+      />
+      <Sheet
+        modal
+        animation="medium"
+        open={open}
+        onOpenChange={setOpen}
+        snapPoints={[80]}
+        position={position}
+        onPositionChange={setPosition}
+        dismissOnSnapToBottom
+      >
+        <Sheet.Overlay animation="lazy" enterStyle={{ opacity: 0 }} exitStyle={{ opacity: 0 }} />
+        <Sheet.Frame ai="center" jc="center">
+          <Sheet.Handle />
+          <Button
+            size="$6"
+            circular
+            // icon={ChevronDown}
+            onPress={() => {
+              setOpen(false)
+              // toast.show('Sheet closed!', {
+              //   message: 'Just showing how toast works...',
+              // })
+            }}
+          />
+        </Sheet.Frame>
+      </Sheet>
+    </>
   )
 }

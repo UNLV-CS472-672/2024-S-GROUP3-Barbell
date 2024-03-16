@@ -46,6 +46,8 @@ export default function RootLayout() {
   // fonts
   let [fontsLoaded] = useFonts({
     Koulen_400Regular,
+    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
+    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   })
 
   if (!fontsLoaded) {
@@ -57,10 +59,10 @@ export default function RootLayout() {
       <TRPCProvider>
         <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
           <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-            {/* <BottomSheetModalProvider> */}
-            <Stack />
-            <StatusBar />
-            {/* </BottomSheetModalProvider> */}
+            <BottomSheetModalProvider>
+              <Stack />
+              <StatusBar />
+            </BottomSheetModalProvider>
           </ThemeProvider>
         </ClerkProvider>
       </TRPCProvider>

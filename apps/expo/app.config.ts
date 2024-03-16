@@ -28,7 +28,7 @@ const defineConfig = (): ExpoConfig => ({
       foregroundImage: './assets/icon.png',
       backgroundColor: '#1F104A',
     },
-    jsEngine: 'hermes',
+    // jsEngine: 'hermes',
   },
   // extra: {
   //   eas: {
@@ -41,8 +41,7 @@ const defineConfig = (): ExpoConfig => ({
     //   projectId: 'a5b98934-bf53-4573-ba91-972c22a6759a',
     // },
     clerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
-    expoPublicClerkPublishableKey:
-      process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    expoPublicClerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
   },
   runtimeVersion: {
     policy: 'appVersion',

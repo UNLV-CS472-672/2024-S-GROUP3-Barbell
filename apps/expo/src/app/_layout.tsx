@@ -11,6 +11,8 @@ import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
+import GlobalContextProvider from '~/context/global-context'
+
 // import { useColorScheme } from 'nativewind'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
@@ -60,19 +62,21 @@ export default function RootLayout() {
         tokenCache={tokenCache}
       >
         <BottomSheetModalProvider>
-          <Stack
-            screenOptions={
-              {
-                // headerStyle: {
-                //   backgroundColor: '#f472b6',
-                // },
-                // contentStyle: {
-                //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
-                // },
+          <GlobalContextProvider>
+            <Stack
+              screenOptions={
+                {
+                  // headerStyle: {
+                  //   backgroundColor: '#f472b6',
+                  // },
+                  // contentStyle: {
+                  //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
+                  // },
+                }
               }
-            }
-          />
-          <StatusBar />
+            />
+            <StatusBar />
+          </GlobalContextProvider>
         </BottomSheetModalProvider>
       </ClerkProvider>
     </TRPCProvider>

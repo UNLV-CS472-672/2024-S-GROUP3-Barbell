@@ -1,18 +1,18 @@
+import type { RouterOutputs } from '@/apps/expo/src/api/api'
 import React from 'react'
 import { Button, Pressable, Text, TextInput, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Link, router, Stack } from 'expo-router'
+import { api } from '@/apps/expo/src/api/api'
 import { SignedIn } from '@clerk/clerk-expo'
 import { FlashList } from '@shopify/flash-list'
 
-import type { RouterOutputs } from '@/apps/expo/src/api/api'
-import { SignOut } from '~/components/auth/sign-out'
-import { api } from '@/apps/expo/src/api/api'
 
-function PostCard(props: {
-  post: RouterOutputs['post']['all'][number]
-  onDelete: () => void
-}) {
+import { Anchor, H1, Paragraph, Separator, Sheet, XStack, YStack } from 'tamagui'
+
+import { SignOut } from '~/components/auth/sign-out'
+
+function PostCard(props: { post: RouterOutputs['post']['all'][number]; onDelete: () => void }) {
   return (
     <View className="flex flex-row rounded-lg bg-white/10 p-4">
       <View className="flex-grow">
@@ -24,9 +24,7 @@ function PostCard(props: {
           }}
         >
           <Pressable>
-            <Text className="text-xl font-semibold text-pink-400">
-              {props.post.title}
-            </Text>
+            <Text className="text-xl font-semibold text-pink-400">{props.post.title}</Text>
             <Text className="mt-2 text-black">{props.post.content}</Text>
           </Pressable>
         </Link>
@@ -62,9 +60,7 @@ function CreatePost() {
         placeholder="Title"
       />
       {error?.data?.zodError?.fieldErrors.title && (
-        <Text className="mb-2 text-red-500">
-          {error.data.zodError.fieldErrors.title}
-        </Text>
+        <Text className="mb-2 text-red-500">{error.data.zodError.fieldErrors.title}</Text>
       )}
       <TextInput
         className="mb-2 rounded bg-white/10 p-2 text-black"
@@ -74,9 +70,7 @@ function CreatePost() {
         placeholder="Content"
       />
       {error?.data?.zodError?.fieldErrors.content && (
-        <Text className="mb-2 text-red-500">
-          {error.data.zodError.fieldErrors.content}
-        </Text>
+        <Text className="mb-2 text-red-500">{error.data.zodError.fieldErrors.content}</Text>
       )}
       <Pressable
         className="rounded bg-pink-400 p-2"
@@ -90,9 +84,7 @@ function CreatePost() {
         <Text className="font-semibold text-black">Publish post</Text>
       </Pressable>
       {error?.data?.code === 'UNAUTHORIZED' && (
-        <Text className="mt-2 text-red-500">
-          You need to be logged in to create a post
-        </Text>
+        <Text className="mt-2 text-red-500">You need to be logged in to create a post</Text>
       )}
     </View>
   )
@@ -123,27 +115,16 @@ const StartPage = () => {
           title="screens"
           color={'#4444FF'}
         />
-        <Button
-          onPress={() => void utils.post.all.invalidate()}
-          title="Refresh posts"
-          color={'#000000'}
-        />
+        <Button onPress={() => void utils.post.all.invalidate()} title="Refresh posts" color={'#000000'} />
         <View className="py-2">
-          <Text className="font-semibold italic text-black">
-            Press on a post
-          </Text>
+          <Text className="font-semibold italic text-black">Press on a post</Text>
         </View>
 
         <FlashList
           data={postQuery.data}
           estimatedItemSize={20}
           ItemSeparatorComponent={() => <View className="h-2" />}
-          renderItem={(p: any) => (
-            <PostCard
-              post={p.item}
-              onDelete={() => deletePostMutation.mutate(p.item.id)}
-            />
-          )}
+          renderItem={(p: any) => <PostCard post={p.item} onDelete={() => deletePostMutation.mutate(p.item.id)} />}
         />
 
         <CreatePost />

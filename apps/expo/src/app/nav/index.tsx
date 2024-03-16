@@ -20,13 +20,9 @@ const Nav = () => {
           { key: 'Go Auth', route: '/auth' },
           { key: 'Notif/dm', route: '/notif/dm' },
           { key: 'Notif/misc', route: '/notif/misc' },
+          { key: 'Home2', route: '/home' },
         ]}
-        renderItem={({ item }) => (
-          <Button
-            title={item.key}
-            onPress={() => router.push(item.route as Route<string>)}
-          />
-        )}
+        renderItem={({ item }) => <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />}
       />
     </View>
   )

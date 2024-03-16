@@ -52,6 +52,8 @@
     "@tamagui/toast": "^1.91.4",
     "@tamagui/themes": "^1.91.4",
     "@tamagui/colors": "^1.91.4",
+    "@tamagui/lucide-icons": "^1.91.4",
+    "@tamagui/font-inter": "^1.91.4",
     "tamagui": "^1.91.4"
   },
   "devDependencies": {

@@ -3,10 +3,7 @@ module.exports = (api) => {
   api.cache.forever()
 
   return {
-    presets: [
-      ['babel-preset-expo', { jsxImportSource: 'nativewind' }],
-      'nativewind/babel',
-    ],
+    presets: [['babel-preset-expo', { jsxImportSource: 'nativewind' }], 'nativewind/babel'],
     plugins: [
       ['module:react-native-dotenv'],
       require.resolve('expo-router/babel'),
@@ -16,8 +13,8 @@ module.exports = (api) => {
       [
         '@tamagui/babel-plugin',
         {
-          components: ['@acme/ui', 'tamagui'],
-          config: '../../packages/ui/tamagui.config.ts',
+          components: ['tamagui'],
+          config: './tamagui.config.ts',
           logTimings: true,
           disableExtraction: process.env.NODE_ENV === 'development',
         },

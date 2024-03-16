@@ -1,9 +1,13 @@
-import { shorthands } from '@tamagui/shorthands'
-import { themes, tokens } from '@tamagui/themes'
-import { createTamagui } from 'tamagui'
 import { animations } from '@/apps/expo/src/utils/animation'
+import { createMedia } from '@tamagui/react-native-media-driver'
+import { shorthands } from '@tamagui/shorthands'
+import { tokens } from '@tamagui/themes/v2'
+import { themes } from '@tamagui/themes/v2-themes'
+import { createTamagui } from 'tamagui'
 
-const appConfig = createTamagui({
+// import { themes, tokens } from '@tamagui/themes'
+
+export const appConfig = createTamagui({
   // custom usage of tamagui
   // components: {
   // 	define your custom components here
@@ -12,9 +16,10 @@ const appConfig = createTamagui({
   // 	define your custom themes here
   // },
   // default initialization
+  fonts: {},
   themes,
   animations,
-  media: {
+  media: createMedia({
     xs: { maxWidth: 660 },
     sm: { maxWidth: 800 },
     md: { maxWidth: 1020 },
@@ -29,8 +34,7 @@ const appConfig = createTamagui({
     tall: { minHeight: 820 },
     hoverNone: { hover: 'none' },
     pointerCoarse: { pointer: 'coarse' },
-  },
-
+  }),
   // highly recommended to turn this on if you are using shorthands
   // to avoid having multiple valid style keys that do the same thing
   // we leave it off by default because it can be confusing as you onboard.
@@ -39,7 +43,7 @@ const appConfig = createTamagui({
   shorthands,
 })
 
-type AppConfig = typeof appConfig
+export type AppConfig = typeof appConfig
 
 // overrides TamaguiCustomConfig so your custom types
 // work everywhere you import `tamagui`

@@ -50,6 +50,12 @@ importers:
       '@tamagui/colors':
         specifier: ^1.91.4
         version: 1.91.4
+      '@tamagui/font-inter':
+        specifier: ^1.91.4
+        version: 1.91.4(react@18.2.0)
+      '@tamagui/lucide-icons':
+        specifier: ^1.91.4
+        version: 1.91.4(react-native-svg@13.9.0)(react@18.2.0)
       '@tamagui/shorthands':
         specifier: ^1.91.4
         version: 1.91.4
@@ -6422,6 +6428,14 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@tamagui/font-inter@1.91.4(react@18.2.0):
+    resolution: {integrity: sha512-Z9rVlx3ij3f+ny5Egt/3BpyDurijLLj71fElw3PN0JJDL5h0tu+mxYgYE9jL5Y2tzZfcPvXD6ROeUujSkkiqAg==}
+    dependencies:
+      '@tamagui/core': 1.91.4(react@18.2.0)
+    transitivePeerDependencies:
+      - react
+    dev: false
+
   /@tamagui/font-size@1.91.4(react@18.2.0):
     resolution: {integrity: sha512-a08xNmqhJX+Q+NjaBVTnfMaykVkUI+r6kRoSHOz/GncovH808OV3QAV4wJQiiVS44NHgzFaMtSvHOJppOZYSjQ==}
     peerDependencies:
@@ -6510,6 +6524,17 @@ packages:
       - immer
     dev: false
 
+  /@tamagui/helpers-icon@1.91.4(react-native-svg@13.9.0)(react@18.2.0):
+    resolution: {integrity: sha512-NODsA/7c8uWtuKt3/q5frM6YxBdrRuXvho3F/Y+TIkmOgFiAZm6y6b19YgJKME/568BWFLPaqxwOlSviNnlVEw==}
+    peerDependencies:
+      react: '*'
+      react-native-svg: '>=12'
+    dependencies:
+      '@tamagui/core': 1.91.4(react@18.2.0)
+      react: 18.2.0
+      react-native-svg: 13.9.0(react-native@0.72.10)(react@18.2.0)
+    dev: false
+
   /@tamagui/helpers-node@1.91.4:
     resolution: {integrity: sha512-QPlUv6ykkMoNDO64wMAvxZJNzwNeZlaJiOYfJqe8SRZr72fZVFqhPNtg9v5oHBcouszN6+xnLmwIxnv6r2f/ZQ==}
     dependencies:
@@ -6593,6 +6618,18 @@ packages:
       react: 18.2.0
     transitivePeerDependencies:
       - react-native
+    dev: false
+
+  /@tamagui/lucide-icons@1.91.4(react-native-svg@13.9.0)(react@18.2.0):
+    resolution: {integrity: sha512-3Wg6hN0/1sfZ958pDV4Cy9j+xa8N266+5TOHOsxzGKcJwSeYzxn2IRVjYfzw7RUFWwfqQows1i3oG3O9quAKlQ==}
+    peerDependencies:
+      react: '*'
+      react-native-svg: '>=12'
+    dependencies:
+      '@tamagui/core': 1.91.4(react@18.2.0)
+      '@tamagui/helpers-icon': 1.91.4(react-native-svg@13.9.0)(react@18.2.0)
+      react: 18.2.0
+      react-native-svg: 13.9.0(react-native@0.72.10)(react@18.2.0)
     dev: false
 
   /@tamagui/normalize-css-color@1.91.4:
@@ -13736,7 +13773,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 14.1.3(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
+      next: 14.1.3(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -13780,7 +13817,7 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /next@14.1.3(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0):
+  /next@14.1.3(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-oexgMV2MapI0UIWiXKkixF8J8ORxpy64OuJ/J9oVUmIthXOUCcuVEZX+dtpgq7wIfIqtBwQsKEDXejcjTsan9g==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -13803,7 +13840,7 @@ packages:
       postcss: 8.4.31
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      styled-jsx: 5.1.1(@babel/core@7.23.9)(react@18.2.0)
+      styled-jsx: 5.1.1(@babel/core@7.24.0)(react@18.2.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.1.3
       '@next/swc-darwin-x64': 14.1.3
@@ -16187,6 +16224,24 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.23.9
+      client-only: 0.0.1
+      react: 18.2.0
+    dev: false
+
+  /styled-jsx@5.1.1(@babel/core@7.24.0)(react@18.2.0):
+    resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      babel-plugin-macros: '*'
+      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      babel-plugin-macros:
+        optional: true
+    dependencies:
+      '@babel/core': 7.24.0
       client-only: 0.0.1
       react: 18.2.0
     dev: false

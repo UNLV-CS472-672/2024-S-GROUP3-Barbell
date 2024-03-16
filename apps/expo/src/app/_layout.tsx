@@ -53,17 +53,17 @@ export default function RootLayout() {
   }
 
   return (
-    <TRPCProvider>
-      <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
-        <UIProvider>
+    <UIProvider>
+      <TRPCProvider>
+        <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
           <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <BottomSheetModalProvider>
-              <Stack />
-              <StatusBar />
-            </BottomSheetModalProvider>
+            {/* <BottomSheetModalProvider> */}
+            <Stack />
+            <StatusBar />
+            {/* </BottomSheetModalProvider> */}
           </ThemeProvider>
-        </UIProvider>
-      </ClerkProvider>
-    </TRPCProvider>
+        </ClerkProvider>
+      </TRPCProvider>
+    </UIProvider>
   )
 }

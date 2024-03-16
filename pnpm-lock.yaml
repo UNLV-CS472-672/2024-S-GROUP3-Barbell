@@ -144,6 +144,9 @@ importers:
       '@acme/tsconfig':
         specifier: workspace:^
         version: link:../../tooling/typescript
+      '@acme/ui':
+        specifier: workspace:^
+        version: link:../../packages/ui
       '@babel/core':
         specifier: ^7.23.9
         version: 7.23.9

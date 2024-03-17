@@ -1,14 +1,18 @@
-import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 
 import { TRPCProvider } from '~/utils/api'
 
 import 'expo-dev-client'
 import '~/styles.css'
 
-import { ClerkProvider } from '@clerk/clerk-expo'
 import * as SecureStore from 'expo-secure-store'
+import { ClerkProvider } from '@clerk/clerk-expo'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+
+import GlobalContextProvider from '~/context/global-context'
+
 // import { useColorScheme } from 'nativewind'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
@@ -57,17 +61,23 @@ export default function RootLayout() {
         publishableKey={CLERK_PUBLISHABLE_KEY!}
         tokenCache={tokenCache}
       >
-        <Stack
-          screenOptions={{
-            // headerStyle: {
-            //   backgroundColor: '#f472b6',
-            // },
-            // contentStyle: {
-            //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
-            // },
-          }}
-        />
-        <StatusBar />
+        <BottomSheetModalProvider>
+          <GlobalContextProvider>
+            <Stack
+              screenOptions={
+                {
+                  // headerStyle: {
+                  //   backgroundColor: '#f472b6',
+                  // },
+                  // contentStyle: {
+                  //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
+                  // },
+                }
+              }
+            />
+            <StatusBar />
+          </GlobalContextProvider>
+        </BottomSheetModalProvider>
       </ClerkProvider>
     </TRPCProvider>
   )

@@ -6,7 +6,7 @@ export default function calculateTimeAgo(timeSent: string): string {
 
   // error check to see if the time sent is somehow in the future
   // in this case we won't display the time
-  if(timeSentUTCTime > currentUTCTime){
+  if(timeSentUTCTime > currentUTCTime || isNaN(Number(timeSentUTCTime))){
     return ""
   }
 

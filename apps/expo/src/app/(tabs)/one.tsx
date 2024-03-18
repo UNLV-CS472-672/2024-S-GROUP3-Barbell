@@ -1,13 +1,14 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { Stack } from 'expo-router'
+import { Button, Text, View } from 'react-native'
+import { Stack, useRouter } from 'expo-router'
 
 const Page = () => {
+  const router = useRouter()
   return (
-    <View style={{ flex: 1, marginTop: 80 }}>
-      {/* Define pour custom header */}
+    <View className="flex-1 items-center justify-center bg-white">
       <Stack.Screen />
-      <Text>Page is making</Text>
+      <Text className="pt-12">Page is making</Text>
+      <Button title="Go to post again" onPress={() => router.push('/post/')} />
     </View>
   )
 }

@@ -4,26 +4,20 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from '@expo/vector-icons'
+import HomeLogo from '~assets/nav/home.svg'
 
-import Colors from '~/styles/colors'
+import colors from '~/styles/colors'
 
 const Layout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors.primary,
-        tabBarLabelStyle: {
-          // fontFamily: 'Koulen',
-        },
-      }}
-    >
+    <Tabs screenOptions={{ tabBarActiveTintColor: colors.primary }}>
       <Tabs.Screen
         name="index"
         options={{
           tabBarLabel: 'Luv',
           headerShown: false,
           tabBarIcon: ({ size, color }) => (
-            <Ionicons name="search" size={size} color={color} />
+            <HomeLogo width={size} height={size} fill={color} />
           ),
         }}
       />

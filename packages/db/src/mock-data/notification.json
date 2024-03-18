@@ -74,5 +74,23 @@
     "subtype": "SYS",
     "read": false,
     "receiverId": 4
+  },
+  {
+    "id": 11,
+    "createdAt": "2024-03-12T09:10:00Z",
+    "content": "Hi! We should bench today, also this is a really long message.",
+    "type": "DM",
+    "read": true,
+    "receiverId": 4,
+    "senderId": 6
+  },
+  {
+    "id": 12,
+    "createdAt": "2024-03-12T09:10:00Z",
+    "content": "Hi! We should bench today, also this is a really long message.",
+    "type": "DM",
+    "read": true,
+    "receiverId": 6,
+    "senderId": 4
   }
 ]

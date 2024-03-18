@@ -240,7 +240,7 @@ model Notification {
   content   String
   type      NotificationType
   subtype   NotificaitonSubtype?
-  read      Boolean              @default(false)
+  read      Boolean?             @default(false)
 
   receiver   User @relation("NotificationReceiver", fields: [receiverId], references: [id])
   receiverId Int

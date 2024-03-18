@@ -25,7 +25,7 @@ export default function MiscNotifs() {
 
   // push some extra space to the array so that we can a little extra room at the bottom of the notifications list
   // this is best for newer mobile displays that have curved corners
-  renderedNotifications.push(<View className="pb-10" key={renderedNotifications.length}/>)
+  renderedNotifications.push(<View className="pb-10" key={-1}/>)
 
   return renderedNotifications.length == 1 ? 
     <Text className="flex pt-10 text-center" style={{color: "#CACACA"}} key={renderedNotifications.length}> No notifications to display. </Text> : 

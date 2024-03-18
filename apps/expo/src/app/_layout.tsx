@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router'
+import { Stack, useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 
@@ -7,6 +7,7 @@ import { TRPCProvider } from '~/utils/api'
 import 'expo-dev-client'
 import '~/styles.css'
 
+import { useEffect } from 'react'
 import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
@@ -63,22 +64,21 @@ export default function RootLayout() {
       >
         <BottomSheetModalProvider>
           <GlobalContextProvider>
-            <Stack
-              screenOptions={
-                {
-                  // headerStyle: {
-                  //   backgroundColor: '#f472b6',
-                  // },
-                  // contentStyle: {
-                  //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
-                  // },
-                }
-              }
-            />
             <StatusBar />
+            <RootLayoutBottomNav />
           </GlobalContextProvider>
         </BottomSheetModalProvider>
       </ClerkProvider>
     </TRPCProvider>
+  )
+}
+
+function RootLayoutBottomNav() {
+  // const router = useRouter()
+
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   )
 }

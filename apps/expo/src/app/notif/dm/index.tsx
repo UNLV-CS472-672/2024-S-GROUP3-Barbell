@@ -49,7 +49,7 @@ const Chats = () => (
   <View>
     <TouchableOpacity 
             className='px-6 py-5'
-            onPress={() => {router.replace('/')}}>
+            onPress={() => {router.replace('/post')}}>
             <Text className='font-IstokWeb pb-1 pr-2 text-right text-[#FFFFFF]'>
             Recieved
             </Text>
@@ -75,13 +75,13 @@ const DM = () => {
     <View style={styles.container}>
       <View style={styles.screenName}>
           <TouchableOpacity 
-            onPress={() => {router.replace('/')}}>
+            onPress={() => {router.replace('/post')}}>
             <Image source={require('assets/buttons/Arrow40.png')}
             className='top-3'></Image>
           </TouchableOpacity>
         <Text className='font-koulen text-4xl font-semibold text-[#CACACA] text-center px-16'>Direct Messages</Text>
         <TouchableOpacity 
-            onPress={() => {router.replace('/')}}>
+            onPress={() => {router.replace('/post')}}>
             <Image source={require('assets/buttons/WriteNew40.png')}
             className='top-3'></Image>
           </TouchableOpacity>

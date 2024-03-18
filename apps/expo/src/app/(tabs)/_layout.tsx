@@ -20,7 +20,8 @@ const Layout = () => {
       <Tabs.Screen
         name="index"
         options={{
-          tabBarLabel: 'Explore',
+          tabBarLabel: 'Luv',
+          headerShown: false,
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="search" size={size} color={color} />
           ),
@@ -30,6 +31,7 @@ const Layout = () => {
         name="one"
         options={{
           tabBarLabel: 'one',
+          headerShown: false,
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="heart-outline" size={size} color={color} />
           ),

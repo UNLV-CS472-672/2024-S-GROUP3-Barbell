@@ -6,17 +6,18 @@ import { router } from 'expo-router'
 import MiscNotifs from '~/components/notif/miscNotifs/miscNotifs';
 import DmNotifs from '~/components/notif/dmNotifs';
 import GcNotifs from '~/components/notif/gcNotifs';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export type notifsType = "misc" | "dm" | "gc"
 
-export default function MiscNotifScreen() {
+export default function NotifScreen() {
   
   const [visibleNotifs, setVisibleNotifs] = useState<notifsType>("misc");
   
   return (
-    <View style={{backgroundColor: "#1C1B1B", flex: 1}}>
+    <SafeAreaView style={{backgroundColor: "#1C1B1B", flex: 1}}>
       {/*header w/ back and new message buttons*/}
-      <View className="flex flex-row justify-between pt-5 px-5">
+      <View className="flex flex-row justify-between px-5">
         <Ionicons onPress={() => router.back()} name="chevron-back" size={24} color="#CACACA" />
         <Text style={{color: "#CACACA", fontSize: 20}}>Notifications</Text>
         <MaterialCommunityIcons name="message-plus-outline" size={24} color="#CACACA" />
@@ -49,6 +50,6 @@ export default function MiscNotifScreen() {
           {visibleNotifs == "gc" && <GcNotifs />}
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

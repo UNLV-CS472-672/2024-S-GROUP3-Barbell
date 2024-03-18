@@ -1,16 +1,15 @@
-import { Stack, useRouter } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
 import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
+import { Stack } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 
 import { TRPCProvider } from '~/utils/api'
 
 import 'expo-dev-client'
 import '~/styles.css'
 
-import { useEffect } from 'react'
-import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import * as SecureStore from 'expo-secure-store'
 
 import GlobalContextProvider from '~/context/global-context'
 
@@ -34,6 +33,7 @@ const tokenCache = {
     }
   },
 }
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 // SplashScreen.preventAutoHideAsync()
 
@@ -54,18 +54,14 @@ export default function RootLayout() {
 
   return (
     <TRPCProvider>
-      {/*
-        The Stack component displays the current page.
-        It also allows you to configure your screens 
-      */}
       <ClerkProvider
         publishableKey={CLERK_PUBLISHABLE_KEY!}
         tokenCache={tokenCache}
       >
         <BottomSheetModalProvider>
           <GlobalContextProvider>
-            <StatusBar />
             <RootLayoutBottomNav />
+            <StatusBar style="light" />
           </GlobalContextProvider>
         </BottomSheetModalProvider>
       </ClerkProvider>

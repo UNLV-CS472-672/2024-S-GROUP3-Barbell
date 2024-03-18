@@ -2,6 +2,7 @@
 import React from 'react'
 import { Button, FlatList, StyleSheet, View } from 'react-native'
 import { router } from 'expo-router'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
 
 const Nav = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={[
           // add your component routes here
@@ -28,7 +29,7 @@ const Nav = () => {
           />
         )}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -66,16 +66,17 @@ export default function RootLayout() {
             <Stack
               screenOptions={
                 {
+                  headerShown: false,
                   // headerStyle: {
-                  //   backgroundColor: '#f472b6',
-                  // },
-                  // contentStyle: {
-                  //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
-                  // },
-                }
-              }
+                    //   backgroundColor: '#f472b6',
+                    // },
+                    // contentStyle: {
+                      //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
+                      // },
+                    }
+                  }
             />
-            <StatusBar />
+          <StatusBar style='light'/>
           </GlobalContextProvider>
         </BottomSheetModalProvider>
       </ClerkProvider>

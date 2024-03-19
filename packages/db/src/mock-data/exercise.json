@@ -2,9 +2,105 @@
   {
     "id": 1,
     "name": "Arnold Dumbbell Press",
-    "note": "This exercise targets shoulders and triceps.",
+    "note": " targets shoulders and triceps.",
     "body_part": "SHOULDERS",
     "category": "DUMBBELL",
     "workoutId": 1
-  }
+  },
+  {
+    "id": 2,
+    "name": "Seated Barbell Twist",
+    "note": " targets the abdominal muscles.",
+    "body_part": "CORE",
+    "category": "BARBELL",
+    "workoutId": 3
+  },
+  {
+    "id": 3,
+    "name": "Calf-Machine Shoulder Shrug",
+    "note": "targets the traps.",
+    "body_part": "BACK",
+    "category": "MACHINE",
+    "workoutId": 2
+  },
+  {
+    "id": 4,
+    "name": "Bodyweight Squat",
+    "note": "targets the quadriceps, glutes, and hamstrings.",
+    "body_part": "LEGS",
+    "category": "BODYWEIGHT",
+    "workoutId": 1
+  },
+  {
+    "id": 5,
+    "name": "Band Assisted Pull-up",
+    "note": "targets the lats, abdominals, forearms, and the middle back.",
+    "body_part": "BACK",
+    "category": "ASSISTED_BODYWEIGHT",
+    "workoutId": 2
+  },
+  {
+    "id": 6,
+    "name": "Weighted Sissy Squat",
+    "note": "targets the quadriceps, calves, glutes, and the hamstrings.",
+    "body_part": "LEGS",
+    "category": "WEIGHTED_BODYWEIGHT",
+    "workoutId": 3
+  },
+  {
+    "id": 7,
+    "name": "Treadmill Run",
+    "note": null,
+    "body_part": "OTHER",
+    "category": "CARDIO",
+    "workoutId": 1
+  },
+  {
+    "id": 8,
+    "name": "Plank",
+    "note": "trains the abdominals.",
+    "body_part": "CORE",
+    "category": "DURATION",
+    "workoutId":1
+  },
+  {
+    "id": 9,
+    "name": "Pullups",
+    "note": "targets the lats, biceps, and the middle back.",
+    "body_part": "BACK",
+    "category": "REPS_ONLY",
+    "workoutId": 2
+  },
+  {
+    "id": 10,
+    "name": "World's Greatest Stretch",
+    "note": "This is a stretch designed to target the hamstrings, calves, glutes, and quadriceps",
+    "body_part": "LEGS",
+    "category": "OTHER",
+    "workoutId": 3
+  },
+ {
+    "id": 11,
+    "name": "Dumbbell Bicep Curl",
+    "note": "targets the biceps and forearms.",
+    "body_part": "ARMS",
+    "category": "DUMBBELL",
+    "workoutId": 2
+ },
+ {
+    "id": 12,
+    "name": "Incline Bench Press",
+    "note": "targets the chest, shoulders, and triceps.",
+    "body_part": "CHEST",
+    "category": "BARBELL",
+    "workoutId": 2
+ },
+ {
+    "id": 13,
+    "name": "Farmer's Walk",
+    "note": " targets multiple body parts, including the forearms, traps, the core, and legs.",
+    "body_part": "FULL_BODY",
+    "category": "WEIGHTED_BODYWEIGHT",
+    "workoutId": 1
+ }
 ]

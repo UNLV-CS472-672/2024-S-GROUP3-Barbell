@@ -12,7 +12,7 @@
     
     "dev"             : "turbo dev --parallel --filter=!@acme/expo",
     "db:studio"       : "pnpm db:prisma && cd packages/db && pnpm dotenv -e ../../.env -- prisma studio -p 6969",
-    "db:seed"         : "pnpm db:prisma && cd packages/db && pnpm dotenv -e ../../.env -- tsx src/seed/seed.ts",
+    "db:seed"         : "pnpm db:prisma && cd packages/db && pnpm dotenv -e ../../.env -- tsx src/scripts/seed.ts",
     "db:prisma"       : "cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push",
     "db:migrate"      : "cd packages/db && pnpm dotenv -e ../../.env prisma migrate dev --name init",
     "format"          : "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",

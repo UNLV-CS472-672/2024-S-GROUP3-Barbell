@@ -11,19 +11,6 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum NotificationType {
-  MISC
-  DM
-  GROUP
-}
-
-enum NotificaitonSubtype {
-  SYS
-  NUDGE
-  FRIEND_REQUEST
-  LIKE
-}
-
 enum SetType {
   NORMAL
   WARMUP
@@ -62,6 +49,18 @@ enum UserStatus {
   ONLINE
 }
 
+enum NotificationType {
+  SYS
+  NUDGE
+  FRIEND_REQUEST
+  LIKE
+}
+
+enum ChatType {
+  DIRECT
+  GROUP
+}
+
 model Post {
   id        Int     @id @default(autoincrement())
   title     String
@@ -87,23 +86,20 @@ model Post {
 // * sentMessages: Notifications sent by the user.
 // ******************************************************************************************
 model User {
-  id       Int         @id @default(autoincrement())
-  username String      @db.Char(20)
-  name     String?
-  status   UserStatus?
-
-  streak Int
-  posts  Post[]
-
-  friends Friend[] @relation("UserFriends")
-
+  id            Int            @id @default(autoincrement())
+  username      String         @db.Char(20)
+  name          String?
+  status        UserStatus?
+  streak        Int
+  posts         Post[]
+  friends       Friend[]
   log           Log[]
   workouts      Workout[]
   awards        Award[]
   notifications Notification[] @relation("NotificationReceiver")
   sentMessages  Notification[] @relation("NotificationSender")
+  chats         Chat[]
 }
-
 
 // ******************************************************************************************
 // * Friends Collection
@@ -114,7 +110,7 @@ model User {
 model Friend {
   id Int @id @default(autoincrement())
 
-  user   User @relation("UserFriends", fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id])
   userId Int
 }
 
@@ -235,16 +231,38 @@ model Award {
 // * senderId: The identifier for the user who sent the notification.
 // ******************************************************************************************
 model Notification {
-  id        Int                  @id @default(autoincrement())
-  createdAt DateTime             @default(now())
+  id        Int              @id @default(autoincrement())
+  createdAt DateTime         @default(now())
   content   String
   type      NotificationType
-  subtype   NotificaitonSubtype?
-  read      Boolean              @default(false)
+  read      Boolean          @default(false)
 
   receiver   User @relation("NotificationReceiver", fields: [receiverId], references: [id])
   receiverId Int
 
   sender   User? @relation("NotificationSender", fields: [senderId], references: [id])
   senderId Int?
+}
+
+model Chat {
+  id              Int       @id @default(autoincrement())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  name            String    @db.Char(40)
+  users           User[]
+  readByUserId    Int?
+  createdByUserId Int
+  messages        Message[]
+  type            ChatType
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  read      Boolean  @default(false)
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    Int
+  senderId  Int
 }

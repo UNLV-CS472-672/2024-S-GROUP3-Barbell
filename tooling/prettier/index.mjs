@@ -1,4 +1,4 @@
-import { fileURLToPath } from "url"
+import { fileURLToPath } from 'url'
 
 /** @typedef {import("prettier").Config} PrettierConfig */
 /** @typedef {import("prettier-plugin-tailwindcss").PluginOptions} TailwindConfig */
@@ -6,31 +6,39 @@ import { fileURLToPath } from "url"
 
 /** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
 const config = {
+  // sort-imports, and tailwinds
   plugins: [
-    "@ianvs/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss",
+    '@ianvs/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
   ],
+
+  // tailwind
   tailwindConfig: fileURLToPath(
-    new URL("../../tooling/tailwind/index.ts", import.meta.url),
+    new URL('../../tooling/tailwind/index.ts', import.meta.url),
   ),
-  tailwindFunctions: ["cn", "cva"],
+
+  // utils
+  tailwindFunctions: ['cn', 'cva'],
+
+  // sort-imports
   importOrder: [
-    "<TYPES>",
-    "^(react/(.*)$)|^(react$)|^(react-native(.*)$)",
-    "^(next/(.*)$)|^(next$)",
-    "^(expo(.*)$)|^(expo$)",
-    "<THIRD_PARTY_MODULES>",
-    "",
-    "<TYPES>^@acme",
-    "^@acme/(.*)$",
-    "",
-    "<TYPES>^[.|..|~]",
-    "^~/",
-    "^[../]",
-    "^[./]",
+    '<TYPES>',
+    '^(react/(.*)$)|^(react$)|^(react-native(.*)$)',
+    '^(next/(.*)$)|^(next$)',
+    '^(expo(.*)$)|^(expo$)',
+    '<THIRD_PARTY_MODULES>',
+    '',
+    '<TYPES>^@acme',
+    '^@acme/(.*)$',
+    '',
+    '<TYPES>^[.|..|~]',
+    '^~/',
+    '^[../]',
+    '^[./]',
   ],
-  importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
-  importOrderTypeScriptVersion: "4.4.0",
+  importOrderTypeScriptVersion: '4.4.0',
+  importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
+  // prettier
   semi: false,
   singleQuote: true,
 }

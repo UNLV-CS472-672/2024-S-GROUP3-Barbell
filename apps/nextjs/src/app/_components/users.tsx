@@ -13,11 +13,7 @@ export function UsersPage() {
 
   return (
     <div className="flex w-full flex-col gap-4">
-      {users?.map((user) => (
-        <div key={user.toString()}>
-          <h1>{user.toString()}</h1>
-        </div>
-      ))}
+      Hi Mom!
     </div>
   )
 }

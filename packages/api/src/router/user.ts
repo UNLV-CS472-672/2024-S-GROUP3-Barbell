@@ -8,7 +8,7 @@ import { createTRPCRouter, publicProcedure } from '../trpc'
  */
 export const userRouter = createTRPCRouter({
   /**
-   * get all users
+   * <get all users>
    */
   all: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.user.findMany({ orderBy: { id: 'desc' } })

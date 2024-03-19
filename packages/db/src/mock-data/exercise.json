@@ -1,34 +1,10 @@
 [
-    {
-        "id": 1,
-        "name": "Arnold Dumbbell Press",
-        "note": "This exercise targets shoulders and triceps.",
-        "sets": [
-            {
-                "id": 1,
-                "type": "NORMAL",
-                "reps": 10,
-                "weight": 20,
-                "exerciseId": 1
-            },
-            {
-                "id": 2,
-                "type": "NORMAL",
-                "reps": 10,
-                "weight": 25,
-                "exerciseId": 1
-            }, 
-            {
-                "id:": 3,
-                "type": "NORMAL",
-                "reps": 10,
-                "weight": 30,
-                "exerciseId": 1
-            }
-        ],
-        "body_part": "SHOULDERS",
-        "category": "DUMBBELL",
-        "workoutId": 1 
-
-    }
+  {
+    "id": 1,
+    "name": "Arnold Dumbbell Press",
+    "note": "This exercise targets shoulders and triceps.",
+    "body_part": "SHOULDERS",
+    "category": "DUMBBELL",
+    "workoutId": 1
+  }
 ]

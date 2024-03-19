@@ -4,6 +4,7 @@ import { prisma } from '..'
 import notification from '../mock-data/notification.json'
 import post from '../mock-data/post.json'
 import users from '../mock-data/user.json'
+import exercise from '../mock-data/exercise.json'
 
 /**
  * @param type logging type
@@ -85,7 +86,10 @@ const loaddb = async () => {
     logger('add', 'notification')
 
     /*  */
-  
+    await prisma.exercise.createMany({
+      data: exercise as Prisma.ExerciseCreateManyInput[],
+    })
+    logger('add', 'exercise')
 
     /*  */
 

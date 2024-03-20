@@ -250,7 +250,7 @@ model Chat {
   updatedAt       DateTime  @updatedAt
   name            String?   @db.Char(40)
   users           User[]
-  readByUserId    Int?
+  readByUserIds   Int[]
   createdByUserId Int
   messages        Message[]
   type            ChatType

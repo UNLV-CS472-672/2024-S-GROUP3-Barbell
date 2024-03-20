@@ -28,20 +28,22 @@ function getConversations(userData: any) {
   return Array.from(convoSet)
 }
 
-function getMessagePreviews(userData: any, conversations: any[]): [number, string][]{
+function getMessagePreview(userData: any, conversations: any[]): [number, string][]{
   for(let i = 0; i < notifData.length; i++){
     for(let j = 0; j < conversations.length; j++){
+      if(notifData[i]?.senderId == conversations[j] || notifData[i]?.receiverId == conversations[j]){
 
+      }
     }
   }
   return []
 }
 
 export default function DmNotifs(notif: any) {
-  // const { isWorkingOut, setIsWorkingOut, userData } = useGlobalContext();
-  const conversations = getConversations(userData);
-  const messagePreviews = getMessagePreviews(userData, conversations);
-  console.log(conversations)
+  // const { isWorkingOut, setIsWorkingOut, userData } = useGlobalContext();  // used to get user data
+  // const messagePreviews = getMessagePreviews(userData);  // returns a 2-tuple list of the conversation and the person they are with
+  // 
+  let messagePreviews: any[]
   const renderedNotifications = [];
   for (let i = 0; i < notifications.length; i++) {
     const notif = notifications[i];

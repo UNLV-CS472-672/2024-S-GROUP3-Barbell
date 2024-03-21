@@ -87,7 +87,7 @@ model Post {
 // ******************************************************************************************
 model User {
   id            Int            @id @default(autoincrement())
-  username      String         @db.Char(20)
+  username      String         @unique @db.Char(20)
   name          String?
   status        UserStatus?
   streak        Int
@@ -248,9 +248,9 @@ model Chat {
   id              Int       @id @default(autoincrement())
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-  name            String    @db.Char(40)
+  name            String?   @db.Char(40)
   users           User[]
-  readByUserId    Int?
+  readByUserIds   Int[]
   createdByUserId Int
   messages        Message[]
   type            ChatType

@@ -70,6 +70,10 @@ export const notifRouter = createTRPCRouter({
         }
       })
 
+      if(directChatIds.length == 0){
+        return []
+      }
+
       const finalMessageForEachDMChat = await prisma.chat.findMany({
         where: {
           id: {
@@ -90,10 +94,6 @@ export const notifRouter = createTRPCRouter({
           },
         },
       });
-
-      if(directChatIds.length == 0){
-        return []
-      }
 
       return finalMessageForEachDMChat;
     }),

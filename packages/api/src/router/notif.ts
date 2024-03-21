@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { createTRPCRouter, publicProcedure } from '../trpc'
+import { ChatType } from '@prisma/client'
 
 export const notifRouter = createTRPCRouter({
   /**
@@ -17,7 +18,7 @@ export const notifRouter = createTRPCRouter({
 
       const chat = await prisma.chat.findFirst({
         where: {
-          type: 'DIRECT',
+          type: ChatType.DIRECT,
           id: input.id,
         },
         select: {
@@ -64,7 +65,7 @@ export const notifRouter = createTRPCRouter({
 
       const directChatIds: number[] = []
       userChats?.chats.forEach((chat) => {
-        if(chat.type === "DIRECT"){
+        if(chat.type === ChatType.DIRECT){
           directChatIds.push(chat.id)
         }
       })

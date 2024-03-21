@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "createdAt": "2023-03-25T13:44:10.488Z",
+        "updatedAt": "2023-03-25T13:44:10.488Z",
+        "content": "Yoo whats up guys, this is the workout group",
+        "read": true,
+        "chatId": 1,
+        "senderId": 1
+    },
+    {
+        "id": 2,
+        "createdAt": "2023-03-25T13:46:59.900Z",
+        "updatedAt": "2023-03-25T13:46:59.900Z",
+        "content": "Hey, lets get to work",
+        "read": true,
+        "chatId": 1,
+        "senderId": 5
+    },
+    {
+        "id": 3,
+        "createdAt": "2023-03-25T13:47:30.812Z",
+        "updatedAt": "2023-03-25T13:47:30.812Z",
+        "content": "We going to the gym tomorrow?",
+        "read": true,
+        "chatId": 1,
+        "senderId": 3
+    },
+    {
+        "id": 4,
+        "createdAt": "2023-03-25T13:48:03.154Z",
+        "updatedAt": "2023-03-25T13:48:03.154Z",
+        "content" : "Yessir",
+        "read": true,
+        "chatId": 1,
+        "senderId": 6
+    },
+    {
+        "id": 5,
+        "createdAt": "2023-03-25T13:49:37.564Z",
+        "updatedAt": "2023-03-25T13:49:37.564Z",
+        "content": "Ight bet, see ya'll there",
+        "read": true,
+        "chatId": 1,
+        "senderId": 2
+    },
+    {
+        "id": 6,
+        "createdAt": "2023-03-25T13:50:10.658Z",
+        "updatedAt": "2023-03-25T13:50:10.658Z",
+        "content": "I'm going to be late because of work",
+        "read": true,
+        "chatId": 1,
+        "senderId": 4
+    },
+    {
+        "id": 7,
+        "createdAt": "2023-03-25T13:51:15.700Z",
+        "updatedAt": "2023-03-25T13:51:15.700Z",
+        "content": "Np, we free most of the day anyways, we can wait",
+        "read": true,
+        "chatId": 1,
+        "senderId": 7
+    }
+]

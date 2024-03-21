@@ -6,6 +6,8 @@ import post from '../mock-data/post.json'
 import users from '../mock-data/user.json'
 import exercise from '../mock-data/exercise.json'
 import workout from '../mock-data/workout.json'
+import chat from '../mock-data/chat.json'
+import message from '../mock-data/message.json'
 
 /**
  * @param type logging type
@@ -62,6 +64,13 @@ const loaddb = async () => {
 
     await prisma.user.deleteMany()
     logger('delete', 'user')
+    
+    await prisma.message.deleteMany()
+    logger('delete', 'message')
+
+    await prisma.chat.deleteMany()
+    logger('delete', 'chat')
+
 
     /// < DIVIDER > ///
     logger('divider', '')
@@ -97,6 +106,19 @@ const loaddb = async () => {
       data: exercise as Prisma.ExerciseCreateManyInput[],
     })
     logger('add', 'exercise')
+
+    /*  */
+    await prisma.chat.createMany({
+      data: chat as Prisma.ChatCreateManyInput[],
+    })
+    logger('add', 'chat')
+
+    /*  */
+    await prisma.message.createMany({
+      data: message as Prisma.MessageCreateManyInput[],
+    })
+    logger('add', 'message')
+
 
     /*  */
 

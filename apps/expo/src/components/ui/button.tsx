@@ -1,9 +1,8 @@
 import type { VariantProps } from 'class-variance-authority'
 import React from 'react'
 import { Pressable, PressableProps, Text } from 'react-native'
+import { cn } from '@/packages/ui/src/cn'
 import { cva } from 'class-variance-authority'
-
-import { cn } from '~/utils/cn'
 
 const buttonVariants = cva('active:opacity-30', {
   variants: {

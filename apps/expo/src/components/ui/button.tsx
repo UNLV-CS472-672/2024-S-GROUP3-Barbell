@@ -1,4 +1,5 @@
 import type { VariantProps } from 'class-variance-authority'
+import React from 'react'
 import { Pressable, PressableProps, Text } from 'react-native'
 import { cva } from 'class-variance-authority'
 
@@ -10,6 +11,7 @@ const buttonVariants = cva('active:opacity-30', {
       primary: 'bg-dark-purple',
       light: 'bg-slate-200',
       dark: 'bg-slate-900',
+      icon: 'bg-transparent',
     },
     size: {
       icon: 'p-1',
@@ -33,6 +35,7 @@ export interface ButtonProps
   extends PressableProps,
     VariantProps<typeof buttonVariants> {
   value?: string
+  children?: React.ReactNode
 }
 
 const textStylesMap = {
@@ -47,6 +50,7 @@ const Button = ({
   size,
   rounded,
   className,
+  children,
   ...props
 }: ButtonProps) => {
   const textColor = color == 'light' ? 'text-slate-900' : 'text-white'
@@ -65,6 +69,7 @@ const Button = ({
           {value}
         </Text>
       )}
+      {children}
     </Pressable>
   )
 }

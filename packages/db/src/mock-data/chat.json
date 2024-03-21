@@ -2,7 +2,7 @@
     {
         "id": 1,
         "createdAt": "2023-03-25T13:43:34.342Z",
-        "updatedAt": "2024-03-15T01:27:37.564Z",
+        "updatedAt": "2023-06-15T01:27:37.564Z",
         "name": "Jedi Council",
         "createdByUserId": 1,
         "type": "GROUP"
@@ -14,5 +14,37 @@
         "name": "Dead chat",
         "createdByUserId": 10,
         "type": "GROUP"
+    },
+    {
+        "id": 3,
+        "createdAt": "2024-03-20T19:55:28.159Z",
+        "updatedAt": "2024-03-20T19:55:28.159Z",
+        "name": "New workout group-chat",
+        "createdByUserId": 3,
+        "type": "GROUP"
+    },
+    {
+        "id": 4,
+        "createdAt": "2020-04-18T14:31:01Z",
+        "updatedAt": "2020-04-18T14:31:01Z",
+        "name": "Direct message with Miguel",
+        "createdByUserId": 5,
+        "type": "DIRECT"
+    },
+    {
+        "id": 5,
+        "createdAt": "2023-05-04T21:46:40Z",
+        "updatedAt": "2023-05-04T21:46:40Z",
+        "name": "Direct message with Marcos",
+        "createdByUserId": 9,
+        "type": "DIRECT"
+    },
+    {
+        "id": 6,
+        "createdAt": "2022-04-19T15:49:09.197Z",
+        "updatedAt": "2024-02-19T15:10:19.456Z",
+        "name": "Direct message with Stef",
+        "createdByUserId": 8,
+        "type": "DIRECT"
     }
 ]

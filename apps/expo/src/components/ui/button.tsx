@@ -49,12 +49,7 @@ const Button = ({
   className,
   ...props
 }: ButtonProps) => {
-  const textColor =
-    color == 'light'
-      ? 'text-slate-900'
-      : color == 'dark' || ((color == 'primary' || !color) && size == 'xl')
-        ? 'text-white'
-        : 'text-slate-200'
+  const textColor = color == 'light' ? 'text-slate-900' : 'text-white'
 
   return (
     <Pressable

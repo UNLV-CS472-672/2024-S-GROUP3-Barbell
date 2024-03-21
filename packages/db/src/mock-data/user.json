@@ -2,7 +2,6 @@
   {
     "id": 1,
     "username": "userOne",
-    "email": "userone@example.com",
     "name": "User One",
     "status": "ACTIVE",
     "streak": 10
@@ -10,7 +9,6 @@
   {
     "id": 2,
     "username": "userTwo",
-    "email": "usertwo@example.com",
     "name": "User Two",
     "status": "BUSY",
     "streak": 5
@@ -18,7 +16,6 @@
   {
     "id": 3,
     "username": "userThree",
-    "email": "userthree@example.com",
     "name": "User Three",
     "status": "ONLINE",
     "streak": 7
@@ -26,7 +23,6 @@
   {
     "id": 4,
     "username": "userFour",
-    "email": "userfour@example.com",
     "name": "User Four",
     "status": "OFFLINE",
     "streak": 2
@@ -34,7 +30,6 @@
   {
     "id": 5,
     "username": "userFive",
-    "email": "userfive@example.com",
     "name": "User Five",
     "status": "ONLINE",
     "streak": 12
@@ -42,7 +37,6 @@
   {
     "id": 6,
     "username": "userSix",
-    "email": "usersix@example.com",
     "name": "User Six",
     "status": "ACTIVE",
     "streak": 8
@@ -50,7 +44,6 @@
   {
     "id": 7,
     "username": "userSeven",
-    "email": "userseven@example.com",
     "name": "User Seven",
     "status": "BUSY",
     "streak": 3
@@ -58,7 +51,6 @@
   {
     "id": 8,
     "username": "userEight",
-    "email": "usereight@example.com",
     "name": "User Eight",
     "status": "ACTIVE",
     "streak": 9
@@ -66,7 +58,6 @@
   {
     "id": 9,
     "username": "userNine",
-    "email": "usernine@example.com",
     "name": "User Nine",
     "status": "ACTIVE",
     "streak": 4
@@ -74,7 +65,6 @@
   {
     "id": 10,
     "username": "userTen",
-    "email": "userten@example.com",
     "name": "User Ten",
     "status": "OFFLINE",
     "streak": 6

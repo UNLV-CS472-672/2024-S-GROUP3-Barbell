@@ -4,6 +4,14 @@ import { prisma } from '..'
 import notification from '../mock-data/notification.json'
 import post from '../mock-data/post.json'
 import users from '../mock-data/user.json'
+import exercise from '../mock-data/exercise.json'
+import workout from '../mock-data/workout.json'
+import chat from '../mock-data/chat.json'
+import message from '../mock-data/message.json'
+import award from '../mock-data/award.json'
+import friend from '../mock-data/friend.json'
+import log from '../mock-data/log.json'
+import set from '../mock-data/set.json'
 
 /**
  * @param type logging type
@@ -43,8 +51,14 @@ const loaddb = async () => {
     await prisma.set.deleteMany()
     logger('delete', 'set')
 
+    await prisma.set.deleteMany()
+    logger('delete', 'set')
+
     await prisma.exercise.deleteMany()
     logger('delete', 'exercise')
+    
+    await prisma.log.deleteMany()
+    logger('delete', 'log')
 
     await prisma.workout.deleteMany()
     logger('delete', 'workout')
@@ -60,6 +74,21 @@ const loaddb = async () => {
 
     await prisma.user.deleteMany()
     logger('delete', 'user')
+    
+    await prisma.message.deleteMany()
+    logger('delete', 'message')
+
+    await prisma.chat.deleteMany()
+    logger('delete', 'chat')
+
+    await prisma.award.deleteMany()
+    logger('delete', 'award')
+
+    await prisma.friend.deleteMany()
+    logger('delete', 'friend')
+
+    
+
 
     /// < DIVIDER > ///
     logger('divider', '')
@@ -85,6 +114,52 @@ const loaddb = async () => {
     logger('add', 'notification')
 
     /*  */
+    await prisma.workout.createMany({
+      data: workout as Prisma.WorkoutCreateManyInput[],
+    })
+    logger('add', 'workout')
+
+    /*  */
+    await prisma.exercise.createMany({
+      data: exercise as Prisma.ExerciseCreateManyInput[],
+    })
+    logger('add', 'exercise')
+
+    /*  */
+    await prisma.chat.createMany({
+      data: chat as Prisma.ChatCreateManyInput[],
+    })
+    logger('add', 'chat')
+
+    /*  */
+    await prisma.message.createMany({
+      data: message as Prisma.MessageCreateManyInput[],
+    })
+    logger('add', 'message')
+
+    /*  */
+    await prisma.award.createMany({
+      data: award as Prisma.AwardCreateManyInput[],
+    })
+    logger('add', 'award')
+
+    /*  */
+    await prisma.friend.createMany({
+      data: friend as Prisma.FriendCreateManyInput[],
+    })
+    logger('add', 'friend')
+
+    /*  */
+    await prisma.log.createMany({
+      data: log as Prisma.LogCreateManyInput[],
+    })
+    logger('add', 'log')
+
+    /*  */
+    await prisma.set.createMany({
+      data: set as Prisma.SetCreateManyInput[],
+    })
+    logger('add', 'set')
 
     /*  */
 

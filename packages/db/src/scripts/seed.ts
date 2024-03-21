@@ -11,6 +11,7 @@ import message from '../mock-data/message.json'
 import award from '../mock-data/award.json'
 import friend from '../mock-data/friend.json'
 import log from '../mock-data/log.json'
+import set from '../mock-data/set.json'
 
 /**
  * @param type logging type
@@ -50,11 +51,15 @@ const loaddb = async () => {
     await prisma.set.deleteMany()
     logger('delete', 'set')
 
+    await prisma.set.deleteMany()
+    logger('delete', 'set')
+
     await prisma.exercise.deleteMany()
     logger('delete', 'exercise')
     
     await prisma.log.deleteMany()
     logger('delete', 'log')
+
     await prisma.workout.deleteMany()
     logger('delete', 'workout')
 
@@ -150,6 +155,11 @@ const loaddb = async () => {
     })
     logger('add', 'log')
 
+    /*  */
+    await prisma.set.createMany({
+      data: set as Prisma.SetCreateManyInput[],
+    })
+    logger('add', 'set')
 
     /*  */
 

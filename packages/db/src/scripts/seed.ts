@@ -9,6 +9,7 @@ import workout from '../mock-data/workout.json'
 import chat from '../mock-data/chat.json'
 import message from '../mock-data/message.json'
 import award from '../mock-data/award.json'
+import friend from '../mock-data/friend.json'
 
 /**
  * @param type logging type
@@ -75,6 +76,9 @@ const loaddb = async () => {
     await prisma.award.deleteMany()
     logger('delete', 'award')
 
+    await prisma.friend.deleteMany()
+    logger('delete', 'friend')
+
 
     /// < DIVIDER > ///
     logger('divider', '')
@@ -128,6 +132,12 @@ const loaddb = async () => {
       data: award as Prisma.AwardCreateManyInput[],
     })
     logger('add', 'award')
+
+    /*  */
+    await prisma.friend.createMany({
+      data: friend as Prisma.FriendCreateManyInput[],
+    })
+    logger('add', 'friend')
 
     /*  */
 

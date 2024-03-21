@@ -84,6 +84,7 @@ export const notifRouter = createTRPCRouter({
             take: 1,
             select: {
               content: true,
+              createdAt: true,
             },
           },
         },

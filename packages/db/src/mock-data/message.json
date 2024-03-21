@@ -104,7 +104,7 @@
         "updatedAt": "2020-04-18T14:31:01.000Z",
         "content": "Hey miguel, you ready to start working out? We should go to the gym tomorrow.",
         "read": true,
-        "chatId": 3,
+        "chatId": 4,
         "senderId": 5
     },
     {
@@ -113,7 +113,7 @@
         "updatedAt": "2020-04-18T14:32:41.250Z",
         "content": "Yeah, I'm ready",
         "read": true,
-        "chatId": 3,
+        "chatId": 4,
         "senderId": 9
     },
     {
@@ -122,7 +122,7 @@
         "updatedAt": "2020-04-18T14:32:49.798Z",
         "content": "What are we doing?",
         "read": true,
-        "chatId": 3,
+        "chatId": 4,
         "senderId": 9
     },
     {
@@ -131,7 +131,7 @@
         "updatedAt": "2020-04-18T14:32:58.123Z",
         "content": "I think tomorrow we can focus on legs if you are down",
         "read": true,
-        "chatId": 3,
+        "chatId": 4,
         "senderId": 9
     },
     {
@@ -140,7 +140,43 @@
         "updatedAt": "2020-04-18T14:32:15.596Z",
         "content": "I'm down, ill see you tomorrow then",
         "read": true,
-        "chatId": 3,
+        "chatId": 4,
         "senderId": 5
+    },
+    {
+        "id": 17,
+        "createdAt": "2023-05-04T21:46:40.000Z",
+        "updatedAt": "2023-05-04T21:46:40.000Z",
+        "content": "Yo just wanted to message you cause i forgot to mention that tomorrow I'm gonna bring the new belts to the gym",
+        "read": true,
+        "chatId": 5,
+        "senderId": 6
+    },
+    {
+        "id": 18,
+        "createdAt": "2023-05-04T21:49:10.050Z",
+        "updatedAt": "2023-05-04T21:49:10.050Z",
+        "content": "NIIICE, I been waiting on that for a bit now, see ya later then gang",
+        "read": true,
+        "chatId": 5,
+        "senderId": 3
+    },
+    {
+        "id": 19,
+        "createdAt": "2023-05-04T21:55:55.099Z",
+        "updatedAt": "2023-05-04T21:55:55.099Z",
+        "content": "Im excited to use them too, I'll see you guys tomorrow",
+        "read": true,
+        "chatId": 5,
+        "senderId": 6
+    },
+    {
+        "id": 20,
+        "createdAt": "2022-04-19T15:49:09.197Z",
+        "updatedAt": "2022-04-19T15:49:09.197Z",
+        "content": "Hey sam, just wanted to say im a fan, you have taught me a lot.",
+        "read": true,
+        "chatId": 6,
+        "senderId": 8
     }
 ]

@@ -36,14 +36,14 @@
         "createdAt": "2023-05-04T21:46:40Z",
         "updatedAt": "2023-05-04T21:46:40Z",
         "name": "Direct message with Marcos",
-        "createdByUserId": 9,
+        "createdByUserId": 6,
         "type": "DIRECT"
     },
     {
         "id": 6,
         "createdAt": "2022-04-19T15:49:09.197Z",
         "updatedAt": "2024-02-19T15:10:19.456Z",
-        "name": "Direct message with Stef",
+        "name": "Direct message with Sam Sulek",
         "createdByUserId": 8,
         "type": "DIRECT"
     }

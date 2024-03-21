@@ -9,6 +9,9 @@ import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
 WebBrowser.maybeCompleteAuthSession()
 
 const SignInWithGoogle = () => {
+  // flag to enable/disable button
+  let isEnabled = true;
+
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser()
@@ -19,24 +22,30 @@ const SignInWithGoogle = () => {
 
   // add mores strategies here
   const onPressOAuth = React.useCallback(async () => {
-    try {
-      const startOAuthFlow = startGoogleOAuthFlow
+    if (isEnabled) {
+      // disable button, then re-enable in 0.5 seconds
+      isEnabled = false;
+      setTimeout(() => { isEnabled = true }, 500)
 
-      const { createdSessionId, setActive } = await startOAuthFlow()
-      console.log('startOAuthFlow')
-
-      if (createdSessionId) {
-        setActive?.({ session: createdSessionId })
-        router.back()
-      } else {
-        alert('Sign in failed')
+      try {
+        const startOAuthFlow = startGoogleOAuthFlow
+  
+        const { createdSessionId, setActive } = await startOAuthFlow()
+        console.log('startOAuthFlow')
+  
+        if (createdSessionId) {
+          setActive?.({ session: createdSessionId })
+          router.back()
+        } else {
+          alert('Sign in failed')
+        }
+      } catch (err: any) {
+        Alert.alert(
+          'OAuth Error',
+          `An error occurred during the OAuth process: ${err.message || err}`,
+        )
+        console.error('OAuth error', err)
       }
-    } catch (err: any) {
-      Alert.alert(
-        'OAuth Error',
-        `An error occurred during the OAuth process: ${err.message || err}`,
-      )
-      console.error('OAuth error', err)
     }
   }, [])
 

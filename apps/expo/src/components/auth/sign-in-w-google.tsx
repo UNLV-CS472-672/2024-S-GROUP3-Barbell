@@ -9,7 +9,7 @@ import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
 WebBrowser.maybeCompleteAuthSession()
 
 const SignInWithGoogle = () => {
-  // flag to enable/disable button
+  // flag used to enable/disable buttons
   let isEnabled = true;
 
   // Warm up the android browser to improve UX
@@ -22,10 +22,11 @@ const SignInWithGoogle = () => {
 
   // add mores strategies here
   const onPressOAuth = React.useCallback(async () => {
+    // check if the buttons can be used (currently enabled)
     if (isEnabled) {
-      // disable button, then re-enable in 0.5 seconds
+      // disable all buttons and re-enable them after 0.5 seconds
       isEnabled = false;
-      setTimeout(() => { isEnabled = true }, 500)
+      setTimeout(() => { isEnabled = true }, 1000)
 
       try {
         const startOAuthFlow = startGoogleOAuthFlow

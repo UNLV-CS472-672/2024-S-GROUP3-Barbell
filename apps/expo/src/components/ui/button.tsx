@@ -41,7 +41,14 @@ const textStylesMap = {
   xl: 'text-xl font-semibold font-koulen',
 }
 
-const Button = ({ value, color, size, className, ...props }: ButtonProps) => {
+const Button = ({
+  value,
+  color,
+  size,
+  rounded,
+  className,
+  ...props
+}: ButtonProps) => {
   const textColor =
     color == 'light'
       ? 'text-slate-900'
@@ -52,7 +59,7 @@ const Button = ({ value, color, size, className, ...props }: ButtonProps) => {
   return (
     <Pressable
       {...props}
-      className={cn(buttonVariants({ color, size }), className)}
+      className={cn(buttonVariants({ color, size, rounded }), className)}
     >
       {value && (
         <Text

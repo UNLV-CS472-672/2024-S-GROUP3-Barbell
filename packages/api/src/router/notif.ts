@@ -26,8 +26,8 @@ export const notifRouter = createTRPCRouter({
         },
       })
 
-      if (!chat) {
-        throw new Error('No messages found for chat ' + input.id);
+      if (chat == undefined) {
+        return []
       }
 
       return prisma.message.findMany({
@@ -41,5 +41,59 @@ export const notifRouter = createTRPCRouter({
     }),
 
     
+  /**
+   *  @remarks
+   *  This returns the most recent message from each direct message chat for a user.
+   * 
+   *  @param  id - the id of the user
+   *  @returns an array of objects containing the chatId, and an array containing the most recent message for that chat
+   */
+    getMessagePreviewsFromUserId: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const { prisma } = ctx
+
+      const userChats = await prisma.user.findFirst({
+        where: {
+          id: input.id
+        },
+        select: {
+          chats: true
+        }
+      })
+
+      const directChatIds: number[] = []
+      userChats?.chats.forEach((chat) => {
+        if(chat.type === "DIRECT"){
+          directChatIds.push(chat.id)
+        }
+      })
+
+      const finalMessageForEachDMChat = await prisma.chat.findMany({
+        where: {
+          id: {
+            in: directChatIds,
+          },
+        },
+        select: {
+          id: true,
+          messages: {
+            orderBy: {
+              createdAt: 'desc',
+            },
+            take: 1,
+            select: {
+              content: true,
+            },
+          },
+        },
+      });
+
+      if(directChatIds.length == 0){
+        return []
+      }
+
+      return finalMessageForEachDMChat;
+    }),
   }
   )

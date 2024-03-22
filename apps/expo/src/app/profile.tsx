@@ -1,5 +1,9 @@
-import React from 'react'
-import { ScrollView, View, Text, StyleSheet, Button } from 'react-native'
+import React, { useState } from 'react';
+import { ScrollView, View, Text, StyleSheet, Button, Switch, FlatList, Pressable } from 'react-native';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { api } from '~/utils/api';
+import { router } from 'expo-router';
 
 const styles = StyleSheet.create({
   screenContainer: {
@@ -59,75 +63,80 @@ const styles = StyleSheet.create({
 })
 
 const Profile = () => {
+  const [notificationsSwitchEnabled, setIsEnabled] = useState(false);
+  const toggleNotificationSwitch = () => setIsEnabled(previousState => !previousState);
+  const iconSize = 26;
+
+  const { data } = api.user.byId.useQuery({ id: 1 });
+
+  const userInfoItems = [
+    { title: 'Height', value: data?.name },
+    { title: 'Weight', value: data?.name },
+    { title: 'Age', value: data?.name },
+  ];
+
+  const accountItems = [
+    { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/personal-data') },
+    { title: 'Achievements', iconName: 'award', onPress: () => router.push('/achievements') },
+    { title: 'Activity History', iconName: 'history', onPress: () => router.push('/activity-history') },
+    { title: 'Workout Progress', iconName: 'chart-pie', onPress: () => router.push('/workout-progress') }
+  ]
+
   return (
-    <ScrollView style={styles.screenContainer}>
-      <View style={styles.userTile}>
-        <Text style={styles.userTileUpper}>pic</Text>
-        <View style={[styles.userTileUpper, { flex: 3 }]}>
-          <Text style={styles.userFullName}>Marcos Villanueva</Text>
-          <Text style={styles.userProgram}>No-neck program</Text>
+    <SafeAreaView>
+      <ScrollView style={styles.screenContainer}>
+        <View style={styles.userTile}>
+          <Text style={styles.userTileUpper}>avatar</Text>
+          <View style={[styles.userTileUpper, { flex: 3 }]}>
+            <Text style={styles.userFullName}>Marcos Villanueva</Text>
+            <Text style={styles.userProgram}>No-neck program</Text>
+          </View>
+          <View>
+            <Button title="Nudge" onPress={() => alert('poke!')}/>
+          </View>
         </View>
-        <Button title="Nudge" onPress={() => alert('poke!')}/>
-      </View>
-      <View style={styles.userTile}>
-        <View style={styles.userTileItem}>
-          <Text style={[styles.userInfoTile, styles.userInfoTileUpper]}>180cm</Text>
-          <Text style={[styles.userInfoTile, styles.userInfoTileLower]}>Height</Text>
+        <View style={styles.userTile}>
+          <FlatList contentContainerStyle={styles.userTile} data={userInfoItems} renderItem={( { item }) => (
+            <View style={styles.userTileItem}>
+              <Text style={[styles.userInfoTile, styles.userInfoTileUpper]}>{item.value}</Text>
+              <Text style={[styles.userInfoTile, styles.userInfoTileLower]}>{item.title}</Text>
+            </View>
+          )}/>
         </View>
-        <View style={styles.userTileItem}>
-          <Text style={[styles.userInfoTile, styles.userInfoTileUpper]}>65kg</Text>
-          <Text style={[styles.userInfoTile, styles.userInfoTileLower]}>Weight</Text>
+        <View style={styles.mainTile}>
+          <Text style={styles.mainTileTitle}>Account</Text>
+          <View style={styles.mainTileItem}>
+            <FlatList data={accountItems} renderItem={({ item }) => (
+              <Pressable onPress={item.onPress} style={ { flexDirection: 'row' }}>
+                <FontAwesome5 name={item.iconName} size={iconSize} />
+                <Text style={styles.mainTileItemLabel}>{item.title}</Text>
+                <FontAwesome5 name="chevron-right" />
+              </Pressable>
+            )}/>
+          </View>
         </View>
-        <View style={styles.userTileItem}>
-          <Text style={[styles.userInfoTile, styles.userInfoTileUpper]}>22yo.</Text>
-          <Text style={[styles.userInfoTile, styles.userInfoTileLower]}>Age</Text>
+        <View style={styles.mainTile}>
+          <Text style={styles.mainTileTitle}>Notifications</Text>
+          <View style={styles.mainTileItem}>
+            <Text style={styles.mainTileItemLabel}>Banners</Text>
+            <Switch onValueChange={toggleNotificationSwitch} value={notificationsSwitchEnabled} />
+          </View>
         </View>
-      </View>
-      <View style={styles.mainTile}>
-        <Text style={styles.mainTileTitle}>Account</Text>
-        <View style={styles.mainTileItem}>
-          <Text style={styles.mainTileIcon}>img</Text>
-          <Text style={styles.mainTileItemLabel}>Personal Data</Text>
-          <Button title="link"/>
+        <View style={styles.mainTile}>
+          <Text style={styles.mainTileTitle}>Other</Text>
+          <View style={styles.mainTileItem}>
+            <FontAwesome5 name="envelope" size={iconSize} />
+            <Text style={styles.mainTileItemLabel}>Contact Us</Text>
+            <FontAwesome5 name="chevron-right" />
+          </View>
+          <View style={styles.mainTileItem}>
+            <FontAwesome5 name="shield-alt" size={iconSize} />
+            <Text style={styles.mainTileItemLabel}>Privacy Policy</Text>
+            <FontAwesome5 name="chevron-right" />
+          </View>
         </View>
-        <View style={styles.mainTileItem}>
-          <Text style={styles.mainTileIcon}>img</Text>
-          <Text style={styles.mainTileItemLabel}>Achievements</Text>
-          <Button title="link"/>
-        </View>
-        <View style={styles.mainTileItem}>
-          <Text style={styles.mainTileIcon}>img</Text>
-          <Text style={styles.mainTileItemLabel}>Activity History</Text>
-          <Button title="link"/>
-        </View>
-        <View style={styles.mainTileItem}>
-          <Text style={styles.mainTileIcon}>img</Text>
-          <Text style={styles.mainTileItemLabel}>Workout Progress</Text>
-          <Button title="link"/>
-        </View>
-      </View>
-      <View style={styles.mainTile}>
-        <Text style={styles.mainTileTitle}>Notification</Text>
-        <View style={styles.mainTileItem}>
-          <Text style={styles.mainTileIcon}>img</Text>
-          <Text style={styles.mainTileItemLabel}>Pop-up Notification</Text>
-          <Button title="switch" />
-        </View>
-      </View>
-      <View style={styles.mainTile}>
-        <Text style={styles.mainTileTitle}>Other</Text>
-        <View style={styles.mainTileItem}>
-          <Text style={styles.mainTileIcon}>img</Text>
-          <Text style={styles.mainTileItemLabel}>Contact Us</Text>
-          <Button title="link"/>
-        </View>
-        <View style={styles.mainTileItem}>
-          <Text style={styles.mainTileIcon}>img</Text>
-          <Text style={styles.mainTileItemLabel}>Privacy Policy</Text>
-          <Button title="link"/>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 

@@ -99,6 +99,7 @@ model User {
   notifications Notification[] @relation("NotificationReceiver")
   sentMessages  Notification[] @relation("NotificationSender")
   chats         Chat[]
+  spotify       SpotifyData?
 }
 
 // ******************************************************************************************
@@ -265,4 +266,33 @@ model Message {
   chat      Chat     @relation(fields: [chatId], references: [id])
   chatId    Int
   senderId  Int
+}
+
+// ******************************************************************************************
+// * spotifyData
+// * id : Auto incremented unique identifier
+// * albumImageURL: URL of album's image to display on frontend. Can be null 
+// * albumName: String name of the album in case we'd like to display it.
+// * artist: Name of song's artist. Can be null.
+// * isPlaying: Boolean to see if song is currently playing. Goes for all songs. Not null.
+// * songURL: URL of song playing. Can be null 
+// * title: Title of currently playing song. Can be null.
+// * timePlayed: Progress into current song. Can be null.
+// * timeTotal: Total length of song. Can be null.
+// * artistURL: URL of song's artist. Can be null.
+// * userID: Foreign key to user
+// ******************************************************************************************
+model SpotifyData {
+  id        Int   @id @default(autoincrement())
+  albumImageURL String?
+  albumName String?
+  artist    String?
+  isPlaying Boolean   @default(false)
+  songURL   String?
+  title     String?
+  timePlayed  Int?
+  timeTotal Int?
+  artistURL String?
+  user      User @relation(fields: [userID], references: [id])
+  userID    Int @unique
 }

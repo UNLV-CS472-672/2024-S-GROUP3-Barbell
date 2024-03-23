@@ -58,17 +58,21 @@ export const workoutRouter = createTRPCRouter({
     //     }),
 
     /**
-     *  This function returns all of the workouts
+     *  @remarks 
+     *  This function returns all of the workouts from our database.
+     *  The workouts are ordered by their ID in descending order when they are returned.
+     * 
+     * @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
+     * @returns an array of workout objects
      */
 
     getAllWorkouts: publicProcedure
-        .input(z.object({ id: z.number() }))
-        .query(async ({ ctx, input }) => {
+        .query(async ({ ctx }) => {
             const { prisma } = ctx
 
             return prisma.workout.findMany({
-                where: {
-                    userId: input.id
+                orderBy: {
+                    id: 'desc'
                 }
             })
         }),

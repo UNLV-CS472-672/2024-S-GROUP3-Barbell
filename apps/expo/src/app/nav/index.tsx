@@ -21,6 +21,7 @@ const Nav = () => {
           { key: 'Go Auth', route: '/auth' },
           { key: 'Notif/dm', route: '/notif/dm' },
           { key: 'Notif/misc', route: '/notif/misc' },
+          { key: 'Message Input', route: '/messages'}
           { key: 'Create New Workout', route: '/workout/createNew' }
         ]}
         renderItem={({ item }) => (

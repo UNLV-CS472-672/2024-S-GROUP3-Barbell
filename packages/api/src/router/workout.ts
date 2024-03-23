@@ -67,7 +67,7 @@ export const workoutRouter = createTRPCRouter({
      */
 
     getAllWorkouts: publicProcedure
-        .query(async ({ ctx }) => {
+        .query(({ ctx }) => {
             const { prisma } = ctx
 
             return prisma.workout.findMany({
@@ -79,11 +79,14 @@ export const workoutRouter = createTRPCRouter({
     
     /**
      * This function returns a workout by its ID
+     * 
+     * @params id - the ID of the workout that is to be retrieved
+     * @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
      */
 
-    getWorkoutByID: publicProcedure
+    getWorkoutFromID: publicProcedure
         .input(z.object({ id: z.number() }))
-        .query(async ({ ctx, input }) => {
+        .query(({ ctx, input }) => {
             const { prisma } = ctx
 
             return prisma.workout.findFirst({
@@ -91,11 +94,13 @@ export const workoutRouter = createTRPCRouter({
                     id: input.id
                 }
             })
-        })
+        }),
 
     /**
-     *  This function would update 
+     *  This function would update a workout
      */
+    // updateWorkout: publicProcedure
+    //     .input(z.object({}),)
 
     
 })

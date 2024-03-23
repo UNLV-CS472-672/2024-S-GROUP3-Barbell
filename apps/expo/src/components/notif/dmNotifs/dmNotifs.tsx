@@ -1,60 +1,36 @@
 import { View, Text } from "react-native"
-import Conversation from "./Conversation"
 import { useGlobalContext } from "~/context/global-context";
+import { api } from "~/utils/api"
+import Conversation from "./Conversation";
+import { useEffect, useState } from "react";
+import RotatingBarbellIcon from "./RotatingBarbellIcon";
 
-// these will be replaced with API calls once completed
-// for now we will use sample data
-import notifData from "@/packages/db/src/mock-data/notification.json"
-const notifications: any[] = notifData
-const userData = {
-    "id": 4,
-    "username": "userFour",
-    "email": "userfour@example.com",
-    "name": "User Four",
-    "status": "OFFLINE",
-    "streak": 2
-}
+export default function DmNotifs() {
+  const { userData } = useGlobalContext();
+  const messagePreviews = api.notif.getMessagePreviewsFromUserId.useQuery({id: userData.id })
+  const data = messagePreviews.data
+  const renderedNotifications: any[] = []
 
-function getConversations(userData: any) {
-  let convoSet = new Set<any>()
-  for (let i = 0; i < notifData.length; i++) {
-    if (notifData[i]?.type === "DM" && notifData[i]?.receiverId === userData.id) {
-      convoSet.add(notifData[i]?.senderId);
-    } else if (notifData[i]?.type === "DM" && notifData[i]?.senderId === userData.id) {
-      convoSet.add(notifData[i]?.receiverId);
-    }
-  }
-
-  return Array.from(convoSet)
-}
-
-function getMessagePreview(userData: any, conversations: any[]): [number, string][]{
-  for(let i = 0; i < notifData.length; i++){
-    for(let j = 0; j < conversations.length; j++){
-      if(notifData[i]?.senderId == conversations[j] || notifData[i]?.receiverId == conversations[j]){
-
-      }
-    }
-  }
-  return []
-}
-
-export default function DmNotifs(notif: any) {
-  // const { isWorkingOut, setIsWorkingOut, userData } = useGlobalContext();  // used to get user data
-  // const messagePreviews = getMessagePreviews(userData);  // returns a 2-tuple list of the conversation and the person they are with
-  // 
-  let messagePreviews: any[]
-  const renderedNotifications = [];
-  for (let i = 0; i < notifications.length; i++) {
-    const notif = notifications[i];
-    if(notif.type == 'DM') renderedNotifications.push(<Conversation notif={notif} key={notif.id}/>)
+  // Iterate over each chat object
+  if(data != undefined){
+    data.forEach(chat => {
+      const messages = chat.messages;
+      messages.forEach(message => {
+        renderedNotifications.push(<Conversation key={chat.id} chatId={chat.id} 
+          user={chat.users[0]?.username == userData.username? chat.users[1]?.username : chat.users[0]?.username}
+          messageContent={message.content} createdAt={message.createdAt} readBy={chat.readByUserIds} />)
+      });
+    });
   }
 
   // push some extra space to the array so that we can a little extra room at the bottom of the notifications list
   // this is best for newer mobile displays that have curved corners
   renderedNotifications.push(<View className="pb-10" key={-1}/>)
-
+  
   return renderedNotifications.length == 1 ? 
-    <Text className="flex pt-10 text-center" style={{color: "#CACACA"}} key={renderedNotifications.length}> No notifications to display. </Text> : 
-    renderedNotifications
+  <View>
+    {messagePreviews.isFetched && <Text className="flex pt-10 text-center" style={{color: "#CACACA"}}>No messages to display.</Text>}
+    {messagePreviews.isFetching && <RotatingBarbellIcon />}
+  </View>
+  : renderedNotifications
 }

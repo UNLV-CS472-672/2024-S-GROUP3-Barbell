@@ -8,10 +8,10 @@ import notifData from "@/packages/db/src/mock-data/notification.json"
 const notifications: any[] = notifData
 
 const handleNotif = (notif: any, id: number) => {
-  if(notif.subtype == "FRIEND_REQUEST"){
+  if(notif.type == "FRIEND_REQUEST"){
     return <FriendRequestNotif notif={notif} key={id} />
   }
-  else if(notif.subtype == "NUDGE"){
+  else if(notif.type == "NUDGE"){
     return <NudgeNotif notif={notif} key={id} />
   }
 }

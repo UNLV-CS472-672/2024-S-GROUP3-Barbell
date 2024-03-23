@@ -3,25 +3,24 @@ import TimeAgo from "~/components/timeAgo/TimeAgo"
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useGlobalContext } from "~/context/global-context"
 // TODO: change from any type to notification type once schema completed
-//////////////////////////////////////////////////////////////////////////
-// can delete from here ...
-import userData from "@/packages/db/src/mock-data/user.json"
-const userInfo: any[] = userData
-function getUsernameFromSenderId(senderId: number): string {
-  const user = userInfo.find((item) => item.id === senderId);
-  if (user) {
-    return user.username;
-  } else {
-    return String(senderId);
-  }
+
+export interface ConversationProps {
+  chatId: number,
+  messageContent: string,
+  createdAt: Date,
+  user: string | undefined,
+  readBy: number[],
 }
-// to here once we get the API setup to get username from sender ID
-//////////////////////////////////////////////////////////////////////////
 
-export default function Conversation({ notif }: { notif: any }) {
+export default function Conversation({messageContent, chatId, createdAt, user, readBy}: ConversationProps) {
 
-  const { isWorkingOut, setIsWorkingOut, userData } = useGlobalContext();
+  const { userData } = useGlobalContext();
+  console.log(chatId)
+  let isRead: boolean = false;
+  if(readBy.includes(userData.id)) isRead = true
   
+  // inside TouchableOpacity, put the following property
+  // onPress={() => openChat(chatId)}
   return (
     <View>
       <TouchableOpacity>
@@ -33,12 +32,12 @@ export default function Conversation({ notif }: { notif: any }) {
           
           <View className="flex flex-col flex-1">
             {/*sender name*/}
-            <Text className="mr-2 mb-2" style={{color: notif.read ? "#A4A4A4" : "#FFFFFF", fontWeight: notif.read ? "normal" : "bold"}}>
-              {getUsernameFromSenderId(notif.senderId)}
+            <Text className="mr-2 mb-2" style={{color: isRead ? "#A4A4A4" : "#FFFFFF", fontWeight: isRead ? "normal" : "bold"}}>
+              {user}
             </Text>
             {/*message content*/}
-            <Text numberOfLines={1} className="mr-2" style={{color: notif.read ? "#A4A4A4" : "#FFFFFF"}}>{}</Text>
-            <TimeAgo notif={notif} />
+            <Text numberOfLines={1} className="mr-2" style={{color: isRead ? "#A4A4A4" : "#FFFFFF"}}>{messageContent}</Text>
+            <TimeAgo createdAt={createdAt} />
           </View>
         </View>
       </TouchableOpacity>

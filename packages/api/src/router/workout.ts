@@ -3,59 +3,70 @@ import { createTRPCRouter, publicProcedure } from '../trpc'
 
 export const workoutRouter = createTRPCRouter({
     /**
-     * This function creates a new workout
+     * This function creates a new workout in the database.
+     * 
+     * @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
+     * @params input - contains the input needed to created the workout, the individual inputs are
+     *          - name: the name of the workout
+     *          - description: the description of the workout
+     *          - duration: the duration of the workout
+     *          - finishedAt: the date and time the workout was finished
+     *          - exercises: an array of exercise objects, they are the individual exercises that make up the workout
+     *              - name: the name of the exercise
+     *              - note: an optional note that describes the exercise
+     *              - body_part: the body part that the exercise targets
+     *              - category: the type of exercise it is
+     *          - userId: the ID of the user that created the workout 
+     * @returns the newly created workout object
      */
-    // createNewWorkout: publicProcedure
-    //     .input(z.object({
-    //             name: z.string(),
-    //             description: z.string().optional(),
-    //             duration: z.number().int(),
-    //             finishedAt: z.date(),
-    //             exercises: z.array(z.object({
-    //                 name: z.string(),
-    //                 note: z.string().optional(),
-    //                 sets: z.array(z.object({
-    //                     id: z.number().int(),
-    //                     type: z.enum(['NORMAL', 'WARMUP', 'DROPSET', 'FAILURE']),
-    //                     reps: z.number().int().nonnegative(),
-    //                     weight: z.number().nonnegative(),
-    //                     exerciseID: z.number().int()
-    //                 })),
-    //                 bodyPart: z.enum(['LEGS', 'ARMS', 'CHEST', 'BACK', 'SHOULDERS', 'CORE', 'FULL_BODY', 'OTHER']),
-    //                 category: z.enum(['BARBELL', 'DUMBELLS', 'MACHINE', 'ASSISTED_BODYWEIGHT', 'WEIGHTED_BODYWEIGHT'
-    //                                     , 'BODYWEIGHT', 'DURATION', 'CARDIO', 'REPS_ONLY', 'OTHER']),
-    //                 workoutId: z.number().int()
-    //             })),
-    //             past_workouts: z.array(z.object({
-    //                 id: z.number().int(),
-    //                 createdAt: z.date(),
-    //                 updatedAt: z.date(),
-    //                 finishedAt: z.date(),
-    //                 userId: z.number().int(),
-    //                 workoutId: z.number().int()
-    //             })),
-    //             userId: z.number().int()
-    //         })
-    //     )
-    //     .mutation(async ({ ctx, input }) => {
-    //         const { prisma } = ctx
+    createNewWorkout: publicProcedure
+        .input(z.object({
+                name: z.string(),
+                description: z.string().optional(),
+                duration: z.number().int(),
+                finishedAt: z.date(),
+                exercises: z.array(z.object({
+                    name: z.string(),
+                    note: z.string().optional(),
+                    // ExerciseCreateWithoutWorkoutInput calls SetCreateNestedManyWithoutExerciseInput which means that the sets field isn't needed?
+                    // this should be the case because the exercises are already linked to the appropriate sets
+                    // sets: z.array(z.object({
+                    //     type: z.enum(['NORMAL', 'WARMUP', 'DROPSET', 'FAILURE']),
+                    //     reps: z.number().int().nonnegative(),
+                    //     weight: z.number().nonnegative(),
+                    //     exerciseID: z.number().int()
+                    // })),
+                    body_part: z.enum(['LEGS', 'ARMS', 'CHEST', 'BACK', 'SHOULDERS', 'CORE', 'FULL_BODY', 'OTHER']),
+                    category: z.enum(['BARBELL', 'DUMBBELL', 'MACHINE', 'ASSISTED_BODYWEIGHT', 'WEIGHTED_BODYWEIGHT'
+                                        , 'BODYWEIGHT', 'DURATION', 'CARDIO', 'REPS_ONLY', 'OTHER']),
+                })),
+
+                // Past workouts should not be needed since there is no history of it being used if it was newly created
+                // past_workouts: z.array(z.object({
+                //     createdAt: z.date(),
+                //     updatedAt: z.date(),
+                //     finishedAt: z.date(),
+                //     userId: z.number().int(),
+                // })),
+                userId: z.number().int()
+            })
+        )
+        .mutation(async ({ ctx, input }) => {
+            const { prisma } = ctx
             
-    //         return prisma.workout.create({
-    //             data: {
-    //                 name: input.name,
-    //                 description: input.description,
-    //                 duration: input.duration,
-    //                 finishedAt: input.finishedAt,
-    //                 exercises: {
-    //                     create: input.exercises
-    //                 },
-    //                 past_workouts: {
-    //                     create: input.past_workouts
-    //                 },
-    //                 userId: input.userId
-    //             }
-    //         })
-    //     }),
+            return prisma.workout.create({
+                data: {
+                    name: input.name,
+                    description: input.description,
+                    duration: input.duration,
+                    finishedAt: input.finishedAt,
+                    exercises: {
+                        create: input.exercises
+                    },
+                    userId: input.userId
+                }
+            })
+        }),
 
     /**
      *  @remarks 

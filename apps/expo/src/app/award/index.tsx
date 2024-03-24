@@ -4,7 +4,7 @@ import { router } from 'expo-router'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function Reward() {
+export default function Award() {
     // screen dimensions
     const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 

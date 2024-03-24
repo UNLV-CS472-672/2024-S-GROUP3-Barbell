@@ -19,10 +19,10 @@ export default function Reward() {
                 <Ionicons name="ellipsis-horizontal-sharp" size={24} color="#CACACA" />
             </View>
 
-            <View className="flex flex-row items-center m-2" >
+            <View className="flex flex-row items-center m-20" >
                 <Image source={require('assets/award/trophy.png')}
-                       style={{ flex: 1,  width: screenWidth*0.95, height: screenWidth*0.95}}
-                       resizeMode="center"/>
+                       style={{ flex: 1,  width: screenWidth*0.8, height: screenWidth*0.8}}
+                       resizeMode="contain"/>
             </View>
         </SafeAreaView>
     );

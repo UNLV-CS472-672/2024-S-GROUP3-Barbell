@@ -56,10 +56,10 @@ export const notifRouter = createTRPCRouter({
 
       const userChats = await prisma.user.findFirst({
         where: {
-          id: input.id
+          id: input.id,
         },
         select: {
-          chats: true
+          chats: true,
         }
       })
 
@@ -81,7 +81,9 @@ export const notifRouter = createTRPCRouter({
           },
         },
         select: {
+          users: true,
           id: true,
+          readByUserIds: true,
           messages: {
             orderBy: {
               createdAt: 'desc',
@@ -93,6 +95,9 @@ export const notifRouter = createTRPCRouter({
             },
           },
         },
+        orderBy: {
+          createdAt: 'desc',
+        }
       });
 
       return finalMessageForEachDMChat;

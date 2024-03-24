@@ -36,13 +36,34 @@ export const spotifyRouter = createTRPCRouter({
     */
    createSpotifyData: publicProcedure
         .input(z.object({
-
+            albumImageURL: z.string().optional(),
+            albumName: z.string().optional(),
+            artist: z.string().optional(),
+            isPlaying: z.boolean(),
+            songURL: z.string().optional(),
+            title: z.string().optional(),
+            timePlayed: z.number().optional(),
+            timeTotal: z.number().optional(),
+            artistURL: z.string().optional(),
+            userID: z.number().int()
         }))
         .mutation(({ ctx, input }) => {
             const { prisma } = ctx
-            data: {
-                
-            }
+
+            return prisma.spotifyData.create({
+                data: {
+                    albumImageURL: input.albumImageURL,
+                    albumName: input.albumName,
+                    artist: input.artist,
+                    isPlaying: input.isPlaying,
+                    songURL: input.songURL,
+                    title: input.title,
+                    timePlayed: input.timePlayed,
+                    timeTotal: input.timeTotal,
+                    artistURL: input.artistURL,
+                    userID: input.userID
+                }
+            })
         }),
 
     /**
@@ -50,17 +71,42 @@ export const spotifyRouter = createTRPCRouter({
      * 
      * @params ctx - Context object for the function
      * @params object - New data + userID to identify the row
+     * @returns - updated spotify object
     */
    updateSpotifyData: publicProcedure
         .input(z.object({
-
+            id: z.number(),
+            albumImageURL: z.string().optional(),
+            albumName: z.string().optional(),
+            artist: z.string().optional(),
+            isPlaying: z.boolean().optional(),
+            songURL: z.string().optional(),
+            title: z.string().optional(),
+            timePlayed: z.number().optional(),
+            timeTotal: z.number().optional(),
+            artistURL: z.string().optional(),
+            userID: z.number().int().optional()
         }))
         .mutation(({ ctx, input }) => {
             const { prisma } = ctx
-            data: {
 
-            }
-            
+            return prisma.spotifyData.update({
+                where: { // Shouldn't update IDs at all. That would be bad to say the least.
+                    id: input.id,
+                    userID: input.userID
+                },
+                data: {
+                    albumImageURL: input.albumImageURL,
+                    albumName: input.albumName,
+                    artist: input.artist,
+                    isPlaying: input.isPlaying,
+                    songURL: input.songURL,
+                    title: input.title,
+                    timePlayed: input.timePlayed,
+                    timeTotal: input.timeTotal,
+                    artistURL: input.artistURL,
+                },
+            })
         }),
 
     /**

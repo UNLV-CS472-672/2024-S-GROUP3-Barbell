@@ -1,6 +1,7 @@
-import { Suspense } from "react"
+import { Suspense } from 'react'
 
-import { CreatePostForm, PostCardSkeleton, PostList } from "./_components/posts"
+import { CreatePostForm, PostCardSkeleton, PostList } from './_components/posts'
+import { UsersPage } from './_components/users'
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
             }
           >
             <PostList />
+            <UsersPage />
           </Suspense>
         </div>
       </div>

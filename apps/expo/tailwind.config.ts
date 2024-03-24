@@ -29,6 +29,11 @@ export default {
         '8xl'  : '6rem',       // 96px
         '9xl'  : '8rem',       // 128px
       },
+      colors: {
+        'slate-900': "#1C1B1B",
+        'dark-purple': "#48476D",
+        'slate-200': "#CACACA",
+      }
     },
   },
 } satisfies Config

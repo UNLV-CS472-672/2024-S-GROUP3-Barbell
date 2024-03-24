@@ -23,7 +23,13 @@ const Nav = () => {
           { key: 'Notif/misc', route: '/notif/misc' },
           { key: 'Message Input', route: '/messages'},
           { key: 'Create New Workout', route: '/workout/createNew' },
-          { key: 'Profile', route: '/profile'}
+          { key: 'Profile', route: '/user' },
+          { key: 'Achievements', route: '/user/achievements' },
+          { key: 'Activity History', route: '/user/activity-history' },
+          { key: 'Personal Data', route: '/user/personal-data' },
+          { key: 'Workout Progress', route: '/user/workout-progress' },
+          { key: 'Contact Us', route: '/contact-us' },
+          { key: 'Privacy Policy', route: '/privacy-policy' },
         ]}
         renderItem={({ item }) => (
           <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />

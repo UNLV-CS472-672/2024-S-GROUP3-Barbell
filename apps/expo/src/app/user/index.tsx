@@ -62,6 +62,12 @@ const styles = StyleSheet.create({
   }
 })
 
+interface NavigationListItem {
+  title: string,
+  iconName: string,
+  onPress: () => void;
+}
+
 const Profile = () => {
   const [notificationsSwitchEnabled, setIsEnabled] = useState(false);
   const toggleNotificationSwitch = () => setIsEnabled(previousState => !previousState);
@@ -75,11 +81,16 @@ const Profile = () => {
     { title: 'Age', value: data?.name },
   ];
 
-  const accountItems = [
-    { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/personal-data') },
-    { title: 'Achievements', iconName: 'award', onPress: () => router.push('/achievements') },
-    { title: 'Activity History', iconName: 'history', onPress: () => router.push('/activity-history') },
-    { title: 'Workout Progress', iconName: 'chart-pie', onPress: () => router.push('/workout-progress') }
+  const accountItems: NavigationListItem[] = [
+    { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/user/personal-data') },
+    { title: 'Achievements', iconName: 'award', onPress: () => router.push('/user/achievements') },
+    { title: 'Activity History', iconName: 'history', onPress: () => router.push('/user/activity-history') },
+    { title: 'Workout Progress', iconName: 'chart-pie', onPress: () => router.push('/user/workout-progress') }
+  ];
+
+  const otherItems: NavigationListItem[] = [
+    { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/contact-us') },
+    { title: 'Privacy Policy', iconName: 'shield-alt', onPress: () => router.push('/privacy-policy') }
   ]
 
   return (
@@ -124,16 +135,13 @@ const Profile = () => {
         </View>
         <View style={styles.mainTile}>
           <Text style={styles.mainTileTitle}>Other</Text>
-          <View style={styles.mainTileItem}>
-            <FontAwesome5 name="envelope" size={iconSize} />
-            <Text style={styles.mainTileItemLabel}>Contact Us</Text>
-            <FontAwesome5 name="chevron-right" />
-          </View>
-          <View style={styles.mainTileItem}>
-            <FontAwesome5 name="shield-alt" size={iconSize} />
-            <Text style={styles.mainTileItemLabel}>Privacy Policy</Text>
-            <FontAwesome5 name="chevron-right" />
-          </View>
+            <FlatList data={otherItems} renderItem={({ item }) => (
+              <Pressable onPress={item.onPress} style={ { flexDirection: 'row' }}>
+                <FontAwesome5 name={item.iconName} size={iconSize} />
+                <Text style={styles.mainTileItemLabel}>{item.title}</Text>
+                <FontAwesome5 name="chevron-right" />
+              </Pressable>
+            )}/>
         </View>
       </ScrollView>
     </SafeAreaView>

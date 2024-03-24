@@ -1,5 +1,7 @@
 import { z } from 'zod'
 import { createTRPCRouter, publicProcedure } from '../trpc'
+import { BodyPart } from '@prisma/client'
+import { Category } from '@prisma/client'
 
 export const workoutRouter = createTRPCRouter({
     /**
@@ -36,9 +38,9 @@ export const workoutRouter = createTRPCRouter({
                     //     weight: z.number().nonnegative(),
                     //     exerciseID: z.number().int()
                     // })),
-                    body_part: z.enum(['LEGS', 'ARMS', 'CHEST', 'BACK', 'SHOULDERS', 'CORE', 'FULL_BODY', 'OTHER']),
-                    category: z.enum(['BARBELL', 'DUMBBELL', 'MACHINE', 'ASSISTED_BODYWEIGHT', 'WEIGHTED_BODYWEIGHT'
-                                        , 'BODYWEIGHT', 'DURATION', 'CARDIO', 'REPS_ONLY', 'OTHER']),
+                    body_part: z.enum([ BodyPart.LEGS, BodyPart.ARMS, BodyPart.CHEST, BodyPart.BACK, BodyPart.SHOULDERS, BodyPart.CORE, BodyPart.FULL_BODY, BodyPart.OTHER]),
+                    category: z.enum([Category.BARBELL, Category.DUMBBELL, Category.MACHINE, Category.ASSISTED_BODYWEIGHT, Category.WEIGHTED_BODYWEIGHT
+                                        , Category.BODYWEIGHT, Category.DURATION, Category.CARDIO, Category.REPS_ONLY, Category.OTHER]),
                 })),
 
                 // Past workouts should not be needed since there is no history of it being used if it was newly created
@@ -126,9 +128,9 @@ export const workoutRouter = createTRPCRouter({
                 id: z.number(),
                 name: z.string(),
                 note: z.string().optional(),
-                body_part: z.enum(['LEGS', 'ARMS', 'CHEST', 'BACK', 'SHOULDERS', 'CORE', 'FULL_BODY', 'OTHER']).optional(),
-                category: z.enum(['BARBELL', 'DUMBBELL', 'MACHINE', 'ASSISTED_BODYWEIGHT', 'WEIGHTED_BODYWEIGHT'
-                , 'BODYWEIGHT', 'DURATION', 'CARDIO', 'REPS_ONLY', 'OTHER']).optional(),
+                body_part: z.enum([BodyPart.LEGS, BodyPart.ARMS, BodyPart.CHEST, BodyPart.BACK, BodyPart.SHOULDERS, BodyPart.CORE, BodyPart.FULL_BODY, BodyPart.OTHER]).optional(),
+                category: z.enum([Category.BARBELL, Category.DUMBBELL, Category.MACHINE, Category.ASSISTED_BODYWEIGHT, Category.WEIGHTED_BODYWEIGHT
+                , Category.BODYWEIGHT, Category.DURATION, Category.CARDIO, Category.REPS_ONLY, Category.OTHER]).optional(),
             })).optional(),
             userId: z.number().int().optional()
             })

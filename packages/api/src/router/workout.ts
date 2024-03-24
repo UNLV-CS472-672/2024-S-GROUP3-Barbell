@@ -197,12 +197,17 @@ export const workoutRouter = createTRPCRouter({
         .query(({ ctx, input }) =>{
             const { prisma } = ctx
 
-            const arr =  prisma.workout.findMany({
-                orderBy: {
-                    id: 'desc'
+            const exercisesArr = prisma.workout.findUnique({
+                where:{
+                    id: input.id,
+                },
+                include:{
+                    exercises: true,
                 }
             })
+
+            return exercisesArr.exercises
             
-        })
+        }),
 
 })

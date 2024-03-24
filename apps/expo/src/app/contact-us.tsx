@@ -5,7 +5,7 @@ const ContactUs = () => {
   return (
     <SafeAreaView>
       <Text style={ { textAlign: 'center', padding: 30 }}>
-        ContactUs!
+        don't contact us
       </Text>
     </SafeAreaView>
   )

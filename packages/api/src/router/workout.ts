@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { array, z } from 'zod'
 import { createTRPCRouter, publicProcedure } from '../trpc'
 import { BodyPart } from '@prisma/client'
 import { Category } from '@prisma/client'
@@ -182,6 +182,27 @@ export const workoutRouter = createTRPCRouter({
                 }
             })
 
+        }),
+
+    /**
+     * This function would return all the exercises inside of a workout
+     * 
+     *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
+     *  @params input - a workout id associated with the workout we want to extract the exercises from
+     *  @return an array of all the exercises in a workout object
+     */
+
+    getAllExercisesFromWorkout: publicProcedure
+        .input(z.object({ id: z.number() }))
+        .query(({ ctx, input }) =>{
+            const { prisma } = ctx
+
+            const arr =  prisma.workout.findMany({
+                orderBy: {
+                    id: 'desc'
+                }
+            })
+            
         })
 
 })

@@ -10,6 +10,8 @@ number_of_rows = 10
 BODY_PARTS = ["SHOULDERS", "CORE", "BACK", "LEGS"]
 CATEGORIES = ["DUMBBELL", "MACHINE", "BODYWEIGHT", "ASSISTED_BODYWEIGHT"]
 STATUSES = ["ONLINE", "OFFLINE", "ACTIVE", "BUSY"]
+NOTIFICATION_TYPES = ["NUDGE", "FRIEND_REQUEST", "LIKE"]
+SET_TYPES = ["WARMUP", "NORMAL", "FAILURE", "DROPSET"]
 
 def created_at():
     return datetime.now().isoformat()
@@ -19,6 +21,9 @@ def updated_at():
 
 def list_rand(lst):
     return random.choice(lst)
+
+def bool_rand():
+    return random.choice([True, False])
 
 class Model:
     fields = []
@@ -91,8 +96,8 @@ class Message(Model):
         self.id = id
         self.createdAt = created_at()
         self.updatedAt = updated_at()
-        self.content = ''
-        self.read = ''
+        self.content = fake.sentence()
+        self.read = bool_rand()
         self.chatId = list_rand(range(1,10))
         self.senderId = list_rand(range(1,10))
 
@@ -104,9 +109,9 @@ class Notification(Model):
     def __init__(self, fake, id):
         self.id = id
         self.createdAt = created_at()
-        self.content = ''
-        self.type = ''
-        self.read = ''
+        self.content = fake.sentence()
+        self.type = list_rand(NOTIFICATION_TYPES)
+        self.read = bool_rand()
         self.receiverId = list_rand(range(1,10))
         self.senderId = list_rand(range(1,10))
         
@@ -130,7 +135,7 @@ class Set(Model):
 
     def __init__(self, fake, id):
         self.id = id
-        self.type = ''
+        self.type = list_rand(SET_TYPES)
         self.reps = list_rand(range(1,10))
         self.weight = list_rand(range(1,100))
         self.exerciseId = list_rand(range(1,10))

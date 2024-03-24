@@ -2,7 +2,6 @@ import { TouchableOpacity, View, Text } from "react-native"
 import TimeAgo from "~/components/timeAgo/TimeAgo"
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useGlobalContext } from "~/context/global-context"
-import { router } from "expo-router"
 import { Link } from "expo-router"
 
 export interface ConversationProps {

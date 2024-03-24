@@ -1,6 +1,6 @@
 import React from 'react'
 import { KeyboardAvoidingView, SafeAreaView, View, Text } from 'react-native'
-import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 
 import MessageInput from '~/components/message/messageInput'
 import { api } from '~/utils/api';

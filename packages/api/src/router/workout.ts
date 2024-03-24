@@ -95,7 +95,7 @@ export const workoutRouter = createTRPCRouter({
      * @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
      */
 
-    getWorkoutFromID: publicProcedure
+    getWorkoutFromWorkoutID: publicProcedure
         .input(z.object({ id: z.number() }))
         .query(({ ctx, input }) => {
             const { prisma } = ctx
@@ -108,10 +108,64 @@ export const workoutRouter = createTRPCRouter({
         }),
 
     /**
-     *  This function would update a workout
+     *  This function would update a workout given workout id, and input to change from the user
+     * 
+     *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
+     *  @params input - input needed from user in order to update the workout, including the workout id
+     *  @returns - the updated workout object
      */
-    // updateWorkout: publicProcedure
-    //     .input(z.object({}),)
+    updateWorkout: publicProcedure
+        .input ( z.object({
+            id: z.number(),
+            name: z.string().optional(),
+            description: z.string().optional(),
+            duration: z.number().int().optional(),
+            finishedAt: z.date().optional(),
+            likes: z.number().int().optional(),
+            exercises: z.array(z.object({
+                id: z.number(),
+                name: z.string(),
+                note: z.string().optional(),
+                body_part: z.enum(['LEGS', 'ARMS', 'CHEST', 'BACK', 'SHOULDERS', 'CORE', 'FULL_BODY', 'OTHER']).optional(),
+                category: z.enum(['BARBELL', 'DUMBBELL', 'MACHINE', 'ASSISTED_BODYWEIGHT', 'WEIGHTED_BODYWEIGHT'
+                , 'BODYWEIGHT', 'DURATION', 'CARDIO', 'REPS_ONLY', 'OTHER']).optional(),
+            })).optional(),
+            userId: z.number().int().optional()
+            })
+        )
+        .mutation(async ({ ctx, input }) => {
+            const { prisma } = ctx
 
+            return prisma.workout.update({
+                where: {
+                    id: input.id
+                },
+                data: {
+                    name: input.name,
+                    description: input.description,
+                    duration: input.duration,
+                    finishedAt: input.finishedAt,
+                    likes: input.likes,
+                    exercises: {
+                        updateMany: input.exercises?.map((exercise) => ({
+                            where: { id: exercise.id },
+                            data: { 
+                                name: exercise.name,
+                                note: exercise.note,
+                                body_part: exercise.body_part,
+                                category: exercise.category
+                            }
+                        })) ?? [] , // if the exercises array is empty then instead of passing a null, it passes an empty array
+                    },
+                    userId: input.userId
+                }
+            })
+        }),
     
+    /**
+     *  This function would delete a workout given an id
+     *  
+     *  @params - 
+     *  @return
+     */
 })

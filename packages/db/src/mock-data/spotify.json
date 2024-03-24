@@ -1,0 +1,15 @@
+[
+ {
+    "id": 1,
+    "albumImageURL": "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+    "albumName": "TestAlbum1",
+    "artist": "TestArtist1",
+    "isPlaying": true,
+    "songURL": "testExternURL1",
+    "title": "TestTitle1", 
+    "timePlayed": 10,
+    "timeTotal": 157,
+    "artistURL": "testArtistURL1",
+    "userID": 2
+ }
+]

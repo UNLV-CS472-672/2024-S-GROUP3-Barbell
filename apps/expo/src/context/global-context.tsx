@@ -20,6 +20,7 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     setIsWorkingOut,
     userData: null,
   }
+  // TODO: implement a fetchUserData function
 
   return (
     <GlobalContext.Provider value={globalContextValue}>

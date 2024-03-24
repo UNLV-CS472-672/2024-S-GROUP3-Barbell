@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image, Button, Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { router } from 'expo-router'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,7 +47,7 @@ const Separator = () => (
   );
 
 const Chats = () => (
-  <View>
+  <SafeAreaView>
     <TouchableOpacity 
             className='px-6 py-5'
             onPress={() => {router.replace('/')}}>
@@ -67,12 +68,12 @@ const Chats = () => (
             </View>
           </TouchableOpacity>
     <View style={styles.chatDiv}></View>
-  </View>
+  </SafeAreaView>
 );
 
 const DM = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.screenName}>
           <TouchableOpacity 
             onPress={() => {router.replace('/')}}>
@@ -89,7 +90,7 @@ const DM = () => {
       <View style={{height:5}} />
         <View style={styles.splitTop}>
           <TouchableOpacity className="mb-4 rounded-[18px] bg-[#FFFFFF] bg-cover px-8 py-2">
-            <Text className="font-koulen text-center text-xl font-semibold">
+            <Text className="font-bold py-2 px-4 rounded-lg flex-1 ml-1 mr-1 mt-1">
               Notifications
             </Text>
           </TouchableOpacity>
@@ -105,7 +106,7 @@ const DM = () => {
         <Separator/>
         <Chats />
         <Chats />
-    </View>
+    </SafeAreaView>
   )
 }
 

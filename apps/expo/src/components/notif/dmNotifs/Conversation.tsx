@@ -16,8 +16,7 @@ export interface ConversationProps {
 export default function Conversation({messageContent, chatId, createdAt, user, readBy}: ConversationProps) {
 
   const { userData } = useGlobalContext();
-  let isRead: boolean = false;
-  if(readBy.includes(userData.id)) isRead = true
+  const isRead: boolean = readBy.includes(userData.id)
   
   return (
     <View>

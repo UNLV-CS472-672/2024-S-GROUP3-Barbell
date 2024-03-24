@@ -2,7 +2,6 @@ import { View, Text } from "react-native"
 import { useGlobalContext } from "~/context/global-context";
 import { api } from "~/utils/api"
 import Conversation from "./Conversation";
-import { useEffect, useState } from "react";
 import RotatingBarbellIcon from "./RotatingBarbellIcon";
 
 export default function DmNotifs() {

@@ -110,7 +110,7 @@ export const workoutRouter = createTRPCRouter({
         }),
 
     /**
-     *  This function would update a workout given workout id, and input to change from the user
+     *  This function updates a workout given workout id, and input to change from the user
      * 
      *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
      *  @params input - input needed from user in order to update the workout, including the workout id
@@ -165,7 +165,7 @@ export const workoutRouter = createTRPCRouter({
         }),
     
     /**
-     *  This function would delete a workout given an id
+     *  This function deletes a workout given an id
      *  
      *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
      *  @params input - an id from the user that is going to be deleted
@@ -185,7 +185,7 @@ export const workoutRouter = createTRPCRouter({
         }),
 
     /**
-     * This function would return all the exercises inside of a workout
+     * This function returns all the exercises inside of a workout
      * 
      *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
      *  @params input - a workout id associated with the workout we want to extract the exercises from
@@ -210,4 +210,34 @@ export const workoutRouter = createTRPCRouter({
             
         }),
 
+
+    /**
+     * This function would remove an exercise from a workout
+     *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
+     *  @params input - a workout id, and also an exercise id
+     */
+
+    deleteExerciseFromWorkout: publicProcedure
+        .input(z.object({
+            id: z.number(),
+            exerciseID: z.number()
+        }))
+        .mutation(async({ ctx,input }) => {
+            const { prisma } = ctx
+
+            return prisma.workout.update({
+                where:{
+                    id: input.id
+                },
+                data: {
+                    exercises: {
+                        disconnect: {
+                            id: input.exerciseID
+                        }
+                    }
+                },
+            })
+
+        }),
 })
+

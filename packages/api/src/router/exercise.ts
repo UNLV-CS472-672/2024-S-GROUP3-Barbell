@@ -139,7 +139,39 @@ export const exerciseRouter = createTRPCRouter ({
                     id: input.id
                 }
             })
+        }),
+    
+    /**
+     * This function returns the all the sets of a specific exercise
+     *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
+     *  @params input - the id of the exercise
+     *  @returns an array of all the sets related to the exercise
+     */
+
+    getAllSetsFromExerciseID: publicProcedure
+        .input(z.object({
+            id: z.number().int()
+        }))
+        .query(async({ctx,input})=>{
+            const { prisma } = ctx
+
+            const exerc = await prisma.exercise.findFirst({
+                where:{
+                    id: input.id
+                },
+                include:{
+                    sets: true
+                }
+            })
+
+            if (!exerc || !exerc.sets){
+                return [];
+            }
+
+            return exerc.sets
+
         })
 
 })
+
 

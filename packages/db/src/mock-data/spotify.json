@@ -1,15 +1,106 @@
 [
- {
-    "id": 1,
-    "albumImageURL": "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
-    "albumName": "TestAlbum1",
-    "artist": "TestArtist1",
+  {
+    "id": 25,
+    "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647",
+    "albumName": "Lover",
+    "artist": "Taylor Swift",
     "isPlaying": true,
-    "songURL": "testExternURL1",
-    "title": "TestTitle1", 
-    "timePlayed": 10,
-    "timeTotal": 157,
-    "artistURL": "testArtistURL1",
-    "userID": 2
- }
+    "songURL": "https://open.spotify.com/track/43rA71bccXFGD4C8GOpIlN",
+    "title": "I Forgot That You Existed",
+    "timePlayed": 67,
+    "timeTotal": 171,
+    "artistURL": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
+    "userID": 3
+  },
+  {
+    "id": 13,
+    "albumImageURL": "https://i.scdn.co/image/ab67616d0000b2739416ed64daf84936d89e671c",
+    "albumName": "Views",
+    "artist": "Drake",
+    "isPlaying": true,
+    "songURL": "https://open.spotify.com/track/1zi7xx7UVEFkmKfv06H8x0",
+    "title": "One Dance",
+    "timePlayed": 0,
+    "timeTotal": 174,
+    "artistURL": "https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4",
+    "userID": 4
+  },
+  {
+    "id": 36,
+    "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273b2b6670e3aca9bcd55fbabbb",
+    "albumName": "Something in the Orange",
+    "artist": "Zach Bryan",
+    "isPlaying": true,
+    "songURL": "https://open.spotify.com/track/3WMj8moIAXJhHsyLaqIIHI",
+    "title": "Something in the Orange",
+    "timePlayed": 228,
+    "timeTotal": 114,
+    "artistURL": "https://open.spotify.com/artist/40ZNYROS4zLfyyBSs2PGe2",
+    "userID": 5
+  },
+  {
+    "id": 99,
+    "albumImageURL": "https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a",
+    "albumName": "Evolve",
+    "artist": "Imagine Dragons",
+    "isPlaying": true,
+    "songURL": "https://open.spotify.com/track/0pqnGHJpmpxLKifKRmU6WP",
+    "title": "Believer",
+    "timePlayed": 63,
+    "timeTotal": 204,
+    "artistURL": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q",
+    "userID": 6
+  },
+  {
+    "id": 49,
+    "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273b2b2747c89d2157b0b29fb6a",
+    "albumName": "Night Visions",
+    "artist": "Imagine Dragons",
+    "isPlaying": true,
+    "songURL": "https://open.spotify.com/track/3LlAyCYU26dvFZBDUIMb7a",
+    "title": "Demons",
+    "timePlayed": 96,
+    "timeTotal": 175,
+    "artistURL": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q",
+    "userID": 7
+  },
+  {
+    "id": 58,
+    "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647",
+    "albumName": "Lover",
+    "artist": "Taylor Swift",
+    "isPlaying": false,
+    "songURL": "https://open.spotify.com/track/43rA71bccXFGD4C8GOpIlN",
+    "title": "I Forgot That You Existed",
+    "timePlayed": 67,
+    "timeTotal": 171,
+    "artistURL": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
+    "userID": 8
+  },
+  {
+    "id": 27,
+    "albumImageURL": "https://i.scdn.co/image/ab67616d0000b2739416ed64daf84936d89e671c",
+    "albumName": "Views",
+    "artist": "Drake",
+    "isPlaying": false,
+    "songURL": "https://open.spotify.com/track/1zi7xx7UVEFkmKfv06H8x0",
+    "title": "One Dance",
+    "timePlayed": 0,
+    "timeTotal": 174,
+    "artistURL": "https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4",
+    "userID": 9
+  },
+  {
+    "id": 63,
+    "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273b2b6670e3aca9bcd55fbabbb",
+    "albumName": "Something in the Orange",
+    "artist": "Zach Bryan",
+    "isPlaying": false,
+    "songURL": "https://open.spotify.com/track/3WMj8moIAXJhHsyLaqIIHI",
+    "title": "Something in the Orange",
+    "timePlayed": 228,
+    "timeTotal": 114,
+    "artistURL": "https://open.spotify.com/artist/40ZNYROS4zLfyyBSs2PGe2",
+    "userID": 10
+  }
 ]

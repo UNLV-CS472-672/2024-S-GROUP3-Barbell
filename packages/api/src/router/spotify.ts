@@ -15,14 +15,14 @@ export const spotifyRouter = createTRPCRouter({
     * @params id - unique id used to determine which row to return from query
     *  
     */
-    getSpotfiyDataFromUserId: publicProcedure
+    getSpotifyDataFromUserId: publicProcedure
         .input(z.object({ id: z.number() }))
         .query(async ({ctx, input}) => {
             const { prisma } = ctx
 
             return prisma.spotifyData.findUnique({
                 where: {
-                    id: input.id
+                    userID: input.id
                 }
             })
         }),
@@ -85,7 +85,7 @@ export const spotifyRouter = createTRPCRouter({
             timePlayed: z.number().optional(),
             timeTotal: z.number().optional(),
             artistURL: z.string().optional(),
-            userID: z.number().int().optional()
+            userID: z.number().int()
         }))
         .mutation(({ ctx, input }) => {
             const { prisma } = ctx
@@ -122,7 +122,7 @@ export const spotifyRouter = createTRPCRouter({
 
             return prisma.spotifyData.delete({
                 where: {
-                    id: input.id
+                    userID: input.id
                 }
             })
         }),

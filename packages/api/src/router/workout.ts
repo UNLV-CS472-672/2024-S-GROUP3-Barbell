@@ -173,7 +173,7 @@ export const workoutRouter = createTRPCRouter({
     
     deleteWorkoutFromWorkoutId: publicProcedure
         .input(z.object( { id: z.number() }))
-        .mutation(async({ ctx, input}) => {
+        .query(async({ ctx, input}) => {
             const { prisma } = ctx
 
             return prisma.workout.delete({
@@ -192,12 +192,12 @@ export const workoutRouter = createTRPCRouter({
      *  @return an array of all the exercises in a workout object
      */
 
-    getAllExercisesFromWorkout: publicProcedure
+    getAllExercisesFromWorkoutID: publicProcedure
         .input(z.object({ id: z.number() }))
-        .query(({ ctx, input }) =>{
+        .query( async({ ctx, input }) =>{
             const { prisma } = ctx
 
-            const exercisesArr = prisma.workout.findUnique({
+            const workout = await prisma.workout.findUnique({
                 where:{
                     id: input.id,
                 },
@@ -206,7 +206,11 @@ export const workoutRouter = createTRPCRouter({
                 }
             })
 
-            return exercisesArr.exercises
+            if (!workout || !workout.exercises){
+                return [];
+            }
+
+            return workout.exercises
             
         }),
 
@@ -222,7 +226,7 @@ export const workoutRouter = createTRPCRouter({
             id: z.number(),
             exerciseID: z.number()
         }))
-        .mutation(async({ ctx,input }) => {
+        .query(async({ ctx,input }) => {
             const { prisma } = ctx
 
             return prisma.workout.update({

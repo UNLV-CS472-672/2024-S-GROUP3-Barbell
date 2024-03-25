@@ -24,7 +24,7 @@ export const exerciseRouter = createTRPCRouter ({
             })),
             body_part: z.nativeEnum(BodyPart),
             category: z.nativeEnum(Category),
-            workoutId: z.number().int()
+            workoutId: z.number().int(),
         }))
         .mutation(async ({ ctx, input }) => {
             const { prisma } = ctx
@@ -38,7 +38,7 @@ export const exerciseRouter = createTRPCRouter ({
                     },
                     body_part: input.body_part,
                     category: input.category,
-                    workoutId: input.workoutId
+                    workoutId: input.workoutId,
                 }
             })
         }),
@@ -54,7 +54,7 @@ export const exerciseRouter = createTRPCRouter ({
 
             return prisma.exercise.findMany({
                 orderBy: {
-                    id: 'desc'
+                    id: 'desc',
                 }
             })
         }),
@@ -72,7 +72,7 @@ export const exerciseRouter = createTRPCRouter ({
 
             return prisma.exercise.findFirst({
                 where:{
-                    id: input.id
+                    id: input.id,
                 }
             })
 
@@ -98,14 +98,14 @@ export const exerciseRouter = createTRPCRouter ({
             })).optional(),
             body_part: z.nativeEnum(BodyPart).optional(),
             category: z.nativeEnum(Category).optional(),
-            workoutId: z.number().int().optional()
+            workoutId: z.number().int().optional(),
         }))
         .mutation(async({ctx, input})=>{
             const { prisma } = ctx
 
             return prisma.exercise.update({
                 where: {
-                    id: input.id
+                    id: input.id,
                 },
                 data:{
                     name: input.name,
@@ -143,7 +143,7 @@ export const exerciseRouter = createTRPCRouter ({
 
             return prisma.exercise.delete({
                 where:{
-                    id: input.id
+                    id: input.id,
                 }
             })
         }),
@@ -164,10 +164,10 @@ export const exerciseRouter = createTRPCRouter ({
 
             const exerc = await prisma.exercise.findFirst({
                 where:{
-                    id: input.id
+                    id: input.id,
                 },
                 include:{
-                    sets: true
+                    sets: true,
                 }
             })
 

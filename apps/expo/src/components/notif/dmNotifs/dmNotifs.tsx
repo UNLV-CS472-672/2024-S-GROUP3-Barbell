@@ -16,7 +16,7 @@ export default function DmNotifs() {
       const messages = chat.messages;
       messages.forEach(message => {
         renderedNotifications.push(<Conversation key={chat.id} chatId={chat.id} 
-          user={chat.users[0]?.username == userData.username? chat.users[1]?.username : chat.users[0]?.username}
+          user={String(chat.users[0]?.username == userData.username? chat.users[1]?.username : chat.users[0]?.username)}
           messageContent={message.content} createdAt={message.createdAt} readBy={chat.readByUserIds} />)
       });
     });

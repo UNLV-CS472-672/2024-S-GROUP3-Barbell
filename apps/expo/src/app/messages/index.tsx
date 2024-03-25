@@ -12,6 +12,7 @@ export default function Messages() {
   
   const response = api.notif.getDMsFromChatId.useQuery({ id: Number(p["chatId"]) })
   const data = response.data
+  const chattingWith = p["user"]
 
   ////////////////////////////////////////////////////////////////////////////////////
   // TODO: stylize

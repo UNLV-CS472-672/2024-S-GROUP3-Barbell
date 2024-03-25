@@ -8,7 +8,7 @@ export interface ConversationProps {
   chatId: number,
   messageContent: string,
   createdAt: Date,
-  user: string | undefined,
+  user: string,
   readBy: number[],
 }
 
@@ -19,7 +19,7 @@ export default function Conversation({messageContent, chatId, createdAt, user, r
   
   return (
     <View>
-      <Link href={{pathname: "/messages/", params: {chatId}}} asChild={true}>
+      <Link href={{pathname: "/messages/", params: {chatId, user}}} asChild={true}>
         <TouchableOpacity>
           <View className="flex flex-row ml-3 mr-3 mt-4">
             {/*photo, use icon for now, use profile photo in the future*/}

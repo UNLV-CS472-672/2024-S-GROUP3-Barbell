@@ -51,7 +51,24 @@ export const exerciseRouter = createTRPCRouter ({
             })
         }),
 
-    
+    /**
+     * This function returns a specific exercise using its ID
+     *  @params id - the ID of the exercise to be retrieved
+     *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
+     *  @returns an exercise object
+     */
+    getExerciseFromExerciseId: publicProcedure
+        .input(z.object({ id: z.number().int() }))
+        .query(async({ctx, input}) => {
+            const { prisma } = ctx
+
+            return prisma.exercise.findFirst({
+                where:{
+                    id: input.id
+                }
+            })
+
+        }),
 
 
 })

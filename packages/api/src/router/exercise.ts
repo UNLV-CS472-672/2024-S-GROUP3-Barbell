@@ -17,15 +17,13 @@ export const exerciseRouter = createTRPCRouter ({
             name: z.string(),
             note: z.string().optional(),
             sets: z.array(z.object({
-                id: z.number(),
-                type: z.enum([SetType.DROPSET, SetType.FAILURE, SetType.NORMAL, SetType.WARMUP]),
+                type: z.nativeEnum(SetType),
                 reps: z.number().int(),
                 weight: z.number(),
                 exerciseId: z.number().int()
             })),
-            body_part: z.enum([ BodyPart.LEGS, BodyPart.ARMS, BodyPart.CHEST, BodyPart.BACK, BodyPart.SHOULDERS, BodyPart.CORE, BodyPart.FULL_BODY, BodyPart.OTHER]),
-            category: z.enum([Category.BARBELL, Category.DUMBBELL, Category.MACHINE, Category.ASSISTED_BODYWEIGHT, Category.WEIGHTED_BODYWEIGHT
-                            , Category.BODYWEIGHT, Category.DURATION, Category.CARDIO, Category.REPS_ONLY, Category.OTHER]),
+            body_part: z.nativeEnum(BodyPart),
+            category: z.nativeEnum(Category),
             workoutId: z.number().int()
         }))
         .mutation(async ({ ctx, input }) => {
@@ -93,14 +91,13 @@ export const exerciseRouter = createTRPCRouter ({
             note: z.string().optional(),
             sets: z.array(z.object({
                 id: z.number(),
-                type: z.enum([SetType.DROPSET, SetType.FAILURE, SetType.NORMAL, SetType.WARMUP]),
+                type: z.nativeEnum(SetType),
                 reps: z.number().int(),
                 weight: z.number(),
                 exerciseId: z.number().int()
             })).optional(),
-            body_part: z.enum([ BodyPart.LEGS, BodyPart.ARMS, BodyPart.CHEST, BodyPart.BACK, BodyPart.SHOULDERS, BodyPart.CORE, BodyPart.FULL_BODY, BodyPart.OTHER]).optional(),
-            category: z.enum([Category.BARBELL, Category.DUMBBELL, Category.MACHINE, Category.ASSISTED_BODYWEIGHT, Category.WEIGHTED_BODYWEIGHT
-                            , Category.BODYWEIGHT, Category.DURATION, Category.CARDIO, Category.REPS_ONLY, Category.OTHER]).optional(),
+            body_part: z.nativeEnum(BodyPart).optional(),
+            category: z.nativeEnum(Category).optional(),
             workoutId: z.number().int().optional()
         }))
         .mutation(async({ctx, input})=>{
@@ -140,7 +137,7 @@ export const exerciseRouter = createTRPCRouter ({
      */
     
     deleteExerciseFromExerciseID: publicProcedure
-        .input(z.object({ id: z.number() }))
+        .input(z.object({ id: z.number().int() }))
         .query(async({ ctx,input }) => {
             const { prisma } = ctx
 

@@ -6,8 +6,7 @@ import RotatingBarbellIcon from "./RotatingBarbellIcon";
 
 export default function DmNotifs() {
   const { userData } = useGlobalContext();
-  const messagePreviews = api.notif.getMessagePreviewsFromUserId.useQuery({id: userData.id })
-  const data = messagePreviews.data
+  const { data, isFetched, isFetching} = api.notif.getMessagePreviewsFromUserId.useQuery({id: userData.id })
   const renderedNotifications: any[] = []
 
   // Iterate over each chat object
@@ -28,8 +27,8 @@ export default function DmNotifs() {
   
   return renderedNotifications.length == 1 ? 
   <View>
-    {messagePreviews.isFetched && <Text className="flex pt-10 text-center" style={{color: "#CACACA"}}>No messages to display.</Text>}
-    {messagePreviews.isFetching && <RotatingBarbellIcon />}
+    {isFetched && <Text className="flex pt-10 text-center" style={{color: "#CACACA"}}>No messages to display.</Text>}
+    {isFetching && <RotatingBarbellIcon />}
   </View>
   : renderedNotifications
 }

@@ -102,5 +102,26 @@ export const notifRouter = createTRPCRouter({
 
       return finalMessageForEachDMChat;
     }),
+
+    
+  /**
+   *  @remarks
+   *  This returns the miscellaneous notifications for a user.
+   * 
+   *  @param  id - the id of the user
+   *  @returns an array of notification objects
+   */
+    getMiscNotifsFromUserId: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const { prisma } = ctx
+
+      return await prisma.notification.findMany({
+        where: {
+          receiverId: input.id,
+        },
+      })
+    }),
+    
   }
   )

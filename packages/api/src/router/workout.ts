@@ -38,9 +38,8 @@ export const workoutRouter = createTRPCRouter({
                     //     weight: z.number().nonnegative(),
                     //     exerciseID: z.number().int()
                     // })),
-                    body_part: z.enum([ BodyPart.LEGS, BodyPart.ARMS, BodyPart.CHEST, BodyPart.BACK, BodyPart.SHOULDERS, BodyPart.CORE, BodyPart.FULL_BODY, BodyPart.OTHER]),
-                    category: z.enum([Category.BARBELL, Category.DUMBBELL, Category.MACHINE, Category.ASSISTED_BODYWEIGHT, Category.WEIGHTED_BODYWEIGHT
-                                        , Category.BODYWEIGHT, Category.DURATION, Category.CARDIO, Category.REPS_ONLY, Category.OTHER]),
+                    body_part: z.nativeEnum(BodyPart),
+                    category: z.nativeEnum(Category),
                 })),
 
                 // Past workouts should not be needed since there is no history of it being used if it was newly created
@@ -50,7 +49,7 @@ export const workoutRouter = createTRPCRouter({
                 //     finishedAt: z.date(),
                 //     userId: z.number().int(),
                 // })),
-                userId: z.number().int()
+                userId: z.number().int(),
             })
         )
         .mutation(async ({ ctx, input }) => {
@@ -65,7 +64,7 @@ export const workoutRouter = createTRPCRouter({
                     exercises: {
                         create: input.exercises
                     },
-                    userId: input.userId
+                    userId: input.userId,
                 }
             })
         }),
@@ -85,7 +84,7 @@ export const workoutRouter = createTRPCRouter({
 
             return prisma.workout.findMany({
                 orderBy: {
-                    id: 'desc'
+                    id: 'desc',
                 }
             })
         }),
@@ -98,13 +97,13 @@ export const workoutRouter = createTRPCRouter({
      */
 
     getWorkoutFromWorkoutID: publicProcedure
-        .input(z.object({ id: z.number() }))
+        .input(z.object({ id: z.number().int() }))
         .query(({ ctx, input }) => {
             const { prisma } = ctx
 
             return prisma.workout.findFirst({
                 where: {
-                    id: input.id
+                    id: input.id,
                 }
             })
         }),
@@ -118,21 +117,20 @@ export const workoutRouter = createTRPCRouter({
      */
     updateWorkout: publicProcedure
         .input ( z.object({
-            id: z.number(),
+            id: z.number().int(),
             name: z.string().optional(),
             description: z.string().optional(),
             duration: z.number().int().optional(),
             finishedAt: z.date().optional(),
             likes: z.number().int().optional(),
             exercises: z.array(z.object({
-                id: z.number(),
+                id: z.number().int(),
                 name: z.string(),
                 note: z.string().optional(),
-                body_part: z.enum([BodyPart.LEGS, BodyPart.ARMS, BodyPart.CHEST, BodyPart.BACK, BodyPart.SHOULDERS, BodyPart.CORE, BodyPart.FULL_BODY, BodyPart.OTHER]).optional(),
-                category: z.enum([Category.BARBELL, Category.DUMBBELL, Category.MACHINE, Category.ASSISTED_BODYWEIGHT, Category.WEIGHTED_BODYWEIGHT
-                , Category.BODYWEIGHT, Category.DURATION, Category.CARDIO, Category.REPS_ONLY, Category.OTHER]).optional(),
+                body_part: z.nativeEnum(BodyPart).optional(),
+                category: z.nativeEnum(Category).optional(),
             })).optional(),
-            userId: z.number().int().optional()
+            userId: z.number().int().optional(),
             })
         )
         .mutation(async ({ ctx, input }) => {
@@ -155,11 +153,11 @@ export const workoutRouter = createTRPCRouter({
                                 name: exercise.name,
                                 note: exercise.note,
                                 body_part: exercise.body_part,
-                                category: exercise.category
+                                category: exercise.category,
                             }
                         })) ?? [] , // if the exercises array is empty then instead of passing a null, it passes an empty array
                     },
-                    userId: input.userId
+                    userId: input.userId,
                 }
             })
         }),
@@ -172,13 +170,13 @@ export const workoutRouter = createTRPCRouter({
      */
     
     deleteWorkoutFromWorkoutId: publicProcedure
-        .input(z.object( { id: z.number() }))
+        .input(z.object( { id: z.number().int() }))
         .query(async({ ctx, input}) => {
             const { prisma } = ctx
 
             return prisma.workout.delete({
                 where: {
-                    id: input.id
+                    id: input.id,
                 }
             })
 
@@ -193,7 +191,7 @@ export const workoutRouter = createTRPCRouter({
      */
 
     getAllExercisesFromWorkoutID: publicProcedure
-        .input(z.object({ id: z.number() }))
+        .input(z.object({ id: z.number().int() }))
         .query( async({ ctx, input }) =>{
             const { prisma } = ctx
 
@@ -223,7 +221,7 @@ export const workoutRouter = createTRPCRouter({
 
     deleteExerciseFromWorkout: publicProcedure
         .input(z.object({
-            id: z.number(),
+            id: z.number().int(),
             exerciseID: z.number()
         }))
         .query(async({ ctx,input }) => {
@@ -231,12 +229,12 @@ export const workoutRouter = createTRPCRouter({
 
             return prisma.workout.update({
                 where:{
-                    id: input.id
+                    id: input.id,
                 },
                 data: {
                     exercises: {
                         disconnect: {
-                            id: input.exerciseID
+                            id: input.exerciseID,
                         }
                     }
                 },

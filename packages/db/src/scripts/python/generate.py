@@ -12,6 +12,7 @@ CATEGORIES = ["DUMBBELL", "MACHINE", "BODYWEIGHT", "ASSISTED_BODYWEIGHT"]
 STATUSES = ["ONLINE", "OFFLINE", "ACTIVE", "BUSY"]
 NOTIFICATION_TYPES = ["NUDGE", "FRIEND_REQUEST", "LIKE"]
 SET_TYPES = ["WARMUP", "NORMAL", "FAILURE", "DROPSET"]
+CHAT_TYPES = ["GROUP", "DIRECT"]
 
 def created_at():
     return datetime.now().isoformat()
@@ -50,8 +51,8 @@ class Chat(Model):
     def __init__(self, fake, id):
         self.id = id
         self.name = fake.name()
-        self.createdByUserId = 1 # TODO
-        self.type = "GROUP" # TODO: rand: group/direct
+        self.createdByUserId = list_rand(range(number_of_rows))
+        self.type = list_rand(CHAT_TYPES)
 
 class Exercise(Model):
     file_name = 'exercise'
@@ -63,7 +64,7 @@ class Exercise(Model):
         self.note = fake.text()
         self.body_part = list_rand(BODY_PARTS)
         self.category = list_rand(CATEGORIES)
-        self.workoutId = list_rand(range(1,10))
+        self.workoutId = list_rand(range(number_of_rows))
 
 
 class Friend(Model):
@@ -72,7 +73,7 @@ class Friend(Model):
 
     def __init__(self, fake, id):
         self.id = id
-        self.userId = list_rand(range(1,10))
+        self.userId = list_rand(range(number_of_rows))
 
 
 class Log(Model):
@@ -84,8 +85,8 @@ class Log(Model):
         self.createdAt = created_at()
         self.updatedAt = updated_at()
         self.finishedAt = updated_at()
-        self.userId = list_rand(range(1,10))
-        self.workoutId = list_rand(range(1,10))
+        self.userId = list_rand(range(number_of_rows))
+        self.workoutId = list_rand(range(number_of_rows))
 
 
 class Message(Model):
@@ -98,8 +99,8 @@ class Message(Model):
         self.updatedAt = updated_at()
         self.content = fake.sentence()
         self.read = bool_rand()
-        self.chatId = list_rand(range(1,10))
-        self.senderId = list_rand(range(1,10))
+        self.chatId = list_rand(range(number_of_rows))
+        self.senderId = list_rand(range(number_of_rows))
 
 
 class Notification(Model):
@@ -112,8 +113,8 @@ class Notification(Model):
         self.content = fake.sentence()
         self.type = list_rand(NOTIFICATION_TYPES)
         self.read = bool_rand()
-        self.receiverId = list_rand(range(1,10))
-        self.senderId = list_rand(range(1,10))
+        self.receiverId = list_rand(range(number_of_rows))
+        self.senderId = list_rand(range(number_of_rows))
         
 
 
@@ -126,7 +127,7 @@ class Post(Model):
         self.title = fake.name()
         self.content = fake.text()
         self.published = False
-        self.authorId = list_rand(range(1,10))
+        self.authorId = list_rand(range(number_of_rows))
 
 
 class Set(Model):
@@ -138,7 +139,7 @@ class Set(Model):
         self.type = list_rand(SET_TYPES)
         self.reps = list_rand(range(1,10))
         self.weight = list_rand(range(1,100))
-        self.exerciseId = list_rand(range(1,10))
+        self.exerciseId = list_rand(range(number_of_rows))
 
 
 class User(Model):
@@ -150,7 +151,7 @@ class User(Model):
         self.username = fake.name()
         self.name = fake.name()
         self.status = list_rand(STATUSES)
-        self.streak = list_rand(range(1,100))
+        self.streak = list_rand(range(1,1000))
 
 
 class Workout(Model):
@@ -165,8 +166,8 @@ class Workout(Model):
         self.createdAt = created_at()
         self.updatedAt = updated_at()
         self.finishedAt = updated_at()
-        self.likes = list_rand(range(1,1000000))
-        self.userId = list_rand(range(1,10))
+        self.likes = list_rand(range(1,1000))
+        self.userId = list_rand(range(number_of_rows))
 
 
 klasses = [

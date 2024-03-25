@@ -16,6 +16,13 @@ export const exerciseRouter = createTRPCRouter ({
         .input(z.object({
             name: z.string(),
             note: z.string().optional(),
+            sets: z.array(z.object({
+                id: z.number(),
+                type: z.enum([SetType.DROPSET, SetType.FAILURE, SetType.NORMAL, SetType.WARMUP]),
+                reps: z.number().int(),
+                weight: z.number(),
+                exerciseId: z.number().int()
+            })),
             body_part: z.enum([ BodyPart.LEGS, BodyPart.ARMS, BodyPart.CHEST, BodyPart.BACK, BodyPart.SHOULDERS, BodyPart.CORE, BodyPart.FULL_BODY, BodyPart.OTHER]),
             category: z.enum([Category.BARBELL, Category.DUMBBELL, Category.MACHINE, Category.ASSISTED_BODYWEIGHT, Category.WEIGHTED_BODYWEIGHT
                             , Category.BODYWEIGHT, Category.DURATION, Category.CARDIO, Category.REPS_ONLY, Category.OTHER]),
@@ -28,6 +35,9 @@ export const exerciseRouter = createTRPCRouter ({
                 data:{
                     name: input.name,
                     note: input.note,
+                    sets:{
+                        create: input.sets
+                    },
                     body_part: input.body_part,
                     category: input.category,
                     workoutId: input.workoutId

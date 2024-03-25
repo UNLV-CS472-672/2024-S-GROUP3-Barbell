@@ -56,6 +56,12 @@ importers:
       '@trpc/server':
         specifier: next
         version: 11.0.0-next-beta.297
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      clsx:
+        specifier: ^2.1.0
+        version: 2.1.0
       eas-cli:
         specifier: ^7.3.0
         version: 7.3.0(@types/node@18.18.13)(expo-modules-autolinking@1.10.3)(typescript@5.3.3)
@@ -127,6 +133,9 @@ importers:
         version: 2.4.6(react-native@0.72.10)(react@18.2.0)
       superjson:
         specifier: 2.2.1
+        version: 2.2.1
+      tailwind-merge:
+        specifier: ^2.2.1
         version: 2.2.1
     devDependencies:
       '@acme/api':
@@ -6571,6 +6580,11 @@ packages:
 
   /clsx@2.0.0:
     resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
+    engines: {node: '>=6'}
+    dev: false
+
+  /clsx@2.1.0:
+    resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
     engines: {node: '>=6'}
     dev: false
 

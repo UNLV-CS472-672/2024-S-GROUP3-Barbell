@@ -14,23 +14,23 @@ NOTIFICATION_TYPES = ["NUDGE", "FRIEND_REQUEST", "LIKE"]
 SET_TYPES = ["WARMUP", "NORMAL", "FAILURE", "DROPSET"]
 CHAT_TYPES = ["GROUP", "DIRECT"]
 
-def created_at():
-    return datetime.now().isoformat()
-
-def updated_at():
-    return (datetime.now() + timedelta(hours = 2)).isoformat()
-
-def list_rand(lst):
-    return random.choice(lst)
-
-def bool_rand():
-    return random.choice([True, False])
-
 class Model:
     fields = []
 
     def to_json(self):
         return {f: getattr(self, f) for f in self.fields}
+
+    def created_at(self):
+        return datetime.now().isoformat()
+
+    def updated_at(self):
+        return (datetime.now() + timedelta(hours = 2)).isoformat()
+
+    def list_rand(self, lst):
+        return random.choice(lst)
+
+    def bool_rand(self):
+        return random.choice([True, False])
 
 class Award(Model):
     file_name = 'award'
@@ -41,8 +41,8 @@ class Award(Model):
         self.name = fake.name()
         self.description = fake.text()
         self.userId = 1
-        self.createdAt = created_at()
-        self.updatedAt = updated_at()
+        self.createdAt = self.created_at()
+        self.updatedAt = self.updated_at()
 
 class Chat(Model):
     file_name = 'chat'
@@ -51,8 +51,8 @@ class Chat(Model):
     def __init__(self, fake, id):
         self.id = id
         self.name = fake.name()
-        self.createdByUserId = list_rand(range(number_of_rows))
-        self.type = list_rand(CHAT_TYPES)
+        self.createdByUserId = self.list_rand(range(1, number_of_rows))
+        self.type = self.list_rand(CHAT_TYPES)
 
 class Exercise(Model):
     file_name = 'exercise'
@@ -62,9 +62,9 @@ class Exercise(Model):
         self.id = id
         self.name = fake.name()
         self.note = fake.text()
-        self.body_part = list_rand(BODY_PARTS)
-        self.category = list_rand(CATEGORIES)
-        self.workoutId = list_rand(range(number_of_rows))
+        self.body_part = self.list_rand(BODY_PARTS)
+        self.category = self.list_rand(CATEGORIES)
+        self.workoutId = self.list_rand(range(1, number_of_rows))
 
 
 class Friend(Model):
@@ -73,7 +73,7 @@ class Friend(Model):
 
     def __init__(self, fake, id):
         self.id = id
-        self.userId = list_rand(range(number_of_rows))
+        self.userId = self.list_rand(range(1, number_of_rows))
 
 
 class Log(Model):
@@ -82,11 +82,11 @@ class Log(Model):
 
     def __init__(self, fake, id):
         self.id = id
-        self.createdAt = created_at()
-        self.updatedAt = updated_at()
-        self.finishedAt = updated_at()
-        self.userId = list_rand(range(number_of_rows))
-        self.workoutId = list_rand(range(number_of_rows))
+        self.createdAt = self.created_at()
+        self.updatedAt = self.updated_at()
+        self.finishedAt = self.updated_at()
+        self.userId = self.list_rand(range(1, number_of_rows))
+        self.workoutId = self.list_rand(range(1, number_of_rows))
 
 
 class Message(Model):
@@ -95,12 +95,12 @@ class Message(Model):
 
     def __init__(self, fake, id):
         self.id = id
-        self.createdAt = created_at()
-        self.updatedAt = updated_at()
+        self.createdAt = self.created_at()
+        self.updatedAt = self.updated_at()
         self.content = fake.sentence()
-        self.read = bool_rand()
-        self.chatId = list_rand(range(number_of_rows))
-        self.senderId = list_rand(range(number_of_rows))
+        self.read = self.bool_rand()
+        self.chatId = self.list_rand(range(1, number_of_rows))
+        self.senderId = self.list_rand(range(1, number_of_rows))
 
 
 class Notification(Model):
@@ -109,12 +109,12 @@ class Notification(Model):
 
     def __init__(self, fake, id):
         self.id = id
-        self.createdAt = created_at()
+        self.createdAt = self.created_at()
         self.content = fake.sentence()
-        self.type = list_rand(NOTIFICATION_TYPES)
-        self.read = bool_rand()
-        self.receiverId = list_rand(range(number_of_rows))
-        self.senderId = list_rand(range(number_of_rows))
+        self.type = self.list_rand(NOTIFICATION_TYPES)
+        self.read = self.bool_rand()
+        self.receiverId = self.list_rand(range(1, number_of_rows))
+        self.senderId = self.list_rand(range(1, number_of_rows))
         
 
 
@@ -127,7 +127,7 @@ class Post(Model):
         self.title = fake.name()
         self.content = fake.text()
         self.published = False
-        self.authorId = list_rand(range(number_of_rows))
+        self.authorId = self.list_rand(range(1, number_of_rows))
 
 
 class Set(Model):
@@ -136,10 +136,10 @@ class Set(Model):
 
     def __init__(self, fake, id):
         self.id = id
-        self.type = list_rand(SET_TYPES)
-        self.reps = list_rand(range(1,10))
-        self.weight = list_rand(range(1,100))
-        self.exerciseId = list_rand(range(number_of_rows))
+        self.type = self.list_rand(SET_TYPES)
+        self.reps = self.list_rand(range(1,10))
+        self.weight = self.list_rand(range(1,100))
+        self.exerciseId = self.list_rand(range(1, number_of_rows))
 
 
 class User(Model):
@@ -150,8 +150,8 @@ class User(Model):
         self.id = id
         self.username = fake.name()
         self.name = fake.name()
-        self.status = list_rand(STATUSES)
-        self.streak = list_rand(range(1,1000))
+        self.status = self.list_rand(STATUSES)
+        self.streak = self.list_rand(range(1,1000))
 
 
 class Workout(Model):
@@ -162,12 +162,12 @@ class Workout(Model):
         self.id = id
         self.name = fake.name()
         self.description = fake.text()
-        self.duration = list_rand([10, 20, 30, 60])
-        self.createdAt = created_at()
-        self.updatedAt = updated_at()
-        self.finishedAt = updated_at()
-        self.likes = list_rand(range(1,1000))
-        self.userId = list_rand(range(number_of_rows))
+        self.duration = self.list_rand([10, 20, 30, 60])
+        self.createdAt = self.created_at()
+        self.updatedAt = self.updated_at()
+        self.finishedAt = self.updated_at()
+        self.likes = self.list_rand(range(1,1000))
+        self.userId = self.list_rand(range(1, number_of_rows))
 
 
 klasses = [
@@ -185,7 +185,7 @@ klasses = [
 ]
 
 for index, klass in enumerate(klasses):
-    data = [klass(fake, i + 1).to_json() for i in range(number_of_rows)]
+    data = [klass(fake, i + 1).to_json() for i in range(1, number_of_rows)]
     with open(f'output/{klass.file_name}.json', 'w') as f:
         f.write(json.dumps(data))
 

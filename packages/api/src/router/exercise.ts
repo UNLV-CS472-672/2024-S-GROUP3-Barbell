@@ -121,6 +121,24 @@ export const exerciseRouter = createTRPCRouter ({
                     workoutId: input.workoutId,
                 }
             })
+        }),
+
+    /**
+     * This function deletes an exercise given its ID
+     * @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
+     * @params input - the id of the exercise to be deleted
+     */
+    
+    deleteExerciseFromExerciseID: publicProcedure
+        .input(z.object({ id: z.number() }))
+        .query(async({ ctx,input }) => {
+            const { prisma } = ctx
+
+            return prisma.exercise.delete({
+                where:{
+                    id: input.id
+                }
+            })
         })
 
 })

@@ -7,8 +7,8 @@ from datetime import datetime, timedelta
 fake = Faker()
 number_of_rows = 10
 
-BODY_PARTS = ["SHOULDERS", "CORE", "BACK", "LEGS"]
-CATEGORIES = ["DUMBBELL", "MACHINE", "BODYWEIGHT", "ASSISTED_BODYWEIGHT"]
+BODY_PARTS = ["SHOULDERS", "CORE", "BACK", "LEGS", "ARMS", "CHEST", "FULL_BODY", "OTHER"]
+CATEGORIES = ["DUMBBELL", "MACHINE", "BODYWEIGHT", "ASSISTED_BODYWEIGHT", "CARDIO"]
 STATUSES = ["ONLINE", "OFFLINE", "ACTIVE", "BUSY"]
 NOTIFICATION_TYPES = ["NUDGE", "FRIEND_REQUEST", "LIKE"]
 SET_TYPES = ["WARMUP", "NORMAL", "FAILURE", "DROPSET"]
@@ -184,8 +184,9 @@ klasses = [
     Workout
 ]
 
-for index, klass in enumerate(klasses):
+for klass in klasses:
     data = [klass(fake, i + 1).to_json() for i in range(1, number_of_rows)]
     with open(f'output/{klass.file_name}.json', 'w') as f:
+        print(f'writing generated data to: {f.name}')
         f.write(json.dumps(data))
 

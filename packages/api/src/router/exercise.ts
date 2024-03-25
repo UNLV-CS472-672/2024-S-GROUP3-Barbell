@@ -40,6 +40,17 @@ export const exerciseRouter = createTRPCRouter ({
      * @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
      * @returns an array of all the exercises in our database
      */
+    getAllExercises: publicProcedure
+        .query(({ctx}) => {
+            const { prisma } = ctx
+
+            return prisma.exercise.findMany({
+                orderBy: {
+                    id: 'desc'
+                }
+            })
+        }),
+
     
 
 

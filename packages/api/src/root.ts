@@ -1,6 +1,7 @@
 import { postRouter } from './router/post'
 import { userRouter } from './router/user'
 import { notifRouter } from './router/notif'
+import { workoutRouter } from './router/workout'
 import { createTRPCRouter } from './trpc'
 import { exerciseRouter } from './router/exercise'
 
@@ -11,6 +12,7 @@ export const appRouter = createTRPCRouter({
   post: postRouter,
   user: userRouter,
   notif: notifRouter,
+  workout: workoutRouter,
   exercise: exerciseRouter,
 })
 

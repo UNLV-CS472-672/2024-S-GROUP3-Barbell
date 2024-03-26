@@ -1,4 +1,4 @@
-export default function calculateTimeAgo(timeSent: string): string {
+export default function calculateTimeAgo(timeSent: Date): string {
   // parse time strings
   // time must be in format of YYYY-MM-DDTHH:MM:SS.202Z
   const currentUTCTime = new Date();

@@ -23,9 +23,9 @@ export default function FriendRequestNotif({ notif }: { notif: any }) {
     <View>
       <View className="flex flex-row items-center ml-3 mr-3 mt-4">
         {/*photo, use icon for now, probably use profile photo in the future*/}
-          <View className="mr-2">
-            <MaterialCommunityIcons name="face-man-profile" size={56} color="#CACACA" />
-          </View>
+        <View className="mr-2">
+          <MaterialCommunityIcons name="face-man-profile" size={56} color="#CACACA" />
+        </View>
         
         <View className="flex flex-col flex-1">
           {/*sender wants to be your friend*/}

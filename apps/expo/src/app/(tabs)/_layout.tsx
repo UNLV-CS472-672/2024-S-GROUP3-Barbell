@@ -64,15 +64,9 @@ const Layout = () => {
           }}
         />
 
-        {/*  */}
+        {/* PLUS CIRCLE */}
         <Tabs.Screen
           name="one"
-          listeners={{
-            tabPress: (e) => {
-              e.preventDefault()
-              handlePresentModal()
-            },
-          }}
           options={{
             headerShown: false,
             tabBarIcon: ({ size, color }) => (
@@ -100,18 +94,8 @@ const Layout = () => {
             ),
           }}
         />
+        {/* FIXME: */}
       </Tabs>
-
-      {/* FIXME: */}
-      <CustomBottomSheetModal
-        ref={bottomSheetRef}
-        customSnapPoints={['30%', '10%']}
-        startIndex={0}
-        renderBackdrop
-        enablePanDownToClose
-      >
-        <Text>Example Content</Text>
-      </CustomBottomSheetModal>
     </>
   )
 }

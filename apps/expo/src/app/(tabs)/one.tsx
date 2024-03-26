@@ -1,15 +1,42 @@
-import React from 'react'
-import { Button, Text, View } from 'react-native'
-import { Stack, useRouter } from 'expo-router'
+import { StyleSheet, View, TextInput, Button } from 'react-native';
+import CustomBottomSheet from '~/components/ui/bottom-sheet';
+import { useRef, useState } from 'react';
+import BottomSheet from '@gorhom/bottom-sheet';
 
-const Page = () => {
-  const router = useRouter()
-  return (
-    <View className="flex-1 items-center justify-center bg-[#1E1E1E]">
-      <Text className="pt-12">Page is making</Text>
-      <Button title="Go to post again" onPress={() => router.push('/post/')} />
-    </View>
-  )
+export default function TabTwoScreen() {
+	const bottomSheetRef = useRef<BottomSheet>(null);
+	const [title, setTitle] = useState('Passing my data 🔥');
+
+	const handleClosePress = () => bottomSheetRef.current?.close();
+	const handleOpenPress = () => bottomSheetRef.current?.expand();
+
+	return (
+		<View style={styles.container}>
+			<TextInput style={styles.input} onChangeText={setTitle} value={title} />
+			<Button title="Open" onPress={handleOpenPress} />
+			<Button title="Close" onPress={handleClosePress} />
+			<CustomBottomSheet ref={bottomSheetRef} title={title} />
+		</View>
+	);
 }
 
-export default Page
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	title: {
+		fontSize: 20,
+		fontWeight: 'bold'
+	},
+	input: {
+		width: '80%',
+		height: 50,
+		borderWidth: 1,
+		borderColor: '#ccc',
+		borderRadius: 10,
+		padding: 10,
+		marginBottom: 20
+	}
+});

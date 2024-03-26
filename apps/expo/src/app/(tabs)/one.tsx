@@ -1,42 +1,48 @@
-import { useRef, useState } from 'react'
-import { Button, StyleSheet, TextInput, View } from 'react-native'
+import { useEffect, useRef, useState } from 'react'
+import { Button, Text, View } from 'react-native'
+import { cn } from '@/packages/ui/src/cn'
 import BottomSheet from '@gorhom/bottom-sheet'
 
+import CustomBottomSheetModal, {
+  CustomBottomSheetModalRef,
+} from '~/components/custom-bottom-sheet-modal'
 import CustomBottomSheet from '~/components/ui/bottom-sheet'
+import colors from '~/styles/colors'
 
 export default function TabTwoScreen() {
-  const bottomSheetRef = useRef<BottomSheet>(null)
+  const bottomSheetRef = useRef<CustomBottomSheetModalRef>(null)
   const [title, setTitle] = useState('Passing my data')
 
-  const handleClosePress = () => bottomSheetRef.current?.close()
-  const handleOpenPress = () => bottomSheetRef.current?.expand()
+  useEffect(() => {
+    bottomSheetRef.current?.present()
+  }, [])
+
+  const handlePresentModal = () => {
+    bottomSheetRef.current?.present()
+  }
 
   return (
-    <View style={styles.container}>
-      <Button title="Open" onPress={handleOpenPress} />
-      <Button title="Close" onPress={handleClosePress} />
-      <CustomBottomSheet ref={bottomSheetRef} title={title} />
+    <View
+      className={cn(
+        'flex-1 items-center justify-center',
+        `bg-[${colors.background}]`,
+      )}
+      style={{ backgroundColor: colors.background }}
+    >
+      <Button
+        title="Open"
+        onPress={handlePresentModal}
+        color={colors.primary}
+      />
+      <CustomBottomSheetModal
+        ref={bottomSheetRef}
+        customSnapPoints={['30%', '10%']}
+        startIndex={0}
+        renderBackdrop
+        enablePanDownToClose
+      >
+        <Text>Example Content</Text>
+      </CustomBottomSheetModal>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  input: {
-    width: '80%',
-    height: 50,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 10,
-    padding: 10,
-    marginBottom: 20,
-  },
-})

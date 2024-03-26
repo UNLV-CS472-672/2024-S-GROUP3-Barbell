@@ -4,10 +4,10 @@ import { Stack } from 'expo-router'
 
 const Page = () => {
   return (
-    <View style={{ flex: 1, marginTop: 80 }}>
+    <View style={{ flex: 1, marginTop: 80, backgroundColor: '#1E1E1E' }}>
       {/* Define pour custom header */}
       <Stack.Screen />
-      <Text>Page is making</Text>
+      <Text className="text-white">Page is making</Text>
     </View>
   )
 }

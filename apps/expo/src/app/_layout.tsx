@@ -1,15 +1,15 @@
-import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 
 import { TRPCProvider } from '~/utils/api'
 
 import 'expo-dev-client'
 import '~/styles.css'
 
+import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
-import * as SecureStore from 'expo-secure-store'
 
 import GlobalContextProvider from '~/context/global-context'
 
@@ -40,17 +40,17 @@ const tokenCache = {
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
-  // themes
+  /* themes */
   // const { colorScheme } = useColorScheme()
 
-  // fonts
+  /* fonts */
   let [fontsLoaded] = useFonts({
     Koulen_400Regular,
+
+    /*  */
   })
 
-  if (!fontsLoaded) {
-    return null
-  }
+  if (!fontsLoaded) return null
 
   return (
     <TRPCProvider>
@@ -60,8 +60,11 @@ export default function RootLayout() {
       >
         <BottomSheetModalProvider>
           <GlobalContextProvider>
-            <RootLayoutBottomNav />
             <StatusBar style="light" />
+
+            {/* Splitter */}
+
+            <RootLayoutBottomNav />
           </GlobalContextProvider>
         </BottomSheetModalProvider>
       </ClerkProvider>
@@ -71,7 +74,7 @@ export default function RootLayout() {
 
 function RootLayoutBottomNav() {
   // const router = useRouter()
-
+  /* Our main navigation here (idk what is best practices here :<) */
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

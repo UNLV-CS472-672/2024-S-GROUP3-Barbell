@@ -26,6 +26,7 @@ const config = {
     '^(react/(.*)$)|^(react$)|^(react-native(.*)$)',
     '^(next/(.*)$)|^(next$)',
     '^(expo(.*)$)|^(expo$)',
+    '',
     '<THIRD_PARTY_MODULES>',
     '',
     '<TYPES>^@acme',
@@ -40,6 +41,7 @@ const config = {
   importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
   // prettier
   semi: false,
+  printWidth: 120,
   singleQuote: true,
 }
 

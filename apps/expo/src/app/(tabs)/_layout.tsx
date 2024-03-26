@@ -1,12 +1,13 @@
 import React, { useRef } from 'react'
-import { Button, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { Tabs } from 'expo-router'
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
-import HomeLogo from '~assets/nav/home.svg'
+import { Ionicons } from '@expo/vector-icons'
+import CirclePlus from '~assets/svgs/circle-plus.svg'
+import HomeLogo from '~assets/svgs/home.svg'
+import Profile from '~assets/svgs/profile.svg'
 
-import CustomBottomSheetModal, {
-  CustomBottomSheetModalRef,
-} from '~/components/custom-bottom-sheet-modal'
+import type { CustomBottomSheetModalRef } from '~/components/custom-bottom-sheet-modal'
+import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
 import colors from '~/styles/colors'
 
 const Layout = () => {
@@ -17,8 +18,19 @@ const Layout = () => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      <Tabs screenOptions={{ tabBarActiveTintColor: colors.primary }}>
+    <>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: colors.primary,
+          tabBarStyle: {
+            height: 70,
+            paddingVertical: 10,
+            backgroundColor: '#272727',
+          },
+          tabBarIconStyle: { marginHorizontal: 10 },
+          tabBarLabelStyle: { fontSize: 12, marginHorizontal: 5 },
+        }}
+      >
         <Tabs.Screen
           name="index"
           options={{
@@ -32,18 +44,17 @@ const Layout = () => {
         {/* Custom Tab Button */}
         <Tabs.Screen
           name="one"
-          // component={() => <View />} // A placeholder component, might be empty since we're not navigating
           listeners={{
             tabPress: (e) => {
-              e.preventDefault() // Prevent the default action (navigation)
-              handlePresentModal() // Open the bottom sheet instead
+              e.preventDefault()
+              handlePresentModal()
             },
           }}
           options={{
             tabBarLabel: 'one',
             headerShown: false,
             tabBarIcon: ({ size, color }) => (
-              <Ionicons name="heart-outline" size={size} color={color} />
+              <CirclePlus width={size * 2} height={size * 2} color={color} />
             ),
           }}
         />
@@ -53,11 +64,7 @@ const Layout = () => {
             tabBarLabel: 'two',
             headerShown: false,
             tabBarIcon: ({ size, color }) => (
-              <Ionicons
-                name="person-circle-outline"
-                size={size}
-                color={color}
-              />
+              <Profile width={size * 1.4} height={size * 1.4} color={color} />
             ),
           }}
         />
@@ -66,14 +73,14 @@ const Layout = () => {
       {/* Bottom Sheet Modal */}
       <CustomBottomSheetModal
         ref={bottomSheetRef}
-        customSnapPoints={['30%', '93%']}
-        startIndex={1}
+        customSnapPoints={['30%', '10%']}
+        startIndex={0}
         renderBackdrop
       >
         {/* Your modal content here */}
         <Text>Example Content</Text>
       </CustomBottomSheetModal>
-    </View>
+    </>
   )
 }
 

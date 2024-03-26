@@ -20,76 +20,71 @@ const Layout = () => {
 
   return (
     <>
-        <Tabs
-          screenOptions={{
-            tabBarActiveTintColor: colors.primary,
-            tabBarStyle: {
-              height: 70,
-              paddingVertical: 10,
-              backgroundColor: '#272727',
-            },
-            tabBarIconStyle: { marginHorizontal: 10 },
-            tabBarLabelStyle: { fontSize: 12, marginHorizontal: 5 },
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: colors.primary,
+          tabBarStyle: {
+            height: 80,
+            backgroundColor: '#272727',
+          },
+          tabBarIconStyle: { marginHorizontal: 10, marginBottom: 2 },
+          tabBarShowLabel: false,
+        }}
+      >
+        {/*  */}
+        <Tabs.Screen
+          name="index"
+          options={{
+            tabBarLabel: 'Luv',
+            headerShown: false,
+            tabBarIcon: ({ size, color }) => (
+              <HomeLogo width={size} height={size} fill={color} />
+            ),
           }}
-        >
-          {/*  */}
-          <Tabs.Screen
-            name="index"
-            options={{
-              tabBarLabel: 'Luv',
-              headerShown: false,
-              tabBarIcon: ({ size, color }) => (
-                <HomeLogo width={size} height={size} fill={color} />
-              ),
-            }}
-          />
+        />
 
-          {/*  */}
-          <Tabs.Screen
-            name="one"
-            listeners={{
-              tabPress: (e) => {
-                e.preventDefault()
-                handlePresentModal()
-              },
-            }}
-            options={{
-              headerShown: false,
-              tabBarShowLabel: false,
-              tabBarIcon: ({ size, color }) => (
-                <CirclePlus
-                  width={size * 2}
-                  height={size * 2}
-                  fill={color}
-                  className="-mt-10"
-                />
-              ),
-            }}
-          />
+        {/*  */}
+        <Tabs.Screen
+          name="one"
+          listeners={{
+            tabPress: (e) => {
+              e.preventDefault()
+              handlePresentModal()
+            },
+          }}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ size, color }) => (
+              <View style={{ marginTop: -30 }}>
+                <CirclePlus width={size * 3} height={size * 3} fill={color} />
+              </View>
+            ),
+          }}
+        />
 
-          {/*  */}
-          <Tabs.Screen
-            name="two"
-            options={{
-              tabBarLabel: 'two',
-              headerShown: false,
-              tabBarIcon: ({ size, color }) => (
-                <Profile width={size * 1.4} height={size * 1.4} color={color} />
-              ),
-            }}
-          />
-        </Tabs>
+        {/*  */}
+        <Tabs.Screen
+          name="two"
+          options={{
+            tabBarLabel: 'two',
+            headerShown: false,
+            tabBarIcon: ({ size, color }) => (
+              <Profile width={size * 1.4} height={size * 1.4} color={color} />
+            ),
+          }}
+        />
+      </Tabs>
 
-        {/* Bottom Sheet Modal */}
-        <CustomBottomSheetModal
-          ref={bottomSheetRef}
-          customSnapPoints={['30%', '10%']}
-          startIndex={0}
-          renderBackdrop
-        >
-          {/* Your modal content here */}
-          <Text>Example Content</Text>
-        </CustomBottomSheetModal>
+      {/* Bottom Sheet Modal */}
+      <CustomBottomSheetModal
+        ref={bottomSheetRef}
+        customSnapPoints={['30%', '10%']}
+        startIndex={0}
+        renderBackdrop
+      >
+        {/* Your modal content here */}
+        <Text>Example Content</Text>
+      </CustomBottomSheetModal>
     </>
   )
 }

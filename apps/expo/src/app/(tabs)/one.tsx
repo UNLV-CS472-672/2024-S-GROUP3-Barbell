@@ -6,9 +6,7 @@ const Page = () => {
   const router = useRouter()
   return (
     <View className="flex-1 items-center justify-center bg-[#1E1E1E]">
-      <Text className="pt-12">
-        Page is making
-      </Text>
+      <Text className="pt-12">Page is making</Text>
       <Button title="Go to post again" onPress={() => router.push('/post/')} />
     </View>
   )

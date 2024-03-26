@@ -1,25 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
-import { Button, Text, View } from 'react-native'
+import { useRef, useState } from 'react'
+import { Button, Text, TextInput, View } from 'react-native'
 import { cn } from '@/packages/ui/src/cn'
 import BottomSheet from '@gorhom/bottom-sheet'
 
-import CustomBottomSheetModal, {
-  CustomBottomSheetModalRef,
-} from '~/components/custom-bottom-sheet-modal'
+import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
 import CustomBottomSheet from '~/components/ui/bottom-sheet'
 import colors from '~/styles/colors'
 
 export default function TabTwoScreen() {
-  const bottomSheetRef = useRef<CustomBottomSheetModalRef>(null)
+  const bottomSheetRef = useRef<BottomSheet>(null)
   const [title, setTitle] = useState('Passing my data')
 
-  useEffect(() => {
-    bottomSheetRef.current?.present()
-  }, [])
-
-  const handlePresentModal = () => {
-    bottomSheetRef.current?.present()
-  }
+  const handleClosePress = () => bottomSheetRef.current?.close()
+  const handleOpenPress = () => bottomSheetRef.current?.expand()
 
   return (
     <View
@@ -29,20 +22,14 @@ export default function TabTwoScreen() {
       )}
       style={{ backgroundColor: colors.background }}
     >
+      <Button title="Open" onPress={handleOpenPress} color={colors.primary} />
       <Button
-        title="Open"
-        onPress={handlePresentModal}
-        color={colors.primary}
+        title="Close"
+        onPress={handleClosePress}
+        color={colors.grey}
+        // className={cn('mb-4')}
       />
-      <CustomBottomSheetModal
-        ref={bottomSheetRef}
-        customSnapPoints={['30%', '10%']}
-        startIndex={0}
-        renderBackdrop
-        enablePanDownToClose
-      >
-        <Text>Example Content</Text>
-      </CustomBottomSheetModal>
+      <CustomBottomSheet ref={bottomSheetRef} title={title} />
     </View>
   )
 }

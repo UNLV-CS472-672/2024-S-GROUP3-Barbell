@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { Tabs } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
@@ -19,67 +20,76 @@ const Layout = () => {
 
   return (
     <>
-      <Tabs
-        screenOptions={{
-          tabBarActiveTintColor: colors.primary,
-          tabBarStyle: {
-            height: 70,
-            paddingVertical: 10,
-            backgroundColor: '#272727',
-          },
-          tabBarIconStyle: { marginHorizontal: 10 },
-          tabBarLabelStyle: { fontSize: 12, marginHorizontal: 5 },
-        }}
-      >
-        <Tabs.Screen
-          name="index"
-          options={{
-            tabBarLabel: 'Luv',
-            headerShown: false,
-            tabBarIcon: ({ size, color }) => (
-              <HomeLogo width={size} height={size} fill={color} />
-            ),
-          }}
-        />
-        {/* Custom Tab Button */}
-        <Tabs.Screen
-          name="one"
-          listeners={{
-            tabPress: (e) => {
-              e.preventDefault()
-              handlePresentModal()
+        <Tabs
+          screenOptions={{
+            tabBarActiveTintColor: colors.primary,
+            tabBarStyle: {
+              height: 70,
+              paddingVertical: 10,
+              backgroundColor: '#272727',
             },
+            tabBarIconStyle: { marginHorizontal: 10 },
+            tabBarLabelStyle: { fontSize: 12, marginHorizontal: 5 },
           }}
-          options={{
-            tabBarLabel: 'one',
-            headerShown: false,
-            tabBarIcon: ({ size, color }) => (
-              <CirclePlus width={size * 2} height={size * 2} color={color} />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="two"
-          options={{
-            tabBarLabel: 'two',
-            headerShown: false,
-            tabBarIcon: ({ size, color }) => (
-              <Profile width={size * 1.4} height={size * 1.4} color={color} />
-            ),
-          }}
-        />
-      </Tabs>
+        >
+          {/*  */}
+          <Tabs.Screen
+            name="index"
+            options={{
+              tabBarLabel: 'Luv',
+              headerShown: false,
+              tabBarIcon: ({ size, color }) => (
+                <HomeLogo width={size} height={size} fill={color} />
+              ),
+            }}
+          />
 
-      {/* Bottom Sheet Modal */}
-      <CustomBottomSheetModal
-        ref={bottomSheetRef}
-        customSnapPoints={['30%', '10%']}
-        startIndex={0}
-        renderBackdrop
-      >
-        {/* Your modal content here */}
-        <Text>Example Content</Text>
-      </CustomBottomSheetModal>
+          {/*  */}
+          <Tabs.Screen
+            name="one"
+            listeners={{
+              tabPress: (e) => {
+                e.preventDefault()
+                handlePresentModal()
+              },
+            }}
+            options={{
+              headerShown: false,
+              tabBarShowLabel: false,
+              tabBarIcon: ({ size, color }) => (
+                <CirclePlus
+                  width={size * 2}
+                  height={size * 2}
+                  fill={color}
+                  className="-mt-10"
+                />
+              ),
+            }}
+          />
+
+          {/*  */}
+          <Tabs.Screen
+            name="two"
+            options={{
+              tabBarLabel: 'two',
+              headerShown: false,
+              tabBarIcon: ({ size, color }) => (
+                <Profile width={size * 1.4} height={size * 1.4} color={color} />
+              ),
+            }}
+          />
+        </Tabs>
+
+        {/* Bottom Sheet Modal */}
+        <CustomBottomSheetModal
+          ref={bottomSheetRef}
+          customSnapPoints={['30%', '10%']}
+          startIndex={0}
+          renderBackdrop
+        >
+          {/* Your modal content here */}
+          <Text>Example Content</Text>
+        </CustomBottomSheetModal>
     </>
   )
 }

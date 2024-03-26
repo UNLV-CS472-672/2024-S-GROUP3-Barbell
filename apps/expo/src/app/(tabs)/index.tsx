@@ -4,9 +4,13 @@ import { Stack } from 'expo-router'
 
 const Page = () => {
   return (
-    <View style={{ flex: 1, marginTop: 80, backgroundColor: '#1E1E1E' }}>
+    <View style={{ flex: 1,  backgroundColor: '#1E1E1E' }}>
       {/* Define pour custom header */}
-      <Stack.Screen />
+      {/* <Stack.Screen
+        options={{
+          header: () => null,
+        }}
+      /> */}
       <Text className="text-white">Page is making</Text>
     </View>
   )

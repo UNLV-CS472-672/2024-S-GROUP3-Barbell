@@ -7,6 +7,7 @@ import { TRPCProvider } from '~/utils/api'
 import 'expo-dev-client'
 import '~/styles.css'
 
+import { View } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
@@ -60,8 +61,7 @@ export default function RootLayout() {
       >
         <BottomSheetModalProvider>
           <GlobalContextProvider>
-            <StatusBar style="light" />
-
+            <StatusBar style="auto" />
             {/* Splitter */}
 
             <RootLayoutBottomNav />
@@ -77,7 +77,13 @@ function RootLayoutBottomNav() {
   /* Our main navigation here (idk what is best practices here :<) */
   return (
     <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="(tabs)"
+        options={{
+          headerShown: false,
+          header: () => <View style={{ backgroundColor: '#1E1E1E' }} />,
+        }}
+      />
     </Stack>
   )
 }

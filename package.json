@@ -9,7 +9,6 @@
     "build"           : "turbo build",
     "clean"           : "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
-    
     "dev"             : "turbo dev --parallel --filter=!@acme/expo",
     "db:studio"       : "pnpm db:prisma && cd packages/db && pnpm dotenv -e ../../.env -- prisma studio -p 6969",
     "db:seed"         : "cd packages/db && pnpm dotenv -e ../../.env -- tsx src/scripts/seed.ts",
@@ -23,15 +22,17 @@
     "typecheck"       : "turbo typecheck",
     "postinstall"     : "pnpm lint:ws",
     "android"         : "expo run:android",
-    "ios"             : "expo run:ios"
+    "ios"             : "expo run:ios",
+    "test"            : "turbo test"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:^",
+    "@babel/core"          : "^7.20.0",
     "@turbo/gen"           : "^1.12.4",
     "prettier"             : "^3.2.5",
     "turbo"                : "^1.12.4",
     "typescript"           : "^5.3.3",
-    "@babel/core"          : "^7.20.0"
+    "vitest"               : "^1.4.0"
   },
   "prettier": "@acme/prettier-config"
 }

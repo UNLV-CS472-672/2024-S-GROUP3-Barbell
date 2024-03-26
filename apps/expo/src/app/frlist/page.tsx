@@ -17,7 +17,7 @@ const FriendsListScreen = () => {
   }, []);
 
   /* assumes API endpoint is available at '/api/friends'
-  *  and '/api/friends/${friendId}' for deleting a friend
+  *  and '/api/friends/${userID}' for deleting a friend
   *  
   *  TODO: Replace with actual API endpoints
   */
@@ -34,15 +34,15 @@ const FriendsListScreen = () => {
     }
   };
 
-  const handleRemoveFriend = async (friendId: string) => {
+  const handleRemoveFriend = async (userId: string) => {
     try {
-      const response = await fetch(`/api/friends/${friendId}`, {
+      const response = await fetch(`/api/friends/${userId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
         throw new Error('Error removing friend');
       }
-      setFriends(friends.filter(friend => friend.id !== friendId));
+      setFriends(friends.filter(friend => friend.id !== userId));
     } catch (error) {
       console.error('Error removing friend:', error);
     }

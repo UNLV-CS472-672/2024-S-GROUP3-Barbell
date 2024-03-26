@@ -31,7 +31,7 @@ importers:
     dependencies:
       '@clerk/clerk-expo':
         specifier: ^0.20.8
-        version: 0.20.10(@types/react@18.2.71)(expo-application@5.8.3)(expo-auth-session@5.0.2)(expo-constants@14.4.2)(expo-web-browser@12.8.2)(react-dom@18.2.0)(react-native@0.72.10)(react@18.2.0)
+        version: 0.20.10(@types/react@18.2.71)(expo-application@5.3.1)(expo-auth-session@5.0.2)(expo-constants@14.4.2)(expo-web-browser@12.8.2)(react-dom@18.2.0)(react-native@0.72.10)(react@18.2.0)
       '@expo-google-fonts/koulen':
         specifier: ^0.2.3
         version: 0.2.3
@@ -68,6 +68,9 @@ importers:
       expo:
         specifier: ^49.0.23
         version: 49.0.23(@babel/core@7.24.3)
+      expo-application:
+        specifier: ~5.3.0
+        version: 5.3.1(expo@49.0.23)
       expo-auth-session:
         specifier: ^5.0.2
         version: 5.0.2(expo@49.0.23)
@@ -1995,7 +1998,7 @@ packages:
       - react
     dev: false
 
-  /@clerk/clerk-expo@0.20.10(@types/react@18.2.71)(expo-application@5.8.3)(expo-auth-session@5.0.2)(expo-constants@14.4.2)(expo-web-browser@12.8.2)(react-dom@18.2.0)(react-native@0.72.10)(react@18.2.0):
+  /@clerk/clerk-expo@0.20.10(@types/react@18.2.71)(expo-application@5.3.1)(expo-auth-session@5.0.2)(expo-constants@14.4.2)(expo-web-browser@12.8.2)(react-dom@18.2.0)(react-native@0.72.10)(react@18.2.0):
     resolution: {integrity: sha512-RHjIpQPEB8gs0YnPVRCHYzObIyxocsXycRHDQGEP60Rn32pF1lbPvJOfRxU13734w+OXs06cEtsoJLA8H3ECtQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -2009,7 +2012,7 @@ packages:
       '@clerk/clerk-react': 4.30.7(react@18.2.0)
       '@clerk/shared': 1.3.3(react@18.2.0)
       base-64: 1.0.0
-      expo-application: 5.8.3(expo@49.0.23)
+      expo-application: 5.3.1(expo@49.0.23)
       expo-auth-session: 5.0.2(expo@49.0.23)
       expo-constants: 14.4.2(expo@49.0.23)
       expo-web-browser: 12.8.2(expo@49.0.23)
@@ -7660,14 +7663,6 @@ packages:
 
   /expo-application@5.3.1(expo@49.0.23):
     resolution: {integrity: sha512-HR2+K+Hm33vLw/TfbFaHrvUbRRNRco8R+3QaCKy7eJC2LFfT05kZ15ynGaKfB5DJ/oqPV3mxXVR/EfwmE++hoA==}
-    peerDependencies:
-      expo: '*'
-    dependencies:
-      expo: 49.0.23(@babel/core@7.24.3)
-    dev: false
-
-  /expo-application@5.8.3(expo@49.0.23):
-    resolution: {integrity: sha512-IISxzpPX+Xe4ynnwX8yY52T6dm1g9sME1GCj4lvUlrdc5xeTPM6U35x7Wj82V7lLWBaVGe+/Tg9EeKqfylCEwA==}
     peerDependencies:
       expo: '*'
     dependencies:

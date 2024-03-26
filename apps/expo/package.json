@@ -27,6 +27,7 @@
     "clsx": "^2.1.0",
     "eas-cli": "^7.3.0",
     "expo": "^49.0.23",
+    "expo-application": "~5.3.0",
     "expo-auth-session": "^5.0.2",
     "expo-constants": "~14.4.2",
     "expo-dev-client": "^2.4.13",

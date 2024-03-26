@@ -1,16 +1,16 @@
 import React from 'react'
 import { KeyboardAvoidingView, SafeAreaView, View, Text } from 'react-native'
 import { useLocalSearchParams } from "expo-router";
-
 import MessageInput from '~/components/message/messageInput'
 import { api } from '~/utils/api';
-import RotatingBarbellIcon from '~/components/notif/dmNotifs/RotatingBarbellIcon';
+import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon';
+import { ChatType } from '@prisma/client'
 
 export default function Messages() {
   const params = useLocalSearchParams();
   const p = params
   
-  const response = api.notif.getDMsFromChatId.useQuery({ id: Number(p["chatId"]) })
+  const response = api.notif.getMessagesFromChatIdAndType.useQuery({ id: Number(p["chatId"]), type: p["type"] as ChatType })
   const data = response.data
   const chattingWith = p["user"]
 

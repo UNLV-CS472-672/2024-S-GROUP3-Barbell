@@ -4,22 +4,25 @@ import { api } from "~/utils/api"
 import Conversation from "apps/expo/src/components/notif/Conversation";
 import RotatingBarbellIcon from "apps/expo/src/components/notif/RotatingBarbellIcon";
 import { ChatType } from '@prisma/client'
+import { makeChatName } from "~/utils/makeChatName";
 
-export default function DmNotifs() {
+export default function GcNotifs() {
 
   const { userData } = useGlobalContext();
-  const { data, isFetched, isFetching} = api.notif.getMessagePreviewsFromUserId.useQuery({id: userData.id, type: ChatType.DIRECT })
+  const { data, isFetched, isFetching} = api.notif.getMessagePreviewsFromUserId.useQuery({id: userData.id, type: ChatType.GROUP })
   const renderedNotifications: any[] = []
 
   // Iterate over each chat object
   if(data != undefined){
     data.forEach(chat => {
-      const messages = chat.messages;
-      messages.forEach(message => {
-        renderedNotifications.push(<Conversation key={chat.id} chatId={chat.id} 
-          chatName={String(chat.users[0]?.username == userData.username? chat.users[1]?.username : chat.users[0]?.username)}
-          messageContent={message.content} createdAt={message.createdAt} readBy={chat.readByUserIds} type={ChatType.DIRECT} />)
-      });
+      const lastMessage = chat.messages[0]
+      const chatName: string = chat.name != undefined ? chat.name : makeChatName(chat.users)
+      const messageContent: string = lastMessage != undefined ? lastMessage.content : String(chat.createdByUserId + " created a new chat")
+      const createdAt: Date = lastMessage != undefined ? lastMessage.createdAt : chat.createdAt
+      renderedNotifications.push(<Conversation key={chat.id} chatId={chat.id} 
+        chatName={chatName}
+        messageContent={messageContent}
+        createdAt={createdAt} readBy={chat.readByUserIds} type={ChatType.GROUP} />)
     });
   }
 

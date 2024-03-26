@@ -3,7 +3,7 @@ import FriendRequestNotif from "./FriendRequestNotif"
 import NudgeNotif from "./NudgeNotif"
 import { api } from "~/utils/api"
 import { useGlobalContext } from "~/context/global-context"
-import RotatingBarbellIcon from "apps/expo/src/components/notif/dmNotifs/RotatingBarbellIcon"
+import RotatingBarbellIcon from "~/components/notif/RotatingBarbellIcon"
 
 const handleNotif = (notif: any, id: number) => {
   if(notif.type == "FRIEND_REQUEST"){

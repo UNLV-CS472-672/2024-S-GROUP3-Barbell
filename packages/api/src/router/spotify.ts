@@ -16,7 +16,7 @@ export const spotifyRouter = createTRPCRouter({
     *  
     */
     getSpotifyDataFromUserId: publicProcedure
-        .input(z.object({ id: z.number() }))
+        .input(z.object({ id: z.number().int() }))
         .query(async ({ctx, input}) => {
             const { prisma } = ctx
 
@@ -74,8 +74,8 @@ export const spotifyRouter = createTRPCRouter({
      * @returns - updated spotify object
     */
    updateSpotifyData: publicProcedure
-        .input(z.object({
-            id: z.number(),
+        .input(z.object({ // Don't see a need to pass the id, only need userID to update. Won't be indexing by id itself, nor should it be updated.
+            id: z.number().int().optional(),
             albumImageURL: z.string().optional(),
             albumName: z.string().optional(),
             artist: z.string().optional(),
@@ -92,7 +92,6 @@ export const spotifyRouter = createTRPCRouter({
 
             return prisma.spotifyData.update({
                 where: { // Shouldn't update IDs at all. That would be bad to say the least.
-                    id: input.id,
                     userID: input.userID
                 },
                 data: {
@@ -116,7 +115,7 @@ export const spotifyRouter = createTRPCRouter({
      * @params id - unique id to determine which row to remove from DB
     */
    deleteSpotifyDataFromUserId: publicProcedure
-        .input(z.object({ id: z.number() }))
+        .input(z.object({ id: z.number().int() }))
         .query(async({ctx, input}) => {
             const { prisma } = ctx
 

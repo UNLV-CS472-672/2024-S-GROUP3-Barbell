@@ -1,14 +1,15 @@
 import React, { useRef } from 'react'
 import { Text, View } from 'react-native'
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Tabs } from 'expo-router'
-import { Ionicons } from '@expo/vector-icons'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
 
-import type { CustomBottomSheetModalRef } from '~/components/custom-bottom-sheet-modal'
-import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
+import CustomBottomSheetModal, {
+  CustomBottomSheetModalRef,
+} from '~/components/custom-bottom-sheet-modal'
 import colors from '~/styles/colors'
 
 const Layout = () => {
@@ -18,32 +19,45 @@ const Layout = () => {
     bottomSheetRef.current?.present()
   }
 
+  // for animated dot
+  const AnimatedDot = () => (
+    <Animated.View
+      entering={FadeIn}
+      exiting={FadeOut}
+      className="mt-2 h-[5px] w-[5px] rounded-full bg-white"
+    />
+  )
+
   return (
     <>
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: colors.primary,
           tabBarStyle: {
-            height: 80,
-            backgroundColor: '#272727',
+            height: 85,
+            backgroundColor: colors.background,
           },
-          tabBarIconStyle: { marginHorizontal: 10, marginBottom: 2 },
           tabBarShowLabel: false,
+          tabBarIconStyle: { paddingHorizontal: 10 },
         }}
       >
         {/*  */}
         <Tabs.Screen
           name="index"
           options={{
-            tabBarLabel: 'Luv',
             headerShown: false,
-            tabBarIcon: ({ size, color }) => (
-              <HomeLogo width={size} height={size} fill={color} />
+            tabBarIcon: ({ focused, size }) => (
+              <View className="items-center">
+                <HomeLogo
+                  width={size * 1.25}
+                  height={size * 1.25}
+                  fill={focused ? '#CACACA' : 'none'}
+                />
+                {focused && <AnimatedDot />}
+              </View>
             ),
           }}
         />
-
-        {/*  */}
         <Tabs.Screen
           name="one"
           listeners={{
@@ -61,28 +75,32 @@ const Layout = () => {
             ),
           }}
         />
-
-        {/*  */}
         <Tabs.Screen
           name="two"
           options={{
-            tabBarLabel: 'two',
             headerShown: false,
-            tabBarIcon: ({ size, color }) => (
-              <Profile width={size * 1.4} height={size * 1.4} color={color} />
+            tabBarIcon: ({ focused, size }) => (
+              <View className="items-center">
+                <Profile
+                  width={size * 1.25}
+                  height={size * 1.25}
+                  fill={focused ? '#CACACA' : 'none'}
+                />
+                {focused && <AnimatedDot />}
+              </View>
             ),
           }}
         />
       </Tabs>
 
-      {/* Bottom Sheet Modal */}
+      {/* FIXME: */}
       <CustomBottomSheetModal
         ref={bottomSheetRef}
         customSnapPoints={['30%', '10%']}
         startIndex={0}
         renderBackdrop
+        enablePanDownToClose
       >
-        {/* Your modal content here */}
         <Text>Example Content</Text>
       </CustomBottomSheetModal>
     </>

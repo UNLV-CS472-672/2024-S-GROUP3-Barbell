@@ -1,23 +1,37 @@
-import type { inferProcedureInput } from '@trpc/server'
+// import { expect, test } from 'vitest';
 
-import { expect, test } from '@jest/globals'
+// // Assuming the rest of your imports remain the same
+// import { prisma } from '@acme/db';
+// import type { AppRouter } from '../root';
+// import { caller } from '../context';
+// import { appRouter, appRouter as trpc } from '../root';
+// import { createCallerFactory } from '../trpc';
 
-import { prisma } from '@acme/db'
+// test('GET /users', async () => {
+//   // Your test setup and execution remains largely the same
 
-import type { AppRouter } from '../root'
-import { caller } from '../context'
-import { appRouter, appRouter as trpc } from '../root'
-import { createCallerFactory } from '../trpc'
+//   // const response = await caller.user.all();
+
+//   // Your actual test assertions go here
+//   // For example, to check if response is defined:
+//   expect(true).toBeDefined();
+
+// });
+
+import { expect, test } from '@jest/globals';
+import { prisma } from '@acme/db';
+import { appRouter } from '../root';
+import { createCallerFactory } from '../trpc';
 
 test('GET /users', async () => {
-  // 1. create a caller-function for your router
-  //   const headers = new Headers()
-  //   headers.append('x-trpc-source', 'test')
+  const createCaller = createCallerFactory(appRouter);
+  const caller = createCaller({ prisma });
 
-  console.log('wer are ere')
-
-  const response = await caller.user.all()
-
-  // console.log(response)
-  expect(true).toBe(true)
-})
+  // Assuming 'user.all' is a valid endpoint that returns an array of users
+  const response = await caller.user.all();
+  
+  // Example assertions about the response
+  expect(response).toBeDefined();       // Check if the response is defined
+  expect(Array.isArray(response)).toBe(true); // Check if the response is an array
+  // Further assertions based on your actual API response structure
+});

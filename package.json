@@ -23,7 +23,8 @@
     "postinstall": "pnpm lint:ws",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "test": "jest"
+    "jest": "jest",
+    "vitest": "vitest"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:^",

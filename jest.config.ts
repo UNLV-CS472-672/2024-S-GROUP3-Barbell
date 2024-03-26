@@ -5,5 +5,12 @@ export default {
   setupFiles: ["dotenv/config"],
   transform: {
     "^.+\\.mjs$": "ts-jest",
+    "^.+\\.(t|j)sx?$": "ts-jest",
   },
+  transformIgnorePatterns: [
+    "/node_modules/(?!superjson).+\\.js$",
+  ],
+  testMatch: [
+    "**/__tests__/**/*.test.ts",
+  ],
 };

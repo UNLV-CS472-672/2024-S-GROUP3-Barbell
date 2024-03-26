@@ -9,6 +9,7 @@ const buttonVariants = cva('active:opacity-30', {
     color: {
       primary: 'bg-dark-purple',
       light: 'bg-slate-200',
+      trap: 'bg-[#717171]',
       dark: 'bg-slate-900',
       icon: 'bg-transparent',
     },

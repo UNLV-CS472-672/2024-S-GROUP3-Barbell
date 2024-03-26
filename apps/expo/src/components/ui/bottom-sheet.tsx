@@ -3,6 +3,7 @@ import { Button as ReactButton, StyleSheet, Text, View } from 'react-native'
 import BottomSheet, { useBottomSheet } from '@gorhom/bottom-sheet'
 
 import Button from '~/components/ui/button'
+import colors from '~/styles/colors'
 
 export type Ref = BottomSheet
 
@@ -26,11 +27,16 @@ const CustomBottomSheet = forwardRef<Ref, Props>((props, ref) => {
       snapPoints={snapPoints}
       enablePanDownToClose={true}
       handleIndicatorStyle={{ backgroundColor: '#fff' }}
-      backgroundStyle={{ backgroundColor: '#1E1E1E' }}
+      backgroundStyle={{ backgroundColor: colors.bottomav.nav }}
     >
-      <View style={styles.contentContainer} className='mt-5'>
-        <Button color="light" size="full" value="Start Saved Workout" className='mb-5'></Button>
-        <Button color="light" size="full" value="Create New Workout"></Button>
+      <View style={styles.contentContainer} className="mt-7">
+        <Button
+          color="trap"
+          size="full"
+          value="Start Saved Workout"
+          className="mb-5"
+        ></Button>
+        <Button color="trap" size="full" value="Create New Workout"></Button>
       </View>
     </BottomSheet>
   )
@@ -40,12 +46,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     alignItems: 'center',
-  },
-  containerHeadline: {
-    fontSize: 24,
-    fontWeight: '600',
-    padding: 20,
-    color: '#fff',
   },
 })
 

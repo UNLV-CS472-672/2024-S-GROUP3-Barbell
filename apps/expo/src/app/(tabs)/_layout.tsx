@@ -1,9 +1,10 @@
 import React, { useRef } from 'react'
-import { View, Text } from 'react-native'
+import { Text, View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
 import { Tabs } from 'expo-router'
 import { cn } from '@/packages/ui/src/cn'
 import BottomSheet from '@gorhom/bottom-sheet'
+import CircleMinus from '~assets/svgs/circle-minus.svg'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
@@ -76,9 +77,22 @@ const Layout = () => {
           }}
           options={{
             headerShown: false,
-            tabBarIcon: ({ size, color }) => (
+            tabBarIcon: ({ size,focused }) => (
               <View style={{ marginTop: -30 }}>
-                <CirclePlus width={size * 3} height={size * 3} fill={color} />
+                {/* <CirclePlus width={size * 3} height={size * 3} fill={color} /> */}
+                {focused ? (
+                  <CircleMinus
+                    width={size * 3}
+                    height={size * 3}
+                    fill={colors.primary}
+                  />
+                ) : (
+                  <CirclePlus
+                    width={size * 3}
+                    height={size * 3}
+                    fill={colors.bottomav.icon}
+                  />
+                )}
               </View>
             ),
           }}
@@ -102,7 +116,6 @@ const Layout = () => {
           }}
         />
       </Tabs>
-
 
       {/* FIXME: */}
       {/* <CustomBottomSheetModal

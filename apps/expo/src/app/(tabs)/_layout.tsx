@@ -1,24 +1,24 @@
 import React, { useRef } from 'react'
-import { Text, View } from 'react-native'
+import { View, Text } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { Tabs } from 'expo-router'
 import { cn } from '@/packages/ui/src/cn'
+import BottomSheet from '@gorhom/bottom-sheet'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
 
-import CustomBottomSheetModal, {
-  CustomBottomSheetModalRef,
-} from '~/components/custom-bottom-sheet-modal'
+import type { CustomBottomSheetModalRef } from '~/components/custom-bottom-sheet-modal'
+import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
+import CustomBottomSheet from '~/components/ui/bottom-sheet'
 import colors from '~/styles/colors'
 
 const Layout = () => {
-  const bottomSheetRef = useRef<CustomBottomSheetModalRef>(null)
+  // const bottomSheetRef = useRef<CustomBottomSheetModalRef>(null)
 
-  const handlePresentModal = () => {
-    bottomSheetRef.current?.present()
-  }
+  // const handlePresentModal = () => {
+  //   bottomSheetRef.current?.present()
+  // }
 
   // for animated dot
   const AnimatedDot = ({ focused }: { focused: boolean }) => (
@@ -67,6 +67,13 @@ const Layout = () => {
         {/* PLUS CIRCLE */}
         <Tabs.Screen
           name="one"
+          redirect={false}
+          listeners={{
+            tabPress: (e) => {
+              // e.preventDefault()
+              // handlePresentModal()
+            },
+          }}
           options={{
             headerShown: false,
             tabBarIcon: ({ size, color }) => (
@@ -94,8 +101,19 @@ const Layout = () => {
             ),
           }}
         />
-        {/* FIXME: */}
       </Tabs>
+
+
+      {/* FIXME: */}
+      {/* <CustomBottomSheetModal
+        ref={bottomSheetRef}
+        customSnapPoints={['30%', '10%']}
+        startIndex={0}
+        renderBackdrop
+        enablePanDownToClose
+      >
+        <Text>Example Content</Text>
+      </CustomBottomSheetModal> */}
     </>
   )
 }

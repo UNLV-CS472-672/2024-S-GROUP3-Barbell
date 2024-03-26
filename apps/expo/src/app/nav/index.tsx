@@ -24,6 +24,7 @@ const Nav = () => {
           { key: 'Message Input', route: '/messages'},
           { key: 'Create New Workout', route: '/workout/createNew' },
           { key: 'Award', route: '/award' },
+          { key:  'Friends List', route: '/frlist' },
         ]}
         renderItem={({ item }) => (
           <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />

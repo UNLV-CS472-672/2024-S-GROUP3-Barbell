@@ -14,7 +14,7 @@ export default function Spotify({inputID}: {inputID: number}) {
     if (data == null || data == undefined || data.isPlaying != true) {
     return (
         <View>
-        <Text>No song playing.</Text>
+        <Text>User is not actively listening to Spotify.</Text>
         </View>
     )
     }
@@ -30,24 +30,22 @@ export default function Spotify({inputID}: {inputID: number}) {
     // Should make a rotating weight plate for aesthetic reasons?
 
     return (
-    <View>
-        <Image
-            source={{ uri: albumImageURL }}
-            className='w-48 h-48'
-        />
-
-        <Text className=''>{songTitle} by {artists}</Text>
-        <SongProgress progress={currTime} total={totalTime}/>
-    </View>
+        <View style={{ width: 300}}>
+            <Text style={{fontWeight: 'bold', height: 25}}>LISTENING TO SPOTIFY</Text>
+            <View style={{flexDirection: 'row', height: 130, alignContent: 'center'}}>
+                <Image
+                    source={{ uri: albumImageURL }}
+                    className='w-36 h-36'
+                />
+                <View>
+                    <Text style={{fontWeight: 'bold', height: 30, verticalAlign: 'bottom'}}>    {songTitle}</Text>
+                    <Text style={{height: 25, verticalAlign: 'bottom'}}>     by {artists}</Text>
+                    <Text style={{height: 25, verticalAlign: 'bottom'}}>     on {album}</Text>
+                </View>
+            </View>
+            
+            <SongProgress progress={currTime} total={totalTime}/>
+        </View>
     )
 }
 
-const styles = StyleSheet.create({
-    // For the box holding the actual widget itself.
-    WidgetBox: {
-        flex: 1,
-        width: 400,
-        height: 100,
-        color: 0xCACACA
-    }
-})

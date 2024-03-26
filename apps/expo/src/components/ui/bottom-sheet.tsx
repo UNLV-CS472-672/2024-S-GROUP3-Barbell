@@ -1,6 +1,8 @@
 import React, { forwardRef, useMemo } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button as ReactButton, StyleSheet, Text, View } from 'react-native'
 import BottomSheet, { useBottomSheet } from '@gorhom/bottom-sheet'
+
+import Button from '~/components/ui/button'
 
 export type Ref = BottomSheet
 
@@ -11,11 +13,11 @@ interface Props {
 const CloseBtn = () => {
   const { close } = useBottomSheet()
 
-  return <Button title="Close" onPress={() => close()} />
+  return <ReactButton title="Close" onPress={() => close()} />
 }
 
 const CustomBottomSheet = forwardRef<Ref, Props>((props, ref) => {
-  const snapPoints = useMemo(() => ['35%'], [])
+  const snapPoints = useMemo(() => ['30%'], [])
 
   return (
     <BottomSheet
@@ -26,9 +28,9 @@ const CustomBottomSheet = forwardRef<Ref, Props>((props, ref) => {
       handleIndicatorStyle={{ backgroundColor: '#fff' }}
       backgroundStyle={{ backgroundColor: '#1E1E1E' }}
     >
-      <View style={styles.contentContainer}>
-        <Text style={styles.containerHeadline}>{props.title}</Text>
-        <CloseBtn />
+      <View style={styles.contentContainer} className='mt-5'>
+        <Button color="light" size="full" value="Start Saved Workout" className='mb-5'></Button>
+        <Button color="light" size="full" value="Create New Workout"></Button>
       </View>
     </BottomSheet>
   )

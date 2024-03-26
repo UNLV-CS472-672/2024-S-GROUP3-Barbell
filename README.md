@@ -89,6 +89,7 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 - [ ] [expo-router not found](https://github.com/expo/router/issues/748)
 - [ ] [Unmatched Route with Clerk -- Window only](https://github.com/expo/router/issues/457)
 - [ ] [Ah yes, you can only for android OS on an Apple OS](https://github.com/expo/eas-cli/issues/1726)
+- [ ] [Invarient Violation](https://github.com/JesperLekland/react-native-svg-charts/issues/201)
 
 In case you encountered, Failed to get localhost. Please point to your production server.
 

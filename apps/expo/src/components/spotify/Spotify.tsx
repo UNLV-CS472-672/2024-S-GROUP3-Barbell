@@ -13,7 +13,7 @@ export default function Spotify({inputID}: {inputID: number}) {
 
     if (data == null || data == undefined || data.isPlaying != true) {
     return (
-        <View style={styles.WidgetBox}>
+        <View>
         <Text>No song playing.</Text>
         </View>
     )
@@ -22,18 +22,18 @@ export default function Spotify({inputID}: {inputID: number}) {
     let albumImageURL: string = data.albumImageURL ? data.albumImageURL : ''
     let songTitle: string = data.title ? data.title : ''
     let currTime: number = data.timePlayed? data.timePlayed : 0
-    let totalTime: number = data.timeTotal? data.timeTotal:0
-    let artists: string = data.artist? data.artist:''
-    let album: string = data.albumName? data.albumName:''
+    let totalTime: number = data.timeTotal? data.timeTotal : 0
+    let artists: string = data.artist? data.artist : ''
+    let album: string = data.albumName? data.albumName : ''
 
     // Make a progress bar to display it: SongProgress handles time and progress bar
     // Should make a rotating weight plate for aesthetic reasons?
 
     return (
-    <View style={styles.WidgetBox}>
+    <View>
         <Image
             source={{ uri: albumImageURL }}
-            className='w-36 h-36'
+            className='w-48 h-48'
         />
 
         <Text className=''>{songTitle} by {artists}</Text>

@@ -13,7 +13,7 @@ export const appRouter = createTRPCRouter({
   user    : userRouter,
   notif   : notifRouter,
   workout : workoutRouter,
-  exercise: exerciseRouter,
+  // exercise: exerciseRouter,
 })
 
 // export type definition of API

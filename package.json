@@ -1,38 +1,42 @@
 {
-  "name"   : "barbell",
+  "name": "barbell",
   "private": true,
   "engines": {
     "node": ">=18.18.2"
   },
   "packageManager": "pnpm@8.11.0",
-  "scripts"       : {
-    "build"           : "turbo build",
-    "clean"           : "git clean -xdf node_modules",
+  "scripts": {
+    "build": "turbo build",
+    "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
-    "dev"             : "turbo dev --parallel --filter=!@acme/expo",
-    "db:studio"       : "pnpm db:prisma && cd packages/db && pnpm dotenv -e ../../.env -- prisma studio -p 6969",
-    "db:seed"         : "cd packages/db && pnpm dotenv -e ../../.env -- tsx src/scripts/seed.ts",
-    "db:prisma"       : "cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push",
-    "db:migrate"      : "cd packages/db && pnpm dotenv -e ../../.env prisma migrate dev --name init",
-    "format"          : "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
-    "format:fix"      : "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
-    "lint"            : "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
-    "lint:fix"        : "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
-    "lint:ws"         : "pnpm dlx sherif@latest",
-    "typecheck"       : "turbo typecheck",
-    "postinstall"     : "pnpm lint:ws",
-    "android"         : "expo run:android",
-    "ios"             : "expo run:ios",
-    "test"            : "turbo test"
+    "dev": "turbo dev --parallel --filter=!@acme/expo",
+    "db:studio": "pnpm db:prisma && cd packages/db && pnpm dotenv -e ../../.env -- prisma studio -p 6969",
+    "db:seed": "cd packages/db && pnpm dotenv -e ../../.env -- tsx src/scripts/seed.ts",
+    "db:prisma": "cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push",
+    "db:migrate": "cd packages/db && pnpm dotenv -e ../../.env prisma migrate dev --name init",
+    "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
+    "format:fix": "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
+    "lint": "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:ws": "pnpm dlx sherif@latest",
+    "typecheck": "turbo typecheck",
+    "postinstall": "pnpm lint:ws",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "test": "jest"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:^",
-    "@babel/core"          : "^7.20.0",
-    "@turbo/gen"           : "^1.12.4",
-    "prettier"             : "^3.2.5",
-    "turbo"                : "^1.12.4",
-    "typescript"           : "^5.3.3",
-    "vitest"               : "^1.4.0"
+    "@babel/core": "^7.20.0",
+    "@turbo/gen": "^1.12.4",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "jest-mock-extended": "^3.0.5",
+    "prettier": "^3.2.5",
+    "ts-jest": "^29.1.2",
+    "turbo": "^1.12.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.4.0"
   },
   "prettier": "@acme/prettier-config"
 }

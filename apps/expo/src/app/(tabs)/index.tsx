@@ -11,7 +11,7 @@ const Page = () => {
           header: () => null,
         }}
       /> */}
-      <Text className="text-white">Page is making</Text>
+      <Text className="text-white">Page is making index</Text>
     </View>
   )
 }

@@ -3,6 +3,7 @@ import { Text, View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Tabs } from 'expo-router'
+import { cn } from '@/packages/ui/src/cn'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
@@ -20,11 +21,14 @@ const Layout = () => {
   }
 
   // for animated dot
-  const AnimatedDot = () => (
+  const AnimatedDot = ({ focused }: { focused: boolean }) => (
     <Animated.View
       entering={FadeIn}
       exiting={FadeOut}
-      className="mt-2 h-[5px] w-[5px] rounded-full bg-white"
+      className={cn(
+        'h-1.5 w-1.5 rounded-full',
+        focused ? 'bg-white' : 'bg-transparent',
+      )}
     />
   )
 
@@ -35,7 +39,8 @@ const Layout = () => {
           tabBarActiveTintColor: colors.primary,
           tabBarStyle: {
             height: 85,
-            backgroundColor: colors.background,
+            backgroundColor: colors.bottomav.nav,
+            borderColor: colors.background,
           },
           tabBarShowLabel: false,
           tabBarIconStyle: { paddingHorizontal: 10 },
@@ -51,13 +56,15 @@ const Layout = () => {
                 <HomeLogo
                   width={size * 1.25}
                   height={size * 1.25}
-                  fill={focused ? '#CACACA' : 'none'}
+                  fill={focused ? `${colors.bottomav.icon}` : 'none'}
                 />
-                {focused && <AnimatedDot />}
+                <AnimatedDot focused={focused} />
               </View>
             ),
           }}
         />
+
+        {/*  */}
         <Tabs.Screen
           name="one"
           listeners={{
@@ -75,6 +82,8 @@ const Layout = () => {
             ),
           }}
         />
+
+        {/*  */}
         <Tabs.Screen
           name="two"
           options={{
@@ -84,9 +93,9 @@ const Layout = () => {
                 <Profile
                   width={size * 1.25}
                   height={size * 1.25}
-                  fill={focused ? '#CACACA' : 'none'}
+                  fill={focused ? `${colors.bottomav.icon}` : 'none'}
                 />
-                {focused && <AnimatedDot />}
+                <AnimatedDot focused={focused} />
               </View>
             ),
           }}

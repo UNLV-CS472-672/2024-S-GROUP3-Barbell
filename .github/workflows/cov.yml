@@ -28,6 +28,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Seed the db
+        working-directory: .
         run: cd packages/db && pnpm dotenv -e ../../.env -- tsx src/scripts/seed.ts
 
       - name: Install dependencies and setup Prisma

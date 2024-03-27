@@ -31,9 +31,9 @@ jobs:
         run: cd packages/db && pnpm dotenv -e ../../.env -- tsx src/scripts/seed.ts
 
       - name: Install dependencies and setup Prisma
+        working-directory: .
         run: |
           cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
-        working-directory: .
       
       - name: Run tests and collect coverage
         run: |

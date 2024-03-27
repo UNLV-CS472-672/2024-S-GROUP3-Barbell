@@ -83,7 +83,7 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 </div>
 
 
-# Commons Bugs Encountered
+## Commons Bugs Encountered
 
 - [ ] [SKD Not found](https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-location-with-sdk-dir-in-the-local-properties-fil)
 - [ ] [expo-router not found](https://github.com/expo/router/issues/748)
@@ -96,3 +96,9 @@ In case you encountered, Failed to get localhost. Please point to your productio
 
 + Check the entire constants from expo-constants and see if it exist the hostUri
 + If it doens't exist, you can add it manually.
+
+## Development Workflows
+
+### Adding/changing the database schema
+
+TBA

@@ -27,7 +27,7 @@ const config: Config = {
   //   '^.+\\.(ts|tsx)?$': 'ts-jest',
   //   '^.+\\.(js|jsx)$': 'babel-jest',
   // }
-  preset: 'react-native',
+  preset: 'jest-expo',
   moduleNameMapper: {
     "~/(.*)": "<rootDir>/src/$1"
   },

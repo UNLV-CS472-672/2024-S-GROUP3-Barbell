@@ -66,15 +66,17 @@ export const exerciseRouter = createTRPCRouter({
    *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.
    *  @returns an exercise object
    */
-  getExerciseFromExerciseId: publicProcedure.input(z.object({ id: z.number().int() })).query(async ({ ctx, input }) => {
-    const { prisma } = ctx
+  getExerciseFromExerciseId: publicProcedure
+    .input(z.object({ id: z.number().int() }))
+    .query(async ({ ctx, input }) => {
+      const { prisma } = ctx
 
-    return prisma.exercise.findFirst({
-      where: {
-        id: input.id,
-      },
-    })
-  }),
+      return prisma.exercise.findFirst({
+        where: {
+          id: input.id,
+        },
+      })
+    }),
 
   /**
    * This function updates a specific exercise given an id and some field of the exercise

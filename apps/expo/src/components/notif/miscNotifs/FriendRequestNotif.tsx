@@ -20,7 +20,8 @@ export default function FriendRequestNotif({notif, senderUsername}: FriendReques
         
         <View className="flex flex-col flex-1">
           {/*sender wants to be your friend*/}
-          <Text className="mr-2 mb-2" style={{color: "#CACACA"}}>{senderUsername} {notif.content}</Text>
+          <Text className="mr-2 mb-2" style={{color: "#CACACA"}}
+           testID="sender-username-with-content">{senderUsername} {notif.content}</Text>
           {/*accept and decline buttons*/}
           <View className="flex flex-row justify-between">
             <TouchableOpacity className="py-2 px-4 rounded-lg flex-1 mr-1" style={{backgroundColor: "#48476D"}}>

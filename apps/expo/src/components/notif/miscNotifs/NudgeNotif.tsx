@@ -22,7 +22,8 @@ export default function NudgeNotif({notif, senderUsername}: NudgeNotifProps) {
         
         <View className="flex flex-col flex-1">
           {/*nudged text*/}
-          <Text className="mr-2 mb-2" style={{color: "#CACACA"}}>{senderUsername} {notif.content}</Text>
+          <Text className="mr-2 mb-2" style={{color: "#CACACA"}} 
+          testID="sender-username-with-content">{senderUsername} {notif.content}</Text>
           {/*nudge back button*/}
           <TouchableOpacity className="py-2 px-4 rounded-lg flex-1" style={{backgroundColor: "#CACACA"}}>
             <Text style={{color: "#1C1B1B"}} className="text-center">Nudge back</Text>

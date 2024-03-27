@@ -15,12 +15,7 @@ const config: Config = {
     '!index.ts',
     '!**/api.tsx',
     // need to remove in future v
-    '!**/app/**',
     '!**/custom-bottom-sheet-modal.tsx',
-    '!**/auth/**',
-    "!**/notif/**",
-    '!**/hooks/**',
-    '!**/context/**',
   ],
   // coverageThreshold: {
   //   global: {

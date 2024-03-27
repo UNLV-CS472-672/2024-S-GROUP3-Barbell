@@ -1,9 +1,9 @@
-export function makeChatName(users: any[]): string {
-  const length = users.length
-  // TODO: check and make sure user that is logged in name doesnt show in title
-  // remove space from usernames
-  if(length > 3){
-    return String(users[0].username.trim() + ", " + users[1].username.trim() + ", + " + (length-2) + " more")
+export function makeChatName(users: any[], userData: any): string {
+
+  const filteredUsers = users.filter((user) => userData.username.trim() !== user.username.trim())
+
+  if(users.length > 3){
+    return String(filteredUsers[0].username.trim() + ", " + filteredUsers[1].username.trim() + ", + " + (filteredUsers.length-2) + " more")
   }
-  return String(users[0].username.trim() + " and " + users[1].username.trim())
+  return String(filteredUsers[0].username.trim() + " and " + filteredUsers[1].username.trim())
 }

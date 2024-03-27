@@ -11,7 +11,7 @@ export const notifRouter = createTRPCRouter({
    *  @param  type - the chat type (DIRECT or GROUP)
    *  @returns an array of message objects
    */
-  getMessagesFromChatIdAndType: publicProcedure
+  getMessagesFromChatIdAndChatType: publicProcedure
     .input(z.object({ id: z.number().int(), type: z.nativeEnum(ChatType) }))
     .query(async ({ ctx, input }) => {
       const { prisma } = ctx

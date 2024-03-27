@@ -16,7 +16,7 @@ export default function GcNotifs() {
   if(data != undefined){
     data.forEach(chat => {
       const lastMessage = chat.messages[0]
-      const chatName: string = chat.name != undefined ? chat.name : makeChatName(chat.users)
+      const chatName: string = chat.name != undefined ? chat.name : makeChatName(chat.users, userData)
       const messageContent: string = lastMessage != undefined ? lastMessage.content : String(chat.createdByUserId + " created a new chat")
       const createdAt: Date = lastMessage != undefined ? lastMessage.createdAt : chat.createdAt
       renderedNotifications.push(<Conversation key={chat.id} chatId={chat.id} 

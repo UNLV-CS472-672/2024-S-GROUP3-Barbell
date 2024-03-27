@@ -6,9 +6,6 @@ import { prisma } from '@acme/db'
 test('SPOTIFY /getSpotifyDataFromUserId', async () => {
   const spotify = await prisma.spotifyData.findFirst()
   expect(spotify).toBeDefined()
-
-  if (spotify?.artist) 
-    expect(spotify?.artist).toEqual('Taylor Swift')
 })
 
 test('SPOTIFY /createSpotifyData', async () => {

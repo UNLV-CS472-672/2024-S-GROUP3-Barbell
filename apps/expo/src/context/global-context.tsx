@@ -18,7 +18,15 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const globalContextValue: TGlobalContext = {
     isWorkingOut,
     setIsWorkingOut,
-    userData: null,
+    userData: {
+      // temporarily assign the provided user data
+      id: 9,
+      username: 'userTen',
+      email: 'userten@example.com',
+      name: 'User Ten',
+      status: 'OFFLINE',
+      streak: 6,
+    },
   }
   // TODO: implement a fetchUserData function
 

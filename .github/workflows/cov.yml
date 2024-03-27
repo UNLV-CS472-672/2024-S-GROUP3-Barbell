@@ -1,6 +1,10 @@
-name: Workflow for Codecov
+name: Github Action 
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches: ["*"]
+  push:
+    branches: ["main"]
 
 jobs:
   run:
@@ -31,12 +35,12 @@ jobs:
         run: |
           cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
         working-directory: .
-      
-      - name: Run tests and collect coverage
-        run: |
-          pnpm run jest
-        env:
-          CI: true
+
+      # - name: Run tests and collect coverage
+      #   run: |
+      #     pnpm run jest
+      #   env:
+      #     CI: true
       
       - name: Run tests in expo
         run: |

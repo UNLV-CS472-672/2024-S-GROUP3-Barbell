@@ -1,11 +1,54 @@
 name: Workflow for Codecov
+
 on: [push, pull_request]
+
 jobs:
   run:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DIRECT_URL: ${{ secrets.DIRECT_URL }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.x 
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
+          
+      - name: Install root dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Install dependencies and setup Prisma
+        run: |
+          cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
+        working-directory: .
+      
+      - name: Run tests and collect coverage
+        run: |
+          pnpm run jest
+        env:
+          CI: true
+      
+      - name: Run tests in expo
+        run: |
+          cd apps/expo && pnpm run test
+        working-directory: .
+        env:
+          CI: true
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: UNLV-CS472-672/2024-S-GROUP3-Barbell
+          directory: ./coverage/
+          fail_ci_if_error: true

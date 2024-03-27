@@ -8,7 +8,7 @@ import { ChatType } from '@prisma/client'
 export default function DmNotifs() {
 
   const { userData } = useGlobalContext();
-  const { data, isFetched, isFetching} = api.notif.getMessagePreviewsFromUserId.useQuery({id: userData.id, type: ChatType.DIRECT })
+  const { data, isFetched, isFetching} = api.notif.getMessagePreviewsFromUserIdAndChatType.useQuery({id: userData.id, type: ChatType.DIRECT })
   const renderedNotifications: any[] = []
 
   // Iterate over each chat object

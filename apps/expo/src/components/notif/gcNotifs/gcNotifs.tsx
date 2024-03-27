@@ -9,7 +9,7 @@ import { makeChatName } from "~/utils/makeChatName";
 export default function GcNotifs() {
 
   const { userData } = useGlobalContext();
-  const { data, isFetched, isFetching} = api.notif.getMessagePreviewsFromUserId.useQuery({id: userData.id, type: ChatType.GROUP })
+  const { data, isFetched, isFetching} = api.notif.getMessagePreviewsFromUserIdAndChatType.useQuery({id: userData.id, type: ChatType.GROUP })
   const renderedNotifications: any[] = []
 
   // Iterate over each chat object

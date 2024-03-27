@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, Image, Dimensions } from 'react-native';
 import { router } from 'expo-router'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import Toggle from '~/components/toggle/Toggle';
+import tailwind from "@/tooling/tailwind";
 
 export default function Award() {
     // screen dimensions
@@ -24,6 +27,17 @@ export default function Award() {
                        style={{ flex: 1,  width: screenWidth*0.9, height: screenWidth*0.9}}
                        resizeMode="contain"/>
             </View>
+
+
+            <View className="flex flex-col items-center" >
+                <Toggle
+                    strRightSide={"defaultOn = TRUE"}
+                    defaultOn={useState(true)}
+                />
+
+                <Toggle/>
+            </View>
+
         </SafeAreaView>
     );
 }

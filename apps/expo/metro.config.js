@@ -7,12 +7,15 @@ const path = require('path')
 
 module.exports = withTurborepoManagedCache(
   withMonorepoPaths(
-    withNativeWind(getDefaultConfig(__dirname), {
-      input: './src/styles.css',
-      configPath: './tailwind.config.ts',
-    }),
+    withSvgTransformer(
+      withNativeWind(getDefaultConfig(__dirname), {
+        input: './src/styles.css',
+        configPath: './tailwind.config.ts',
+      }),
+    ),
   ),
-)
+);
+
 
 /**
  * Add the monorepo paths to the Metro config.
@@ -54,3 +57,27 @@ function withTurborepoManagedCache(config) {
   return config
 }
 
+/**
+ * Incorporate SVG support using react-native-svg-transformer
+ *
+ * @param {import('expo/metro-config').MetroConfig} config
+ * @returns {import('expo/metro-config').MetroConfig}
+ */
+function withSvgTransformer(config) {
+  const { transformer, resolver } = config
+
+  // Modify the transformer to use react-native-svg-transformer for SVG files
+  config.transformer = {
+    ...transformer,
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
+  }
+
+  // Update resolver to properly handle SVG files
+  config.resolver = {
+    ...resolver,
+    assetExts: resolver.assetExts.filter((ext) => ext !== 'svg'),
+    sourceExts: [...resolver.sourceExts, 'svg'],
+  }
+
+  return config
+}

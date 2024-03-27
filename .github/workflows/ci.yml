@@ -1,4 +1,4 @@
-name: Barbel Github Action
+name: Barbel Best Practices
 
 on:
   # pull_request:

@@ -1,4 +1,4 @@
-name: Github Action 
+name: Barbell Github Action 
 
 on:
   pull_request:

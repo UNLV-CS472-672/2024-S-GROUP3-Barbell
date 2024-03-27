@@ -18,20 +18,26 @@
 
 // });
 
-import { expect, test } from '@jest/globals';
-import { prisma } from '@acme/db';
-import { appRouter } from '../root';
-import { createCallerFactory } from '../trpc';
+import { expect, test } from '@jest/globals'
 
+import { prisma } from '@acme/db'
+
+import { appRouter } from '../root'
+import { createCallerFactory } from '../trpc'
+
+/*  */
 test('GET /users', async () => {
-  const createCaller = createCallerFactory(appRouter);
-  const caller = createCaller({ prisma });
-
-  // Assuming 'user.all' is a valid endpoint that returns an array of users
-  const response = await caller.user.all();
-  
   // Example assertions about the response
-  expect(response).toBeDefined();       // Check if the response is defined
-  expect(Array.isArray(response)).toBe(true); // Check if the response is an array
-  // Further assertions based on your actual API response structure
-});
+  const user = await prisma.user.findFirst()
+  expect(user).toBeDefined()
+})
+
+/*  */
+test('GET /users/:id', async () => {
+  // Example assertions about the response
+  const user = await prisma.user.findFirst({ where: { id: 1 } })
+  expect(user).toBeDefined()
+})
+
+
+

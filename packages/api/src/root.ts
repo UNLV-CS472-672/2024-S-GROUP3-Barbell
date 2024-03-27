@@ -5,6 +5,7 @@ import { spotifyRouter } from './router/spotify'
 import { workoutRouter } from './router/workout'
 import { createTRPCRouter } from './trpc'
 import { exerciseRouter } from './router/exercise'
+import { friendRouter } from './router/friend'
 
 /**
  * step2: aliaes and CREATE IT TO THE FRONTEND routers
@@ -16,6 +17,7 @@ export const appRouter = createTRPCRouter({
   spotify: spotifyRouter,
   workout: workoutRouter,
   exercise: exerciseRouter,
+  friend: friendRouter,
 })
 
 // export type definition of API

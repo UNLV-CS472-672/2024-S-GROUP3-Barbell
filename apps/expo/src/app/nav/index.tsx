@@ -1,8 +1,8 @@
 import type { Route } from 'expo-router'
 import React from 'react'
 import { Button, FlatList, StyleSheet, View } from 'react-native'
-import { router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { router } from 'expo-router'
 
 const styles = StyleSheet.create({
   container: {
@@ -21,7 +21,7 @@ const Nav = () => {
           { key: 'Go Auth', route: '/auth' },
           { key: 'Notif/dm', route: '/notif/dm' },
           { key: 'Notif/misc', route: '/notif/misc' },
-          { key: 'Message Input', route: '/messages'},
+          { key: 'Message Input', route: '/messages' },
           { key: 'Create New Workout', route: '/workout/createNew' },
           { key: 'Profile', route: '/user' },
           { key: 'Achievements', route: '/user/achievements' },
@@ -29,12 +29,15 @@ const Nav = () => {
           { key: 'Personal Data', route: '/user/personal-data' },
           { key: 'Workout Progress', route: '/user/workout-progress' },
           { key: 'Contact Us', route: '/contact-us' },
-          { key: 'Privacy Policy', route: '/privacy-policy' }
+          { key: 'Privacy Policy', route: '/privacy-policy' },
           { key: 'Award', route: '/award' },
           { key:  'Friends List', route: '/frlist' },
         ]}
         renderItem={({ item }) => (
-          <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />
+          <Button
+            title={item.key}
+            onPress={() => router.push(item.route as Route<string>)}
+          />
         )}
       />
     </SafeAreaView>

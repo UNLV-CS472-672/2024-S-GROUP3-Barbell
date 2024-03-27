@@ -1,12 +1,10 @@
 import { exerciseRouter } from './router/exercise'
-import { notifRouter } from './router/notif'
 import { postRouter } from './router/post'
 import { userRouter } from './router/user'
 import { notifRouter } from './router/notif'
 import { spotifyRouter } from './router/spotify'
 import { workoutRouter } from './router/workout'
 import { createTRPCRouter } from './trpc'
-import { exerciseRouter } from './router/exercise'
 import { friendRouter } from './router/friend'
 
 /**

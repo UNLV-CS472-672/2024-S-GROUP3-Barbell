@@ -12,6 +12,7 @@ import award from '../mock-data/award.json'
 import friend from '../mock-data/friend.json'
 import log from '../mock-data/log.json'
 import set from '../mock-data/set.json'
+import spotify from '../mock-data/spotify.json'
 
 /**
  * @param type logging type
@@ -87,6 +88,8 @@ const loaddb = async () => {
     await prisma.friend.deleteMany()
     logger('delete', 'friend')
 
+    await prisma.spotifyData.deleteMany()
+    logger('delete', 'spotify')
     
 
 
@@ -162,6 +165,9 @@ const loaddb = async () => {
     logger('add', 'set')
 
     /*  */
+    await prisma.spotifyData.createMany({
+      data: spotify as Prisma.SpotifyDataCreateManyInput[],
+    })
 
   } catch (error) {
     console.error(error)

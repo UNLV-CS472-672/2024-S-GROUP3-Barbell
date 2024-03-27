@@ -1,4 +1,6 @@
 export default {
+  collectCoverage: true,
+  coverageDirectory: "./coverage/",
   clearMocks: true,
   coverageProvider: "v8",
   preset: "ts-jest/presets/js-with-ts",

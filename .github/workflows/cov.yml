@@ -5,7 +5,9 @@ on: [push, pull_request]
 jobs:
   run:
     runs-on: ubuntu-latest
-    
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DIRECT_URL: ${{ secrets.DIRECT_URL }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -33,6 +35,9 @@ jobs:
       - name: Run tests and collect coverage
         run: |
           pnpm run jest
+        env:
+          CI: true
+      
       - name: Run tests in expo
         run: |
           cd apps/expo && pnpm run test

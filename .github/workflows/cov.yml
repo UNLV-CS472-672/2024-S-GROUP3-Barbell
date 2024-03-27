@@ -27,14 +27,15 @@ jobs:
 
       - name: Install dependencies and setup Prisma
         run: |
-          pnpm i --filter ./apps/... --no-frozen-lockfile
           pnpm db:prisma 
         working-directory: .
       
       - name: Run tests and collect coverage
         run: |
-          pnpm test --filter ./apps/... --recursive --if-present
-          pnpm test --filter ./packages/... --recursive --if-present
+          pnpm run jest
+      - name: Run tests in expo
+        run: |
+          cd apps/expo && pnpm run test
         working-directory: .
         env:
           CI: true

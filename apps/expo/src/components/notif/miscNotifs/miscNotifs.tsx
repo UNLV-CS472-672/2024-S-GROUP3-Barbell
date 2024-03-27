@@ -7,16 +7,16 @@ import RotatingBarbellIcon from "apps/expo/src/components/notif/dmNotifs/Rotatin
 
 const handleNotif = (notif: any, id: number) => {
   if(notif.type == "FRIEND_REQUEST"){
-    return <FriendRequestNotif notif={notif} key={id} />
+    return <FriendRequestNotif notif={notif} key={id} senderUsername={notif.senderUsername} />
   }
   else if(notif.type == "NUDGE"){
-    return <NudgeNotif notif={notif} key={id} />
+    return <NudgeNotif notif={notif} key={id} senderUsername={notif.senderUsername} />
   }
 }
 
 export default function MiscNotifs() {
   const { userData } = useGlobalContext()
-  const { data, isFetched, isFetching} = api.notif.getMiscNotifsFromUserId.useQuery({ id: userData.id })
+  const { data, isFetched, isFetching } = api.notif.getMiscNotifsWithSenderUsernameFromUserId.useQuery({ id: userData.id })
   const renderedNotifications = [];
 
   if(data){

@@ -109,19 +109,51 @@ export const notifRouter = createTRPCRouter({
    *  This returns the miscellaneous notifications for a user.
    * 
    *  @param  id - the id of the user
-   *  @returns an array of notification objects
+   *  @returns an array of notification objects with a senderUsername attached
    */
-    getMiscNotifsFromUserId: publicProcedure
-    .input(z.object({ id: z.number().int() }))
-    .query(async ({ ctx, input }) => {
-      const { prisma } = ctx
+  getMiscNotifsWithSenderUsernameFromUserId: publicProcedure
+  .input(z.object({ id: z.number().int() }))
+  .query(async ({ ctx, input }) => {
+    const { prisma } = ctx;
 
-      return await prisma.notification.findMany({
+    // fetch notifications for the given receiverId
+    const notifs = await prisma.notification.findMany({
+      where: {
+        receiverId: input.id,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      }
+    });
+
+    // get senderIds from notifications
+    const senderIds = notifs.map(notif => notif.senderId).filter(id => id !== null);
+
+    // fetch usernames for senderIds from the users table
+    let senders: {id: number, username: string}[] = [];
+    if (senderIds.length > 0) {
+      senders = await prisma.user.findMany({
         where: {
-          receiverId: input.id,
+          id: { 
+            in: senderIds 
+          },
         },
-      })
-    }),
+        select: {
+          id: true,
+          username: true,
+        },
+      });
+    }
+
+    // map sender usernames back to notifications
+    const notificationsWithSenders = notifs.map(notif => {
+      const sender = notif.senderId !== null ? senders.find(sender => sender.id === notif.senderId) : null;
+      return { ...notif, senderUsername: sender ? sender.username.trim() : null };
+    });
+
+    return notificationsWithSenders;
+  }),
+
     
   }
   )

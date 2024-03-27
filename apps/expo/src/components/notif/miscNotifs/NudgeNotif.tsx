@@ -1,23 +1,14 @@
 import { View, Text, TouchableOpacity } from "react-native"
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import TimeAgo from "~/components/timeAgo/TimeAgo"
-// TODO: change from any type to notification type once schema completed
-//////////////////////////////////////////////////////////////////////////
-// can delete from here ...
-import userData from "@/packages/db/src/mock-data/user.json"
-const userInfo: any[] = userData
-function getUsernameFromSenderId(senderId: number): string {
-  const user = userInfo.find((item) => item.id === senderId);
-  if (user) {
-    return user.username;
-  } else {
-    return String(senderId);
-  }
-}
-// to here once we get the API setup to get username from sender ID
-//////////////////////////////////////////////////////////////////////////
+import { Notification } from '@prisma/client'
 
-export default function NudgeNotif({ notif }: { notif: any }) {
+export interface NudgeNotifProps {
+  notif: Notification,
+  senderUsername: string,
+}
+
+export default function NudgeNotif({notif, senderUsername}: NudgeNotifProps) {
 
   return (
     <View>
@@ -31,12 +22,12 @@ export default function NudgeNotif({ notif }: { notif: any }) {
         
         <View className="flex flex-col flex-1">
           {/*nudged text*/}
-          <Text className="mr-2 mb-2" style={{color: "#CACACA"}}>{getUsernameFromSenderId(notif.senderId)} {notif.content}</Text>
+          <Text className="mr-2 mb-2" style={{color: "#CACACA"}}>{senderUsername} {notif.content}</Text>
           {/*nudge back button*/}
           <TouchableOpacity className="py-2 px-4 rounded-lg flex-1" style={{backgroundColor: "#CACACA"}}>
             <Text style={{color: "#1C1B1B"}} className="text-center">Nudge back</Text>
           </TouchableOpacity>
-          <TimeAgo createdAt={notif} />
+          <TimeAgo createdAt={notif.createdAt} />
         </View>
       </View>
       {/*thin line between notifications*/}

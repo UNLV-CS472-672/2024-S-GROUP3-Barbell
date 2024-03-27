@@ -28,7 +28,6 @@ jobs:
       - name: Install dependencies and setup Prisma
         run: |
           pnpm i --filter ./apps/... --no-frozen-lockfile
-          pnpm i --filter ./packages/... --no-frozen-lockfile
           pnpm db:prisma 
         working-directory: .
       

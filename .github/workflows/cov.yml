@@ -27,16 +27,10 @@ jobs:
       - name: Install root dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Seed the db
-        working-directory: ./packages/db
-        run: pnpm exec ts-node src/scripts/seed.ts
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DIRECT_URL: ${{ secrets.DIRECT_URL }}
-  
       - name: Install dependencies and setup Prisma
         run: |
-          pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
+          cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
+        working-directory: .
       
       - name: Run tests and collect coverage
         run: |

@@ -28,6 +28,9 @@ const config: Config = {
   //   '^.+\\.(js|jsx)$': 'babel-jest',
   // }
   preset: 'react-native',
+  moduleNameMapper: {
+    "~/(.*)": "<rootDir>/src/$1"
+  },
 };
 
 export default config;

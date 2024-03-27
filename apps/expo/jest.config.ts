@@ -12,7 +12,8 @@ const config: Config = {
     '!**/jest.config.ts',
     '!**/.expo/**',
     '!**/*.d.ts',
-    '!index.ts'
+    '!index.ts',
+    '!**/api.tsx',
   ],
   // coverageThreshold: {
   //   global: {

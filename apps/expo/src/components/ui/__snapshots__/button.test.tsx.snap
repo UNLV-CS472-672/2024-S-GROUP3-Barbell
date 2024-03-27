@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button renders correctly 1`] = `
+exports[`Button 1`] = `
 <View
   accessibilityState={
     {
@@ -32,5 +32,12 @@ exports[`Button renders correctly 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-/>
+>
+  <Text
+    className="text-center text-white text-base"
+    testID="button-text"
+  >
+    Button Text
+  </Text>
+</View>
 `;

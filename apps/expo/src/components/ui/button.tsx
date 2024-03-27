@@ -65,6 +65,7 @@ const Button = ({
           className={`text-center ${textColor} ${
             textStylesMap[size ? size : 'medium']
           }`}
+          testID="button-text"
         >
           {value}
         </Text>

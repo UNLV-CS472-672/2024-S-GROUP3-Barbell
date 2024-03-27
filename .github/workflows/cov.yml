@@ -49,10 +49,10 @@ jobs:
         env:
           CI: true
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: UNLV-CS472-672/2024-S-GROUP3-Barbell
-          directory: ./coverage/
-          fail_ci_if_error: true
+      # - name: Upload coverage reports to Codecov
+      #   uses: codecov/codecov-action@v4.0.1
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     slug: UNLV-CS472-672/2024-S-GROUP3-Barbell
+      #     directory: ./coverage/
+      #     fail_ci_if_error: true

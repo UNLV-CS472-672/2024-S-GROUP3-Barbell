@@ -5,24 +5,23 @@ on: [push, pull_request]
 jobs:
   run:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2 # Updated to v2 for better features including caching
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          version: 7.x # Specify the pnpm version you need
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
           cache: 'pnpm'
           cache-dependency-path: '**/pnpm-lock.yaml'
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-      
+          
       - name: Install root dependencies
         run: pnpm install
 

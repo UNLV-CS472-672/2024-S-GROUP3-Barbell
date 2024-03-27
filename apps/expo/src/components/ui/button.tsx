@@ -3,7 +3,7 @@ import React from 'react'
 import { Pressable, PressableProps, Text } from 'react-native'
 import { cva } from 'class-variance-authority'
 
-import { cn } from './cn'
+import { cn } from '../../utils/cn'
 
 const buttonVariants = cva('active:opacity-30', {
   variants: {

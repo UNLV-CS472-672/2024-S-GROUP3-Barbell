@@ -1,4 +1,4 @@
-name: Barbel Best Practices
+name: Barbell Code Checker
 
 on:
   # pull_request:

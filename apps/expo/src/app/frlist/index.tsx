@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { api } from '~/utils/api';
 
+/*
+ * Main FriendsListScreen frontend component
+ * 
+ * TODO: Create pop-up modal for removing friend
+ * TODO: Add search bar for searching friends 
+ */
 interface Friend {
   id: string;
   username: string;
   avatar: string;
 }
 
+type RootStackParamList = {
+  FriendsList: undefined;
+  Messages: { friend: Friend };
+  Profile: { userId: string };
+  // Add other route definitions here as needed
+};
+
+type FriendsListScreenNavigationProp = StackNavigationProp<RootStackParamList, 'FriendsList'>;
+
 const FriendsListScreen = () => {
   const [friends, setFriends] = useState<Friend[]>([]);
-  const navigation = useNavigation();
+  const navigation = useNavigation<FriendsListScreenNavigationProp>();
+  // const { data } = api.friends. 
 
   useEffect(() => {
     fetchFriends();
   }, []);
 
-  /* assumes API endpoint is available at '/api/friends'
-  *  and '/api/friends/${userID}' for deleting a friend
-  *
-  * TODO: set 'Messages' and 'Profile' screens to navigate to
-  * the correct screens
-  */
   const fetchFriends = async () => {
     try {
+      // TODO: replace fetch with trpc query 
       const response = await fetch('/api/friends');
       if (!response.ok) {
         throw new Error('Error fetching friends');

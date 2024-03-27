@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies and setup Prisma
         run: |
-          pnpm db:prisma 
+          cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
         working-directory: .
       
       - name: Run tests and collect coverage

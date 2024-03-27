@@ -30,6 +30,7 @@ const Nav = () => {
           { key: 'Workout Progress', route: '/user/workout-progress' },
           { key: 'Contact Us', route: '/contact-us' },
           { key: 'Privacy Policy', route: '/privacy-policy' }
+          { key: 'Award', route: '/award' },
         ]}
         renderItem={({ item }) => (
           <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />

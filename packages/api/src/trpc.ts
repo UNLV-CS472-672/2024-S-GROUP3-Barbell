@@ -1,3 +1,4 @@
+import { prisma } from './../../db/src/index';
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
  * 1. You want to modify request context (see Part 1)
@@ -8,11 +9,26 @@
  */
 // import type { inferAsyncReturnType } from "@trpc/server"
 import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
+
 import { initTRPC } from '@trpc/server'
 import superjson from 'superjson'
 import { ZodError } from 'zod'
 
-import { prisma } from '@acme/db'
+
+// interface CreateContextOptions {
+//   // session: Session | null
+//   req: FetchCreateContextFnOptions['req']
+//   resHeaders: FetchCreateContextFnOptions['resHeaders']
+//   prisma: typeof prisma
+// }
+
+// /**
+//  * Inner function for `createContext` where we create the context.
+//  * This is useful for testing when we don't want to mock Next.js' request/response
+//  */
+// export async function createContextInner(_opts: CreateContextOptions) {
+//   return {}
+// }
 
 /**
  * 1. CONTEXT
@@ -61,11 +77,9 @@ import { prisma } from '@acme/db'
 //   })
 // }
 
-export function createTRPCContext({
-  req,
-  resHeaders,
-}: FetchCreateContextFnOptions) {
-  return { req, resHeaders, prisma }
+export function createTRPCContext({ req, resHeaders }: FetchCreateContextFnOptions) {
+  // return { req, resHeaders, prisma }
+  return { prisma }
 }
 
 /**
@@ -84,8 +98,7 @@ const t = initTRPC
         ...shape,
         data: {
           ...shape.data,
-          zodError:
-            error.cause instanceof ZodError ? error.cause.flatten() : null,
+          zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
         },
       }
     },

@@ -36,7 +36,7 @@ export default function NudgeNotif({ notif }: { notif: any }) {
           <TouchableOpacity className="py-2 px-4 rounded-lg flex-1" style={{backgroundColor: "#CACACA"}}>
             <Text style={{color: "#1C1B1B"}} className="text-center">Nudge back</Text>
           </TouchableOpacity>
-          <TimeAgo notif={notif} />
+          <TimeAgo createdAt={notif} />
         </View>
       </View>
       {/*thin line between notifications*/}

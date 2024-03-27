@@ -39,8 +39,7 @@ export default function FriendRequestNotif({ notif }: { notif: any }) {
               <Text className="text-center" style={{color: "#1C1B1B"}}>Decline</Text>
             </TouchableOpacity>
           </View>
-          {/* FIXME: presumaply after user api */}
-          <TimeAgo notif={notif} />
+          <TimeAgo createdAt={notif} />
         </View>
       </View>
       {/*thin line between notifications*/}

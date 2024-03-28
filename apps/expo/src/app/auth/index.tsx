@@ -5,7 +5,7 @@ import SignInWithGoogle from '~/components/auth/sign-in-w-google'
 const AuthScreen = () => {
   return (
     <ImageBackground
-      source={require('assets/auth/background.png')}
+      source={require('~assets/auth/background.png')}
       style={{ flex: 1, backgroundColor: '#1E1E1E' }}
       resizeMode="cover"
     >

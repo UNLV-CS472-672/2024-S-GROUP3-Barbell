@@ -38,7 +38,7 @@ const SignInWithOAuth = () => {
         setActive?.({ session: createdSessionId })
 
         // so it naviagates back here, but it doesnt reg that,
-        router.replace("/");
+        router.replace("/post");
       } else {
         alert('Sign in failed')
       }

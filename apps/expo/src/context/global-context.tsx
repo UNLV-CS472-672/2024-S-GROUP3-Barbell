@@ -20,7 +20,7 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     setIsWorkingOut,
     userData: {
       // temporarily assign the provided user data
-      id: 9,
+      id: 4,
       username: 'userTen',
       email: 'userten@example.com',
       name: 'User Ten',
@@ -30,19 +30,13 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   }
   // TODO: implement a fetchUserData function
 
-  return (
-    <GlobalContext.Provider value={globalContextValue}>
-      {children}
-    </GlobalContext.Provider>
-  )
+  return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>
 }
 
 export const useGlobalContext = () => {
   const context = useContext(GlobalContext)
   if (!context) {
-    throw new Error(
-      'useGlobalContext must be used within a GlobalContextProvider',
-    )
+    throw new Error('useGlobalContext must be used within a GlobalContextProvider')
   }
   return context
 }

@@ -10,6 +10,7 @@ const buttonVariants = cva('active:opacity-30', {
     color: {
       primary: 'bg-dark-purple',
       light: 'bg-slate-200',
+      trap: 'bg-[#717171]',
       dark: 'bg-slate-900',
       icon: 'bg-transparent',
     },
@@ -17,6 +18,7 @@ const buttonVariants = cva('active:opacity-30', {
       icon: 'p-1',
       medium: 'py-2',
       xl: 'py-1',
+      full: 'w-11/12 py-3', 
     },
     rounded: {
       full: 'rounded-full',
@@ -42,6 +44,7 @@ const textStylesMap = {
   icon: 'text-sm',
   medium: 'text-base',
   xl: 'text-xl font-semibold font-koulen',
+  full: 'text-3xl font-semibold font-koulen'
 }
 
 const Button = ({

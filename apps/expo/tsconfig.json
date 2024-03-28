@@ -5,7 +5,7 @@
     "strict": true,
     "paths": {
       "~/*": ["./apps/expo/src/*"], // expo folder root
-      "assets/*": ["./apps/expo/assets/*"], 
+      "~assets/*": ["./apps/expo/assets/*"], 
       "@/*": ["./*"], // Monorepo root
     },
     "jsx": "react-native",

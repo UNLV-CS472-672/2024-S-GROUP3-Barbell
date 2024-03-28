@@ -7,6 +7,7 @@ import { TRPCProvider } from '~/utils/api'
 import 'expo-dev-client'
 import '~/styles.css'
 
+import { View } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
@@ -33,53 +34,56 @@ const tokenCache = {
     }
   },
 }
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 // SplashScreen.preventAutoHideAsync()
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
-  // themes
+  /* themes */
   // const { colorScheme } = useColorScheme()
 
-  // fonts
+  /* fonts */
   let [fontsLoaded] = useFonts({
     Koulen_400Regular,
+
+    /*  */
   })
 
-  if (!fontsLoaded) {
-    return null
-  }
+  if (!fontsLoaded) return null
 
   return (
     <TRPCProvider>
-      {/*
-        The Stack component displays the current page.
-        It also allows you to configure your screens 
-      */}
       <ClerkProvider
         publishableKey={CLERK_PUBLISHABLE_KEY!}
         tokenCache={tokenCache}
       >
         <BottomSheetModalProvider>
           <GlobalContextProvider>
-            <Stack
-              screenOptions={
-                {
-                  headerShown: false,
-                  // headerStyle: {
-                    //   backgroundColor: '#f472b6',
-                    // },
-                    // contentStyle: {
-                      //   backgroundColor: colorScheme == 'dark' ? '#09090B' : '#FFFFFF',
-                      // },
-                    }
-                  }
-            />
-          <StatusBar style='light'/>
+            <StatusBar style="auto" />
+            {/* Splitter */}
+
+            <RootLayoutBottomNav />
           </GlobalContextProvider>
         </BottomSheetModalProvider>
       </ClerkProvider>
     </TRPCProvider>
+  )
+}
+
+function RootLayoutBottomNav() {
+  // const router = useRouter()
+  /* Our main navigation here (idk what is best practices here :<) */
+  return (
+    <Stack>
+      <Stack.Screen
+        name="(tabs)"
+        options={{
+          headerShown: false,
+          header: () => <View style={{ backgroundColor: '#1E1E1E' }} />,
+        }}
+      />
+    </Stack>
   )
 }

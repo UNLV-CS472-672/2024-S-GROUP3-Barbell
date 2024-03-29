@@ -1,5 +1,6 @@
 // import type { Route } from 'expo-router'
 import React from 'react'
+import { Route } from 'expo-router'
 import { Button, FlatList, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'

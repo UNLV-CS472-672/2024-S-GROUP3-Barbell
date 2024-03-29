@@ -58,7 +58,6 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
   )
 
   const [trpcClient] = React.useState(() =>
-  /* @ts-ignore */
     api.createClient({
       links: [
         loggerLink({

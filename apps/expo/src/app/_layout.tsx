@@ -62,6 +62,7 @@ export default function RootLayout() {
         <BottomSheetModalProvider>
           <GlobalContextProvider>
             <StatusBar style="auto" />
+            
             {/* Splitter */}
 
             <RootLayoutBottomNav />

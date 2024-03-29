@@ -1,9 +1,8 @@
 // import type { Route } from 'expo-router'
 import React from 'react'
-import { Route } from 'expo-router'
-import { Button, FlatList, StyleSheet, View } from 'react-native'
+import { Button, FlatList, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { router } from 'expo-router'
+import { Route, router } from 'expo-router'
 
 const styles = StyleSheet.create({
   container: {
@@ -34,12 +33,7 @@ const Nav = () => {
           { key: 'Privacy Policy', route: '/privacy-policy' },
           { key: 'Award', route: '/award' },
         ]}
-        renderItem={({ item }) => (
-          <Button
-            title={item.key}
-            onPress={() => router.push(item.route as Route<string>)}
-          />
-        )}
+        renderItem={({ item }) => <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />}
       />
     </SafeAreaView>
   )

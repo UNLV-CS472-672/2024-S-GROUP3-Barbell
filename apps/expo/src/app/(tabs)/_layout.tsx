@@ -11,7 +11,7 @@ import Profile from '~assets/svgs/profile.svg'
 
 import type { CustomBottomSheetModalRef } from '~/components/custom-bottom-sheet-modal'
 import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
-import CustomBottomSheet from '~/components/ui/bottom-sheet'
+import CustomBottomSheet from '~/components/ui/bottom-sheet/bottom-sheet'
 import colors from '~/styles/colors'
 
 const Layout = () => {

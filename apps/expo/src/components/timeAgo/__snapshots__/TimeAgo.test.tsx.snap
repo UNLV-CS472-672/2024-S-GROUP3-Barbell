@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TimeAgo 1`] = `
+exports[`TimeAgo renders correctly and matches snapshot 1`] = `
 <Text
   className="pb-2 pt-2 text-right"
   style={
@@ -11,6 +11,6 @@ exports[`TimeAgo 1`] = `
   }
   testID="timeAgoText"
 >
-  168 weeks ago
+  116 weeks ago
 </Text>
 `;

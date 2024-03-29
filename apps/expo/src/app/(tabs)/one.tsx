@@ -4,7 +4,7 @@ import { cn } from '@/packages/ui/src/cn'
 import BottomSheet from '@gorhom/bottom-sheet'
 
 import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
-import CustomBottomSheet from '~/components/ui/bottom-sheet'
+import CustomBottomSheet from '~/components/ui/bottom-sheet/bottom-sheet'
 import colors from '~/styles/colors'
 
 export default function TabTwoScreen() {

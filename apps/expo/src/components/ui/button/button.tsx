@@ -3,7 +3,7 @@ import React from 'react'
 import { Pressable, PressableProps, Text } from 'react-native'
 import { cva } from 'class-variance-authority'
 
-import { cn } from '../../utils/cn'
+import { cn } from '../../../utils/cn'
 
 const buttonVariants = cva('active:opacity-30', {
   variants: {
@@ -54,6 +54,7 @@ const Button = ({
   rounded,
   className,
   children,
+  testID,
   ...props
 }: ButtonProps) => {
   const textColor = color == 'light' ? 'text-slate-900' : 'text-white'
@@ -62,6 +63,7 @@ const Button = ({
     <Pressable
       {...props}
       className={cn(buttonVariants({ color, size, rounded }), className)}
+      testID={testID}
     >
       {value && (
         <Text

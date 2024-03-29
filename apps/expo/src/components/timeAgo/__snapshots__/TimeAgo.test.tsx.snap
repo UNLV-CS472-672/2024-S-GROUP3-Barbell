@@ -11,6 +11,6 @@ exports[`TimeAgo 1`] = `
   }
   testID="timeAgoText"
 >
-  168 weeks ago
+  4 weeks ago
 </Text>
 `;

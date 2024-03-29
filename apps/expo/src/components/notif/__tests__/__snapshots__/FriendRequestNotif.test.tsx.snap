@@ -3,7 +3,7 @@
 exports[`FriendRequestNotif 1`] = `
 <View>
   <View
-    className="flex flex-row items-center ml-3 mr-3 mt-4"
+    className="ml-3 mr-3 mt-4 flex flex-row items-center"
   >
     <View
       className="mr-2"
@@ -31,10 +31,10 @@ exports[`FriendRequestNotif 1`] = `
       </Text>
     </View>
     <View
-      className="flex flex-col flex-1"
+      className="flex flex-1 flex-col"
     >
       <Text
-        className="mr-2 mb-2"
+        className="mb-2 mr-2"
         style={
           {
             "color": "#CACACA",
@@ -152,7 +152,7 @@ exports[`FriendRequestNotif 1`] = `
         }
         testID="timeAgoText"
       >
-        1 week ago
+        2 weeks ago
       </Text>
     </View>
   </View>

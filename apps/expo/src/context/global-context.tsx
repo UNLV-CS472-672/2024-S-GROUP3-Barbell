@@ -19,13 +19,13 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     isWorkingOut,
     setIsWorkingOut,
     userData: {
-      // temporarily assign the provided user data
       id: 4,
-      username: 'userTen',
-      email: 'userten@example.com',
-      name: 'User Ten',
-      status: 'OFFLINE',
-      streak: 6,
+      createdAt: '2024-03-13T10:15:00Z',
+      content: "Hi everyone! Let's do cardio today.",
+      type: 'FRIEND_REQUEST',
+      read: false,
+      receiverId: 4,
+      senderId: 3,
     },
   }
   // TODO: implement a fetchUserData function

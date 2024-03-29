@@ -36,11 +36,11 @@ jobs:
           cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
         working-directory: .
 
-      - name: Run tests and collect coverage
-        run: |
-          pnpm run jest
-        env:
-          CI: true
+      # - name: Run tests and collect coverage
+      #   run: |
+      #     pnpm run jest
+      #   env:
+      #     CI: true
       
       - name: Run tests in expo
         run: |

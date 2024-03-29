@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "test": "vitest run",
+    "test": "pnpm dotenv -e ../../.env -- vitest run",
+    "jest": "pnpm dotenv -e ../../.env -- jest --coverage",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore"

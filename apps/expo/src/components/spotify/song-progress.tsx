@@ -14,6 +14,7 @@ export default function SongProgress({ progress, total }: { progress: number; to
     progMinute++
     progSecond -= 60 // Care if single digit, convert to string maybe? Find out right now.
   }
+
   while (totalSecond > 60) {
     totalMinute++
     totalSecond -= 60
@@ -21,12 +22,15 @@ export default function SongProgress({ progress, total }: { progress: number; to
 
   let pSecondString: string = ''
   let tSecondString: string = '' // These are for displaying trailing zero
+  
   if (progSecond < 10) {
     pSecondString = '0'
   }
+  
   if (totalSecond < 10) {
     tSecondString = '0'
   }
+  
   pSecondString += progSecond.toString()
   tSecondString += totalSecond.toString()
 

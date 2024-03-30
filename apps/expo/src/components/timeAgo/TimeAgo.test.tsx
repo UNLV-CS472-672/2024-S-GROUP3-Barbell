@@ -53,7 +53,7 @@ describe('TimeAgo', () => {
   })
 
   it('renders correctly and matches snapshot', () => {
-    const testDate = new Date('2022-01-01T00:00:00Z')
+    const testDate = new Date()
     const { toJSON } = render(<TimeAgo createdAt={testDate} />)
 
     expect(toJSON()).toMatchSnapshot()

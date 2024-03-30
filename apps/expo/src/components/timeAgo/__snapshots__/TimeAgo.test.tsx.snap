@@ -11,6 +11,6 @@ exports[`TimeAgo renders correctly and matches snapshot 1`] = `
   }
   testID="timeAgoText"
 >
-  116 weeks ago
+  Just now
 </Text>
 `;

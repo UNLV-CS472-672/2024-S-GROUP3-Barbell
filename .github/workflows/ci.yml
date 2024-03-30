@@ -1,4 +1,4 @@
-name: Barbel Github Action
+name: Barbell Code Checker
 
 on:
   # pull_request:

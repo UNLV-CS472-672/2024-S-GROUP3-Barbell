@@ -8,13 +8,13 @@
   },
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf .turbo node_modules",
+    "clean": "git clean -xdf .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "zod": "^3.22.2"
+    "zod": ">=3.22.3"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:^0.2.0",

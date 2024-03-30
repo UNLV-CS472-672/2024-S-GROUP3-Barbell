@@ -2,15 +2,11 @@
 
 The repository for the Barbell project, Group 3.
 
-Quickstart (Deprecated):
-
-- [Installation](https://scribehow.com/shared/Quickstart_Barbell___I7R2_mESL68FTCAMcbF8w)
-- [Issue Board + Development](https://scribehow.com/shared/Issue_and_start_working_on_Barbell__ibGJtJNdRfqZ1aucOCC0sg)
-- [When you fininishing your issue](#)
+## Resolve Merge Conflicts
 
 There will be merge conflicts, so do check out the resources here of how to resolve them:
 
-- [youtube vid](https://www.youtube.com/watch?v=QmKdodJU-js)
+- [youtube](https://www.youtube.com/watch?v=QmKdodJU-js)
 - [blog](https://leonardomontini.dev/merge-conflict-vscode/)
 - [vscode docs](https://code.visualstudio.com/docs/sourcecontrol/overview)
 
@@ -87,14 +83,22 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 </div>
 
 
-# Commons Bugs Encountered
+## Commons Bugs Encountered
 
 - [ ] [SKD Not found](https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-location-with-sdk-dir-in-the-local-properties-fil)
 - [ ] [expo-router not found](https://github.com/expo/router/issues/748)
 - [ ] [Unmatched Route with Clerk -- Window only](https://github.com/expo/router/issues/457)
 - [ ] [Ah yes, you can only for android OS on an Apple OS](https://github.com/expo/eas-cli/issues/1726)
+- [ ] [Invarient Violation](https://github.com/JesperLekland/react-native-svg-charts/issues/201)
+- [ ] [svg being funny](https://github.com/software-mansion/react-native-svg/issues/1405)
 
 In case you encountered, Failed to get localhost. Please point to your production server.
 
 + Check the entire constants from expo-constants and see if it exist the hostUri
 + If it doens't exist, you can add it manually.
+
+## Development Workflows
+
+### Adding/changing the database schema
+
+TBA

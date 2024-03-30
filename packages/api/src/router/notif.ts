@@ -12,7 +12,7 @@ export const notifRouter = createTRPCRouter({
    *  @returns an array of message objects
    */
   getDMsFromChatId: publicProcedure
-    .input(z.object({ id: z.number() }))
+    .input(z.object({ id: z.number().int() }))
     .query(async ({ ctx, input }) => {
       const { prisma } = ctx
 
@@ -50,7 +50,7 @@ export const notifRouter = createTRPCRouter({
    *  @returns an array of objects containing the chatId, and an array containing the most recent message for that chat
    */
     getMessagePreviewsFromUserId: publicProcedure
-    .input(z.object({ id: z.number() }))
+    .input(z.object({ id: z.number().int() }))
     .query(async ({ ctx, input }) => {
       const { prisma } = ctx
 
@@ -102,5 +102,26 @@ export const notifRouter = createTRPCRouter({
 
       return finalMessageForEachDMChat;
     }),
+
+
+  /**
+   *  @remarks
+   *  This returns the miscellaneous notifications for a user.
+   * 
+   *  @param  id - the id of the user
+   *  @returns an array of notification objects
+   */
+    getMiscNotifsFromUserId: publicProcedure
+    .input(z.object({ id: z.number().int() }))
+    .query(async ({ ctx, input }) => {
+      const { prisma } = ctx
+
+      return await prisma.notification.findMany({
+        where: {
+          receiverId: input.id,
+        },
+      })
+    }),
+    
   }
   )

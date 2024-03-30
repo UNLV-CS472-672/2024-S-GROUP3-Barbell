@@ -32,6 +32,7 @@ const Nav = () => {
           { key: 'Contact Us', route: '/contact-us' },
           { key: 'Privacy Policy', route: '/privacy-policy' },
           { key: 'Award', route: '/award' },
+          { key: 'Spotify', route: '/spotify' }
         ]}
         renderItem={({ item }) => <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />}
       />

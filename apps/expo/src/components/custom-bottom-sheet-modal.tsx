@@ -1,9 +1,6 @@
 import { forwardRef, useCallback, useMemo } from 'react'
-import {
-  BottomSheetBackdrop,
-  BottomSheetBackdropProps,
-  BottomSheetModal,
-} from '@gorhom/bottom-sheet'
+
+import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet'
 
 export type CustomBottomSheetModalRef = BottomSheetModal
 export interface CustomBottomSheetModalProps {
@@ -53,26 +50,12 @@ const Example = () => {
   )
 }
 */
-const CustomBottomSheetModal = forwardRef<
-  CustomBottomSheetModalRef,
-  CustomBottomSheetModalProps
->(
-  (
-    {
-      children,
-      customSnapPoints,
-      startIndex,
-      enablePanDownToClose,
-      renderBackdrop,
-    },
-    ref,
-  ) => {
+const CustomBottomSheetModal = forwardRef<CustomBottomSheetModalRef, CustomBottomSheetModalProps>(
+  ({ children, customSnapPoints, startIndex, enablePanDownToClose, renderBackdrop }, ref) => {
     const snapPoints = useMemo(() => customSnapPoints, [])
 
     const backdrop = useCallback(
-      (props: BottomSheetBackdropProps) => (
-        <BottomSheetBackdrop disappearsOnIndex={-1} {...props} />
-      ),
+      (props: BottomSheetBackdropProps) => <BottomSheetBackdrop disappearsOnIndex={-1} {...props} />,
       [],
     )
 

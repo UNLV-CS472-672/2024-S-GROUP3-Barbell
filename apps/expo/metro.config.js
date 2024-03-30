@@ -14,8 +14,7 @@ module.exports = withTurborepoManagedCache(
       }),
     ),
   ),
-);
-
+)
 
 /**
  * Add the monorepo paths to the Metro config.
@@ -51,9 +50,7 @@ function withMonorepoPaths(config) {
  * @returns {import('expo/metro-config').MetroConfig}
  */
 function withTurborepoManagedCache(config) {
-  config.cacheStores = [
-    new FileStore({ root: path.join(__dirname, 'node_modules/.cache/metro') }),
-  ]
+  config.cacheStores = [new FileStore({ root: path.join(__dirname, 'node_modules/.cache/metro') })]
   return config
 }
 

@@ -1,9 +1,13 @@
-name: Workflow for Codecov
+name: Barbell Github Action 
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches: ["*"]
+  push:
+    branches: ["main"]
 
 jobs:
-  run:
+  build-n-test:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -31,12 +35,12 @@ jobs:
         run: |
           cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
         working-directory: .
-      
-      - name: Run tests and collect coverage
-        run: |
-          pnpm run jest
-        env:
-          CI: true
+
+      # - name: Run tests and collect coverage
+      #   run: |
+      #     pnpm run jest
+      #   env:
+      #     CI: true
       
       - name: Run tests in expo
         run: |
@@ -50,5 +54,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: UNLV-CS472-672/2024-S-GROUP3-Barbell
-          directory: ./coverage/
+          directory: ./apps/expo/coverage/
           fail_ci_if_error: true

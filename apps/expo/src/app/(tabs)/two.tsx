@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { router, Stack } from 'expo-router'
 
-import Button from '~/components/ui/button'
+import Button from '~/components/ui/button/button'
 
 
 

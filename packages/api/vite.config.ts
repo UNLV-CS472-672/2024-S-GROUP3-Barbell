@@ -13,8 +13,9 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul', // or 'v8'
       exclude: ['**/node_modules/**', '**/__tests/**'],
-      reportsDirectory: 'vitest-coverage', 
+      reportsDirectory: 'vitest-coverage',
     },
-    exclude: ['**/node_modules/**', '**/__tests/**'],
+    exclude: ['**/node_modules/**', '**/__tests/**', '**/html/**', '**/coverage/**', '**/jest-coverage/**'],
+    reporters: ['html'],
   },
 })

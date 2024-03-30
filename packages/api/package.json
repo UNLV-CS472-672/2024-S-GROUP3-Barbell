@@ -8,9 +8,10 @@
   "scripts": {
     "lint": "eslint .",
     "vitest": "pnpm dotenv -e ../../.env -- vitest run --coverage",
+    "vitest-ui": "npx vite preview --outDir html",
     "jest": "pnpm dotenv -e ../../.env -- jest --coverage",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf .turbo node_modules",
+    "clean": "git clean -xdf .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore"
   },
   "dependencies": {

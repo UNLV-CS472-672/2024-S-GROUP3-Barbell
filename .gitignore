@@ -9,6 +9,7 @@ node_modules
 coverage
 vitest-coverage
 jest-coverage
+html
 
 # next.js
 .next/

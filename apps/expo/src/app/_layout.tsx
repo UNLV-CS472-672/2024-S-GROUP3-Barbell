@@ -60,7 +60,8 @@ export default function RootLayout() {
       <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
         <BottomSheetModalProvider>
           <GlobalContextProvider>
-            <StatusBar style="light" />
+            <StatusBar style="auto" />
+
             {/* Splitter */}
 
             <RootLayoutBottomNav />
@@ -75,7 +76,7 @@ function RootLayoutBottomNav() {
   // const router = useRouter()
   /* Our main navigation here (idk what is best practices here :<) */
   return (
-    <Stack>
+    <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="(tabs)"
         options={{

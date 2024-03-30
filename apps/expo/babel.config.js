@@ -9,8 +9,8 @@ module.exports = (api) => {
       ['babel-preset-expo', { jsxImportSource: 'nativewind' }], 
     ],
     plugins: [
-      require.resolve('expo-router/babel'),
       ['module:react-native-dotenv'],
+      require.resolve('expo-router/babel'),
       require.resolve('react-native-reanimated/plugin'),
 
       /* aliases */

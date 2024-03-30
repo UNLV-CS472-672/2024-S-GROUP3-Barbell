@@ -31,10 +31,13 @@ const config: Config = {
   //   },
   // },
   // preset: 'ts-jest',
+
+  /* DON'T UNCOMMENT THIs, IT GOES KABOOM */
   // transform: {
   //   '^.+\\.(ts|tsx)?$': 'ts-jest',
   //   '^.+\\.(js|jsx)$': 'babel-jest',
   // }
+  
   preset: 'jest-expo',
   moduleNameMapper: {
     "~/(.*)": "<rootDir>/src/$1"

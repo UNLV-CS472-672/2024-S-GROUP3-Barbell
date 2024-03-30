@@ -63,3 +63,5 @@ packages/db/src/scripts/python/*
 !packages/db/src/scripts/python/generate.py
 !packages/db/src/scripts/python/README.md
 
+# intellij
+.idea

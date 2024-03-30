@@ -7,12 +7,29 @@ import { router } from 'expo-router';
 
 const iconSize = 26;
 const borderRadius = 12;
+const colors = {
+    primary: '#FF385C',
+    grey: '#cacaca',
+    dark: '#1A1A1A',
+    darkGrey: '#272727',
+    purple: '#48476D',
+    white: '#FFFFFF',
+    background: '#1E1E1E',
+    bottomav : {
+      nav: '#272727',
+      icon: '#CACACA',
+    },
+  };
 const styles = StyleSheet.create({
   screenContainer: {
-    backgroundColor: '#eeeeee'
+    color: colors.primary,
+    backgroundColor: colors.background
   },
   userTile: {
     flexDirection: 'row',
+    backgroundColor: colors.darkGrey,
+    borderRadius: borderRadius,
+    margin: 12
   },
   userTileUpper: {
     margin: 12,
@@ -29,10 +46,11 @@ const styles = StyleSheet.create({
     margin: 12,
     padding: 18,
     borderRadius: borderRadius,
-    backgroundColor: '#ffffff'
+    backgroundColor: colors.darkGrey
   },
   mainTileTitle: {
     fontSize: 22,
+    color: colors.grey
   },
   mainTileItem: {
     flexDirection: 'row'
@@ -42,22 +60,27 @@ const styles = StyleSheet.create({
   },
   userFullName: {
     fontSize: 22,
-    margin: 6 
+    margin: 6,
+    color: colors.grey
   },
   userProgram: {
-    margin: 6
+    margin: 6,
+    color: colors.grey
   },
   navigationListItemIcon: {
     padding: 8,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: colors.purple
   },
   navigationListItemLabel: {
     flex: 4,
     margin: 4,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: colors.grey
   },
   navigationListItemChevron: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: colors.grey
   },
   nudgeBtn: {
     margin: 12
@@ -70,7 +93,7 @@ interface NavigationListItem {
   onPress: () => void;
 }
 
-const Profile = () => {
+const AccountSettings = () => {
   const [notificationsSwitchEnabled, setIsEnabled] = useState(false);
   const toggleNotificationSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -90,17 +113,16 @@ const Profile = () => {
   ]
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={[styles.screenContainer, { flex: 1 }]}>
       <View style={styles.userTile}>
         <View style={ { flexDirection: 'row', alignItems: 'center' }}>
-          <FontAwesome5 name="user" size={48} style={ { padding: 22 }}/>
+          <FontAwesome5 name="user" size={48} style={{padding: 22, color: colors.purple}}/>
         </View>
         <View style={[styles.userTileUpper, { flex: 3 }]}>
           <Text style={styles.userFullName}>{user?.name}</Text>
           <Text style={styles.userProgram}>Program</Text>
         </View>
         <View style={ { flexDirection: 'row', alignItems: 'center', padding: 12 }}>
-          <Button title="Nudge" onPress={() => alert('boop')} />
         </View>
       </View>
       <View style={styles.mainTile}>
@@ -119,7 +141,11 @@ const Profile = () => {
         <Text style={styles.mainTileTitle}>Notifications</Text>
         <View style={styles.mainTileItem}>
           <Text style={styles.navigationListItemLabel}>Banners</Text>
-          <Switch onValueChange={toggleNotificationSwitch} value={notificationsSwitchEnabled} />
+          <Switch
+            onValueChange={toggleNotificationSwitch}
+            value={notificationsSwitchEnabled}
+            trackColor={{true: colors.purple}}
+            thumbColor={notificationsSwitchEnabled ? colors.purple : colors.grey}/>
         </View>
       </View>
       <View style={styles.mainTile}>
@@ -136,4 +162,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default AccountSettings

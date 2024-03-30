@@ -1,4 +1,3 @@
-import { prisma } from './../../db/src/index';
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
  * 1. You want to modify request context (see Part 1)
@@ -6,14 +5,20 @@ import { prisma } from './../../db/src/index';
  *
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
+ *
+ * @thienguen
+ * @date 3.30.2024
  */
+
 // import type { inferAsyncReturnType } from "@trpc/server"
 import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
+import type * as trpcNext from '@trpc/server/adapters/next'
 
 import { initTRPC } from '@trpc/server'
 import superjson from 'superjson'
 import { ZodError } from 'zod'
 
+import { prisma } from '@acme/db'
 
 // interface CreateContextOptions {
 //   // session: Session | null
@@ -31,13 +36,14 @@ import { ZodError } from 'zod'
 // }
 
 /**
- * 1. CONTEXT
+ * > 1. CONTEXT
  *
  * This section defines the "contexts" that are available in the backend API
  *
  * These allow you to access things like the database, the session, etc, when
  * processing a request
  *
+ * @see https://trpc.io/docs/server/context
  */
 // interface CreateContextOptions {
 //   session: Session | null
@@ -82,8 +88,10 @@ export function createTRPCContext({ req, resHeaders }: FetchCreateContextFnOptio
   return { prisma }
 }
 
+/* ------------------------------------------------------------------------------- */
+
 /**
- * 2. INITIALIZATION
+ * > 2. INITIALIZATION
  *
  * This is where the trpc api is initialized, connecting the context and
  * transformer
@@ -112,7 +120,7 @@ const t = initTRPC
 export const createCallerFactory = t.createCallerFactory
 
 /**
- * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
+ * > 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
  *
  * These are the pieces you use to build your tRPC API. You should import these
  * a lot in the /src/server/api/routers folder
@@ -133,13 +141,13 @@ export const createTRPCRouter = t.router
  */
 export const publicProcedure = t.procedure
 
+/* ------------------------------------------------------------------------ */
 /**
  * Reusable middleware that enforces users are logged in before running the
  * procedure
+ * 
+ * @see https://trpc.io/docs/server/procedures
  */
-
-/* ------------------------------------------------------------------------ */
-
 // const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
 //   if (!ctx.session?.user) {
 //     throw new TRPCError({ code: "UNAUTHORIZED" })

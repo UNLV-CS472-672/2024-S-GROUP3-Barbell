@@ -1,11 +1,11 @@
 import { exerciseRouter } from './router/exercise'
-import { postRouter } from './router/post'
-import { userRouter } from './router/user'
+import { friendRouter } from './router/friend'
 import { notifRouter } from './router/notif'
+import { postRouter } from './router/post'
 import { spotifyRouter } from './router/spotify'
+import { userRouter } from './router/user'
 import { workoutRouter } from './router/workout'
 import { createTRPCRouter } from './trpc'
-import { friendRouter } from './router/friend'
 
 /**
  * step2: aliaes and CREATE IT TO THE FRONTEND routers

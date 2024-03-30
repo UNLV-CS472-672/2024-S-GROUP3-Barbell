@@ -60,7 +60,7 @@ export default function RootLayout() {
       <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
         <BottomSheetModalProvider>
           <GlobalContextProvider>
-            <StatusBar style="auto" />
+            <StatusBar style="light" />
 
             {/* Splitter */}
 

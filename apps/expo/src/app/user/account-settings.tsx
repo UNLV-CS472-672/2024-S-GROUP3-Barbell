@@ -70,7 +70,7 @@ interface NavigationListItem {
   onPress: () => void;
 }
 
-const Profile = () => {
+const AccountSettings = () => {
   const [notificationsSwitchEnabled, setIsEnabled] = useState(false);
   const toggleNotificationSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -136,4 +136,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default AccountSettings

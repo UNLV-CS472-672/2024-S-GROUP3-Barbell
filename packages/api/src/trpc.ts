@@ -11,7 +11,6 @@
  */
 
 // import type { inferAsyncReturnType } from "@trpc/server"
-import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
 import type * as trpcNext from '@trpc/server/adapters/next'
 
 import { initTRPC } from '@trpc/server'
@@ -19,21 +18,6 @@ import superjson from 'superjson'
 import { ZodError } from 'zod'
 
 import { prisma } from '@acme/db'
-
-// interface CreateContextOptions {
-//   // session: Session | null
-//   req: FetchCreateContextFnOptions['req']
-//   resHeaders: FetchCreateContextFnOptions['resHeaders']
-//   prisma: typeof prisma
-// }
-
-// /**
-//  * Inner function for `createContext` where we create the context.
-//  * This is useful for testing when we don't want to mock Next.js' request/response
-//  */
-// export async function createContextInner(_opts: CreateContextOptions) {
-//   return {}
-// }
 
 /**
  * > 1. CONTEXT
@@ -45,9 +29,9 @@ import { prisma } from '@acme/db'
  *
  * @see https://trpc.io/docs/server/context
  */
-// interface CreateContextOptions {
-//   session: Session | null
-// }
+interface CreateContextOptions {
+  // session: Session | null
+}
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use
@@ -56,8 +40,27 @@ import { prisma } from '@acme/db'
  * Examples of things you may need it for:
  * - testing, so we dont have to mock Next.js' req/res
  * - trpc's `createSSGHelpers` where we don't have req/res
+ *
+ * - inner function for `createContext` where we create the context.
+ * - this is useful for testing when we don't want to mock Next.js' request/response
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
+export async function createContextInner(_opts: CreateContextOptions) {
+  return {
+    prisma,
+  }
+}
+
+export type Context = Awaited<ReturnType<typeof createContextInner>>
+
+export async function createTRPCContext(opts: trpcNext.CreateNextContextOptions): Promise<Context> {
+  // for API-response caching see https://trpc.io/docs/v11/caching
+  /* isAuthed, and authentication through opts, if any */
+  const source = opts.req.headers['x-trpc-source'] ?? 'unknown'
+  console.log('>>> tRPC Request from', source)
+  return await createContextInner({})
+}
+
 // const createInnerTRPCContext = (opts: CreateContextOptions) => {
 //   return {
 //     session: opts.session,
@@ -65,13 +68,7 @@ import { prisma } from '@acme/db'
 //   }
 // }
 
-/**
- * This is the actual context you'll use in your router. It will be used to
- * process every request that goes through your tRPC endpoint
- * @link https://trpc.io/docs/context
- */
 // export const createTRPCContext = async (opts: {
-
 // }: FetchCreateContextFnOptions) => {
 //   const session = opts.session ?? (await auth())
 //   const source = opts.headers.get("x-trpc-source") ?? "unknown"
@@ -83,10 +80,10 @@ import { prisma } from '@acme/db'
 //   })
 // }
 
-export function createTRPCContext({ req, resHeaders }: FetchCreateContextFnOptions) {
-  // return { req, resHeaders, prisma }
-  return { prisma }
-}
+// export function createTRPCContext({ req, resHeaders }: FetchCreateContextFnOptions) {
+//   // return { req, resHeaders, prisma }
+//   return { prisma }
+// }
 
 /* ------------------------------------------------------------------------------- */
 
@@ -96,29 +93,20 @@ export function createTRPCContext({ req, resHeaders }: FetchCreateContextFnOptio
  * This is where the trpc api is initialized, connecting the context and
  * transformer
  */
-const t = initTRPC
-  // .context<inferAsyncReturnType<typeof createTRPCContext>>()
-  .context<typeof createTRPCContext>()
-  .create({
-    transformer: superjson,
-    errorFormatter({ shape, error }) {
-      return {
-        ...shape,
-        data: {
-          ...shape.data,
-          zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
-        },
-      }
-    },
-  })
+const t = initTRPC.context<Context>().create({
+  transformer: superjson,
+  errorFormatter({ shape, error }) {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
+      },
+    }
+  },
+})
 
 /* ------------------------------------------------------------------------ */
-/**
- * Create a server-side caller
- * @see https://trpc.io/docs/server/server-side-calls
- */
-export const createCallerFactory = t.createCallerFactory
-
 /**
  * > 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
  *
@@ -141,11 +129,17 @@ export const createTRPCRouter = t.router
  */
 export const publicProcedure = t.procedure
 
+/**
+ * Create a server-side caller
+ * @see https://trpc.io/docs/server/server-side-calls
+ */
+export const createCallerFactory = t.createCallerFactory
+
 /* ------------------------------------------------------------------------ */
 /**
  * Reusable middleware that enforces users are logged in before running the
  * procedure
- * 
+ *
  * @see https://trpc.io/docs/server/procedures
  */
 // const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {

@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+
 import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 
 import { TRPCProvider } from '~/utils/api'
@@ -9,6 +10,7 @@ import '~/styles.css'
 
 import { View } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
+
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
@@ -55,14 +57,11 @@ export default function RootLayout() {
 
   return (
     <TRPCProvider>
-      <ClerkProvider
-        publishableKey={CLERK_PUBLISHABLE_KEY!}
-        tokenCache={tokenCache}
-      >
+      <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
         <BottomSheetModalProvider>
           <GlobalContextProvider>
-            <StatusBar style="auto" />
-            
+            <StatusBar style="light" />
+
             {/* Splitter */}
 
             <RootLayoutBottomNav />
@@ -77,7 +76,7 @@ function RootLayoutBottomNav() {
   // const router = useRouter()
   /* Our main navigation here (idk what is best practices here :<) */
   return (
-    <Stack>
+    <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="(tabs)"
         options={{

@@ -12,6 +12,8 @@ export default defineConfig({
     // ...
     coverage: {
       provider: 'istanbul', // or 'v8'
+      exclude: ['**/node_modules/**', '**/__tests/**'],
     },
+    exclude: ['**/node_modules/**', '**/__tests/**'],
   },
 })

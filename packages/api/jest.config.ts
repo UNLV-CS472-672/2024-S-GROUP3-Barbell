@@ -27,6 +27,6 @@ export default {
     "/node_modules/(?!superjson).+\\.js$",
   ],
   testMatch: [
-    "**/__tests__/**/*.test.ts",
+    "**/__tests/**/*.test.ts",
   ],
 };

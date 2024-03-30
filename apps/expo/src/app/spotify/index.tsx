@@ -1,4 +1,4 @@
-import Spotify from 'apps/expo/src/components/spotify/Spotify'
+import Spotify from 'apps/expo/src/components/spotify/spotify'
 import { router } from 'expo-router'
 import { View, SafeAreaView, Dimensions, StyleSheet } from 'react-native'
 

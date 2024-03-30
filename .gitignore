@@ -7,6 +7,8 @@ node_modules
 
 # testing
 coverage
+vitest-coverage
+jest-coverage
 
 # next.js
 .next/

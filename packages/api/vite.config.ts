@@ -13,6 +13,7 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul', // or 'v8'
       exclude: ['**/node_modules/**', '**/__tests/**'],
+      reportsDirectory: 'vitest-coverage', 
     },
     exclude: ['**/node_modules/**', '**/__tests/**'],
   },

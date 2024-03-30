@@ -1,6 +1,6 @@
 export default {
   collectCoverage: true,
-  coverageDirectory: "./coverage/",
+  coverageDirectory: "./jest-coverage/", 
   collectCoverageFrom: [
     '**/*.{ts,tsx}',
     '!**/node_modules/**',

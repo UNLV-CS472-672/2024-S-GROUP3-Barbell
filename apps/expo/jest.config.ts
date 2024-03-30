@@ -1,4 +1,4 @@
-import type {Config} from 'jest';
+import type { Config } from 'jest'
 
 const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/setup-jest.js'],
@@ -15,7 +15,12 @@ const config: Config = {
     '!index.ts',
     '!**/api.tsx',
     // need to remove in future v
+    '!**/app/**',
     '!**/custom-bottom-sheet-modal.tsx',
+    '!**/auth/**',
+    '!**/notif/**',
+    '!**/hooks/**',
+    '!**/context/**',
   ],
   // coverageThreshold: {
   //   global: {
@@ -32,11 +37,11 @@ const config: Config = {
   //   '^.+\\.(ts|tsx)?$': 'ts-jest',
   //   '^.+\\.(js|jsx)$': 'babel-jest',
   // }
-  
+
   preset: 'jest-expo',
   moduleNameMapper: {
-    "~/(.*)": "<rootDir>/src/$1"
+    '~/(.*)': '<rootDir>/src/$1',
   },
-};
+}
 
-export default config;
+export default config

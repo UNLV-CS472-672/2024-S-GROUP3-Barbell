@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react'
-import { Button, Text, TextInput, View } from 'react-native'
+import { Button as RNButton, Text, TextInput, View } from 'react-native'
+import { router } from 'expo-router'
 import { cn } from '@/packages/ui/src/cn'
 import BottomSheet from '@gorhom/bottom-sheet'
+import Button from '~/components/ui/button/button'
 
 import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
 import CustomBottomSheet from '~/components/ui/bottom-sheet/bottom-sheet'
@@ -22,13 +24,19 @@ export default function TabTwoScreen() {
       )}
       style={{ backgroundColor: colors.background }}
     >
-      <Button title="Open" onPress={handleOpenPress} color={colors.primary} />
-      <Button
+      <RNButton title="Open" onPress={handleOpenPress} color={colors.primary} />
+      <RNButton
         title="Close"
         onPress={handleClosePress}
         color={colors.grey}
         // className={cn('mb-4')}
       />
+      <Button
+        onPress={() => router.push('/nav')}
+        className='flex items-center justify-center bg-blue-500 rounded-md'
+        aria-label='Go to nav'>
+        <Text className='text-white'>Nav</Text>
+      </Button>
       <CustomBottomSheet ref={bottomSheetRef} title={title} />
     </View>
   )

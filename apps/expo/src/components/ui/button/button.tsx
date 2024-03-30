@@ -54,7 +54,6 @@ const Button = ({
   rounded,
   className,
   children,
-  testID,
   ...props
 }: ButtonProps) => {
   const textColor = color == 'light' ? 'text-slate-900' : 'text-white'
@@ -63,7 +62,7 @@ const Button = ({
     <Pressable
       {...props}
       className={cn(buttonVariants({ color, size, rounded }), className)}
-      testID={testID}
+      testID={props.testID}
     >
       {value && (
         <Text

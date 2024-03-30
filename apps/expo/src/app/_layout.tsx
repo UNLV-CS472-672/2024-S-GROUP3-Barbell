@@ -75,7 +75,7 @@ function RootLayoutBottomNav() {
   // const router = useRouter()
   /* Our main navigation here (idk what is best practices here :<) */
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack>
       <Stack.Screen
         name="(tabs)"
         options={{

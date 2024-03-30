@@ -1,49 +1,46 @@
-import { View, Text, TouchableOpacity } from "react-native"
+import { Text, TouchableOpacity, View } from 'react-native'
+
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import TimeAgo from "~/components/timeAgo/TimeAgo"
-// TODO: change from any type to notification type once schema completed
-//////////////////////////////////////////////////////////////////////////
-// can delete from here ...
-import userData from "@/packages/db/src/mock-data/user.json"
-const userInfo: any[] = userData
-function getUsernameFromSenderId(senderId: number): string {
-  const user = userInfo.find((item) => item.id === senderId);
-  if (user) {
-    return user.username;
-  } else {
-    return String(senderId);
-  }
+import { Notification } from '@prisma/client'
+
+import TimeAgo from '~/components/timeAgo/TimeAgo'
+
+export interface FriendRequestNotifProps {
+  notif: Notification
+  senderUsername: string
 }
-// to here once we get the API setup to get username from sender ID
-//////////////////////////////////////////////////////////////////////////
 
-export default function FriendRequestNotif({ notif }: { notif: any }) {
-
+export default function FriendRequestNotif({ notif, senderUsername }: FriendRequestNotifProps) {
   return (
     <View>
-      <View className="flex flex-row items-center ml-3 mr-3 mt-4">
+      <View className="ml-3 mr-3 mt-4 flex flex-row items-center">
         {/*photo, use icon for now, probably use profile photo in the future*/}
         <View className="mr-2">
           <MaterialCommunityIcons name="face-man-profile" size={56} color="#CACACA" />
         </View>
-        
-        <View className="flex flex-col flex-1">
+        <View className="flex flex-1 flex-col">
           {/*sender wants to be your friend*/}
-          <Text className="mr-2 mb-2" style={{color: "#CACACA"}}>{getUsernameFromSenderId(notif.senderId)} {notif.content}</Text>
+          <Text className="mb-2 mr-2" style={{ color: '#CACACA' }} testID="sender-username-with-content">
+            {senderUsername} {notif.content}
+          </Text>
           {/*accept and decline buttons*/}
           <View className="flex flex-row justify-between">
-            <TouchableOpacity className="py-2 px-4 rounded-lg flex-1 mr-1" style={{backgroundColor: "#48476D"}}>
-              <Text style={{color: "#CACACA"}} className="text-center">Accept</Text>
+            <TouchableOpacity className="mr-1 flex-1 rounded-lg px-4 py-2" style={{ backgroundColor: '#48476D' }}>
+              <Text style={{ color: '#CACACA' }} className="text-center">
+                Accept
+              </Text>
             </TouchableOpacity>
-            <TouchableOpacity className="py-2 px-4 rounded-lg flex-1 ml-1" style={{backgroundColor: "#CACACA"}}>
-              <Text className="text-center" style={{color: "#1C1B1B"}}>Decline</Text>
+            <TouchableOpacity className="ml-1 flex-1 rounded-lg px-4 py-2" style={{ backgroundColor: '#CACACA' }}>
+              <Text className="text-center" style={{ color: '#1C1B1B' }}>
+                Decline
+              </Text>
             </TouchableOpacity>
           </View>
-          <TimeAgo createdAt={notif} />
+          <TimeAgo createdAt={notif.createdAt} />
         </View>
       </View>
       {/*thin line between notifications*/}
-      <View className="ml-3 mr-3" style={{borderBottomWidth: 1, borderBottomColor: "#737272"}}/>
+      <View className="ml-3 mr-3" style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
     </View>
   )
 }

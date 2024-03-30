@@ -51,13 +51,15 @@ export async function createContextInner(_opts: CreateContextOptions) {
   }
 }
 
+
 export type Context = Awaited<ReturnType<typeof createContextInner>>
+
 
 export async function createTRPCContext(opts: trpcNext.CreateNextContextOptions): Promise<Context> {
   // for API-response caching see https://trpc.io/docs/v11/caching
-  /* isAuthed, and authentication through opts, if any */
   const source = opts.req.headers['x-trpc-source'] ?? 'unknown'
   console.log('>>> tRPC Request from', source)
+
   return await createContextInner({})
 }
 

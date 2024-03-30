@@ -22,8 +22,7 @@
     "typecheck": "turbo typecheck",
     "postinstall": "pnpm lint:ws",
     "android": "expo run:android",
-    "ios": "expo run:ios",
-    "vitest": "vitest"
+    "ios": "expo run:ios"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:^",
@@ -35,8 +34,7 @@
     "prettier": "^3.2.5",
     "ts-jest": "^29.1.2",
     "turbo": "^1.12.4",
-    "typescript": "^5.3.3",
-    "vitest": "^1.4.0"
+    "typescript": "^5.3.3"
   },
   "prettier": "@acme/prettier-config"
 }

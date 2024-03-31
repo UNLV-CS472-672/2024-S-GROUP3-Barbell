@@ -88,6 +88,11 @@ export const notifRouter = createTRPCRouter({
           name: true,
           createdByUserId: true,
           createdAt: true,
+          createdBy: {
+            select: {
+              username: true,
+            },
+          },
           messages: {
             orderBy: {
               createdAt: 'desc',

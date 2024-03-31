@@ -98,6 +98,7 @@
     awards        Award[]
     notifications Notification[] @relation("NotificationReceiver")
     sentMessages  Notification[] @relation("NotificationSender")
+    createdChats  Chat[]         @relation("ChatCreator")
     chats         Chat[]
     spotify       SpotifyData?
   }
@@ -252,9 +253,10 @@
     name            String?   @db.Char(40)
     users           User[]
     readByUserIds   Int[]
-    createdByUserId Int
+    createdByUserId Int?
     messages        Message[]
     type            ChatType
+    createdBy       User?      @relation("ChatCreator", fields: [createdByUserId], references: [id])
   }
 
   model Message {

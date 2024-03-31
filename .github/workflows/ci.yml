@@ -22,6 +22,7 @@ env:
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}}
 
 jobs:
+  # > Jobs 1
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -37,6 +38,7 @@ jobs:
       - name: Lint Check
         run: pnpm lint && pnpm lint:ws
 
+  # > Jobs 2
   format:
     runs-on: ubuntu-latest
     steps:
@@ -51,6 +53,7 @@ jobs:
       - name: Format
         run: pnpm format
 
+  # > Jobs 3
   typecheck:
     runs-on: ubuntu-latest
     steps:

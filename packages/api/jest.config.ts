@@ -1,6 +1,6 @@
 export default {
   collectCoverage: true,
-  coverageDirectory: "./coverage/",
+  coverageDirectory: "./jest-coverage/", 
   collectCoverageFrom: [
     '**/*.{ts,tsx}',
     '!**/node_modules/**',
@@ -13,7 +13,7 @@ export default {
     '!**/*.d.ts',
     '!index.ts',
     '!**/api.tsx',
-    // need to remove in future v
+    '!**/__tests__/**',
   ],
   clearMocks: true,
   coverageProvider: "v8",
@@ -27,6 +27,6 @@ export default {
     "/node_modules/(?!superjson).+\\.js$",
   ],
   testMatch: [
-    "**/__tests__/**/*.test.ts",
+    "**/__test__/**/*.test.ts",
   ],
 };

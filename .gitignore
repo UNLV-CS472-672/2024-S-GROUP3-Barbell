@@ -7,6 +7,9 @@ node_modules
 
 # testing
 coverage
+vitest-coverage
+jest-coverage
+html
 
 # next.js
 .next/
@@ -63,3 +66,5 @@ packages/db/src/scripts/python/*
 !packages/db/src/scripts/python/generate.py
 !packages/db/src/scripts/python/README.md
 
+# intellij
+.idea

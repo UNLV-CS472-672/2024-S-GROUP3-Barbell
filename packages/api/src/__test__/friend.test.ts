@@ -4,13 +4,11 @@ import { prisma } from '@acme/db'
 
 /*  */
 test('FRIEND /all', async () => {
-
   const friends = await prisma.friend.findMany()
 
   expect(friends).toBeDefined()
   expect(friends.length).toBeGreaterThan(0)
 })
-
 
 /*  */
 test('FRIEND /byId', async () => {
@@ -23,7 +21,6 @@ test('FRIEND /byId', async () => {
   expect(friend).toBeDefined()
   expect(friend?.id).toBe(1)
 })
-
 
 /*  */
 test('FRIEND /create', async () => {
@@ -54,4 +51,3 @@ test('FRIEND /delete', async () => {
   expect(friend).toBeDefined()
   expect(friend.id).toBe(1)
 })
-

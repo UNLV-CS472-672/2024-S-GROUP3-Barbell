@@ -36,7 +36,8 @@
     "ts-jest": "^29.1.2",
     "typescript": "^5.3.3",
     "vitest": "^1.4.0",
-    "@vitest/ui": "^1.4.0"
+    "@vitest/ui": "^1.4.0",
+    "@vitest/browser": "^1.4.0"
   },
   "eslintConfig": {
     "root": true,

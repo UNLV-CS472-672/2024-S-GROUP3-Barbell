@@ -12,10 +12,14 @@ export default defineConfig({
     // ...
     coverage: {
       provider: 'istanbul', // or 'v8'
-      exclude: ['**/node_modules/**', '**/__tests/**'],
+      exclude: ['**/node_modules/**', '**/__test__/**', '**/html/**', '**/coverage/**', '**/jest-coverage/**'],
       reportsDirectory: 'vitest-coverage',
     },
-    exclude: ['**/node_modules/**', '**/__tests/**', '**/html/**', '**/coverage/**', '**/jest-coverage/**'],
+    browser: {
+      enabled: true,
+      name: 'chrome', // browser name is required
+    },
+    exclude: ['**/node_modules/**', '**/__test__/**', '**/html/**', '**/coverage/**', '**/jest-coverage/**'],
     reporters: ['html'],
   },
 })

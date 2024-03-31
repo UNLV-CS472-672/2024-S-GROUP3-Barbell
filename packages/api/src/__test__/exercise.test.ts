@@ -82,15 +82,14 @@ test('EXERCISE /updateExerciseFromExericseID', async () => {
 
 test('EXERCISE /deleteExerciseFromExerciseID', async () => {
   // delete all sets associated with the exercise
-  await prisma.set.deleteMany({ where: { exerciseId: 1 } });
+  await prisma.set.deleteMany({ where: { exerciseId: 1 } })
 
   // as then we can delete the exercise
-  const exercise = await prisma.exercise.delete({ where: { id: 1 } });
+  const exercise = await prisma.exercise.delete({ where: { id: 1 } })
 
-  expect(exercise).toBeDefined();
-  expect(exercise.id).toBe(1);
-});
-
+  expect(exercise).toBeDefined()
+  expect(exercise.id).toBe(1)
+})
 
 test('EXERCISE /getAllSetsFromExerciseID', async () => {
   const sets = await prisma.set.findMany({ where: { exerciseId: 6 } })

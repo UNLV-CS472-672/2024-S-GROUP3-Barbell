@@ -49,7 +49,7 @@ jobs:
         env:
           CI: true
         run: |
-          cd apps/expo && pnpm run test
+          cd apps/expo && pnpm run jest
 
       - name: Run tests in api
         working-directory: .

@@ -5,7 +5,7 @@ import { AppRouter } from '../root'
 import { createContextInner } from '../trpc'
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-describe('add and get post', async () => {
+describe('POST', async () => {
   const ctx = await createContextInner({})
   const caller = createCaller(ctx)
 
@@ -28,7 +28,7 @@ describe('add and get post', async () => {
   }
 
 
-  it('should add and get post', async () => {
+  it('/byId && /create', async () => {
     const byId = await caller.post.byId({ id: 1 })
     const create = await caller.post.create(input2)
 

@@ -15,10 +15,6 @@ export default defineConfig({
       exclude: ['**/node_modules/**', '**/__test__/**', '**/html/**', '**/coverage/**', '**/jest-coverage/**'],
       reportsDirectory: 'vitest-coverage',
     },
-    browser: {
-      enabled: true,
-      name: 'chrome', // browser name is required
-    },
     exclude: ['**/node_modules/**', '**/__test__/**', '**/html/**', '**/coverage/**', '**/jest-coverage/**'],
     reporters: ['html'],
   },

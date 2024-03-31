@@ -1,18 +1,17 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { Stack } from 'expo-router'
+import { Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Page = () => {
   return (
-    <SafeAreaView style={{ flex: 1,  backgroundColor: '#1E1E1E' }}>
-        {/* Define pour custom header */}
-        {/* <Stack.Screen
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#1E1E1E' }}>
+      {/* Define pour custom header */}
+      {/* <Stack.Screen
           options={{
             header: () => null,
           }}
         /> */}
-      <Text className='text-center text-white m-8'>Home screen</Text>
+      <Text className="m-8 text-center text-white">Home screen</Text>
     </SafeAreaView>
   )
 }

@@ -12,6 +12,22 @@ import { View } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 
 import { ClerkProvider } from '@clerk/clerk-expo'
+import {
+  IstokWeb_400Regular,
+  IstokWeb_400Regular_Italic,
+  IstokWeb_700Bold,
+  IstokWeb_700Bold_Italic,
+} from '@expo-google-fonts/istok-web'
+import {
+  Sora_100Thin,
+  Sora_200ExtraLight,
+  Sora_300Light,
+  Sora_400Regular,
+  Sora_500Medium,
+  Sora_600SemiBold,
+  Sora_700Bold,
+  Sora_800ExtraBold,
+} from '@expo-google-fonts/sora'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
 import GlobalContextProvider from '~/context/global-context'
@@ -37,20 +53,26 @@ const tokenCache = {
   },
 }
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-// SplashScreen.preventAutoHideAsync()
-
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
-  /* themes */
-  // const { colorScheme } = useColorScheme()
-
   /* fonts */
   let [fontsLoaded] = useFonts({
     Koulen_400Regular,
-
     /*  */
+    IstokWeb_400Regular,
+    IstokWeb_400Regular_Italic,
+    IstokWeb_700Bold,
+    IstokWeb_700Bold_Italic,
+    /*  */
+    Sora_100Thin,
+    Sora_200ExtraLight,
+    Sora_300Light,
+    Sora_400Regular,
+    Sora_500Medium,
+    Sora_600SemiBold,
+    Sora_700Bold,
+    Sora_800ExtraBold,
   })
 
   if (!fontsLoaded) return null

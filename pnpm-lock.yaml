@@ -32,7 +32,13 @@ importers:
       '@clerk/clerk-expo':
         specifier: ^0.20.8
         version: 0.20.8(@types/react@18.2.42)(expo-application@5.3.0)(expo-auth-session@5.0.2)(expo-constants@14.4.2)(expo-web-browser@12.8.2)(react-dom@18.2.0)(react-native@0.72.10)(react@18.2.0)
+      '@expo-google-fonts/istok-web':
+        specifier: ^0.2.3
+        version: 0.2.3
       '@expo-google-fonts/koulen':
+        specifier: ^0.2.3
+        version: 0.2.3
+      '@expo-google-fonts/sora':
         specifier: ^0.2.3
         version: 0.2.3
       '@expo/metro-config':
@@ -3885,8 +3891,16 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
+  /@expo-google-fonts/istok-web@0.2.3:
+    resolution: {integrity: sha512-HvhS9cU59qqhEPWP0DK/qPJNTJ9N25tZ6BT8jQvCqBLKqvHQEuTtbvsftrgZGc4OVtlH6yUMsuz03kqmFkwipA==}
+    dev: false
+
   /@expo-google-fonts/koulen@0.2.3:
     resolution: {integrity: sha512-cxQlCSePbvzrkD43Z6nRoHkc4ODMnYVO9yNDDvNIob257Cltk7XYIPoQpHsL1g1Vzde9BOro/8anMKEzmp1jTQ==}
+    dev: false
+
+  /@expo-google-fonts/sora@0.2.3:
+    resolution: {integrity: sha512-ly41fWFI6eDWokUJPkqdKKW1McX9O/1NiaP41O8tT1CbMEStGCOQs6FUiMG4qdDG5sxVKA8vElaekelCwBKhAQ==}
     dev: false
 
   /@expo/apple-utils@1.4.0:
@@ -10344,7 +10358,7 @@ packages:
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.4
     dev: false
 
   /graceful-fs@4.2.11:

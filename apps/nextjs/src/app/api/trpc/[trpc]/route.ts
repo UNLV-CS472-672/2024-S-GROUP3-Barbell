@@ -25,6 +25,7 @@ const handler = async (req: Request) => {
     req,
     router: appRouter,
     endpoint: '/api/trpc',
+    // FIXME: typeof createTRPCContext is not compatible with fetchRequestHandler
     createContext: createTRPCContext as any,
     onError({ error, path }) {
       console.error(`>>> tRPC Error on '${path}'`, error)

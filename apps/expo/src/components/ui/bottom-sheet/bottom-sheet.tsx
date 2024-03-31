@@ -31,8 +31,8 @@ const CustomBottomSheet = forwardRef<Ref, Props>((_, ref) => {
       backgroundStyle={{ backgroundColor: colors.bottomav.nav }}
     >
       <View style={styles.contentContainer} className="mt-7">
-        <Button color="trap" size="full" value="Start Saved Workout" className="mb-5" testID='button-test'></Button>
-        <Button color="trap" size="full" value="Create New Workout" testID='button-test-2'></Button>
+        <Button color="trap" size="full" value="Start Saved Workout" className="mb-5" testID="button-test"></Button>
+        <Button color="trap" size="full" value="Create New Workout" testID="button-test-2"></Button>
       </View>
     </BottomSheet>
   )

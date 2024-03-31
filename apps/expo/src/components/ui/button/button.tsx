@@ -43,8 +43,8 @@ export interface ButtonProps
 const textStylesMap = {
   icon: 'text-sm',
   medium: 'text-base',
-  xl: 'text-xl font-semibold font-koulen',
-  full: 'text-3xl font-semibold font-koulen'
+  xl: 'text-xl font-semibold',
+  full: 'text-3xl font-semibold font-koulen',
 }
 
 const Button = ({
@@ -66,7 +66,7 @@ const Button = ({
     >
       {value && (
         <Text
-          className={`text-center ${textColor} ${
+          className={`text-center  ${textColor} ${
             textStylesMap[size ? size : 'medium']
           }`}
           testID="button-text"

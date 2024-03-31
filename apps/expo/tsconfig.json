@@ -6,7 +6,7 @@
     "paths": {
       "~/*": ["./apps/expo/src/*"], // expo folder root
       "~assets/*": ["./apps/expo/assets/*"], 
-      "@/*": ["./*"], // Monorepo root
+      "^/*": ["./*"], // Monorepo root
     },
     "jsx": "react-native",
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",

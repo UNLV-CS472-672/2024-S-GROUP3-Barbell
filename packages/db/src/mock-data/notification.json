@@ -5,7 +5,7 @@
     "content": "wants to be your friend.",
     "type": "NUDGE",
     "read": false,
-    "receiverId": 4,
+    "receiverId": 9,
     "senderId": 2
   },
   {
@@ -32,7 +32,7 @@
     "content": "nudged you!",
     "type": "NUDGE",
     "read": false,
-    "receiverId": 4,
+    "receiverId": 9,
     "senderId": 6
   },
   {
@@ -50,7 +50,7 @@
     "content": "Legs today, anyone?",
     "type": "FRIEND_REQUEST",
     "read": false,
-    "receiverId": 4,
+    "receiverId": 9,
     "senderId": 8
   },
   {
@@ -66,8 +66,8 @@
     "id": 10,
     "createdAt": "2024-03-07T10:15:00Z",
     "content": "Welcome to Barbell.",
-    "type": "LIKE",
+    "type": "NUDGE",
     "read": false,
-    "receiverId": 4
+    "receiverId": 9
   }
 ]

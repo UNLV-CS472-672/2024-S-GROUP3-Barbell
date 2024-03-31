@@ -8,7 +8,7 @@ on:
 
 jobs:
   # > Jobs 1
-  buil-n-coverage:
+  build-n-coverage:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}

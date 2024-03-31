@@ -35,5 +35,4 @@ describe('POST', async () => {
     expect(byId).toMatchObject(input)
     expect(create).toMatchObject(input2)
   })
-
 })

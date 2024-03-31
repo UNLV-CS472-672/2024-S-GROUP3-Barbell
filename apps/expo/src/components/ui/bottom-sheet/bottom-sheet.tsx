@@ -1,7 +1,7 @@
 import React, { forwardRef, useMemo } from 'react'
-import { Button as ReactButton, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
-import BottomSheet, { useBottomSheet } from '@gorhom/bottom-sheet'
+import BottomSheet from '@gorhom/bottom-sheet'
 
 import Button from '~/components/ui/button/button'
 import colors from '~/styles/colors'

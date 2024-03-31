@@ -44,7 +44,7 @@ exports[`CustomBottomSheet renders correctly 1`] = `
     testID="button-test"
   >
     <Text
-      className="text-center text-white text-3xl font-semibold font-koulen"
+      className="text-center  text-white text-3xl font-semibold font-koulen"
       testID="button-text"
     >
       Start Saved Workout
@@ -84,7 +84,7 @@ exports[`CustomBottomSheet renders correctly 1`] = `
     testID="button-test-2"
   >
     <Text
-      className="text-center text-white text-3xl font-semibold font-koulen"
+      className="text-center  text-white text-3xl font-semibold font-koulen"
       testID="button-text"
     >
       Create New Workout

@@ -34,7 +34,7 @@ exports[`Button 1`] = `
   onStartShouldSetResponder={[Function]}
 >
   <Text
-    className="text-center text-white text-base"
+    className="text-center  text-white text-base"
     testID="button-text"
   >
     Button Text

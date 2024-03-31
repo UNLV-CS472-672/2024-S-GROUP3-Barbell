@@ -8,7 +8,7 @@ import CircleMinus from '~assets/svgs/circle-minus.svg'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
-
+import { DefaultHeader } from '~/layouts/headers/default'
 import colors from '~/styles/colors'
 
 const Layout = () => {
@@ -30,6 +30,7 @@ const Layout = () => {
             backgroundColor: colors.bottomav.nav,
             borderColor: colors.background,
           },
+          // headerShown: false,
           tabBarShowLabel: false,
           tabBarIconStyle: { paddingHorizontal: 10 },
         }}
@@ -38,7 +39,7 @@ const Layout = () => {
         <Tabs.Screen
           name="index"
           options={{
-            headerShown: false,
+            header: () => <DefaultHeader onCategoryChanged={() => {'Cabin'}}/>,
             tabBarIcon: ({ focused, size }) => (
               <View className="items-center">
                 <HomeLogo
@@ -63,7 +64,6 @@ const Layout = () => {
             },
           }}
           options={{
-            headerShown: false,
             tabBarIcon: ({ size, focused }) => (
               <View style={{ marginTop: -30 }}>
                 {/* <CirclePlus width={size * 3} height={size * 3} fill={color} /> */}
@@ -81,7 +81,6 @@ const Layout = () => {
         <Tabs.Screen
           name="two"
           options={{
-            headerShown: false,
             tabBarIcon: ({ focused, size }) => (
               <View className="items-center">
                 <Profile width={size * 1.25} height={size * 1.25} fill={focused ? `${colors.bottomav.icon}` : 'none'} />

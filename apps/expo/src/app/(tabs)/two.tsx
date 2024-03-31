@@ -1,9 +1,9 @@
 import React from 'react'
+
 import AccountSettings from '../user/account-settings'
 
-
-const Page = () => {
+const AccountScreen = () => {
   return <AccountSettings></AccountSettings>
 }
 
-export default Page
+export default AccountScreen

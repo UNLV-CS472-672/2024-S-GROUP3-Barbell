@@ -98,12 +98,11 @@ function RootLayoutBottomNav() {
   // const router = useRouter()
   /* Our main navigation here (idk what is best practices here :<) */
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack>
       <Stack.Screen
         name="(tabs)"
         options={{
-          headerShown: false,
-          header: () => <View style={{ backgroundColor: '#1E1E1E' }} />,
+          header: () => <View className="bg-dark py-10"></View>,
         }}
       />
     </Stack>

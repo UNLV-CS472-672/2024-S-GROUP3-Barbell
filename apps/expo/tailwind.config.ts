@@ -48,6 +48,8 @@ export default {
         'slate-900': '#1C1B1B',
         'dark-purple': '#48476D',
         'slate-200': '#CACACA',
+        'background': '#1E1E1E',
+        'dark': '#1A1A1A',
       },
     },
   },

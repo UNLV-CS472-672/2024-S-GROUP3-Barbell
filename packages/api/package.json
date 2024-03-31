@@ -5,6 +5,7 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "lint": "eslint .",
     "vitest": "pnpm dotenv -e ../../.env -- vitest run --coverage",

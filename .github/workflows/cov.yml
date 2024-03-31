@@ -1,10 +1,10 @@
-name: Barbell Github Action 
+name: Barbell Github Action
 
 on:
   pull_request:
-    branches: ["*"]
+    branches: ['*']
   push:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   # > Jobs 1
@@ -16,44 +16,60 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       - name: Set up pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8.x 
-      
+          version: 8.x
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 18.x
           cache: 'pnpm'
           cache-dependency-path: '**/pnpm-lock.yaml'
-          
+
       - name: Install root dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Install dependencies and setup Prisma
+      
+      - name: Setup Prisma Schema
+        working-directory: .
         run: |
           cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
-        working-directory: .
 
       # - name: Run tests and collect coverage
       #   run: |
       #     pnpm run jest
       #   env:
       #     CI: true
-      
+
       - name: Run tests in expo
-        run: |
-          cd apps/expo && pnpm run test
         working-directory: .
         env:
           CI: true
+        run: |
+          cd apps/expo && pnpm run test
 
-      - name: Upload coverage reports to Codecov
+      - name: Run tests in api
+        working-directory: .
+        env:
+          CI: true
+        run: |
+          cd packages/api && pnpm run vitest
+
+      - name: Upload expo coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: UNLV-CS472-672/2024-S-GROUP3-Barbell
-          directory: ./apps/expo/coverage/
+          directory: ./apps/expo/jest-coverage/
+          fail_ci_if_error: true
+
+      - name: Upload api coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: UNLV-CS472-672/2024-S-GROUP3-Barbell
+          directory: ./packages/api/vitest-coverage/
           fail_ci_if_error: true

@@ -1,6 +1,7 @@
 import type { Config } from 'jest'
 
 const config: Config = {
+  coverageDirectory: "./jest-coverage/", 
   setupFilesAfterEnv: ['<rootDir>/setup-jest.js'],
   collectCoverageFrom: [
     '**/*.{ts,tsx}',

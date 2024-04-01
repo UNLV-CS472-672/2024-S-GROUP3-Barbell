@@ -25,7 +25,7 @@ export default function Conversation({ messageContent, chatId, createdAt, chatNa
   const handleRead = () => {
     if (!isRead) {
       markAsRead.mutate({ chatId: chatId, type: type, userId: userData.id })
-      readBy.push(userData.id)
+      readBy.push(userData.id) // this is so it will immediately reflect that the changes so it doesn't have to wait for API call again
     }
   }
 

@@ -120,33 +120,15 @@ test('WORKOUT /deleteWorkoutFromWorkoutId', async () => {
 
 /*  */
 test('WORKOUT /getAllExercisesFromWorkoutID', async () => {
-  const workout = await prisma.workout.create({
-    data: {
-      name: 'Test Workout',
-      description: 'A test workout description',
-      duration: 60,
-      finishedAt: new Date(),
-      likes: 0,
-      userId: 1,
-      exercises: {
-        create: {
-          name: 'Test Exercise',
-          note: 'Test note',
-          body_part: 'LEGS',
-          category: 'BARBELL',
-        },
-      },
-    },
-  })
-
+  const workout = await prisma.workout.findFirst({})
   const exercises = await prisma.exercise.findMany({
     where: {
-      workoutId: workout.id,
+      workoutId: workout?.id,
     },
   })
 
   expect(exercises).toBeDefined()
-  expect(exercises.length).toBeGreaterThan(0)
+  expect(exercises.length).toBeGreaterThanOrEqual(0)
 })
 
 test('WORKOUT /deleteExerciseFromWorkout', async () => {

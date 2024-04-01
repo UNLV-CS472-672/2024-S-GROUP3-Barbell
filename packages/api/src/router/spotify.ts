@@ -14,17 +14,15 @@ export const spotifyRouter = createTRPCRouter({
    * @params id - unique id used to determine which row to return from query
    *
    */
-  getSpotifyDataFromUserId: publicProcedure
-    .input(z.object({ id: z.number().int() }))
-    .query(async ({ ctx, input }) => {
-      const { prisma } = ctx
+  getSpotifyDataFromUserId: publicProcedure.input(z.object({ id: z.number().int() })).query(async ({ ctx, input }) => {
+    const { prisma } = ctx
 
-      return prisma.spotifyData.findUnique({
-        where: {
-          userID: input.id,
-        },
-      })
-    }),
+    return prisma.spotifyData.findUnique({
+      where: {
+        userID: input.id,
+      },
+    })
+  }),
 
   /**
    * This function creates a new SpotifyData entry based on the provided userID

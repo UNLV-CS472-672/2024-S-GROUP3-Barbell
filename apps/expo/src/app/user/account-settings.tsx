@@ -21,52 +21,6 @@ const colors = {
     },
   };
 const styles = StyleSheet.create({
-  screenContainer: {
-    color: colors.primary,
-    backgroundColor: colors.background
-  },
-  userTile: {
-    flexDirection: 'row',
-    backgroundColor: colors.darkGrey,
-    borderRadius: borderRadius,
-    margin: 12
-  },
-  userTileUpper: {
-    margin: 12,
-  },
-  userTileItem: {
-    flex: 1,
-    textAlign: 'center',
-    padding: 4,
-    backgroundColor: '#ffffff',
-    margin: 12,
-    borderRadius: borderRadius
-  },
-  mainTile: {
-    margin: 12,
-    padding: 18,
-    borderRadius: borderRadius,
-    backgroundColor: colors.darkGrey
-  },
-  mainTileTitle: {
-    fontSize: 22,
-    color: colors.grey
-  },
-  mainTileItem: {
-    flexDirection: 'row'
-  },
-  mainTileIcon: {
-    margin: 4
-  },
-  userFullName: {
-    fontSize: 22,
-    margin: 6,
-    color: colors.grey
-  },
-  userProgram: {
-    margin: 6,
-    color: colors.grey
-  },
   navigationListItemIcon: {
     padding: 8,
     alignSelf: 'center',
@@ -81,9 +35,6 @@ const styles = StyleSheet.create({
   navigationListItemChevron: {
     alignSelf: 'center',
     color: colors.grey
-  },
-  nudgeBtn: {
-    margin: 12
   }
 })
 
@@ -96,9 +47,16 @@ interface NavigationListItem {
 const AccountSettings = () => {
   const [notificationsSwitchEnabled, setIsEnabled] = useState(false);
   const toggleNotificationSwitch = () => setIsEnabled(previousState => !previousState);
-
   const { data } = api.user.byId.useQuery({ id: 1 });
   const user = data; // alias for readability
+
+  const tailwindClasses = {
+    mainTile: 'm-4 p-4 rounded-lg bg-bb-dark-gray',
+    mainTileTitle: 'text-2xl text-slate-200',
+    mainTileItem: 'flex-row',
+    navigationListItemLabel: 'flex-auto m-2 self-center text-slate-200',
+    navigationListItemChevron: 'self-center text-slate-200'
+  }
 
   const accountItems: NavigationListItem[] = [
     { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/user/personal-data') },
@@ -113,34 +71,33 @@ const AccountSettings = () => {
   ]
 
   return (
-    <SafeAreaView style={[styles.screenContainer, { flex: 1 }]}>
-      <View style={styles.userTile}>
-        <View style={ { flexDirection: 'row', alignItems: 'center' }}>
-          <FontAwesome5 name="user" size={48} style={{padding: 22, color: colors.purple}}/>
+    <SafeAreaView className='flex-1 bg-bb-slate-100' style={{backgroundColor: '#1e1e1e', flex: 1}}>
+      <View className='flex-row bg-bb-dark-gray rounded-lg m-4'>
+        <View className='flex-row items-center'>
+          <FontAwesome5 name="user" size={48} className="p-6 text-bb-dark-purple" style={{color: '#48476D'}}/>
         </View>
-        <View style={[styles.userTileUpper, { flex: 3 }]}>
-          <Text style={styles.userFullName}>{user?.name}</Text>
-          <Text style={styles.userProgram}>Program</Text>
-        </View>
-        <View style={ { flexDirection: 'row', alignItems: 'center', padding: 12 }}>
+        <View className='m-4 flex-3'>
+          <Text className="text-2xl text-slate-200">{user?.name}</Text>
+          <Text className="text-md text-slate-200">@{user?.id}</Text>
+          <Text className="text-md text-slate-200">Streak: {user?.streak} days</Text>
         </View>
       </View>
-      <View style={styles.mainTile}>
-        <Text style={styles.mainTileTitle}>Account</Text>
-        <View style={styles.mainTileItem}>
+      <View className={tailwindClasses.mainTile}>
+        <Text className={tailwindClasses.mainTileTitle}>Account</Text>
+        <View className={tailwindClasses.mainTileItem}>
           <FlatList data={accountItems} renderItem={({ item }) => (
-            <Pressable onPress={item.onPress} style={ { flexDirection: 'row' }}>
+            <Pressable onPress={item.onPress} className='flex-row'>
               <FontAwesome5 name={item.iconName} size={iconSize} style={styles.navigationListItemIcon}/>
-              <Text style={styles.navigationListItemLabel}>{item.title}</Text>
-              <FontAwesome5 name="chevron-right" style={styles.navigationListItemChevron} />
+              <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
+              <FontAwesome5 name="chevron-right" className={tailwindClasses.navigationListItemChevron} style={styles.navigationListItemChevron}/>
             </Pressable>
           )}/>
         </View>
       </View>
-      <View style={styles.mainTile}>
-        <Text style={styles.mainTileTitle}>Notifications</Text>
-        <View style={styles.mainTileItem}>
-          <Text style={styles.navigationListItemLabel}>Banners</Text>
+      <View className={tailwindClasses.mainTile}>
+        <Text className={tailwindClasses.mainTileTitle}>Notifications</Text>
+        <View className={tailwindClasses.mainTileItem}>
+          <Text className={tailwindClasses.navigationListItemLabel}>Banners</Text>
           <Switch
             onValueChange={toggleNotificationSwitch}
             value={notificationsSwitchEnabled}
@@ -148,13 +105,13 @@ const AccountSettings = () => {
             thumbColor={notificationsSwitchEnabled ? colors.purple : colors.grey}/>
         </View>
       </View>
-      <View style={styles.mainTile}>
-        <Text style={styles.mainTileTitle}>Other</Text>
+      <View className={tailwindClasses.mainTile}>
+        <Text className={tailwindClasses.mainTileTitle}>Other</Text>
           <FlatList data={otherItems} renderItem={({ item }) => (
-            <Pressable onPress={item.onPress} style={ { flexDirection: 'row' }}>
+            <Pressable onPress={item.onPress} className='flex-row'>
               <FontAwesome5 name={item.iconName} size={iconSize} style={styles.navigationListItemIcon} />
-              <Text style={styles.navigationListItemLabel}>{item.title}</Text>
-              <FontAwesome5 name="chevron-right" style={styles.navigationListItemChevron} />
+              <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
+              <FontAwesome5 name="chevron-right" className={tailwindClasses.navigationListItemChevron} style={styles.navigationListItemChevron}/>
             </Pressable>
           )}/>
       </View>

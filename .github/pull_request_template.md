@@ -24,7 +24,7 @@ How was this tested?
 - [ ] Tests were NOT needed
 - [ ] Other (explain below)
 
-Explanation:
+# [Optional] Screenshots
 
 # Documentation
 
@@ -34,8 +34,4 @@ Explanation:
 
 Link to external documentation:
 
-# [Optional] Screenshots
-
 # [Optional] Are there any post-deployment tasks we need to perform?
-
-# Additional notes

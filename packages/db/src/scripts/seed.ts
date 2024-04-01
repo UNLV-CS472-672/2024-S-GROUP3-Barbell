@@ -1,17 +1,18 @@
 import { Prisma } from '@prisma/client'
 
 import { prisma } from '..'
-import notification from '../mock-data/notification.json'
-import post from '../mock-data/post.json'
-import users from '../mock-data/user.json'
-import exercise from '../mock-data/exercise.json'
-import workout from '../mock-data/workout.json'
-import chat from '../mock-data/chat.json'
-import message from '../mock-data/message.json'
 import award from '../mock-data/award.json'
+import chat from '../mock-data/chat.json'
+import exercise from '../mock-data/exercise.json'
 import friend from '../mock-data/friend.json'
 import log from '../mock-data/log.json'
+import message from '../mock-data/message.json'
+import notification from '../mock-data/notification.json'
+import post from '../mock-data/post.json'
 import set from '../mock-data/set.json'
+import spotify from '../mock-data/spotify.json'
+import users from '../mock-data/user.json'
+import workout from '../mock-data/workout.json'
 
 /**
  * @param type logging type
@@ -56,7 +57,7 @@ const loaddb = async () => {
 
     await prisma.exercise.deleteMany()
     logger('delete', 'exercise')
-    
+
     await prisma.log.deleteMany()
     logger('delete', 'log')
 
@@ -72,9 +73,12 @@ const loaddb = async () => {
     await prisma.post.deleteMany()
     logger('delete', 'post')
 
+    await prisma.spotifyData.deleteMany()
+    logger('delete', 'spotify')
+
     await prisma.user.deleteMany()
     logger('delete', 'user')
-    
+
     await prisma.message.deleteMany()
     logger('delete', 'message')
 
@@ -87,9 +91,6 @@ const loaddb = async () => {
     await prisma.friend.deleteMany()
     logger('delete', 'friend')
 
-    
-
-
     /// < DIVIDER > ///
     logger('divider', '')
     logger('divider', '')
@@ -97,11 +98,18 @@ const loaddb = async () => {
     /// < DIVIDER > ///
 
     /// < SEED PROCEDURE > ///
+    
     /*  */
     await prisma.user.createMany({
       data: users as Prisma.UserCreateManyInput[],
     })
     logger('add', 'user')
+    
+    /*  */
+    await prisma.spotifyData.createMany({
+      data: spotify as Prisma.SpotifyDataCreateManyInput[],
+    })
+    logger('add', 'spotify')
 
     /*  */
     await prisma.post.createMany({ data: post })
@@ -160,9 +168,6 @@ const loaddb = async () => {
       data: set as Prisma.SetCreateManyInput[],
     })
     logger('add', 'set')
-
-    /*  */
-
   } catch (error) {
     console.error(error)
     process.exit(1)

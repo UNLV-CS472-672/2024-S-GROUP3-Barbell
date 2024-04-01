@@ -61,7 +61,7 @@
     "note": "trains the abdominals.",
     "body_part": "CORE",
     "category": "DURATION",
-    "workoutId":1
+    "workoutId": 1
   },
   {
     "id": 9,
@@ -79,28 +79,28 @@
     "category": "OTHER",
     "workoutId": 3
   },
- {
+  {
     "id": 11,
     "name": "Dumbbell Bicep Curl",
     "note": "targets the biceps and forearms.",
     "body_part": "ARMS",
     "category": "DUMBBELL",
     "workoutId": 2
- },
- {
+  },
+  {
     "id": 12,
     "name": "Incline Bench Press",
     "note": "targets the chest, shoulders, and triceps.",
     "body_part": "CHEST",
     "category": "BARBELL",
     "workoutId": 2
- },
- {
+  },
+  {
     "id": 13,
     "name": "Farmer's Walk",
     "note": " targets multiple body parts, including the forearms, traps, the core, and legs.",
     "body_part": "FULL_BODY",
     "category": "WEIGHTED_BODYWEIGHT",
     "workoutId": 1
- }
+  }
 ]

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RotatingBarbellIcon 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "paddingTop": 20,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "transform": [
+          {
+            "rotate": "0deg",
+          },
+        ],
+      }
+    }
+  >
+    <Text />
+  </View>
+</View>
+`;

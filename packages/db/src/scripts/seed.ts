@@ -79,11 +79,11 @@ const loaddb = async () => {
     await prisma.message.deleteMany()
     logger('delete', 'message')
 
-    await prisma.user.deleteMany()
-    logger('delete', 'user')
-
     await prisma.chat.deleteMany()
     logger('delete', 'chat')
+
+    await prisma.user.deleteMany()
+    logger('delete', 'user')
 
     await prisma.award.deleteMany()
     logger('delete', 'award')

@@ -19,11 +19,11 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     isWorkingOut,
     setIsWorkingOut,
     userData: {
-      id: 4,
-      username: 'userFour',
-      name: 'User Four',
-      status: 'OFFLINE',
-      streak: 2,
+      id: 9,
+      username: 'userNine',
+      name: 'User Nine',
+      status: 'ACTIVE',
+      streak: 4,
     },
   }
   // TODO: implement a fetchUserData function

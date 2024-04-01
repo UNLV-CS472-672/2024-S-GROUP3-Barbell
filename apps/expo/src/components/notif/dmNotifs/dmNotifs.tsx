@@ -1,12 +1,14 @@
 import { View, Text } from "react-native"
 import { useGlobalContext } from "~/context/global-context";
 import { api } from "~/utils/api"
-import Conversation from "./Conversation";
-import RotatingBarbellIcon from "./RotatingBarbellIcon";
+import Conversation from "apps/expo/src/components/notif/Conversation";
+import RotatingBarbellIcon from "apps/expo/src/components/notif/RotatingBarbellIcon";
+import { ChatType } from '@prisma/client'
 
 export default function DmNotifs() {
+
   const { userData } = useGlobalContext();
-  const { data, isFetched, isFetching} = api.notif.getMessagePreviewsFromUserId.useQuery({id: userData.id })
+  const { data, isFetched, isFetching} = api.notif.getMessagePreviewsFromUserIdAndChatType.useQuery({id: userData.id, type: ChatType.DIRECT })
   const renderedNotifications: any[] = []
 
   // Iterate over each chat object
@@ -15,8 +17,8 @@ export default function DmNotifs() {
       const messages = chat.messages;
       messages.forEach(message => {
         renderedNotifications.push(<Conversation key={chat.id} chatId={chat.id} 
-          user={String(chat.users[0]?.username == userData.username? chat.users[1]?.username : chat.users[0]?.username)}
-          messageContent={message.content} createdAt={message.createdAt} readBy={chat.readByUserIds} />)
+          chatName={String(chat.users[0]?.username == userData.username? chat.users[1]?.username : chat.users[0]?.username)}
+          messageContent={message.content} createdAt={message.createdAt} readBy={chat.readByUserIds} type={ChatType.DIRECT} />)
       });
     });
   }

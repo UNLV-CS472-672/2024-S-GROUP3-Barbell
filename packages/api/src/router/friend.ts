@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createTRPCRouter, publicProcedure } from '../trpc';
+import { createTRPCRouter, publicProcedure, protectedProcedure } from '../trpc';
 
 export const friendRouter = createTRPCRouter({
   /**
@@ -52,6 +52,31 @@ export const friendRouter = createTRPCRouter({
         where: { id: input.id },
       });
     }),
+
+/**
+   * Get friends for the current user
+   */
+getFriends: protectedProcedure
+.query(async ({ ctx }) => {
+  const currentUserId = ctx.session.user.id;
+
+  const friends = await ctx.prisma.friend.findMany({
+    where: {
+      userId: currentUserId,
+    },
+    select: {
+      user: {
+        select: {
+          id: true,
+          username: true,
+          avatar: true,
+        },
+      },
+    },
+  });
+
+  return friends.map((friend) => friend.user);
+}),
 
   /**
    * Update a friend: UNUSED, but here for reference

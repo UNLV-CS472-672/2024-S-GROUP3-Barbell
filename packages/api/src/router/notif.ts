@@ -8,7 +8,7 @@ export const notifRouter = createTRPCRouter({
    *  @remarks
    *  This returns all of the messages in order from oldest to newest within any chat type
    *
-   *  @param  id - the id of the direct message chat
+   *  @param  id - the id of the chat
    *  @param  type - the chat type (DIRECT or GROUP)
    *  @returns an array of message objects
    */
@@ -38,6 +38,33 @@ export const notifRouter = createTRPCRouter({
         },
         orderBy: {
           createdAt: 'asc',
+        },
+      })
+    }),
+
+  /**
+   *  @remarks
+   *  Adds current user to readByUserIds field in DB
+   *
+   *  @param  chatId - the id of the chat
+   *  @param  userId - the id of the logged in user
+   *  @param  type - the chat type (DIRECT or GROUP)
+   *  @returns an array of message objects
+   */
+  markChatAsReadByChatIdAndUserIdAndChatType: publicProcedure
+    .input(z.object({ chatId: z.number().int(), userId: z.number().int(), type: z.nativeEnum(ChatType) }))
+    .mutation(async ({ ctx, input }) => {
+      const { prisma } = ctx
+
+      return prisma.chat.update({
+        where: {
+          id: input.chatId,
+          type: input.type,
+        },
+        data: {
+          readByUserIds: {
+            push: input.userId,
+          },
         },
       })
     }),

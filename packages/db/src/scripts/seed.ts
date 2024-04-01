@@ -76,11 +76,11 @@ const loaddb = async () => {
     await prisma.spotifyData.deleteMany()
     logger('delete', 'spotify')
 
-    await prisma.user.deleteMany()
-    logger('delete', 'user')
-
     await prisma.message.deleteMany()
     logger('delete', 'message')
+
+    await prisma.user.deleteMany()
+    logger('delete', 'user')
 
     await prisma.chat.deleteMany()
     logger('delete', 'chat')
@@ -98,13 +98,13 @@ const loaddb = async () => {
     /// < DIVIDER > ///
 
     /// < SEED PROCEDURE > ///
-    
+
     /*  */
     await prisma.user.createMany({
       data: users as Prisma.UserCreateManyInput[],
     })
     logger('add', 'user')
-    
+
     /*  */
     await prisma.spotifyData.createMany({
       data: spotify as Prisma.SpotifyDataCreateManyInput[],

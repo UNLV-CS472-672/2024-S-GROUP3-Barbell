@@ -253,10 +253,10 @@
     name            String?   @db.Char(40)
     users           User[]
     readByUserIds   Int[]
-    createdByUserId Int?
+    createdByUserId Int
     messages        Message[]
     type            ChatType
-    createdBy       User?      @relation("ChatCreator", fields: [createdByUserId], references: [id])
+    createdBy       User       @relation("ChatCreator", fields: [createdByUserId], references: [id])
   }
 
   model Message {

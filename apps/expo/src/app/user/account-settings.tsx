@@ -7,6 +7,12 @@ import { router } from 'expo-router';
 import colors from '~/styles/colors';
 import { FA } from '~/utils/constants';
 
+interface NavigationListItem {
+  title: string;
+  iconName: string;
+  onPress: () => void;
+}
+
 const styles = StyleSheet.create({
   navigationListItemIcon: {
     padding: 8,
@@ -25,37 +31,31 @@ const styles = StyleSheet.create({
   }
 });
 
-interface NavigationListItem {
-  title: string;
-  iconName: string;
-  onPress: () => void;
-}
+const tailwindClasses = {
+  mainTile: 'm-4 p-4 rounded-lg bg-bb-dark-gray',
+  mainTileTitle: 'text-2xl text-slate-200',
+  mainTileItem: 'flex-row',
+  navigationListItemLabel: 'flex-auto m-2 self-center text-slate-200',
+  navigationListItemChevron: 'self-center text-slate-200'
+};
+
+const accountItems: NavigationListItem[] = [
+  { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/user/personal-data') },
+  { title: 'Achievements', iconName: 'award', onPress: () => router.push('/user/achievements') },
+  { title: 'Activity History', iconName: 'history', onPress: () => router.push('/user/activity-history') },
+  { title: 'Workout Progress', iconName: 'chart-pie', onPress: () => router.push('/user/workout-progress') }
+];
+
+const otherItems: NavigationListItem[] = [
+  { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/contact-us') },
+  { title: 'Privacy Policy', iconName: 'shield-alt', onPress: () => router.push('/privacy-policy') }
+];
 
 const AccountSettings = () => {
   const [notificationsSwitchEnabled, setIsEnabled] = useState(false);
   const toggleNotificationSwitch = () => setIsEnabled(previousState => !previousState);
   const { data } = api.user.byId.useQuery({ id: 1 });
   const user = data; // alias for readability
-
-  const tailwindClasses = {
-    mainTile: 'm-4 p-4 rounded-lg bg-bb-dark-gray',
-    mainTileTitle: 'text-2xl text-slate-200',
-    mainTileItem: 'flex-row',
-    navigationListItemLabel: 'flex-auto m-2 self-center text-slate-200',
-    navigationListItemChevron: 'self-center text-slate-200'
-  }
-
-  const accountItems: NavigationListItem[] = [
-    { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/user/personal-data') },
-    { title: 'Achievements', iconName: 'award', onPress: () => router.push('/user/achievements') },
-    { title: 'Activity History', iconName: 'history', onPress: () => router.push('/user/activity-history') },
-    { title: 'Workout Progress', iconName: 'chart-pie', onPress: () => router.push('/user/workout-progress') }
-  ];
-
-  const otherItems: NavigationListItem[] = [
-    { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/contact-us') },
-    { title: 'Privacy Policy', iconName: 'shield-alt', onPress: () => router.push('/privacy-policy') }
-  ]
 
   return (
     <SafeAreaView className='flex-1 bg-bb-slate-100' style={{backgroundColor: '#1e1e1e', flex: 1}}>
@@ -105,4 +105,4 @@ const AccountSettings = () => {
   )
 }
 
-export default AccountSettings
+export default AccountSettings;

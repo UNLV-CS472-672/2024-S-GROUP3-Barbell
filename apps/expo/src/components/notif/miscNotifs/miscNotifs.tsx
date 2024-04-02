@@ -1,7 +1,6 @@
 import { Text, View } from 'react-native'
 
-import RotatingBarbellIcon from 'apps/expo/src/components/notif/dmNotifs/RotatingBarbellIcon'
-
+import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/api'
 import FriendRequestNotif from './FriendRequestNotif'

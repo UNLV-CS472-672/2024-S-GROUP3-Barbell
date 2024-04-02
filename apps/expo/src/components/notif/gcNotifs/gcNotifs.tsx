@@ -6,34 +6,41 @@ import Conversation from '~/components/notif/Conversation'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/api'
+import { makeChatName } from '~/utils/makeChatName'
 
-export default function DmNotifs() {
+function makeNullMessagePreview(chat: any, loggedInUser: string): string {
+  return (
+    (chat.createdBy.username.trim() == loggedInUser ? 'You' : chat.createdBy.username.trim()) + ' created a new chat'
+  )
+}
+
+export default function GcNotifs() {
   const { userData } = useGlobalContext()
   const { data, isFetched, isFetching } = api.notif.getMessagePreviewsFromUserIdAndChatType.useQuery({
     id: userData.id,
-    type: ChatType.DIRECT,
+    type: ChatType.GROUP,
   })
   const renderedNotifications: any[] = []
 
   // Iterate over each chat object
   if (data != undefined) {
     data.forEach((chat) => {
-      const messages = chat.messages
-      messages.forEach((message) => {
-        renderedNotifications.push(
-          <Conversation
-            key={chat.id}
-            chatId={chat.id}
-            chatName={String(
-              chat.users[0]?.username == userData.username ? chat.users[1]?.username : chat.users[0]?.username,
-            )}
-            messageContent={message.content}
-            createdAt={message.createdAt}
-            readBy={chat.readByUserIds}
-            type={ChatType.DIRECT}
-          />,
-        )
-      })
+      const lastMessage = chat.messages[0]
+      const chatName: string = chat.name != undefined ? chat.name : makeChatName(chat.users, userData)
+      const messageContent: string =
+        lastMessage != undefined ? lastMessage.content : makeNullMessagePreview(chat, userData.username)
+      const createdAt: Date = lastMessage != undefined ? lastMessage.createdAt : chat.createdAt
+      renderedNotifications.push(
+        <Conversation
+          key={chat.id}
+          chatId={chat.id}
+          chatName={chatName}
+          messageContent={messageContent}
+          createdAt={createdAt}
+          readBy={chat.readByUserIds}
+          type={ChatType.GROUP}
+        />,
+      )
     })
   }
 

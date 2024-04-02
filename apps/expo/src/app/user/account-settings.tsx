@@ -1,25 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, Switch, FlatList, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Switch, FlatList, Pressable } from 'react-native';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { api } from '~/utils/api';
 import { router } from 'expo-router';
+import colors from '~/styles/colors';
+import { FA } from '~/utils/constants';
 
-const iconSize = 26;
-const borderRadius = 12;
-const colors = {
-    primary: '#FF385C',
-    grey: '#cacaca',
-    dark: '#1A1A1A',
-    darkGrey: '#272727',
-    purple: '#48476D',
-    white: '#FFFFFF',
-    background: '#1E1E1E',
-    bottomav : {
-      nav: '#272727',
-      icon: '#CACACA',
-    },
-  };
 const styles = StyleSheet.create({
   navigationListItemIcon: {
     padding: 8,
@@ -30,17 +17,17 @@ const styles = StyleSheet.create({
     flex: 4,
     margin: 4,
     alignSelf: 'center',
-    color: colors.grey
+    color: colors.lightGray
   },
   navigationListItemChevron: {
     alignSelf: 'center',
-    color: colors.grey
+    color: colors.lightGray
   }
-})
+});
 
 interface NavigationListItem {
-  title: string,
-  iconName: string,
+  title: string;
+  iconName: string;
   onPress: () => void;
 }
 
@@ -74,11 +61,10 @@ const AccountSettings = () => {
     <SafeAreaView className='flex-1 bg-bb-slate-100' style={{backgroundColor: '#1e1e1e', flex: 1}}>
       <View className='flex-row bg-bb-dark-gray rounded-lg m-4'>
         <View className='flex-row items-center'>
-          <FontAwesome5 name="user" size={48} className="p-6 text-bb-dark-purple" style={{color: '#48476D'}}/>
+          <FontAwesome5 name="user" size={FA.xl} className="p-6 text-bb-dark-purple" style={{color: '#48476D'}}/>
         </View>
         <View className='m-4 flex-3'>
           <Text className="text-2xl text-slate-200">{user?.name}</Text>
-          <Text className="text-md text-slate-200">@{user?.id}</Text>
           <Text className="text-md text-slate-200">Streak: {user?.streak} days</Text>
         </View>
       </View>
@@ -87,7 +73,7 @@ const AccountSettings = () => {
         <View className={tailwindClasses.mainTileItem}>
           <FlatList data={accountItems} renderItem={({ item }) => (
             <Pressable onPress={item.onPress} className='flex-row'>
-              <FontAwesome5 name={item.iconName} size={iconSize} style={styles.navigationListItemIcon}/>
+              <FontAwesome5 name={item.iconName} size={FA.reg} style={styles.navigationListItemIcon}/>
               <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
               <FontAwesome5 name="chevron-right" className={tailwindClasses.navigationListItemChevron} style={styles.navigationListItemChevron}/>
             </Pressable>
@@ -102,14 +88,14 @@ const AccountSettings = () => {
             onValueChange={toggleNotificationSwitch}
             value={notificationsSwitchEnabled}
             trackColor={{true: colors.purple}}
-            thumbColor={notificationsSwitchEnabled ? colors.purple : colors.grey}/>
+            thumbColor={notificationsSwitchEnabled ? colors.purple : colors.lightGray}/>
         </View>
       </View>
       <View className={tailwindClasses.mainTile}>
         <Text className={tailwindClasses.mainTileTitle}>Other</Text>
           <FlatList data={otherItems} renderItem={({ item }) => (
             <Pressable onPress={item.onPress} className='flex-row'>
-              <FontAwesome5 name={item.iconName} size={iconSize} style={styles.navigationListItemIcon} />
+              <FontAwesome5 name={item.iconName} size={FA.reg} style={styles.navigationListItemIcon} />
               <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
               <FontAwesome5 name="chevron-right" className={tailwindClasses.navigationListItemChevron} style={styles.navigationListItemChevron}/>
             </Pressable>

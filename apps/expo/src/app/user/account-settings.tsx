@@ -52,10 +52,11 @@ const otherItems: NavigationListItem[] = [
 ];
 
 const AccountSettings = () => {
-  const [notificationsSwitchEnabled, setIsEnabled] = useState(false);
-  const toggleNotificationSwitch = () => setIsEnabled(previousState => !previousState);
-  const { data } = api.user.byId.useQuery({ id: 1 });
-  const user = data; // alias for readability
+  const { data: user } = api.user.byId.useQuery({ id: 1 });
+  const [notificationsSwitchEnabled, setNotificationsSwitchEnabled] = useState(false);
+  const toggleNotificationSwitch = () => {
+    setNotificationsSwitchEnabled(previousState => !previousState);
+  };
 
   return (
     <SafeAreaView className='flex-1 bg-bb-slate-100' style={{backgroundColor: '#1e1e1e', flex: 1}}>

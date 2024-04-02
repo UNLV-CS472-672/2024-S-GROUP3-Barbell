@@ -9,7 +9,7 @@ export default function SpotifyScreen() {
 
     return(
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}> 
-            <Spotify inputID={1} />
+            <Spotify inputID={4} />
         </View>
     )
 }

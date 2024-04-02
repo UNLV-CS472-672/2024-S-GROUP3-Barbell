@@ -6,49 +6,79 @@ import { createTRPCRouter, publicProcedure } from '../trpc'
 export const notifRouter = createTRPCRouter({
   /**
    *  @remarks
-   *  This returns all of the messages in order from oldest to newest within a direct message chat
-   *  between two users.
+   *  This returns all of the messages in order from oldest to newest within any chat type
    *
-   *  @param  id - the id of the direct message chat
+   *  @param  id - the id of the chat
+   *  @param  type - the chat type (DIRECT or GROUP)
    *  @returns an array of message objects
    */
-  getDMsFromChatId: publicProcedure.input(z.object({ id: z.number().int() })).query(async ({ ctx, input }) => {
-    const { prisma } = ctx
+  getMessagesFromChatIdAndChatType: publicProcedure
+    .input(z.object({ id: z.number().int(), type: z.nativeEnum(ChatType) }))
+    .query(async ({ ctx, input }) => {
+      const { prisma } = ctx
 
-    const chat = await prisma.chat.findFirst({
-      where: {
-        type: ChatType.DIRECT,
-        id: input.id,
-      },
-      select: {
-        id: true,
-        users: true,
-      },
-    })
+      const chat = await prisma.chat.findFirst({
+        where: {
+          type: input.type,
+          id: input.id,
+        },
+        select: {
+          id: true,
+          users: true,
+        },
+      })
 
-    if (chat == undefined) {
-      return []
-    }
+      if (chat == undefined) {
+        return []
+      }
 
-    return prisma.message.findMany({
-      where: {
-        chatId: chat.id,
-      },
-      orderBy: {
-        createdAt: 'asc',
-      },
-    })
-  }),
+      return prisma.message.findMany({
+        where: {
+          chatId: chat.id,
+        },
+        orderBy: {
+          createdAt: 'asc',
+        },
+      })
+    }),
 
   /**
    *  @remarks
-   *  This returns the most recent message from each direct message chat for a user.
+   *  Adds current user to readByUserIds field in DB
+   *
+   *  @param  chatId - the id of the chat
+   *  @param  userId - the id of the logged in user
+   *  @param  type - the chat type (DIRECT or GROUP)
+   *  @returns an array of message objects
+   */
+  markChatAsReadByChatIdAndUserIdAndChatType: publicProcedure
+    .input(z.object({ chatId: z.number().int(), userId: z.number().int(), type: z.nativeEnum(ChatType) }))
+    .mutation(async ({ ctx, input }) => {
+      const { prisma } = ctx
+
+      return prisma.chat.update({
+        where: {
+          id: input.chatId,
+          type: input.type,
+        },
+        data: {
+          readByUserIds: {
+            push: input.userId,
+          },
+        },
+      })
+    }),
+
+  /**
+   *  @remarks
+   *  This returns the most recent message from each chat for a user, separated by type
    *
    *  @param  id - the id of the user
+   *  @param  type - type of the chat (DIRECT or GROUP)
    *  @returns an array of objects containing the chatId, and an array containing the most recent message for that chat
    */
-  getMessagePreviewsFromUserId: publicProcedure
-    .input(z.object({ id: z.number().int() }))
+  getMessagePreviewsFromUserIdAndChatType: publicProcedure
+    .input(z.object({ id: z.number().int(), type: z.nativeEnum(ChatType) }))
     .query(async ({ ctx, input }) => {
       const { prisma } = ctx
 
@@ -61,27 +91,35 @@ export const notifRouter = createTRPCRouter({
         },
       })
 
-      const directChatIds: number[] = []
+      const chatIds: number[] = []
       userChats?.chats.forEach((chat) => {
-        if (chat.type === ChatType.DIRECT) {
-          directChatIds.push(chat.id)
+        if (chat.type === input.type) {
+          chatIds.push(chat.id)
         }
       })
 
-      if (directChatIds.length == 0) {
+      if (chatIds.length == 0) {
         return []
       }
 
-      const finalMessageForEachDMChat = await prisma.chat.findMany({
+      const finalMessageForEachChat = await prisma.chat.findMany({
         where: {
           id: {
-            in: directChatIds,
+            in: chatIds,
           },
         },
         select: {
           users: true,
           id: true,
           readByUserIds: true,
+          name: true,
+          createdByUserId: true,
+          createdAt: true,
+          createdBy: {
+            select: {
+              username: true,
+            },
+          },
           messages: {
             orderBy: {
               createdAt: 'desc',
@@ -98,7 +136,7 @@ export const notifRouter = createTRPCRouter({
         },
       })
 
-      return finalMessageForEachDMChat
+      return finalMessageForEachChat
     }),
 
   /**

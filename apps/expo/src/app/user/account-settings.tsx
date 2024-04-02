@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
     flex: 4,
     margin: 4,
     alignSelf: 'center',
-    color: colors.lightGray
+    color: colors.silver
   },
   navigationListItemChevron: {
     alignSelf: 'center',
-    color: colors.lightGray
+    color: colors.silver
   }
 });
 
@@ -88,7 +88,7 @@ const AccountSettings = () => {
             onValueChange={toggleNotificationSwitch}
             value={notificationsSwitchEnabled}
             trackColor={{true: colors.purple}}
-            thumbColor={notificationsSwitchEnabled ? colors.purple : colors.lightGray}/>
+            thumbColor={notificationsSwitchEnabled ? colors.purple : colors.silver}/>
         </View>
       </View>
       <View className={tailwindClasses.mainTile}>

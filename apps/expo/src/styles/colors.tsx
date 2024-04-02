@@ -4,7 +4,7 @@ export default {
   dark: '#1A1A1A',
   background: '#1E1E1E',
   purple: '#48476D',
-  lightGray: '#CACACA',
+  silver: '#CACACA',
   bottomav: {
     nav: '#272727',
     icon: '#CACACA',

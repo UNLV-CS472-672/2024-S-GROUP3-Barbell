@@ -9,7 +9,6 @@ import 'react-native-get-random-values'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { useGlobalContext } from '~/context/global-context'
 import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
 import { api } from '~/utils/api'
 import { SignOut } from './sign-out'
@@ -19,9 +18,8 @@ WebBrowser.maybeCompleteAuthSession()
 const SignInWithGoogle = () => {
   // flag used to enable/disable buttons
   const [isEnabled, setIsEnabled] = useState(true)
-  const { setUserData: setGlobalContextUserData } = useGlobalContext()
   const createUserApi = api.user.create.useMutation()
-  const { userId: clerkUserId } = useAuth()
+  const { userId: clerkUserId, signOut } = useAuth()
   const { user: clerkUserData } = useUser()
 
   // Warm up the android browser to improve UX
@@ -71,42 +69,25 @@ const SignInWithGoogle = () => {
       : 'user' + uuidv4().slice(0, 13).replaceAll('-', '')
 
     if (clerkUserId && clerkUserData?.fullName) {
-      const { data: existingUser } = api.user.byClerkId.useQuery({ clerkId: clerkUserId })
-      // if (existingUser) {
-      //   setGlobalContextUserData({
-      //     id: existingUser.id,
-      //     clerkId: existingUser.clerkId,
-      //     username: existingUser.username,
-      //     name: existingUser.name!,
-      //   })
-      //   return true
-      // }
-      createUserApi.mutate({
-        clerkId: clerkUserId,
-        username: username,
-        name: clerkUserData.fullName,
-      })
-      // console.log('User created:', t)
-
-      // if (!userId) {
-      //   Alert.alert('Error', 'Could not sign up user. Please try again.')
-      //   console.log("Couldn't get user id from the database")
-      //   // deleteUserApi.mutate({ clerkId: clerkUserId })
-      //   return false
-      // }
-      // setGlobalContextUserData({
-      //   id: userId,
-      //   clerkId: clerkUserId,
-      //   username: username,
-      //   name: clerkUserData.fullName,
-      // })
+      createUserApi.mutate(
+        {
+          clerkId: clerkUserId,
+          username: username,
+          name: clerkUserData.fullName,
+        },
+        {
+          onError: (err) => {
+            console.error('Error creating user', err)
+            Alert.alert('Error creating user', 'If you already have an account, please sign in instead.')
+            signOut()
+          },
+        },
+      )
     }
 
     if (!clerkUserData?.username) {
       // TODO: Send to create/edit user info screen
     }
-
-    return true
   }
 
   const onSignUpPressOAuth = React.useCallback(async () => {
@@ -126,10 +107,6 @@ const SignInWithGoogle = () => {
           console.log('Session Id:', createdSessionId)
           console.log('User Id:', clerkUserId)
           createUser()
-          // if (!createUser()) {
-          //   setActive?.({ session: null })
-          // }
-          router.back()
         } else {
           alert('Sign up failed')
         }

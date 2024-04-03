@@ -12,7 +12,7 @@ export interface FriendRequestNotifProps {
 
 export default function FriendRequestNotif({ notif, senderUsername }: FriendRequestNotifProps) {
   return (
-    <View>
+    <View testID="friend-request-notif-container">
       <View className="ml-3 mr-3 mt-4 flex flex-row items-center">
         {/*photo, use icon for now, probably use profile photo in the future*/}
         <View className="mr-2">

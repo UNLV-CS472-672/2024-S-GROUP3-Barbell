@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FriendRequestNotif 1`] = `
-<View>
+<View
+  testID="friend-request-notif-container"
+>
   <View
     className="ml-3 mr-3 mt-4 flex flex-row items-center"
   >

@@ -176,4 +176,38 @@ export const notifRouter = createTRPCRouter({
 
       return notifs
     }),
+
+  /**
+   *  @remarks
+   *  This accepts or denies a friend request for the user.
+   *
+   *  @param  receiverId - the id of the one who receives, logged in user
+   *  @param  senderId - the id of the one who sends, *not* logged in user
+   *  @param  acceptFR - boolean to accept friend request or not
+   *  @returns the accept or deny mutation, adds as friend or does not add
+   */
+  acceptOrDenyFriendRequestReceiverIdSenderId: publicProcedure
+    .input(z.object({ receiverId: z.number().int(), senderId: z.number().int(), acceptFR: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const { prisma } = ctx
+
+      if (input.acceptFR) {
+        const newFriend = await prisma.user.findFirst({
+          where: {
+            id: input.senderId,
+          },
+        })
+
+        return prisma.user.update({
+          where: {
+            id: input.senderId,
+          },
+          data: {
+            friends: {
+              push: newFriend,
+            },
+          },
+        })
+      }
+    }),
 })

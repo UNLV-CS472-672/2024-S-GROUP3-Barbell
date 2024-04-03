@@ -15,21 +15,41 @@ export const userRouter = createTRPCRouter({
   }),
 
   /**
-   * get user by id
+   * get user by clerkId
    */
-  byId: publicProcedure
-    .input(z.object({ id: z.number() }))
-    .query(({ ctx, input }) => {
-      return ctx.prisma.user.findFirst({ where: { id: input.id } })
-    }),
+  byClerkId: publicProcedure.input(z.object({ clerkId: z.string() })).query(({ ctx, input }) => {
+    return ctx.prisma.user.findFirst({ where: { clerkId: input.clerkId } })
+  }),
 
   /**
    * create a user
    */
+  create: publicProcedure
+    .input(z.object({ clerkId: z.string(), username: z.string(), name: z.string() }))
+    .mutation(({ ctx, input }) => {
+      const { prisma } = ctx
+
+      return prisma.user.create({
+        data: {
+          clerkId: input.clerkId,
+          username: input.username,
+          name: input.name,
+        },
+      })
+    }),
+
+  getIdByClerkId: publicProcedure.input(z.object({ clerkId: z.string() })).query(({ ctx, input }) => {
+    return ctx.prisma.user.findFirst({ where: { clerkId: input.clerkId } }).then((user) => {
+      return user?.id
+    })
+  }),
 
   /**
    * delete a user
    */
+  deleteByClerkId: publicProcedure.input(z.object({ clerkId: z.string() })).mutation(({ ctx, input }) => {
+    return ctx.prisma.user.deleteMany({ where: { clerkId: input.clerkId } })
+  }),
 
   /**
    * update a user

@@ -117,8 +117,8 @@ const Layout = () => {
         />
       </Tabs>
 
-      <CustomBottomSheetModal ref={bottomSheetRef} customSnapPoints={['30%']} startIndex={0} renderBackdrop>
-        <View className="align-center bg-white flex-1 ">
+      <CustomBottomSheetModal ref={bottomSheetRef} customSnapPoints={['30%']} startIndex={0} renderBackdrop enablePanDownToClose>
+        <View className="align-center bg-background flex-1 items-center py-10">
           <Button color="trap" size="full" value="Start Saved Workout" className="mb-5" testID="button-test"></Button>
           <Button color="trap" size="full" value="Create New Workout" testID="button-test-2"></Button>
         </View>

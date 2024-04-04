@@ -19,7 +19,7 @@ interface Props {
 // }
 
 const CustomBottomSheet = forwardRef<Ref, Props>((_, ref) => {
-  const snapPoints = useMemo(() => ['38%'], [])
+  const snapPoints = useMemo(() => ['30%'], [])
 
   return (
     <BottomSheet

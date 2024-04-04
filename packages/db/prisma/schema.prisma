@@ -176,7 +176,7 @@
     sets      Set[]
     body_part BodyPart
     category  Category
-    workout   Workout  @relation(fields: [workoutId], references: [id])
+    workout   Workout[]
     workoutId Int
   }
 

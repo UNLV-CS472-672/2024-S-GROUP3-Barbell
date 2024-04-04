@@ -41,7 +41,6 @@ const SignInWithGoogle = () => {
         }
       } catch (err: any) {
         Alert.alert('OAuth Error', `An error occurred during the OAuth process: ${err.message || err}`)
-        console.error('OAuth error', err)
       }
       setIsEnabled(true)
     }
@@ -49,6 +48,7 @@ const SignInWithGoogle = () => {
 
   return (
     <Button
+      testID="sign-in-with-google-btn"
       onPress={() => SignInWithGoogleOAuth()}
       disabled={!isEnabled}
       color="dark"

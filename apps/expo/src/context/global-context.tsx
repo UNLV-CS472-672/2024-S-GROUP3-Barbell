@@ -20,7 +20,6 @@ export type TGlobalContext = {
   isWorkingOut: boolean
   setIsWorkingOut: Dispatch<SetStateAction<boolean>>
   userData: IUserData | null
-  setUserData: Dispatch<SetStateAction<IUserData | null>>
 }
 
 export const GlobalContext = createContext<TGlobalContext | null>(null)
@@ -62,7 +61,6 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     isWorkingOut,
     setIsWorkingOut,
     userData,
-    setUserData,
   }
 
   return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>

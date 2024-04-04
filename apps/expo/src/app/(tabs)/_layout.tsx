@@ -8,6 +8,7 @@ import CircleMinus from '~assets/svgs/circle-minus.svg'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
+
 import { DefaultHeader } from '~/layouts/headers/default'
 import colors from '~/styles/colors'
 
@@ -39,7 +40,13 @@ const Layout = () => {
         <Tabs.Screen
           name="index"
           options={{
-            header: () => <DefaultHeader onCategoryChanged={() => {'Cabin'}}/>,
+            header: () => (
+              <DefaultHeader
+                onCategoryChanged={() => {
+                  'Cabin'
+                }}
+              />
+            ),
             tabBarIcon: ({ focused, size }) => (
               <View className="items-center">
                 <HomeLogo
@@ -58,10 +65,10 @@ const Layout = () => {
           name="one"
           redirect={false}
           listeners={{
-            tabPress: (e) => {
-              // e.preventDefault()
-              // handlePresentModal()
-            },
+            // tabPress: (e) => {
+            //   // e.preventDefault()
+            //   // handlePresentModal()
+            // },
           }}
           options={{
             tabBarIcon: ({ size, focused }) => (

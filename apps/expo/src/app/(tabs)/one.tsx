@@ -18,10 +18,7 @@ export default function TabTwoScreen() {
   const handleOpenPress = () => bottomSheetRef.current?.expand()
 
   return (
-    <View
-      className={cn('', `bg-[${colors.background}]`)}
-      style={{ backgroundColor: colors.background }}
-    >
+    <View className={cn('flex-1', `bg-[${colors.background}]`)} style={{ backgroundColor: colors.background }}>
       {/* <Stack.Screen
         options={{
           header: () => (
@@ -36,7 +33,7 @@ export default function TabTwoScreen() {
       {/*  */}
       <RNButton title="Open" onPress={handleOpenPress} color={colors.primary} />
       <RNButton title="Close" onPress={handleClosePress} color={colors.grey} />
-      
+
       <Button
         onPress={() => router.push('/nav')}
         className="flex h-10 w-24 items-center justify-center rounded-md bg-blue-500"

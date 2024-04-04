@@ -7,7 +7,8 @@
   "packageManager": "pnpm@8.11.0",
   "scripts"       : {
     "build"           : "turbo build",
-    "dev"             : "turbo dev --parallel",
+    "dev"             : "turbo dev --parallel --filter=!@acme/expo",
+    "tui"             : "turbo dev --parallel --experimental-ui",
     "scan"            : "pnpm exec turbo scan",
     "clean"           : "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",

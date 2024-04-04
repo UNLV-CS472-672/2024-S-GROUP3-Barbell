@@ -6,18 +6,21 @@ import { fileURLToPath } from 'url'
 
 /** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
 const config = {
+  // prettier
+  semi: false,
+  printWidth: 120,
+  singleQuote: true,
+  quoteProps: 'as-needed',
+  jsxSingleQuote: true,
+
   // sort-imports, and tailwinds
-  plugins: [
-    '@ianvs/prettier-plugin-sort-imports',
-    'prettier-plugin-tailwindcss',
-  ],
+  plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss'],
 
   // tailwind
-  tailwindConfig: fileURLToPath(
-    new URL('../../tooling/tailwind/index.ts', import.meta.url),
-  ),
+tailwindConfig: fileURLToPath(new URL('../../tooling/tailwind/native.ts', import.meta.url)),
 
   // utils
+  // https://github.com/tailwindlabs/prettier-plugin-tailwindcss
   tailwindFunctions: ['cn', 'cva'],
 
   // sort-imports
@@ -39,10 +42,6 @@ const config = {
   ],
   importOrderTypeScriptVersion: '4.4.0',
   importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
-  // prettier
-  semi: false,
-  printWidth: 120,
-  singleQuote: true,
 }
 
 export default config

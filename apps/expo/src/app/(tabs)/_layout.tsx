@@ -43,7 +43,7 @@ const Layout = () => {
             header: () => (
               <DefaultHeader
                 onCategoryChanged={() => {
-                  'Cabin'
+                  'Home'
                 }}
               />
             ),
@@ -64,13 +64,22 @@ const Layout = () => {
         <Tabs.Screen
           name="one"
           redirect={false}
-          listeners={{
-            // tabPress: (e) => {
-            //   // e.preventDefault()
-            //   // handlePresentModal()
-            // },
-          }}
+          listeners={
+            {
+              // tabPress: (e) => {
+              //   // e.preventDefault()
+              //   // handlePresentModal()
+              // },
+            }
+          }
           options={{
+            header: () => (
+              <DefaultHeader
+                onCategoryChanged={() => {
+                  'New Workout'
+                }}
+              />
+            ),
             tabBarIcon: ({ size, focused }) => (
               <View style={{ marginTop: -30 }}>
                 {/* <CirclePlus width={size * 3} height={size * 3} fill={color} /> */}
@@ -88,6 +97,13 @@ const Layout = () => {
         <Tabs.Screen
           name="two"
           options={{
+            header: () => (
+              <DefaultHeader
+                onCategoryChanged={() => {
+                  'Settings'
+                }}
+              />
+            ),
             tabBarIcon: ({ focused, size }) => (
               <View className="items-center">
                 <Profile width={size * 1.25} height={size * 1.25} fill={focused ? `${colors.bottomav.icon}` : 'none'} />

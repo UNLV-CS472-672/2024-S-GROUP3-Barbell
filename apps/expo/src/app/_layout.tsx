@@ -102,7 +102,7 @@ function RootLayoutBottomNav() {
       <Stack.Screen
         name="(tabs)"
         options={{
-          header: () => <View className="bg-dark py-10"></View>,
+          header: () => <View className="py-10"></View>,
         }}
       />
     </Stack>

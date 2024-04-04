@@ -9,11 +9,10 @@ import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
 
-import type { CustomBottomSheetModalRef } from '~/components/custom-bottom-sheet-modal'
-import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
-import Button from '~/components/ui/button/button'
+import { useTBottomSheet } from '~/hooks/useTBottomSheet'
 import { DefaultHeader } from '~/layouts/headers/default'
 import colors from '~/styles/colors'
+import BottomSheetContext from '../../context/bottom-sheet.context'
 
 const Layout = () => {
   const AnimatedDot = ({ focused }: { focused: boolean }) => (
@@ -24,105 +23,111 @@ const Layout = () => {
     />
   )
 
-  const bottomSheetRef = React.useRef<CustomBottomSheetModalRef>(null)
-  const handlePresentModalPress = () => bottomSheetRef.current?.present()
+  const { isOpen, openBottomSheet, closeBottomSheet, bottomSheetRef } = useTBottomSheet()
+  // const bottomSheetRef = React.useRef(null);
+  // console.log('bottomSheetRef', bottomSheetRef)
 
   return (
     <>
-      <Tabs
-        screenOptions={{
-          tabBarActiveTintColor: colors.primary,
-          tabBarStyle: {
-            height: 85,
-            backgroundColor: colors.bottomav.nav,
-            borderColor: colors.background,
-          },
-          // headerShown: false,
-          tabBarShowLabel: false,
-          tabBarIconStyle: { paddingHorizontal: 10 },
-        }}
-      >
-        {/*  */}
-        <Tabs.Screen
-          name="index"
-          options={{
-            header: () => (
-              <DefaultHeader
-                onCategoryChanged={() => {
-                  'Home'
-                }}
-              />
-            ),
-            tabBarIcon: ({ focused, size }) => (
-              <View className="items-center">
-                <HomeLogo
-                  width={size * 1.25}
-                  height={size * 1.25}
-                  fill={focused ? `${colors.bottomav.icon}` : 'none'}
-                />
-                <AnimatedDot focused={focused} />
-              </View>
-            ),
-          }}
-        />
-
-        {/* PLUS CIRCLE */}
-        <Tabs.Screen
-          name="one"
-          redirect={false}
-          listeners={{
-            tabPress: (e) => {
-              handlePresentModalPress()
+      <BottomSheetContext.Provider value={{ bottomSheetRef, closeBottomSheet, openBottomSheet }}>
+        <Tabs
+          screenOptions={{
+            tabBarActiveTintColor: colors.primary,
+            tabBarStyle: {
+              height: 85,
+              backgroundColor: colors.bottomav.nav,
+              borderColor: colors.background,
             },
+            // headerShown: false,
+            tabBarShowLabel: false,
+            tabBarIconStyle: { paddingHorizontal: 10 },
           }}
-          options={{
-            // header: () => (
-            //   <DefaultHeader
-            //     onCategoryChanged={() => {
-            //       'New Workout'
-            //     }}
-            //   />
-            // ),
-            tabBarIcon: ({ size, focused }) => (
-              <View style={{ marginTop: -30 }}>
-                {/* <CirclePlus width={size * 3} height={size * 3} fill={color} /> */}
-                {focused ? (
-                  <CircleMinus width={size * 3} height={size * 3} fill={colors.primary} />
-                ) : (
-                  <CirclePlus width={size * 3} height={size * 3} fill={colors.bottomav.icon} />
-                )}
-              </View>
-            ),
-          }}
-        />
+        >
+          {/*  */}
+          <Tabs.Screen
+            name="index"
+            options={{
+              header: () => (
+                <DefaultHeader
+                  onCategoryChanged={() => {
+                    'Home'
+                  }}
+                />
+              ),
+              tabBarIcon: ({ focused, size }) => (
+                <View className="items-center">
+                  <HomeLogo
+                    width={size * 1.25}
+                    height={size * 1.25}
+                    fill={focused ? `${colors.bottomav.icon}` : 'none'}
+                  />
+                  <AnimatedDot focused={focused} />
+                </View>
+              ),
+            }}
+          />
 
-        {/*  */}
-        <Tabs.Screen
-          name="two"
-          options={{
-            header: () => (
-              <DefaultHeader
-                onCategoryChanged={() => {
-                  'Settings'
-                }}
-              />
-            ),
-            tabBarIcon: ({ focused, size }) => (
-              <View className="items-center">
-                <Profile width={size * 1.25} height={size * 1.25} fill={focused ? `${colors.bottomav.icon}` : 'none'} />
-                <AnimatedDot focused={focused} />
-              </View>
-            ),
-          }}
-        />
-      </Tabs>
+          {/* PLUS CIRCLE */}
+          <Tabs.Screen
+            name="one"
+            redirect={false}
+            listeners={{
+              tabPress: (e) => {
+                // e.preventDefault();
+                console.log('tabPress', bottomSheetRef)
+                if (!isOpen) {
+                  openBottomSheet()
+                } else {
+                  closeBottomSheet()
+                }
+              },
+            }}
+            options={{
+              // header: () => (
+              //   <DefaultHeader
+              //     onCategoryChanged={() => {
+              //       'New Workout'
+              //     }}
+              //   />
+              // ),
+              tabBarIcon: ({ size, focused }) => (
+                <View style={{ marginTop: -30 }}>
+                  {/* <CirclePlus width={size * 3} height={size * 3} fill={color} /> */}
+                  {focused ? (
+                    <CircleMinus width={size * 3} height={size * 3} fill={colors.primary} />
+                  ) : (
+                    <CirclePlus width={size * 3} height={size * 3} fill={colors.bottomav.icon} />
+                  )}
+                </View>
+              ),
+            }}
+          />
 
-      <CustomBottomSheetModal ref={bottomSheetRef} customSnapPoints={['30%']} startIndex={0} renderBackdrop>
-        <View className="align-center bg-white flex-1 ">
-          <Button color="trap" size="full" value="Start Saved Workout" className="mb-5" testID="button-test"></Button>
-          <Button color="trap" size="full" value="Create New Workout" testID="button-test-2"></Button>
-        </View>
-      </CustomBottomSheetModal>
+          {/*  */}
+          <Tabs.Screen
+            name="two"
+            options={{
+              header: () => (
+                <DefaultHeader
+                  onCategoryChanged={() => {
+                    'Settings'
+                  }}
+                />
+              ),
+              tabBarIcon: ({ focused, size }) => (
+                <View className="items-center">
+                  <Profile
+                    width={size * 1.25}
+                    height={size * 1.25}
+                    fill={focused ? `${colors.bottomav.icon}` : 'none'}
+                  />
+                  <AnimatedDot focused={focused} />
+                </View>
+              ),
+            }}
+          />
+        </Tabs>
+      </BottomSheetContext.Provider>
     </>
   )
 }

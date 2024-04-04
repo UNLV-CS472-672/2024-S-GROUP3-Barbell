@@ -1,6 +1,9 @@
 import React from 'react'
-import { Button, View } from 'react-native'
+import { View } from 'react-native'
+
 import { useAuth } from '@clerk/clerk-expo'
+
+import Button from '../ui/button/button'
 
 export const SignOut = () => {
   const { isLoaded, signOut } = useAuth()
@@ -10,7 +13,9 @@ export const SignOut = () => {
   return (
     <View>
       <Button
-        title="Sign Out"
+        color="dark"
+        value="Sign Out"
+        size="xl"
         onPress={() => {
           signOut()
         }}

@@ -26,10 +26,16 @@ export const userRouter = createTRPCRouter({
    */
   create: publicProcedure
     .input(z.object({ clerkId: z.string(), username: z.string(), name: z.string() }))
-    .mutation(({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { prisma } = ctx
 
-      return prisma.user.create({
+      const user = await prisma.user.findFirst({ where: { clerkId: input.clerkId } })
+
+      if (user) {
+        return user
+      }
+
+      return await prisma.user.create({
         data: {
           clerkId: input.clerkId,
           username: input.username,
@@ -43,15 +49,4 @@ export const userRouter = createTRPCRouter({
       return user?.id
     })
   }),
-
-  /**
-   * delete a user
-   */
-  deleteByClerkId: publicProcedure.input(z.object({ clerkId: z.string() })).mutation(({ ctx, input }) => {
-    return ctx.prisma.user.deleteMany({ where: { clerkId: input.clerkId } })
-  }),
-
-  /**
-   * update a user
-   */
 })

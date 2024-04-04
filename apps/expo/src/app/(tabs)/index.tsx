@@ -1,20 +1,29 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { Stack } from 'expo-router'
+import { Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Stack } from 'expo-router'
 
-const Page = () => {
+import { useGlobalContext } from '~/context/global-context'
+
+const Dashboard = () => {
+  const { userData } = useGlobalContext()
+
   return (
-    <SafeAreaView style={{ flex: 1,  backgroundColor: '#1E1E1E' }}>
-        {/* Define pour custom header */}
-        {/* <Stack.Screen
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#1E1E1E' }}>
+      {/* Define pour custom header */}
+      {/* <Stack.Screen
           options={{
             header: () => null,
           }}
         /> */}
-      <Text className='text-center text-white m-8'>Home screen</Text>
+      <Text className="m-8 text-center text-white">Home screen</Text>
+      <Text>User Data</Text>
+      <Text>{userData?.id}</Text>
+      <Text>{userData?.clerkId}</Text>
+      <Text>{userData?.name}</Text>
+      <Text>{userData?.username}</Text>
     </SafeAreaView>
   )
 }
 
-export default Page
+export default Dashboard

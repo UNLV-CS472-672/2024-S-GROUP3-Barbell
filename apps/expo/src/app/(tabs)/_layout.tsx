@@ -9,6 +9,9 @@ import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
 
+import type { CustomBottomSheetModalRef } from '~/components/custom-bottom-sheet-modal'
+import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
+import Button from '~/components/ui/button/button'
 import { DefaultHeader } from '~/layouts/headers/default'
 import colors from '~/styles/colors'
 
@@ -20,6 +23,9 @@ const Layout = () => {
       className={cn('h-1.5 w-1.5 rounded-full', focused ? 'bg-white' : 'bg-transparent')}
     />
   )
+
+  const bottomSheetRef = React.useRef<CustomBottomSheetModalRef>(null)
+  const handlePresentModalPress = () => bottomSheetRef.current?.present()
 
   return (
     <>
@@ -64,22 +70,19 @@ const Layout = () => {
         <Tabs.Screen
           name="one"
           redirect={false}
-          listeners={
-            {
-              // tabPress: (e) => {
-              //   // e.preventDefault()
-              //   // handlePresentModal()
-              // },
-            }
-          }
+          listeners={{
+            tabPress: (e) => {
+              handlePresentModalPress()
+            },
+          }}
           options={{
-            header: () => (
-              <DefaultHeader
-                onCategoryChanged={() => {
-                  'New Workout'
-                }}
-              />
-            ),
+            // header: () => (
+            //   <DefaultHeader
+            //     onCategoryChanged={() => {
+            //       'New Workout'
+            //     }}
+            //   />
+            // ),
             tabBarIcon: ({ size, focused }) => (
               <View style={{ marginTop: -30 }}>
                 {/* <CirclePlus width={size * 3} height={size * 3} fill={color} /> */}
@@ -113,6 +116,13 @@ const Layout = () => {
           }}
         />
       </Tabs>
+
+      <CustomBottomSheetModal ref={bottomSheetRef} customSnapPoints={['30%']} startIndex={0} renderBackdrop>
+        <View className="align-center bg-white flex-1 ">
+          <Button color="trap" size="full" value="Start Saved Workout" className="mb-5" testID="button-test"></Button>
+          <Button color="trap" size="full" value="Create New Workout" testID="button-test-2"></Button>
+        </View>
+      </CustomBottomSheetModal>
     </>
   )
 }

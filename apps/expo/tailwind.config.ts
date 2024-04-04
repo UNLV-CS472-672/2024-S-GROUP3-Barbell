@@ -6,7 +6,7 @@ import nativewind from 'nativewind/preset'
 import baseConfig from '@acme/tailwind-config/native'
 
 export default {
-  content: ["./App.{js,jsx,ts,tsx}", "./<custom-folder>/**/*.{js,jsx,ts,tsx}"],
+  content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
   presets: [baseConfig, nativewind],
   theme: {
     extend: {

@@ -17,7 +17,7 @@ const config = {
   plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss'],
 
   // tailwind
-tailwindConfig: fileURLToPath(new URL('../../tooling/tailwind/native.ts', import.meta.url)),
+  tailwindConfig: fileURLToPath(new URL('../../tooling/tailwind/index.ts', import.meta.url)),
 
   // utils
   // https://github.com/tailwindlabs/prettier-plugin-tailwindcss

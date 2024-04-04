@@ -6,8 +6,8 @@ import BottomSheet from '@gorhom/bottom-sheet'
 import { cn } from '^/packages/ui/src/cn'
 
 import CustomBottomSheet from '~/components/ui/bottom-sheet/bottom-sheet'
-import Button from '~/components/ui/button/button'
 import { DefaultHeader } from '~/layouts/headers/default'
+import Button from '~/components/ui/button/button'
 import colors from '~/styles/colors'
 
 export default function TabTwoScreen() {
@@ -18,7 +18,7 @@ export default function TabTwoScreen() {
   const handleOpenPress = () => bottomSheetRef.current?.expand()
 
   return (
-    <View className={cn('flex-1', `bg-[${colors.background}]`)} style={{ backgroundColor: colors.background }}>
+    <View className={cn('flex-grow mt-20', `bg-background`)}>
       {/* <Stack.Screen
         options={{
           header: () => (
@@ -42,7 +42,7 @@ export default function TabTwoScreen() {
         <Text className="text-white">Nav</Text>
       </Button>
 
-      <CustomBottomSheet ref={bottomSheetRef} title={title} />
+      {/* <CustomBottomSheet ref={bottomSheetRef} title={title} /> */}
     </View>
   )
 }

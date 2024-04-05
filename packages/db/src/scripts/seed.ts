@@ -5,7 +5,7 @@ import award from '../mock-data/award.json'
 import chat from '../mock-data/chat.json'
 import exercise from '../mock-data/exercise.json'
 import friend from '../mock-data/friend.json'
-import log from '../mock-data/log.json'
+import workoutLog from '../mock-data/workoutLog.json'
 import message from '../mock-data/message.json'
 import notification from '../mock-data/notification.json'
 import post from '../mock-data/post.json'
@@ -58,14 +58,14 @@ const loaddb = async () => {
     await prisma.exercise.deleteMany()
     logger('delete', 'exercise')
 
-    await prisma.log.deleteMany()
-    logger('delete', 'log')
+    await prisma.workoutLog.deleteMany()
+    logger('delete', 'workoutLog')
 
     await prisma.workout.deleteMany()
     logger('delete', 'workout')
 
-    await prisma.log.deleteMany()
-    logger('delete', 'log')
+    // await prisma.log.deleteMany()
+    // logger('delete', 'log')
 
     await prisma.friend.deleteMany()
     logger('delete', 'friend')
@@ -158,8 +158,8 @@ const loaddb = async () => {
     logger('add', 'friend')
 
     /*  */
-    await prisma.log.createMany({
-      data: log as Prisma.LogCreateManyInput[],
+    await prisma.workoutLog.createMany({
+      data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
     })
     logger('add', 'log')
 

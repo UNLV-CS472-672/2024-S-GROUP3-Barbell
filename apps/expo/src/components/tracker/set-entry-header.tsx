@@ -1,5 +1,8 @@
 import { Text, View } from 'react-native'
+
 import { Feather } from '@expo/vector-icons'
+
+import colors from '~/styles/colors'
 
 const SetEntryHeader: React.FC = () => {
   return (
@@ -7,7 +10,7 @@ const SetEntryHeader: React.FC = () => {
       <View className="basis-14">
         <Text className="text-center font-bold text-slate-200">Set</Text>
       </View>
-      <View className="basis-20">
+      <View className="basis-24">
         <Text className="text-center font-bold text-slate-200">Unilateral</Text>
       </View>
       <View className="basis-20">
@@ -17,12 +20,7 @@ const SetEntryHeader: React.FC = () => {
         <Text className="text-center font-bold text-slate-200">Reps</Text>
       </View>
       <View className="basis-12">
-        <Feather
-          name="check"
-          size={20}
-          color="#CACACA"
-          className="text-center"
-        />
+        <Feather name="check" size={20} color={colors.bottomav.icon} className="text-center" />
       </View>
     </View>
   )

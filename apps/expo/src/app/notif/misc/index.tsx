@@ -3,6 +3,10 @@ import { Text, TouchableOpacity, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
+import MiscNotifs from '~/components/notif/miscNotifs/miscNotifs';
+import DmNotifs from '~/components/notif/dmNotifs/dmNotifs';
+import GcNotifs from '~/components/notif/gcNotifs/gcNotifs';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 

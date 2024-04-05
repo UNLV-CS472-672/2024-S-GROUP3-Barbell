@@ -18,7 +18,7 @@ const buttonVariants = cva('active:opacity-30', {
       icon: 'p-1',
       medium: 'py-2',
       xl: 'py-1',
-      full: 'w-11/12 py-3', 
+      full: 'w-11/12 py-3',
     },
     rounded: {
       full: 'rounded-full',
@@ -43,7 +43,7 @@ export interface ButtonProps
 const textStylesMap = {
   icon: 'text-sm',
   medium: 'text-base',
-  xl: 'text-xl font-semibold',
+  xl: 'text-xl font-semibold font-koulen',
   full: 'text-3xl font-semibold font-koulen',
 }
 

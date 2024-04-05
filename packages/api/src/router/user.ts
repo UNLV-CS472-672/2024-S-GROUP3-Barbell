@@ -1,6 +1,8 @@
 import { z } from 'zod'
 
 import { createTRPCRouter, publicProcedure } from '../trpc'
+import { UpdateUserSchema } from '../../../validators/src';
+
 
 /**
  * step1: define user router
@@ -34,4 +36,15 @@ export const userRouter = createTRPCRouter({
   /**
    * update a user
    */
+  update: publicProcedure
+    .input(UpdateUserSchema)
+    .mutation(async ({ ctx, input }) => {
+      const { prisma } = ctx;
+      return prisma.user.update({
+        where: { id: input.id, },
+        data: {
+          notificationsBanners: input.notificationsBanners
+        }
+      })
+    })
 })

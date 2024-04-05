@@ -7,6 +7,8 @@ import { router } from 'expo-router';
 import colors from '~/styles/colors';
 import { FA } from '~/utils/constants';
 
+const userId = 1; // TODO: remove when real user ID is used.
+
 interface NavigationListItem {
   title: string;
   iconName: string;
@@ -52,11 +54,22 @@ const otherItems: NavigationListItem[] = [
 ];
 
 const AccountSettings = () => {
-  const { data: user } = api.user.byId.useQuery({ id: 1 });
-  const [notificationsSwitchEnabled, setNotificationsSwitchEnabled] = useState(false);
+  const userMutation = api.user.update.useMutation();
+
+  const { data: user, isLoading, isFetched } = api.user.byId.useQuery({ id: userId });
+  console.log("fetched user: ", user);
+
+  const [notificationsSwitchEnabled, setNotificationsSwitchEnabled] = useState(user?.notificationsBanners ?? false);
+
   const toggleNotificationSwitch = () => {
     setNotificationsSwitchEnabled(previousState => !previousState);
+    console.log("updating user notifications value: ", notificationsSwitchEnabled);
+    userMutation.mutateAsync({ id: userId, notificationsBanners: notificationsSwitchEnabled });
   };
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <SafeAreaView className='flex-1 bg-bb-slate-100' style={{backgroundColor: '#1e1e1e', flex: 1}}>

@@ -56,23 +56,39 @@ const otherItems: NavigationListItem[] = [
 ]
 
 const AccountSettings = () => {
-  const context = api.useUtils()
+  // const context = api.useUtils()
+  const { data: user, isLoading, isFetching } = api.user.byId.useQuery({ id: userId })
+  const updateUserMutation = api.user.update.useMutation()
 
-  const userMutation = api.user.update.useMutation()
-  const { data: user, isLoading, isFetched } = api.user.byId.useQuery({ id: userId })
-  const [notificationsSwitchEnabled, setNotificationsSwitchEnabled] = useState(user?.notificationsBanners ?? false)
+  const [notificationsSwitchEnabled, setNotificationsSwitchEnabled] = useState(false)
 
   React.useEffect(() => {
     if (user) {
-      setNotificationsSwitchEnabled(user.notificationsBanners)
+      setNotificationsSwitchEnabled(user.notificationsBanners ?? false)
     }
   }, [user])
 
-  const toggleNotificationSwitch = () => {
+  const toggleNotificationSwitch = async () => {
     const newValue = !notificationsSwitchEnabled
-    userMutation.mutateAsync({ id: userId, notificationsBanners: newValue })
-    context.user.byId.invalidate()
-    setNotificationsSwitchEnabled(newValue)
+    setNotificationsSwitchEnabled(newValue) 
+    try {
+      await updateUserMutation.mutateAsync({
+        id: userId,
+        notificationsBanners: newValue,
+      })
+      // context.user.byId.invalidate()
+    } catch (error) {
+      console.error('Failed to update user settings', error)
+      setNotificationsSwitchEnabled(!newValue)
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size='large' color={colors.primary} />
+      </View>
+    )
   }
 
   if (isLoading) {
@@ -123,6 +139,7 @@ const AccountSettings = () => {
             onChange={toggleNotificationSwitch}
             value={notificationsSwitchEnabled}
             trackColor={{ true: colors.purple }}
+            disabled={isFetching}
             thumbColor={notificationsSwitchEnabled ? colors.purple : colors.silver}
           />
         </View>

@@ -39,6 +39,11 @@ interface Props {
   onCategoryChanged: (category: string) => void
 }
 
+
+/**
+ * Work on this, TBD
+ * FIXME:
+ */
 export const DefaultHeader = ({ onCategoryChanged }: Props) => {
   const scrollRef = useRef<ScrollView>(null)
   const itemsRef = useRef<Array<TouchableOpacity | null>>([])

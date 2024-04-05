@@ -7,6 +7,7 @@
   "packageManager": "pnpm@8.11.0",
   "scripts"       : {
     "build"           : "turbo build",
+    "with-env"        : "dotenv -e ../../.env --",
     "dev"             : "turbo dev --parallel --filter=!@acme/expo",
     "tui"             : "turbo dev --parallel --experimental-ui",
     "scan"            : "pnpm exec turbo scan",
@@ -28,8 +29,7 @@
     "typecheck"  : "turbo typecheck",
     "postinstall": "pnpm lint:ws",
     "ios"        : "expo run:ios",
-    "android"    : "expo run:android",
-    "with-env"   : "dotenv -e ../../.env --"
+    "android"    : "expo run:android"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:^",

@@ -20,13 +20,14 @@
     "typecheck": "echo 'No typecheck script defined'",
     "db:seed"  : "dotenv -e ../../.env -- tsx src/seed/seed.ts",
     "db:push"  : "dotenv -e ../../.env -- prisma db push",
-    "db:studio": "dotenv -e ../../.env -- prisma studio -p 6969"
+    "db:studio": "dotenv -e ../../.env -- prisma studio -p 6969",
+    "with-env" : "dotenv -e ../../.env --"
   },
   "dependencies": {
     "@prisma/client": "^5.10.2",
     "prisma"        : "^5.10.2",
     "tiny-invariant": "^1.3.3",
-    "zod": ">=3.22.3"
+    "zod"           : ">=3.22.3"
   },
   "devDependencies": {
     "@acme/eslint-config"  : "workspace:^",

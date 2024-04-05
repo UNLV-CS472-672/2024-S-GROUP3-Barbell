@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
-
 import { api } from '~/utils/api'
 
 const iconSize = 26
@@ -99,8 +98,9 @@ interface NavigationListItem {
 const AccountSettings = () => {
   const [notificationsSwitchEnabled, setIsEnabled] = useState(false)
   const toggleNotificationSwitch = () => setIsEnabled((previousState) => !previousState)
+  const context = api.useUtils()
 
-  const { data } = api.user.byId.useQuery({ id: 1 })
+  const { data, isLoading } = api.user.byId.useQuery({ id: 1 })
   const user = data // alias for readability
 
   const accountItems: NavigationListItem[] = [

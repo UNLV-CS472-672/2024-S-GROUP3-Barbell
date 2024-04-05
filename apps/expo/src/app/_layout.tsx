@@ -1,6 +1,5 @@
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-
 import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 
 import { TRPCProvider } from '~/utils/api'
@@ -10,7 +9,6 @@ import '~/styles.css'
 
 import { View } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
-
 import { ClerkProvider } from '@clerk/clerk-expo'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
@@ -57,16 +55,19 @@ export default function RootLayout() {
 
   return (
     <TRPCProvider>
-      <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
-        <BottomSheetModalProvider>
-          <GlobalContextProvider>
+      <ClerkProvider
+        publishableKey={CLERK_PUBLISHABLE_KEY!}
+        tokenCache={tokenCache}
+      >
+        <GlobalContextProvider>
+          <BottomSheetModalProvider>
             <StatusBar style="light" />
 
             {/* Splitter */}
 
             <RootLayoutBottomNav />
-          </GlobalContextProvider>
-        </BottomSheetModalProvider>
+          </BottomSheetModalProvider>
+        </GlobalContextProvider>
       </ClerkProvider>
     </TRPCProvider>
   )

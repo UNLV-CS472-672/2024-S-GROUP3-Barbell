@@ -9,4 +9,8 @@ export default {
     nav: '#272727',
     icon: '#CACACA',
   },
+  tracker: {
+    cancel: '#9D534F',
+    finish: '#55A181',
+  },
 }

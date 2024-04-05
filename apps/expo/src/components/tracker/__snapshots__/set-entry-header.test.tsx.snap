@@ -14,7 +14,7 @@ exports[`SetEntryHeader should render correctly 1`] = `
     </Text>
   </View>
   <View
-    className="basis-20"
+    className="basis-24"
   >
     <Text
       className="text-center font-bold text-slate-200"

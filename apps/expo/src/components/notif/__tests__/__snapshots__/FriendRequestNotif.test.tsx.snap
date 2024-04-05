@@ -152,7 +152,7 @@ exports[`FriendRequestNotif 1`] = `
         }
         testID="timeAgoText"
       >
-        2 weeks ago
+        3 weeks ago
       </Text>
     </View>
   </View>

@@ -101,6 +101,7 @@
     createdChats  Chat[]         @relation("ChatCreator")
     chats         Chat[]
     spotify       SpotifyData?
+    notificationsBanners Boolean @default(true)
   }
 
   // ******************************************************************************************

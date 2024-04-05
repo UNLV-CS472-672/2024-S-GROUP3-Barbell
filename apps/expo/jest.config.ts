@@ -15,6 +15,7 @@ const config: Config = {
     '!**/*.d.ts',
     '!index.ts',
     '!**/api.tsx',
+    '!**/constants.ts',
     // need to remove in future v
     '!**/app/**',
     '!**/custom-bottom-sheet-modal.tsx',

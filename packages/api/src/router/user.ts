@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+import { UpdateUserSchema } from '../../../validators/src'
 import { createTRPCRouter, publicProcedure } from '../trpc'
 
 /**
@@ -17,8 +18,8 @@ export const userRouter = createTRPCRouter({
   /**
    * get user by clerkId
    */
-  byClerkId: publicProcedure.input(z.object({ clerkId: z.string() })).query(({ ctx, input }) => {
-    return ctx.prisma.user.findFirst({ where: { clerkId: input.clerkId } })
+  byId: publicProcedure.input(z.object({ id: z.number() })).query(({ ctx, input }) => {
+    return ctx.prisma.user.findFirst({ where: { id: input.id } })
   }),
 
   /**
@@ -47,6 +48,15 @@ export const userRouter = createTRPCRouter({
   getIdByClerkId: publicProcedure.input(z.object({ clerkId: z.string() })).query(({ ctx, input }) => {
     return ctx.prisma.user.findFirst({ where: { clerkId: input.clerkId } }).then((user) => {
       return user?.id
+    })
+  }),
+  update: publicProcedure.input(UpdateUserSchema).mutation(async ({ ctx, input }) => {
+    const { prisma } = ctx
+    return prisma.user.update({
+      where: { id: input.id },
+      data: {
+        notificationsBanners: input.notificationsBanners,
+      },
     })
   }),
 })

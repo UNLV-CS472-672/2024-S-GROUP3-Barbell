@@ -13,7 +13,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as SecureStore from 'expo-secure-store'
 
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo'
-import { ClerkProvider } from '@clerk/clerk-expo'
 import {
   IstokWeb_400Regular,
   IstokWeb_400Regular_Italic,
@@ -80,12 +79,13 @@ export default function RootLayout() {
 
   return (
     <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
+      {/*  */}
       <SignedIn>
         <TRPCProvider>
           <GlobalContextProvider>
             <SafeAreaProvider>
               <BottomSheetModalProvider>
-                <StatusBar style="light" />
+                <StatusBar style='light' />
 
                 {/* Splitter */}
 
@@ -96,6 +96,7 @@ export default function RootLayout() {
         </TRPCProvider>
       </SignedIn>
 
+      {/*  */}
       <SignedOut>
         <AuthScreen />
       </SignedOut>
@@ -109,9 +110,9 @@ function RootLayoutBottomNav() {
   return (
     <Stack>
       <Stack.Screen
-        name="(tabs)"
+        name='(tabs)'
         options={{
-          header: () => <View className="bg-background py-10"></View>,
+          header: () => <View className='bg-background py-10'></View>,
         }}
       />
     </Stack>

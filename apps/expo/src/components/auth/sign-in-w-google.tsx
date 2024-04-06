@@ -8,7 +8,8 @@ import { AntDesign } from '@expo/vector-icons'
 import 'react-native-get-random-values'
 
 import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
-import Button from '../ui/button/button'
+import Button from '~/components/ui/button/button'
+import { router } from 'expo-router'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -35,8 +36,12 @@ const SignInWithGoogle = () => {
 
         if (createdSessionId) {
           setActive?.({ session: createdSessionId })
+          // FIXME:  WARN  The navigation state parsed from the URL contains routes not present in the root navigator. 
+          // This usually means that the linking configuration doesn't match the navigation structure. 
+          // See https://reactnavigation.org/docs/configuring-links for more details on how to specify a linking configuration.
+          router.back() // this will tempo resolved the warning
         } else {
-          // TODO: Change this to a toast or style this alert
+          // FIXME: Change this to a toast or style this alert
           alert('Sign in failed')
         }
       } catch (err: any) {

@@ -4,7 +4,7 @@ import { Pressable, PressableProps, Text } from 'react-native'
 
 import { cva } from 'class-variance-authority'
 
-import { cn } from '../../../utils/cn'
+import { cn } from '~/utils/cn'
 
 const buttonVariants = cva('active:opacity-30 disabled:opacity-60', {
   variants: {
@@ -52,12 +52,7 @@ const Button = ({ value, color, size, rounded, className, children, ...props }: 
   return (
     <Pressable {...props} className={cn(buttonVariants({ color, size, rounded }), className)} testID={props.testID}>
       {value && (
-        <Text
-          className={`text-center  ${textColor} ${
-            textStylesMap[size ? size : 'medium']
-          }`}
-          testID="button-text"
-        >
+        <Text className={`text-center  ${textColor} ${textStylesMap[size ? size : 'medium']}`} testID='button-text'>
           {value}
         </Text>
       )}

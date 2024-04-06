@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+
 import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 
 import { TRPCProvider } from '~/utils/api'
@@ -8,13 +9,14 @@ import 'expo-dev-client'
 import '~/styles.css'
 
 import { View } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as SecureStore from 'expo-secure-store'
-import { ClerkProvider } from '@clerk/clerk-expo'
+
+import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
+import AuthScreen from '~/app/auth'
 import GlobalContextProvider from '~/context/global-context'
-
-// import { useColorScheme } from 'nativewind'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -41,35 +43,34 @@ const tokenCache = {
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
-  /* themes */
-  // const { colorScheme } = useColorScheme()
-
-  /* fonts */
   let [fontsLoaded] = useFonts({
     Koulen_400Regular,
-
-    /*  */
   })
 
   if (!fontsLoaded) return null
 
   return (
-    <TRPCProvider>
-      <ClerkProvider
-        publishableKey={CLERK_PUBLISHABLE_KEY!}
-        tokenCache={tokenCache}
-      >
-        <GlobalContextProvider>
-          <BottomSheetModalProvider>
-            <StatusBar style="light" />
+    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
+      <SignedIn>
+        <TRPCProvider>
+          <GlobalContextProvider>
+            <SafeAreaProvider>
+              <BottomSheetModalProvider>
+                <StatusBar style="light" />
 
-            {/* Splitter */}
+                {/* Splitter */}
 
-            <RootLayoutBottomNav />
-          </BottomSheetModalProvider>
-        </GlobalContextProvider>
-      </ClerkProvider>
-    </TRPCProvider>
+                <RootLayoutBottomNav />
+              </BottomSheetModalProvider>
+            </SafeAreaProvider>
+          </GlobalContextProvider>
+        </TRPCProvider>
+      </SignedIn>
+
+      <SignedOut>
+        <AuthScreen />
+      </SignedOut>
+    </ClerkProvider>
   )
 }
 

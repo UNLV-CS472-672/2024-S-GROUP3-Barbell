@@ -1,9 +1,8 @@
 // import type { Route } from 'expo-router'
-import { router } from 'expo-router'
-import type { Href } from 'expo-router/build/link/href'
 import React from 'react'
 import { Button, FlatList, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Route, router } from 'expo-router'
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +35,14 @@ const Nav = () => {
           { key: 'Spotify', route: '/spotify' },
           { key: 'Tracker', route: '/tracker' },
         ]}
-        renderItem={({ item }) => <Button title={item.key} onPress={() => router.push(item.route as Href)} />}
+        renderItem={({ item }) => (
+          <Button
+            title={item.key}
+            onPress={() => {
+              router.push(item.route as Route<string>)
+            }}
+          />
+        )}
       />
     </SafeAreaView>
   )

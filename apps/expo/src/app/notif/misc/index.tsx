@@ -6,13 +6,9 @@ import { router } from 'expo-router'
 import MiscNotifs from '~/components/notif/miscNotifs/miscNotifs';
 import DmNotifs from '~/components/notif/dmNotifs/dmNotifs';
 import GcNotifs from '~/components/notif/gcNotifs/gcNotifs';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 
-import DmNotifs from '~/components/notif/dmNotifs/dmNotifs'
-import GcNotifs from '~/components/notif/gcNotifs'
-import MiscNotifs from '~/components/notif/miscNotifs/miscNotifs'
 
 export type notifsType = 'misc' | 'dm' | 'gc'
 

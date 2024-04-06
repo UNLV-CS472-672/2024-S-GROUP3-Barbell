@@ -9,7 +9,8 @@ import colors from '~/styles/colors'
 import { api } from '~/utils/api'
 import { FA } from '~/utils/constants'
 
-const userId = 1 // TODO: remove when real user ID is used.
+// FIXME: 
+const userId = 1
 
 interface NavigationListItem {
   title: string
@@ -56,10 +57,8 @@ const otherItems: NavigationListItem[] = [
 ]
 
 const AccountSettings = () => {
-  // const context = api.useUtils()
   const { data: user, isLoading, isFetching } = api.user.byId.useQuery({ id: userId })
   const updateUserMutation = api.user.update.useMutation()
-
   const [notificationsSwitchEnabled, setNotificationsSwitchEnabled] = useState(false)
 
   React.useEffect(() => {
@@ -70,13 +69,12 @@ const AccountSettings = () => {
 
   const toggleNotificationSwitch = async () => {
     const newValue = !notificationsSwitchEnabled
-    setNotificationsSwitchEnabled(newValue) 
+    setNotificationsSwitchEnabled(newValue)
     try {
       await updateUserMutation.mutateAsync({
         id: userId,
         notificationsBanners: newValue,
       })
-      // context.user.byId.invalidate()
     } catch (error) {
       console.error('Failed to update user settings', error)
       setNotificationsSwitchEnabled(!newValue)
@@ -91,17 +89,9 @@ const AccountSettings = () => {
     )
   }
 
-  if (isLoading) {
-    return (
-      <View className='py-10'>
-        <Text>Something</Text>
-        <ActivityIndicator size='large' color={colors.primary} />
-      </View>
-    )
-  }
-
   return (
     <SafeAreaView className='bg-bb-slate-100 flex-1' style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
+      {/*  */}
       <View className='bg-bb-dark-gray m-4 flex-row rounded-lg'>
         <View className='flex-row items-center'>
           <FontAwesome5 name='user' size={FA.xl} className='text-bb-dark-purple p-6' style={{ color: '#48476D' }} />
@@ -111,6 +101,7 @@ const AccountSettings = () => {
           <Text className='text-md text-slate-200'>Streak: {user?.streak} days</Text>
         </View>
       </View>
+      {/*  */}
       <View className={tailwindClasses.mainTile}>
         <Text className={tailwindClasses.mainTileTitle}>Account</Text>
         <View className={tailwindClasses.mainTileItem}>
@@ -130,6 +121,7 @@ const AccountSettings = () => {
           />
         </View>
       </View>
+      {/*  */}
       <View className={tailwindClasses.mainTile}>
         <Text className={tailwindClasses.mainTileTitle}>Notifications</Text>
         <View className={tailwindClasses.mainTileItem}>
@@ -144,6 +136,7 @@ const AccountSettings = () => {
           />
         </View>
       </View>
+      {/*  */}
       <View className={tailwindClasses.mainTile}>
         <Text className={tailwindClasses.mainTileTitle}>Other</Text>
         <FlatList

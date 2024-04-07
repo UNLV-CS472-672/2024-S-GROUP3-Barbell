@@ -38,11 +38,11 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     if (clerkUserData) {
       console.log('Calling create user mutation')
 
-      const response = await createUser.mutateAsync({
-        clerkId: clerkUserData.id,
-        username: clerkUserData.username ? clerkUserData.username : generateUsername(),
-        name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
-      })
+        const response = await createUser.mutateAsync({
+          clerkId: clerkUserData.id,
+          username: clerkUserData.username ? clerkUserData.username : generateUsername(),
+          name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
+        })
 
       setUserData({
         id: response.id,

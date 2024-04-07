@@ -87,7 +87,7 @@ model Post {
 // ******************************************************************************************
 model User {
   id                   Int            @id @unique @default(autoincrement())
-  clerkId              String         @unique
+  clerkId              String?        @unique
   username             String         @unique @db.Char(20)
   name                 String?
   status               UserStatus?

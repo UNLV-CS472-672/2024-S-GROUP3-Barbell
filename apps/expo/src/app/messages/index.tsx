@@ -36,7 +36,7 @@ export default function MessageView() {
           ) : isFetched ? (
             <View className="flex gap-y-3">
               {messages?.map((message) =>
-                message.senderId == user.id ? (
+                message.senderId == user?.id ? (
                   <View key={message.id} className="bg-dark-purple w-1/2 self-end rounded-xl px-4 py-3">
                     <Text className="text-left text-slate-200">{message.content + '\n'}</Text>
                   </View>

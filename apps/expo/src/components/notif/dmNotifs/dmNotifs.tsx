@@ -9,6 +9,11 @@ import { api } from '~/utils/api'
 
 export default function DmNotifs() {
   const { userData } = useGlobalContext()
+
+  if (!userData) {
+    return null
+  }
+  
   const { data, isFetched, isFetching } = api.notif.getMessagePreviewsFromUserIdAndChatType.useQuery({
     id: userData.id,
     type: ChatType.DIRECT,

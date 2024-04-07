@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -22,6 +23,7 @@ export default function FriendRequestNotif({ notif, senderUsername, receiverId }
 
   // NOTE: friend request always has senderId
   const handleAcceptFriend = () => {
+    setComponent(<></>)
     friendsMutation.mutateAsync({
       receiverId: receiverId,
       senderId: notif.senderId!,
@@ -31,6 +33,7 @@ export default function FriendRequestNotif({ notif, senderUsername, receiverId }
   }
 
   const handleDeclineFriend = () => {
+    setComponent(<></>)
     friendsMutation.mutateAsync({
       receiverId: receiverId,
       senderId: notif.senderId!,
@@ -39,7 +42,10 @@ export default function FriendRequestNotif({ notif, senderUsername, receiverId }
     })
   }
 
-  return (
+  // unhinged, but it works LOL
+  // we do this so it will instantly remove the notification from the list
+  // TRPC invalidator takes too long to remove it
+  const [component, setComponent] = useState(
     <View>
       <View className="ml-3 mr-3 mt-4 flex flex-row items-center">
         {/*photo, use icon for now, probably use profile photo in the future*/}
@@ -77,6 +83,8 @@ export default function FriendRequestNotif({ notif, senderUsername, receiverId }
       </View>
       {/*thin line between notifications*/}
       <View className="ml-3 mr-3" style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
-    </View>
+    </View>,
   )
+
+  return component
 }

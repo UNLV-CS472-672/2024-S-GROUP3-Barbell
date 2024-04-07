@@ -34,24 +34,38 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const { user: clerkUserData } = useClerk()
   const createUser = api.user.create.useMutation()
 
+  const { data: userDevelopment } = api.user.byId.useQuery({ id: 9 })
+
   const getUserData = useCallback(async () => {
     if (clerkUserData) {
-      console.log('Calling create user mutation')
+      console.log('Fetching user data based on environment')
 
+      if (process.env.NODE_ENV === 'development') {
+        // In development, fetch a predefined user
+        const response = userDevelopment
+        setUserData({
+          id: response?.id || 0,
+          clerkId: response?.clerkId || '',
+          username: response?.username || '',
+          name: response?.name || '',
+        })
+      } else {
+        // In production, create or fetch user dynamically
         const response = await createUser.mutateAsync({
           clerkId: clerkUserData.id,
           username: clerkUserData.username ? clerkUserData.username : generateUsername(),
           name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
         })
 
-      setUserData({
-        id: response.id,
-        clerkId: response.clerkId,
-        username: response.username,
-        name: response.name!,
-      })
+        setUserData({
+          id: response.id,
+          clerkId: response.clerkId,
+          username: response.username,
+          name: response.name || '',
+        })
+      }
     }
-  }, [clerkUserData])
+  }, [clerkUserData, createUser])
 
   useEffect(() => {
     getUserData()

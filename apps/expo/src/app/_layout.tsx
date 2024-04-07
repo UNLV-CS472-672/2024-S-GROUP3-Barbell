@@ -39,15 +39,17 @@ const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 const tokenCache = {
   async getToken(key: string) {
     try {
-      return SecureStore.getItemAsync(key)
+      return await SecureStore.getItemAsync(key)
     } catch (err) {
+      console.error('Error getting token:', err)
       return null
     }
   },
   async saveToken(key: string, value: string) {
     try {
-      return SecureStore.setItemAsync(key, value)
+      return await SecureStore.setItemAsync(key, value)
     } catch (err) {
+      console.error('Error saving token:', err)
       return
     }
   },
@@ -77,30 +79,41 @@ export default function RootLayout() {
 
   if (!fontsLoaded) return null
 
+  const isDevelopment = process.env.NODE_ENV === 'development'
+
   return (
     <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
-      {/*  */}
-      <SignedIn>
-        <TRPCProvider>
-          <GlobalContextProvider>
-            <SafeAreaProvider>
-              <BottomSheetModalProvider>
-                <StatusBar style='light' />
-
-                {/* Splitter */}
-
-                <RootLayoutBottomNav />
-              </BottomSheetModalProvider>
-            </SafeAreaProvider>
-          </GlobalContextProvider>
-        </TRPCProvider>
-      </SignedIn>
-
-      {/*  */}
-      <SignedOut>
-        <AuthScreen />
-      </SignedOut>
+      {isDevelopment ? (
+        <AppContent />
+      ) : (
+        <>
+          <SignedIn>
+            <AppContent />
+          </SignedIn>
+          <SignedOut>
+            <AuthScreen />
+          </SignedOut>
+        </>
+      )}
     </ClerkProvider>
+  )
+}
+
+function AppContent() {
+  return (
+    <TRPCProvider>
+      <GlobalContextProvider>
+        <SafeAreaProvider>
+          <BottomSheetModalProvider>
+            <StatusBar style="light" />
+
+            {/* Splitter */}
+
+            <RootLayoutBottomNav />
+          </BottomSheetModalProvider>
+        </SafeAreaProvider>
+      </GlobalContextProvider>
+    </TRPCProvider>
   )
 }
 

@@ -3,6 +3,7 @@ import { ActivityIndicator, Button, FlatList, Pressable, StyleSheet, Switch, Tex
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 
+import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 
 import { useGlobalContext } from '~/context/global-context'
@@ -90,29 +91,29 @@ const AccountSettings = () => {
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size='large' color={colors.primary} />
+        <ActivityIndicator size="large" color={colors.primary} />
       </View>
     )
   }
 
   if (isLoading) {
     return (
-      <View className='py-10'>
+      <View className="py-10">
         <Text>Something</Text>
-        <ActivityIndicator size='large' color={colors.primary} />
+        <ActivityIndicator size="large" color={colors.primary} />
       </View>
     )
   }
 
   return (
-    <SafeAreaView className='bg-bb-slate-100 flex-1' style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
-      <View className='bg-bb-dark-gray m-4 flex-row rounded-lg'>
-        <View className='flex-row items-center'>
-          <FontAwesome5 name='user' size={FA.xl} className='text-bb-dark-purple p-6' style={{ color: '#48476D' }} />
+    <SafeAreaView className="bg-bb-slate-100 flex-1" style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
+      <View className="bg-bb-dark-gray m-4 flex-row rounded-lg">
+        <View className="flex-row items-center">
+          <FontAwesome5 name="user" size={FA.xl} className="text-bb-dark-purple p-6" style={{ color: '#48476D' }} />
         </View>
-        <View className='flex-3 m-4'>
-          <Text className='text-2xl text-slate-200'>{user?.name}</Text>
-          <Text className='text-md text-slate-200'>Streak: {user?.streak} days</Text>
+        <View className="flex-3 m-4">
+          <Text className="text-2xl text-slate-200">{user?.name}</Text>
+          <Text className="text-md text-slate-200">Streak: {user?.streak} days</Text>
         </View>
       </View>
       <View className={tailwindClasses.mainTile}>
@@ -121,11 +122,11 @@ const AccountSettings = () => {
           <FlatList
             data={accountItems}
             renderItem={({ item }) => (
-              <Pressable onPress={item.onPress} className='flex-row'>
+              <Pressable onPress={item.onPress} className="flex-row">
                 <FontAwesome5 name={item.iconName} size={FA.reg} style={styles.navigationListItemIcon} />
                 <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
                 <FontAwesome5
-                  name='chevron-right'
+                  name="chevron-right"
                   className={tailwindClasses.navigationListItemChevron}
                   style={styles.navigationListItemChevron}
                 />
@@ -153,11 +154,11 @@ const AccountSettings = () => {
         <FlatList
           data={otherItems}
           renderItem={({ item }) => (
-            <Pressable onPress={item.onPress} className='flex-row'>
+            <Pressable onPress={item.onPress} className="flex-row">
               <FontAwesome5 name={item.iconName} size={FA.reg} style={styles.navigationListItemIcon} />
               <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
               <FontAwesome5
-                name='chevron-right'
+                name="chevron-right"
                 className={tailwindClasses.navigationListItemChevron}
                 style={styles.navigationListItemChevron}
               />

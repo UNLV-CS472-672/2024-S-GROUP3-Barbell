@@ -15,7 +15,7 @@ export interface FriendRequestNotifProps {
 export default function FriendRequestNotif({ notif, senderUsername, receiverId }: FriendRequestNotifProps) {
   const friendsMutation = api.friend.makeFriendsReceiverIdSenderId.useMutation()
   const handleFriend = () => {
-    friendsMutation.mutate({ receiverId: receiverId, senderId: Number(notif.senderId) }) // NOTE: friend request always has senderId
+    friendsMutation.mutate({ receiverId: receiverId, senderId: notif.senderId! }) // NOTE: friend request always has senderId
     // TODO: api to erase notification
   }
 

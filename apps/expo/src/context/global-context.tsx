@@ -33,38 +33,37 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const [userData, setUserData] = useState<IUserData | null>(null)
   const { user: clerkUserData } = useClerk()
   const createUser = api.user.create.useMutation()
+  const userNine = api.user.byId.useQuery({ id: 9 })
 
-  const getUserData = useCallback(async () => {
-    if (clerkUserData) {
-      console.log('DEVELOPMENT EVIRONMENT')
-
-      if (process.env.NODE_ENV === 'development') {
-        const userNine = api.user.byId.useQuery({ id: 9 })
-
-        if (userNine.data) {
-          setUserData({
-            id: userNine.data.id,
-            clerkId: userNine.data.clerkId,
-            username: userNine.data.username,
-            name: userNine.data.name!,
-          })
-          return
-        }
-      }
-
-      const response = await createUser.mutateAsync({
-        clerkId: clerkUserData.id,
-        username: clerkUserData.username ? clerkUserData.username : generateUsername(),
-        name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
-      })
-
+  const getUserData = useCallback(() => {
+    if (process.env.NODE_ENV === 'development') {
+      // if (userNine.data) {
       setUserData({
-        id: response.id,
-        clerkId: response.clerkId,
-        username: response.username,
-        name: response.name!,
+        id: userNine?.data?.id!,
+        clerkId: userNine?.data?.clerkId!,
+        username: userNine?.data?.username!,
+        name: userNine?.data?.name!,
       })
+      return
+      // }
     }
+    //   if (clerkUserData) {
+    //     console.log('DEVELOPMENT EVIRONMENT')
+    //   }
+
+    //   const response = await createUser.mutateAsync({
+    //     clerkId: clerkUserData.id,
+    //     username: clerkUserData.username ? clerkUserData.username : generateUsername(),
+    //     name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
+    //   })
+
+    //   setUserData({
+    //     id: response.id,
+    //     clerkId: response.clerkId,
+    //     username: response.username,
+    //     name: response.name!,
+    //   })
+    // }
   }, [clerkUserData])
 
   useEffect(() => {

@@ -65,7 +65,7 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
         })
       }
     }
-  }, [clerkUserData, createUser])
+  }, [clerkUserData])
 
   useEffect(() => {
     getUserData()

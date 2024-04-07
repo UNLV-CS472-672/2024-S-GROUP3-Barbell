@@ -36,7 +36,21 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
 
   const getUserData = useCallback(async () => {
     if (clerkUserData) {
-      console.log('Calling create user mutation')
+      console.log('DEVELOPMENT EVIRONMENT')
+
+      if (process.env.NODE_ENV === 'development') {
+        const userNine = api.user.byId.useQuery({ id: 9 })
+
+        if (userNine.data) {
+          setUserData({
+            id: userNine.data.id,
+            clerkId: userNine.data.clerkId,
+            username: userNine.data.username,
+            name: userNine.data.name!,
+          })
+          return
+        }
+      }
 
       const response = await createUser.mutateAsync({
         clerkId: clerkUserData.id,

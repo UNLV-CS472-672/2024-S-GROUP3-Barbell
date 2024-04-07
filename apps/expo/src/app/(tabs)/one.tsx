@@ -1,14 +1,13 @@
-import { useRef, useState } from 'react'
-import { Button as RNButton, Text, View } from 'react-native'
-import { router, Stack } from 'expo-router'
+import { router } from 'expo-router'
+import { Text, View } from 'react-native'
 
-import BottomSheet from '@gorhom/bottom-sheet'
+// import BottomSheet from '@gorhom/bottom-sheet'
 import { cn } from '^/packages/ui/src/cn'
 
-import CustomBottomSheet from '~/components/ui/bottom-sheet/bottom-sheet'
+// import CustomBottomSheet from '~/components/ui/bottom-sheet/bottom-sheet'
 import Button from '~/components/ui/button/button'
-import { DefaultHeader } from '~/layouts/headers/default'
-import colors from '~/styles/colors'
+// import { DefaultHeader } from '~/layouts/headers/default'
+// import colors from '~/styles/colors'
 
 
 /**
@@ -16,11 +15,11 @@ import colors from '~/styles/colors'
  * https://docs.expo.dev/tutorial/create-a-modal/
  */
 export default function TabTwoScreen() {
-  const bottomSheetRef = useRef<BottomSheet>(null)
-  const [title, setTitle] = useState('Passing my data')
+  // const bottomSheetRef = useRef<BottomSheet>(null)
+  // const [title, setTitle] = useState('Passing my data')
 
-  const handleClosePress = () => bottomSheetRef.current?.close()
-  const handleOpenPress = () => bottomSheetRef.current?.expand()
+  // const handleClosePress = () => bottomSheetRef.current?.close()
+  // const handleOpenPress = () => bottomSheetRef.current?.expand()
 
   return (
     <View className={cn('pt-20 flex-grow', `bg-background`)}>

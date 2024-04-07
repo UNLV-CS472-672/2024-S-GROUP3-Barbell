@@ -40,7 +40,6 @@ const SignInWithGoogle = () => {
           // FIXME:  WARN  The navigation state parsed from the URL contains routes not present in the root navigator.
           // This usually means that the linking configuration doesn't match the navigation structure.
           // See https://reactnavigation.org/docs/configuring-links for more details on how to specify a linking configuration.
-          router.back() // this will tempo resolved the warning
         } else {
           // FIXME: Change this to a toast or style this alert
           alert('Sign in failed')

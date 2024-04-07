@@ -195,7 +195,8 @@ model Set {
   type       SetType  @default(NORMAL)
   reps       Int
   weight     Float
-  exercise   Exercise[]
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int
 }
 
 // ******************************************************************************************

@@ -108,12 +108,15 @@
   // * id: Auto-incremented unique identifier.
   // * user: The User model representing one side of the friendship.
   // * userId: The identifier for the user, establishing the relation to the User model.
+  // * friendId: The identifier for the friend, used to query friend info.
   // ******************************************************************************************
   model Friend {
-    id Int @id @unique @default(autoincrement())
+    id          Int @id @unique @default(autoincrement())
 
-    user   User @relation(fields: [userId], references: [id])
-    userId Int
+    user        User @relation(fields: [userId], references: [id])
+    userId      Int
+
+    friendId    Int
   }
 
   // ******************************************************************************************
@@ -253,9 +256,9 @@
     name            String?   @db.Char(40)
     users           User[]
     readByUserIds   Int[]
-    createdByUserId Int
     messages        Message[]
     type            ChatType
+    createdByUserId Int
     createdBy       User       @relation("ChatCreator", fields: [createdByUserId], references: [id])
   }
 

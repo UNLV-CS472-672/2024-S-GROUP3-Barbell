@@ -1,162 +1,165 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, Switch, FlatList, Pressable } from 'react-native';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { api } from '~/utils/api';
-import { router } from 'expo-router';
+import React, { useState } from 'react'
+import { ActivityIndicator, Button, FlatList, Pressable, StyleSheet, Switch, Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { router } from 'expo-router'
 
-const iconSize = 26;
-const borderRadius = 12;
-const colors = {
-    primary: '#FF385C',
-    grey: '#cacaca',
-    dark: '#1A1A1A',
-    darkGrey: '#272727',
-    purple: '#48476D',
-    white: '#FFFFFF',
-    background: '#1E1E1E',
-    bottomav : {
-      nav: '#272727',
-      icon: '#CACACA',
-    },
-  };
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
+
+import colors from '~/styles/colors'
+import { api } from '~/utils/api'
+import { FA } from '~/utils/constants'
+
+const userId = 1 // TODO: remove when real user ID is used.
+
+interface NavigationListItem {
+  title: string
+  iconName: string
+  onPress: () => void
+}
+
 const styles = StyleSheet.create({
-  screenContainer: {
-    color: colors.primary,
-    backgroundColor: colors.background
-  },
-  userTile: {
-    flexDirection: 'row',
-    backgroundColor: colors.darkGrey,
-    borderRadius: borderRadius,
-    margin: 12
-  },
-  userTileUpper: {
-    margin: 12,
-  },
-  userTileItem: {
-    flex: 1,
-    textAlign: 'center',
-    padding: 4,
-    backgroundColor: '#ffffff',
-    margin: 12,
-    borderRadius: borderRadius
-  },
-  mainTile: {
-    margin: 12,
-    padding: 18,
-    borderRadius: borderRadius,
-    backgroundColor: colors.darkGrey
-  },
-  mainTileTitle: {
-    fontSize: 22,
-    color: colors.grey
-  },
-  mainTileItem: {
-    flexDirection: 'row'
-  },
-  mainTileIcon: {
-    margin: 4
-  },
-  userFullName: {
-    fontSize: 22,
-    margin: 6,
-    color: colors.grey
-  },
-  userProgram: {
-    margin: 6,
-    color: colors.grey
-  },
   navigationListItemIcon: {
     padding: 8,
     alignSelf: 'center',
-    color: colors.purple
+    color: colors.purple,
   },
   navigationListItemLabel: {
     flex: 4,
     margin: 4,
     alignSelf: 'center',
-    color: colors.grey
+    color: colors.silver,
   },
   navigationListItemChevron: {
     alignSelf: 'center',
-    color: colors.grey
+    color: colors.silver,
   },
-  nudgeBtn: {
-    margin: 12
-  }
 })
 
-interface NavigationListItem {
-  title: string,
-  iconName: string,
-  onPress: () => void;
+const tailwindClasses = {
+  mainTile: 'm-4 p-4 rounded-lg bg-bb-dark-gray',
+  mainTileTitle: 'text-2xl text-slate-200',
+  mainTileItem: 'flex-row',
+  navigationListItemLabel: 'flex-auto m-2 self-center text-slate-200',
+  navigationListItemChevron: 'self-center text-slate-200',
 }
 
+const accountItems: NavigationListItem[] = [
+  { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/user/personal-data') },
+  { title: 'Achievements', iconName: 'award', onPress: () => router.push('/user/achievements') },
+  { title: 'Activity History', iconName: 'history', onPress: () => router.push('/user/activity-history') },
+  { title: 'Workout Progress', iconName: 'chart-pie', onPress: () => router.push('/user/workout-progress') },
+]
+
+const otherItems: NavigationListItem[] = [
+  { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/contact-us') },
+  { title: 'Privacy Policy', iconName: 'shield-alt', onPress: () => router.push('/privacy-policy') },
+]
+
 const AccountSettings = () => {
-  const [notificationsSwitchEnabled, setIsEnabled] = useState(false);
-  const toggleNotificationSwitch = () => setIsEnabled(previousState => !previousState);
+  // const context = api.useUtils()
+  const { data: user, isLoading, isFetching } = api.user.byId.useQuery({ id: userId })
+  const updateUserMutation = api.user.update.useMutation()
 
-  const { data } = api.user.byId.useQuery({ id: 1 });
-  const user = data; // alias for readability
+  const [notificationsSwitchEnabled, setNotificationsSwitchEnabled] = useState(false)
 
-  const accountItems: NavigationListItem[] = [
-    { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/user/personal-data') },
-    { title: 'Achievements', iconName: 'award', onPress: () => router.push('/user/achievements') },
-    { title: 'Activity History', iconName: 'history', onPress: () => router.push('/user/activity-history') },
-    { title: 'Workout Progress', iconName: 'chart-pie', onPress: () => router.push('/user/workout-progress') }
-  ];
+  React.useEffect(() => {
+    if (user) {
+      setNotificationsSwitchEnabled(user.notificationsBanners ?? false)
+    }
+  }, [user])
 
-  const otherItems: NavigationListItem[] = [
-    { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/contact-us') },
-    { title: 'Privacy Policy', iconName: 'shield-alt', onPress: () => router.push('/privacy-policy') }
-  ]
+  const toggleNotificationSwitch = async () => {
+    const newValue = !notificationsSwitchEnabled
+    setNotificationsSwitchEnabled(newValue) 
+    try {
+      await updateUserMutation.mutateAsync({
+        id: userId,
+        notificationsBanners: newValue,
+      })
+      // context.user.byId.invalidate()
+    } catch (error) {
+      console.error('Failed to update user settings', error)
+      setNotificationsSwitchEnabled(!newValue)
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size='large' color={colors.primary} />
+      </View>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <View className='py-10'>
+        <Text>Something</Text>
+        <ActivityIndicator size='large' color={colors.primary} />
+      </View>
+    )
+  }
 
   return (
-    <SafeAreaView style={[styles.screenContainer, { flex: 1 }]}>
-      <View style={styles.userTile}>
-        <View style={ { flexDirection: 'row', alignItems: 'center' }}>
-          <FontAwesome5 name="user" size={48} style={{padding: 22, color: colors.purple}}/>
+    <SafeAreaView className='bg-bb-slate-100 flex-1' style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
+      <View className='bg-bb-dark-gray m-4 flex-row rounded-lg'>
+        <View className='flex-row items-center'>
+          <FontAwesome5 name='user' size={FA.xl} className='text-bb-dark-purple p-6' style={{ color: '#48476D' }} />
         </View>
-        <View style={[styles.userTileUpper, { flex: 3 }]}>
-          <Text style={styles.userFullName}>{user?.name}</Text>
-          <Text style={styles.userProgram}>Program</Text>
-        </View>
-        <View style={ { flexDirection: 'row', alignItems: 'center', padding: 12 }}>
+        <View className='flex-3 m-4'>
+          <Text className='text-2xl text-slate-200'>{user?.name}</Text>
+          <Text className='text-md text-slate-200'>Streak: {user?.streak} days</Text>
         </View>
       </View>
-      <View style={styles.mainTile}>
-        <Text style={styles.mainTileTitle}>Account</Text>
-        <View style={styles.mainTileItem}>
-          <FlatList data={accountItems} renderItem={({ item }) => (
-            <Pressable onPress={item.onPress} style={ { flexDirection: 'row' }}>
-              <FontAwesome5 name={item.iconName} size={iconSize} style={styles.navigationListItemIcon}/>
-              <Text style={styles.navigationListItemLabel}>{item.title}</Text>
-              <FontAwesome5 name="chevron-right" style={styles.navigationListItemChevron} />
-            </Pressable>
-          )}/>
+      <View className={tailwindClasses.mainTile}>
+        <Text className={tailwindClasses.mainTileTitle}>Account</Text>
+        <View className={tailwindClasses.mainTileItem}>
+          <FlatList
+            data={accountItems}
+            renderItem={({ item }) => (
+              <Pressable onPress={item.onPress} className='flex-row'>
+                <FontAwesome5 name={item.iconName} size={FA.reg} style={styles.navigationListItemIcon} />
+                <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
+                <FontAwesome5
+                  name='chevron-right'
+                  className={tailwindClasses.navigationListItemChevron}
+                  style={styles.navigationListItemChevron}
+                />
+              </Pressable>
+            )}
+          />
         </View>
       </View>
-      <View style={styles.mainTile}>
-        <Text style={styles.mainTileTitle}>Notifications</Text>
-        <View style={styles.mainTileItem}>
-          <Text style={styles.navigationListItemLabel}>Banners</Text>
+      <View className={tailwindClasses.mainTile}>
+        <Text className={tailwindClasses.mainTileTitle}>Notifications</Text>
+        <View className={tailwindClasses.mainTileItem}>
+          <Text className={tailwindClasses.navigationListItemLabel}>Banners</Text>
           <Switch
-            onValueChange={toggleNotificationSwitch}
+            // onValueChange={toggleNotificationSwitch}
+            onChange={toggleNotificationSwitch}
             value={notificationsSwitchEnabled}
-            trackColor={{true: colors.purple}}
-            thumbColor={notificationsSwitchEnabled ? colors.purple : colors.grey}/>
+            trackColor={{ true: colors.purple }}
+            disabled={isFetching}
+            thumbColor={notificationsSwitchEnabled ? colors.purple : colors.silver}
+          />
         </View>
       </View>
-      <View style={styles.mainTile}>
-        <Text style={styles.mainTileTitle}>Other</Text>
-          <FlatList data={otherItems} renderItem={({ item }) => (
-            <Pressable onPress={item.onPress} style={ { flexDirection: 'row' }}>
-              <FontAwesome5 name={item.iconName} size={iconSize} style={styles.navigationListItemIcon} />
-              <Text style={styles.navigationListItemLabel}>{item.title}</Text>
-              <FontAwesome5 name="chevron-right" style={styles.navigationListItemChevron} />
+      <View className={tailwindClasses.mainTile}>
+        <Text className={tailwindClasses.mainTileTitle}>Other</Text>
+        <FlatList
+          data={otherItems}
+          renderItem={({ item }) => (
+            <Pressable onPress={item.onPress} className='flex-row'>
+              <FontAwesome5 name={item.iconName} size={FA.reg} style={styles.navigationListItemIcon} />
+              <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
+              <FontAwesome5
+                name='chevron-right'
+                className={tailwindClasses.navigationListItemChevron}
+                style={styles.navigationListItemChevron}
+              />
             </Pressable>
-          )}/>
+          )}
+        />
       </View>
     </SafeAreaView>
   )

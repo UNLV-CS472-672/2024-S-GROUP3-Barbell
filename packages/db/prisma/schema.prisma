@@ -86,22 +86,24 @@ model Post {
 // * sentMessages: Notifications sent by the user.
 // ******************************************************************************************
 model User {
-  id              Int            @id @unique @default(autoincrement())
-  username        String         @unique @db.Char(20)
-  name            String?
-  status          UserStatus?
-  streak          Int
-  posts           Post[]
-  friends         Friend[]
-  workoutHistory  WorkoutLog[]
-  workouts        Workout[]
-  awards          Award[]
-  notifications   Notification[] @relation("NotificationReceiver")
-  sentMessages    Notification[] @relation("NotificationSender")
-  createdChats    Chat[]         @relation("ChatCreator")
-  chats           Chat[]
-  spotify         SpotifyData?
-  customExercises Exercise[]
+  id                   Int            @id @unique @default(autoincrement())
+  clerkId              String         @unique
+  username             String         @unique @db.Char(20)
+  name                 String?
+  status               UserStatus?
+  streak               Int
+  posts                Post[]
+  friends              Friend[]
+  workoutHistory       WorkoutLog[]
+  workouts             Workout[]
+  awards               Award[]
+  notifications        Notification[] @relation("NotificationReceiver")
+  sentMessages         Notification[] @relation("NotificationSender")
+  createdChats         Chat[]         @relation("ChatCreator")
+  chats                Chat[]
+  spotify              SpotifyData?
+  notificationsBanners Boolean        @default(true)
+  customExercises      Exercise[]
 }
 
 // ******************************************************************************************

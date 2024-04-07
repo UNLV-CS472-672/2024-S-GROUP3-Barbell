@@ -18,24 +18,29 @@ const Test: React.FC = () =>{
     const createWorkout = async () => {
         mutate({
             name: 'test workout',
-            duration: 340,
+            description: "Amazing best workout",
+            duration: 140,
             finishedAt: new Date(),
-            exercises: [{
-                id: 1
-            },
-            {
-                id: 2
-            },
-            {
-                id: 3
-            },
-            {
-                id: 4
-            },
-            {
-                id: 5
-            }
-        ],
+            exercises: [
+                {
+                id: 1,
+                },
+                {
+                id: 2,
+                },
+                {
+                id: 3,
+                },
+                {
+                id: 4,
+                },
+                {
+                id: 5,
+                },
+                {
+                id: 6,
+                },
+            ],
             userId: 1
         })
     }

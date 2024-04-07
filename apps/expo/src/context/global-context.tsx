@@ -38,7 +38,8 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const [userData, setUserData] = useState<IUserData | null>(null)
   const { user: clerkUserData } = useClerk()
   const createUser = api.user.create.useMutation()
-  const { data: userNineData } = api.user.byId.useQuery({ id: 9 })
+  const { data: userNineData, isFetched: userNineDataIsFetched } =
+    api.user.byId.useQuery({ id: 9 })
 
   const getUserData = useCallback(async () => {
     if (clerkUserData) {
@@ -61,6 +62,8 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
+      if (!userNineDataIsFetched) return
+
       setUserData({
         id: userNineData?.id!,
         clerkId: userNineData?.clerkId!,
@@ -68,7 +71,7 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
         name: userNineData?.name!,
       })
     } else getUserData()
-  }, [getUserData])
+  }, [getUserData, userNineDataIsFetched])
 
   const globalContextValue: TGlobalContext = {
     isWorkingOut,

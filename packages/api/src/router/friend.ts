@@ -39,10 +39,11 @@ export const friendRouter = createTRPCRouter({
       }),
     )
     .mutation(({ ctx, input }) => {
-      ctx.prisma.friend.create({
+      return ctx.prisma.friend.create({
         data: {
-          friendId: 
-        }
+          friendId: input.receiverId,
+          userId: input.senderId,
+        },
       })
     }),
 

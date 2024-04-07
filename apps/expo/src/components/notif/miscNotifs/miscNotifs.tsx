@@ -6,17 +6,27 @@ import { api } from '~/utils/api'
 import FriendRequestNotif from './FriendRequestNotif'
 import NudgeNotif from './NudgeNotif'
 
+const { userData } = useGlobalContext()
+
 const handleNotif = (notif: any, id: number) => {
+  if (!userData) {
+    return null
+  }
   if (notif.type == 'FRIEND_REQUEST') {
-    return <FriendRequestNotif notif={notif} key={id} senderUsername={notif.sender?.username.trim()} />
+    return (
+      <FriendRequestNotif
+        notif={notif}
+        key={id}
+        senderUsername={notif.sender?.username.trim()}
+        receiverId={userData.id}
+      />
+    )
   } else if (notif.type == 'NUDGE') {
     return <NudgeNotif notif={notif} key={id} senderUsername={notif.sender?.username.trim()} />
   }
 }
 
 export default function MiscNotifs() {
-  const { userData } = useGlobalContext()
-
   if (!userData) {
     return null
   }

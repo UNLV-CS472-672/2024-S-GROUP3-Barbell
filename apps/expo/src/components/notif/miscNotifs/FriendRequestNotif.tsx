@@ -4,13 +4,21 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Notification } from '@prisma/client'
 
 import TimeAgo from '~/components/timeAgo/TimeAgo'
+import { api } from '~/utils/api'
 
 export interface FriendRequestNotifProps {
   notif: Notification
   senderUsername: string
+  receiverId: number
 }
 
-export default function FriendRequestNotif({ notif, senderUsername }: FriendRequestNotifProps) {
+export default function FriendRequestNotif({ notif, senderUsername, receiverId }: FriendRequestNotifProps) {
+  const friendsMutation = api.friend.makeFriendsReceiverIdSenderId.useMutation()
+  const handleFriend = () => {
+    friendsMutation.mutate({ receiverId: receiverId, senderId: Number(notif.senderId) }) // NOTE: friend request always has senderId
+    // TODO: api to erase notification
+  }
+
   return (
     <View>
       <View className="ml-3 mr-3 mt-4 flex flex-row items-center">
@@ -25,7 +33,11 @@ export default function FriendRequestNotif({ notif, senderUsername }: FriendRequ
           </Text>
           {/*accept and decline buttons*/}
           <View className="flex flex-row justify-between">
-            <TouchableOpacity className="mr-1 flex-1 rounded-lg px-4 py-2" style={{ backgroundColor: '#48476D' }}>
+            <TouchableOpacity
+              onPress={handleFriend}
+              className="mr-1 flex-1 rounded-lg px-4 py-2"
+              style={{ backgroundColor: '#48476D' }}
+            >
               <Text style={{ color: '#CACACA' }} className="text-center">
                 Accept
               </Text>

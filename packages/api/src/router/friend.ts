@@ -36,13 +36,30 @@ export const friendRouter = createTRPCRouter({
       z.object({
         receiverId: z.number().int(),
         senderId: z.number().int(),
+        accepted: z.boolean(),
+        notificationId: z.number(),
       }),
     )
-    .mutation(({ ctx, input }) => {
-      return ctx.prisma.friend.create({
-        data: {
-          friendId: input.receiverId,
-          userId: input.senderId,
+    .mutation(async ({ ctx, input }) => {
+      if (input.accepted) {
+        await ctx.prisma.friend.create({
+          data: {
+            friendId: input.receiverId,
+            userId: input.senderId,
+          },
+        })
+
+        await ctx.prisma.friend.create({
+          data: {
+            friendId: input.senderId,
+            userId: input.receiverId,
+          },
+        })
+      }
+
+      await ctx.prisma.notification.delete({
+        where: {
+          id: input.notificationId,
         },
       })
     }),

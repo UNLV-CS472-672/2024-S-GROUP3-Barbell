@@ -24,13 +24,9 @@ const handleNotif = (notif: any, id: number, receiverId: number) => {
 export default function MiscNotifs() {
   const { userData } = useGlobalContext()
 
-  console.log(userData)
-
   if (!userData) {
     return null
   }
-
-  console.log(userData)
 
   const { data, isFetched, isFetching } = api.notif.getMiscNotifsWithSenderUsernameFromUserId.useQuery({
     id: userData.id,

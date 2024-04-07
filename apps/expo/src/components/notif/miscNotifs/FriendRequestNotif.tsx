@@ -13,10 +13,30 @@ export interface FriendRequestNotifProps {
 }
 
 export default function FriendRequestNotif({ notif, senderUsername, receiverId }: FriendRequestNotifProps) {
-  const friendsMutation = api.friend.makeFriendsReceiverIdSenderId.useMutation()
-  const handleFriend = () => {
-    friendsMutation.mutate({ receiverId: receiverId, senderId: notif.senderId! }) // NOTE: friend request always has senderId
-    // TODO: api to erase notification
+  const inv = api.useUtils()
+  const friendsMutation = api.friend.makeFriendsReceiverIdSenderId.useMutation({
+    async onSuccess() {
+      inv.notif.getMiscNotifsWithSenderUsernameFromUserId.invalidate()
+    },
+  })
+
+  // NOTE: friend request always has senderId
+  const handleAcceptFriend = () => {
+    friendsMutation.mutateAsync({
+      receiverId: receiverId,
+      senderId: notif.senderId!,
+      accepted: true,
+      notificationId: notif.id,
+    })
+  }
+
+  const handleDeclineFriend = () => {
+    friendsMutation.mutateAsync({
+      receiverId: receiverId,
+      senderId: notif.senderId!,
+      accepted: false,
+      notificationId: notif.id,
+    })
   }
 
   return (
@@ -34,7 +54,7 @@ export default function FriendRequestNotif({ notif, senderUsername, receiverId }
           {/*accept and decline buttons*/}
           <View className="flex flex-row justify-between">
             <TouchableOpacity
-              onPress={handleFriend}
+              onPress={handleAcceptFriend}
               className="mr-1 flex-1 rounded-lg px-4 py-2"
               style={{ backgroundColor: '#48476D' }}
             >
@@ -42,7 +62,11 @@ export default function FriendRequestNotif({ notif, senderUsername, receiverId }
                 Accept
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity className="ml-1 flex-1 rounded-lg px-4 py-2" style={{ backgroundColor: '#CACACA' }}>
+            <TouchableOpacity
+              onPress={handleDeclineFriend}
+              className="ml-1 flex-1 rounded-lg px-4 py-2"
+              style={{ backgroundColor: '#CACACA' }}
+            >
               <Text className="text-center" style={{ color: '#1C1B1B' }}>
                 Decline
               </Text>

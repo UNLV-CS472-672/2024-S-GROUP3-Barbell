@@ -37,7 +37,7 @@ export const friendRouter = createTRPCRouter({
         receiverId: z.number().int(),
         senderId: z.number().int(),
         accepted: z.boolean(),
-        notificationId: z.number(),
+        notificationId: z.number().int(),
       }),
     )
     .mutation(async ({ ctx, input }) => {

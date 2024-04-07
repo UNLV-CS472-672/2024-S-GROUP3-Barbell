@@ -35,39 +35,32 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const createUser = api.user.create.useMutation()
   const userNine = api.user.byId.useQuery({ id: 9 })
 
-  const getUserData = useCallback(() => {
+  const getUserData = useCallback(async () => {
+    if (clerkUserData) {
+      const response = await createUser.mutateAsync({
+        clerkId: clerkUserData.id,
+        username: clerkUserData.username ? clerkUserData.username : generateUsername(),
+        name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
+      })
+
+      setUserData({
+        id: response.id,
+        clerkId: response.clerkId,
+        username: response.username,
+        name: response.name!,
+      })
+    }
+  }, [clerkUserData])
+
+  useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
-      // if (userNine.data) {
       setUserData({
         id: userNine?.data?.id!,
         clerkId: userNine?.data?.clerkId!,
         username: userNine?.data?.username!,
         name: userNine?.data?.name!,
       })
-      return
-      // }
-    }
-    //   if (clerkUserData) {
-    //     console.log('DEVELOPMENT EVIRONMENT')
-    //   }
-
-    //   const response = await createUser.mutateAsync({
-    //     clerkId: clerkUserData.id,
-    //     username: clerkUserData.username ? clerkUserData.username : generateUsername(),
-    //     name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
-    //   })
-
-    //   setUserData({
-    //     id: response.id,
-    //     clerkId: response.clerkId,
-    //     username: response.username,
-    //     name: response.name!,
-    //   })
-    // }
-  }, [clerkUserData])
-
-  useEffect(() => {
-    getUserData()
+    } else getUserData()
   }, [getUserData])
 
   const globalContextValue: TGlobalContext = {

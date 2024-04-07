@@ -6,19 +6,14 @@ import { api } from '~/utils/api'
 import FriendRequestNotif from './FriendRequestNotif'
 import NudgeNotif from './NudgeNotif'
 
-const { userData } = useGlobalContext()
-
-const handleNotif = (notif: any, id: number) => {
-  if (!userData) {
-    return null
-  }
+const handleNotif = (notif: any, id: number, receiverId: number) => {
   if (notif.type == 'FRIEND_REQUEST') {
     return (
       <FriendRequestNotif
         notif={notif}
         key={id}
         senderUsername={notif.sender?.username.trim()}
-        receiverId={userData.id}
+        receiverId={receiverId}
       />
     )
   } else if (notif.type == 'NUDGE') {
@@ -27,6 +22,7 @@ const handleNotif = (notif: any, id: number) => {
 }
 
 export default function MiscNotifs() {
+  const { userData } = useGlobalContext()
   if (!userData) {
     return null
   }
@@ -40,7 +36,7 @@ export default function MiscNotifs() {
     for (let i = 0; i < data.length; i++) {
       const notif = data[i]
       if (notif) {
-        renderedNotifications?.push(handleNotif(notif, notif.id))
+        renderedNotifications?.push(handleNotif(notif, notif.id, userData.id))
       }
     }
   }

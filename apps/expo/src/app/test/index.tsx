@@ -45,8 +45,14 @@ const Test: React.FC = () =>{
         })
     }
 
+    const { data } = api.workout.deleteExerciseFromWorkout.useQuery({
+        id: 6,
+        exerciseID: 1
+    })
+
     return <SafeAreaView>
         <Button title="Create Workout" onPress={createWorkout}/>
+        <Button title="Delete exercise 1 from workout 6" onPress={() => console.log(data)} />
     </SafeAreaView>
 
 }

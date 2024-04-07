@@ -19,6 +19,11 @@ export interface ConversationProps {
 
 export default function Conversation({ messageContent, chatId, createdAt, chatName, readBy, type }: ConversationProps) {
   const { userData } = useGlobalContext()
+
+  if (!userData) {
+    return null
+  }
+
   const isRead: boolean = readBy.includes(userData.id)
   const markAsRead = api.notif.markChatAsReadByChatIdAndUserIdAndChatType.useMutation()
 

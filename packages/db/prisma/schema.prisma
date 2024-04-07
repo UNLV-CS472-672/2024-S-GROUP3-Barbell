@@ -1,107 +1,109 @@
-  // This is your Prisma schema file,
-  // learn more about it in the docs: https://pris.ly/d/prisma-schema
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-  generator client {
-    provider = "prisma-client-js"
-  }
+generator client {
+  provider = "prisma-client-js"
+}
 
-  datasource db {
-    provider  = "postgresql"
-    url       = env("DATABASE_URL")
-    directUrl = env("DIRECT_URL")
-  }
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
 
-  enum SetType {
-    NORMAL
-    WARMUP
-    DROPSET
-    FAILURE
-  }
+enum SetType {
+  NORMAL
+  WARMUP
+  DROPSET
+  FAILURE
+}
 
-  enum BodyPart {
-    LEGS
-    ARMS
-    CHEST
-    BACK
-    SHOULDERS
-    CORE
-    FULL_BODY
-    OTHER
-  }
+enum BodyPart {
+  LEGS
+  ARMS
+  CHEST
+  BACK
+  SHOULDERS
+  CORE
+  FULL_BODY
+  OTHER
+}
 
-  enum Category {
-    BARBELL
-    DUMBBELL
-    MACHINE
-    ASSISTED_BODYWEIGHT
-    WEIGHTED_BODYWEIGHT
-    BODYWEIGHT
-    DURATION
-    CARDIO
-    REPS_ONLY
-    OTHER
-  }
+enum Category {
+  BARBELL
+  DUMBBELL
+  MACHINE
+  ASSISTED_BODYWEIGHT
+  WEIGHTED_BODYWEIGHT
+  BODYWEIGHT
+  DURATION
+  CARDIO
+  REPS_ONLY
+  OTHER
+}
 
-  enum UserStatus {
-    ACTIVE
-    BUSY
-    OFFLINE
-    ONLINE
-  }
+enum UserStatus {
+  ACTIVE
+  BUSY
+  OFFLINE
+  ONLINE
+}
 
-  enum NotificationType {
-    SYS
-    NUDGE
-    FRIEND_REQUEST
-    LIKE
-  }
+enum NotificationType {
+  SYS
+  NUDGE
+  FRIEND_REQUEST
+  LIKE
+}
 
-  enum ChatType {
-    DIRECT
-    GROUP
-  }
+enum ChatType {
+  DIRECT
+  GROUP
+}
 
-  model Post {
-    id        Int     @id @unique @default(autoincrement())
-    title     String
-    content   String?
-    published Boolean @default(false)
-    author    User?   @relation(fields: [authorId], references: [id])
-    authorId  Int?
-  }
+model Post {
+  id        Int     @id @unique @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User?   @relation(fields: [authorId], references: [id])
+  authorId  Int?
+}
 
-  // ******************************************************************************************
-  // * id: Auto-incremented unique identifier.
-  // * username: Unique username for the user, restricted to 20 characters.
-  // * email: Unique email address for the user.
-  // * name: Optional name of the user.
-  // * status: Optional status of the user (e.g., "active", "busy").
-  // * streak: Represents a count, potentially tracking user engagement or achievement streaks.
-  // * posts: A list of posts created by the user.
-  // * friends: A list of friends associated with the user, represented through the Friend model.
-  // * log: A list of workout logs.
-  // * workouts: Workouts created or logged by the user.
-  // * awards: Awards granted to the user.
-  // * notifications: Notifications received by the user.
-  // * sentMessages: Notifications sent by the user.
-  // ******************************************************************************************
-  model User {
-    id            Int            @id @unique @default(autoincrement())
-    username      String         @unique @db.Char(20)
-    name          String?
-    status        UserStatus?
-    streak        Int
-    posts         Post[]
-    friends       Friend[]
-    log           Log[]
-    workouts      Workout[]
-    awards        Award[]
-    notifications Notification[] @relation("NotificationReceiver")
-    sentMessages  Notification[] @relation("NotificationSender")
-    createdChats  Chat[]         @relation("ChatCreator")
-    chats         Chat[]
-    spotify       SpotifyData?
-  }
+// ******************************************************************************************
+// * id: Auto-incremented unique identifier.
+// * username: Unique username for the user, restricted to 20 characters.
+// * email: Unique email address for the user.
+// * name: Optional name of the user.
+// * status: Optional status of the user (e.g., "active", "busy").
+// * streak: Represents a count, potentially tracking user engagement or achievement streaks.
+// * posts: A list of posts created by the user.
+// * friends: A list of friends associated with the user, represented through the Friend model.
+// * log: A list of workout logs.
+// * workouts: Workouts created or logged by the user.
+// * awards: Awards granted to the user.
+// * notifications: Notifications received by the user.
+// * sentMessages: Notifications sent by the user.
+// ******************************************************************************************
+model User {
+  id                   Int            @id @unique @default(autoincrement())
+  clerkId              String         @unique
+  username             String         @unique @db.Char(20)
+  name                 String?
+  status               UserStatus?
+  streak               Int            @default(0)
+  posts                Post[]
+  friends              Friend[]
+  log                  Log[]
+  workouts             Workout[]
+  awards               Award[]
+  notifications        Notification[] @relation("NotificationReceiver")
+  sentMessages         Notification[] @relation("NotificationSender")
+  createdChats         Chat[]         @relation("ChatCreator")
+  chats                Chat[]
+  spotify              SpotifyData?
+  notificationsBanners Boolean        @default(true)
+}
 
   // ******************************************************************************************
   // * Friends Collection
@@ -119,135 +121,135 @@
     friendId    Int
   }
 
-  // ******************************************************************************************
-  // * Log model
-  // * id: Auto-incremented unique identifier.
-  // * createdAt: Timestamp of when the log was created.
-  // * updatedAt: Timestamp of the last update to the log.
-  // * finishedAt: Timestamp of when the workout was completed.
-  // * user: The user who completed the workout.
-  // * userId: The identifier for the user.
-  // * workout: The workout that was completed.
-  // * workoutId: The identifier for the workout.
-  // ******************************************************************************************
-  model Log {
-    id         Int      @id @unique @default(autoincrement())
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    finishedAt DateTime
+// ******************************************************************************************
+// * Log model
+// * id: Auto-incremented unique identifier.
+// * createdAt: Timestamp of when the log was created.
+// * updatedAt: Timestamp of the last update to the log.
+// * finishedAt: Timestamp of when the workout was completed.
+// * user: The user who completed the workout.
+// * userId: The identifier for the user.
+// * workout: The workout that was completed.
+// * workoutId: The identifier for the workout.
+// ******************************************************************************************
+model Log {
+  id         Int      @id @unique @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  finishedAt DateTime
 
-    user   User @relation(fields: [userId], references: [id])
-    userId Int
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
 
-    workout   Workout @relation(fields: [workoutId], references: [id])
-    workoutId Int
-  }
+  workout   Workout @relation(fields: [workoutId], references: [id])
+  workoutId Int
+}
 
-  // ******************************************************************************************
-  // * Workout model
-  // * Workout: Contains details about workout routines, including a unique name, description, duration, and the user who created it.
-  // * Exercise: Represents an individual exercise within a workout, detailing the exercise name, optional notes, the body part targeted, and the category of the exercise.
-  // * Set: Details a specific set within an exercise, including the type of set, the number of repetitions, and the weight used.
-  // * Award: Represents achievements or milestones reached by users, with a name, description, and the user who received it.
-  // ******************************************************************************************
-  model Workout {
-    id            Int        @id @unique @default(autoincrement())
-    name          String     @db.Char(100)
-    description   String?
-    duration      Int
-    createdAt     DateTime   @default(now())
-    updatedAt     DateTime   @updatedAt
-    finishedAt    DateTime
-    likes         Int        @default(0)
-    exercises     Exercise[]
-    past_workouts Log[]
+// ******************************************************************************************
+// * Workout model
+// * Workout: Contains details about workout routines, including a unique name, description, duration, and the user who created it.
+// * Exercise: Represents an individual exercise within a workout, detailing the exercise name, optional notes, the body part targeted, and the category of the exercise.
+// * Set: Details a specific set within an exercise, including the type of set, the number of repetitions, and the weight used.
+// * Award: Represents achievements or milestones reached by users, with a name, description, and the user who received it.
+// ******************************************************************************************
+model Workout {
+  id            Int        @id @unique @default(autoincrement())
+  name          String     @db.Char(100)
+  description   String?
+  duration      Int
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  finishedAt    DateTime
+  likes         Int        @default(0)
+  exercises     Exercise[]
+  past_workouts Log[]
 
-    user   User @relation(fields: [userId], references: [id])
-    userId Int 
-  }
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+}
 
-  // ******************************************************************************************
-  // * Notification Types
-  // * MISC: Miscellaneous notification
-  // * DM: Direct message
-  // * GROUP: Group message
-  // ******************************************************************************************
-  model Exercise {
-    id        Int      @id @unique @default(autoincrement())
-    name      String   @db.Char(100)
-    note      String?
-    sets      Set[]
-    body_part BodyPart
-    category  Category
-    workout   Workout  @relation(fields: [workoutId], references: [id])
-    workoutId Int
-  }
+// ******************************************************************************************
+// * Notification Types
+// * MISC: Miscellaneous notification
+// * DM: Direct message
+// * GROUP: Group message
+// ******************************************************************************************
+model Exercise {
+  id        Int      @id @unique @default(autoincrement())
+  name      String   @db.Char(100)
+  note      String?
+  sets      Set[]
+  body_part BodyPart
+  category  Category
+  workout   Workout  @relation(fields: [workoutId], references: [id])
+  workoutId Int
+}
 
-  // ******************************************************************************************
-  // * Set model
-  // * id: Auto-incremented unique identifier.
-  // * type: The type of set, such as "normal", "warmup", or "dropset".
-  // * reps: The number of repetitions performed in the set.
-  // * weight: The weight used in the set.
-  // * exercise: The exercise associated with the set.
-  // ******************************************************************************************
-  model Set {
-    id         Int      @id @unique @default(autoincrement())
-    type       SetType  @default(NORMAL)
-    reps       Int
-    weight     Float
-    exercise   Exercise @relation(fields: [exerciseId], references: [id])
-    exerciseId Int
-  }
+// ******************************************************************************************
+// * Set model
+// * id: Auto-incremented unique identifier.
+// * type: The type of set, such as "normal", "warmup", or "dropset".
+// * reps: The number of repetitions performed in the set.
+// * weight: The weight used in the set.
+// * exercise: The exercise associated with the set.
+// ******************************************************************************************
+model Set {
+  id         Int      @id @unique @default(autoincrement())
+  type       SetType  @default(NORMAL)
+  reps       Int
+  weight     Float
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int
+}
 
-  // ******************************************************************************************
-  // * Award model
-  // * id: Auto-incremented unique identifier.
-  // * name: The name of the award.
-  // * description: A description of the award.
-  // * user: The user who received the award.
-  // * userId: The identifier for the user.
-  // * createdAt: Timestamp of when the award was created.
-  // * updatedAt: Timestamp of the last update to the award.
-  // ******************************************************************************************
-  model Award {
-    id          Int      @id @unique @default(autoincrement())
-    name        String   @db.Char(100)
-    description String
-    user        User     @relation(fields: [userId], references: [id])
-    userId      Int
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-  }
+// ******************************************************************************************
+// * Award model
+// * id: Auto-incremented unique identifier.
+// * name: The name of the award.
+// * description: A description of the award.
+// * user: The user who received the award.
+// * userId: The identifier for the user.
+// * createdAt: Timestamp of when the award was created.
+// * updatedAt: Timestamp of the last update to the award.
+// ******************************************************************************************
+model Award {
+  id          Int      @id @unique @default(autoincrement())
+  name        String   @db.Char(100)
+  description String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
 
-  // ******************************************************************************************
-  // * Notification Types
-  // * id: Auto-incremented unique identifier.
-  // * createdAt: Timestamp of when the notification was created.
-  // * content: The content of the notification.
-  // * type: The type of notification, such as "misc", "dm", or "group".
-  // * subtype: The subtype of the notification, such as "sys", "nudge", or "friend_request".
-  // * read: A boolean value indicating whether the notification has been read.
-  // *
-  // * receiver: The user who received the notification.
-  // * receiverId: The identifier for the user who received the notification.
-  // *
-  // * sender: The user who sent the notification.
-  // * senderId: The identifier for the user who sent the notification.
-  // ******************************************************************************************
-  model Notification {
-    id        Int              @id @unique @default(autoincrement())
-    createdAt DateTime         @default(now())
-    content   String
-    type      NotificationType
-    read      Boolean          @default(false)
+// ******************************************************************************************
+// * Notification Types
+// * id: Auto-incremented unique identifier.
+// * createdAt: Timestamp of when the notification was created.
+// * content: The content of the notification.
+// * type: The type of notification, such as "misc", "dm", or "group".
+// * subtype: The subtype of the notification, such as "sys", "nudge", or "friend_request".
+// * read: A boolean value indicating whether the notification has been read.
+// *
+// * receiver: The user who received the notification.
+// * receiverId: The identifier for the user who received the notification.
+// *
+// * sender: The user who sent the notification.
+// * senderId: The identifier for the user who sent the notification.
+// ******************************************************************************************
+model Notification {
+  id        Int              @id @unique @default(autoincrement())
+  createdAt DateTime         @default(now())
+  content   String
+  type      NotificationType
+  read      Boolean          @default(false)
 
-    receiver   User @relation("NotificationReceiver", fields: [receiverId], references: [id])
-    receiverId Int
+  receiver   User @relation("NotificationReceiver", fields: [receiverId], references: [id])
+  receiverId Int
 
-    sender   User? @relation("NotificationSender", fields: [senderId], references: [id])
-    senderId Int?
-  }
+  sender   User? @relation("NotificationSender", fields: [senderId], references: [id])
+  senderId Int?
+}
 
   model Chat {
     id              Int       @id @unique @default(autoincrement())
@@ -262,42 +264,42 @@
     createdBy       User       @relation("ChatCreator", fields: [createdByUserId], references: [id])
   }
 
-  model Message {
-    id        Int      @id @unique @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    content   String
-    read      Boolean  @default(false)
-    chat      Chat     @relation(fields: [chatId], references: [id])
-    chatId    Int
-    senderId  Int
-  }
+model Message {
+  id        Int      @id @unique @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  read      Boolean  @default(false)
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    Int
+  senderId  Int
+}
 
-  // ******************************************************************************************
-  // * spotifyData
-  // * id : Auto incremented unique identifier
-  // * albumImageURL: URL of album's image to display on frontend. Can be null 
-  // * albumName: String name of the album in case we'd like to display it.
-  // * artist: Name of song's artist. Can be null.
-  // * isPlaying: Boolean to see if song is currently playing. Goes for all songs. Not null.
-  // * songURL: URL of song playing. Can be null 
-  // * title: Title of currently playing song. Can be null.
-  // * timePlayed: Progress into current song. Can be null.
-  // * timeTotal: Total length of song. Can be null.
-  // * artistURL: URL of song's artist. Can be null.
-  // * userID: Foreign key to user
-  // ******************************************************************************************
-  model SpotifyData {
-    id        Int   @id @unique @default(autoincrement())
-    albumImageURL String?
-    albumName String?
-    artist    String?
-    isPlaying Boolean   @default(false)
-    songURL   String?
-    title     String?
-    timePlayed  Int?
-    timeTotal Int?
-    artistURL String?
-    user      User @relation(fields: [userID], references: [id])
-    userID    Int @unique
-  }
+// ******************************************************************************************
+// * spotifyData
+// * id : Auto incremented unique identifier
+// * albumImageURL: URL of album's image to display on frontend. Can be null 
+// * albumName: String name of the album in case we'd like to display it.
+// * artist: Name of song's artist. Can be null.
+// * isPlaying: Boolean to see if song is currently playing. Goes for all songs. Not null.
+// * songURL: URL of song playing. Can be null 
+// * title: Title of currently playing song. Can be null.
+// * timePlayed: Progress into current song. Can be null.
+// * timeTotal: Total length of song. Can be null.
+// * artistURL: URL of song's artist. Can be null.
+// * userID: Foreign key to user
+// ******************************************************************************************
+model SpotifyData {
+  id            Int     @id @unique @default(autoincrement())
+  albumImageURL String?
+  albumName     String?
+  artist        String?
+  isPlaying     Boolean @default(false)
+  songURL       String?
+  title         String?
+  timePlayed    Int?
+  timeTotal     Int?
+  artistURL     String?
+  user          User    @relation(fields: [userID], references: [id])
+  userID        Int     @unique
+}

@@ -32,6 +32,4 @@ test('SearchBar', async () => {
 
   // Simulate typing in the search input
   fireEvent.changeText(searchInput, 'a') // Type 'a'
-
-  // Add further tests as needed
 })

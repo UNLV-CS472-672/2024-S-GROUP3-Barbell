@@ -6,7 +6,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Body from 'react-native-body-highlighter'
 import ToggleSwitch from '~/components/toggle/Toggle'
-import FrontBackSwitch from '~/components/toggle/FrontBackSwitch'
+import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 
 export type muscleSelect =
   | "abs"

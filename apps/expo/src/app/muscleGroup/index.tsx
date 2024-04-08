@@ -1,23 +1,9 @@
 import React, { useState } from 'react'
-<<<<<<< Updated upstream
-import { Dimensions, Image, Text, View } from 'react-native'
-=======
 import { Dimensions, Image, Text, View, StyleSheet } from 'react-native'
->>>>>>> Stashed changes
 import { router } from 'expo-router'
 import tailwind from '@/tooling/tailwind'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import MuscleGroup from '~/components/muscleGroup/muscleGroup'
-<<<<<<< Updated upstream
-
-export default function NewWorkoutMuscleGroup() {
-  const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
-
-  // vmin: CSS
-  const vmin70 = Math.min(screenWidth, screenHeight) * 0.7
-
-=======
 import Body from 'react-native-body-highlighter'
 import ToggleSwitch from '~/components/toggle/Toggle'
 import FrontBackSwitch from '~/components/toggle/FrontBackSwitch'
@@ -66,9 +52,9 @@ export default function NewWorkoutMuscleGroup() {
 
   //let tmp = "";
   let sameGroup = {};
-  const [tmpS, settmpS] = useState({})
+  const [tmp1, setTmp1] = useState({})
+  const [userSelection, setUserSelection] = useState("");
 
->>>>>>> Stashed changes
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
       <View className="flex flex-row justify-between px-5">
@@ -79,17 +65,6 @@ export default function NewWorkoutMuscleGroup() {
           color="#CACACA"
         />
         <Text style={{ color: '#CACACA', fontSize: 20 }}>Select a muscle group</Text>
-<<<<<<< Updated upstream
-        <Ionicons name="ellipsis-horizontal-sharp" size={24} color="#CACACA" />
-      </View>
-
-      <View className="flex flex-row items-center">
-        <MuscleGroup />
-      </View>
-    </SafeAreaView>
-  )
-}
-=======
         <Text></Text>
       </View>
 
@@ -101,78 +76,99 @@ export default function NewWorkoutMuscleGroup() {
           onBodyPartPress={(e) =>
             {
               switch (e.slug) {
-                case "abs":
-                  break;
-                case "adductors":
-                  break;
-                case "ankles":
-                  break;
-                case "calves":
-                  break;
-                case "chest":
-                  break;
                 case "deltoids":
+                  // Shoulder
                   setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  settmpS({ slug: "chest", intensity: 2 })
-                  sameGroup = bodyPartSelected;
-                  sameGroup.slug = "chest";
+                  setUserSelection("Shoulder");
+
+                  // setTmp1({ slug: "chest", intensity: 2 })
+                  // sameGroup = bodyPartSelected;
+                  // sameGroup.slug = "chest";
                   break;
-                case "feet":
+
+                case "chest":
+                  // Chest
+                  setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                  setUserSelection("Chest")
                   break;
+
                 case "biceps":
                 case "triceps":
                 case "forearm":
+                  // Arm
+                  setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                  setUserSelection("Arm")
                   break;
-                case "gluteal":
-                  break;
-                case "hamstring":
-                  break;
-                case "hands":
-                  break;
-                case "hair":
-                  break;
-                case "head":
-                  break;
-                case "knees":
-                  break;
-                case "lower-back":
-                  break;
-                case "neck":
-                  break;
+
+                case "abs":
                 case "obliques":
+                  // Core
+                  setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                  setUserSelection("Core")
                   break;
+
                 case "quadriceps":
+                case "adductors":
+                case "hamstring":
+                  // Upper leg
+                  setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                  setUserSelection("Upper leg")
                   break;
+
                 case "tibialis":
+                case "calves":
+                  // Lower leg
+                  setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                  setUserSelection("Lower leg")
                   break;
+
                 case "trapezius":
+                  // Conflit with upper back
+                  // Go with the figma design
+                  // Upper back
+                  setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                  setUserSelection("Upper back")
                   break;
+
                 case "upper-back":
+                  // Lat
+                  setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                  setUserSelection("Lat")
                   break;
+
+                case "lower-back":
+                  // Lower back
+                  setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                  setUserSelection("Lower back")
+                  break;
+
+                case "gluteal":
+                  // Glute
+                  setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                  setUserSelection("Glute")
+                  break;
+
                 default:
                   // Do Nothing
                   // Not supported
+                  setUserSelection("")
                   break;
               }
 
-              //if (e.slug != "abs")
+              // Get out
               // setBodyPartSelected({ slug: e.slug, intensity: 2 })
             }
           }
 
 
-
           data={
           [
-
-            tmpS,
-            bodyPartSelected,
-
             /*
           { slug: "chest", intensity: 1 },
           { slug: "abs", intensity: 2 },
           { slug: "upper-back", intensity: 1 },
           { slug: "lower-back", intensity: 2 },*/
+            // tmp1,
             bodyPartSelected
           ]}
 
@@ -183,7 +179,7 @@ export default function NewWorkoutMuscleGroup() {
 
         <View>
           <Text style={{ color: '#CACACA', fontSize: 20 }}>
-            Muscle Group Selected: {bodyPartSelected.slug}
+            Muscle Group Selected: {userSelection}
           </Text>
         </View>
 
@@ -220,4 +216,4 @@ export default function NewWorkoutMuscleGroup() {
     </SafeAreaView>
   )
 }
->>>>>>> Stashed changes
+

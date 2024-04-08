@@ -1,3 +1,29 @@
+/**
+ * HOW TO USE:
+ * --------------------------------------------------------------------------------
+ * Inside of your PARENT component, you need to have the following:
+ * - list: any[]
+ *    - This is your raw data that you get from a query
+ * - const[filteredList, setFilteredList] = useState<any[]>(List)
+ *    - filteredList is what is going to be displayed
+ *    - setFilteredList is how we set the values that are going to be outputted
+ * - filterBy: string
+ *    - this is the field that you want to filter your data by
+ * - placeholder: string
+ *    - placeholder text within the search bar
+ * --------------------------------------------------------------------------------
+ * To output the data, you want to use a map and map the items within filteredList
+ * to your list item component.
+ *
+ * For example:
+ *  <SearchBar list={list} placeholder="Search..." setFilteredList={setFilteredList} filterBy="name" />
+ *  {filteredList.map((item, index) => (
+ *    <View key={index}>
+ *      <Text>{item.name}</Text>
+ *    </View>
+ *  ))}
+ */
+
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'

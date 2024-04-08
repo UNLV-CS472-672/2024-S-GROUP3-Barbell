@@ -4,3 +4,8 @@ export const CreatePostSchema = z.object({
   title: z.string().min(1),
   content: z.string().min(1),
 })
+
+export const UpdateUserSchema = z.object({
+  id: z.number().int(),
+  notificationsBanners: z.boolean().optional()
+})

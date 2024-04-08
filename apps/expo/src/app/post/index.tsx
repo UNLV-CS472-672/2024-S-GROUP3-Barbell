@@ -6,7 +6,6 @@ import { SignedIn, SignedOut } from '@clerk/clerk-expo'
 import { FlashList } from '@shopify/flash-list'
 
 import type { RouterOutputs } from '~/utils/api'
-import SignInWithOAuth from '~/components/auth/sign-in-w-oauth'
 import { SignOut } from '~/components/auth/sign-out'
 import { api } from '~/utils/api'
 

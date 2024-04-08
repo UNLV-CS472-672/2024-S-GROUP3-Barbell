@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Text, View } from 'react-native'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
@@ -6,9 +7,16 @@ import { api } from '~/utils/api'
 import FriendRequestNotif from './FriendRequestNotif'
 import NudgeNotif from './NudgeNotif'
 
-const handleNotif = (notif: any, id: number) => {
+const handleNotif = (notif: any, id: number, receiverId: number) => {
   if (notif.type == 'FRIEND_REQUEST') {
-    return <FriendRequestNotif notif={notif} key={id} senderUsername={notif.sender?.username.trim()} />
+    return (
+      <FriendRequestNotif
+        notif={notif}
+        key={id}
+        senderUsername={notif.sender?.username.trim()}
+        receiverId={receiverId}
+      />
+    )
   } else if (notif.type == 'NUDGE') {
     return <NudgeNotif notif={notif} key={id} senderUsername={notif.sender?.username.trim()} />
   }
@@ -30,7 +38,7 @@ export default function MiscNotifs() {
     for (let i = 0; i < data.length; i++) {
       const notif = data[i]
       if (notif) {
-        renderedNotifications?.push(handleNotif(notif, notif.id))
+        renderedNotifications?.push(handleNotif(notif, notif.id, userData.id))
       }
     }
   }

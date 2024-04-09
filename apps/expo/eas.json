@@ -1,48 +1,31 @@
-  {
-    "cli": {
-      "version": ">= 5.8.0"
-    },
-    "build": {
-      "base": {
-        "node": "18.16.1",
-        "ios": {
-          "resourceClass": "m-medium"
-        }
-      },
-      "development": {
-        "extends": "base",
-        "developmentClient": true,
-        "distribution": "internal",
-        "releaseChannel": "default",
-        "android": {
-          "buildType": "apk"
-        }
-      },
-      "preview": {
-        "extends": "base",
-        "distribution": "internal",
-        "releaseChannel": "preview",
-        "android": {
-          "buildType": "apk"
-        }
-      },
-      "production": {
-        "extends": "base"
-      },
-      "devclient": {
-        "extends": "base",
-        "releaseChannel": "default",
-        "distribution": "internal",
-        "developmentClient": true,
-        "android": {
-          "buildType": "apk"
-        },
-        "ios": {
-          "simulator": true
-        }
+{
+  "cli": {
+    "version": ">= 4.1.2"
+  },
+  "build": {
+    "base": {
+      "node": "18.16.1",
+      "ios": {
+        "resourceClass": "m-medium"
       }
     },
-    "submit": {
-      "production": {}
+    "development": {
+      "extends": "base",
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "extends": "base",
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "production": {
+      "extends": "base"
     }
+  },
+  "submit": {
+    "production": {}
   }
+}

@@ -102,3 +102,9 @@ In case you encountered, Failed to get localhost. Please point to your productio
 ### Adding/changing the database schema
 
 TBA
+
+### EAS UPDATE BRANCHES
+
+```
+eas update --auto
+```

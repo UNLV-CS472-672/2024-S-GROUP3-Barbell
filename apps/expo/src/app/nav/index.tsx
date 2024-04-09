@@ -34,13 +34,9 @@ const Nav = () => {
           { key: 'Award', route: '/award' },
           { key: 'Spotify', route: '/spotify' },
           { key: 'Tracker', route: '/tracker' },
+          { key: 'KeypadDemo', route: '/keypadDemo' },
         ]}
-        renderItem={({ item }) => (
-          <Button
-            title={item.key}
-            onPress={() => router.push(item.route as Route<string>)}
-          />
-        )}
+        renderItem={({ item }) => <Button title={item.key} onPress={() => router.push(item.route as Route<string>)} />}
       />
     </SafeAreaView>
   )

@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native'
 
-import { Ionicons } from '@expo/vector-icons'
+import { AntDesign, Ionicons } from '@expo/vector-icons'
 
 interface NumericKeypadProps {
   setNumber: React.Dispatch<React.SetStateAction<any>>
   number: string
+  keypadVisible: boolean
+  setKeypadVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function Keypad({ setNumber, number }: NumericKeypadProps) {
+export default function Keypad({ setNumber, number, keypadVisible, setKeypadVisible }: NumericKeypadProps) {
   const handleKeyPress = (value: string) => {
     if (value === 'backspace') {
       if (number.length === 1) {
@@ -25,11 +27,14 @@ export default function Keypad({ setNumber, number }: NumericKeypadProps) {
     } else if (number === '0') {
       // if the only thing in the string is a 0, just replace the 0 with the digit
       setNumber(value)
-    } else if ((number.includes('.') && number.indexOf('.') === number.length - 3) || Number(number) >= 9999.99) {
+    } else if (
+      (number.includes('.') && number.indexOf('.') === number.length - 3) ||
+      Number(number + value) > 9999.99
+    ) {
       // do not allow further input if they want more than 2 decimal points of precision
       // or if they want to enter a value of 10,000 or more
       // preventing any buffer overflow attempts
-    } else {
+    } else if (Number(value) >= 0 && Number(value) <= 9) {
       // else just concatenate as normal
       setNumber(number + value)
     }
@@ -37,8 +42,10 @@ export default function Keypad({ setNumber, number }: NumericKeypadProps) {
 
   const { height } = Dimensions.get('window')
 
-  return (
-    <View className="flex bg-slate-200 p-1" style={{ height: height * 0.3 }}>
+  return !keypadVisible ? (
+    <View />
+  ) : (
+    <View className="flex bg-slate-200 p-1" style={{ height: height * 0.35 }}>
       <View className="flex-1 flex-row justify-between">
         <TouchableOpacity className="m-1 flex-1 justify-center rounded-md bg-white" onPress={() => handleKeyPress('1')}>
           <Text style={{ fontSize: 24 }} className="text-center">
@@ -107,6 +114,13 @@ export default function Keypad({ setNumber, number }: NumericKeypadProps) {
         >
           <Ionicons name="backspace-outline" size={24} color="black" />
         </TouchableOpacity>
+      </View>
+      <View className="h-12 flex-row">
+        <TouchableOpacity onPress={() => setKeypadVisible(false)} className="flex-1 items-center justify-center">
+          <AntDesign name="down" size={18} color="black" />
+        </TouchableOpacity>
+        <View className="flex-1" />
+        <View className="flex-1" />
       </View>
     </View>
   )

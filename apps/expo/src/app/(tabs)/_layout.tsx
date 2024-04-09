@@ -3,7 +3,6 @@ import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
 import { Tabs } from 'expo-router'
 
-import { cn } from '^/packages/ui/src/cn'
 import CircleMinus from '~assets/svgs/circle-minus.svg'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
@@ -12,8 +11,9 @@ import Profile from '~assets/svgs/profile.svg'
 import type { CustomBottomSheetModalRef } from '~/components/custom-bottom-sheet-modal'
 import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
 import Button from '~/components/ui/button/button'
-import { DefaultHeader } from '~/layouts/headers/default'
+import { DefaultHeader } from '~/layouts/headers/default-header'
 import colors from '~/styles/colors'
+import { cn } from '~/utils/cn'
 
 const Layout = () => {
   const AnimatedDot = ({ focused }: { focused: boolean }) => (
@@ -44,7 +44,7 @@ const Layout = () => {
       >
         {/*  */}
         <Tabs.Screen
-          name="index"
+          name='index'
           options={{
             header: () => (
               <DefaultHeader
@@ -54,7 +54,7 @@ const Layout = () => {
               />
             ),
             tabBarIcon: ({ focused, size }) => (
-              <View className="items-center">
+              <View className='items-center'>
                 <HomeLogo
                   width={size * 1.25}
                   height={size * 1.25}
@@ -68,7 +68,7 @@ const Layout = () => {
 
         {/* PLUS CIRCLE */}
         <Tabs.Screen
-          name="one"
+          name='one'
           redirect={false}
           listeners={{
             tabPress: (e) => {
@@ -98,7 +98,7 @@ const Layout = () => {
 
         {/*  */}
         <Tabs.Screen
-          name="two"
+          name='two'
           options={{
             header: () => (
               <DefaultHeader
@@ -108,7 +108,7 @@ const Layout = () => {
               />
             ),
             tabBarIcon: ({ focused, size }) => (
-              <View className="items-center">
+              <View className='items-center'>
                 <Profile width={size * 1.25} height={size * 1.25} fill={focused ? `${colors.bottomav.icon}` : 'none'} />
                 <AnimatedDot focused={focused} />
               </View>
@@ -124,9 +124,9 @@ const Layout = () => {
         renderBackdrop
         enablePanDownToClose
       >
-        <View className="align-center bg-background flex-1 items-center py-10">
-          <Button color="trap" size="full" value="Start Saved Workout" className="mb-5" testID="button-test"></Button>
-          <Button color="trap" size="full" value="Create New Workout" testID="button-test-2"></Button>
+        <View className='align-center bg-background flex-1 items-center py-10'>
+          <Button color='trap' size='full' value='Start Saved Workout' className='mb-5' testID='button-test'></Button>
+          <Button color='trap' size='full' value='Create New Workout' testID='button-test-2'></Button>
         </View>
       </CustomBottomSheetModal>
     </>

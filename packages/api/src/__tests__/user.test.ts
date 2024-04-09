@@ -9,13 +9,6 @@ describe('USER', async () => {
   const ctx = await createContextInner({})
   const caller = createCaller(ctx)
 
-  /* Do this */
-  // const input: inferProcedureInput<AppRouter['post']['create']> = {
-
-  //   title: 'First Post',
-  //   content: 'This is the content of the first post.',
-  // }
-
   /* Or this */
   const input: RouterInputs['user']['byId'] = {
     id: 1,
@@ -25,8 +18,7 @@ describe('USER', async () => {
     title: 'Another Post',
     content: 'This is.',
   }
-
-
+	
   it('/byId && /create', async () => {
     const byId = await caller.user.byId({ id: 1 })
     const create = await caller.post.create(input2)

@@ -16,6 +16,8 @@ export default defineConfig({
       reportsDirectory: 'vitest-coverage',
     },
     exclude: ['**/node_modules/**', '**/__test__/**', '**/html/**', '**/coverage/**', '**/jest-coverage/**'],
-    reporters: ['html'],
+    // https://vitest.dev/guide/reporters
+    // the rest is ugly so these 2 only
+    reporters: ['verbose', 'html'],
   },
 })

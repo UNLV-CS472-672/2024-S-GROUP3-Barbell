@@ -60,11 +60,7 @@ export async function createTRPCContext(opts: FetchCreateContextFnOptions): Prom
   console.log('opts', opts.resHeaders)
   console.log('>>> tRPC Request from', source)
 
-  const contextInner = await createContextInner({})
-  return {
-    ...contextInner,
-    prisma: prisma,
-  }
+  return await createContextInner({})
 }
 
 // const createInnerTRPCContext = (opts: CreateContextOptions) => {

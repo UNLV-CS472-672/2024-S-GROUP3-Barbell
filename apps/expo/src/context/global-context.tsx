@@ -1,10 +1,30 @@
 import type { Dispatch, SetStateAction } from 'react'
-import { createContext, useContext, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
+import { useClerk } from '@clerk/clerk-expo'
+
+import { api } from '~/utils/api'
+import { generateUsername } from '~/utils/usernameGenerator'
+
+// TODO: Finish defining user data
+export interface IUserData {
+  id: number
+  clerkId: string
+  username: string
+  name: string
+  // status: 'ACTIVE' | 'INACTIVE'
+  // streak: number
+}
 
 export type TGlobalContext = {
   isWorkingOut: boolean
   setIsWorkingOut: Dispatch<SetStateAction<boolean>>
-  userData: any // TODO: define user data type
+  userData: IUserData | null
 }
 
 export const GlobalContext = createContext<TGlobalContext | null>(null)
@@ -15,26 +35,63 @@ interface IGlobalContextProviderProps {
 
 const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const [isWorkingOut, setIsWorkingOut] = useState(false)
+  const [userData, setUserData] = useState<IUserData | null>(null)
+  const { user: clerkUserData } = useClerk()
+  const createUser = api.user.create.useMutation()
+  const { data: userNineData, isFetched: userNineDataIsFetched } =
+    api.user.byId.useQuery({ id: 9 })
+
+  const getUserData = useCallback(async () => {
+    if (clerkUserData) {
+      const response = await createUser.mutateAsync({
+        clerkId: clerkUserData.id,
+        username: clerkUserData.username
+          ? clerkUserData.username
+          : generateUsername(),
+        name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
+      })
+
+      setUserData({
+        id: response.id,
+        clerkId: response.clerkId,
+        username: response.username,
+        name: response.name!,
+      })
+    }
+  }, [clerkUserData])
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      if (!userNineDataIsFetched) return
+
+      setUserData({
+        id: userNineData?.id!,
+        clerkId: userNineData?.clerkId!,
+        username: userNineData?.username!,
+        name: userNineData?.name!,
+      })
+    } else getUserData()
+  }, [getUserData, userNineDataIsFetched])
+
   const globalContextValue: TGlobalContext = {
     isWorkingOut,
     setIsWorkingOut,
-    userData: {
-      id: 9,
-      username: 'userNine',
-      name: 'User Nine',
-      status: 'ACTIVE',
-      streak: 4,
-    },
+    userData,
   }
-  // TODO: implement a fetchUserData function
 
-  return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>
+  return (
+    <GlobalContext.Provider value={globalContextValue}>
+      {children}
+    </GlobalContext.Provider>
+  )
 }
 
 export const useGlobalContext = () => {
   const context = useContext(GlobalContext)
   if (!context) {
-    throw new Error('useGlobalContext must be used within a GlobalContextProvider')
+    throw new Error(
+      'useGlobalContext must be used within a GlobalContextProvider',
+    )
   }
   return context
 }

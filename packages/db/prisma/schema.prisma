@@ -92,7 +92,7 @@
     status        UserStatus?
     streak        Int
     posts         Post[]
-    friends       Friend[]
+    friends       Friend[]       @relation("UserFriends")
     log           Log[]
     workouts      Workout[]
     awards        Award[]
@@ -101,6 +101,7 @@
     createdChats  Chat[]         @relation("ChatCreator")
     chats         Chat[]
     spotify       SpotifyData?
+    
   }
 
   // ******************************************************************************************
@@ -109,12 +110,13 @@
   // * user: The User model representing one side of the friendship.
   // * userId: The identifier for the user, establishing the relation to the User model.
   // ******************************************************************************************
-  model Friend {
-    id Int @id @unique @default(autoincrement())
 
-    user   User @relation(fields: [userId], references: [id])
-    userId Int
-  }
+model Friend {
+  id        Int     @id @unique @default(autoincrement())
+  user      User    @relation("UserFriends", fields: [userId], references: [id])
+  userId    Int
+  status    String
+}
 
   // ******************************************************************************************
   // * Log model

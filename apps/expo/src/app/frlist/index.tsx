@@ -30,7 +30,7 @@ const FriendsListScreen = () => {
   const navigation = useNavigation<FriendsListScreenNavigationProp>();
 
   // Use the tRPC query to fetch friends
-  const { data: friendsData, isLoading } = api.friend.getFriends.useQuery();
+  const { data: friendsData } = api.friend.getFriends.useQuery();
 
   useEffect(() => {
     if (friendsData) {
@@ -75,10 +75,6 @@ const FriendsListScreen = () => {
       </View>
     );
   };
-
-  // if (isLoading) {
-  //   return <Text>Loading...</Text>;
-  // }
 
   return (
     <View className="flex-1 bg-white">

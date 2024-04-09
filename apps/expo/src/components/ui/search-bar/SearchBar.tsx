@@ -30,7 +30,7 @@ import { TextInput } from 'react-native-gesture-handler'
 
 interface SearchBarProps {
   list: any[]
-  setFilteredList: any
+  setFilteredList: React.Dispatch<React.SetStateAction<any[]>>
   filterBy: string
   placeholder: string
 }

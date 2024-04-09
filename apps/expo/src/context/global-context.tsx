@@ -1,10 +1,25 @@
 import type { Dispatch, SetStateAction } from 'react'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+
+import { useClerk } from '@clerk/clerk-expo'
+
+import { api } from '~/utils/api'
+import { generateUsername } from '~/utils/usernameGenerator'
+
+// TODO: Finish defining user data
+export interface IUserData {
+  id: number
+  clerkId: string
+  username: string
+  name: string
+  // status: 'ACTIVE' | 'INACTIVE'
+  // streak: number
+}
 
 export type TGlobalContext = {
   isWorkingOut: boolean
   setIsWorkingOut: Dispatch<SetStateAction<boolean>>
-  userData: any // TODO: define user data type
+  userData: IUserData | null
 }
 
 export const GlobalContext = createContext<TGlobalContext | null>(null)
@@ -15,18 +30,52 @@ interface IGlobalContextProviderProps {
 
 const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const [isWorkingOut, setIsWorkingOut] = useState(false)
+  const [userData, setUserData] = useState<IUserData | null>(null)
+  const { user: clerkUserData } = useClerk()
+  const createUser = api.user.create.useMutation()
+
+  const getUserData = useCallback(async () => {
+    if (clerkUserData) {
+      console.log('DEVELOPMENT EVIRONMENT')
+
+      if (process.env.NODE_ENV === 'development') {
+        const userNine = api.user.byId.useQuery({ id: 9 })
+
+        if (userNine.data) {
+          setUserData({
+            id: userNine.data.id,
+            clerkId: userNine.data.clerkId,
+            username: userNine.data.username,
+            name: userNine.data.name!,
+          })
+          return
+        }
+      }
+
+      const response = await createUser.mutateAsync({
+        clerkId: clerkUserData.id,
+        username: clerkUserData.username ? clerkUserData.username : generateUsername(),
+        name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
+      })
+
+      setUserData({
+        id: response.id,
+        clerkId: response.clerkId,
+        username: response.username,
+        name: response.name!,
+      })
+    }
+  }, [clerkUserData])
+
+  useEffect(() => {
+    getUserData()
+  }, [getUserData])
+
   const globalContextValue: TGlobalContext = {
     isWorkingOut,
     setIsWorkingOut,
-    userData: {
-      id: 9,
-      username: 'userNine',
-      name: 'User Nine',
-      status: 'ACTIVE',
-      streak: 4,
-    },
+    userData,
   }
-  // TODO: implement a fetchUserData function
 
   return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>
 }

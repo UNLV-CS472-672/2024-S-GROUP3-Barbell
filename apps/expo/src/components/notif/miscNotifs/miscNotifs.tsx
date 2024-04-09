@@ -16,6 +16,11 @@ const handleNotif = (notif: any, id: number) => {
 
 export default function MiscNotifs() {
   const { userData } = useGlobalContext()
+
+  if (!userData) {
+    return null
+  }
+
   const { data, isFetched, isFetching } = api.notif.getMiscNotifsWithSenderUsernameFromUserId.useQuery({
     id: userData.id,
   })

@@ -29,7 +29,7 @@ exports[`CustomBottomSheet renders correctly 1`] = `
       }
     }
     accessible={true}
-    className="active:opacity-30 bg-[#717171] w-11/12 py-3 rounded-lg mb-5"
+    className="active:opacity-30 disabled:opacity-60 bg-[#717171] w-11/12 py-3 rounded-lg mb-5"
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -69,7 +69,7 @@ exports[`CustomBottomSheet renders correctly 1`] = `
       }
     }
     accessible={true}
-    className="active:opacity-30 bg-[#717171] w-11/12 py-3 rounded-lg"
+    className="active:opacity-30 disabled:opacity-60 bg-[#717171] w-11/12 py-3 rounded-lg"
     collapsable={false}
     focusable={true}
     onBlur={[Function]}

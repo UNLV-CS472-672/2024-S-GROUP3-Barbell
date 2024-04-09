@@ -48,9 +48,9 @@ const Layout = () => {
           options={{
             header: () => (
               <DefaultHeader
-                onCategoryChanged={() => {
-                  'Home'
-                }}
+                // onCategoryChanged={() => {
+                //   'Home'
+                // }}
               />
             ),
             tabBarIcon: ({ focused, size }) => (
@@ -102,9 +102,9 @@ const Layout = () => {
           options={{
             header: () => (
               <DefaultHeader
-                onCategoryChanged={() => {
-                  'Settings'
-                }}
+                // onCategoryChanged={() => {
+                //   'Settings'
+                // }}
               />
             ),
             tabBarIcon: ({ focused, size }) => (

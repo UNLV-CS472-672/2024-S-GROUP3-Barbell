@@ -1,6 +1,11 @@
 import type { Dispatch, SetStateAction } from 'react'
-import { createContext, useCallback, useContext, useEffect, useState } from 'react'
-
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { useClerk } from '@clerk/clerk-expo'
 
 import { api } from '~/utils/api'
@@ -33,14 +38,16 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const [userData, setUserData] = useState<IUserData | null>(null)
   const { user: clerkUserData } = useClerk()
   const createUser = api.user.create.useMutation()
+  const { data: userNineData, isFetched: userNineDataIsFetched } =
+    api.user.byId.useQuery({ id: 9 })
 
   const getUserData = useCallback(async () => {
     if (clerkUserData) {
-      console.log('Calling create user mutation')
-
       const response = await createUser.mutateAsync({
         clerkId: clerkUserData.id,
-        username: clerkUserData.username ? clerkUserData.username : generateUsername(),
+        username: clerkUserData.username
+          ? clerkUserData.username
+          : generateUsername(),
         name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
       })
 
@@ -54,8 +61,17 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   }, [clerkUserData])
 
   useEffect(() => {
-    getUserData()
-  }, [getUserData])
+    if (process.env.NODE_ENV === 'development') {
+      if (!userNineDataIsFetched) return
+
+      setUserData({
+        id: userNineData?.id!,
+        clerkId: userNineData?.clerkId!,
+        username: userNineData?.username!,
+        name: userNineData?.name!,
+      })
+    } else getUserData()
+  }, [getUserData, userNineDataIsFetched])
 
   const globalContextValue: TGlobalContext = {
     isWorkingOut,
@@ -63,13 +79,19 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     userData,
   }
 
-  return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>
+  return (
+    <GlobalContext.Provider value={globalContextValue}>
+      {children}
+    </GlobalContext.Provider>
+  )
 }
 
 export const useGlobalContext = () => {
   const context = useContext(GlobalContext)
   if (!context) {
-    throw new Error('useGlobalContext must be used within a GlobalContextProvider')
+    throw new Error(
+      'useGlobalContext must be used within a GlobalContextProvider',
+    )
   }
   return context
 }

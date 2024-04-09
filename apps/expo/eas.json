@@ -4,7 +4,8 @@
   },
   "build": {
     "base": {
-      "node": "18.16.1",
+      "node": "18.18.2",
+      "pnpm": "8.15.4",
       "ios": {
         "resourceClass": "m-medium"
       }
@@ -12,7 +13,8 @@
     "development": {
       "extends": "base",
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "releaseChannel": "default"
     },
     "preview": {
       "extends": "base",
@@ -22,7 +24,20 @@
       }
     },
     "production": {
-      "extends": "base"
+      "extends": "base",
+      "releaseChannel": "default"
+    },
+    "devclient": {
+      "extends": "base",
+      "releaseChannel": "default",
+      "distribution": "internal",
+      "developmentClient": true,
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
+      }
     }
   },
   "submit": {

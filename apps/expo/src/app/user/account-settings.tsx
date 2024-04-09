@@ -61,6 +61,7 @@ const AccountSettings = () => {
   if (!userData) {
     return null
   }
+  console.log('userData', userData)
 
   const { data: user, isLoading, isFetching } = api.user.byId.useQuery({ id: userData.id })
   const updateUserMutation = api.user.update.useMutation()

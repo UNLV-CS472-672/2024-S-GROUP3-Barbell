@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "clean": "git clean -xdf .expo .turbo node_modules",
-    "dev": "expo start",
-    "dev:android": "expo start --android",
+    "dev": "expo start --go",
+    "dev:android": "expo start --android --go",
     "dev:ios": "expo start --ios",
     "lint": "eslint .",
     "format": "prettier --check . --ignore-path ../../.gitignore",

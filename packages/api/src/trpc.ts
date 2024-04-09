@@ -14,6 +14,7 @@
 import type * as trpcNext from '@trpc/server/adapters/next'
 
 import { initTRPC } from '@trpc/server'
+import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
 import superjson from 'superjson'
 import { ZodError } from 'zod'
 
@@ -51,16 +52,19 @@ export async function createContextInner(_opts: CreateContextOptions) {
   }
 }
 
-
 export type Context = Awaited<ReturnType<typeof createContextInner>>
 
-
-export async function createTRPCContext(opts: trpcNext.CreateNextContextOptions): Promise<Context> {
+export async function createTRPCContext(opts: FetchCreateContextFnOptions): Promise<Context> {
   // for API-response caching see https://trpc.io/docs/v11/caching
-  const source = opts.req.headers['x-trpc-source'] ?? 'unknown'
+  const source = opts.resHeaders.get('x-trpc-source') ?? 'unknown'
+  console.log('opts', opts.resHeaders)
   console.log('>>> tRPC Request from', source)
 
-  return await createContextInner({})
+  const contextInner = await createContextInner({})
+  return {
+    ...contextInner,
+    prisma: prisma,
+  }
 }
 
 // const createInnerTRPCContext = (opts: CreateContextOptions) => {

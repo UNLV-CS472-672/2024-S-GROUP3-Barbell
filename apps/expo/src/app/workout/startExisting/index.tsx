@@ -2,8 +2,7 @@ import React from 'react'
 import {StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import { router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
-import ExerciseList from '~/components/workout/exerciseList'
+import WorkoutList from '~/components/workout/workoutList'
 
 
 const styles = StyleSheet.create({
@@ -40,9 +39,7 @@ export default function createNew() {
       </View>
       <View style={{height: 1, backgroundColor: '#CACACA', marginHorizontal: 13, opacity: 0.3, top: 10, }}/>
       <ScrollView className="mb-[25px] py-[20px]">
-        <View>
-          <ExerciseList />
-        </View>
+        <WorkoutList />
       </ScrollView>
     </SafeAreaView>
   )

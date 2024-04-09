@@ -21,6 +21,7 @@ export default function KeypadDemo() {
           }}
           value={number}
         />
+
         <TextInput style={{ borderWidth: 1, padding: 10, marginBottom: 20, width: '100%' }} />
       </View>
       <View style={styles.keypadContainer}>

@@ -1,4 +1,5 @@
 import { forwardRef, useCallback, useMemo } from 'react'
+
 import {
   BottomSheetBackdrop,
   BottomSheetBackdropProps,
@@ -54,20 +55,8 @@ const Example = () => {
   )
 }
 */
-const CustomBottomSheetModal = forwardRef<
-  CustomBottomSheetModalRef,
-  CustomBottomSheetModalProps
->(
-  (
-    {
-      children,
-      customSnapPoints,
-      startIndex,
-      enablePanDownToClose,
-      renderBackdrop,
-    },
-    ref,
-  ) => {
+const CustomBottomSheetModal = forwardRef<CustomBottomSheetModalRef, CustomBottomSheetModalProps>(
+  ({ children, customSnapPoints, startIndex, enablePanDownToClose, renderBackdrop }, ref) => {
     const snapPoints = useMemo(() => customSnapPoints, [])
 
     const backdrop = useCallback(

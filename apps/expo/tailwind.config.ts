@@ -52,7 +52,6 @@ export default {
         'dark-purple'   : '#48476D',
         'slate-200'     : '#CACACA',
         'bb-dark-gray'  : '#272727',
-        'bb-dark-purple': '#48476D',
         'bb-slate-100'  : '#1E1E1E',
         'light-red'     : '#9D534F',
         'light-green'   : '#55A181',

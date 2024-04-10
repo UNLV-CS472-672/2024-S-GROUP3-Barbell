@@ -131,14 +131,6 @@ const AccountSettings = () => {
       className='bg-bb-slate-100 flex-1'
       style={{ backgroundColor: '#1e1e1e', flex: 1 }}
     >
-      <Button
-        onPress={() => router.push('/nav')}
-        className='flex h-10 w-24 items-center justify-center rounded-md bg-blue-500'
-        aria-label='Go to nav'
-      >
-        <Text className='text-white'>Nav</Text>
-      </Button>
-
       <View className='bg-bb-dark-gray m-4 flex-row rounded-lg'>
         <View className='flex-row items-center'>
           <FontAwesome5

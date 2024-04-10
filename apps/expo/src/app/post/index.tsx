@@ -18,10 +18,7 @@ function PostCard(props: {
       <View className="flex-grow">
         <Link
           asChild
-          href={{
-            pathname: '/post/[id]',
-            params: { id: props.post.id },
-          }}
+          href={`/post/${props.post.id}`}
         >
           <Pressable>
             <Text className="text-xl font-semibold text-pink-400">

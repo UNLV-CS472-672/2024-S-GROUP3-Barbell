@@ -10,6 +10,7 @@ import '~/styles.css'
 
 import { useEffect } from 'react'
 import { View } from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { SplashScreen } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
@@ -121,17 +122,19 @@ export default function RootLayout() {
 function AppContent() {
   return (
     <TRPCProvider>
-      <GlobalContextProvider>
-        <SafeAreaProvider>
-          <BottomSheetModalProvider>
-            <StatusBar style='light' />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <GlobalContextProvider>
+          <SafeAreaProvider>
+            <BottomSheetModalProvider>
+              <StatusBar style='light' />
 
-            {/* Splitter */}
+              {/* Splitter */}
 
-            <RootLayoutBottomNav />
-          </BottomSheetModalProvider>
-        </SafeAreaProvider>
-      </GlobalContextProvider>
+              <RootLayoutBottomNav />
+            </BottomSheetModalProvider>
+          </SafeAreaProvider>
+        </GlobalContextProvider>
+      </GestureHandlerRootView>
     </TRPCProvider>
   )
 }

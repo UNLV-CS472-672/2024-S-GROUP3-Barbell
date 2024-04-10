@@ -12,11 +12,11 @@ export const DefaultHeader = () => {
         </TouchableOpacity>
       </View>
 
-      <Text className='font-koulen text-bb-dark-purple flex-auto pl-6 text-center text-5xl'>
+      <Text className='font-koulen text-dark-purple flex-auto pl-5 text-center text-5xl'>
         BARBELL
       </Text>
 
-      <TouchableOpacity className='p-2 pr-6'>
+      <TouchableOpacity className='p-2 pr-5'>
         <NotificationSVG />
       </TouchableOpacity>
     </View>

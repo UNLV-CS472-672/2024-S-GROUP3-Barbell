@@ -1,15 +1,15 @@
-import { Tabs } from 'expo-router'
 import React from 'react'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
+import { Tabs } from 'expo-router'
 
 import CircleMinus from '~assets/svgs/circle-minus.svg'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
 
-import type { CustomBottomSheetModalRef } from '~/components/custom-bottom-sheet-modal'
-import CustomBottomSheetModal from '~/components/custom-bottom-sheet-modal'
+import type { CustomBottomSheetModalRef } from '~/components/ui/custom-bottom-sheet-modal'
+import CustomBottomSheetModal from '~/components/ui/custom-bottom-sheet-modal'
 import Button from '~/components/ui/button/button'
 import { DefaultHeader } from '~/layouts/headers/default-header'
 import colors from '~/styles/colors'
@@ -46,13 +46,7 @@ const Layout = () => {
         <Tabs.Screen
           name='index'
           options={{
-            header: () => (
-              <DefaultHeader
-              // onCategoryChanged={() => {
-              //   'Home'
-              // }}
-              />
-            ),
+            header: () => <DefaultHeader />,
             tabBarIcon: ({ focused, size }) => (
               <View className='items-center'>
                 <HomeLogo
@@ -116,7 +110,7 @@ const Layout = () => {
         renderBackdrop
         enablePanDownToClose
       >
-        <View className='align-center bg-background flex-1 items-center py-10'>
+        <View className='align-center flex-1 items-center bg-background py-10'>
           <Button
             color='trap'
             size='full'

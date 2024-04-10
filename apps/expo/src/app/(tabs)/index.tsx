@@ -6,38 +6,9 @@ import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import { useGlobalContext } from '~/context/global-context'
 
 const Dashboard = () => {
-  const { userData, isLoadingUserData } = useGlobalContext()
-
-  if (isLoadingUserData) {
-    return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#1E1E1E' }}>
-        <RotatingBarbellIcon />
-      </SafeAreaView>
-    )
-  }
-
-  console.log('userData', userData)
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#1E1E1E' }}>
-      {/* Define pour custom header */}
-      {/* <Stack.Screen
-          options={{
-            header: () => null,
-          }}
-        /> */}
       <Text className='m-8 text-center text-white'>Home screen</Text>
-      {userData ? (
-        <>
-          <Text>User Data</Text>
-          <Text>{userData?.id}</Text>
-          <Text>{userData?.clerkId}</Text>
-          <Text>{userData?.name}</Text>
-          <Text>{userData?.username}</Text>
-        </>
-      ) : (
-        <RotatingBarbellIcon />
-      )}
     </SafeAreaView>
   )
 }

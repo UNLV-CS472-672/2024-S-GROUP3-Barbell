@@ -37,6 +37,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import AuthScreen from '~/app/auth'
 import GlobalContextProvider from '~/context/global-context'
 import { DashboardHeader } from '~/layouts/headers/dashboard-header'
+import { FriendsHeader } from '~/layouts/headers/friends-header'
 import { InboxHeader } from '~/layouts/headers/inbox-headers'
 import { WorkoutHeader } from '~/layouts/headers/workout-headers'
 
@@ -178,6 +179,16 @@ function RootLayoutBottomNav() {
       />
 
       {/* friends */}
+      <Stack.Screen
+        name='(friends)'
+        options={{
+          header: () => (
+            <View className='bg-slate-900 pt-10'>
+              <FriendsHeader />
+            </View>
+          ),
+        }}
+      />
     </Stack>
   )
 }

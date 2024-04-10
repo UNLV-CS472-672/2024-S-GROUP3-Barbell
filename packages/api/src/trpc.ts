@@ -69,10 +69,8 @@ export type Context = Awaited<ReturnType<typeof createContextInner>>
  */
 export async function createTRPCContext(opts: FetchCreateContextFnOptions): Promise<Context> {
   // for API-response caching see https://trpc.io/docs/v11/caching
-  const source = opts.resHeaders.get('x-trpc-source') ?? 'unknown'
+  const source = opts.req.headers.get('x-trpc-source') ?? 'unknown'
   console.log('>>> tRPC Request from', source)
-
-  console.log('opts', opts.resHeaders)
 
   // get error m,essage resHJeaders
   getErrorMessage(opts.resHeaders)

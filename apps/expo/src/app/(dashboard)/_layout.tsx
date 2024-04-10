@@ -41,7 +41,7 @@ const Layout = () => {
             backgroundColor: colors.bottomav.nav,
             borderColor: colors.background,
           },
-          // headerShown: false,
+          headerShown: false,
           tabBarShowLabel: false,
           tabBarIconStyle: { paddingHorizontal: 10 },
         }}
@@ -50,7 +50,7 @@ const Layout = () => {
         <Tabs.Screen
           name='index'
           options={{
-            header: () => <DashboardHeader />,
+            // header: () => <DashboardHeader />,
             tabBarIcon: ({ focused, size }) => (
               <View className='items-center'>
                 <HomeLogo
@@ -93,7 +93,7 @@ const Layout = () => {
         <Tabs.Screen
           name='account-settings'
           options={{
-            header: () => <DashboardHeader />,
+            // header: () => <DashboardHeader />,
             tabBarIcon: ({ focused, size }) => (
               <View className='items-center'>
                 <Profile

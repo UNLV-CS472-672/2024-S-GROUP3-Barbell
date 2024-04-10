@@ -64,9 +64,6 @@ const loaddb = async () => {
     await prisma.workout.deleteMany()
     logger('delete', 'workout')
 
-    // await prisma.log.deleteMany()
-    // logger('delete', 'log')
-
     await prisma.friend.deleteMany()
     logger('delete', 'friend')
 

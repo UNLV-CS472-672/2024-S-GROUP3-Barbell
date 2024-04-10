@@ -91,7 +91,7 @@ model User {
   username             String         @unique @db.Char(20)
   name                 String?
   status               UserStatus?
-  streak               Int
+  streak               Int            @default(0)
   posts                Post[]
   friends              Friend[]
   workoutHistory       WorkoutLog[]

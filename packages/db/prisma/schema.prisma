@@ -105,21 +105,21 @@ model User {
   notificationsBanners Boolean        @default(true)
 }
 
-  // ******************************************************************************************
-  // * Friends Collection
-  // * id: Auto-incremented unique identifier.
-  // * user: The User model representing one side of the friendship.
-  // * userId: The identifier for the user, establishing the relation to the User model.
-  // * friendId: The identifier for the friend, used to query friend info.
-  // ******************************************************************************************
-  model Friend {
-    id          Int @id @unique @default(autoincrement())
+// ******************************************************************************************
+// * Friends Collection
+// * id: Auto-incremented unique identifier.
+// * user: The User model representing one side of the friendship.
+// * userId: The identifier for the user, establishing the relation to the User model.
+// * friendId: The identifier for the friend, used to query friend info.
+// ******************************************************************************************
+model Friend {
+  id Int @id @unique @default(autoincrement())
 
-    user        User @relation(fields: [userId], references: [id])
-    userId      Int
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
 
-    friendId    Int
-  }
+  friendId Int
+}
 
 // ******************************************************************************************
 // * Log model
@@ -251,18 +251,18 @@ model Notification {
   senderId Int?
 }
 
-  model Chat {
-    id              Int       @id @unique @default(autoincrement())
-    createdAt       DateTime  @default(now())
-    updatedAt       DateTime  @updatedAt
-    name            String?   @db.Char(40)
-    users           User[]
-    readByUserIds   Int[]
-    messages        Message[]
-    type            ChatType
-    createdByUserId Int
-    createdBy       User       @relation("ChatCreator", fields: [createdByUserId], references: [id])
-  }
+model Chat {
+  id              Int       @id @unique @default(autoincrement())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  name            String?   @db.Char(40)
+  users           User[]
+  readByUserIds   Int[]
+  messages        Message[]
+  type            ChatType
+  createdByUserId Int
+  createdBy       User      @relation("ChatCreator", fields: [createdByUserId], references: [id])
+}
 
 model Message {
   id        Int      @id @unique @default(autoincrement())

@@ -1,9 +1,10 @@
 import type { inferProcedureInput } from '@trpc/server'
 
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+
 import { createCaller, RouterInputs, RouterOutputs } from '../..'
 import { AppRouter } from '../root'
 import { createContextInner } from '../trpc'
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe('USER', async () => {
   const ctx = await createContextInner({})
@@ -18,10 +19,9 @@ describe('USER', async () => {
     title: 'Another Post',
     content: 'This is.',
   }
-	
+
   it('/byId && /create', async () => {
     const byId = await caller.user.byId({ id: 1 })
-    const create = await caller.post.create(input2)
 
     expect(byId).toMatchObject(input)
   })

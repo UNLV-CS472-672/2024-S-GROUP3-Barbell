@@ -92,6 +92,7 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 - [ ] [Invarient Violation](https://github.com/JesperLekland/react-native-svg-charts/issues/201)
 - [ ] [svg being funny](https://github.com/software-mansion/react-native-svg/issues/1405)
 - [ ] [nativewind is really really really bad](https://github.com/marklawlor/nativewind/issues/556)
+- [ ] [isn't this amazing SafeAreaView, Fk you](https://github.com/marklawlor/nativewind/issues/628)
 
 In case you encountered, Failed to get localhost. Please point to your production server.
 

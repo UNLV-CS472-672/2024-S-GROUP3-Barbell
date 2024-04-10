@@ -6,20 +6,13 @@ module.exports = (api) => {
   return {
     presets: [['babel-preset-expo', { jsxImportSource: 'nativewind' }], 'nativewind/babel'],
     plugins: [
-      ['module:react-native-dotenv'],
+      /* 50 */
       'react-native-reanimated/plugin',
+
+      /* 49 */
+      // ['module:react-native-dotenv'],
       // require.resolve('expo-router/babel'),
       // require.resolve('react-native-reanimated/plugin'),
-
-      /* aliases */
-      [
-        'module-resolver',
-        {
-          alias: {
-            '~assets': './assets',
-          },
-        },
-      ],
     ],
   }
 }

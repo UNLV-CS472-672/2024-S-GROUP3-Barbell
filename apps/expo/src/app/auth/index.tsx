@@ -12,8 +12,10 @@ const AuthScreen = () => {
       resizeMode='cover'
     >
       <View className='flex-1 items-center justify-center rounded-md'>
-        <View className='scale-150 rounded-lg bg-white p-7 gap-y-2'>
-          <Text className='font-koulen m-2 mb-1 text-center text-[3.70rem] font-semibold'>BARBELL</Text>
+        <View className='scale-150 gap-y-2 rounded-lg bg-white p-7'>
+          <Text className='font-koulen m-2 mb-1 text-center text-[3.70rem] font-semibold'>
+            BARBELL
+          </Text>
           <SignInWithGoogle />
           <SignOut />
         </View>

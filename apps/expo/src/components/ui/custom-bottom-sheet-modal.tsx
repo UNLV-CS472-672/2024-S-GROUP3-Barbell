@@ -60,8 +60,6 @@ const CustomBottomSheetModal = forwardRef<CustomBottomSheetModalRef, CustomBotto
   ({ children, customSnapPoints, startIndex, enablePanDownToClose, renderBackdrop }, ref) => {
     const snapPoints = useMemo(() => customSnapPoints, [])
 
-    console.log(ref)
-
     const backdrop = useCallback(
       (props: BottomSheetBackdropProps) => (
         <BottomSheetBackdrop

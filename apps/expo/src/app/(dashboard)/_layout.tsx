@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
 import { Tabs } from 'expo-router'
 
+import { DashboardHeader } from '^/apps/expo/src/layouts/headers/dashboard-header'
 import CircleMinus from '~assets/svgs/circle-minus.svg'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
@@ -11,7 +12,6 @@ import Profile from '~assets/svgs/profile.svg'
 import type { CustomBottomSheetModalRef } from '~/components/ui/custom-bottom-sheet-modal'
 import Button from '~/components/ui/button/button'
 import CustomBottomSheetModal from '~/components/ui/custom-bottom-sheet-modal'
-import { DefaultHeader } from '~/layouts/headers/default-header'
 import colors from '~/styles/colors'
 import { cn } from '~/utils/cn'
 
@@ -46,7 +46,7 @@ const Layout = () => {
         <Tabs.Screen
           name='index'
           options={{
-            header: () => <DefaultHeader />,
+            header: () => <DashboardHeader />,
             tabBarIcon: ({ focused, size }) => (
               <View className='items-center'>
                 <HomeLogo
@@ -62,7 +62,7 @@ const Layout = () => {
 
         {/* PLUS CIRCLE */}
         <Tabs.Screen
-          name='one'
+          name='unused'
           redirect={false}
           listeners={{
             tabPress: (e) => {
@@ -88,7 +88,7 @@ const Layout = () => {
         <Tabs.Screen
           name='two'
           options={{
-            header: () => <DefaultHeader />,
+            header: () => <DashboardHeader />,
             tabBarIcon: ({ focused, size }) => (
               <View className='items-center'>
                 <Profile

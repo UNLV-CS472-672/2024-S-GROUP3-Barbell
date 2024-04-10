@@ -144,7 +144,7 @@ function RootLayoutBottomNav() {
   return (
     <Stack>
       <Stack.Screen
-        name='(tabs)'
+        name='(dashboard)'
         options={{
           header: () => <View className='bg-slate-900 py-6'></View>,
         }}

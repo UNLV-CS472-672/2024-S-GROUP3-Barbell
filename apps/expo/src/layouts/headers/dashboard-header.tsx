@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native'
 
 import NotificationSVG from '~assets/svgs/notification.svg'
 
-export const DefaultHeader = () => {
+export const DashboardHeader = () => {
   return (
     <View className='flex-row items-center justify-between bg-slate-900 p-1'>
       <View className='opacity-0'>

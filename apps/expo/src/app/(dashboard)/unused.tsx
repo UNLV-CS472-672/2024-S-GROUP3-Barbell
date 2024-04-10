@@ -5,6 +5,7 @@ import { cn } from '^/packages/ui/src/cn'
 /**
  * @depraecated
  * @date 4/10/2024
+ * No more development should be make here
  */
 export default function Unused() {
   return (

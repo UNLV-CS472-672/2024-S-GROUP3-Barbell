@@ -50,8 +50,6 @@
     "react-native-dotenv": "^3.4.10",
     "react-native-gesture-handler": "~2.14.1",
     "react-native-get-random-values": "^1.8.0",
-    "react-native-modal": "^13.0.1",
-    "react-native-picker-modal": "^1.0.0",
     "react-native-reanimated": "~3.6.3",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",

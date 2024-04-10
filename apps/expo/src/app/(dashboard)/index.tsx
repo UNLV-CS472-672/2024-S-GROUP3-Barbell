@@ -5,6 +5,7 @@ import { router } from 'expo-router'
 
 import Button from '~/components/ui/button/button'
 
+// FIXME: Dashboard start here
 const Dashboard = () => {
   return (
     <SafeAreaView style={{ backgroundColor: '#1E1E1E', flex: 1 }}>

@@ -84,9 +84,9 @@ const Layout = () => {
           }}
         />
 
-        {/*  */}
+        {/* Account Settings */}
         <Tabs.Screen
-          name='two'
+          name='account-settings'
           options={{
             header: () => <DashboardHeader />,
             tabBarIcon: ({ focused, size }) => (

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-
 import NotificationSVG from '~assets/svgs/notification.svg'
 
 export const DashboardHeader = () => {

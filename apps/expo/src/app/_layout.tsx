@@ -149,6 +149,14 @@ function RootLayoutBottomNav() {
           header: () => <View className='bg-slate-900 py-6'></View>,
         }}
       />
+
+      {/* new workout? workout view? */}
+
+
+      {/* inbox */}
+
+
+      {/* friends */}
     </Stack>
   )
 }

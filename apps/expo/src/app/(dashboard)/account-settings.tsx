@@ -1,3 +1,4 @@
+import { router } from 'expo-router'
 import React, { useState } from 'react'
 import {
   ActivityIndicator,
@@ -9,11 +10,9 @@ import {
   View,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { router } from 'expo-router'
 
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 
-import Button from '~/components/ui/button/button'
 import { useGlobalContext } from '~/context/global-context'
 import colors from '~/styles/colors'
 import { api } from '~/utils/api'

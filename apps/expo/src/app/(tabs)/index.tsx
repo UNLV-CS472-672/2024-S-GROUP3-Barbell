@@ -7,8 +7,8 @@ import { useGlobalContext } from '~/context/global-context'
 
 const Dashboard = () => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#1E1E1E' }}>
-      <Text className='m-8 text-center text-white'>Home screen</Text>
+    <SafeAreaView className='flex-1' style={{ backgroundColor: '#1E1E1E', flex: 1 }}>
+      <Text className='text-center text-white'>Home screen</Text>
     </SafeAreaView>
   )
 }

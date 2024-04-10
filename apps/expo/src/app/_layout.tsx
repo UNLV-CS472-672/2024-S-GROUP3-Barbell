@@ -136,15 +136,14 @@ function AppContent() {
   )
 }
 
+/*  */
 function RootLayoutBottomNav() {
-  // const router = useRouter()
-  /* Our main navigation here (idk what is best practices here :<) */
   return (
     <Stack>
       <Stack.Screen
         name='(tabs)'
         options={{
-          header: () => <View className='bg-slate-900 py-10'></View>,
+          header: () => <View className='bg-slate-900 py-6'></View>,
         }}
       />
     </Stack>

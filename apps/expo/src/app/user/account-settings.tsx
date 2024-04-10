@@ -1,10 +1,19 @@
 import React, { useState } from 'react'
-import { ActivityIndicator, FlatList, Pressable, StyleSheet, Switch, Text, View } from 'react-native'
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
+} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 
+import Button from '~/components/ui/button/button'
 import { useGlobalContext } from '~/context/global-context'
 import colors from '~/styles/colors'
 import { api } from '~/utils/api'
@@ -45,13 +54,25 @@ const tailwindClasses = {
 const accountItems: NavigationListItem[] = [
   { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/user/personal-data') },
   { title: 'Achievements', iconName: 'award', onPress: () => router.push('/user/achievements') },
-  { title: 'Activity History', iconName: 'history', onPress: () => router.push('/user/activity-history') },
-  { title: 'Workout Progress', iconName: 'chart-pie', onPress: () => router.push('/user/workout-progress') },
+  {
+    title: 'Activity History',
+    iconName: 'history',
+    onPress: () => router.push('/user/activity-history'),
+  },
+  {
+    title: 'Workout Progress',
+    iconName: 'chart-pie',
+    onPress: () => router.push('/user/workout-progress'),
+  },
 ]
 
 const otherItems: NavigationListItem[] = [
   { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/contact-us') },
-  { title: 'Privacy Policy', iconName: 'shield-alt', onPress: () => router.push('/privacy-policy') },
+  {
+    title: 'Privacy Policy',
+    iconName: 'shield-alt',
+    onPress: () => router.push('/privacy-policy'),
+  },
 ]
 
 const AccountSettings = () => {
@@ -106,16 +127,33 @@ const AccountSettings = () => {
   }
 
   return (
-    <SafeAreaView className='bg-bb-slate-100 flex-1' style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
+    <SafeAreaView
+      className='bg-bb-slate-100 flex-1'
+      style={{ backgroundColor: '#1e1e1e', flex: 1 }}
+    >
+      <Button
+        onPress={() => router.push('/nav')}
+        className='flex h-10 w-24 items-center justify-center rounded-md bg-blue-500'
+        aria-label='Go to nav'
+      >
+        <Text className='text-white'>Nav</Text>
+      </Button>
+
       <View className='bg-bb-dark-gray m-4 flex-row rounded-lg'>
         <View className='flex-row items-center'>
-          <FontAwesome5 name='user' size={FA.xl} className='text-bb-dark-purple p-6' style={{ color: '#48476D' }} />
+          <FontAwesome5
+            name='user'
+            size={FA.xl}
+            className='text-bb-dark-purple p-6'
+            style={{ color: '#48476D' }}
+          />
         </View>
         <View className='flex-3 m-4'>
           <Text className='text-2xl text-slate-200'>{user?.name}</Text>
           <Text className='text-md text-slate-200'>Streak: {user?.streak} days</Text>
         </View>
       </View>
+
       <View className={tailwindClasses.mainTile}>
         <Text className={tailwindClasses.mainTileTitle}>Account</Text>
         <View className={tailwindClasses.mainTileItem}>
@@ -123,7 +161,11 @@ const AccountSettings = () => {
             data={accountItems}
             renderItem={({ item }) => (
               <Pressable onPress={item.onPress} className='flex-row'>
-                <FontAwesome5 name={item.iconName} size={FA.reg} style={styles.navigationListItemIcon} />
+                <FontAwesome5
+                  name={item.iconName}
+                  size={FA.reg}
+                  style={styles.navigationListItemIcon}
+                />
                 <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
                 <FontAwesome5
                   name='chevron-right'
@@ -135,6 +177,7 @@ const AccountSettings = () => {
           />
         </View>
       </View>
+
       <View className={tailwindClasses.mainTile}>
         <Text className={tailwindClasses.mainTileTitle}>Notifications</Text>
         <View className={tailwindClasses.mainTileItem}>
@@ -149,13 +192,18 @@ const AccountSettings = () => {
           />
         </View>
       </View>
+
       <View className={tailwindClasses.mainTile}>
         <Text className={tailwindClasses.mainTileTitle}>Other</Text>
         <FlatList
           data={otherItems}
           renderItem={({ item }) => (
             <Pressable onPress={item.onPress} className='flex-row'>
-              <FontAwesome5 name={item.iconName} size={FA.reg} style={styles.navigationListItemIcon} />
+              <FontAwesome5
+                name={item.iconName}
+                size={FA.reg}
+                style={styles.navigationListItemIcon}
+              />
               <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
               <FontAwesome5
                 name='chevron-right'

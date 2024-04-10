@@ -1,13 +1,12 @@
 import type { Config } from 'tailwindcss'
 
-  // @ts-expect-error - no types
-import nativewind from 'nativewind/preset'
+  // import nativewind from 'nativewind/preset'
 
 import baseConfig from '@acme/tailwind-config/native'
 
 export default {
-  content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
-  presets: [baseConfig, nativewind],
+  content: ['/apps/**/*.{js,jsx,ts,tsx}'],
+  presets: [baseConfig, require('nativewind/preset')],
   theme  : {
     extend: {
       fontFamily: {
@@ -27,6 +26,9 @@ export default {
         'istok-web-bold'       : ['IstokWeb_700Bold'],
         'istok-web-bold-italic': ['IstokWeb_700Bold_Italic'],
       },
+      flex: {
+        'one': '1',
+      },
       fontSize: {
         xs     : '0.75rem',    // 12px
         sm     : '0.875rem',   // 14px
@@ -45,9 +47,9 @@ export default {
         '9xl'  : '8rem',       // 128px
       },
       colors: {
-        'slate-900'     : "#1C1B1B",
-        'dark-purple'   : "#48476D",
-        'slate-200'     : "#CACACA",
+        'slate-900'     : '#1C1B1B',
+        'dark-purple'   : '#48476D',
+        'slate-200'     : '#CACACA',
         'bb-dark-gray'  : '#272727',
         'bb-dark-purple': '#48476D',
         'bb-slate-100'  : '#1E1E1E',

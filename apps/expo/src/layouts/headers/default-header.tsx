@@ -1,14 +1,23 @@
 import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 
-import { Ionicons } from '@expo/vector-icons'
+import NotificationSVG from '~assets/svgs/notification.svg'
 
 export const DefaultHeader = () => {
   return (
-    <View className='flex flex-row items-center justify-between bg-slate-900'>
-      <Text className='text-xl font-bold text-white'>BARBELL</Text>
-      <TouchableOpacity className='p-2'>
-        <Ionicons name='notifications-outline' size={24} color='#fff' />
+    <View className='flex-row items-center justify-between bg-slate-900 p-1'>
+      <View className='opacity-0'>
+        <TouchableOpacity className='p-2'>
+          <NotificationSVG />
+        </TouchableOpacity>
+      </View>
+
+      <Text className='font-koulen text-bb-dark-purple flex-auto pl-6 text-center text-5xl'>
+        BARBELL
+      </Text>
+
+      <TouchableOpacity className='p-2 pr-6'>
+        <NotificationSVG />
       </TouchableOpacity>
     </View>
   )

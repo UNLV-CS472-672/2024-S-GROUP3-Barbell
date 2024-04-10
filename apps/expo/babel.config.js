@@ -4,11 +4,9 @@ module.exports = (api) => {
   api.cache(true)
 
   return {
-    presets: [
-      'nativewind/babel',
-      ['babel-preset-expo', { jsxImportSource: 'nativewind' }], 
-    ],
+    presets: ['nativewind/babel', ['babel-preset-expo', { jsxImportSource: 'nativewind' }]],
     plugins: [
+      // 'nativewind/babel',
       ['module:react-native-dotenv'],
       require.resolve('expo-router/babel'),
       require.resolve('react-native-reanimated/plugin'),

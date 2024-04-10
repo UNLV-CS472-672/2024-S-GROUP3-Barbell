@@ -16,7 +16,6 @@ import colors from '~/styles/colors'
 import { cn } from '~/utils/cn'
 
 const Layout = () => {
-
   const AnimatedDot = ({ focused }: { focused: boolean }) => (
     <Animated.View
       entering={FadeIn}
@@ -49,9 +48,9 @@ const Layout = () => {
           options={{
             header: () => (
               <DefaultHeader
-                // onCategoryChanged={() => {
-                //   'Home'
-                // }}
+              // onCategoryChanged={() => {
+              //   'Home'
+              // }}
               />
             ),
             tabBarIcon: ({ focused, size }) => (
@@ -73,17 +72,11 @@ const Layout = () => {
           redirect={false}
           listeners={{
             tabPress: (e) => {
+              e.preventDefault()
               handlePresentModalPress()
             },
           }}
           options={{
-            // header: () => (
-            //   <DefaultHeader
-            //     onCategoryChanged={() => {
-            //       'New Workout'
-            //     }}
-            //   />
-            // ),
             tabBarIcon: ({ size, focused }) => (
               <View style={{ marginTop: -30 }}>
                 {/* <CirclePlus width={size * 3} height={size * 3} fill={color} /> */}
@@ -101,16 +94,14 @@ const Layout = () => {
         <Tabs.Screen
           name='two'
           options={{
-            header: () => (
-              <DefaultHeader
-                // onCategoryChanged={() => {
-                //   'Settings'
-                // }}
-              />
-            ),
+            header: () => <DefaultHeader />,
             tabBarIcon: ({ focused, size }) => (
               <View className='items-center'>
-                <Profile width={size * 1.25} height={size * 1.25} fill={focused ? `${colors.bottomav.icon}` : 'none'} />
+                <Profile
+                  width={size * 1.25}
+                  height={size * 1.25}
+                  fill={focused ? `${colors.bottomav.icon}` : 'none'}
+                />
                 <AnimatedDot focused={focused} />
               </View>
             ),
@@ -126,8 +117,19 @@ const Layout = () => {
         enablePanDownToClose
       >
         <View className='align-center bg-background flex-1 items-center py-10'>
-          <Button color='trap' size='full' value='Start Saved Workout' className='mb-5' testID='button-test'></Button>
-          <Button color='trap' size='full' value='Create New Workout' testID='button-test-2'></Button>
+          <Button
+            color='trap'
+            size='full'
+            value='Start Saved Workout'
+            className='mb-5'
+            testID='button-test'
+          ></Button>
+          <Button
+            color='trap'
+            size='full'
+            value='Create New Workout'
+            testID='button-test-2'
+          ></Button>
         </View>
       </CustomBottomSheetModal>
     </>

@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url'
 const config = {
   // prettier
   semi: false,
-  printWidth: 120,
+  printWidth: 100,
   singleQuote: true,
   quoteProps: 'as-needed',
   jsxSingleQuote: true,

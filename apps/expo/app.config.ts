@@ -49,7 +49,7 @@ const defineConfig = (): ExpoConfig => ({
   plugins: [
     /* don't touch this */
     'expo-router',
-    './expo-plugins/with-modify-gradle.js',
+    // './expo-plugins/with-modify-gradle.js',
   ],
 })
 

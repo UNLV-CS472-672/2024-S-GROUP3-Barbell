@@ -18,7 +18,7 @@ export const WorkoutHeader = () => {
         <ArrowLeft width={40} height={40} />
       </TouchableOpacity>
 
-      <Text className='font-koulen flex-1 pb-1 text-center text-5xl text-purple-400'>BARBELL</Text>
+      <Text className='font-koulen flex-1 pb-1 text-center text-6xl text-dark-purple'>BARBELL</Text>
 
       <TouchableOpacity className='p-2'>
         <NotificationSVG width={40} height={40} />

@@ -37,6 +37,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import AuthScreen from '~/app/auth'
 import GlobalContextProvider from '~/context/global-context'
 import { DashboardHeader } from '~/layouts/headers/dashboard-header'
+import { InboxHeader } from '~/layouts/headers/inbox-headers'
 import { WorkoutHeader } from '~/layouts/headers/workout-headers'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
@@ -172,11 +173,7 @@ function RootLayoutBottomNav() {
       <Stack.Screen
         name='(inbox)'
         options={{
-          header: () => (
-            <View className='bg-slate-900 pt-10'>
-              <WorkoutHeader />
-            </View>
-          ),
+          header: () => <View className='bg-slate-900 pt-10'></View>,
         }}
       />
 

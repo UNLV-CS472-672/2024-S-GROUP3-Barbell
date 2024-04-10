@@ -12,7 +12,7 @@ export const DashboardHeader = () => {
         </TouchableOpacity>
       </View>
 
-      <Text className='font-koulen text-dark-purple flex-auto pl-5 text-center text-5xl'>
+      <Text className='font-koulen text-dark-purple flex-auto pl-5 text-center text-6xl'>
         BARBELL
       </Text>
 

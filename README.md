@@ -106,5 +106,9 @@ TBA
 ### EAS UPDATE BRANCHES
 
 ```
+<!-- sync development build with [yap] -->
 eas update --auto
+
+<!-- build android aab (apk successor) -->
+eas build --platform android
 ```

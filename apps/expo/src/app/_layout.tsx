@@ -8,8 +8,10 @@ import { TRPCProvider } from '~/utils/api'
 import 'expo-dev-client'
 import '~/styles.css'
 
+import { useEffect } from 'react'
 import { View } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { SplashScreen } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo'
@@ -39,7 +41,7 @@ const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 const tokenCache = {
   async getToken(key: string) {
     try {
-      return await SecureStore.getItemAsync(key)
+      return SecureStore.getItemAsync(key)
     } catch (err) {
       console.error('Error getting token:', err)
       return null
@@ -47,7 +49,7 @@ const tokenCache = {
   },
   async saveToken(key: string, value: string) {
     try {
-      return await SecureStore.setItemAsync(key, value)
+      return SecureStore.setItemAsync(key, value)
     } catch (err) {
       console.error('Error saving token:', err)
       return
@@ -55,11 +57,14 @@ const tokenCache = {
   },
 }
 
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync()
+
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
   /* fonts */
-  let [fontsLoaded] = useFonts({
+  const [loaded, error] = useFonts({
     Koulen_400Regular,
     /*  */
     IstokWeb_400Regular,
@@ -77,7 +82,21 @@ export default function RootLayout() {
     Sora_800ExtraBold,
   })
 
-  if (!fontsLoaded) return null
+  // Expo Router uses Error Boundaries
+  // to catch errors in the navigation tree.
+  useEffect(() => {
+    if (error) throw error
+  }, [error])
+
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync()
+    }
+  }, [loaded])
+
+  if (!loaded) {
+    return null
+  }
 
   const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -105,7 +124,7 @@ function AppContent() {
       <GlobalContextProvider>
         <SafeAreaProvider>
           <BottomSheetModalProvider>
-            <StatusBar style="light" />
+            <StatusBar style='light' />
 
             {/* Splitter */}
 

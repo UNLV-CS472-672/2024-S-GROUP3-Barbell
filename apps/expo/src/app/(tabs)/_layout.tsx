@@ -16,6 +16,7 @@ import colors from '~/styles/colors'
 import { cn } from '~/utils/cn'
 
 const Layout = () => {
+
   const AnimatedDot = ({ focused }: { focused: boolean }) => (
     <Animated.View
       entering={FadeIn}

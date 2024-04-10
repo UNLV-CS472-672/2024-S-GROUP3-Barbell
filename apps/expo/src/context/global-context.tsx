@@ -20,6 +20,7 @@ export type TGlobalContext = {
   isWorkingOut: boolean
   setIsWorkingOut: Dispatch<SetStateAction<boolean>>
   userData: IUserData | null
+  isLoadingUserData: boolean
 }
 
 export const GlobalContext = createContext<TGlobalContext | null>(null)
@@ -34,7 +35,7 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const { user: clerkUserData } = useClerk()
   const createUser = api.user.create.useMutation()
 
-  const { data: userNineData, isFetched: userNineDataIsFetched } = api.user.byId.useQuery({ id: 9 })
+  const { data: userNineData, isFetched: userNineDataIsFetched, isLoading: isLoadingUserNine } = api.user.byId.useQuery({ id: 9 })
 
   const createUserIfNotExist = useCallback(async () => {
     if (clerkUserData) {
@@ -54,22 +55,23 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   }, [clerkUserData])
 
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      if (!userNineDataIsFetched) return
+    // if (process.env.NODE_ENV === 'development') {
+    if (!userNineDataIsFetched) return
 
-      setUserData({
-        id: userNineData?.id!,
-        clerkId: userNineData?.clerkId!,
-        username: userNineData?.username!,
-        name: userNineData?.name!,
-      })
-    } else createUserIfNotExist()
+    setUserData({
+      id: userNineData?.id!,
+      clerkId: userNineData?.clerkId!,
+      username: userNineData?.username!,
+      name: userNineData?.name!,
+    })
+    // } else createUserIfNotExist()
   }, [createUserIfNotExist, userNineDataIsFetched])
 
   const globalContextValue: TGlobalContext = {
     isWorkingOut,
     setIsWorkingOut,
     userData,
+    isLoadingUserData: isLoadingUserNine,
   }
 
   return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>

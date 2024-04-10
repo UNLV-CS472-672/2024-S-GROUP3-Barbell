@@ -20,6 +20,13 @@ import { ZodError } from 'zod'
 
 import { prisma } from '@acme/db'
 
+export default function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message
+
+  if (String(error) === '[object Object]') return JSON.stringify(error)
+  else return String(error)
+}
+
 /**
  * > 1. CONTEXT
  *
@@ -44,7 +51,7 @@ interface CreateContextOptions {
  *
  * - inner function for `createContext` where we create the context.
  * - this is useful for testing when we don't want to mock Next.js' request/response
- * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
+ * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
 export async function createContextInner(_opts: CreateContextOptions) {
   return {
@@ -54,11 +61,22 @@ export async function createContextInner(_opts: CreateContextOptions) {
 
 export type Context = Awaited<ReturnType<typeof createContextInner>>
 
+/* ------------------------------------------------------------------------------- */
+
+/**
+ * @param opts this thing need for nextjs (for some on god reason)
+ * @see https://create.t3.gg/en/usage/trpc#-pagesapitrpctrpcts
+ */
 export async function createTRPCContext(opts: FetchCreateContextFnOptions): Promise<Context> {
   // for API-response caching see https://trpc.io/docs/v11/caching
   const source = opts.resHeaders.get('x-trpc-source') ?? 'unknown'
   console.log('>>> tRPC Request from', source)
-  
+
+  console.log('opts', opts.resHeaders)
+
+  // get error m,essage resHJeaders
+  getErrorMessage(opts.resHeaders)
+
   // console.log('opts', opts.resHeaders)
 
   return await createContextInner({})

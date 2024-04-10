@@ -4,7 +4,6 @@ import { router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import WorkoutList from '~/components/workout/workoutList'
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -13,8 +12,6 @@ const styles = StyleSheet.create({
 })
 
 export default function createNew() {
-
-
 
   return (
     <SafeAreaView style={styles.container}>

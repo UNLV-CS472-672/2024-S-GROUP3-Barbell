@@ -33,7 +33,7 @@ const SignInWithGoogle = () => {
 
       try {
         const { createdSessionId, setActive } = await startGoogleOAuthFlow()
-        console.log('startOAuthFlow')
+        // console.log('startOAuthFlow')
 
         if (createdSessionId) {
           setActive?.({ session: createdSessionId })

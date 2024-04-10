@@ -11,6 +11,7 @@ export const FriendsHeader = () => {
     <View className='flex-row items-center justify-between bg-slate-900 px-1 pt-1'>
       <TouchableOpacity
         className='p-2 pt-4'
+        testID='friends-header-button'
         onPress={() => {
           router.back()
         }}

@@ -11,6 +11,7 @@ export const WorkoutHeader = () => {
     <View className='flex-row items-center justify-between bg-slate-900 p-1'>
       <TouchableOpacity
         className='p-2 pt-4'
+        testID='workout-header-button'
         onPress={() => {
           router.back()
         }}

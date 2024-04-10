@@ -72,37 +72,8 @@ export async function createTRPCContext(opts: FetchCreateContextFnOptions): Prom
   const source = opts.req.headers.get('x-trpc-source') ?? 'unknown'
   console.log('>>> tRPC Request from', source)
 
-  // get error m,essage resHJeaders
-  getErrorMessage(opts.resHeaders)
-
-  // console.log('opts', opts.resHeaders)
-
   return await createContextInner({})
 }
-
-// const createInnerTRPCContext = (opts: CreateContextOptions) => {
-//   return {
-//     session: opts.session,
-//     prisma,
-//   }
-// }
-
-// export const createTRPCContext = async (opts: {
-// }: FetchCreateContextFnOptions) => {
-//   const session = opts.session ?? (await auth())
-//   const source = opts.headers.get("x-trpc-source") ?? "unknown"
-
-//   console.log(">>> tRPC Request from", source, "by", session?.user)
-
-//   return createInnerTRPCContext({
-//     session,
-//   })
-// }
-
-// export function createTRPCContext({ req, resHeaders }: FetchCreateContextFnOptions) {
-//   // return { req, resHeaders, prisma }
-//   return { prisma }
-// }
 
 /* ------------------------------------------------------------------------------- */
 

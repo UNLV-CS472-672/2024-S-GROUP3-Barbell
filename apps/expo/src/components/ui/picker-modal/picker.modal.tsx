@@ -74,19 +74,16 @@ const PickerModal: React.FC<IPickerModalProps> = ({
       {/* <Title /> */}
       <Divider style={dividerStyle} />
       {data.map((item: string | number, index: number) => (
-        <>
-          {/* {index != 0 && <Divider style={dividerStyle} />} */}
-          <ActionButton
-            key={index}
-            TouchableComponent={TouchableComponent}
-            isLastItem={index === data.length - 1}
-            actionButtonStyle={{ paddingBottom: index === 0 ? 8 : 0 }}
-            actionButtonTextStyle={{ fontSize: 24 }}
-            {...actionButtonProps}
-            text={item}
-            onActionPress={() => onPress && onPress(item, index)}
-          />
-        </>
+        <ActionButton
+          key={index}
+          TouchableComponent={TouchableComponent}
+          isLastItem={index === data.length - 1}
+          actionButtonStyle={{ paddingBottom: index === 0 ? 8 : 0 }}
+          actionButtonTextStyle={{ fontSize: 24 }}
+          {...actionButtonProps}
+          text={item}
+          onActionPress={() => onPress && onPress(item, index)}
+        />
       ))}
     </View>
   )

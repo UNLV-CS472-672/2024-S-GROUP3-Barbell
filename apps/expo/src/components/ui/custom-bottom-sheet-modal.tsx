@@ -60,14 +60,16 @@ const CustomBottomSheetModal = forwardRef<CustomBottomSheetModalRef, CustomBotto
   ({ children, customSnapPoints, startIndex, enablePanDownToClose, renderBackdrop }, ref) => {
     const snapPoints = useMemo(() => customSnapPoints, [])
 
+    console.log(ref)
+
     const backdrop = useCallback(
       (props: BottomSheetBackdropProps) => (
         <BottomSheetBackdrop
           disappearsOnIndex={-1}
-          appearsOnIndex={2}
+          appearsOnIndex={0}
           style={{ backgroundColor: 'transparent' }}
           // FIXME: bugs https://github.com/gorhom/react-native-bottom-sheet/issues/1332
-          // opacity={0}
+          opacity={0}
           enableTouchThrough={true}
           pressBehavior={'close'}
           {...props}

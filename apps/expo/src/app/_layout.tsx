@@ -169,6 +169,16 @@ function RootLayoutBottomNav() {
       />
 
       {/* inbox */}
+      <Stack.Screen
+        name='(inbox)'
+        options={{
+          header: () => (
+            <View className='bg-slate-900 pt-10'>
+              <WorkoutHeader />
+            </View>
+          ),
+        }}
+      />
 
       {/* friends */}
     </Stack>

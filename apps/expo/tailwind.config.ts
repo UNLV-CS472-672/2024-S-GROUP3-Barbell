@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss'
 
-  // @ts-expect-error - no types
+    // @ts-expect-error - no types
 import nativewind from 'nativewind/preset'
 
 import baseConfig from '@acme/tailwind-config/native'
@@ -39,8 +39,9 @@ export default {
         '2xl'  : '1.5rem',     // 24px
         '3xl'  : '1.875rem',   // 30px
         '4xl'  : '2.25rem',    // 36px
-        '5.5xl': '2.75rem',    // 44px
-        '5xl'  : '3rem',       // 48px
+        '4.5xl': '2.5rem',     // 40px
+        '5xl'  : '2.75rem',    // 44px
+        '5.5xl': '3rem',       // 48px
         '6xl'  : '3.75rem',    // 60px
         '6.5xl': '4rem',       // 64px
         '7xl'  : '4.5rem',     // 72px
@@ -48,13 +49,13 @@ export default {
         '9xl'  : '8rem',       // 128px
       },
       colors: {
-        'slate-900'     : '#1C1B1B',
-        'dark-purple'   : '#48476D',
-        'slate-200'     : '#CACACA',
-        'bb-dark-gray'  : '#272727',
-        'bb-slate-100'  : '#1E1E1E',
-        'light-red'     : '#9D534F',
-        'light-green'   : '#55A181',
+        'slate-900'   : '#1C1B1B',
+        'dark-purple' : '#48476D',
+        'slate-200'   : '#CACACA',
+        'bb-dark-gray': '#272727',
+        'bb-slate-100': '#1E1E1E',
+        'light-red'   : '#9D534F',
+        'light-green' : '#55A181',
       },
     },
   },

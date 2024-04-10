@@ -36,6 +36,7 @@ const Nav = () => {
           { key: 'Spotify', route: '/spotify' },
           { key: 'Tracker', route: '/tracker' },
           { key: '(workout)', route: '/(workout)' },
+          { key: '(inbox)', route: '/(inbox)' },
         ]}
         renderItem={({ item }) => (
           <Button

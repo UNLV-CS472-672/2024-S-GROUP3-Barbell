@@ -15,14 +15,9 @@ describe('USER', async () => {
     id: 1,
   }
 
-  const input2: RouterInputs['post']['create'] = {
-    title: 'Another Post',
-    content: 'This is.',
-  }
-
   it('/byId && /create', async () => {
     const byId = await caller.user.byId({ id: 1 })
 
-    expect(byId).toMatchObject(input)
+    expect(byId?.id).toMatchObject(input.id)
   })
 })

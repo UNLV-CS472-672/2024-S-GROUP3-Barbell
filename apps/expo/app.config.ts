@@ -1,4 +1,4 @@
-import type { ExpoConfig } from '@expo/config'
+import type { ExpoConfig } from 'expo/config'
 
 const defineConfig = (): ExpoConfig => ({
   name: 'expo',
@@ -7,7 +7,7 @@ const defineConfig = (): ExpoConfig => ({
   version: '0.1.0',
   orientation: 'portrait',
   icon: './assets/icon.png',
-  userInterfaceStyle: 'light',
+  userInterfaceStyle: 'automatic',
   splash: {
     image: './assets/icon.png',
     resizeMode: 'contain',
@@ -49,6 +49,8 @@ const defineConfig = (): ExpoConfig => ({
   plugins: [
     /* don't touch this */
     'expo-router',
+    'expo-font',
+    'expo-secure-store',
     // './expo-plugins/with-modify-gradle.js',
   ],
 })

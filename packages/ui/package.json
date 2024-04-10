@@ -24,7 +24,7 @@
     "@acme/prettier-config": "workspace:^0.1.0",
     "@acme/tailwind-config": "workspace:^0.1.0",
     "@acme/tsconfig": "workspace:^0.1.0",
-    "@types/react": "^18.2.42",
+    "@types/react": "^18.2.75",
     "eslint": "^8.53.0",
     "prettier": "^3.1.0",
     "react": "18.2.0",

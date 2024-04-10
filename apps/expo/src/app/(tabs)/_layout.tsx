@@ -1,7 +1,7 @@
+import { Tabs } from 'expo-router'
 import React from 'react'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
-import { Tabs } from 'expo-router'
 
 import CircleMinus from '~assets/svgs/circle-minus.svg'
 import CirclePlus from '~assets/svgs/circle-plus.svg'

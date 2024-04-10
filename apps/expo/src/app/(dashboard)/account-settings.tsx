@@ -1,4 +1,3 @@
-import { router } from 'expo-router'
 import React, { useState } from 'react'
 import {
   ActivityIndicator,
@@ -10,6 +9,7 @@ import {
   View,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { router } from 'expo-router'
 
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 
@@ -81,7 +81,6 @@ const AccountSettings = () => {
   if (!userData) {
     return null
   }
-  console.log('userData', userData)
 
   const { data: user, isLoading, isFetching } = api.user.byId.useQuery({ id: userData.id })
   const updateUserMutation = api.user.update.useMutation()

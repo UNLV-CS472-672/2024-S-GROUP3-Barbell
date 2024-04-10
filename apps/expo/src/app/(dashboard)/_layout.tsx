@@ -9,9 +9,10 @@ import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
 
-import type { CustomBottomSheetModalRef } from '~/components/ui/custom-bottom-sheet-modal'
-import Button from '~/components/ui/button/button'
-import CustomBottomSheetModal from '~/components/ui/custom-bottom-sheet-modal'
+// import type { CustomBottomSheetModalRef } from '~/components/ui/custom-bottom-sheet-modal'
+// import Button from '~/components/ui/button/button'
+// import CustomBottomSheetModal from '~/components/ui/custom-bottom-sheet-modal'
+import PickerModal from '~/components/ui/picker-modal/picker.modal'
 import colors from '~/styles/colors'
 import { cn } from '~/utils/cn'
 
@@ -24,8 +25,11 @@ const Layout = () => {
     />
   )
 
-  const bottomSheetRef = React.useRef<CustomBottomSheetModalRef>(null)
-  const handlePresentModalPress = () => bottomSheetRef.current?.present()
+  // const bottomSheetRef = React.useRef<CustomBottomSheetModalRef>(null)
+  // const handlePresentModalPress = () => bottomSheetRef.current?.present()
+
+  /* states */
+  const [isVisible, setVisible] = React.useState(false)
 
   return (
     <>
@@ -67,7 +71,8 @@ const Layout = () => {
           listeners={{
             tabPress: (e) => {
               e.preventDefault()
-              handlePresentModalPress()
+              // handlePresentModalPress()
+              setVisible(true)
             },
           }}
           options={{
@@ -103,7 +108,7 @@ const Layout = () => {
         />
       </Tabs>
 
-      <CustomBottomSheetModal
+      {/* <CustomBottomSheetModal
         ref={bottomSheetRef}
         customSnapPoints={['30%']}
         startIndex={0}
@@ -125,7 +130,24 @@ const Layout = () => {
             testID='button-test-2'
           ></Button>
         </View>
-      </CustomBottomSheetModal>
+      </CustomBottomSheetModal> */}
+
+      <PickerModal
+        // style={{ }}
+        title='Would you like to?'
+        isVisible={isVisible}
+        data={['Start Saved Workout', 'Create New Workout']}
+        onPress={(selectedItem: string | number, index: number) => {
+          console.log({ selectedItem, index })
+        }}
+        cancelButtonTextStyle={{ fontSize: 18 }}
+        onCancelPress={() => {
+          setVisible(false)
+        }}
+        onBackdropPress={() => {
+          setVisible(false)
+        }}
+      />
     </>
   )
 }

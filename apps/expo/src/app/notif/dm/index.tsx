@@ -70,7 +70,7 @@ const DM = () => {
       <View style={styles.screenName}>
         <TouchableOpacity
           onPress={() => {
-            router.replace('/post')
+            router.replace('/nav')
           }}
         >
           <Image source={require('~assets/buttons/Arrow40.png')} className="top-3"></Image>
@@ -78,7 +78,7 @@ const DM = () => {
         <Text className="font-koulen px-16 text-center text-4xl font-semibold text-[#CACACA]">Direct Messages</Text>
         <TouchableOpacity
           onPress={() => {
-            router.replace('/post')
+            router.replace('/nav')
           }}
         >
           <Image source={require('~assets/buttons/WriteNew40.png')} className="top-3"></Image>

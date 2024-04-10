@@ -48,10 +48,10 @@ const defineConfig = (): ExpoConfig => ({
   // jsEngine: 'hermes',
   plugins: [
     /* don't touch this */
-    // 'expo-router',
     ["expo-router", { "root": "./src/app/" }],
     'expo-font',
     'expo-secure-store',
+    // 'expo-router',
     // './expo-plugins/with-modify-gradle.js',
   ],
 })

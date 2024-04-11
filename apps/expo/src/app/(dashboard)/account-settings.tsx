@@ -51,26 +51,26 @@ const tailwindClasses = {
 }
 
 const accountItems: NavigationListItem[] = [
-  { title: 'Personal Data', iconName: 'user', onPress: () => router.push('/user/personal-data') },
-  { title: 'Achievements', iconName: 'award', onPress: () => router.push('/user/achievements') },
+  { title: 'Personal Data', iconName: 'user', onPress: () => router.push('user/personal-data') },
+  { title: 'Achievements', iconName: 'award', onPress: () => router.push('user/achievements') },
   {
     title: 'Activity History',
     iconName: 'history',
-    onPress: () => router.push('/user/activity-history'),
+    onPress: () => router.push('user/activity-history'),
   },
   {
     title: 'Workout Progress',
     iconName: 'chart-pie',
-    onPress: () => router.push('/user/workout-progress'),
+    onPress: () => router.push('user/workout-progress'),
   },
 ]
 
 const otherItems: NavigationListItem[] = [
-  { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/contact-us') },
+  { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/') },
   {
     title: 'Privacy Policy',
     iconName: 'shield-alt',
-    onPress: () => router.push('/privacy-policy'),
+    onPress: () => router.push('/'),
   },
 ]
 

@@ -29,25 +29,19 @@ const SignInWithGoogle = () => {
 
   const SignInWithGoogleOAuth = React.useCallback(async () => {
     try {
-      if (isEnabled) {
-        setIsEnabled(false)
-        const { createdSessionId, setActive } = await startGoogleOAuthFlow()
+      const { createdSessionId, setActive } = await startGoogleOAuthFlow()
+      // console.log('startOAuthFlow')
 
-        // console.log('startOAuthFlow')
+      if (createdSessionId && setActive) {
+        await setActive({ session: createdSessionId })
 
-        if (createdSessionId && setActive) {
-          await setActive({ session: createdSessionId })
-
-          // FIXME:  WARN  The navigation state parsed from the URL contains routes not present in the root navigator.
-          // This usually means that the linking configuration doesn't match the navigation structure.
-          // See https://reactnavigation.org/docs/configuring-links for more details on how to specify a linking configuration.
-          // router.push('(dashboard)/')
-        } else {
-          // FIXME: Change this to a toast or style this alert
-          alert('Sign in failed')
-        }
-
-        setIsEnabled(true)
+        // FIXME:  WARN  The navigation state parsed from the URL contains routes not present in the root navigator.
+        // This usually means that the linking configuration doesn't match the navigation structure.
+        // See https://reactnavigation.org/docs/configuring-links for more details on how to specify a linking configuration.
+        // router.push('(dashboard)/')
+      } else {
+        // FIXME: Change this to a toast or style this alert
+        alert('Sign in failed')
       }
     } catch (err: any) {
       Alert.alert(

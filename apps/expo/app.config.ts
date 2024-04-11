@@ -47,9 +47,9 @@ const defineConfig = (): ExpoConfig => ({
   },
   extra: {
     // this is commented out so you don't have to log in to run expo start locally
-    // eas: {
-    //   projectId: 'a5b98934-bf53-4573-ba91-972c22a6759a',
-    // },
+    eas: {
+      projectId: 'a5b98934-bf53-4573-ba91-972c22a6759a',
+    },
     clerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
     expoPublicClerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
   },

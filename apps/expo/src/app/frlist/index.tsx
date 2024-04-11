@@ -1,7 +1,8 @@
 import React, { useEffect,useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { api } from '~/utils/api';
 
 /*
@@ -13,7 +14,6 @@ import { api } from '~/utils/api';
 interface Friend {
   id: string;
   username: string;
-  avatar: string;
 }
 
 type RootStackParamList = {
@@ -30,7 +30,7 @@ const FriendsListScreen = () => {
   const navigation = useNavigation<FriendsListScreenNavigationProp>();
 
   // Use the tRPC query to fetch friends
-  const { data: friendsData, isLoading } = api.friend.getFriends.useQuery();
+  const { data: friendsData } = api.friend.getFriends.useQuery();
 
   useEffect(() => {
     if (friendsData) {
@@ -58,37 +58,33 @@ const FriendsListScreen = () => {
     return (
       <View className="flex-row items-center justify-between p-4 border-b border-gray-200">
         <View className="flex-row items-center">
-          <Image source={{ uri: item.avatar }} className="w-12 h-12 rounded-full mr-4" />
+        <MaterialCommunityIcons name="face-man-profile" size={56} color="#CACACA" />
           <Text className="text-lg font-semibold">{item.username}</Text>
         </View>
         <View className="flex-row">
           <TouchableOpacity onPress={() => navigation.navigate('Messages', { friend: item })}>
-            <Text className="text-blue-500 font-semibold mr-4">Message</Text>
+            <Text className='font-IstokWeb px-4 pb-1 text-[#FFFFFF]'>Message</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Profile', { userId: item.id })}>
-            <Text className="text-blue-500 font-semibold mr-4">Profile</Text>
+            <Text className='font-IstokWeb px-4 pb-1 text-[#FFFFFF]'>Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleRemoveFriend(item.id)}>
-            <Text className="text-red-500 font-semibold">Remove</Text>
+            <Text className='font-IstokWeb px-4 pb-1 text-[#FFFFFF]'>Remove</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   };
 
-  // if (isLoading) {
-  //   return <Text>Loading...</Text>;
-  // }
-
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-[#1C1B1B]">
       <FlatList
         data={friends}
         renderItem={renderFriendItem}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={
-          <View className="p-4 border-b border-gray-200">
-            <Text className="text-2xl font-bold">Friends List</Text>
+          <View className="p-4 border-b border-[#CACACA]">
+            <Text className="text-2xl font-bold text-[#CACACA]">Friends List</Text>
           </View>
         }
       />

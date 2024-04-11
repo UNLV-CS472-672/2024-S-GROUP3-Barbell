@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PickerModal renders correctly and matches snapshot 1`] = `
+<Modal
+  animationType="none"
+  deviceHeight={null}
+  deviceWidth={null}
+  hardwareAccelerated={false}
+  hideModalContentWhileAnimating={false}
+  onBackdropPress={[MockFunction]}
+  onModalHide={[Function]}
+  onModalWillHide={[Function]}
+  onModalWillShow={[Function]}
+  onRequestClose={[Function]}
+  panResponderThreshold={4}
+  scrollHorizontal={false}
+  scrollOffset={0}
+  scrollOffsetMax={0}
+  scrollTo={null}
+  statusBarTranslucent={false}
+  supportedOrientations={
+    [
+      "portrait",
+      "landscape",
+    ]
+  }
+  swipeThreshold={100}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "backgroundColor": "black",
+        "bottom": 0,
+        "height": 1334,
+        "left": 0,
+        "opacity": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "width": 750,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    deviceHeight={null}
+    deviceWidth={null}
+    hideModalContentWhileAnimating={false}
+    onBackdropPress={[MockFunction]}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    panResponderThreshold={4}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    statusBarTranslucent={false}
+    style={
+      {
+        "flex": 1,
+        "justifyContent": "center",
+        "margin": 37.5,
+        "marginBottom": 200,
+        "marginLeft": 20,
+        "opacity": 0,
+        "transform": [
+          {
+            "scale": 0.3,
+          },
+        ],
+      }
+    }
+    supportedOrientations={
+      [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+  >
+    <View
+      style={
+        [
+          {
+            "bottom": 100,
+            "position": "absolute",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "backgroundColor": "#232323",
+              "borderRadius": 12,
+              "paddingBottom": 4,
+              "paddingTop": 8,
+              "width": 675,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "#3b3b3b",
+                "height": 1,
+                "width": "100%",
+              },
+              undefined,
+            ]
+          }
+          testID="divider"
+        />
+        <View
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            [
+              {
+                "alignItems": "center",
+                "height": 75,
+                "justifyContent": "center",
+              },
+              {
+                "paddingBottom": 8,
+              },
+              {
+                "borderBottomLeftRadius": 0,
+                "borderBottomRightRadius": 0,
+              },
+            ]
+          }
+          testID="action-button"
+        >
+          <Text
+            className="font-koulen"
+            style={
+              [
+                {
+                  "color": "#fff",
+                },
+                {
+                  "fontSize": 24,
+                },
+              ]
+            }
+          >
+            Option 1
+          </Text>
+        </View>
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "#3b3b3b",
+                "height": 1,
+                "width": "100%",
+              },
+              undefined,
+            ]
+          }
+          testID="divider"
+        />
+        <View
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            [
+              {
+                "alignItems": "center",
+                "height": 75,
+                "justifyContent": "center",
+              },
+              {
+                "paddingBottom": 0,
+              },
+              {
+                "borderBottomLeftRadius": 12,
+                "borderBottomRightRadius": 12,
+              },
+            ]
+          }
+          testID="action-button"
+        >
+          <Text
+            className="font-koulen"
+            style={
+              [
+                {
+                  "color": "#fff",
+                },
+                {
+                  "fontSize": 24,
+                },
+              ]
+            }
+          >
+            Option 2
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;

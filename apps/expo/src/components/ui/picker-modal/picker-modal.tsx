@@ -7,7 +7,6 @@ import ActionButton, {
 } from '~/components/ui/picker-modal/action-button/action-button'
 import Divider from '~/components/ui/picker-modal/divider/divider'
 import styles from '~/components/ui/picker-modal/picker-modal.style'
-import colors from '~/styles/colors'
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>
 type CustomTextStyleProp = StyleProp<TextStyle> | Array<StyleProp<TextStyle>>

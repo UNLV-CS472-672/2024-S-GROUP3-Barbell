@@ -31,8 +31,6 @@ const config: Config = {
     '!**/(inbox)/**',
     '!**/(friends)/**',
     '!**/(workout)/**',
-
-    // '!**/picker-modal/**',
   ],
   // coverageThreshold: {
   //   global: {

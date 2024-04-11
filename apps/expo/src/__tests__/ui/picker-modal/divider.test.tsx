@@ -15,4 +15,9 @@ describe('Divider', () => {
     const { getByTestId } = render(<Divider style={customStyle} />)
     expect(getByTestId('divider')).toHaveStyle(customStyle)
   })
+
+  it('matches snapshot', () => {
+    const { toJSON } = render(<Divider />)
+    expect(toJSON()).toMatchSnapshot()
+  })
 })

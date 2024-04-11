@@ -36,7 +36,16 @@ describe('ActionButton', () => {
     const { queryByTestId } = render(
       <ActionButton isLastItem={true} TouchableComponent={MockTouchable} />,
     )
-    // Since the `queryByTestId` for 'divider' would not work because the Divider itself does not accept testID as a prop,
+    // since the `queryByTestId` for 'divider' would not work 
+    // because the Divider itself does not accept testID as a prop,
     expect(queryByTestId('divider')).toBeNull()
+  })
+  
+  it('matches snapshot', () => {
+    const { toJSON } = render(
+      <ActionButton text='Snapshot Test' TouchableComponent={MockTouchable} />,
+    )
+
+    expect(toJSON()).toMatchSnapshot()
   })
 })

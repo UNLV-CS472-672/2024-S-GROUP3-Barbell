@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react-native'
 
-import Toggle from '^/apps/expo/src/components/toggle/change-Toggle'
+import Toggle from '~/components/toggle/toggle'
 
 test('Toggle', () => {
   render(<Toggle />)

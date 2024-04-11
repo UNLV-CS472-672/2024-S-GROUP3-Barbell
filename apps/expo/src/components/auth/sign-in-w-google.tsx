@@ -28,27 +28,26 @@ const SignInWithGoogle = () => {
   // TODO: If clerk doesn't have a username, prompt them to create one
 
   const SignInWithGoogleOAuth = React.useCallback(async () => {
-    if (isEnabled) {
-      setIsEnabled(false)
+    try {
+      const { createdSessionId, setActive } = await startGoogleOAuthFlow()
+      // console.log('startOAuthFlow')
 
-      try {
-        const { createdSessionId, setActive } = await startGoogleOAuthFlow()
-        // console.log('startOAuthFlow')
+      if (createdSessionId && setActive) {
+        await setActive({ session: createdSessionId })
 
-        if (createdSessionId) {
-          setActive?.({ session: createdSessionId })
-          // FIXME:  WARN  The navigation state parsed from the URL contains routes not present in the root navigator.
-          // This usually means that the linking configuration doesn't match the navigation structure.
-          // See https://reactnavigation.org/docs/configuring-links for more details on how to specify a linking configuration.
-          router.push('(dashboard)/')
-        } else {
-          // FIXME: Change this to a toast or style this alert
-          alert('Sign in failed')
-        }
-      } catch (err: any) {
-        Alert.alert('OAuth Error', `An error occurred during the OAuth process: ${err.message || err}`)
+        // FIXME:  WARN  The navigation state parsed from the URL contains routes not present in the root navigator.
+        // This usually means that the linking configuration doesn't match the navigation structure.
+        // See https://reactnavigation.org/docs/configuring-links for more details on how to specify a linking configuration.
+        // router.push('(dashboard)/')
+      } else {
+        // FIXME: Change this to a toast or style this alert
+        alert('Sign in failed')
       }
-      setIsEnabled(true)
+    } catch (err: any) {
+      Alert.alert(
+        'OAuth Error',
+        `An error occurred during the OAuth process: ${err.message || err}`,
+      )
     }
   }, [])
 
@@ -61,7 +60,9 @@ const SignInWithGoogle = () => {
       className='flex flex-row items-center justify-center gap-x-2'
     >
       <AntDesign name='google' size={24} color='white' />
-      <Text className='font-koulen text-center text-lg font-semibold text-white'>Sign in with Google</Text>
+      <Text className='font-koulen text-center text-lg font-semibold text-white'>
+        Sign in with Google
+      </Text>
     </Button>
   )
 }

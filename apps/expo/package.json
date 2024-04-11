@@ -15,7 +15,7 @@
     "jest": "jest --coverage -u"
   },
   "dependencies": {
-    "@clerk/clerk-expo": "^0.20.8",
+    "@clerk/clerk-expo": "1.0.1-snapshot.v498dc07",
     "@expo-google-fonts/istok-web": "^0.2.3",
     "@expo-google-fonts/koulen": "^0.2.3",
     "@expo-google-fonts/sora": "^0.2.3",

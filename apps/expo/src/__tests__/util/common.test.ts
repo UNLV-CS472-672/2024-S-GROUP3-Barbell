@@ -1,5 +1,4 @@
 import getErrorMessage, { makeChatName } from '~/utils/common'
-import log from '~/utils/common'
 
 describe('getErrorMessage', () => {
   test('returns message for Error instances', () => {

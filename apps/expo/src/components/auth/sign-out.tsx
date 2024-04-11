@@ -3,7 +3,6 @@ import { View } from 'react-native'
 
 import { useAuth } from '@clerk/clerk-expo'
 
-import log from '~/utils/common'
 import Button from '../ui/button/button'
 
 export const SignOut = () => {
@@ -17,8 +16,10 @@ export const SignOut = () => {
     try {
       await signOut()
     } catch (err: any) {
-      log('Error:> ' + err?.status || '')
-      log('Error:> ' + err?.errors ? JSON.stringify(err.errors) : err)
+      // log('Error:> ' + err?.status || '')
+      // log('Error:> ' + err?.errors ? JSON.stringify(err.errors) : err)
+      console.log('Error:> ' + err?.status || '')
+      console.log('Error:> ' + err?.errors ? JSON.stringify(err.errors) : err)
     }
   }
 

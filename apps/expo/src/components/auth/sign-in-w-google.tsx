@@ -4,13 +4,15 @@ import * as WebBrowser from 'expo-web-browser'
 
 import { useOAuth } from '@clerk/clerk-expo'
 import { AntDesign } from '@expo/vector-icons'
-
+import { getRedirectUrl } from 'expo-auth-session'
 import 'react-native-get-random-values'
 
+import * as AuthSession from 'expo-auth-session'
 import { router } from 'expo-router'
 
 import Button from '~/components/ui/button/button'
 import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
+import { getBaseUrl } from '~/utils/trpc/api'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -29,8 +31,12 @@ const SignInWithGoogle = () => {
 
   const SignInWithGoogleOAuth = React.useCallback(async () => {
     try {
-      const { createdSessionId, setActive } = await startGoogleOAuthFlow()
+      const { createdSessionId, setActive } = await startGoogleOAuthFlow({
+        // redirectUrl: '/oauth-native-callback',
+      })
       // console.log('startOAuthFlow')
+
+      console.log(getBaseUrl(), 'getBaseUrl')
 
       if (createdSessionId && setActive) {
         await setActive({ session: createdSessionId })

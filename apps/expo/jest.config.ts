@@ -15,11 +15,13 @@ const config: Config = {
     '!**/*.d.ts',
     '!index.ts',
     '!**/api.tsx',
+    '!**/sign-in-w-google.tsx',
     '!**/constants.ts',
 
     /* need to remove in the future */
     '!**/app/**',
     '!**/custom-bottom-sheet-modal.tsx',
+    '!**/sign-in-with-google.tsx',
     '!**/svgMock.tsx',
     '!**/notif/**',
     '!**/hooks/**',

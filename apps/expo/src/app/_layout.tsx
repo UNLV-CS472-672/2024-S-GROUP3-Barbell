@@ -38,7 +38,7 @@ import AuthScreen from '~/app/auth'
 import GlobalContextProvider from '~/context/global-context'
 import { DashboardHeader } from '~/layouts/headers/dashboard-header'
 import { FriendsHeader } from '~/layouts/headers/friends-header'
-import { InboxHeader } from '~/layouts/headers/inbox-headers'
+// import { InboxHeader } from '~/layouts/headers/inbox-headers'
 import { WorkoutHeader } from '~/layouts/headers/workout-headers'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY

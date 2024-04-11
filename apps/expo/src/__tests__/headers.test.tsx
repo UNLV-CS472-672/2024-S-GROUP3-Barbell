@@ -3,10 +3,10 @@ import { router } from 'expo-router'
 
 import { fireEvent, render } from '@testing-library/react-native'
 
-import { DashboardHeader } from './dashboard-header'
-import { FriendsHeader } from './friends-header'
-import { InboxHeader } from './inbox-headers'
-import { WorkoutHeader } from './workout-headers'
+import { DashboardHeader } from '../layouts/headers/dashboard-header'
+import { FriendsHeader } from '../layouts/headers/friends-header'
+import { InboxHeader } from '../layouts/headers/inbox-headers'
+import { WorkoutHeader } from '../layouts/headers/workout-headers'
 
 jest.mock('~assets/svgs/notification.svg', () => 'NotificationSVG')
 jest.mock('~assets/svgs/arrow-left.svg', () => 'ArrowLeftSVG')
@@ -20,7 +20,7 @@ jest.mock('expo-router', () => ({
 
 describe('DashboardHeader', () => {
   it('renders correctly', () => {
-    const { getByText, getByTestId } = render(<DashboardHeader />)
+    const { getByText } = render(<DashboardHeader />)
     expect(getByText('BARBELL')).toBeTruthy()
   })
 })

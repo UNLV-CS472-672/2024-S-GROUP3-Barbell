@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react-native'
 
 import FriendRequestNotif from '~/components/notif/miscNotifs/FriendRequestNotif'
 
-jest.mock('~/utils/api', () => ({
+jest.mock('~/utils/trpc/api', () => ({
   __esModule: true,
   api: {
     useUtils: jest.fn(() => ({

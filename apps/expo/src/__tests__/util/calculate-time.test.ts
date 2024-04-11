@@ -1,4 +1,4 @@
-import calculateTimeAgo from './calculateTime'
+import calculateTimeAgo from '../../utils/calculateTime'
 
 describe('calculateTimeAgo', () => {
   test('returns empty string for future dates', () => {

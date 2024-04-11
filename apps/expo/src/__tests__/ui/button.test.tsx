@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react-native'
 
-import Button from './button'
+import Button from '~/components/ui/button/button'
 
 test('Button', async () => {
   const expectedButtonText = 'Button Text'

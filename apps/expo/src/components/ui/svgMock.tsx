@@ -1,6 +1,9 @@
 import React from 'react'
 import { Text, View, ViewProps } from 'react-native'
 
+/**
+ * All this file is doing is for testing svg files in the app
+ */
 interface SvgMockProps extends ViewProps {
   children?: React.ReactNode
 }

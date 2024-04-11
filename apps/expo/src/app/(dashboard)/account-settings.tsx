@@ -15,8 +15,8 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 
 import { useGlobalContext } from '~/context/global-context'
 import colors from '~/styles/colors'
-import { api } from '~/utils/api'
 import { FA } from '~/utils/constants'
+import { api } from '~/utils/trpc/api'
 
 interface NavigationListItem {
   title: string

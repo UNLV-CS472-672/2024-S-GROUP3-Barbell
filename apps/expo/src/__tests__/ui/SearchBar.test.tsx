@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { fireEvent, render, screen } from '@testing-library/react-native'
 
-import SearchBar from './SearchBar'
+import SearchBar from '~/components/ui/search-bar/SearchBar'
 
 test('SearchBar', async () => {
   const TestComponent = () => {

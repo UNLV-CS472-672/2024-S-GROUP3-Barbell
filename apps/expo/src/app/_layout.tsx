@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar'
 
 import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 
-import { TRPCProvider } from '~/utils/api'
+import { TRPCProvider } from '~/utils/trpc/api'
 
 import 'expo-dev-client'
 import '~/styles.css'

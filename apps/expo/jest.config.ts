@@ -52,8 +52,8 @@ const config: Config = {
 
   preset: 'jest-expo',
   moduleNameMapper: {
-    '~/(.*)': '<rootDir>/src/$1',
-    '\\.svg$': '<rootDir>/src/layouts/headers/svgMock.tsx',
+    '~/(.*)' : '<rootDir>/src/$1',
+    '\\.svg$': '<rootDir>/src/components/ui/svgMock.tsx',
   },
 }
 

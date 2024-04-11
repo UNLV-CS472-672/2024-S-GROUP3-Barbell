@@ -1,4 +1,4 @@
-import formatTime from './timerFormatter'
+import formatTime from '../../utils/timerFormatter'
 
 test('formatTime', () => {
   expect(formatTime(0)).toBe('0:00')

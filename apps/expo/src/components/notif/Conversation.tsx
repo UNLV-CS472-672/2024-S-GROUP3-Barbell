@@ -6,7 +6,7 @@ import { ChatType } from '@prisma/client'
 
 import TimeAgo from '~/components/timeAgo/TimeAgo'
 import { useGlobalContext } from '~/context/global-context'
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 
 export interface ConversationProps {
   chatId: number

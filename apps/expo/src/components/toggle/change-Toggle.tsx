@@ -1,12 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { Animated, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 // screen dimensions
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
@@ -63,9 +56,7 @@ const ToggleSwitch = ({
       <TouchableOpacity onPress={toggleSwitch} activeOpacity={1}>
         <Animated.View style={[styles.switch, { backgroundColor }]}>
           {/* Animated the marginLeft of the circle */}
-          <Animated.View
-            style={[styles.circle, { marginLeft: circleTransform }]}
-          />
+          <Animated.View style={[styles.circle, { marginLeft: circleTransform }]} />
         </Animated.View>
       </TouchableOpacity>
       <Text style={styles.label}>{label}</Text>
@@ -77,11 +68,7 @@ const ToggleSwitch = ({
 // defaultOn: Set to 1, make switch on by default
 // props: pass in additional stuff
 // Main App Component - State is lifted here
-export default function Toggle({
-  strRightSide = '',
-  defaultOn = useState(false),
-  ...props
-}) {
+export default function Toggle({ strRightSide = '', defaultOn = useState(false), ...props }) {
   const [isToggleOn, setIsToggleOn] = defaultOn
 
   return (

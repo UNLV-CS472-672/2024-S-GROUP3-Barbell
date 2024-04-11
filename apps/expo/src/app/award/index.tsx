@@ -3,7 +3,7 @@ import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { Dimensions, Image, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Toggle from '~/components/toggle/Toggle'
+import Toggle from '^/apps/expo/src/components/toggle/change-Toggle'
 
 export default function Award() {
   // screen dimensions

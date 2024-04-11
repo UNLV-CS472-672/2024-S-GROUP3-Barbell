@@ -32,7 +32,7 @@ const config: Config = {
     '!**/(friends)/**',
     '!**/(workout)/**',
 
-    '!**/picker-modal/**',
+    // '!**/picker-modal/**',
   ],
   // coverageThreshold: {
   //   global: {

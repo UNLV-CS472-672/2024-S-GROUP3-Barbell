@@ -5,5 +5,7 @@
     }
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "discord.enabled": true
+  "discord.enabled": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true
 }

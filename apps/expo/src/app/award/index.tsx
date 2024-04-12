@@ -37,11 +37,6 @@ export default function Award() {
         />
       </View>
 
-      <View className="flex flex-col items-center">
-        <Toggle strRightSide={'defaultOn = TRUE'} defaultOn={useState(true)} />
-
-        <Toggle />
-      </View>
     </SafeAreaView>
   )
 }

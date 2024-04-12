@@ -15,7 +15,7 @@ export default function createNew() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View className="flex-row justify-evenly h-[60px] items-center">
+      <View className="flex-row justify-evenly h-[40px] items-center">
         <TouchableOpacity onPress={() => router.back()}>
             <Text className="text-[20px] text-[#FFFFFF] text-center px-16'">
               Back
@@ -28,16 +28,10 @@ export default function createNew() {
           </Text>
         </TouchableOpacity>
       </View>
-      <View className="mx-3 bg-[#272727] rounded-[5px]">
-        <TextInput
-          className="text-[12px] text-[#CACACA] px-4 py-[6px] mx-1
-          placeholder:text-[#CACACA] placeholder:text-[20px] placeholder:italic placeholder:opacity-40 top-0" 
-          placeholder= "Search workout by name..."/>
-      </View>
-      <View style={{height: 1, backgroundColor: '#CACACA', marginHorizontal: 13, opacity: 0.3, top: 10, }}/>
-      <ScrollView className="mb-[25px] py-[20px]">
+
+      <View className="mb-[25px] py-[20px]">
         <WorkoutList />
-      </ScrollView>
+      </View>
     </SafeAreaView>
   )
 }

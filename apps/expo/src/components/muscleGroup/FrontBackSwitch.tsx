@@ -1,24 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Animated, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+  Animated,
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 
 // screen dimensions
+// Scaled based on screenWidth and screenHeight
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 
-// Use <Toggle
-//        strRightSide={"defaultOn = TRUE"}
-//        defaultOn={useState(true)}
-//     />
-// All props are optional
-// Scaled based on screenWidth and screenHeight
-
-// Custom onValueChange Component - With Animation
+// Custom switch component show at bottom - With Animation
 // Call as follows:
 // <onValueChange
 //     label="..."
 //     value={useState()}
 //     onValueChange={() => set(!On)}
 // />
-export default function Toggle ({
+export default function FrontBackSwitch ({
   value,
   onValueChange,
   label,
@@ -33,9 +34,11 @@ export default function Toggle ({
   useEffect(() => {
     // animate the switch when the value prop changes
     Animated.timing(animation, {
-      toValue: value ? 1 : 0, // Animate to 1 if enabled, else to 0
+      // Animate to 1 if enabled, else to 0
+      toValue: value ? 1 : 0,
       duration: 150,
-      useNativeDriver: false, // since we're animating a non-native property (marginLeft keke)
+      // since we're animating a non-native property (marginLeft keke)
+      useNativeDriver: false,
     }).start()
   }, [value, animation])
 
@@ -43,47 +46,48 @@ export default function Toggle ({
   // Use screen width for compat
   const circleTransform = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [screenWidth * 0.01, screenWidth * 0.106],
+    outputRange: [0, screenWidth * 0.35],
   })
 
   const backgroundColor = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: ['#3A3A3A', '#8FCAB1'],
+    // Simple left to right
+    // No effects
+    outputRange: ['#797979', '#797979'],
   })
 
   return (
     <View style={styles.toggleContainer}>
       <TouchableOpacity onPress={onValueChange} activeOpacity={1}>
+
+
         <Animated.View style={[styles.switch, { backgroundColor }]}>
           {/* Animated the marginLeft of the circle */}
-          <Animated.View style={[styles.circle, { marginLeft: circleTransform }]} />
+          <Animated.View
+            style={[styles.circle, { marginLeft: circleTransform }]}
+          />
         </Animated.View>
+
+        <Text style={{fontSize: screenWidth * 0.04, textAlign: 'center',
+          margin: 10, position: 'absolute', color: '#CACACA',
+          width: screenWidth * 0.7, height: screenWidth * 0.1,
+          top: 0, left: 0-(screenWidth*0.4)/2  }}>FRONT
+        </Text>
+
+        <Text style={{fontSize: screenWidth * 0.04, textAlign: 'center',
+          margin: 10, position: 'absolute', color: '#CACACA',
+          width: screenWidth * 0.7, height: screenWidth * 0.1,
+          top: 0, left: (screenWidth*0.3)/2  }}>BACK
+        </Text>
+
       </TouchableOpacity>
       <Text style={styles.label}>{label}</Text>
     </View>
   )
 }
 
-// strRightSide: String that displays on the right side of switch
-// defaultOn: Set to 1, make switch on by default
-// props: pass in additional stuff
-// Main App Component - State is lifted here
-export default function Toggle({ strRightSide = '', defaultOn = useState(false), ...props }) {
-  const [isToggleOn, setIsToggleOn] = defaultOn
 
-  return (
-    <onValueChange
-      {...props}
-      label={strRightSide}
-      value={isToggleOn}
-      onValueChange={() => setIsToggleOn(!isToggleOn)}
-    />
-  )
-}
-*/
-
-// Color Match
-// Inside circle always < outer
+// For rectangle shape
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -97,20 +101,23 @@ const styles = StyleSheet.create({
     marginBottom: screenWidth * 0.015,
   },
   switch: {
-    width: screenWidth * 0.15,
-    height: screenWidth * 0.05,
-    borderRadius: screenWidth * 0.025,
+    width: screenWidth * 0.7,
+    height: screenWidth * 0.1,
+    // Adjust shape to rectangle with round edges
+    borderRadius: screenWidth * 0.02,
     justifyContent: 'center',
-    marginRight: screenWidth * 0.01,
+    // Handle thin line on the right
+    marginRight: screenWidth * 0.012,
   },
   circle: {
-    width: screenWidth * 0.035,
-    height: screenWidth * 0.035,
-    borderRadius: screenWidth * 0.05,
-    backgroundColor: '#D9D9D9',
+    width: screenWidth * 0.35,
+    height: screenWidth * 0.1,
+    borderRadius: screenWidth * 0.02,
+    backgroundColor: '#48476D',
   },
   label: {
+    // Overlap
     fontSize: screenWidth * 0.04,
     color: '#CACACA',
-  },
+  }
 })

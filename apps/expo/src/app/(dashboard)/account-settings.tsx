@@ -79,6 +79,8 @@ const AccountSettings = () => {
 
   // FIXME:
   if (!userData) {
+    // TODO: Add a no user found component
+    console.log('USER DATA IS NULL, MAKE SURE YOUR DB IS RUNNING...')
     return null
   }
 

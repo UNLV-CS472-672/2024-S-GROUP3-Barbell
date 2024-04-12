@@ -7,8 +7,10 @@ import { AntDesign } from '@expo/vector-icons'
 
 import 'react-native-get-random-values'
 
+import { router } from 'expo-router'
+
+import Button from '~/components/ui/button/button'
 import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
-import Button from '../ui/button/button'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -31,12 +33,16 @@ const SignInWithGoogle = () => {
 
       try {
         const { createdSessionId, setActive } = await startGoogleOAuthFlow()
-        console.log('startOAuthFlow')
+        // console.log('startOAuthFlow')
 
         if (createdSessionId) {
           setActive?.({ session: createdSessionId })
+          // FIXME:  WARN  The navigation state parsed from the URL contains routes not present in the root navigator.
+          // This usually means that the linking configuration doesn't match the navigation structure.
+          // See https://reactnavigation.org/docs/configuring-links for more details on how to specify a linking configuration.
+          router.push('(dashboard)/')
         } else {
-          // TODO: Change this to a toast or style this alert
+          // FIXME: Change this to a toast or style this alert
           alert('Sign in failed')
         }
       } catch (err: any) {
@@ -48,14 +54,14 @@ const SignInWithGoogle = () => {
 
   return (
     <Button
-      testID="sign-in-with-google-btn"
+      testID='sign-in-with-google-btn'
       onPress={() => SignInWithGoogleOAuth()}
       disabled={!isEnabled}
-      color="dark"
-      className="flex flex-row items-center justify-center gap-x-2"
+      color='dark'
+      className='flex flex-row items-center justify-center gap-x-2'
     >
-      <AntDesign name="google" size={24} color="white" />
-      <Text className="font-koulen text-center text-lg font-semibold text-white">Sign in with Google</Text>
+      <AntDesign name='google' size={24} color='white' />
+      <Text className='font-koulen text-center text-lg font-semibold text-white'>Sign in with Google</Text>
     </Button>
   )
 }

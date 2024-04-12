@@ -1,11 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react'
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+
 import { useClerk } from '@clerk/clerk-expo'
 
 import { api } from '~/utils/api'
@@ -25,6 +20,7 @@ export type TGlobalContext = {
   isWorkingOut: boolean
   setIsWorkingOut: Dispatch<SetStateAction<boolean>>
   userData: IUserData | null
+  isLoadingUserData: boolean
 }
 
 export const GlobalContext = createContext<TGlobalContext | null>(null)
@@ -38,16 +34,18 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const [userData, setUserData] = useState<IUserData | null>(null)
   const { user: clerkUserData } = useClerk()
   const createUser = api.user.create.useMutation()
-  const { data: userNineData, isFetched: userNineDataIsFetched } =
-    api.user.byId.useQuery({ id: 9 })
 
-  const getUserData = useCallback(async () => {
+  const {
+    data: userNineData,
+    isFetched: userNineDataIsFetched,
+    isLoading: isLoadingUserNine,
+  } = api.user.byId.useQuery({ id: 9 })
+
+  const createUserIfNotExist = useCallback(async () => {
     if (clerkUserData) {
       const response = await createUser.mutateAsync({
         clerkId: clerkUserData.id,
-        username: clerkUserData.username
-          ? clerkUserData.username
-          : generateUsername(),
+        username: clerkUserData.username ? clerkUserData.username : generateUsername(),
         name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
       })
 
@@ -70,28 +68,23 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
         username: userNineData?.username!,
         name: userNineData?.name!,
       })
-    } else getUserData()
-  }, [getUserData, userNineDataIsFetched])
+    } else createUserIfNotExist()
+  }, [createUserIfNotExist, userNineDataIsFetched])
 
   const globalContextValue: TGlobalContext = {
     isWorkingOut,
     setIsWorkingOut,
     userData,
+    isLoadingUserData: isLoadingUserNine,
   }
 
-  return (
-    <GlobalContext.Provider value={globalContextValue}>
-      {children}
-    </GlobalContext.Provider>
-  )
+  return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>
 }
 
 export const useGlobalContext = () => {
   const context = useContext(GlobalContext)
   if (!context) {
-    throw new Error(
-      'useGlobalContext must be used within a GlobalContextProvider',
-    )
+    throw new Error('useGlobalContext must be used within a GlobalContextProvider')
   }
   return context
 }

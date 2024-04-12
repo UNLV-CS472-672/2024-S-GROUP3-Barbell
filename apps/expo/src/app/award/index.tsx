@@ -1,8 +1,7 @@
+import { Ionicons } from '@expo/vector-icons'
+import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { Dimensions, Image, Text, View } from 'react-native'
-import { router } from 'expo-router'
-import tailwind from '@/tooling/tailwind'
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toggle from '~/components/toggle/Toggle'
 

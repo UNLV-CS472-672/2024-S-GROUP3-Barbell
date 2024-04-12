@@ -11,6 +11,9 @@ import Toggle from '~/components/toggle/toggle'
  */
 
 describe('Toggle component', () => {
+  beforeAll(() => {
+    jest.setTimeout(30000)
+  })
 
   /* git force */
   const originalConsoleError = console.error

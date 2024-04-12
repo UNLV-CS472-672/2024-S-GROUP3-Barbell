@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@clerk/clerk-expo": "1.0.1-snapshot.v498dc07",
-    "@clerk/clerk-expo": "1.0.1-snapshot.v498dc07",
     "@expo-google-fonts/istok-web": "^0.2.3",
     "@expo-google-fonts/koulen": "^0.2.3",
     "@expo-google-fonts/sora": "^0.2.3",
@@ -48,7 +47,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.73.6",
-    "react-native": "0.73.6",
     "react-native-body-highlighter": "3.0.0-beta.6",
     "react-native-dotenv": "^3.4.10",
     "react-native-gesture-handler": "~2.14.1",
@@ -79,7 +77,6 @@
     "@testing-library/react-native": "^12.4.4",
     "@types/babel__core": "^7.20.5",
     "@types/jest": "^29.5.12",
-    "@types/ramda": "^0.29.12",
     "@types/ramda": "^0.29.12",
     "@types/react": "^18.2.75",
     "@types/react-test-renderer": "^18.0.7",

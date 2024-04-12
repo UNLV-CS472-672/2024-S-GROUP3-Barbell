@@ -8,14 +8,13 @@ import Body from 'react-native-body-highlighter'
 import ToggleSwitch from '~/components/toggle/Toggle'
 import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 
-export type muscleSelect =
+export type muscleSelectDev =
   | "abs"
   | "adductors"
   | "ankles"
   | "biceps"
   | "calves"
   | "chest"
-  | "deltoids"
   | "deltoids"
   | "feet"
   | "forearm"
@@ -33,6 +32,18 @@ export type muscleSelect =
   | "trapezius"
   | "triceps"
   | "upper-back";
+
+export type muscleSelectUser =
+  | "Shoulder"
+  | "Chest"
+  | "Arm"
+  | "Core"
+  | "Upper leg"
+  | "Lower leg"
+  | "Upper back"
+  | "Lat"
+  | "Lower back"
+  | "Glute";
 
 export default function NewWorkoutMuscleGroup() {
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
@@ -69,7 +80,7 @@ export default function NewWorkoutMuscleGroup() {
       </View>
 
       <View className="flex-1"
-            style = {{alignItems: "center", justifyContent: "center"}}>
+            style = {{alignItems: "center", justifyContent: "center",}}>
 
         <Body
 
@@ -176,43 +187,39 @@ export default function NewWorkoutMuscleGroup() {
           side={isBackSideEnabled ? "back" : "front"}
           scale={1.7}
         />
-
-        <View>
-          <Text style={{ color: '#CACACA', fontSize: 20 }}>
-            Muscle Group Selected: {userSelection}
-          </Text>
-        </View>
+      </View>
 
 
+      {/* Bottom section */}
         <View className="flex flex-row"
-              style={{gap: 0.1 * screenWidth}}>
+              style={{gap: 0.1 * screenWidth, position: "absolute", bottom: 11}}>
 
           <View className="flex-1"
                 style={{alignItems: "center", justifyContent: "center"}}>
 
+            <View>
+              <Text style={{ color: '#CACACA', fontSize: 20 }}>
+                Muscle Group Selected: {userSelection}
+              </Text>
+            </View>
+
+            {/*
             <Text style={{ color: '#CACACA', fontSize: 20 }}>
               {isMale ? "Male" : "Female"}
             </Text>
 
             <ToggleSwitch onValueChange={toggleGenderSwitch} value={isMale} />
-          </View>
-        </View>
-
-
-        <View className="flex flex-row"
-              style={{gap: 0.1 * screenWidth, position: "absolute", bottom: 15}}>
-
-          <View className="flex-1"
-                style={{alignItems: "center", justifyContent: "center"}}>
+            */}
 
             <FrontBackSwitch
               onValueChange={toggleSwitch}
               value={isBackSideEnabled}
               label={""}
             />
+
           </View>
         </View>
-      </View>
+
     </SafeAreaView>
   )
 }

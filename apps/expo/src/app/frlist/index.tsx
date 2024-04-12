@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { api } from '~/utils/api';
 
 /*
@@ -38,8 +38,7 @@ const FriendsListScreen = () => {
     }
   }, [friendsData]);
 
-  // Remove the fetchFriends function since you're using tRPC
-
+  // handle removing a friend from the friends list
   const handleRemoveFriend = async (userId: string) => {
     try {
       const response = await fetch(`/api/friends/${userId}`, {
@@ -54,6 +53,7 @@ const FriendsListScreen = () => {
     }
   };
 
+  // render each friend item in the list and provide options to message, view profile, and remove friend
   const renderFriendItem = ({ item }: { item: Friend }) => {
     return (
       <View className="flex-row items-center justify-between p-4 border-b border-gray-200">
@@ -76,6 +76,7 @@ const FriendsListScreen = () => {
     );
   };
 
+  // main render of friends list screen
   return (
     <View className="flex-1 bg-[#1C1B1B]">
       <FlatList

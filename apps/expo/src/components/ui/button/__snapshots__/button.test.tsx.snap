@@ -20,7 +20,7 @@ exports[`Button 1`] = `
     }
   }
   accessible={true}
-  className="active:opacity-30 bg-dark-purple py-2 rounded-lg"
+  className="active:opacity-30 disabled:opacity-60 bg-dark-purple py-2 rounded-lg"
   collapsable={false}
   focusable={true}
   onBlur={[Function]}

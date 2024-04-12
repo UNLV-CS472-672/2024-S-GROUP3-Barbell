@@ -1,11 +1,9 @@
 import { Ionicons } from '@expo/vector-icons'
-import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { Dimensions, Image, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 
-import { Ionicons } from '@expo/vector-icons'
 
 import Toggle from '~/components/toggle/toggle'
 
@@ -34,12 +32,6 @@ export default function Award() {
           }}
           resizeMode='contain'
         />
-      </View>
-
-      <View className='flex flex-col items-center'>
-        <Toggle strRightSide={'defaultOn = TRUE'} defaultOn={useState(true)} />
-
-        <Toggle />
       </View>
     </SafeAreaView>
   )

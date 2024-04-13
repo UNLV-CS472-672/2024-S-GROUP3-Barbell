@@ -2,6 +2,7 @@
 
 import type { RouterOutputs } from '@/utils/api'
 import { useState } from 'react'
+
 import { api } from '@/utils/api'
 
 export function CreatePostForm() {
@@ -20,7 +21,7 @@ export function CreatePostForm() {
 
   return (
     <form
-      className="flex w-full max-w-2xl flex-col"
+      className='flex w-full max-w-2xl flex-col'
       onSubmit={async (e) => {
         e.preventDefault()
         try {
@@ -37,34 +38,28 @@ export function CreatePostForm() {
       }}
     >
       <input
-        className="mb-2 rounded bg-white/10 p-2 text-white"
+        className='mb-2 rounded bg-white/10 p-2 text-white'
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
+        placeholder='Title'
       />
       {error?.data?.zodError?.fieldErrors.title && (
-        <span className="mb-2 text-red-500">
-          {error.data.zodError.fieldErrors.title}
-        </span>
+        <span className='mb-2 text-red-500'>{error.data.zodError.fieldErrors.title}</span>
       )}
       <input
-        className="mb-2 rounded bg-white/10 p-2 text-white"
+        className='mb-2 rounded bg-white/10 p-2 text-white'
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        placeholder="Content"
+        placeholder='Content'
       />
       {error?.data?.zodError?.fieldErrors.content && (
-        <span className="mb-2 text-red-500">
-          {error.data.zodError.fieldErrors.content}
-        </span>
+        <span className='mb-2 text-red-500'>{error.data.zodError.fieldErrors.content}</span>
       )}
       {}
-      <button type="submit" className="rounded bg-pink-400 p-2 font-bold">
+      <button type='submit' className='rounded bg-pink-400 p-2 font-bold'>
         Create
       </button>
-      {error?.data?.code === 'UNAUTHORIZED' && (
-        <span className="mt-2 text-red-500">You must be logged in to post</span>
-      )}
+      {error?.data?.code === 'UNAUTHORIZED' && <span className='mt-2 text-red-500'>You must be logged in to post</span>}
     </form>
   )
 }
@@ -76,20 +71,20 @@ export function PostList() {
 
   if (posts.length === 0) {
     return (
-      <div className="relative flex w-full flex-col gap-4">
+      <div className='relative flex w-full flex-col gap-4'>
         <PostCardSkeleton pulse={false} />
         <PostCardSkeleton pulse={false} />
         <PostCardSkeleton pulse={false} />
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/10">
-          <p className="text-2xl font-bold text-white">No posts yet</p>
+        <div className='absolute inset-0 flex flex-col items-center justify-center bg-black/10'>
+          <p className='text-2xl font-bold text-white'>No posts yet</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="flex w-full flex-col gap-4">
+    <div className='flex w-full flex-col gap-4'>
       {posts.map((p: any) => {
         return <PostCard key={p.id} post={p} />
       })}
@@ -97,23 +92,21 @@ export function PostList() {
   )
 }
 
-export function PostCard(props: {
-  post: RouterOutputs['post']['all'][number]
-}) {
+export function PostCard(props: { post: RouterOutputs['post']['all'][number] }) {
   const utils = api.useUtils()
   const deletePost = api.post.delete.useMutation()
 
   return (
-    <div className="flex flex-row rounded-lg bg-white/10 p-4 transition-all hover:scale-[101%]">
-      <div className="flex-grow">
-        <h2 className="text-2xl font-bold text-pink-400">{props.post.title}</h2>
-        <p className="mt-2 text-sm">{props.post.content}</p>
+    <div className='flex flex-row rounded-lg bg-white/10 p-4 transition-all hover:scale-[101%]'>
+      <div className='flex-grow'>
+        <h2 className='text-2xl font-bold text-pink-400'>{props.post.title}</h2>
+        <p className='mt-2 text-sm'>{props.post.content}</p>
       </div>
       <div>
         <button
-          className="cursor-pointer text-sm font-bold uppercase text-pink-400"
+          className='cursor-pointer text-sm font-bold uppercase text-pink-400'
           onClick={async () => {
-            await deletePost.mutateAsync(props.post.id)
+            await deletePost.mutateAsync({ id: props.post.id })
             await utils.post.all.invalidate()
           }}
         >
@@ -127,22 +120,10 @@ export function PostCard(props: {
 export function PostCardSkeleton(props: { pulse?: boolean }) {
   const { pulse = true } = props
   return (
-    <div className="flex flex-row rounded-lg bg-white/10 p-4 transition-all hover:scale-[101%]">
-      <div className="flex-grow">
-        <h2
-          className={`w-1/4 rounded bg-pink-400 text-2xl font-bold ${
-            pulse && 'animate-pulse'
-          }`}
-        >
-          &nbsp;
-        </h2>
-        <p
-          className={`mt-2 w-1/3 rounded bg-current text-sm ${
-            pulse && 'animate-pulse'
-          }`}
-        >
-          &nbsp;
-        </p>
+    <div className='flex flex-row rounded-lg bg-white/10 p-4 transition-all hover:scale-[101%]'>
+      <div className='flex-grow'>
+        <h2 className={`w-1/4 rounded bg-pink-400 text-2xl font-bold ${pulse && 'animate-pulse'}`}>&nbsp;</h2>
+        <p className={`mt-2 w-1/3 rounded bg-current text-sm ${pulse && 'animate-pulse'}`}>&nbsp;</p>
       </div>
     </div>
   )

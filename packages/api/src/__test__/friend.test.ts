@@ -33,6 +33,7 @@ test('FRIEND /create', async () => {
     },
     create: {
       userId: 1,
+      friendId: 2,
     },
   })
 

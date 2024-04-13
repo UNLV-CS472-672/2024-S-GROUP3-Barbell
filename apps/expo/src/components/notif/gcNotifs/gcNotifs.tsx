@@ -6,7 +6,7 @@ import Conversation from '~/components/notif/Conversation'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/api'
-import { makeChatName } from '~/utils/makeChatName'
+import { makeChatName } from '~/utils/common'
 
 function makeNullMessagePreview(chat: any, loggedInUser: string): string {
   return (

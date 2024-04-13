@@ -30,28 +30,11 @@ export const workoutRouter = createTRPCRouter({
         finishedAt: z.date(),
         exercises: z.array(
           z.object({
-            name: z.string(),
-            note: z.string().optional(),
-            // ExerciseCreateWithoutWorkoutInput calls SetCreateNestedManyWithoutExerciseInput which means that the sets field isn't needed?
-            // this should be the case because the exercises are already linked to the appropriate sets
-            // sets: z.array(z.object({
-            //     type: z.enum(['NORMAL', 'WARMUP', 'DROPSET', 'FAILURE']),
-            //     reps: z.number().int().nonnegative(),
-            //     weight: z.number().nonnegative(),
-            //     exerciseID: z.number().int()
-            // })),
-            body_part: z.nativeEnum(BodyPart),
-            category: z.nativeEnum(Category),
+            id: z.number().int(),
           }),
         ),
 
         // Past workouts should not be needed since there is no history of it being used if it was newly created
-        // past_workouts: z.array(z.object({
-        //     createdAt: z.date(),
-        //     updatedAt: z.date(),
-        //     finishedAt: z.date(),
-        //     userId: z.number().int(),
-        // })),
         userId: z.number().int(),
       }),
     )
@@ -65,7 +48,10 @@ export const workoutRouter = createTRPCRouter({
           duration: input.duration,
           finishedAt: input.finishedAt,
           exercises: {
-            create: input.exercises,
+            connect: 
+              input.exercises?.map((exercise)=>({
+                id: exercise.id,
+              })),
           },
           userId: input.userId,
         },

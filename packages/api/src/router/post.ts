@@ -40,4 +40,41 @@ export const postRouter = createTRPCRouter({
   delete: publicProcedure.input(z.object({ id: z.number() })).mutation(({ ctx, input }) => {
     return ctx.prisma.post.delete({ where: { id: input.id } })
   }),
+
+  /**
+   *  @remarks
+   *  This returns the user-specified most recent posts from all friends for a user
+   *
+   *  @param  id - the id of the user
+   *  @returns an array of the [#] most recent posts from the user's friends
+   */
+  getRecentPostsByUserIdAndPostCount: publicProcedure
+    .input(z.object({ id: z.number().int(), postCount: z.number().int() }))
+    .query(async ({ ctx, input }) => {
+      const friendsList = await ctx.prisma.friend.findMany({
+        where: {
+          userId: input.id,
+        },
+      })
+
+      const friendIds: number[] = friendsList.map((item) => {
+        return item.friendId
+      })
+
+      return ctx.prisma.post.findMany({
+        where: {
+          authorId: { in: friendIds },
+        },
+        select: {
+          author: true,
+          content: true,
+          title: true,
+          id: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: input.postCount,
+      })
+    }),
 })

@@ -1,10 +1,11 @@
-import { TouchableOpacity } from '@gorhom/bottom-sheet'
-import React, {useState} from 'react'
-import { Text, View, TextInput } from 'react-native'
+import React, { useState } from 'react'
+import { Text, TextInput, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
-import SearchBar from '../ui/search-bar/SearchBar'
+import { TouchableOpacity } from '@gorhom/bottom-sheet'
+
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
+import SearchBar from '~/components/ui/search-bar/SearchBar'
 import { api } from '~/utils/api'
 
 export default function WorkoutList() {
@@ -12,46 +13,46 @@ export default function WorkoutList() {
   const { data, isFetched, isFetching } = api.workout.getAllWorkouts.useQuery()
 
   // Select an exercise
-  const [selectExercise, setSelect] = useState<{[wid: number]: boolean }>({});
+  const [selectExercise, setSelect] = useState<{ [wid: number]: boolean }>({})
   const selectToggle = (wid: number) => {
-      setSelect((prevState) => ({
+    setSelect((prevState) => ({
       [wid]: !prevState[wid],
-      }));
-  };
+    }))
+  }
 
-  //Search bar
-  const [searchTerm, setTerm] = useState('');
-  const filteredworkouts = data?.filter((workout) =>
-    workout.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ) || [];
+  const [filteredList, setFilteredList] = useState(data)
 
-  
-  const workouts =
-  <View>
-    <View className="mx-3 bg-[#272727] rounded-[5px]">
-      <TextInput className="text-[12px] text-[#CACACA] px-4 py-[6px] mx-1
-          placeholder:text-[#CACACA] placeholder:text-[20px] placeholder:italic placeholder:opacity-40" 
-          placeholder= "Search workout by name..."
-          onChangeText={setTerm} value={searchTerm}>
-      </TextInput>
+  const workouts = (
+    <View>
+      <SearchBar
+        filterBy="name"
+        list={data}
+        placeholder="Search workout by name..."
+        setFilteredList={setFilteredList}
+      />
+      <View className="pt-3" style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
+
+      <ScrollView className="h-full">
+        {filteredList?.map((workout) => (
+          <View>
+            <View className="px-3" key={workout.id}>
+              <TouchableOpacity
+                key={workout.id}
+                className="pt-5"
+                style={{ backgroundColor: selectExercise[workout.id] ? '#272727' : '#1E1E1E' }}
+                onPress={() => selectToggle(workout.id)}
+              >
+                <Text className="px-2 text-[20px] text-slate-200">{workout.name}</Text>
+                <View className="pt-2" />
+                <Text className="px-4 pb-4 italic text-slate-200 opacity-70">{workout.description}</Text>
+              </TouchableOpacity>
+            </View>
+            <View className="ml-3 mr-3" style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
+          </View>
+        ))}
+      </ScrollView>
     </View>
-
-    <View className=" bg-[#CACACA] h-[1px] color-slate-200 my-[4px] opacity-[.3] mx-[13px]"/>
-    
-    <ScrollView className='px-[15px]'>
-      {filteredworkouts.map((workout) =>
-        <TouchableOpacity key={workout.id} className='px-5 mx-5' 
-        style={{backgroundColor: selectExercise[workout.id] ? "#48476D" : "#1E1E1E"}}
-        onPress={() => selectToggle(workout.id)}>
-          <Text  className='text-slate-200 text-[20px] px-4'>
-            {workout.name} 
-          </Text>
-          <Text className='text-slate-200 text-[15px] pb-4 px-6'>
-            {workout.description}
-          </Text>
-        </TouchableOpacity>)}
-    </ScrollView>
-  </View>
+  )
 
   return (
     <View>

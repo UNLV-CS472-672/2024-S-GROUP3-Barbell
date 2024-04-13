@@ -8,18 +8,17 @@ import {makeRedirectUri} from 'expo-auth-session' // For return uri
 const clientId = "b141ac3691f44bc0a508538e1c888ebf"; // in .env, find way to use from there?
 
 // This is where the user will be redirected after authenticating spotify
+// TODO: MAKE SURE THIS WORKS WHEN TESTING
+// Should probably use a page to test thing out?
 const redirectUri = makeRedirectUri({
     scheme: 'expo',
     path: 'redirect'
 }); 
 
+// Do we need this within another function or?
 // This specifies what data we'd like to retrieve from Spotify Web API
 // Documentation: https://developer.spotify.com/documentation/web-api/concepts/scopes
 const scope = "user-read-currently-playing"; // Space delimited within quotes
-
-// This is the returned URL. Should have a code if valid, else we know we have to request a new access token
-const params = new URLSearchParams(window.location.search); // Use local memory to avoid infinite auth loop
-const code = params.get("code");
 
 // If user declines the request, we get an error field back. Refer to documentation
 // TODO: IMPLEMENT AFTERWARDS, GET FUNCTIONAL FIRST
@@ -27,15 +26,6 @@ const code = params.get("code");
 // TODO: DEALING WITH REFRESH TOKEN/NEW ACCESS TOKENS: TRACK THE TIME 
 // https://developer.spotify.com/documentation/web-api/tutorials/refreshing-tokens
 
-if (!code) {
-    // Hasn't verified nor generated a code yet. Send to auth
-    redirectToAuthCodeFlow(clientId);
-} else {
-    // We have the url and code stored so just get information
-    const accessToken = await getAccessToken(clientId, code);
-    const trackData = await fetchCurrentlyPlayingTrack(accessToken);
-    // Now populate and push to the database
-}
 
 // Send user to authentication to create a verifier
 async function redirectToAuthCodeFlow(clientId: string) {
@@ -44,12 +34,17 @@ async function redirectToAuthCodeFlow(clientId: string) {
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
 
+    // Just store verifier locally to be used
     localStorage.setItem("verifier", verifier);
 
     const params = new URLSearchParams();
+
+    // Creating key-value pairs for the searchURL
+    // Refer to https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow for specifics
     params.append("client_id", clientId);
     params.append("response_type", "code");
 
+    // Has to be same on Spotify App which could cause issues?
     // TODO : GET MOBILE APP RETURN URL AND UPDATE THE APP TO HAVE THAT 
     params.append("redirect_uri", redirectUri); 
     // These are scopes; allow us to get different information. For sake of our app
@@ -59,6 +54,7 @@ async function redirectToAuthCodeFlow(clientId: string) {
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 
+    // Sets the actual website/location
     document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
@@ -101,6 +97,7 @@ async function getAccessToken(clientId: string, code: string): Promise<string> {
     });
 
     const { access_token } = await result.json();
+    localStorage.setItem('access-token', access_token.access_token);
     return access_token;
 }
 
@@ -113,9 +110,28 @@ async function fetchCurrentlyPlayingTrack(token: string){
     // Data retrieved: https://developer.spotify.com/documentation/web-api/reference/get-the-users-currently-playing-track
 
     // Error check the response.status really quickly
-    if(result.status == 200 ) return result.json;
+    if(result.status == 200 ) return result;
     else{
         //Error case. Just return null 
         throw new Error("Unable to fetch currently playing track. Code: " + result.status);
     }
+}
+
+export async function getCurrentSong(){
+    // This is the returned URL. Should have a code if valid, else we know we have to request a new access token
+    const params = new URLSearchParams(window.location.search); // Use local memory to avoid infinite auth loop
+
+    //  To be used later on when generating an access token
+    const code = params.get("code");
+        
+    // HOW AND WHEN DOES THIS THING RUN???
+    if (!code) {
+        // Hasn't verified nor generated a code yet. Send to auth
+        redirectToAuthCodeFlow(clientId);
+    } else {
+        // We have the url and code stored so just get information using functions from below
+        const accessToken = await getAccessToken(clientId, code);
+        let playingTrack = await fetchCurrentlyPlayingTrack(accessToken);
+    }
+
 }

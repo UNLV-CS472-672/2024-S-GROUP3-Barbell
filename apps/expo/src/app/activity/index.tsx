@@ -1,12 +1,16 @@
 import { Text, View } from 'react-native';
+import { WorkoutZod } from '^/packages/validators/src';
 
+interface ActivityProps {
+  workout: any;
+}
 
-const Activity = () => {
+const Activity: React.FC<ActivityProps> = ({ workout }) => {
   return (
     <View className="m-3 p-4 bg-bb-dark-gray text-bb-slate-100 rounded-lg">
       <View className="flex-row justify-between items-baseline">
         <Text className="text-2xl text-slate-200">User Name</Text>
-        <Text className="text-lg text-slate-200">April 20, 4:20pm</Text>
+        <Text className="text-lg text-slate-200">{workout.id}</Text>
       </View>
       <View className="flex-row justify-between items-baseline">
         <Text className="text-lg my-2 text-slate-200">Name of workout</Text>

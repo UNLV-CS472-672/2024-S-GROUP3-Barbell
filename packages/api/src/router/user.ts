@@ -67,6 +67,25 @@ export const userRouter = createTRPCRouter({
   }),
 
   /**
+    * get a user's friends
+    */
+  getFriends: publicProcedure
+    .input(
+      z.object(
+        { userId: z.number().int() }
+      )
+    )
+    .query(({ ctx, input }) => {
+      return ctx.prisma.friend.findMany(
+        {
+          where: {
+            userId: input.userId
+          }
+        }
+      )
+    }),
+
+  /**
    * update user
    */
   update: publicProcedure.input(UpdateUserSchema).mutation(async ({ ctx, input }) => {

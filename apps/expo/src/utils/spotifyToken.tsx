@@ -2,6 +2,11 @@
 // PKCE Auth: https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 // Requesting Web API Data: https://developer.spotify.com/documentation/web-api/howtos/web-app-profile
 
+// For type safety
+interface trackInformation{
+    
+}
+
 import {makeRedirectUri} from 'expo-auth-session' // For return uri
 
 // Public id, not too dangerous i think
@@ -25,6 +30,32 @@ const scope = "user-read-currently-playing"; // Space delimited within quotes
 
 // TODO: DEALING WITH REFRESH TOKEN/NEW ACCESS TOKENS: TRACK THE TIME 
 // https://developer.spotify.com/documentation/web-api/tutorials/refreshing-tokens
+
+export async function getSpotifyData(){
+    console.log("Testing1\n");
+    // This is the returned URL. Should have a code if valid, else we know we have to request a new access token
+    console.log(document.location.search);
+    const params = new URLSearchParams(document.location.search); // Use local memory to avoid infinite auth loop
+    console.log("Testing2\n");
+
+    //  To be used later on when generating an access token
+    const code = params.get("code");
+    
+
+    if (!code) {
+        // Hasn't verified nor generated a code yet. Send to auth
+        redirectToAuthCodeFlow(clientId);
+    } else {
+        // We have the url and code stored so just get information using functions from below
+        const accessToken = await getAccessToken(clientId, code);
+
+        // Return this guy?
+        let playingTrack = await fetchCurrentlyPlayingTrack(accessToken);
+        return playingTrack;
+    }
+}
+
+
 
 
 // Send user to authentication to create a verifier
@@ -96,6 +127,7 @@ async function getAccessToken(clientId: string, code: string): Promise<string> {
         body: params
     });
 
+    // Locally store stuff
     const { access_token } = await result.json();
     localStorage.setItem('access-token', access_token.access_token);
     return access_token;
@@ -117,21 +149,6 @@ async function fetchCurrentlyPlayingTrack(token: string){
     }
 }
 
-export async function getCurrentSong(){
-    // This is the returned URL. Should have a code if valid, else we know we have to request a new access token
-    const params = new URLSearchParams(window.location.search); // Use local memory to avoid infinite auth loop
-
-    //  To be used later on when generating an access token
-    const code = params.get("code");
-        
-    // HOW AND WHEN DOES THIS THING RUN???
-    if (!code) {
-        // Hasn't verified nor generated a code yet. Send to auth
-        redirectToAuthCodeFlow(clientId);
-    } else {
-        // We have the url and code stored so just get information using functions from below
-        const accessToken = await getAccessToken(clientId, code);
-        let playingTrack = await fetchCurrentlyPlayingTrack(accessToken);
-    }
+function populateField(song: any){
 
 }

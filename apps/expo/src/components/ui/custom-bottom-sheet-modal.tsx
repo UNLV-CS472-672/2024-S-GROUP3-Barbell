@@ -1,4 +1,5 @@
 import { forwardRef, useCallback, useMemo } from 'react'
+
 import {
   BottomSheetBackdrop,
   BottomSheetBackdropProps,
@@ -54,25 +55,23 @@ const Example = () => {
   )
 }
 */
-const CustomBottomSheetModal = forwardRef<
-  CustomBottomSheetModalRef,
-  CustomBottomSheetModalProps
->(
-  (
-    {
-      children,
-      customSnapPoints,
-      startIndex,
-      enablePanDownToClose,
-      renderBackdrop,
-    },
-    ref,
-  ) => {
+
+const CustomBottomSheetModal = forwardRef<CustomBottomSheetModalRef, CustomBottomSheetModalProps>(
+  ({ children, customSnapPoints, startIndex, enablePanDownToClose, renderBackdrop }, ref) => {
     const snapPoints = useMemo(() => customSnapPoints, [])
 
     const backdrop = useCallback(
       (props: BottomSheetBackdropProps) => (
-        <BottomSheetBackdrop disappearsOnIndex={-1} {...props} />
+        <BottomSheetBackdrop
+          disappearsOnIndex={-1}
+          appearsOnIndex={0}
+          style={{ backgroundColor: 'transparent' }}
+          // FIXME: bugs https://github.com/gorhom/react-native-bottom-sheet/issues/1332
+          opacity={0}
+          enableTouchThrough={true}
+          pressBehavior={'close'}
+          {...props}
+        />
       ),
       [],
     )
@@ -82,6 +81,7 @@ const CustomBottomSheetModal = forwardRef<
         ref={ref}
         snapPoints={snapPoints}
         index={startIndex}
+        style={{ backgroundColor: 'transparent' }}
         enablePanDownToClose={enablePanDownToClose ?? true}
         backdropComponent={renderBackdrop ? backdrop : undefined}
         handleIndicatorStyle={{ backgroundColor: '#CACACA' }}

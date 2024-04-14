@@ -1,14 +1,12 @@
 import { FlatList, Text, View } from 'react-native';
-import { WorkoutZod } from '^/packages/validators/src';
 
-interface ActivityProps {
+export interface ActivityProps {
   workout: any;
 }
 
 const Activity: React.FC<ActivityProps> = ({ workout }) => {
-  const formatDate = (date: Date): string => {
-    return date.toLocaleDateString();
-  }
+  const formatDate = (date: Date) => date.toLocaleDateString();
+
   return (
     <View className="m-3 p-4 bg-bb-dark-gray text-bb-slate-100 rounded-lg">
       <View className="flex-row justify-between items-baseline">

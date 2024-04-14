@@ -16,6 +16,10 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      base-64:
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@acme/prettier-config':
         specifier: workspace:^
@@ -68,6 +72,9 @@ importers:
       '@trpc/server':
         specifier: next
         version: 11.0.0-next-beta.297
+      base-64:
+        specifier: ^1.0.0
+        version: 1.0.0
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -173,6 +180,9 @@ importers:
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
+      utf8:
+        specifier: ^3.0.0
+        version: 3.0.0
       uuid:
         specifier: ^9.0.1
         version: 9.0.1
@@ -213,6 +223,9 @@ importers:
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
+      '@types/base-64':
+        specifier: ^1.0.2
+        version: 1.0.2
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
@@ -225,6 +238,9 @@ importers:
       '@types/react-test-renderer':
         specifier: ^18.0.7
         version: 18.0.7
+      '@types/utf8':
+        specifier: ^3.0.3
+        version: 3.0.3
       '@types/uuid':
         specifier: ^9.0.8
         version: 9.0.8
@@ -6273,6 +6289,10 @@ packages:
     dependencies:
       '@babel/types': 7.23.9
 
+  /@types/base-64@1.0.2:
+    resolution: {integrity: sha512-uPgKMmM9fmn7I+Zi6YBqctOye4SlJsHKcisjHIMWpb2YKZRc36GpKyNuQ03JcT+oNXg1m7Uv4wU94EVltn8/cw==}
+    dev: true
+
   /@types/body-parser@1.19.5:
     resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
     dependencies:
@@ -6512,6 +6532,10 @@ packages:
   /@types/tough-cookie@4.0.5:
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
     dev: false
+
+  /@types/utf8@3.0.3:
+    resolution: {integrity: sha512-+lqLGxWZsEe4Z6OrzBI7Ym4SMUTaMS5yOrHZ0/IL0bpIye1Qbs4PpobJL2mLDbftUXlPFZR7fu6d1yM+bHLX1w==}
+    dev: true
 
   /@types/uuid@9.0.8:
     resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
@@ -16359,6 +16383,10 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /utf8@3.0.0:
+    resolution: {integrity: sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==}
     dev: false
 
   /util-deprecate@1.0.2:

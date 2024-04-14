@@ -2,10 +2,12 @@ import Spotify from 'apps/expo/src/components/spotify/spotify'
 import { router } from 'expo-router'
 import { View, SafeAreaView, Dimensions, StyleSheet, Text } from 'react-native'
 
+
 // To figure out the return uri
 import { makeRedirectUri } from 'expo-auth-session';
 
-import { getSpotifyData } from '../../utils/spotifyToken';
+import { getAuthorizationCode } from '../../utils/spotifyToken';
+
 
 export default function SpotifyScreen() {
     // This whole file is just to display the widget but getting it in the middle is a battle.
@@ -20,8 +22,8 @@ export default function SpotifyScreen() {
     // });
     // GOT: exp://192.168.0.11:8081/~/redirect
 
-    // Get spotify data and store it into DB using current userID
-    let currentlyPlayingTrack = getSpotifyData();
+    // Testing
+    getAuthorizationCode();
 
     return(
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}> 

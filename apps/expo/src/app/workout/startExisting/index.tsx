@@ -4,6 +4,7 @@ import { router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import WorkoutList from '~/components/workout/workoutList'
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -12,6 +13,8 @@ const styles = StyleSheet.create({
 })
 
 export default function createNew() {
+
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,6 +35,11 @@ export default function createNew() {
       <View className="mb-[25px] py-[20px]">
         <WorkoutList />
       </View>
+
+      <View style={{height: 1, backgroundColor: '#CACACA', marginHorizontal: 13, opacity: 0.3, top: 10, }}/>
+      <ScrollView className="mb-[25px] py-[20px]">
+        <WorkoutList />
+      </ScrollView>
     </SafeAreaView>
   )
 }

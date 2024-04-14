@@ -2,6 +2,7 @@ import React from 'react'
 import {StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import { router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import ExerciseList from '~/components/workout/exerciseList'
 
 const styles = StyleSheet.create({
   container: {
@@ -47,9 +48,8 @@ export default function createNew() {
         </TouchableOpacity>
       </View>
       <View style={{height: 1, backgroundColor: '#CACACA', marginHorizontal: 13, opacity: 0.3,}}/>
-      <ScrollView className="mb-[25px] py-[20px]">
-        <View>
-        </View>
+      <ScrollView className="mb-[25px] py-[5px]">
+        <ExerciseList />
       </ScrollView>
       <View>
         <TouchableOpacity className=" px-4 py-[6px] bottom-[10px] rounded-[5px]  border-[#CACACA] bg-[#424242]" >
@@ -58,6 +58,7 @@ export default function createNew() {
             </Text>
         </TouchableOpacity>
       </View>
+      
     </SafeAreaView>
   )
 }

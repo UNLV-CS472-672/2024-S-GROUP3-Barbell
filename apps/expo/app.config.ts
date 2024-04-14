@@ -1,4 +1,4 @@
-import type { ExpoConfig } from '@expo/config'
+import type { ExpoConfig } from 'expo/config'
 
 const defineConfig = (): ExpoConfig => ({
   name: 'expo',
@@ -7,7 +7,7 @@ const defineConfig = (): ExpoConfig => ({
   version: '0.1.0',
   orientation: 'portrait',
   icon: './assets/icon.png',
-  userInterfaceStyle: 'light',
+  userInterfaceStyle: 'automatic',
   splash: {
     image: './assets/icon.png',
     resizeMode: 'contain',
@@ -30,19 +30,13 @@ const defineConfig = (): ExpoConfig => ({
     },
     jsEngine: 'hermes',
   },
-  // extra: {
-  //   eas: {
-  //     projectId: "your-eas-project-id",
-  //   },
-  // },
   extra: {
     // this is commented out so you don't have to log in to run expo start locally
     // eas: {
     //   projectId: 'a5b98934-bf53-4573-ba91-972c22a6759a',
     // },
     clerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
-    expoPublicClerkPublishableKey:
-      process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    expoPublicClerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
   },
   runtimeVersion: {
     policy: 'appVersion',
@@ -54,8 +48,11 @@ const defineConfig = (): ExpoConfig => ({
   // jsEngine: 'hermes',
   plugins: [
     /* don't touch this */
-    'expo-router',
-    './expo-plugins/with-modify-gradle.js',
+    ["expo-router", { "root": "./src/app/" }],
+    'expo-font',
+    'expo-secure-store',
+    // 'expo-router',
+    // './expo-plugins/with-modify-gradle.js',
   ],
 })
 

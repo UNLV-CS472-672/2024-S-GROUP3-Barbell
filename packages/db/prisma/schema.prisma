@@ -94,7 +94,7 @@ model User {
   streak               Int            @default(0)
   posts                Post[]
   friends              Friend[]
-  log                  Log[]
+  workoutHistory       WorkoutLog[]
   workouts             Workout[]
   awards               Award[]
   notifications        Notification[] @relation("NotificationReceiver")
@@ -103,6 +103,7 @@ model User {
   chats                Chat[]
   spotify              SpotifyData?
   notificationsBanners Boolean        @default(true)
+  customExercises      Exercise[]
 }
 
 // ******************************************************************************************
@@ -110,12 +111,15 @@ model User {
 // * id: Auto-incremented unique identifier.
 // * user: The User model representing one side of the friendship.
 // * userId: The identifier for the user, establishing the relation to the User model.
+// * friendId: The identifier for the friend, used to query friend info.
 // ******************************************************************************************
 model Friend {
   id Int @id @unique @default(autoincrement())
 
   user   User @relation(fields: [userId], references: [id])
   userId Int
+
+  friendId Int
 }
 
 // ******************************************************************************************
@@ -129,7 +133,7 @@ model Friend {
 // * workout: The workout that was completed.
 // * workoutId: The identifier for the workout.
 // ******************************************************************************************
-model Log {
+model WorkoutLog {
   id         Int      @id @unique @default(autoincrement())
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -150,16 +154,16 @@ model Log {
 // * Award: Represents achievements or milestones reached by users, with a name, description, and the user who received it.
 // ******************************************************************************************
 model Workout {
-  id            Int        @id @unique @default(autoincrement())
-  name          String     @db.Char(100)
+  id            Int          @id @unique @default(autoincrement())
+  name          String       @db.Char(100)
   description   String?
   duration      Int
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   finishedAt    DateTime
-  likes         Int        @default(0)
+  likes         Int          @default(0)
   exercises     Exercise[]
-  past_workouts Log[]
+  past_workouts WorkoutLog[]
 
   user   User @relation(fields: [userId], references: [id])
   userId Int
@@ -172,14 +176,15 @@ model Workout {
 // * GROUP: Group message
 // ******************************************************************************************
 model Exercise {
-  id        Int      @id @unique @default(autoincrement())
-  name      String   @db.Char(100)
+  id        Int       @id @unique @default(autoincrement())
+  name      String    @db.Char(100)
   note      String?
   sets      Set[]
   body_part BodyPart
   category  Category
-  workout   Workout  @relation(fields: [workoutId], references: [id])
-  workoutId Int
+  workout   Workout[]
+  User      User?     @relation(fields: [userId], references: [id])
+  userId    Int?
 }
 
 // ******************************************************************************************
@@ -255,9 +260,9 @@ model Chat {
   name            String?   @db.Char(40)
   users           User[]
   readByUserIds   Int[]
-  createdByUserId Int
   messages        Message[]
   type            ChatType
+  createdByUserId Int
   createdBy       User      @relation("ChatCreator", fields: [createdByUserId], references: [id])
 }
 

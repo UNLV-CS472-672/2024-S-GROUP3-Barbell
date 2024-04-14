@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FriendRequestNotif 1`] = `
+exports[`FriendRequestNotif should render sender's username and content 1`] = `
 <View>
   <View
     className="ml-3 mr-3 mt-4 flex flex-row items-center"
@@ -69,7 +69,7 @@ exports[`FriendRequestNotif 1`] = `
           }
           accessible={true}
           collapsable={false}
-          focusable={false}
+          focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -115,7 +115,7 @@ exports[`FriendRequestNotif 1`] = `
           }
           accessible={true}
           collapsable={false}
-          focusable={false}
+          focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}

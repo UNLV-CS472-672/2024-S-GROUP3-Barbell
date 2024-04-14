@@ -91,6 +91,8 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 - [ ] [Ah yes, you can only for android OS on an Apple OS](https://github.com/expo/eas-cli/issues/1726)
 - [ ] [Invarient Violation](https://github.com/JesperLekland/react-native-svg-charts/issues/201)
 - [ ] [svg being funny](https://github.com/software-mansion/react-native-svg/issues/1405)
+- [ ] [nativewind is really really really bad](https://github.com/marklawlor/nativewind/issues/556)
+- [ ] [isn't this amazing SafeAreaView, Fk you](https://github.com/marklawlor/nativewind/issues/628)
 
 In case you encountered, Failed to get localhost. Please point to your production server.
 
@@ -102,3 +104,13 @@ In case you encountered, Failed to get localhost. Please point to your productio
 ### Adding/changing the database schema
 
 TBA
+
+### EAS UPDATE BRANCHES
+
+```
+<!-- sync development build with [yap] -->
+eas update --auto
+
+<!-- build android aab (apk successor) -->
+eas build --platform android
+```

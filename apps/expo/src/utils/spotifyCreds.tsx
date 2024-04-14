@@ -2,6 +2,7 @@ import { makeRedirectUri } from "expo-auth-session"
 
 export const spotifyCredentials = {
     clientID: "b141ac3691f44bc0a508538e1c888ebf",
+    clientSecret: "b698fee6ccf04427b4ed49849e80ec06",
     redirectUri: makeRedirectUri({
         scheme: 'expo',
         path: 'redirect'

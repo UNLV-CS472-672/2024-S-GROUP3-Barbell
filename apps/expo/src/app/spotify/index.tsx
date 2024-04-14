@@ -6,7 +6,8 @@ import { View, SafeAreaView, Dimensions, StyleSheet, Text } from 'react-native'
 // To figure out the return uri
 import { makeRedirectUri } from 'expo-auth-session';
 
-import { getAuthorizationCode } from '../../utils/spotifyToken';
+//import SpotifyLoginButton from '../../utils/spotifyToken';
+import { getAuthCode } from '../../utils/spotifyToken';
 
 
 export default function SpotifyScreen() {
@@ -21,9 +22,8 @@ export default function SpotifyScreen() {
     //     path: 'redirect'
     // });
     // GOT: exp://192.168.0.11:8081/~/redirect
+    getAuthCode();
 
-    // Testing
-    getAuthorizationCode();
 
     return(
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}> 

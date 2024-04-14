@@ -1,115 +1,134 @@
-// ENTIRELY REHASHED, DANG IT
-// For now just include these guys 
-import { spotifyCredentials } from "./spotifyCreds";
-import * as AuthSession from "expo-auth-session";
-import { encode as encodeUTF8 } from 'utf8'
+// USING THIS AUTH FLOW: https://developer.spotify.com/documentation/web-api/tutorials/code-flow
 
-// For getting tokens
-import * as Crypto from 'expo-crypto';
+import * as React from 'react'
+import { Button } from 'react-native'
+import { AccessTokenRequest, makeRedirectUri, useAuthRequest } from 'expo-auth-session'
+import * as WebBrowser from 'expo-web-browser'
 
-import { encode as btoa } from 'base-64'
+import { spotifyCredentials } from './spotifyCreds'
 
+WebBrowser.maybeCompleteAuthSession()
 
-// HELPER FUNCTIONS FOR PKCE CODE CHALLENGE------------------------------
-// Just generates a random string to be used to create a digest (SHA256)
-const generateRandomString = (length: number) => {
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const values = Crypto.getRandomValues(new Uint8Array(length));
-    return values.reduce((acc, x) => acc + possible[x % possible.length], "");
-}
+const scopeArray: string[] = ['user-read-currently-playing']
 
-// Turns input string into SHA256 digest
-const sha256 = async (plain: string) => {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(plain);
-    return await Crypto.digest(Crypto.CryptoDigestAlgorithm.SHA256, data)
-}
-
-// Transforms input string into base 64
-const base64encode = (input: ArrayBuffer) => {
-    return btoa(String.fromCharCode(...new Uint8Array(input)))
-      .replace(/=/g, '')
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_');
-}
-const codeVerifier  = generateRandomString(64);
-
-const codeChallenge = async() => {
-    const hashed = await sha256(codeVerifier);
-    const CodeChallenge = base64encode(hashed);
-};
-
-const cChallenge = codeChallenge();
-// Now we have the relevant info to get an authorization token and refresh token.
-
-//-----------------------------------------------------------------------
-
-// https://docs.expo.dev/guides/authentication/#spotify
-
-// Start by authorizing the user through AuthSession from expo
-
-// Scopes for what data to get: https://developer.spotify.com/documentation/web-api/concepts/scopes
-// Can add more later as desired
-const scopeArray = ['user-read-currently-playing'];
-
-// For browser to ensure completion?
-// DONT HAVE WEBBROWSER INSTALLED
-//WebBrowser.maybeCompleteAuthSession();
-
-// Endpoints
+// Endpoint
 const discovery = {
-    // Only one needed for useAuthRequest
-    authorizationEndpoint: "https://accounts.spotify.com/authorize",
-    // Not sure when used?
-    tokenEndpoint: "https://accounts.spotify.com/api/token"
-};
-
-// Gives us the user authentication code through code challenge and OAuth (ISSUES)
-export const getAuthorizationCode = async() => {
-    const credentials = spotifyCredentials; // Implement safety later on with T
-    const redirectUri = spotifyCredentials.redirectUri;
-
-    // To be used as the config for useAuthRequest: https://docs.expo.dev/versions/latest/sdk/auth-session/#authrequestconfig
-
-    /*
-    Returns a loaded request, a response, and a prompt method in a single array in the following order:
-
-    request - An instance of AuthRequest that can be used to prompt the user for authorization. 
-    This will be null until the auth request has finished loading.
-
-    response - This is null until promptAsync has been invoked. 
-    Once fulfilled it will return information about the authorization.
-
-    promptAsync - When invoked, a web browser will open up and prompt the user for authentication. 
-    Accepts an AuthRequestPromptOptions object with options about how the prompt will execute.
-    */
-    // const [request, response, promptAysnc ] = AuthSession.useAuthRequest(
-    //     {
-    //         clientId: credentials.clientID,
-    //         codeChallenge: CodeChallenge,
-    //         codeChallengeMethod: AuthSession.CodeChallengeMethod.S256,
-    //         redirectUri: credentials.redirectUri,
-    //         responseType: AuthSession.ResponseType.Code,
-    //         scopes: scopeArray,
-    //     }, 
-    //     discovery);
-
-    // const result = await promptAysnc();
-    console.log(codeVerifier);
-    console.log(cChallenge);
-    console.log(scopeArray);
+  authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+  tokenEndpoint: 'https://accounts.spotify.com/api/token',
 }
 
-// Gets user refresh and access tokens.
-// Access tokens expire every hour, so need refresh token to generate new access tokens.
-const getTokens = async() => {
-    try{
-        const authCode = await getAuthorizationCode(); // Written above. Prompt user to get auth code.
-        const credentials = spotifyCredentials;
 
+// NEED TO CREATE ASYNC STORAGE TO BE ABLE TO HANDLE THINGS BETWEEN SPOTIFY API CALLS
+
+// // Not using PKCE flow, uses default auth flow. 
+// export default function SpotifyLoginButton() {  
+//   const credentials = spotifyCredentials
+  
+
+//   React.useEffect(() => {
+//     // Result of session: https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionresult
+    
+//   }, [response])
+
+//   return (
+//     <Button
+//       disabled={!request}
+//       title='Login'
+//       onPress={() => {
+//         promptAsync()
+//       }}
+//     />
+//   )
+// }
+
+// Getting an authorization code now. PLEASE PLEASE 
+export const getAuthCode = async (authenticated: Boolean) => {
+  console.log("In auth function!");
+  try{
+    console.log("Attempting auth!")
+    const credentials = spotifyCredentials;
+    const redirectUri = makeRedirectUri({
+      scheme: 'expo',
+      path: 'redirect',
+    })
+    // Start auth session
+    const [request, response, promptAsync] = useAuthRequest(
+      {
+        clientId: credentials.clientID,
+        scopes: scopeArray,
+        // To follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
+        // this must be set to false
+        usePKCE: false,
+        redirectUri: makeRedirectUri({
+          scheme: 'expo',
+          path: 'redirect',
+        }),
+      },
+      discovery,
+    )
+    console.log("Got past the authRequest!");
+    console.log("Request: ", request)
+    console.log("Response: ", response);
+    console.log("PromptAsync: ", promptAsync);
+
+    // See if we have anything stored already. If we do, then invoke prompt, otherwise dont
+    if(!authenticated){
+
+    }else{
+      // Already authenticated, so we should just have the data somewhere. Just return it
+      // using our local storage.
     }
-    catch(err){ console.log(err);}
+    if (response?.type === 'success') {
+      const { code } = response.params
+      console.log('code', code)
+      
+      // Now get access token
+      const accessToken = undefined;
+      if(code != null){const accessToken = getTokens(code!);}
+      console.log("Access token: " + accessToken + '\n');
+      return response.params;
+    }
+    else if(response?.type === 'cancel'){
+      console.log("User cancelled login.\n");
+    }
+
+  }catch(e){ console.log("Error: " + e);}
+
 }
 
+// Each one is valid for only an hour, 3600 seconds.
+// Recall unix is in milliseconds
+// Recall not PKCE
+const getTokens = async (code: string) => {
+  console.log("Code2: " + code);
+  try {
+    const credentials = spotifyCredentials
+    const credsB64 = btoa(`${credentials.clientID}:${credentials.clientSecret}`);
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${credsB64}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `grant_type=authorization_code&code=${code}&redirect_uri=${
+        credentials.redirectUri
+      }`,
+    });
+    const responseJson = await response.json();
+    
+    console.log(responseJson);
+    const {
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      expires_in: expiresIn,
+    } = responseJson;
 
-
+    const expirationTime = new Date().getTime() + expiresIn * 1000;
+    // await setUserData('accessToken', accessToken);
+    // await setUserData('refreshToken', refreshToken);
+    // await setUserData('expirationTime', expirationTime);
+    return accessToken;
+  } catch (err) {
+    console.error(err);
+  }
+}

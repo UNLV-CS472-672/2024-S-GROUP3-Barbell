@@ -46,6 +46,7 @@ export const postRouter = createTRPCRouter({
    *  This returns the user-specified most recent posts from all friends for a user
    *
    *  @param  id - the id of the user
+   *  @param  postCount - the number of posts to get
    *  @returns an array of the [#] most recent posts from the user's friends
    */
   getRecentPostsByUserIdAndPostCount: publicProcedure

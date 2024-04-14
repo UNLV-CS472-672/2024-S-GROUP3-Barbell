@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 
 import { headers } from 'next/headers'
+
 import { TRPCReactProvider } from '@/app/providers'
 import { ClerkProvider } from '@clerk/nextjs'
 
@@ -30,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@jullerino',
-    creator: '@jullerino',
+    site: '@barbell',
+    creator: '@barbell',
   },
 }
 
@@ -39,13 +40,8 @@ export default function Layout(props: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning={true}>
-        <body
-          className={['font-sans', fontSans.variable].join(' ')}
-          suppressHydrationWarning={true}
-        >
-          <TRPCReactProvider headers={headers()}>
-            {props.children}
-          </TRPCReactProvider>
+        <body className={['font-sans', fontSans.variable].join(' ')} suppressHydrationWarning={true}>
+          <TRPCReactProvider headers={headers()}>{props.children}</TRPCReactProvider>
         </body>
       </html>
     </ClerkProvider>

@@ -30,7 +30,9 @@ export default function PostDashboard() {
 
   const noPosts = (
     <View className="mb-10">
-      <Text className="color-black text-center">No posts to display.</Text>
+      <Text testID="no-posts-test" className="color-black text-center">
+        No posts to display.
+      </Text>
     </View>
   )
 

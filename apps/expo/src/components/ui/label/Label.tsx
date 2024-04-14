@@ -16,7 +16,7 @@ export default function Label({ text, textColor, backgroundColor, rounded = 'lg'
       }}
       className={`rounded-${rounded} px-2 py-1`}
     >
-      <Text className="text-[20px] font-bold" style={{ color: textColor }} numberOfLines={1}>
+      <Text testID="text-test" className="text-[20px] font-bold" style={{ color: textColor }} numberOfLines={1}>
         {text}
       </Text>
     </View>

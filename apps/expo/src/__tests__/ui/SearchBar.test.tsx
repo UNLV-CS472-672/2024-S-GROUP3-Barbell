@@ -20,8 +20,7 @@ test('SearchBar', async () => {
     }
 
     const listToFilter = [item1, item2, item3]
-    const [filteredList, setFilteredList] = useState(listToFilter)
-
+    const [filteredList, setFilteredList] = useState<any[] | undefined>(listToFilter)
     return <SearchBar list={listToFilter} placeholder="Search..." setFilteredList={setFilteredList} filterBy="name" />
   }
 

@@ -235,8 +235,8 @@ export const workoutRouter = createTRPCRouter({
   getActivityFeedWorkouts: publicProcedure
     .input(
       z.object({
-        userId: z.number().int(),
-        friendIds: z.array(z.number().int())
+        friendIds: z.array(z.number().int()),
+        count: z.number().int()
       })
     )
     .query(({ ctx, input }) => {
@@ -247,6 +247,14 @@ export const workoutRouter = createTRPCRouter({
             in: input.friendIds
           }
         },
+        take: input.count,
+        orderBy:  {
+          createdAt: 'desc'
+        },
+        include: {
+          user: true,
+          exercises: true
+        }
       })
     })
 })

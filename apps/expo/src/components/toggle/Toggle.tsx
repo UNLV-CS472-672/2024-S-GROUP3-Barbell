@@ -18,33 +18,33 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 // All props are optional
 // Scaled based on screenWidth and screenHeight
 
-// Custom ToggleSwitch Component - With Animation
+// Custom onValueChange Component - With Animation
 // Call as follows:
-// <ToggleSwitch
+// <onValueChange
 //     label="..."
-//     isEnabled={useState()}
-//     toggleSwitch={() => set(!On)}
+//     value={useState()}
+//     onValueChange={() => set(!On)}
 // />
-const ToggleSwitch = ({
-  isEnabled,
-  toggleSwitch,
+export default function Toggle ({
+  value,
+  onValueChange,
   label,
 }: {
-  isEnabled: boolean
-  toggleSwitch: () => void
+  value: boolean
+  onValueChange: () => void
   label: string
-}) => {
+})  {
   // Use useRef to persist the animated value without reinitializing it on every render
-  const animation = useRef(new Animated.Value(isEnabled ? 1 : 0)).current
+  const animation = useRef(new Animated.Value(value ? 1 : 0)).current
 
   useEffect(() => {
-    // animate the switch when the isEnabled prop changes
+    // animate the switch when the value prop changes
     Animated.timing(animation, {
-      toValue: isEnabled ? 1 : 0, // Animate to 1 if enabled, else to 0
+      toValue: value ? 1 : 0, // Animate to 1 if enabled, else to 0
       duration: 150,
       useNativeDriver: false, // since we're animating a non-native property (marginLeft keke)
     }).start()
-  }, [isEnabled, animation])
+  }, [value, animation])
 
   // interpolate the animated value to calculate marginLeft
   // Use screen width for compat
@@ -60,7 +60,7 @@ const ToggleSwitch = ({
 
   return (
     <View style={styles.toggleContainer}>
-      <TouchableOpacity onPress={toggleSwitch} activeOpacity={1}>
+      <TouchableOpacity onPress={onValueChange} activeOpacity={1}>
         <Animated.View style={[styles.switch, { backgroundColor }]}>
           {/* Animated the marginLeft of the circle */}
           <Animated.View
@@ -77,7 +77,7 @@ const ToggleSwitch = ({
 // defaultOn: Set to 1, make switch on by default
 // props: pass in additional stuff
 // Main App Component - State is lifted here
-export default function Toggle({
+/*export default function Toggle({
   strRightSide = '',
   defaultOn = useState(false),
   ...props
@@ -85,16 +85,18 @@ export default function Toggle({
   const [isToggleOn, setIsToggleOn] = defaultOn
 
   return (
-    <ToggleSwitch
+    <onValueChange
       {...props}
       label={strRightSide}
-      isEnabled={isToggleOn}
-      toggleSwitch={() => setIsToggleOn(!isToggleOn)}
+      value={isToggleOn}
+      onValueChange={() => setIsToggleOn(!isToggleOn)}
     />
   )
 }
+*/
 
-// Styles - Unchanged, but included for completeness
+// Color Match
+// Inside circle always < outer
 const styles = StyleSheet.create({
   container: {
     flex: 1,

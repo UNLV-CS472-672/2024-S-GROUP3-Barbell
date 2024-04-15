@@ -12,7 +12,7 @@ import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/api'
 
 export default function MessageView() {
-  const p = useLocalSearchParams()
+  const p = useLocalSearchParams() // TF is this?
   const { userData: user } = useGlobalContext()
 
   const {

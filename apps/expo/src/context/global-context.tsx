@@ -20,6 +20,7 @@ export type TGlobalContext = {
   isWorkingOut: boolean
   setIsWorkingOut: Dispatch<SetStateAction<boolean>>
   userData: IUserData | null
+  isLoadingUserData: boolean
 }
 
 export const GlobalContext = createContext<TGlobalContext | null>(null)
@@ -34,28 +35,19 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const { user: clerkUserData } = useClerk()
   const createUser = api.user.create.useMutation()
 
-  const { data: userDevelopment } = api.user.byId.useQuery({ id: 9 })
+  const {
+    data: userNineData,
+    isFetched: userNineDataIsFetched,
+    isLoading: isLoadingUserNine,
+  } = api.user.byId.useQuery({ id: 9 })
 
-  const getUserData = useCallback(async () => {
+  const createUserIfNotExist = useCallback(async () => {
     if (clerkUserData) {
-      console.log('Fetching user data based on environment')
-
-      if (process.env.NODE_ENV === 'development') {
-        // In development, fetch a predefined user
-        const response = userDevelopment
-        setUserData({
-          id: response?.id || 0,
-          clerkId: response?.clerkId || '',
-          username: response?.username || '',
-          name: response?.name || '',
-        })
-      } else {
-        // In production, create or fetch user dynamically
-        const response = await createUser.mutateAsync({
-          clerkId: clerkUserData.id,
-          username: clerkUserData.username ? clerkUserData.username : generateUsername(),
-          name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
-        })
+      const response = await createUser.mutateAsync({
+        clerkId: clerkUserData.id,
+        username: clerkUserData.username ? clerkUserData.username : generateUsername(),
+        name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
+      })
 
         setUserData({
           id: response.id,
@@ -68,13 +60,23 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   }, [clerkUserData])
 
   useEffect(() => {
-    getUserData()
-  }, [getUserData])
+    if (process.env.NODE_ENV === 'development') {
+      if (!userNineDataIsFetched) return
+
+      setUserData({
+        id: userNineData?.id!,
+        clerkId: userNineData?.clerkId!,
+        username: userNineData?.username!,
+        name: userNineData?.name!,
+      })
+    } else createUserIfNotExist()
+  }, [createUserIfNotExist, userNineDataIsFetched])
 
   const globalContextValue: TGlobalContext = {
     isWorkingOut,
     setIsWorkingOut,
     userData,
+    isLoadingUserData: isLoadingUserNine,
   }
 
   return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>

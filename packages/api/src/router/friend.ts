@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import { createTRPCRouter, publicProcedure } from '../trpc'
-import { userRouter } from './user';
+import { userRouter } from './user'
 
 export const friendRouter = createTRPCRouter({
   /**
@@ -74,26 +74,52 @@ export const friendRouter = createTRPCRouter({
     })
   }),
 
-/**
+  /**
    * Get friends for the current user
    */
 
-getFriendsForCurrentUser: publicProcedure.query(async ({ ctx }) => {
-  // Retrieve clerkId of the current user from session or wherever it's stored
-  const clerkId = ctx.session.user.clerkId;
+  getFriendsForCurrentUser: publicProcedure.query(async ({ ctx }) => {
+    // Retrieve clerkId of the current user from session or wherever it's stored
+    const clerkId = ctx.session.user.clerkId
 
-  // Retrieve user ID based on clerkId
-  const currentUserId = await userRouter.getIdByClerkId({ clerkId });
+    // Retrieve user ID based on clerkId
+    const currentUserId = await userRouter.getIdByClerkId({ clerkId })
 
-  // Retrieve friends of the current user
-  return ctx.prisma.friend.findMany({
-    where: {
-      userId: currentUserId,
-    },
-    orderBy: { id: 'asc' },
-    include: { user: true },
-  });
-}),
+    // Retrieve friends of the current user
+    return ctx.prisma.friend.findMany({
+      where: {
+        userId: currentUserId,
+      },
+      orderBy: { id: 'asc' },
+      include: { user: true },
+    })
+  }),
 
+  /**
+   * USAGE:
+   * (inside component/page)
+   * const { userData } = useGlobalContext()
+   * const { data } = api.friend.getFriendsFromUserId({ id: userData.id })
+   */
+  getFriendsFromUserId: publicProcedure
+    .input(z.object({ id: z.number().int() }))
+    .query(async ({ ctx, input }) => {
+      const friendsList = await ctx.prisma.friend.findMany({
+        where: {
+          userId: input.id,
+        },
+      })
 
+      const friendIds: number[] = friendsList.map((item) => {
+        return item.friendId
+      })
+
+      return await ctx.prisma.user.findMany({
+        where: {
+          id: {
+            in: friendIds,
+          },
+        },
+      })
+    }),
 })

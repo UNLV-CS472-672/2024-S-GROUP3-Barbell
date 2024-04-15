@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Dimensions, Image, Text, View, StyleSheet } from 'react-native'
 import { router } from 'expo-router'
-import tailwind from '@/tooling/tailwind'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Body from 'react-native-body-highlighter'
-import ToggleSwitch from '~/components/toggle/Toggle'
+import Toggle from '~/components/toggle/Toggle'
 import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
+// import tailwind from '@/tooling/tailwind'
 
 export type muscleSelectDev =
   | "abs"
@@ -47,7 +47,10 @@ export type muscleSelectUser =
 
 export default function NewWorkoutMuscleGroup() {
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
-  const vmin70 = Math.min(screenWidth, screenHeight) * 0.7
+  // <Svg viewBox={viewBox} height={400 * scale} width={200 * scale}>
+  // Dynamically resize by reversing the work done in react-native-body-highlighter
+  const maxScale = (screenHeight-64) / (400+96)
+  // const maxScale = (screenHeight-96) / (400+64)
 
   const [bodyPartSelected, setBodyPartSelected] = useState({/*
     slug: "biceps",
@@ -80,8 +83,8 @@ export default function NewWorkoutMuscleGroup() {
       </View>
 
       <View className="flex-1"
-            style = {{alignItems: "center", justifyContent: "center",}}>
-
+            style = {{alignItems: "center", justifyContent: "center",
+              position: "relative", bottom: 45}}>
         <Body
 
           onBodyPartPress={(e) =>
@@ -185,7 +188,7 @@ export default function NewWorkoutMuscleGroup() {
 
           gender={isMale ? "male" : "female"}
           side={isBackSideEnabled ? "back" : "front"}
-          scale={1.7}
+          scale={maxScale}
         />
       </View>
 
@@ -197,19 +200,23 @@ export default function NewWorkoutMuscleGroup() {
           <View className="flex-1"
                 style={{alignItems: "center", justifyContent: "center"}}>
 
-            <View>
+            <View className={"p-1"}>
               <Text style={{ color: '#CACACA', fontSize: 20 }}>
                 Muscle Group Selected: {userSelection}
               </Text>
             </View>
 
-            {/*
-            <Text style={{ color: '#CACACA', fontSize: 20 }}>
-              {isMale ? "Male" : "Female"}
-            </Text>
+            <View className={"flex flex-row p-1"}>
+              <Text style={{ color: '#CACACA', fontSize: 20 }}>
+                Currently Selecting: {isMale ? "Male  " : "Female  "}
+              </Text>
 
-            <ToggleSwitch onValueChange={toggleGenderSwitch} value={isMale} />
-            */}
+              <Toggle onValueChange={toggleGenderSwitch} value={isMale} />
+            </View>
+
+            {/*<Text style={{ color: '#CACACA', fontSize: 20 }}>
+              {maxScale}
+            </Text>*/}
 
             <FrontBackSwitch
               onValueChange={toggleSwitch}

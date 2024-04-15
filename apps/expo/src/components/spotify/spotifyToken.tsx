@@ -33,6 +33,7 @@ export function LoginSpotifyButton(){
   })
 
   // Start the authSession hook to give us promptAsync for use in the button
+  console.log("Starting auth!\n");
   const [request, response, promptAsync] = useAuthRequest({
     clientId: credentials.clientID,
     scopes: scopeArray,
@@ -43,23 +44,33 @@ export function LoginSpotifyButton(){
     })
   }, discovery)
 
+  console.log("Done creating auth session.");
+
+  let localCode = SecureStore.getItem("code");
+  console.log("Local code: " + localCode);
+
+
+
   // Hook to use and return the results from promptAsync()
   React.useEffect(() => {
     if (response?.type === 'success') {
+      console.log("Where am I?\n");
       const { code } = response.params
       console.log('code', code)
       // Now store it. 
-      if(code != null){
+      if(code != undefined){
         SecureStore.setItem("code", code);
+        console.log("We are here now and we stored code: " + code);  
       }
       
     }
   }, [response])
 
   // Runs promptAsync() which updates response and thus invokes the hook above
+  // Button should only be available if 
   return (
     <Button
-      disabled={!request}
+      disabled={localCode === null}
       title='Login to Spotify'
       onPress={() => {
         promptAsync()
@@ -68,7 +79,7 @@ export function LoginSpotifyButton(){
   )
 }
 
-// Just testing that 
+// Just testing that button
 export function TestCode(){
   const output = SecureStore.getItem("code");
   return(<Text>{output}</Text>)

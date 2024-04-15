@@ -6,7 +6,7 @@ import { TouchableOpacity } from '@gorhom/bottom-sheet'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 
 export default function WorkoutList() {
   // Query data

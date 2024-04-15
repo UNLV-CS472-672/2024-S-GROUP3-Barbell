@@ -6,7 +6,7 @@ import { ChatType } from '@prisma/client'
 
 import TimeAgo from '~/components/timeAgo/TimeAgo'
 import { useGlobalContext } from '~/context/global-context'
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 
 export interface ConversationProps {
   chatId: number
@@ -36,7 +36,7 @@ export default function Conversation({ messageContent, chatId, createdAt, chatNa
 
   return (
     <View>
-      <Link href={{ pathname: '/messages/', params: { chatId, chatName, type } }} asChild={true}>
+      <Link href={{ pathname: 'messages/', params: { chatId, chatName, type } }} asChild={true}>
         <TouchableOpacity onPress={handleRead}>
           <View className="ml-3 mr-3 mt-4 flex flex-row">
             {/*photo, use icon for now, use profile photo in the future*/}

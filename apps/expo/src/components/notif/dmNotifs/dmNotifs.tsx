@@ -5,7 +5,7 @@ import { ChatType } from '@prisma/client'
 import Conversation from '~/components/notif/Conversation'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import { useGlobalContext } from '~/context/global-context'
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 
 export default function DmNotifs() {
   const { userData } = useGlobalContext()
@@ -46,16 +46,24 @@ export default function DmNotifs() {
   // this is best for newer mobile displays that have curved corners
   renderedNotifications.push(<View className="pb-10" key={-1} />)
 
-  return renderedNotifications.length == 1 ? (
-    <View>
-      {isFetched && (
-        <Text className="flex pt-10 text-center" style={{ color: '#CACACA' }}>
-          No messages to display.
-        </Text>
+  return (
+    <View testID="dm-notifications-container">
+      {renderedNotifications.length == 1 ? (
+        <>
+          {isFetched && (
+            <Text testID="no-messages-text" className="flex pt-10 text-center" style={{ color: '#CACACA' }}>
+              No messages to display.
+            </Text>
+          )}
+          {isFetching && (
+            <View testID="rotating-barbell-icon-container">
+              <RotatingBarbellIcon />
+            </View>
+          )}
+        </>
+      ) : (
+        renderedNotifications
       )}
-      {isFetching && <RotatingBarbellIcon />}
     </View>
-  ) : (
-    renderedNotifications
   )
 }

@@ -8,7 +8,7 @@ import { ChatType } from '@prisma/client'
 import MessageInput from '~/components/message/messageInput'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import { useGlobalContext } from '~/context/global-context'
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 
 export default function MessageView() {
   const p = useLocalSearchParams() // TF is this?

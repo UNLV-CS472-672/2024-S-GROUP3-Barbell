@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react-native'
 
-import * as api from '~/utils/api'
+import * as api from '~/utils/trpc/api'
 import DmNotifs from './dmNotifs'
 
 jest.mock('~/context/global-context', () => ({
@@ -14,7 +14,7 @@ jest.mock('~/context/global-context', () => ({
 
 const mockApi = api as { api: any }
 
-jest.mock('~/utils/api', () => ({
+jest.mock('~/utils/trpc/api', () => ({
   __esModule: true,
   api: {
     notif: {

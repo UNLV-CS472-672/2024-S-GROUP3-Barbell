@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react-native'
-import * as api from '~/utils/api'
+
+import * as api from '~/utils/trpc/api'
 import PostDashboard from './PostDashboard'
 
 jest.mock('~/context/global-context', () => ({
@@ -10,7 +11,7 @@ jest.mock('~/context/global-context', () => ({
 
 const mockApi = api as { api: any }
 
-jest.mock('~/utils/api', () => ({
+jest.mock('~/utils/trpc/api', () => ({
   __esModule: true,
   api: {
     post: {
@@ -35,12 +36,12 @@ describe('PostDashboard', () => {
   it('should render text posts"', () => {
     mockApi.api.post.getRecentPostsByUserIdAndPostCount.useQuery = jest.fn(() => ({
       data: [
-          { id: 1, author: { username: 'user1' }, content: 'Post 1' },
-          { id: 2, author: { username: 'user2' }, content: 'Post 2' },
-          { id: 3, author: { username: 'user3' }, content: 'Post 3' },
-        ],
-        isFetching: false,
-        isFetched: true,
+        { id: 1, author: { username: 'user1' }, content: 'Post 1' },
+        { id: 2, author: { username: 'user2' }, content: 'Post 2' },
+        { id: 3, author: { username: 'user3' }, content: 'Post 3' },
+      ],
+      isFetching: false,
+      isFetched: true,
     }))
     render(<PostDashboard />)
 

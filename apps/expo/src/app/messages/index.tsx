@@ -12,7 +12,7 @@ import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/api'
 
 export default function MessageView() {
-  const p = useLocalSearchParams() // TF is this?
+  const p = useLocalSearchParams()
   const { userData: user } = useGlobalContext()
 
   const {
@@ -24,7 +24,11 @@ export default function MessageView() {
 
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 80}
+        style={{ flex: 1 }}
+      >
         <View style={{ flex: 1, margin: 10 }}>
           <View className="flex flex-row justify-between px-5">
             <Ionicons onPress={() => router.back()} name="chevron-back" size={24} color="#CACACA" />

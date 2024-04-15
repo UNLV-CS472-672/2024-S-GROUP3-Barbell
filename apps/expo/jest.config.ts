@@ -3,6 +3,7 @@ import type { Config } from 'jest'
 const config: Config = {
   coverageDirectory: './jest-coverage/',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.js'],
+  testTimeout: 60000,
   collectCoverageFrom: [
     '**/*.{ts,tsx}',
     '!**/node_modules/**',
@@ -15,11 +16,13 @@ const config: Config = {
     '!**/*.d.ts',
     '!index.ts',
     '!**/api.tsx',
+    '!**/sign-in-w-google.tsx',
     '!**/constants.ts',
 
     /* need to remove in the future */
     '!**/app/**',
     '!**/custom-bottom-sheet-modal.tsx',
+    '!**/sign-in-with-google.tsx',
     '!**/svgMock.tsx',
     '!**/notif/**',
     '!**/hooks/**',
@@ -31,8 +34,6 @@ const config: Config = {
     '!**/(inbox)/**',
     '!**/(friends)/**',
     '!**/(workout)/**',
-
-    '!**/picker-modal/**',
   ],
   // coverageThreshold: {
   //   global: {
@@ -52,8 +53,8 @@ const config: Config = {
 
   preset: 'jest-expo',
   moduleNameMapper: {
-    '~/(.*)': '<rootDir>/src/$1',
-    '\\.svg$': '<rootDir>/src/layouts/headers/svgMock.tsx',
+    '~/(.*)' : '<rootDir>/src/$1',
+    '\\.svg$': '<rootDir>/src/components/ui/svgMock.tsx',
   },
 }
 

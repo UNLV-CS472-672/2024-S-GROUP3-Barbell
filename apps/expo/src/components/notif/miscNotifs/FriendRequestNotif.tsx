@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Notification } from '@prisma/client'
 
 import TimeAgo from '~/components/timeAgo/TimeAgo'
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 
 export interface FriendRequestNotifProps {
   notif: Notification

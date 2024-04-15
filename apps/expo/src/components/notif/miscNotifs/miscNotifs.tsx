@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import { useGlobalContext } from '~/context/global-context'
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 import FriendRequestNotif from './FriendRequestNotif'
 import NudgeNotif from './NudgeNotif'
 

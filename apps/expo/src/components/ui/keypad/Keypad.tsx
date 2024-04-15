@@ -43,7 +43,7 @@ export default function Keypad({
   const { height } = Dimensions.get('window')
 
   return !keypadVisible ? (
-    <View />
+    <View testID='invisible-test' />
   ) : (
     <View className='flex bg-slate-200 p-1' style={{ height: height * 0.35 }}>
       <View className='flex-1 flex-row justify-between'>

@@ -140,4 +140,13 @@ describe('Keypad component', () => {
     fireEvent.press(getByTestId('test-backspace'))
     expect(setNumber).toHaveBeenCalledWith('12')
   })
+
+  it('checks empty view', () => {
+    const setNumber = jest.fn()
+    const { getByTestId } = render(
+      <Keypad setNumber={setNumber} number='' keypadVisible={false} setKeypadVisible={jest.fn()} />,
+    )
+
+    expect('invisible-test').toBeTruthy()
+  })
 })

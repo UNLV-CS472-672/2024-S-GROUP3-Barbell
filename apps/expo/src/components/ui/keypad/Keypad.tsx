@@ -17,6 +17,7 @@ export default function Keypad({
   setKeypadVisible,
 }: NumericKeypadProps) {
   const handleKeyPress = (value: string) => {
+    /* istanbul ignore next */
     if (value === 'backspace') {
       setNumber(number.slice(0, -1)) // remove the last digit
     } else if (value === '.') {

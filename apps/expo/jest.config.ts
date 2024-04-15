@@ -27,6 +27,10 @@ const config: Config = {
     '!**/notif/**',
     '!**/hooks/**',
     '!**/context/**',
+    '!**/coverage/**',
+    '!**/node_modules/**',
+    '!**/babel.config.js',
+    '!**/jest.setup.js',
     '!**/spotify/**',
 
     /* halt the coverage */
@@ -43,14 +47,7 @@ const config: Config = {
   //     statements: -10,
   //   },
   // },
-  // preset: 'ts-jest',
-
-  /* DON'T UNCOMMENT THIs, IT GOES KABOOM */
-  // transform: {
-  //   '^.+\\.(ts|tsx)?$': 'ts-jest',
-  //   '^.+\\.(js|jsx)$': 'babel-jest',
-  // }
-
+  moduleFileExtensions: ['ts', 'tsx', 'js'],
   preset: 'jest-expo',
   moduleNameMapper: {
     '~/(.*)' : '<rootDir>/src/$1',

@@ -19,8 +19,6 @@ const discovery = {
   tokenEndpoint: 'https://accounts.spotify.com/api/token',
 }
 
-
-
 // Actual login button to be displayed on a page
 // Whole point is to prompt login and return an auth code if they accept.
 // Else return something else to indicate nothing was done. To store stuff in
@@ -58,19 +56,20 @@ export function LoginSpotifyButton(){
       const { code } = response.params
       console.log('code', code)
       // Now store it. 
-      if(code != undefined){
+      if((code != undefined) && (SecureStore.getItem("code")===undefined || SecureStore.getItem("code")===null)){
         SecureStore.setItem("code", code);
         console.log("We are here now and we stored code: " + code);  
       }
+      // Now check if we need to get the new refresh and access tokens
       
     }
   }, [response])
 
   // Runs promptAsync() which updates response and thus invokes the hook above
-  // Button should only be available if 
+  // Button should only be available if localCode is null/undefined I think?
   return (
     <Button
-      disabled={localCode === null}
+      disabled={!(localCode === null || localCode===undefined)}
       title='Login to Spotify'
       onPress={() => {
         promptAsync()
@@ -79,73 +78,51 @@ export function LoginSpotifyButton(){
   )
 }
 
-// Just testing that button
-export function TestCode(){
-  const output = SecureStore.getItem("code");
-  return(<Text>{output}</Text>)
+// Step 2: Now that we have an auth code stored in SecureStorage.getItem("code")
+// we can work on generating a refresh and access token. Two functions. 
+//  1) Tokens init, get refresh and access first time. Only run when refresh doesn't already exist.
+//  2) Use refresh. This one is done when we have the refresh already, and we use that token to get a new access token.
+export async function getAccessToken(){
+  // Just check to see which function to call.
+  // If we don't have a refresh, we clearly don't have an access token either
+  const refresh = SecureStore.getItem("refreshToken");
+  if(refresh === undefined || refresh === null){
+    // Get both tokens
+    const authCode = SecureStore.getItem("code");
+    if(!(authCode === null || authCode === undefined)){
+      // Code exists, just call tokensInit with code
+      console.log("Calling tokensInit with " + authCode);
+      return await tokensInit(authCode)
+    }
+    else{
+      throw new Error("We somehow get into getAccessToken without an auth code anywhere?")
+    }
+  }
+  else{
+    // Refresh token so just invoke get access token with the refresh token
+    console.log("Getting access token with refresh token of: " + refresh);
+    const authCode = SecureStore.getItem("code");
+    if(!(authCode === null || authCode === undefined)){
+      // Code exists, just call tokensInit with code
+      console.log("Calling refresh function with " + authCode);
+      return await getAccessWithRefresh(refresh)
+    }
+    else{
+      throw new Error("We somehow get into getAccessToken without an auth code anywhere?")
+    }
+  }
 }
 
-// Getting an authorization code now. PLEASE PLEASE 
-// Not really in use right now.
-const getAuthCode = async (authenticated: Boolean) => {
-  console.log("In auth function!");
-  try{
-    console.log("Attempting auth!")
-    const credentials = spotifyCredentials;
-    const redirectUri = makeRedirectUri({
-      scheme: 'expo',
-      path: 'redirect',
-    })
-    // Start auth session
-    const [request, response, promptAsync] = useAuthRequest(
-      {
-        clientId: credentials.clientID,
-        scopes: scopeArray,
-        // To follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
-        // this must be set to false
-        usePKCE: false,
-        redirectUri: makeRedirectUri({
-          scheme: 'expo',
-          path: 'redirect',
-        }),
-      },
-      discovery,
-    )
-    console.log("Got past the authRequest!");
-    console.log("Request: ", request)
-    console.log("Response: ", response);
-    console.log("PromptAsync: ", promptAsync);
-
-    // See if we have anything stored already. If we do, then invoke prompt, otherwise dont
-    if(!authenticated){
-
-    }else{
-      // Already authenticated, so we should just have the data somewhere. Just return it
-      // using our local storage.
-    }
-    if (response?.type === 'success') {
-      const { code } = response.params
-      console.log('code', code)
-      
-      // Now get access token
-      const accessToken = undefined;
-      if(code != null){const accessToken = getTokens(code!);}
-      console.log("Access token: " + accessToken + '\n');
-      return response.params;
-    }
-    else if(response?.type === 'cancel'){
-      console.log("User cancelled login.\n");
-    }
-
-  }catch(e){ console.log("Error: " + e);}
-
-}
-
+// This function grabs both tokens, only run when no refresh is there just yet.
 // Each one is valid for only an hour, 3600 seconds.
 // Recall unix is in milliseconds
 // Recall not PKCE
-const getTokens = async (code: string) => {
-  console.log("Code2: " + code);
+async function tokensInit(code: string){
+  console.log("Getting tokens for: " + SecureStore.getItem("code"))
+  if(code!=SecureStore.getItem("code")){
+    // Mismatched from local storage to passed parameter
+    throw new Error("Auth codes mismatch in token init. Local does not match passed argument.")
+  }
   try {
     const credentials = spotifyCredentials
     const credsB64 = btoa(`${credentials.clientID}:${credentials.clientSecret}`);
@@ -166,14 +143,28 @@ const getTokens = async (code: string) => {
       access_token: accessToken,
       refresh_token: refreshToken,
       expires_in: expiresIn,
+      error: returnedError,
+      error_description: errMsg
     } = responseJson;
 
+    if(returnedError != undefined){
+      //That means we had an error of sorts. 
+      throw new Error("'" + returnedError + "' with description '" + errMsg +"'")
+    }
+
+    // Use it later on to check if our access token is out of wack.
     const expirationTime = new Date().getTime() + expiresIn * 1000;
-    // await setUserData('accessToken', accessToken);
-    // await setUserData('refreshToken', refreshToken);
-    // await setUserData('expirationTime', expirationTime);
+    SecureStore.setItem("accessToken", accessToken)
+    SecureStore.setItem("refreshToken", refreshToken)
+    // Stored as string. Must convert back into date time
+    SecureStore.setItem("expirationTime", expirationTime.toString())
     return accessToken;
   } catch (err) {
     console.error(err);
   }
+}
+
+// This function just returns an access code 
+async function getAccessWithRefresh(refreshToken: string){
+
 }

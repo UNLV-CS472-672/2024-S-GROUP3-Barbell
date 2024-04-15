@@ -2,7 +2,7 @@ import * as useAuth from '@clerk/clerk-expo'
 import { fireEvent, render, screen } from '@testing-library/react-native'
 import { act } from 'react-test-renderer'
 
-import { SignOut } from './sign-out'
+import { SignOut } from '~/components/auth/sign-out'
 
 const mockUseAuth = useAuth as { useAuth: any }
 

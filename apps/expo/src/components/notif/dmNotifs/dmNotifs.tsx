@@ -5,7 +5,7 @@ import { ChatType } from '@prisma/client'
 import Conversation from '~/components/notif/Conversation'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import { useGlobalContext } from '~/context/global-context'
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 
 export default function DmNotifs() {
   const { userData } = useGlobalContext()

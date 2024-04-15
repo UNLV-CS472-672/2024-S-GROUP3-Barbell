@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import Button from '~/components/ui/button/button'
-import { CustomBottomSheetModalRef } from '~/components/ui/custom-bottom-sheet-modal'
+import { CustomBottomSheetModalRef } from '^/apps/expo/src/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 import { useGlobalContext } from '~/context/global-context'
 import colors from '~/styles/colors'
 import WorkoutTimer from './workout-timer'

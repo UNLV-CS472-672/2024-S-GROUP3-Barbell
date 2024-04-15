@@ -1,5 +1,6 @@
 import React from 'react'
-import { KeyboardAvoidingView, SafeAreaView, Text, View } from 'react-native'
+import { KeyboardAvoidingView, LayoutAnimation, Platform, SafeAreaView, Text, View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { router, useLocalSearchParams } from 'expo-router'
 
 import { Ionicons } from '@expo/vector-icons'
@@ -23,7 +24,7 @@ export default function MessageView() {
 
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
         <View style={{ flex: 1, margin: 10 }}>
           <View className="flex flex-row justify-between px-5">
             <Ionicons onPress={() => router.back()} name="chevron-back" size={24} color="#CACACA" />
@@ -34,21 +35,23 @@ export default function MessageView() {
           {isFetching ? (
             <RotatingBarbellIcon />
           ) : isFetched ? (
-            <View className="flex gap-y-3">
-              {messages?.map((message) =>
-                message.senderId == user?.id ? (
-                  <View key={message.id} className="bg-dark-purple w-1/2 self-end rounded-xl px-4 py-3">
-                    <Text className="text-left text-slate-200">{message.content + '\n'}</Text>
-                  </View>
-                ) : (
-                  <View key={message.id} className="w-1/2 self-start rounded-xl bg-zinc-800 px-4 py-3">
-                    <Text className="text-left text-slate-200">{message.content + '\n'}</Text>
-                  </View>
-                ),
-              )}
-            </View>
+            <ScrollView className="flex gap-y-3">
+              <View className="h-fit gap-y-3">
+                {messages?.map((message) =>
+                  message.senderId == user?.id ? (
+                    <View key={message.id} className="bg-dark-purple w-1/2 self-end rounded-xl px-4 py-3">
+                      <Text className="text-left text-slate-200">{message.content + '\n'}</Text>
+                    </View>
+                  ) : (
+                    <View key={message.id} className="w-1/2 self-start rounded-xl bg-zinc-800 px-4 py-3">
+                      <Text className="text-left text-slate-200">{message.content + '\n'}</Text>
+                    </View>
+                  ),
+                )}
+              </View>
+            </ScrollView>
           ) : (
-            <Text>Issue retriving messages</Text>
+            <Text>Issue retrieving messages</Text>
           )}
         </View>
         <MessageInput />

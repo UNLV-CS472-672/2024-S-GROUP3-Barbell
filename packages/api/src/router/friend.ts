@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { createTRPCRouter, publicProcedure } from '../trpc'
+import { userRouter } from './user';
 
 export const friendRouter = createTRPCRouter({
   /**
@@ -76,45 +77,23 @@ export const friendRouter = createTRPCRouter({
 /**
    * Get friends for the current user
    */
-getFriends: protectedProcedure
-.query(async ({ ctx }) => {
-  const currentUserId = ctx.session.user.id;
 
-  const friends = await ctx.prisma.friend.findMany({
+getFriendsForCurrentUser: publicProcedure.query(async ({ ctx }) => {
+  // Retrieve clerkId of the current user from session or wherever it's stored
+  const clerkId = ctx.session.user.clerkId;
+
+  // Retrieve user ID based on clerkId
+  const currentUserId = await userRouter.getIdByClerkId({ clerkId });
+
+  // Retrieve friends of the current user
+  return ctx.prisma.friend.findMany({
     where: {
       userId: currentUserId,
     },
-    select: {
-      user: {
-        select: {
-          id: true,
-          username: true,
-          avatar: true,
-        },
-      },
-    },
+    orderBy: { id: 'asc' },
+    include: { user: true },
   });
-
-  return friends.map((friend) => friend.user);
 }),
 
-  /**
-   * Update a friend: UNUSED, but here for reference
-   */
-  //   update: publicProcedure
-  //     .input(
-  //       z.object({
-  //         id: z.number(),
-  //         userId: z.number().optional(),
-  //       })
-  //     )
-  //     .mutation(({ ctx, input }) => {
-  //       return ctx.prisma.friend.update({
-  //         where: { id: input.id },
-  //         data: {
-  //           user: input.userId ? { connect: { id: input.userId } } : undefined,
-  //         },
-  //         include: { user: true },
-  //       });
-  //     }),
+
 })

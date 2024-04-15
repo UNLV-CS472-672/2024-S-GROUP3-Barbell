@@ -4,24 +4,15 @@ module.exports = (api) => {
   api.cache(true)
 
   return {
-    presets: [
-      'nativewind/babel',
-      ['babel-preset-expo', { jsxImportSource: 'nativewind' }], 
-    ],
+    presets: [['babel-preset-expo', { jsxImportSource: 'nativewind' }], 'nativewind/babel'],
     plugins: [
-      ['module:react-native-dotenv'],
-      require.resolve('expo-router/babel'),
-      require.resolve('react-native-reanimated/plugin'),
+      /* 50 */
+      'react-native-reanimated/plugin',
 
-      /* aliases */
-      [
-        'module-resolver',
-        {
-          alias: {
-            '~assets': './assets',
-          },
-        },
-      ],
+      /* 49 */
+      // ['module:react-native-dotenv'],
+      // require.resolve('expo-router/babel'),
+      // require.resolve('react-native-reanimated/plugin'),
     ],
   }
 }

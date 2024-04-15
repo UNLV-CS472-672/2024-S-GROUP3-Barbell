@@ -40,7 +40,6 @@ export const exerciseRouter = createTRPCRouter({
           },
           body_part: input.body_part,
           category: input.category,
-          workoutId: input.workoutId,
         },
       })
     }),
@@ -130,7 +129,6 @@ export const exerciseRouter = createTRPCRouter({
           },
           body_part: input.body_part,
           category: input.category,
-          workoutId: input.workoutId,
         },
       })
     }),

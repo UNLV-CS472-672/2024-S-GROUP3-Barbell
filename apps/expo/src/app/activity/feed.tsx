@@ -23,7 +23,7 @@ const ActivityFeed = () => {
 
   return (
     <SafeAreaView className="bg-bb-slate-100 flex-1" style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
-      <Text className="text-3xl text-slate-200 py-4 px-2">Feed</Text>
+      <Text className="text-3xl text-slate-200 py-4 px-2">Friend Activities</Text>
       <FlatList
         data={activities}
         renderItem={({ item }) => (item)} />

@@ -4,7 +4,7 @@ import { router } from 'expo-router'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Body from 'react-native-body-highlighter'
-import Toggle from '~/components/toggle/Toggle'
+import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
 import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 // import tailwind from '@/tooling/tailwind'
 
@@ -49,7 +49,7 @@ export default function NewWorkoutMuscleGroup() {
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
   // <Svg viewBox={viewBox} height={400 * scale} width={200 * scale}>
   // Dynamically resize by reversing the work done in react-native-body-highlighter
-  const maxScale = (screenHeight-64) / (400+96)
+  const maxScale = (screenHeight-96) / (400+96)
   // const maxScale = (screenHeight-96) / (400+64)
 
   const [bodyPartSelected, setBodyPartSelected] = useState({/*
@@ -58,11 +58,11 @@ export default function NewWorkoutMuscleGroup() {
   }
   )
   const [isBackSideEnabled, setIsBackSideEnabled] = useState(false)
-  const [isMale, setIsMale] = useState(true)
+  const [genderSelection, setGender] = useState(false)
   const toggleSwitch = () =>
     setIsBackSideEnabled((previousState) => !previousState)
 
-  const toggleGenderSwitch = () => setIsMale((previousState) => !previousState)
+  const toggleGenderSwitch = () => setGender((previousState) => !previousState)
 
   //let tmp = "";
   let sameGroup = {};
@@ -186,7 +186,7 @@ export default function NewWorkoutMuscleGroup() {
             bodyPartSelected
           ]}
 
-          gender={isMale ? "male" : "female"}
+          gender={genderSelection ?   "female" : "male"}
           side={isBackSideEnabled ? "back" : "front"}
           scale={maxScale}
         />
@@ -208,10 +208,10 @@ export default function NewWorkoutMuscleGroup() {
 
             <View className={"flex flex-row p-1"}>
               <Text style={{ color: '#CACACA', fontSize: 20 }}>
-                Currently Selecting: {isMale ? "Male  " : "Female  "}
+                Currently Selecting: {genderSelection ? "Female  " : "Male      "}
               </Text>
 
-              <Toggle onValueChange={toggleGenderSwitch} value={isMale} />
+              <GenderSwitch onValueChange={toggleGenderSwitch} value={genderSelection} />
             </View>
 
             {/*<Text style={{ color: '#CACACA', fontSize: 20 }}>

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { render } from '@testing-library/react-native'
 
-import CustomBottomSheet from './bottom-sheet'
+import CustomBottomSheet from '~/components/ui/bottom-sheet/bottom-sheet'
 
 /**
  * @bug https://github.com/software-mansion/react-native-reanimated/issues/1555

@@ -1,12 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { Animated, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 // screen dimensions
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
@@ -25,7 +18,7 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 //     value={useState()}
 //     onValueChange={() => set(!On)}
 // />
-export default function Toggle ({
+export default function Toggle({
   value,
   onValueChange,
   label,
@@ -33,7 +26,7 @@ export default function Toggle ({
   value: boolean
   onValueChange: () => void
   label: string
-})  {
+}) {
   // Use useRef to persist the animated value without reinitializing it on every render
   const animation = useRef(new Animated.Value(value ? 1 : 0)).current
 
@@ -59,16 +52,19 @@ export default function Toggle ({
   })
 
   return (
-    <View style={styles.toggleContainer}>
+    <View style={styles.toggleContainer} testID='toggle-container'>
       <TouchableOpacity onPress={onValueChange} activeOpacity={1}>
-        <Animated.View style={[styles.switch, { backgroundColor }]}>
+        <Animated.View style={[styles.switch, { backgroundColor }]} testID='toggle-switch'>
           {/* Animated the marginLeft of the circle */}
           <Animated.View
             style={[styles.circle, { marginLeft: circleTransform }]}
+            testID='toggle-circle'
           />
         </Animated.View>
       </TouchableOpacity>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.label} testID='toggle-label'>
+        {label}
+      </Text>
     </View>
   )
 }

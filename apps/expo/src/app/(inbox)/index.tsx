@@ -13,7 +13,7 @@ const Inbox = () => {
         <Text className='text-center text-white'>Inbox screen ye</Text>
 
         <Button
-          onPress={() => router.push('/direct-messages')}
+          onPress={() => router.push('(inbox)/direct-messages')}
           className='my-10 flex h-24  items-center justify-center'
         >
           <Text className='text-center text-white'>Go to Direct Messages</Text>

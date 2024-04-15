@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { fireEvent, render, screen } from '@testing-library/react-native'
 
-import SearchBar from './SearchBar'
+import SearchBar from '~/components/ui/search-bar/SearchBar'
 
 test('SearchBar', async () => {
   const TestComponent = () => {
@@ -20,8 +20,7 @@ test('SearchBar', async () => {
     }
 
     const listToFilter = [item1, item2, item3]
-    const [filteredList, setFilteredList] = useState(listToFilter)
-
+    const [filteredList, setFilteredList] = useState<any[] | undefined>(listToFilter)
     return <SearchBar list={listToFilter} placeholder="Search..." setFilteredList={setFilteredList} filterBy="name" />
   }
 

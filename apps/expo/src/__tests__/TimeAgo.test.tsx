@@ -3,7 +3,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react-native'
 
 import calculateTimeAgo from '~/utils/calculateTime'
-import TimeAgo from './TimeAgo'
+import TimeAgo from '~/components/timeAgo/TimeAgo'
 
 describe('TimeAgo', () => {
   /*  */

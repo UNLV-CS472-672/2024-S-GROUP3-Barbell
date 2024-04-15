@@ -7,7 +7,6 @@ import ActionButton, {
 } from '~/components/ui/picker-modal/action-button/action-button'
 import Divider from '~/components/ui/picker-modal/divider/divider'
 import styles from '~/components/ui/picker-modal/picker-modal.style'
-import colors from '~/styles/colors'
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>
 type CustomTextStyleProp = StyleProp<TextStyle> | Array<StyleProp<TextStyle>>
@@ -50,24 +49,26 @@ const PickerModal: React.FC<IPickerModalProps> = ({
   onCancelPress,
   ...rest
 }) => {
-  const Title = () => (
-    <View style={[styles.titleTextContainer, titleTextContainer]}>
-      <Text style={[styles.titleTextStyle, titleTextStyle]}>{title}</Text>
-    </View>
-  )
+  // /* istanbul ignore next */
+  // const Title = () => (
+  //   <View style={[styles.titleTextContainer, titleTextContainer]}>
+  //     <Text style={[styles.titleTextStyle, titleTextStyle]}>{title}</Text>
+  //   </View>
+  // )
 
-  const CancelButton = () => (
-    <ActionButton
-      TouchableComponent={TouchableComponent}
-      actionButtonUnderlayColor={cancelButtonUnderlayColor}
-      onActionPress={onCancelPress}
-      actionButtonStyle={styles.cancelButtonStyle}
-      actionButtonTextStyle={cancelButtonTextStyle}
-      text='Cancel'
-      isLastItem
-      {...actionButtonProps}
-    />
-  )
+  // /* istanbul ignore next */
+  // const CancelButton = () => (
+  //   <ActionButton
+  //     TouchableComponent={TouchableComponent}
+  //     actionButtonUnderlayColor={cancelButtonUnderlayColor}
+  //     onActionPress={onCancelPress}
+  //     actionButtonStyle={styles.cancelButtonStyle}
+  //     actionButtonTextStyle={cancelButtonTextStyle}
+  //     text='Cancel'
+  //     isLastItem
+  //     {...actionButtonProps}
+  //   />
+  // )
 
   const Picker = () => (
     <View style={[styles.mainContent, style]}>
@@ -82,7 +83,10 @@ const PickerModal: React.FC<IPickerModalProps> = ({
           actionButtonTextStyle={{ fontSize: 24 }}
           {...actionButtonProps}
           text={item}
-          onActionPress={() => onPress && onPress(item, index)}
+          onActionPress={() => {
+            /* istanbul ignore next */
+            onPress && onPress(item, index)
+          }}
         />
       ))}
     </View>

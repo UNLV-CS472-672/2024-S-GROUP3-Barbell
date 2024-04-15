@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react-native'
 
-import MessageInput from './messageInput'
+import MessageInput from '~/components/message/messageInput'
 
 test('MessageInput', async () => {
   render(<MessageInput />)

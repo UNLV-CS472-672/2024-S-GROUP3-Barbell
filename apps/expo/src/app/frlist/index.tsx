@@ -1,93 +1,129 @@
-import React, { useEffect,useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import { router } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useGlobalContext } from '~/context/global-context';
 import { api } from '~/utils/api';
+import SearchBar from '~/components/ui/search-bar/SearchBar'
 
-/*
- * Main FriendsListScreen frontend component
- * 
- * TODO: Create pop-up modal for removing friend
- * TODO: Add search bar for searching friends 
- */
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1E1E1E',
+  },
+  friendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  iconContainer: {
+    marginRight: 12,
+  },
+  username: {
+    fontSize: 16,
+    color: '#fff',
+  },
+  actionButton: {
+    paddingHorizontal: 8,
+    color: '#fff',
+  },
+});
+
 interface Friend {
-  id: string;
+  id: number;
   username: string;
 }
 
-type RootStackParamList = {
-  FriendsList: undefined;
-  Messages: { friend: Friend };
-  Profile: { userId: string };
-  // Add other route definitions here as needed
+const handleNavigateToProfile = (userId: number) => {
+  router.push(`/user/${userId}`);
 };
 
-type FriendsListScreenNavigationProp = StackNavigationProp<RootStackParamList, 'FriendsList'>;
+const handleNavigateToMessages = (friend: Friend) => {
+  router.push(`/messages/${friend.id}`);
+};
 
 const FriendsListScreen = () => {
   const [friends, setFriends] = useState<Friend[]>([]);
-  const navigation = useNavigation<FriendsListScreenNavigationProp>();
+  const [filteredFriends, setFilteredFriends] = useState<Friend[]>([]);
+  const { userData } = useGlobalContext();
 
-  // Use the tRPC query to fetch friends
-  const { data: friendsData } = api.friend.getFriends.useQuery();
+  const { data: friendsData, isLoading, error } = api.friend.getFriends.useQuery(
+    { id: userData?.id ?? 0 },
+    { enabled: !!userData?.id }
+  );
+
+  const deleteFriendMutation = api.friend.delete.useMutation();
 
   useEffect(() => {
     if (friendsData) {
       setFriends(friendsData);
+      setFilteredFriends(friendsData);
     }
   }, [friendsData]);
 
-  // handle removing a friend from the friends list
-  const handleRemoveFriend = async (userId: string) => {
-    try {
-      const response = await fetch(`/api/friends/${userId}`, {
-        method: 'DELETE',
-      });
-      if (!response.ok) {
-        throw new Error('Error removing friend');
+  const handleRemoveFriend = useCallback(
+    async (userId: number) => {
+      try {
+        await deleteFriendMutation.mutateAsync({ id: userId });
+        setFriends(friends.filter(friend => friend.id !== userId));
+        setFilteredFriends(filteredFriends.filter(friend => friend.id !== userId));
+      } catch (error) {
+        console.error('Error removing friend:', error);
+        // Handle error
       }
-      setFriends(friends.filter(friend => friend.id !== userId));
-    } catch (error) {
-      console.error('Error removing friend:', error);
-    }
-  };
+    },
+    [deleteFriendMutation, friends, filteredFriends]
+  );
 
-  // render each friend item in the list and provide options to message, view profile, and remove friend
   const renderFriendItem = ({ item }: { item: Friend }) => {
     return (
-      <View className="flex-row items-center justify-between p-4 border-b border-gray-200">
-        <View className="flex-row items-center">
-        <MaterialCommunityIcons name="face-man-profile" size={56} color="#CACACA" />
-          <Text className="text-lg font-semibold">{item.username}</Text>
+      <View style={styles.friendItem}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <MaterialCommunityIcons
+            style={styles.iconContainer}
+            name="face-man-profile"
+            size={36}
+            color="#CACACA"
+          />
+          <Text style={styles.username}>{item.username}</Text>
         </View>
-        <View className="flex-row">
-          <TouchableOpacity onPress={() => navigation.navigate('Messages', { friend: item })}>
-            <Text className='font-IstokWeb px-4 pb-1 text-[#FFFFFF]'>Message</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity onPress={() => handleNavigateToMessages(item)}>
+            <Text style={styles.actionButton}>Message</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Profile', { userId: item.id })}>
-            <Text className='font-IstokWeb px-4 pb-1 text-[#FFFFFF]'>Profile</Text>
+          <TouchableOpacity onPress={() => handleNavigateToProfile(item.id)}>
+            <Text style={styles.actionButton}>Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleRemoveFriend(item.id)}>
-            <Text className='font-IstokWeb px-4 pb-1 text-[#FFFFFF]'>Remove</Text>
+            <Text style={styles.actionButton}>Remove</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   };
 
-  // main render of friends list screen
+  if (isLoading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
+  if (error) {
+    return <Text>{error.message}</Text>;
+  }
+
   return (
-    <View className="flex-1 bg-[#1C1B1B]">
+    <View style={styles.container}>
+      <SearchBar
+        list={friends}
+        setFilteredList={setFilteredFriends as React.Dispatch<React.SetStateAction<any[] | undefined>>}
+        filterBy="username"
+        placeholder="Search For Friend By Username..."
+      />
       <FlatList
-        data={friends}
+        data={filteredFriends}
         renderItem={renderFriendItem}
-        keyExtractor={(item) => item.id}
-        ListHeaderComponent={
-          <View className="p-4 border-b border-[#CACACA]">
-            <Text className="text-2xl font-bold text-[#CACACA]">Friends List</Text>
-          </View>
-        }
+        keyExtractor={(item) => item.id.toString()}
       />
     </View>
   );

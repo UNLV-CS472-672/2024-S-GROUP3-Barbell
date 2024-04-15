@@ -1,11 +1,13 @@
 import { z } from 'zod'
 
 import { createTRPCRouter, publicProcedure } from '../trpc'
-import { userRouter } from './user'
 
 export const friendRouter = createTRPCRouter({
   /**
    * Get all friends
+   * USAGE:
+   * (inside component/page)
+   * const { data } = api.friend.all()
    */
   all: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.friend.findMany({
@@ -16,6 +18,9 @@ export const friendRouter = createTRPCRouter({
 
   /**
    * Get friend by id
+   * USAGE:
+   * (inside component/page)
+   * const { data } = api.friend.byId({ id: friendId })
    */
   byId: publicProcedure.input(z.object({ id: z.number() })).query(({ ctx, input }) => {
     return ctx.prisma.friend.findFirst({
@@ -67,6 +72,9 @@ export const friendRouter = createTRPCRouter({
 
   /**
    * Delete a friend
+   * USAGE:
+   * (inside component/page)
+   * const { data } = api.friend.delete({ id: friendId })
    */
   delete: publicProcedure.input(z.object({ id: z.number() })).mutation(({ ctx, input }) => {
     return ctx.prisma.friend.delete({
@@ -75,33 +83,13 @@ export const friendRouter = createTRPCRouter({
   }),
 
   /**
-   * Get friends for the current user
-   */
-
-  getFriendsForCurrentUser: publicProcedure.query(async ({ ctx }) => {
-    // Retrieve clerkId of the current user from session or wherever it's stored
-    const clerkId = ctx.session.user.clerkId
-
-    // Retrieve user ID based on clerkId
-    const currentUserId = await userRouter.getIdByClerkId({ clerkId })
-
-    // Retrieve friends of the current user
-    return ctx.prisma.friend.findMany({
-      where: {
-        userId: currentUserId,
-      },
-      orderBy: { id: 'asc' },
-      include: { user: true },
-    })
-  }),
-
-  /**
+   * Get friends of a user
    * USAGE:
    * (inside component/page)
    * const { userData } = useGlobalContext()
-   * const { data } = api.friend.getFriendsFromUserId({ id: userData.id })
+   * const { data } = api.friend.getFriends({ id: userData.id })
    */
-  getFriendsFromUserId: publicProcedure
+  getFriends: publicProcedure
     .input(z.object({ id: z.number().int() }))
     .query(async ({ ctx, input }) => {
       const friendsList = await ctx.prisma.friend.findMany({

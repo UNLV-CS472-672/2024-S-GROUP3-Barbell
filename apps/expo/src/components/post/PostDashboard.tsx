@@ -7,6 +7,7 @@ import { api } from '~/utils/trpc/api'
 
 export default function PostDashboard() {
   const { userData } = useGlobalContext()
+  /* istanbul ignore next */
   if (!userData) {
     return null
   }

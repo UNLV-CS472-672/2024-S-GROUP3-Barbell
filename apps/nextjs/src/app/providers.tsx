@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+
 import { env } from '@/env.mjs'
 import { api } from '@/utils/api'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
 import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client'
 import SuperJSON from 'superjson'
 
@@ -20,10 +20,7 @@ const getBaseUrl = () => {
   return `http://localhost:${env.PORT}`
 }
 
-export function TRPCReactProvider(props: {
-  children: React.ReactNode
-  headers?: Headers
-}) {
+export function TRPCReactProvider(props: { children: React.ReactNode; headers?: Headers }) {
   /*  */
   const [queryClient] = useState(
     () =>
@@ -42,8 +39,7 @@ export function TRPCReactProvider(props: {
       links: [
         loggerLink({
           enabled: (op) =>
-            process.env.NODE_ENV === 'development' ||
-            (op.direction === 'down' && op.result instanceof Error),
+            process.env.NODE_ENV === 'development' || (op.direction === 'down' && op.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({
           transformer: SuperJSON,
@@ -63,9 +59,7 @@ export function TRPCReactProvider(props: {
       <api.Provider client={trpcClient} queryClient={queryClient}>
         {props.children}
       </api.Provider>
-      {process.env.NODE_ENV === 'development' && (
-        <ReactQueryDevtools initialIsOpen={false} />
-      )}
+      {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   )
 }

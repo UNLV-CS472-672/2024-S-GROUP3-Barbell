@@ -12,6 +12,9 @@ import { api } from '~/utils/trpc/api'
 
 WebBrowser.maybeCompleteAuthSession()
 
+// Can set scopes during API requests. Might have to generate a new auth code though.
+// Logout -> Login again -> Make requests.
+//    Handled easily by just invoking logout and then login/updateTrackData
 const scopeArray: string[] = ['user-read-currently-playing']
 
 // Endpoint
@@ -21,9 +24,7 @@ const discovery = {
 }
 
 // Actual login button to be displayed on a page
-// Whole point is to prompt login and return an auth code if they accept.
-// Else return something else to indicate nothing was done. To store stuff in
-// local storage when generating data (another component)
+// Whole point is to prompt login and set the auth code if they accept
 export function LoginSpotifyButton(){
   const credentials = spotifyCredentials; 
   const returnUri = makeRedirectUri({
@@ -42,24 +43,27 @@ export function LoginSpotifyButton(){
     })
   }, discovery)
 
+  // This is the code. If it returns undefined, no such code exists and thus authentication
+  // has never happened before (or user logged out).
   let localCode = SecureStore.getItem("code");
 
-
-
   // Hook to use and return the results from promptAsync()
+  // Has several cases. Refer to the following: https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionresult
   React.useEffect(() => {
     if (response?.type === 'success') {
+      // Successful auth request. 
       const { code } = response.params
-      // Now store it. 
-      if((code != undefined) && (SecureStore.getItem("code")===undefined || SecureStore.getItem("code")===null)){
+      // Now store it. Check if code already existed first.
+      if(!(code === undefined) && (SecureStore.getItem("code")===undefined)){
         SecureStore.setItem("code", code);
-      }else if(code == undefined){
-        console.log("No valid code :<");
+      }else if(code === undefined){
+        throw new Error("Authentication code not generated during auth.");
       }else{
-        console.log("Valid code but already stored? How did we get here?");
-      }
-      // Now check if we need to get the new refresh and access tokens
-      
+        throw new Error("Auth code already existed. This shouldn't be able to happen.");
+      } 
+    }else{
+      // Auth was failed. See what error code it was
+      console.log("Auth status not success, rather: " + response?.type);
     }
   }, [response])
 
@@ -99,9 +103,7 @@ export async function getAccessToken(){
     // Refresh token so just invoke get access token with the refresh token
       // Make sure we need a token first too.
       const expTime = SecureStore.getItem("expirationTime");
-      console.log("Token expires at: " , expTime);
       const currTime = new Date().getTime();
-      console.log("Current time is: ", currTime)
       let needToken: boolean = false;
       if(!(expTime === null || expTime === undefined)){
         needToken = currTime >= parseInt(expTime);
@@ -231,10 +233,38 @@ async function getAccessWithRefresh(refToken: string){
   }
 }
 
+// 
+interface spotifyData{
+  albumImageURL: string,
+  albumName: string,
+  artist: string,
+  isPlaying: boolean,
+  songURL: string,
+  title: string,
+  timePlayed: number, // Should be an integer
+  timeTotal: number, // Should be an integer
+  artistURL: string,
+  userID: number
+}
+
 // Finally update the user data using an accessToken.
-export async function updateTrackData(userID: number){
+async function getTrackData() {
   // Start by checking if we need to update our tokens
   await getAccessToken()
+
+  let retData: spotifyData = {
+    albumImageURL: "",
+    albumName: "",
+    artist: "",
+    isPlaying: false,
+    songURL: "",
+    title: "",
+    timePlayed: 0,
+    timeTotal: 0,
+    artistURL: "",
+    userID: -2 // Just a place holder for now
+  }
+  
   // Get local accessToken and expiration time. 
   // See if expired first. Could also be done by checking result of json, but we can just check the time anyways.
   const access = SecureStore.getItem("accessToken");
@@ -249,53 +279,68 @@ export async function updateTrackData(userID: number){
 
     // Error checking very quickly
     if(result.status > 400){
+      // Should we keep error?
       throw new Error("Unable to fetch song :[");
+      return retData;
     }else if(result.status===204){
       //Reponse was fetched but no content
       throw new Error("Currently Not Playing anything.");
+      // Same idea as directly above?
+      return retData;
     }
 
     // No error so just carry on 
     const song = await result.json();
-
-    console.log("Parsed results: ", data);
-    api.spotify.updateSpotifyData.useMutation({
+    retData = {
       albumImageURL: song.item.album.images[0].url,
       albumName: song.item.album.name,
       artist: song.item.artists.map((artist) => artist.name).join(', '),
       isPlaying: song.is_playing,
       songURL: song.item.external_urls.spotify,
       title: song.item.name,
-      timePlayed: song.progress_ms/1000,
-      timeTotal: song.item.duration_ms/1000,
+      timePlayed: Math.floor(song.progress_ms/1000),
+      timeTotal: Math.floor(song.item.duration_ms/1000),
       artistURL: song.item.album.artists[0].external_urls.spotify,
-      userID: userID
-    });
-    console.log("Did we update the database at all?")
-
-    // Actually parse data and return it now finally
+      userID: -1 // Just a place holder for now
+    }
+    // Just return the data to be used in the update function
+    return retData;
   }else{
     console.log("No access token :<");
+    return retData
   }
 }
 
-// CURRENT BUG: Auth code expired but idk how to get a new one?
-// Need a new authRequest I guess but idk how to do that.
+export async function updateSpotifyData(userID: number){
+  // Just set the userID of the returned data from getTrackData and then just call prisma DB API
+  console.log("Updating track data!");
+  const returnedTrack: spotifyData = await getTrackData();
+  console.log(returnedTrack);
+  // Check to make sure that we got meaningful data back, aka -1. -2 is bad data.
+  if(returnedTrack.userID === -1){
+    // Got good data
+    returnedTrack.userID = userID;
+    // Now just make the API call and we're all good to go!
+  }else{
+    // Bad data
+    console.log("Bad data retrieved or no data retrieved, thus returned default values. Don't update database");
+  }
+  console.log("Done updating data!");
+}
 
 // Very primitive logout function. 
-// Is there a better way of doing it than just clearing all the tokens and codes?
+// Clear the login by clearing all tokens and stuff.
 export async function logoutSpotify(){
   const auth = SecureStore.getItem("code");
-  if(!(auth===null || auth === undefined)){
-    console.log("Removing auth code: " + auth);
-    const value = await SecureStore.deleteItemAsync("code");
-    console.log("Now removing refresh token: " + SecureStore.getItem("refreshToken"));
-    await SecureStore.deleteItemAsync("refreshToken");
-    console.log("Now removing access token: " + SecureStore.getItem("accessToken"));
-    await SecureStore.deleteItemAsync("accessToken");
-    console.log("Now finally deleting expiration time/date of token: " + SecureStore.getItem("expirationTime"));
-    await SecureStore.deleteItemAsync("expirationTime");
-
-    console.log("Finished logging out. Sort of.")
+  if(!(auth === undefined)){
+    try{
+      await SecureStore.deleteItemAsync("code");
+      await SecureStore.deleteItemAsync("refreshToken");
+      await SecureStore.deleteItemAsync("accessToken");
+      await SecureStore.deleteItemAsync("expirationTime");
+    }catch(e){console.log(e);}
+    
+  }else{
+    throw new Error("User not logged in.")
   }
 }

@@ -12,7 +12,7 @@ export interface NudgeNotifProps {
 
 export default function NudgeNotif({ notif, senderUsername }: NudgeNotifProps) {
   return (
-    <View>
+    <View testID="nudge-notif-container">
       <View className="ml-3 mr-3 mt-4 flex flex-row items-center">
         {/*flexing arm is the placeholder, might change in future*/}
         <View className="flex flex-col">

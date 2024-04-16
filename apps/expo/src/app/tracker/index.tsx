@@ -5,7 +5,7 @@ import { useAuth, useUser } from '@clerk/clerk-expo'
 
 import WorkoutTracker from '~/components/tracker/workout-tracker'
 import Button from '~/components/ui/button/button'
-import CustomBottomSheetModal, { CustomBottomSheetModalRef } from '~/components/ui/custom-bottom-sheet-modal'
+import CustomBottomSheetModal, { CustomBottomSheetModalRef } from '^/apps/expo/src/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 import { useGlobalContext } from '~/context/global-context'
 
 const Tracker = () => {

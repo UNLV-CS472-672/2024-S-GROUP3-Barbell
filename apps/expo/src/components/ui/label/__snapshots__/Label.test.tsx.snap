@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Label 1`] = `
+<View
+  className="rounded-lg px-2 py-1"
+  style={
+    {
+      "alignSelf": "flex-start",
+      "backgroundColor": "#FFFFFF",
+    }
+  }
+>
+  <Text
+    className="text-[20px] font-bold"
+    numberOfLines={1}
+    style={
+      {
+        "color": "#000000",
+      }
+    }
+    testID="text-test"
+  >
+    Label
+  </Text>
+</View>
+`;

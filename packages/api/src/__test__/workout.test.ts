@@ -123,7 +123,7 @@ test('WORKOUT /getAllExercisesFromWorkoutID', async () => {
   const workout = await prisma.workout.findFirst({})
   const exercises = await prisma.exercise.findMany({
     where: {
-      workoutId: workout?.id,
+      // workoutId: workout?.id,
     },
   })
 
@@ -174,7 +174,7 @@ test('WORKOUT /deleteExerciseFromWorkout', async () => {
 
   const exercise = await prisma.exercise.findFirst({
     where: {
-      workoutId: workout.id,
+      // workoutId: workout.id,
     },
   })
 

@@ -12,7 +12,7 @@ import Profile from '~assets/svgs/profile.svg'
 // import type { CustomBottomSheetModalRef } from '~/components/ui/custom-bottom-sheet-modal'
 // import Button from '~/components/ui/button/button'
 // import CustomBottomSheetModal from '~/components/ui/custom-bottom-sheet-modal'
-import PickerModal from '~/components/ui/picker-modal/picker.modal'
+import PickerModal from '~/components/ui/picker-modal/picker-modal'
 import colors from '~/styles/colors'
 import { cn } from '~/utils/cn'
 

@@ -47,7 +47,7 @@ export default function Keypad({
 
   const keypadRows = keypadArrangement.map(row => {
     return (
-      <View className='flex-1 flex-row justify-between'>
+      <View className='flex-1 flex-row justify-between' key={row.toString()}>
         {
           row.map(x => {
             let btnFace = <Text style={{ fontSize: 24 }} className='text-center'>{x}</Text>;
@@ -56,7 +56,8 @@ export default function Keypad({
             }
             return (
               <TouchableOpacity
-                testID='test-{x}'
+                key={x}
+                testID={`test-${x}`}
                 className='m-1 flex-1 justify-center items-center rounded-md bg-white'
                 onPress={() => handleKeyPress(x.toString())}>
                 {btnFace}

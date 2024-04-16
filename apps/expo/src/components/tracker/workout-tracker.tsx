@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import ExerciseEntry from '~/components/tracker/exercise-entry'
 import WorkoutTrackerHeader from '~/components/tracker/workout-tracker-header'
 import Button from '~/components/ui/button/button'
-import { CustomBottomSheetModalRef } from '~/components/ui/custom-bottom-sheet-modal'
+import { CustomBottomSheetModalRef } from '^/apps/expo/src/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 
 export interface IWorkoutTrackerProps {
   bottomSheetRef: React.RefObject<CustomBottomSheetModalRef>

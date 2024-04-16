@@ -49,14 +49,15 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
         name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
       })
 
-      setUserData({
-        id: response.id,
-        clerkId: response.clerkId,
-        username: response.username,
-        name: response.name!,
-      })
+        setUserData({
+          id: response.id,
+          clerkId: response.clerkId,
+          username: response.username,
+          name: response.name || '',
+        })
+      }
     }
-  }, [clerkUserData])
+  }, [clerkUserData, createUser])
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {

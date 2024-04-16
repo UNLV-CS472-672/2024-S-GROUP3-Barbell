@@ -8,6 +8,7 @@ import * as SecureStore from 'expo-secure-store'
 
 import { spotifyCredentials } from './spotifyCreds'
 import { useAuth } from '@clerk/clerk-expo'
+import { api } from '~/utils/trpc/api'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -80,8 +81,6 @@ export function LoginSpotifyButton(){
 //  1) Tokens init, get refresh and access first time. Only run when refresh doesn't already exist.
 //  2) Use refresh. This one is done when we have the refresh already, and we use that token to get a new access token.
 export async function getAccessToken(){
-  // Make sure we need a token first too.
-
   // Just check to see which function to call.
   // If we don't have a refresh, we clearly don't have an access token either
   const refresh = SecureStore.getItem("refreshToken");
@@ -98,14 +97,28 @@ export async function getAccessToken(){
   }
   else{
     // Refresh token so just invoke get access token with the refresh token
-    const authCode = SecureStore.getItem("code");
-    if(!(authCode === null || authCode === undefined)){
-      // Code exists, just call tokensInit with code
-      return await getAccessWithRefresh(refresh)
-    }
-    else{
-      throw new Error("We somehow get into getAccessToken without an auth code anywhere?")
-    }
+      // Make sure we need a token first too.
+      const expTime = SecureStore.getItem("expirationTime");
+      console.log("Token expires at: " , expTime);
+      const currTime = new Date().getTime();
+      console.log("Current time is: ", currTime)
+      let needToken: boolean = false;
+      if(!(expTime === null || expTime === undefined)){
+        needToken = currTime >= parseInt(expTime);
+      }
+      if(needToken){
+        const authCode = SecureStore.getItem("code");
+        if(!(authCode === null || authCode === undefined)){
+          // Code exists, just call tokensInit with code
+          return await getAccessWithRefresh(refresh)
+        }
+        else{
+          throw new Error("We somehow get into getAccessToken without an auth code anywhere?")
+        }
+      }else{
+        console.log("No new token needed! Not expired yet for: ", SecureStore.getItem("accessToken"));
+      }
+    
   }
 }
 
@@ -159,10 +172,10 @@ async function tokensInit(code: string){
   }
 }
 
-// This function just returns an access code 
-async function getAccessWithRefresh(refreshToken: string){
+// This function just returns an access code via refresh
+async function getAccessWithRefresh(refToken: string){
   const refresh = SecureStore.getItem("refreshToken");
-  if(!(refreshToken === refresh)){
+  if(!(refToken === refresh)){
     // Mismatch of locally stored token with that passed.
     throw new Error("Mismatched refresh tokens.");
   }
@@ -183,6 +196,7 @@ async function getAccessWithRefresh(refreshToken: string){
   //  Authorization: "Authorization: Basic " + <base64 encoded client_id:client_secret 
 
   try{
+    console.log("Trying to get new access token!")
     const credentials = spotifyCredentials
     const credsB64 = btoa(`${credentials.clientID}:${credentials.clientSecret}`);
     const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -191,15 +205,12 @@ async function getAccessWithRefresh(refreshToken: string){
         Authorization: `Basic ${credsB64}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: refreshToken,
-        //client_id: credentials.clientID
-      })
+      body: `grant_type=refresh_token&refresh_token=${refresh}`
     });
     const responseJson = await response.json();
 
     // Just debugging and stuff
+    console.log("New tokens based on refresh token");
     console.log(responseJson);
     if(responseJson){
       const {
@@ -212,11 +223,7 @@ async function getAccessWithRefresh(refreshToken: string){
       const expirationTime = new Date().getTime() + expiresIn * 1000;
       SecureStore.setItem("accessToken", accessToken);
       SecureStore.setItem("expirationTime", expirationTime.toString())
-
-      // Refresh token should remain the same I think?
-      if(!(refreshToken === refresh)){
-        throw new Error("Why did the refresh token change when refreshing our access token?");
-      }
+      console.log("The new access token expires at: " + expirationTime)
     }
   }
   catch(e){
@@ -225,16 +232,61 @@ async function getAccessWithRefresh(refreshToken: string){
 }
 
 // Finally update the user data using an accessToken.
-export async function getTrackData(){
+export async function updateTrackData(userID: number){
+  // Start by checking if we need to update our tokens
+  await getAccessToken()
   // Get local accessToken and expiration time. 
   // See if expired first. Could also be done by checking result of json, but we can just check the time anyways.
   const access = SecureStore.getItem("accessToken");
   console.log("Getting track data!");
 
   if(!(access === null || access === undefined)){
-    console.log("We have this access token: " + access);
-    const expTime = SecureStore.getItem("expirationTime");
-    console.log("This token expires at: " + expTime);
+    // Finally just get the data and return 
+    const result = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${access}`},
+    });
+
+    // Error checking very quickly
+    if(result.status > 400){
+      throw new Error("Unable to fetch song :[");
+    }else if(result.status===204){
+      //Reponse was fetched but no content
+      throw new Error("Currently Not Playing anything.");
+    }
+
+    // No error so just carry on 
+    const song = await result.json();
+    
+    const data = {
+      albumImageUrl: song.item.album.images[0].url,
+      albumName: song.item.album.name,
+      artist: song.item.artists.map((artist) => artist.name).join(', '),
+      isPlaying: song.is_playing,
+      songURL: song.item.external_urls.spotify,
+      title: song.item.name,
+      timePlayed: song.progress_ms/1000,
+      timeTotal: song.item.duration_ms/1000,
+      artistURL: song.item.album.artists[0].external_urls.spotify,
+      userID: userID
+    }
+
+    console.log("Parsed results: ", data);
+    api.spotify.updateSpotifyData.useMutation({
+      albumImageURL: song.item.album.images[0].url,
+      albumName: song.item.album.name,
+      artist: song.item.artists.map((artist) => artist.name).join(', '),
+      isPlaying: song.is_playing,
+      songURL: song.item.external_urls.spotify,
+      title: song.item.name,
+      timePlayed: song.progress_ms/1000,
+      timeTotal: song.item.duration_ms/1000,
+      artistURL: song.item.album.artists[0].external_urls.spotify,
+      userID: userID
+    });
+    console.log("Did we update the database at all?")
+
+    // Actually parse data and return it now finally
   }else{
     console.log("No access token :<");
   }
@@ -243,15 +295,20 @@ export async function getTrackData(){
 // CURRENT BUG: Auth code expired but idk how to get a new one?
 // Need a new authRequest I guess but idk how to do that.
 
-// Very primitive logout function. It doesn't do anything useful really.
+// Very primitive logout function. 
+// Is there a better way of doing it than just clearing all the tokens and codes?
 export async function logoutSpotify(){
   const auth = SecureStore.getItem("code");
   if(!(auth===null || auth === undefined)){
     console.log("Removing auth code: " + auth);
     const value = await SecureStore.deleteItemAsync("code");
-    console.log("Finished deleting?")
-    console.log(value);
+    console.log("Now removing refresh token: " + SecureStore.getItem("refreshToken"));
+    await SecureStore.deleteItemAsync("refreshToken");
+    console.log("Now removing access token: " + SecureStore.getItem("accessToken"));
+    await SecureStore.deleteItemAsync("accessToken");
+    console.log("Now finally deleting expiration time/date of token: " + SecureStore.getItem("expirationTime"));
+    await SecureStore.deleteItemAsync("expirationTime");
 
-    console.log("New auth code = " + SecureStore.getItem("code"));
+    console.log("Finished logging out. Sort of.")
   }
 }

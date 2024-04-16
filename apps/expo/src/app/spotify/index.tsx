@@ -9,7 +9,7 @@ import { makeRedirectUri } from 'expo-auth-session';
 //import SpotifyLoginButton from '../../utils/spotifyToken';
 import {LoginSpotifyButton} from '../../components/spotify/spotifyToken';
 import { getAccessToken } from '../../components/spotify/spotifyToken';
-import { getTrackData } from '../../components/spotify/spotifyToken';
+import { updateTrackData } from '../../components/spotify/spotifyToken';
 import { logoutSpotify } from '../../components/spotify/spotifyToken';
 
 
@@ -26,9 +26,8 @@ export default function SpotifyScreen() {
     // });
     // GOT: exp://192.168.0.11:8081/~/redirect
 
-    // Testing tokens function
-    getAccessToken();
-    getTrackData();
+    // Getting data
+    updateTrackData(userID);
     //logoutSpotify();
 
 

@@ -34,6 +34,8 @@ const Nav = () => {
           { key: 'Award', route: '/award' },
           { key: 'Spotify', route: '/spotify' },
           { key: 'Tracker', route: '/tracker' },
+          { key: 'Show Activity', route: '/activity' },
+          { key: 'Activity Feed', route: '/activity/feed' },
           { key: '(workout)', route: '/(workout)' },
           { key: '(inbox)', route: '/(inbox)' },
           { key: '(friends)', route: '/(friends)' },

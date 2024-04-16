@@ -119,16 +119,16 @@ const loaddb = async () => {
     logger('add', 'notification')
 
     /*  */
-    await prisma.workout.createMany({
-      data: workout as Prisma.WorkoutCreateManyInput[],
-    })
-    logger('add', 'workout')
-
-    /*  */
     await prisma.exercise.createMany({
       data: exercise as Prisma.ExerciseCreateManyInput[],
     })
     logger('add', 'exercise')
+
+    /* */
+    for (let i = 0; i < workout.length; i++) {
+      await prisma.workout.create({ data: workout[i] as any });
+    }
+    logger('add', 'workout')
 
     /*  */
     await prisma.chat.createMany({
@@ -165,6 +165,7 @@ const loaddb = async () => {
       data: set as Prisma.SetCreateManyInput[],
     })
     logger('add', 'set')
+
   } catch (error) {
     console.error(error)
     process.exit(1)

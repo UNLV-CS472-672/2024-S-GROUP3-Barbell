@@ -48,7 +48,7 @@ export const workoutRouter = createTRPCRouter({
           duration: input.duration,
           finishedAt: input.finishedAt,
           exercises: {
-            connect: 
+            connect:
               input.exercises?.map((exercise)=>({
                 id: exercise.id,
               })),
@@ -231,4 +231,30 @@ export const workoutRouter = createTRPCRouter({
         },
       })
     }),
+
+  getActivityFeedWorkouts: publicProcedure
+    .input(
+      z.object({
+        friendIds: z.array(z.number().int()),
+        count: z.number().int()
+      })
+    )
+    .query(({ ctx, input }) => {
+      const { prisma } = ctx;
+      return prisma.workout.findMany({
+        where: {
+          userId: {
+            in: input.friendIds
+          }
+        },
+        take: input.count,
+        orderBy:  {
+          createdAt: 'desc'
+        },
+        include: {
+          user: true,
+          exercises: true
+        }
+      })
+    })
 })

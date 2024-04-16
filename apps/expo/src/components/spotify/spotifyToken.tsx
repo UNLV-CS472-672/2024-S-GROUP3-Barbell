@@ -257,19 +257,6 @@ export async function updateTrackData(userID: number){
 
     // No error so just carry on 
     const song = await result.json();
-    
-    const data = {
-      albumImageUrl: song.item.album.images[0].url,
-      albumName: song.item.album.name,
-      artist: song.item.artists.map((artist) => artist.name).join(', '),
-      isPlaying: song.is_playing,
-      songURL: song.item.external_urls.spotify,
-      title: song.item.name,
-      timePlayed: song.progress_ms/1000,
-      timeTotal: song.item.duration_ms/1000,
-      artistURL: song.item.album.artists[0].external_urls.spotify,
-      userID: userID
-    }
 
     console.log("Parsed results: ", data);
     api.spotify.updateSpotifyData.useMutation({

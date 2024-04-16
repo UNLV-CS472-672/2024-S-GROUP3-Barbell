@@ -21,6 +21,7 @@ const defineConfig = (): ExpoConfig => ({
   ios: {
     bundleIdentifier: 'your.bundle.identifier',
     supportsTablet: true,
+    // associatedDomains: ['applinks:clerk.helping.lemming-64.lclstage.dev'],
   },
   android: {
     package: 'your.bundle.identifier',
@@ -28,6 +29,20 @@ const defineConfig = (): ExpoConfig => ({
       foregroundImage: './assets/icon.png',
       backgroundColor: '#1F104A',
     },
+    // intentFilters: [
+    //   {
+    //     action: 'VIEW',
+    //     autoVerify: true,
+    //     data: [
+    //       {
+    //         scheme: 'https',
+    //         host: 'clerk.helping.lemming-64.lclstage.dev',
+    //         pathPrefix: '/v1/oauth-native-callback',
+    //       },
+    //     ],
+    //     category: ['BROWSABLE', 'DEFAULT'],
+    //   },
+    // ],
     jsEngine: 'hermes',
   },
   extra: {
@@ -48,7 +63,7 @@ const defineConfig = (): ExpoConfig => ({
   // jsEngine: 'hermes',
   plugins: [
     /* don't touch this */
-    ["expo-router", { "root": "./src/app/" }],
+    ['expo-router', { root: './src/app/' }],
     'expo-font',
     'expo-secure-store',
     // 'expo-router',

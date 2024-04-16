@@ -14,7 +14,7 @@ const Dashboard = () => {
       </View>
 
       <Button
-        onPress={() => router.push('/nav')}
+        onPress={() => router.push('nav/')}
         className='my-5 flex h-10 items-center rounded-md bg-blue-500'
         aria-label='Go to nav'
       >

@@ -1,10 +1,10 @@
-import { exerciseRouter } from './router/exercise'
-import { friendRouter } from './router/friend'
-import { notifRouter } from './router/notif'
-import { postRouter } from './router/post'
-import { spotifyRouter } from './router/spotify'
-import { userRouter } from './router/user'
-import { workoutRouter } from './router/workout'
+import { exerciseRouter } from './router/exercise.router'
+import { friendRouter } from './router/friend.router'
+import { notifRouter } from './router/notif.router'
+import { postRouter } from './router/post.router'
+import { spotifyRouter } from './router/spotify.router'
+import { userRouter } from './router/user.router'
+import { workoutRouter } from './router/workout.router'
 import { createTRPCRouter, publicProcedure } from './trpc'
 
 /**

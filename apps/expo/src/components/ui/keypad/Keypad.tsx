@@ -44,22 +44,23 @@ export default function Keypad({
   const { height } = Dimensions.get('window')
 
   const keypadArrangement = [[1,2,3], [4,5,6], [7,8,9], ['.', 0, 'backspace']];
+  const keyFontSize = 24;
 
   const keypadRows = keypadArrangement.map(row => {
     return (
       <View className='flex-1 flex-row justify-between' key={row.toString()}>
         {
-          row.map(x => {
-            let btnFace = <Text style={{ fontSize: 24 }} className='text-center'>{x}</Text>;
-            if (x === 'backspace') {
-              btnFace = <Ionicons name='backspace-outline' size={24} color='black' />;
+          row.map(keypadKey => {
+            let btnFace = <Text style={{ fontSize: keyFontSize }} className='text-center'>{keypadKey}</Text>;
+            if (keypadKey === 'backspace') {
+              btnFace = <Ionicons name='backspace-outline' size={keyFontSize} color='black' />;
             }
             return (
               <TouchableOpacity
-                key={x}
-                testID={`test-${x}`}
+                key={keypadKey}
+                testID={`test-${keypadKey}`}
                 className='m-1 flex-1 justify-center items-center rounded-md bg-white'
-                onPress={() => handleKeyPress(x.toString())}>
+                onPress={() => handleKeyPress(keypadKey.toString())}>
                 {btnFace}
               </TouchableOpacity>
             )

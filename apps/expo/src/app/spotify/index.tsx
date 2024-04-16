@@ -9,6 +9,8 @@ import { makeRedirectUri } from 'expo-auth-session';
 //import SpotifyLoginButton from '../../utils/spotifyToken';
 import {LoginSpotifyButton} from '../../components/spotify/spotifyToken';
 import { getAccessToken } from '../../components/spotify/spotifyToken';
+import { getTrackData } from '../../components/spotify/spotifyToken';
+import { logoutSpotify } from '../../components/spotify/spotifyToken';
 
 
 export default function SpotifyScreen() {
@@ -26,6 +28,9 @@ export default function SpotifyScreen() {
 
     // Testing tokens function
     getAccessToken();
+    getTrackData();
+    //logoutSpotify();
+
 
     return(
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}> 

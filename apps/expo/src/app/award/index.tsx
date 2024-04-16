@@ -1,9 +1,11 @@
 import { Ionicons } from '@expo/vector-icons'
-import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { Dimensions, Image, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Toggle from '~/components/toggle/Toggle'
+import { router } from 'expo-router'
+
+
+import Toggle from '~/components/toggle/toggle'
 
 export default function Award() {
   // screen dimensions
@@ -14,18 +16,13 @@ export default function Award() {
 
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
-      <View className="flex flex-row justify-between px-5">
-        <Ionicons
-          onPress={() => router.back()}
-          name="chevron-back"
-          size={24}
-          color="#CACACA"
-        />
+      <View className='flex flex-row justify-between px-5'>
+        <Ionicons onPress={() => router.back()} name='chevron-back' size={24} color='#CACACA' />
         <Text style={{ color: '#CACACA', fontSize: 20 }}>Award</Text>
-        <Ionicons name="ellipsis-horizontal-sharp" size={24} color="#CACACA" />
+        <Ionicons name='ellipsis-horizontal-sharp' size={24} color='#CACACA' />
       </View>
 
-      <View className="flex flex-row items-center">
+      <View className='flex flex-row items-center'>
         <Image
           source={require('~assets/award/trophy.png')}
           style={{
@@ -33,10 +30,9 @@ export default function Award() {
             width: screenWidth * 0.9,
             height: screenWidth * 0.9,
           }}
-          resizeMode="contain"
+          resizeMode='contain'
         />
       </View>
-
     </SafeAreaView>
   )
 }

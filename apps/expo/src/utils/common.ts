@@ -21,3 +21,7 @@ export function makeChatName(users: any[], userData: any): string {
   }
   return String(filteredUsers[0].username?.trim() + ' and ' + filteredUsers[1].username.trim())
 }
+
+// export function log(msg = "") {
+//   return console.log(new Date() + ":> " + msg);
+// }

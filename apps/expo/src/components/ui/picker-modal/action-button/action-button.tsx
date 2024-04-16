@@ -36,9 +36,10 @@ const ActionButton: React.FC<IActionButtonProps> = ({
   return (
     <>
       <TouchableComponent
+        testID='action-button'
+        onPress={onActionPress}
         underlayColor={actionButtonUnderlayColor}
         style={[styles.actionButtonStyle, actionButtonStyle, _dynamicBorderStyle(isLastItem)]}
-        onPress={onActionPress}
       >
         <Text style={[styles.actionButtonTextStyle, actionButtonTextStyle]} className='font-koulen'>
           {text}

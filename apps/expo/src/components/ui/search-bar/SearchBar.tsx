@@ -29,8 +29,8 @@ import { View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 
 interface SearchBarProps {
-  list: any[]
-  setFilteredList: React.Dispatch<React.SetStateAction<any[]>>
+  list: any[] | undefined
+  setFilteredList: React.Dispatch<React.SetStateAction<any[] | undefined>>
   filterBy: string
   placeholder: string
 }
@@ -38,15 +38,16 @@ interface SearchBarProps {
 export default function SearchBar({ list, setFilteredList, filterBy, placeholder }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState('')
 
-  useEffect(() => {
-    setFilteredList(list.filter((item) => item[filterBy].toLowerCase().includes(searchTerm.toLowerCase())))
-  }, [searchTerm])
+  if (list) {
+    useEffect(() => {
+      setFilteredList(list.filter((item) => item[filterBy].toLowerCase().includes(searchTerm.toLowerCase())))
+    }, [searchTerm])
+  }
 
   return (
     <View className="mx-3 rounded-[5px] bg-[#272727]" testID="searchBar">
       <TextInput
-        className="top-0 mx-1 px-4 py-[6px] text-[12px]
-          text-[#CACACA] placeholder:text-[20px] placeholder:italic placeholder:text-[#CACACA] placeholder:opacity-40"
+        className="placeholder:color-[#717171] top-0 mx-1 px-4 py-[6px] text-[20px] text-white"
         placeholder={placeholder}
         onChangeText={setSearchTerm}
       />

@@ -76,39 +76,23 @@ export const friendRouter = createTRPCRouter({
   /**
     * get a user's friends
     */
-  getFriends: publicProcedure
-    .input(
-      z.object(
-        { userId: z.number().int() }
-      )
-    )
-    .query(({ ctx, input }) => {
-      return ctx.prisma.friend.findMany(
-        {
-          where: {
-            userId: input.userId
-          }
-        }
-      )
-    }),
+    getFriends: publicProcedure
+    .input(z.object({ id: z.number().int() }))
+    .query(async ({ ctx, input }) => {
+      const friendsList = await ctx.prisma.friend.findMany({
+        where: {
+          userId: input.id,
+        },
+      })
 
-  /**
-   * Update a friend: UNUSED, but here for reference
-   */
-  //   update: publicProcedure
-  //     .input(
-  //       z.object({
-  //         id: z.number(),
-  //         userId: z.number().optional(),
-  //       })
-  //     )
-  //     .mutation(({ ctx, input }) => {
-  //       return ctx.prisma.friend.update({
-  //         where: { id: input.id },
-  //         data: {
-  //           user: input.userId ? { connect: { id: input.userId } } : undefined,
-  //         },
-  //         include: { user: true },
-  //       });
-  //     }),
+      const friendIds: number[] = friendsList.map((item) => {
+        return item.friendId
+      })
+
+      return ctx.prisma.user.findMany({
+        where: {
+          id: { in: friendIds },
+        },
+      })
+    }),
 })

@@ -1,10 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
-import { router } from 'expo-router';
+
+import { Route, router } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { useGlobalContext } from '~/context/global-context';
-import { api } from '~/utils/api';
+import { api } from '~/utils/trpc/api';
+
 import SearchBar from '~/components/ui/search-bar/SearchBar'
+
 
 const styles = StyleSheet.create({
   container: {
@@ -37,17 +41,18 @@ interface Friend {
 }
 
 const handleNavigateToProfile = (userId: number) => {
-  router.push(`/user/${userId}`);
+  router.push(`/user/${userId}` as Route<string>);
 };
 
 const handleNavigateToMessages = (friend: Friend) => {
-  router.push(`/messages/${friend.id}`);
+  router.push(`/messages/${friend.id}` as Route<string>);
 };
 
 const FriendsListScreen = () => {
   const [friends, setFriends] = useState<Friend[]>([]);
   const [filteredFriends, setFilteredFriends] = useState<Friend[]>([]);
   const { userData } = useGlobalContext();
+  console.log('userData:', userData);
 
   const { data: friendsData, isLoading, error } = api.friend.getFriends.useQuery(
     { id: userData?.id ?? 0 },
@@ -58,8 +63,14 @@ const FriendsListScreen = () => {
 
   useEffect(() => {
     if (friendsData) {
-      setFriends(friendsData);
-      setFilteredFriends(friendsData);
+      const transformedData = friendsData.map((friend) => ({
+        id: friend.id,
+        name: friend.name,
+        username: friend.username,
+      }));
+  
+      setFriends(transformedData);
+      setFilteredFriends(transformedData);
     }
   }, [friendsData]);
 

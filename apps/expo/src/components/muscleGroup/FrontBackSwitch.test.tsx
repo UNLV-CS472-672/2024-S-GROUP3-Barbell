@@ -1,16 +1,14 @@
-import { render, screen } from '@testing-library/react-native'
+import React from 'react'
 
-import FrontBackSwitch from "~/components/muscleGroup/FrontBackSwitch";
-import {useState} from "react";
+import { render } from '@testing-library/react-native'
 
-test('FrontBackSwitch', () => {
-  const [tmp, setTmp] = useState(false)
-  const tmpCh = () => setTmp((previousState) => !previousState)
+import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 
-  render(<FrontBackSwitch
-    onValueChange={tmpCh}
-    value={tmp}
-    label={""}
-  />)
-  expect(screen.toJSON()).toMatchSnapshot()
+describe('FrontBackSwitch', () => {
+  it('should match snapshot', () => {
+    const { toJSON } = render(
+      <FrontBackSwitch label='test' onValueChange={() => {}} value={false} key='stuff' />,
+    )
+    expect(toJSON()).toMatchSnapshot()
+  })
 })

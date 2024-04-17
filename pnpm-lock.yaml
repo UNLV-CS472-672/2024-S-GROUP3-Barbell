@@ -16,10 +16,6 @@ overrides:
 importers:
 
   .:
-    dependencies:
-      base-64:
-        specifier: ^1.0.0
-        version: 1.0.0
     devDependencies:
       '@acme/prettier-config':
         specifier: workspace:^

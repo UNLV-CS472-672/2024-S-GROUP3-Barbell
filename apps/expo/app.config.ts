@@ -50,8 +50,13 @@ const defineConfig = (): ExpoConfig => ({
     // eas: {
     //   projectId: 'a5b98934-bf53-4573-ba91-972c22a6759a',
     // },
+    /* Clerk */
     clerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
     expoPublicClerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
+
+    /* Spotify */
+    spotifyClientID: process.env.EXPO_PUCLIC_SPOTIFY_CLIENT_ID,
+    spotifyClientSecret: process.env.EXPO_PUCLIC_SPOTIFY_CLIENT_SECRET,
   },
   runtimeVersion: {
     policy: 'appVersion',

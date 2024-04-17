@@ -87,6 +87,9 @@ export default function RootLayout() {
     Sora_800ExtraBold,
   })
 
+  console.log('process.env 1', process.env.EXPO_PUCLIC_SPOTIFY_CLIENT_ID)
+  console.log('process.env 3', process.env.EXPO_PUCLIC_SPOTIFY_CLIENT_SECRET)
+
   // Expo Router uses Error Boundaries
   // to catch errors in the navigation tree.
   useEffect(() => {

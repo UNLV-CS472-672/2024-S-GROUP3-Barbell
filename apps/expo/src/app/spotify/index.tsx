@@ -1,43 +1,43 @@
-import Spotify from 'apps/expo/src/components/spotify/spotify'
-import { router } from 'expo-router'
-import { View, SafeAreaView, Dimensions, StyleSheet, Text } from 'react-native'
-
-
+import { Dimensions, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 // To figure out the return uri
-import { makeRedirectUri } from 'expo-auth-session';
+import { makeRedirectUri } from 'expo-auth-session'
+import { router } from 'expo-router'
+
+import Spotify from 'apps/expo/src/components/spotify/spotify'
 
 //import SpotifyLoginButton from '../../utils/spotifyToken';
-import {LoginSpotifyButton} from '../../components/spotify/spotifyToken';
-import { updateSpotifyData } from '../../components/spotify/spotifyToken';
-import { logoutSpotify } from '../../components/spotify/spotifyToken';
+import {
+  LoginSpotifyButton,
+  logoutSpotify,
+  updateSpotifyData,
+} from '../../components/spotify/spotifyToken'
 
-// Should get the current user 
-
+// Should get the current user
 
 export default function SpotifyScreen() {
-    // This whole file is just to display the widget but getting it in the middle is a battle.
+  // This whole file is just to display the widget but getting it in the middle is a battle.
 
-    // TODO: update inputID to use a dynamic userID when possible. For now this is what we have tho. Just testing using ID of 1
-    let userID: number = 6;
+  // TODO: update inputID to use a dynamic userID when possible. For now this is what we have tho. Just testing using ID of 1
+  let userID: number = 6
 
-    // To figure out what the returnURI is:
-    // let returnURI = makeRedirectUri({
-    //     scheme: 'expo',
-    //     path: 'redirect'
-    // });
-    // GOT: exp://192.168.0.11:8081/~/redirect
+  // To figure out what the returnURI is:
+  // let returnURI = makeRedirectUri({
+  //     scheme: 'expo',
+  //     path: 'redirect'
+  // });
+  // GOT: exp://192.168.0.11:8081/~/redirect
 
-    // Getting data
-    // Why is this infinite looping?
-    // updateSpotifyData(userID);
-    //logoutSpotify();
+  // Getting data
+  // Why is this infinite looping?
+  updateSpotifyData(userID)
+  //logoutSpotify();
 
-    //console.log("AAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+  //console.log("AAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 
-    return(
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}> 
-            <Spotify inputID={userID} />
-            <LoginSpotifyButton/>
-        </View>
-    )
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Spotify inputID={userID} />
+      <LoginSpotifyButton />
+    </View>
+  )
 }

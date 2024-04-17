@@ -134,6 +134,9 @@ importers:
       react-native-body-highlighter:
         specifier: 3.0.0-beta.6
         version: 3.0.0-beta.6(react-native@0.73.6)(react@18.2.0)
+      react-native-chart-kit:
+        specifier: ^6.12.0
+        version: 6.12.0(react-native-svg@14.1.0)(react-native@0.73.6)(react@18.2.0)
       react-native-dotenv:
         specifier: ^3.4.10
         version: 3.4.10(@babel/runtime@7.23.9)
@@ -13735,6 +13738,11 @@ packages:
     resolution: {integrity: sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==}
     dev: true
 
+  /paths-js@0.4.11:
+    resolution: {integrity: sha512-3mqcLomDBXOo7Fo+UlaenG6f71bk1ZezPQy2JCmYHy2W2k5VKpP+Jbin9H0bjXynelTbglCqdFhSEkeIkKTYUA==}
+    engines: {node: '>=0.11.0'}
+    dev: false
+
   /pathval@1.1.1:
     resolution: {integrity: sha512-Dp6zGqpTdETdR63lehJYPeIOqpiNBNtc7BpWSLrOje7UaIsE5aY92r/AunQA7rsXvet3lrJ3JnZX29UPTKXyKQ==}
     dev: true
@@ -13798,6 +13806,10 @@ packages:
   /pngjs@7.0.0:
     resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
     engines: {node: '>=14.19.0'}
+    dev: false
+
+  /point-in-polygon@1.1.0:
+    resolution: {integrity: sha512-3ojrFwjnnw8Q9242TzgXuTD+eKiutbzyslcq1ydfu82Db2y+Ogbmyrkpv0Hgj31qwT3lbS9+QAAO/pIQM35XRw==}
     dev: false
 
   /postcss-import@15.1.0(postcss@8.4.38):
@@ -14240,6 +14252,21 @@ packages:
       react-native: '*'
     dependencies:
       ramda: 0.29.1
+      react: 18.2.0
+      react-native: 0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
+      react-native-svg: 14.1.0(react-native@0.73.6)(react@18.2.0)
+    dev: false
+
+  /react-native-chart-kit@6.12.0(react-native-svg@14.1.0)(react-native@0.73.6)(react@18.2.0):
+    resolution: {integrity: sha512-nZLGyCFzZ7zmX0KjYeeSV1HKuPhl1wOMlTAqa0JhlyW62qV/1ZPXHgT8o9s8mkFaGxdqbspOeuaa6I9jUQDgnA==}
+    peerDependencies:
+      react: '> 16.7.0'
+      react-native: '>= 0.50.0'
+      react-native-svg: '> 6.4.1'
+    dependencies:
+      lodash: 4.17.21
+      paths-js: 0.4.11
+      point-in-polygon: 1.1.0
       react: 18.2.0
       react-native: 0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
       react-native-svg: 14.1.0(react-native@0.73.6)(react@18.2.0)

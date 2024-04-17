@@ -33,7 +33,7 @@ export default function NavBar({
       testID='left-button'
       onPress={() => router.back()}
       name='chevron-back'
-      size={24}
+      size={20}
       color='#CACACA'
     />
   ),

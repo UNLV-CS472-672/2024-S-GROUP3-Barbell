@@ -20,7 +20,7 @@ export default function NotifScreen() {
       {/*header w/ back and new message buttons*/}
       <NavBar
         center={'Notifications'}
-        right={<MaterialCommunityIcons name='message-plus-outline' size={24} color='#CACACA' />}
+        right={<MaterialCommunityIcons name='message-plus-outline' size={20} color='#CACACA' />}
       />
 
       {/*notif nav buttons*/}

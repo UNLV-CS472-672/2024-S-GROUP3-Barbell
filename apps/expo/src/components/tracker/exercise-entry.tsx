@@ -45,9 +45,10 @@ const ExerciseEntry: React.FC<IExerciseEntryProps> = memo(
 
     const handleNoteInputChange = useCallback(
       (value: NativeSyntheticEvent<TextInputChangeEventData>) => {
+        const val = value.nativeEvent.text
         workoutUpdater(
           produce((draft) => {
-            draft[exerciseIndex]!.note = value.nativeEvent.text
+            draft[exerciseIndex]!.note = val
           }),
         )
       },

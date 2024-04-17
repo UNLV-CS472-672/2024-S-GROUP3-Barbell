@@ -1,43 +1,32 @@
-import { Dimensions, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-// To figure out the return uri
-import { makeRedirectUri } from 'expo-auth-session'
-import { router } from 'expo-router'
+import React from 'react'
+import { Alert, Button, View } from 'react-native'
 
 import Spotify from 'apps/expo/src/components/spotify/spotify'
 
-//import SpotifyLoginButton from '../../utils/spotifyToken';
-import {
-  LoginSpotifyButton,
-  logoutSpotify,
-  updateSpotifyData,
-} from '../../components/spotify/spotifyToken'
+import { SignInSpotify } from '~/components/spotify/sign-in-spotify'
+import { SignOutSpotifyButton } from '~/components/spotify/sign-out-spotify'
+import useUpdateSpotify from '~/hooks/useUpdateSpotify'
 
-// Should get the current user
+const SpotifyScreen = () => {
+  const userID = 6 // This could eventually be dynamic based on user login.
 
-export default function SpotifyScreen() {
-  // This whole file is just to display the widget but getting it in the middle is a battle.
-
-  // TODO: update inputID to use a dynamic userID when possible. For now this is what we have tho. Just testing using ID of 1
-  let userID: number = 6
-
-  // To figure out what the returnURI is:
-  // let returnURI = makeRedirectUri({
-  //     scheme: 'expo',
-  //     path: 'redirect'
-  // });
-  // GOT: exp://192.168.0.11:8081/~/redirect
-
-  // Getting data
-  // Why is this infinite looping?
-  updateSpotifyData(userID)
-  //logoutSpotify();
-
-  //console.log("AAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+  const { handleUpdateData } = useUpdateSpotify(userID)
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Spotify inputID={userID} />
-      <LoginSpotifyButton />
+      <SignInSpotify />
+      <SignOutSpotifyButton />
+      <Button
+        title='Update Spotify Data'
+        onPress={async () => {
+          console.log('Updating Spotify data.')
+          handleUpdateData()
+          console.log('Spotify data updated.')
+        }}
+      />
     </View>
   )
 }
+
+export default SpotifyScreen

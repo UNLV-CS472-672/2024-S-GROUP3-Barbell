@@ -41,19 +41,40 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
   const [inErrorState, setInErrorState] = useState({
     weight: false,
     reps: false,
+    leftWeight: false,
+    rightWeight: false,
+    leftReps: false,
+    rightReps: false,
   })
 
   const handleWeightChange = useCallback(
-    (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+    (e: NativeSyntheticEvent<TextInputChangeEventData>, idx: number) => {
       workoutUpdater(
         produce((draft) => {
           const { sets } = draft[exerciseIndex]!
           const setIndex = sets.findIndex((s) => s.id === set.id)
-          sets[setIndex]!.weight = Number(e.nativeEvent.text)
+          sets[setIndex]!.weight[idx] = Number(e.nativeEvent.text)
         }),
       )
       setInErrorState(
         produce((draft) => {
+          if (isUnilateral) {
+            if (completed && e.nativeEvent.text.length === 0) {
+              if (idx === 0) {
+                draft.leftWeight = true
+              } else {
+                draft.rightWeight = true
+              }
+              setCompleted(false)
+            } else {
+              if (idx === 0) {
+                draft.leftWeight = false
+              } else {
+                draft.rightWeight = false
+              }
+            }
+            return
+          }
           if (completed && e.nativeEvent.text.length === 0) {
             draft.weight = true
             setCompleted(false)
@@ -63,44 +84,82 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
         }),
       )
     },
-    [completed],
+    [completed, isUnilateral],
   )
 
   const handleRepsChange = useCallback(
-    (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+    (e: NativeSyntheticEvent<TextInputChangeEventData>, idx: number) => {
       workoutUpdater(
         produce((draft) => {
           const { sets } = draft[exerciseIndex]!
           const setIndex = sets.findIndex((s) => s.id === set.id)
-          sets[setIndex]!.reps = Number(e.nativeEvent.text)
+          sets[setIndex]!.reps[idx] = Number(e.nativeEvent.text)
         }),
       )
       setInErrorState(
         produce((draft) => {
-          if (completed && e.nativeEvent.text.length === 0) {
-            draft.reps = true
-            setCompleted(false)
+          if (isUnilateral) {
+            if (completed && e.nativeEvent.text.length === 0) {
+              if (idx === 0) {
+                draft.leftReps = true
+              } else {
+                draft.rightReps = true
+              }
+              setCompleted(false)
+            } else {
+              if (idx === 0) {
+                draft.leftReps = false
+              } else {
+                draft.rightReps = false
+              }
+            }
           } else {
-            draft.reps = false
+            if (completed && e.nativeEvent.text.length === 0) {
+              draft.reps = true
+              setCompleted(false)
+            } else {
+              draft.reps = false
+            }
           }
         }),
       )
     },
-    [completed],
+    [completed, isUnilateral],
   )
 
   const handleCompletedPress = () => {
     const { weight, reps } = set
+    console.log(weight, reps)
 
-    if (!weight) {
-      setInErrorState((prev) => ({ ...prev, weight: true }))
+    // Non unilateral sets
+    if ((weight.length < 2 && reps.length < 2) || !isUnilateral) {
+      if (!weight[0]) {
+        setInErrorState((prev) => ({ ...prev, weight: true }))
+      }
+      if (!reps[0]) {
+        setInErrorState((prev) => ({ ...prev, reps: true }))
+      }
+      if (weight[0] && reps[0]) {
+        setCompleted((prev) => !prev)
+      }
     }
-    if (!reps) {
-      setInErrorState((prev) => ({ ...prev, reps: true }))
-    }
-
-    if (weight && reps) {
-      setCompleted((prev) => !prev)
+    // unilateral sets
+    else {
+      if (!weight[0]) {
+        setInErrorState((prev) => ({ ...prev, leftWeight: true }))
+      }
+      if (!weight[1]) {
+        setInErrorState((prev) => ({ ...prev, rightWeight: true }))
+      }
+      if (!reps[0]) {
+        setInErrorState((prev) => ({ ...prev, leftReps: true }))
+      }
+      if (!reps[1]) {
+        setInErrorState((prev) => ({ ...prev, rightReps: true }))
+      }
+      if (weight[0] && weight[1] && reps[0] && reps[1]) {
+        setCompleted((prev) => !prev)
+      }
     }
   }
 
@@ -124,6 +183,44 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
     }
   }
 
+  const handleUnilateralSwitch = () => {
+    if (!isUnilateral) {
+      workoutUpdater(
+        produce((draft) => {
+          const { sets } = draft[exerciseIndex]!
+          const setIndex = sets.findIndex((s) => s.id === set.id)
+          if (sets[setIndex]!.weight.length === 1) {
+            sets[setIndex]!.weight.push(sets[setIndex]!.weight[0] as number)
+            sets[setIndex]!.reps.push(sets[setIndex]!.reps[0] as number)
+          } else {
+            sets[setIndex]!.weight[1] = sets[setIndex]!.weight[0] as number
+            sets[setIndex]!.reps[1] = sets[setIndex]!.reps[0] as number
+          }
+        }),
+      )
+    }
+    workoutUpdater(
+      produce((draft) => {
+        const { sets } = draft[exerciseIndex]!
+        const setIndex = sets.findIndex((s) => s.id === set.id)
+        sets[setIndex]!.unilateral = !sets[setIndex]!.unilateral
+      }),
+    )
+    setIsUnilateral((prev) => !prev)
+  }
+
+  const isDisabled = () => {
+    if (isUnilateral) {
+      return (
+        inErrorState.leftWeight ||
+        inErrorState.rightWeight ||
+        inErrorState.leftReps ||
+        inErrorState.rightReps
+      )
+    }
+    return inErrorState.reps || inErrorState.weight
+  }
+
   return (
     <Swipeable renderRightActions={() => <DeleteButton handlePress={handleDeletePress} />}>
       <View
@@ -145,36 +242,39 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
           className='align-center flex basis-24 items-center justify-center py-1'
           testID='unilateral-switch-container'
         >
-          <Toggle value={isUnilateral} onValueChange={() => setIsUnilateral((prev) => !prev)} />
+          <Toggle value={isUnilateral} onValueChange={handleUnilateralSwitch} />
         </View>
-        {/* TODO: Fix tracking of unilateral sets */}
+
         <View className='basis-20 py-1' testID='weight-input-container'>
           {isUnilateral ? (
             <View className='gap-y-1'>
               <View className='flex flex-row items-center'>
                 <Text className='mr-2 font-bold text-white'>L</Text>
                 <TextInput
-                  onChange={handleWeightChange}
+                  onChange={(e) => handleWeightChange(e, 0)}
+                  value={set.weight[0] ? set.weight[0]!.toString() : ''}
                   className={`h-9 flex-1 rounded-lg text-lg ${styleTextInput(
                     completed,
-                    inErrorState.weight,
+                    inErrorState.leftWeight,
                   )} text-center text-white`}
                 />
               </View>
               <View className='flex flex-row items-center'>
                 <Text className='mr-2 font-bold text-white'>R</Text>
                 <TextInput
-                  onChange={handleWeightChange}
+                  onChange={(e) => handleWeightChange(e, 1)}
+                  value={set.weight[1] ? set.weight[1]!.toString() : ''}
                   className={`h-9 flex-1 rounded-lg text-lg ${styleTextInput(
                     completed,
-                    inErrorState.weight,
+                    inErrorState.rightWeight,
                   )} text-center text-white`}
                 />
               </View>
             </View>
           ) : (
             <TextInput
-              onChange={handleWeightChange}
+              onChange={(e) => handleWeightChange(e, 0)}
+              value={set.weight[0] ? set.weight[0]!.toString() : ''}
               className={`h-9 rounded-lg text-lg ${styleTextInput(
                 completed,
                 inErrorState.weight,
@@ -182,33 +282,37 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
             />
           )}
         </View>
+
         <View className='basis-20 py-1' testID='reps-input-container'>
           {isUnilateral ? (
             <View className='gap-y-1'>
               <View className='flex flex-row items-center'>
                 <Text className='mr-2 font-bold text-white'>L</Text>
                 <TextInput
-                  onChange={handleRepsChange}
+                  onChange={(e) => handleRepsChange(e, 0)}
+                  value={set.reps[0] ? set.reps[0]!.toString() : ''}
                   className={`h-9 flex-1 rounded-lg text-lg ${styleTextInput(
                     completed,
-                    inErrorState.reps,
+                    inErrorState.leftReps,
                   )} text-center text-white`}
                 />
               </View>
               <View className='flex flex-row items-center'>
                 <Text className='mr-2 font-bold text-white'>R</Text>
                 <TextInput
-                  onChange={handleRepsChange}
+                  onChange={(e) => handleRepsChange(e, 1)}
+                  value={set.reps[1] ? set.reps[1]!.toString() : ''}
                   className={`h-9 flex-1 rounded-lg text-lg ${styleTextInput(
                     completed,
-                    inErrorState.reps,
+                    inErrorState.rightReps,
                   )} text-center text-white`}
                 />
               </View>
             </View>
           ) : (
             <TextInput
-              onChange={handleRepsChange}
+              onChange={(e) => handleRepsChange(e, 0)}
+              value={set.reps[0] ? set.reps[0]!.toString() : ''}
               className={`h-9 rounded-lg text-lg ${styleTextInput(
                 completed,
                 inErrorState.reps,
@@ -216,6 +320,7 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
             />
           )}
         </View>
+
         <View className='basis-12 py-1' testID='completed-button-container'>
           <Button
             className={`flex h-9 items-center justify-center ${
@@ -223,7 +328,7 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
             }`}
             color='dark'
             onPress={handleCompletedPress}
-            disabled={inErrorState.reps || inErrorState.weight}
+            disabled={isDisabled()}
           >
             <Feather name='check' color='white' size={19} />
           </Button>

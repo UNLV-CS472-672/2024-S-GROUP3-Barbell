@@ -11,27 +11,20 @@ export const UpdateUserSchema = z.object({
   notificationsBanners: z.boolean().optional(),
 })
 
+export const SetSchema = z.object({
+  id: z.string(),
+  type: z.nativeEnum(SetType),
+  reps: z.array(z.number().int()),
+  weight: z.array(z.number()),
+  exerciseId: z.number().int(),
+  unilateral: z.boolean().default(false),
+})
+
 export const ExerciseSchema = z.object({
   id: z.number().int(),
   name: z.string(),
   note: z.string().optional(),
   bodyPart: z.nativeEnum(BodyPart),
   category: z.nativeEnum(Category),
-  sets: z.array(
-    z.object({
-      id: z.string(),
-      type: z.nativeEnum(SetType),
-      reps: z.number().int().optional(),
-      weight: z.number().optional(),
-      exerciseId: z.number().int(),
-    }),
-  ),
-})
-
-export const SetSchema = z.object({
-  id: z.string(),
-  type: z.nativeEnum(SetType),
-  reps: z.number().int().optional(),
-  weight: z.number().optional(),
-  exerciseId: z.number().int(),
+  sets: z.array(SetSchema),
 })

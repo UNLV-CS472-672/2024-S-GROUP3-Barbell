@@ -199,8 +199,9 @@ model Exercise {
 model Set {
   id         String   @id @default(uuid())
   type       SetType  @default(NORMAL)
-  reps       Int?
-  weight     Float?
+  unilateral Boolean  @default(false)
+  reps       Int[]
+  weight     Float[]
   exercise   Exercise @relation(fields: [exerciseId], references: [id])
   exerciseId Int
 }

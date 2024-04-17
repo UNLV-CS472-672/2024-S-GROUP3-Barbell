@@ -26,8 +26,9 @@ const ExerciseEntry: React.FC<IExerciseEntryProps> = memo(
             id: uuid(),
             type: SetType.NORMAL,
             exerciseId: exercise.id,
-            reps: undefined,
-            weight: undefined,
+            reps: [] as number[],
+            weight: [] as number[],
+            unilateral: false,
           })
         }),
       )
@@ -62,8 +63,9 @@ const ExerciseEntry: React.FC<IExerciseEntryProps> = memo(
             id: uuid(),
             type: SetType.NORMAL,
             exerciseId: exercise.id,
-            reps: undefined,
-            weight: undefined,
+            reps: [] as number[],
+            weight: [] as number[],
+            unilateral: false,
           })
         }),
       )

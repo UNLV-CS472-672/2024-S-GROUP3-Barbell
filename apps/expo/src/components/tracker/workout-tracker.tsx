@@ -47,8 +47,6 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef }) => {
   const [exercises, setExercises] = useState<TExercise[]>(exerciseData)
   const [workoutName, setWorkoutName] = useState('New Workout') // TODO: Set the default value to the previous workout name
 
-  const onSubmit = (data: any) => console.log('data', data)
-
   // TODO: Fix the keyboard avoid view with the inputs
   return (
     <View>

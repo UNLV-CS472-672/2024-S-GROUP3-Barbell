@@ -7,6 +7,13 @@ import Body from 'react-native-body-highlighter'
 import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
 import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 // import tailwind from '@/tooling/tailwind'
+import {GlobalContext, useGlobalContext} from '~/context/global-context'
+
+enum GENDER {
+  MALE,
+  FEMALE,
+  PREFERNOTTOSAY
+}
 
 export type muscleSelectDev =
   | "abs"
@@ -51,6 +58,7 @@ export default function NewWorkoutMuscleGroup() {
   // Dynamically resize by reversing the work done in react-native-body-highlighter
   const maxScale = (screenHeight-96) / (400+96)
   // const maxScale = (screenHeight-96) / (400+64)
+  const { userData } = useGlobalContext()
 
   const [bodyPartSelected, setBodyPartSelected] = useState({/*
     slug: "biceps",
@@ -58,7 +66,18 @@ export default function NewWorkoutMuscleGroup() {
   }
   )
   const [isBackSideEnabled, setIsBackSideEnabled] = useState(false)
+  // const {userData} = useGlobalContext()
   const [genderSelection, setGender] = useState(false)
+
+  if (userData?.gender == GENDER.FEMALE) {
+    setGender(true)
+  } else {
+    setGender(false)
+  }
+
+
+
+
   const toggleSwitch = () =>
     setIsBackSideEnabled((previousState) => !previousState)
 

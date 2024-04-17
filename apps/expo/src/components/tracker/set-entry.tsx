@@ -183,7 +183,7 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
     }
   }
 
-  const handleUnilateralSwitch = () => {
+  const handleUnilateralSwitch = useCallback(() => {
     if (!isUnilateral) {
       workoutUpdater(
         produce((draft) => {
@@ -198,7 +198,22 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
           }
         }),
       )
+      setInErrorState(
+        produce((draft) => {
+          draft.leftWeight = false
+          draft.rightWeight = false
+          draft.leftReps = false
+          draft.rightReps = false
+        }),
+      )
     }
+
+    setInErrorState(
+      produce((draft) => {
+        draft.weight = false
+        draft.reps = false
+      }),
+    )
     workoutUpdater(
       produce((draft) => {
         const { sets } = draft[exerciseIndex]!
@@ -207,7 +222,7 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
       }),
     )
     setIsUnilateral((prev) => !prev)
-  }
+  }, [isUnilateral, inErrorState])
 
   const isDisabled = () => {
     if (isUnilateral) {

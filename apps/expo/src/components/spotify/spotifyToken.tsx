@@ -47,8 +47,6 @@ export function LoginSpotifyButton() {
   // This is the code. If it returns undefined, no such code exists and thus authentication
   // has never happened before (or user logged out).
   let localCode = SecureStore.getItem('code')
-  console.log('Local code: ', localCode)
-  console.log('Response: ', response)
 
   // Hook to use and return the results from promptAsync()
   // Has several cases. Refer to the following: https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionresult
@@ -69,6 +67,7 @@ export function LoginSpotifyButton() {
       // Auth was failed. See what error code it was
       console.log('Auth status not success, rather: ' + response?.type)
     } else {
+      /* experimenting */
       console.log('Auth code already exists. No need to update.')
     }
     // Now store it. Check if code already existed first.
@@ -285,12 +284,12 @@ async function getTrackData() {
       headers: { Authorization: `Bearer ${access}` },
     })
 
-    // if (!result.ok) {
-    //   const errorResponse = await result.json()
-    //   console.error('Spotify API Error:', errorResponse)
-    //   throw new Error(`Spotify API responded with ${result.status}: ${errorResponse.error.message}`)
-    // }
-    // console.log('result body: ', result.blob())
+    if (!result.ok) {
+      const errorResponse = await result.json()
+      console.error('Spotify API Error:', errorResponse)
+      throw new Error(`Spotify API responded with ${result.status}: ${errorResponse.error.message}`)
+    }
+    console.log('result body: ', result.blob())
 
     // const songData = await result.json()
     // console.log(songData, 'huh')

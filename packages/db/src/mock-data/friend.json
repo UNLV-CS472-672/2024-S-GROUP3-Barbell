@@ -1,2 +1,10 @@
 [
+  {
+    "userId": 9,
+    "friendId": 1
+  },
+  {
+    "userId": 9,
+    "friendId": 2
+  }
 ]

@@ -23,7 +23,7 @@ test('EXERCISE /createNewExercise', async () => {
       note: exerciseInput.note,
       body_part: exerciseInput.body_part,
       category: exerciseInput.category,
-      workoutId: exerciseInput.workoutId,
+      // workoutId: exerciseInput.workoutId,
     },
     create: {
       id: exerciseInput.id,
@@ -31,7 +31,7 @@ test('EXERCISE /createNewExercise', async () => {
       note: exerciseInput.note,
       body_part: exerciseInput.body_part,
       category: exerciseInput.category,
-      workoutId: exerciseInput.workoutId,
+      // workoutId: exerciseInput.workoutId,
     },
   })
 
@@ -72,7 +72,7 @@ test('EXERCISE /updateExerciseFromExericseID', async () => {
       note: exerciseInput.note,
       body_part: exerciseInput.body_part,
       category: exerciseInput.category,
-      workoutId: exerciseInput.workoutId,
+      // workoutId: exerciseInput.workoutId,
     },
   })
 

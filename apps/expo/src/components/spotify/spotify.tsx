@@ -3,7 +3,7 @@ import { Image, Text, View } from 'react-native'
 // Use to show the progress of the song using a bar
 import SongProgress from '~/components/spotify/song-progress'
 
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 
 export default function Spotify({ inputID }: { inputID: number }) {
   // Should use this line instead for actual display

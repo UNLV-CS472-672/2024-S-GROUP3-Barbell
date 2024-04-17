@@ -78,12 +78,12 @@ export default function NewWorkoutMuscleGroup() {
 
   const [isBackSideEnabled, setIsBackSideEnabled] = useState(false)
   const [genderSelection, setGender] = useState(false)
-/*
-  if (userData?.gender == GENDER.FEMALE) {
-    setGender(true)
-  } else {
-    setGender(false)
-  }*/
+  /*
+    if (userData?.gender == GENDER.FEMALE) {
+      setGender(true)
+    } else {
+      setGender(false)
+    }*/
 
 
 
@@ -116,168 +116,168 @@ export default function NewWorkoutMuscleGroup() {
         <Body
 
           onBodyPartPress={(e) =>
-            {
-              switch (e.slug) {
-                case 'deltoids':
-                  // Shoulder
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Shoulder')
+          {
+            switch (e.slug) {
+              case 'deltoids':
+                // Shoulder
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Shoulder')
 
-                  // setTmp1({ slug: "chest", intensity: 2 })
-                  // sameGroup = bodyPartSelected;
-                  // sameGroup.slug = "chest";
-                  break
+                // setTmp1({ slug: "chest", intensity: 2 })
+                // sameGroup = bodyPartSelected;
+                // sameGroup.slug = "chest";
+                break
 
-                case 'chest':
-                  // Chest
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Chest')
-                  break
+              case 'chest':
+                // Chest
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Chest')
+                break
 
-                case 'biceps':
-                case 'triceps':
-                case 'forearm':
-                  // Arm
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Arm')
-                  break
+              case 'biceps':
+              case 'triceps':
+              case 'forearm':
+                // Arm
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Arm')
+                break
 
-                case 'abs':
-                case 'obliques':
-                  // Core
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Core')
-                  break
+              case 'abs':
+              case 'obliques':
+                // Core
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Core')
+                break
 
-                case 'quadriceps':
-                case 'adductors':
-                case 'hamstring':
-                  // Upper leg
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Upper leg')
-                  break
+              case 'quadriceps':
+              case 'adductors':
+              case 'hamstring':
+                // Upper leg
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Upper leg')
+                break
 
-                case 'tibialis':
-                case 'calves':
-                  // Lower leg
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Lower leg')
-                  break
+              case 'tibialis':
+              case 'calves':
+                // Lower leg
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Lower leg')
+                break
 
-                case 'trapezius':
-                  // Conflit with upper back
-                  // Go with the figma design
-                  // Upper back
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Upper back')
-                  break
+              case 'trapezius':
+                // Conflit with upper back
+                // Go with the figma design
+                // Upper back
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Upper back')
+                break
 
-                case 'upper-back':
-                  // Lat
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Lat')
-                  break
+              case 'upper-back':
+                // Lat
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Lat')
+                break
 
-                case 'lower-back':
-                  // Lower back
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Lower back')
-                  break
+              case 'lower-back':
+                // Lower back
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Lower back')
+                break
 
-                case 'gluteal':
-                  // Glute
-                  // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                  setBodyPartSelected({
-                    slug: e.slug,
-                    intensity: 2,
-                    color: 'defaultColor',
-                    pathArray: e.pathArray,
-                  })
-                  setUserSelection('Glute')
-                  break
+              case 'gluteal':
+                // Glute
+                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 2,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setUserSelection('Glute')
+                break
 
-                default:
-                  // Do Nothing
-                  // Not supported
-                  setUserSelection('')
-                  break
-              }
-
-              // DO NOT SELECT
-              // Get out
-              setBodyPartSelected({
-                slug: e.slug,
-                intensity: 2,
-                color: 'defaultColor',
-                pathArray: e.pathArray,
-              })
+              default:
+                // Do Nothing
+                // Not supported
+                setUserSelection('')
+                break
             }
+
+            // DO NOT SELECT
+            // Get out
+            setBodyPartSelected({
+              slug: e.slug,
+              intensity: 2,
+              color: 'defaultColor',
+              pathArray: e.pathArray,
+            })
+          }
           }
 
           data={
-          [
-            /*
-          { slug: "chest", intensity: 1 },
-          { slug: "abs", intensity: 2 },
-          { slug: "upper-back", intensity: 1 },
-          { slug: "lower-back", intensity: 2 },*/
-            // tmp1,
-            bodyPartSelected
-          ]}
+            [
+              /*
+            { slug: "chest", intensity: 1 },
+            { slug: "abs", intensity: 2 },
+            { slug: "upper-back", intensity: 1 },
+            { slug: "lower-back", intensity: 2 },*/
+              // tmp1,
+              bodyPartSelected
+            ]}
 
           gender={genderSelection ?   "female" : "male"}
           side={isBackSideEnabled ? "back" : "front"}
@@ -289,38 +289,38 @@ export default function NewWorkoutMuscleGroup() {
 
 
       {/* Bottom section */}
-        <View className="flex flex-row"
-              style={{gap: 0.1 * screenWidth, position: "absolute", bottom: 11}}>
+      <View className="flex flex-row"
+            style={{gap: 0.1 * screenWidth, position: "absolute", bottom: 11}}>
 
-          <View className="flex-1"
-                style={{alignItems: "center", justifyContent: "center"}}>
+        <View className="flex-1"
+              style={{alignItems: "center", justifyContent: "center"}}>
 
-            <View className={"p-1"}>
-              <Text style={{ color: '#CACACA', fontSize: 20 }}>
-                Muscle Group Selected: {userSelection}
-              </Text>
-            </View>
+          <View className={"p-1"}>
+            <Text style={{ color: '#CACACA', fontSize: 20 }}>
+              Muscle Group Selected: {userSelection}
+            </Text>
+          </View>
 
-            <View className={"flex flex-row p-1"}>
-              <Text style={{ color: '#CACACA', fontSize: 20 }}>
-                Currently Selecting: {genderSelection ? "Female  " : "Male      "}
-              </Text>
+          <View className={"flex flex-row p-1"}>
+            <Text style={{ color: '#CACACA', fontSize: 20 }}>
+              Currently Selecting: {genderSelection ? "Female  " : "Male      "}
+            </Text>
 
-              <GenderSwitch onValueChange={toggleGenderSwitch} value={genderSelection} />
-            </View>
+            <GenderSwitch onValueChange={toggleGenderSwitch} value={genderSelection} />
+          </View>
 
-            {/*<Text style={{ color: '#CACACA', fontSize: 20 }}>
+          {/*<Text style={{ color: '#CACACA', fontSize: 20 }}>
               {maxScale}
             </Text>*/}
 
-            <FrontBackSwitch
-              onValueChange={toggleSwitch}
-              value={isBackSideEnabled}
-              label={''}
-            />
+          <FrontBackSwitch
+            onValueChange={toggleSwitch}
+            value={isBackSideEnabled}
+            label={''}
+          />
 
-          </View>
         </View>
+      </View>
 
     </SafeAreaView>
   )

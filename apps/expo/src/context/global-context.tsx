@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 
 import { useClerk } from '@clerk/clerk-expo'
 
-import { api } from '~/utils/api'
+import { api } from '~/utils/trpc/api'
 import { generateUsername } from '~/utils/usernameGenerator'
 
 

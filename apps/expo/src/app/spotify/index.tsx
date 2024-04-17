@@ -11,6 +11,8 @@ import {LoginSpotifyButton} from '../../components/spotify/spotifyToken';
 import { updateSpotifyData } from '../../components/spotify/spotifyToken';
 import { logoutSpotify } from '../../components/spotify/spotifyToken';
 
+// Should get the current user 
+
 
 export default function SpotifyScreen() {
     // This whole file is just to display the widget but getting it in the middle is a battle.
@@ -26,9 +28,11 @@ export default function SpotifyScreen() {
     // GOT: exp://192.168.0.11:8081/~/redirect
 
     // Getting data
-    updateSpotifyData(userID);
+    // Why is this infinite looping?
+    // updateSpotifyData(userID);
     //logoutSpotify();
 
+    //console.log("AAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 
     return(
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}> 

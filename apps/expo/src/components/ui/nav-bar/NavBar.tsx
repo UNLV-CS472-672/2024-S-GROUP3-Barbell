@@ -5,6 +5,11 @@
  *   right={<MaterialCommunityIcons name='message-plus-outline' size={24} color='#CACACA' />}
  * />
  *
+ * <NavBar
+ *   center={'Workout Page'}
+ *   right={'Next'}
+ * />
+ *
  * @note
  * If you want to remove the back arrow, pass in a <View /> component into the left param.
  * The rest of the fields will default to empty.

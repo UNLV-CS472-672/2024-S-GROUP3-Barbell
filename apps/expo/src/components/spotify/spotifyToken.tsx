@@ -47,6 +47,8 @@ export function LoginSpotifyButton() {
   // This is the code. If it returns undefined, no such code exists and thus authentication
   // has never happened before (or user logged out).
   let localCode = SecureStore.getItem('code')
+  console.log('Local code: ', localCode)
+  console.log('Response: ', response)
 
   // Hook to use and return the results from promptAsync()
   // Has several cases. Refer to the following: https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionresult
@@ -54,14 +56,14 @@ export function LoginSpotifyButton() {
     if (response?.type === 'success') {
       // Successful auth request.
       const { code } = response.params
-
       // Now store it. Check if code already existed first.
       if (!(code === undefined) && SecureStore.getItem('code') === undefined) {
         SecureStore.setItem('code', code)
       } else if (code === undefined) {
         throw new Error('Authentication code not generated during auth.')
       } else {
-        throw new Error("Auth code already existed. This shouldn't be able to happen.")
+        /* Well, it does happen, session last login */
+        // throw new Error("Auth code already existed. This shouldn't be able to happen.")
       }
     } else if (localCode === null || localCode === undefined) {
       // Auth was failed. See what error code it was
@@ -69,6 +71,7 @@ export function LoginSpotifyButton() {
     } else {
       console.log('Auth code already exists. No need to update.')
     }
+    // Now store it. Check if code already existed first.
   }, [response])
 
   // Runs promptAsync() which updates response and thus invokes the hook above
@@ -282,8 +285,6 @@ async function getTrackData() {
       headers: { Authorization: `Bearer ${access}` },
     })
 
-    console.log('Result of fetch: ', result)
-
     // if (!result.ok) {
     //   const errorResponse = await result.json()
     //   console.error('Spotify API Error:', errorResponse)
@@ -291,8 +292,8 @@ async function getTrackData() {
     // }
     // console.log('result body: ', result.blob())
 
-    const songData = result.json()
-    console.log(songData, 'huh')
+    // const songData = await result.json()
+    // console.log(songData, 'huh')
 
     // Error checking very quickly
     if (result.status > 400) {
@@ -310,6 +311,9 @@ async function getTrackData() {
 
     // No error so just carry on
     const song = await result.json()
+
+    console.log('something')
+
     retData = {
       albumImageURL: song.item.album.images[0].url,
       albumName: song.item.album.name,
@@ -339,7 +343,6 @@ export async function updateSpotifyData(userID: number) {
   console.log('Updating track data!')
   const returnedTrack: spotifyData = await getTrackData()
   console.log(spotifyCredentials.redirectUri)
-
 
   console.log('we never get here')
   console.log(returnedTrack)

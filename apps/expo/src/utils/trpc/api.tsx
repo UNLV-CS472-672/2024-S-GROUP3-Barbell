@@ -1,5 +1,6 @@
 import React from 'react'
 import Constants from 'expo-constants'
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { httpBatchLink, loggerLink } from '@trpc/client'
 import { createTRPCReact } from '@trpc/react-query'
@@ -27,15 +28,12 @@ export const getBaseUrl = () => {
    * baseUrl to your production API URL.
    */
   const debuggerHost = Constants.expoConfig?.hostUri
-  let localhost = debuggerHost?.split(':')[0]
-  // const uri = Constants.manifest2?.extra?.expoGo?.debuggerHost
+  const localhost = debuggerHost?.split(':')[0]
 
   if (!localhost) {
-    throw new Error(
-      'Failed to get localhost. Please point to your production server.',
-    )
-  } 
-
+    // return "https://turbo.t3.gg";
+    return 'https://2024-s-group-3-barbell-nextjs.vercel.app/'
+  }
   return `http://${localhost}:3000`
 }
 
@@ -81,9 +79,7 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
 
   return (
     <api.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        {props.children}
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{props.children}</QueryClientProvider>
     </api.Provider>
   )
 }

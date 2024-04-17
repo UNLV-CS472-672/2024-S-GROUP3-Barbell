@@ -28,25 +28,33 @@ interface NavBarProps {
 }
 
 export default function NavBar({
-  left = <Ionicons onPress={() => router.back()} name='chevron-back' size={24} color='#CACACA' />,
+  left = (
+    <Ionicons
+      testID='left-button'
+      onPress={() => router.back()}
+      name='chevron-back'
+      size={24}
+      color='#CACACA'
+    />
+  ),
   center = <View />,
   right = <View />,
 }: NavBarProps) {
   return (
     <View className='flex-row items-center justify-between px-5'>
-      <View className='basis-1/3 items-start'>
+      <View testID='left-test' className='basis-1/3 items-start'>
         {typeof left == 'string' && <Text style={{ color: '#CACACA', fontSize: 16 }}>{left}</Text>}
         {typeof left != 'string' && left}
       </View>
 
-      <View className='basis-1/3 items-center'>
+      <View testID='center-test' className='basis-1/3 items-center'>
         {typeof center == 'string' && (
           <Text style={{ color: '#CACACA', fontSize: 20 }}>{center}</Text>
         )}
         {typeof center != 'string' && center}
       </View>
 
-      <View className='basis-1/3 items-end'>
+      <View testID='right-test' className='basis-1/3 items-end'>
         {typeof right == 'string' && (
           <Text style={{ color: '#CACACA', fontSize: 16 }}>{right}</Text>
         )}

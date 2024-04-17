@@ -41,6 +41,7 @@
     "expo-splash-screen": "~0.26.4",
     "expo-status-bar": "~1.11.1",
     "expo-updates": "~0.24.12",
+    "immer": "^10.0.4",
     "jest": "^29.7.0",
     "jest-expo": "~50.0.4",
     "nativewind": "4.0.36",

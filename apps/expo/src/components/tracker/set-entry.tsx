@@ -8,14 +8,16 @@ import { produce } from 'immer'
 import { z } from 'zod'
 
 import type { TExercise } from '~/components/tracker/workout-tracker'
+import Toggle from '~/components/toggle/toggle'
+import SetTypeButton from '~/components/tracker/set-type-button'
 import Button from '~/components/ui/button/button'
-import Toggle from '../toggle/toggle'
 
 export type TSet = z.infer<typeof SetSchema>
 export interface ISetEntryProps {
   set: TSet
   exerciseIndex: number
   workoutUpdater: React.Dispatch<React.SetStateAction<TExercise[]>>
+  setIndex: number
 }
 
 export interface IDeleteButtonProps {
@@ -35,7 +37,7 @@ const DeleteButton: React.FC<IDeleteButtonProps> = ({ handlePress }) => {
   )
 }
 
-const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex }) => {
+const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex, setIndex }) => {
   const [isUnilateral, setIsUnilateral] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [inErrorState, setInErrorState] = useState({
@@ -247,11 +249,7 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
           className='flex basis-14 flex-row justify-start py-1'
           testID='set-type-button-container'
         >
-          <Button
-            value='W'
-            className={`h-9 w-full ${completed ? 'bg-transparent' : 'bg-slate-900'}`}
-            color='dark'
-          />
+          <SetTypeButton set={set} {...{ workoutUpdater, completed, exerciseIndex, setIndex }} />
         </View>
         <View
           className='align-center flex basis-24 items-center justify-center py-1'

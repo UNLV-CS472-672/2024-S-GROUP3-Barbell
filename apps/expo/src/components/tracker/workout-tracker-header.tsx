@@ -1,6 +1,6 @@
 import { Text, TextInput, View } from 'react-native'
 
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import { CustomBottomSheetModalRef } from '^/apps/expo/src/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 
 import WorkoutTimer from '~/components/tracker/workout-timer'
@@ -32,8 +32,8 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
     <View className='mx-2'>
       <View className='mt-2 flex flex-row items-center justify-between'>
         {/* TODO: Implement Rest Timer Component functionality */}
-        <Button color='dark' size='icon' className='p-2'>
-          <MaterialCommunityIcons name='camera-timer' size={24} color={colors.bottomav.icon} />
+        <Button color='dark' size='icon' className='p-3'>
+          <Ionicons name='timer-outline' size={26} color={colors.bottomav.icon} />
         </Button>
         <View className='flex flex-row justify-end gap-x-4'>
           <Button className='bg-light-red px-6 opacity-90' onPress={handleCancelWorkout}>

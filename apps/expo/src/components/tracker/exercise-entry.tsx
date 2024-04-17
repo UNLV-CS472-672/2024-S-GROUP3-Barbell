@@ -35,7 +35,6 @@ const ExerciseEntry: React.FC<IExerciseEntryProps> = memo(
     }, [])
 
     useEffect(() => {
-      console.log('ExerciseEntry useEffect')
       const { sets } = exercise
       // If there doesn't exists a set from a previous workout, then we start this new exercise with one default set
       if (sets.length === 0) {
@@ -91,8 +90,8 @@ const ExerciseEntry: React.FC<IExerciseEntryProps> = memo(
           />
         </View>
         <View className='gap-y-1'>
-          {exercise.sets.map((set) => (
-            <SetEntry key={set.id} {...{ set, workoutUpdater, exerciseIndex }} />
+          {exercise.sets.map((set, setIndex) => (
+            <SetEntry key={set.id} {...{ set, workoutUpdater, exerciseIndex, setIndex }} />
           ))}
         </View>
         <Button value='Add Set' color='dark' className='mx-2 mt-2' onPress={handleAddSet} />

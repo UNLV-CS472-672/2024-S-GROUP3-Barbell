@@ -146,7 +146,7 @@ function AppContent() {
 /*  */
 function RootLayoutBottomNav() {
   return (
-    <Stack>
+    <Stack >
       <Stack.Screen
         name='(dashboard)'
         options={{

@@ -12,8 +12,10 @@
 
 // import type { inferAsyncReturnType } from "@trpc/server"
 // import type * as trpcNext from '@trpc/server/adapters/next'
+import type { CreateNextContextOptions } from '@trpc/server/adapters/next'
+import type { CreateWSSContextFnOptions } from '@trpc/server/adapters/ws'
 import { initTRPC } from '@trpc/server'
-import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
+// import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
 import superjson from 'superjson'
 import { ZodError } from 'zod'
 
@@ -36,6 +38,7 @@ export default function getErrorMessage(error: unknown) {
  *
  * @see https://trpc.io/docs/server/context
  */
+// interface CreateContextOptions extends Partial<CreateNextContextOptions> {
 interface CreateContextOptions {
   // session: Session | null
 }
@@ -52,7 +55,7 @@ interface CreateContextOptions {
  * - this is useful for testing when we don't want to mock Next.js' request/response
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
-export async function createContextInner(_opts: CreateContextOptions) {
+export async function createContextInner(_opts?: CreateContextOptions) {
   return {
     prisma,
   }
@@ -67,12 +70,25 @@ export type Context = Awaited<ReturnType<typeof createContextInner>>
  * @see https://create.t3.gg/en/usage/trpc#-pagesapitrpctrpcts
  * @alias createContext
  */
-export async function createTRPCContext(opts: FetchCreateContextFnOptions): Promise<Context> {
+export async function createTRPCContext(
+  opts: CreateNextContextOptions | CreateWSSContextFnOptions,
+) {
   // for API-response caching see https://trpc.io/docs/v11/caching
-  const source = opts.req.headers.get('x-trpc-source') ?? 'unknown'
-  console.log('>>> tRPC Request from', source)
+  // const source = opts.req.headers.get('x-trpc-source') ?? 'unknown'
+  // console.log('>>> tRPC Request from', source)
 
-  return await createContextInner({})
+  // https://trpc.io/docs/server/context#example-for-inner--outer-context
+  const soruce = opts.req.headers['x-trpc-source']
+  console.log('>>> tRPC Request from', soruce)
+
+  const contextInner = await createContextInner({})
+  return {
+    ...contextInner,
+    req: opts.req,
+    res: opts.res,
+    // session: opts.session,
+  }
+  // return await createContextInner({})
 }
 
 /* ------------------------------------------------------------------------------- */

@@ -35,19 +35,26 @@ interface SearchBarProps {
   placeholder: string
 }
 
-export default function SearchBar({ list, setFilteredList, filterBy, placeholder }: SearchBarProps) {
+export default function SearchBar({
+  list,
+  setFilteredList,
+  filterBy,
+  placeholder,
+}: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState('')
 
-  if (list) {
-    useEffect(() => {
-      setFilteredList(list.filter((item) => item[filterBy].toLowerCase().includes(searchTerm.toLowerCase())))
-    }, [searchTerm])
-  }
+  useEffect(() => {
+    if (list) {
+      setFilteredList(
+        list.filter((item) => item[filterBy].toLowerCase().includes(searchTerm.toLowerCase())),
+      )
+    }
+  }, [list, filterBy, searchTerm])
 
   return (
-    <View className="mx-3 rounded-[5px] bg-[#272727]" testID="searchBar">
+    <View className='mx-3 rounded-[5px] bg-[#272727]' testID='searchBar'>
       <TextInput
-        className="placeholder:color-[#717171] top-0 mx-1 px-4 py-[6px] text-[20px] text-white"
+        className='placeholder:color-[#717171] top-0 mx-1 px-4 py-[6px] text-[20px] text-white'
         placeholder={placeholder}
         onChangeText={setSearchTerm}
       />

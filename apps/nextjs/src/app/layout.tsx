@@ -23,17 +23,17 @@ export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Barbell',
   description: 'Simple monorepo with shared backend for web & mobile apps',
-  openGraph: {
-    title: 'Barbell',
-    description: 'Simple monorepo with shared backend for web & mobile apps',
-    url: 'https://create-t3-turbo.vercel.app',
-    siteName: 'Barbell',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@barbell',
-    creator: '@barbell',
-  },
+  // openGraph: {
+  //   title: 'Barbell',
+  //   description: 'Simple monorepo with shared backend for web & mobile apps',
+  //   url: 'https://create-t3-turbo.vercel.app',
+  //   siteName: 'Barbell',
+  // },
+  // twitter: {
+  //   card: 'summary_large_image',
+  //   site: '@barbell',
+  //   creator: '@barbell',
+  // },
 }
 
 export default function Layout(props: { children: React.ReactNode }) {

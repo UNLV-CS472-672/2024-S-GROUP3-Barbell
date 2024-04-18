@@ -7,7 +7,7 @@
     "clean": "git clean -xdf .next .turbo node_modules",
     "dev:next": "pnpm with-env next dev",
     "dev:wss": "pnpm with-env tsx watch src/server/ws-dev-server.ts --tsconfig tsconfig.server.json",
-    "dev": "pnpm dev:wss && pnpm dev:next",
+    "dev": "pnpm dev:next",
     "lint": "dotenv -v SKIP_ENV_VALIDATION=1 next lint",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "start": "pnpm with-env next start",

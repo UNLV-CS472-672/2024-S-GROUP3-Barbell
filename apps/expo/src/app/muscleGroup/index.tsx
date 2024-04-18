@@ -9,13 +9,8 @@ import Body from 'react-native-body-highlighter'
 import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
 import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 
-import {GlobalContext, useGlobalContext} from '~/context/global-context'
-
-enum GENDER {
-  MALE,
-  FEMALE,
-  PREFERNOTTOSAY
-}
+import { useGlobalContext, Gender} from '~/context/global-context'
+import { api } from '~/utils/trpc/api'
 
 export type muscleSelectDev =
   | 'abs'
@@ -61,6 +56,8 @@ export default function NewWorkoutMuscleGroup() {
   const maxScale = (screenHeight-96) / (400+96)
   // const maxScale = (screenHeight-96) / (400+64)
   const { userData } = useGlobalContext()
+  // Is female: true, Else: false
+  let genderTmp = false
 
   // const [bodyPartSelected, setBodyPartSelected] = useState({
   //   /*
@@ -77,16 +74,10 @@ export default function NewWorkoutMuscleGroup() {
   })
 
   const [isBackSideEnabled, setIsBackSideEnabled] = useState(false)
-  const [genderSelection, setGender] = useState(false)
-  /*
-    if (userData?.gender == GENDER.FEMALE) {
-      setGender(true)
-    } else {
-      setGender(false)
-    }*/
 
-
-
+  // Use user data to decide if change view to female
+  genderTmp = userData?.gender == Gender.FEMALE.toString()
+  const [genderSelection, setGender] = useState(genderTmp)
 
   const toggleSwitch = () => setIsBackSideEnabled((previousState) => !previousState)
 

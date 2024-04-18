@@ -6,8 +6,7 @@ import { useClerk } from '@clerk/clerk-expo'
 import { api } from '~/utils/trpc/api'
 import { generateUsername } from '~/utils/usernameGenerator'
 
-
-export enum GENDER {
+export enum Gender {
   MALE,
   FEMALE,
   PREFERNOTTOSAY
@@ -21,7 +20,7 @@ export interface IUserData {
   name: string
   // status: 'ACTIVE' | 'INACTIVE'
   // streak: number
-  gender: GENDER
+  gender: string
 }
 
 export type TGlobalContext = {
@@ -62,7 +61,7 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
         clerkId: response.clerkId,
         username: response.username,
         name: response.name!,
-        gender: GENDER.PREFERNOTTOSAY
+        gender: response.gender!
       })
     }
   }, [clerkUserData])
@@ -76,7 +75,7 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
         clerkId: userNineData?.clerkId!,
         username: userNineData?.username!,
         name: userNineData?.name!,
-        gender: GENDER.PREFERNOTTOSAY
+        gender: userNineData?.gender!
       })
     } else createUserIfNotExist()
   }, [createUserIfNotExist, userNineDataIsFetched])

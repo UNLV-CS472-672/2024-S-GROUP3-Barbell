@@ -66,6 +66,7 @@ export type Context = Awaited<ReturnType<typeof createContextInner>>
 /**
  * @param opts this thing need for nextjs (for some on god reason)
  * @see https://create.t3.gg/en/usage/trpc#-pagesapitrpctrpcts
+ * @alias createContext
  */
 export async function createTRPCContext(opts: FetchCreateContextFnOptions): Promise<Context> {
   // for API-response caching see https://trpc.io/docs/v11/caching

@@ -10,7 +10,7 @@ There will be merge conflicts, so do check out the resources here of how to reso
 - [blog](https://leonardomontini.dev/merge-conflict-vscode/)
 - [vscode docs](https://code.visualstudio.com/docs/sourcecontrol/overview)
 
-Whenever you want to sync with the main branch, get the latest main branch and then merge it with your branch. This will help you to avoid merge conflicts. There is some funny tools can help you with this 
+Whenever you want to sync with the main branch, get the latest main branch and then merge it with your branch. This will help you to avoid merge conflicts. There is some funny tools can help you with this
 as well.
 
 ```bash
@@ -42,6 +42,7 @@ That's it! You are now up to date with the main branch. Now submit and write tha
 1. Use present tense in your commit messages. For example, use "✨feature: Add xyz to component qrs" instead of "✨feature: Added xyz to component qrs". ([Source](https://stackoverflow.com/questions/3580013/should-i-use-past-or-present-tense-in-git-commit-messages))
 
 2. Use the emojis below to distinguish what type of change you have made in your commit. This will help keep commit messages consistent and easier to read. For example, "📚docs: Update commit conventions in README.md".
+
 - ✨feature: Introduces completely new code or new features.
 - 🐛fix: Implements changes that fix a bug. Ideally, reference an issue if present.
 - ♻️refactor: Includes any code-related change that is neither a fix nor a feature.
@@ -82,7 +83,6 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
   <strong>Note:</strong> This README is a work in progress and will be updated as the project progresses. Not strictly enforced, just a template for you to START with.
 </div>
 
-
 ## Commons Bugs Encountered
 
 - [ ] [SKD Not found](https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-location-with-sdk-dir-in-the-local-properties-fil)
@@ -96,8 +96,8 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 
 In case you encountered, Failed to get localhost. Please point to your production server.
 
-+ Check the entire constants from expo-constants and see if it exist the hostUri
-+ If it doens't exist, you can add it manually.
+- Check the entire constants from expo-constants and see if it exist the hostUri
+- If it doens't exist, you can add it manually.
 
 ## Development Workflows
 
@@ -114,3 +114,7 @@ eas update --auto
 <!-- build android aab (apk successor) -->
 eas build --platform android
 ```
+
+### WebSocket
+
+- [ ] [WebSocket](https://medium.com/@jonas.skackauskas/practical-implementation-of-websockets-with-next-js-and-trpc-eb5fb3b5c211)

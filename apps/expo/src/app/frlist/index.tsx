@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useGlobalContext } from '~/context/global-context';
 import { api } from '~/utils/trpc/api';
 
+import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
 
 
@@ -44,8 +45,22 @@ const handleNavigateToProfile = (userId: number) => {
   router.push(`/user/${userId}` as Route<string>);
 };
 
-const handleNavigateToMessages = (friend: Friend) => {
-  router.push(`/messages/${friend.id}` as Route<string>);
+const handleNavigateToMessages = async (friend: Friend) => {
+  const { userData } = useGlobalContext();
+  const mutation = api.friend.getChatIdByFriendId.useMutation();
+
+  // Use mutateAsync to perform the mutation and wait for the result
+  const chatId = await mutation.mutateAsync({
+    userId: userData?.id ?? 0,
+    friendId: friend.id,
+  });
+
+  if (chatId) {
+    router.push(`/messages/${chatId}` as Route<string>);
+  } else {
+    // Handle any error that may occur during chat creation
+    console.error('Failed to create a new chat');
+  }
 };
 
 const FriendsListScreen = () => {
@@ -82,7 +97,6 @@ const FriendsListScreen = () => {
         setFilteredFriends(filteredFriends.filter(friend => friend.id !== userId));
       } catch (error) {
         console.error('Error removing friend:', error);
-        // Handle error
       }
     },
     [deleteFriendMutation, friends, filteredFriends]
@@ -116,7 +130,13 @@ const FriendsListScreen = () => {
   };
 
   if (isLoading) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
+
+    return (
+      <div>
+        <RotatingBarbellIcon />
+        <ActivityIndicator size="large" color="#0000ff" />
+      </div>
+    );
   }
 
   if (error) {

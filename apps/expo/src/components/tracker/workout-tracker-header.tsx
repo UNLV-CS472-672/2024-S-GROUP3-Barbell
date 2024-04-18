@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Text, TextInput, View } from 'react-native'
 
 import { Ionicons } from '@expo/vector-icons'
@@ -20,12 +21,20 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
   bottomSheetRef,
   workoutName,
   setWorkoutName,
+  exercises,
 }) => {
   const { setIsWorkingOut } = useGlobalContext()
+  const [time, setTime] = useState(0)
 
   const handleCancelWorkout = () => {
     setIsWorkingOut(false)
     bottomSheetRef.current?.dismiss()
+  }
+
+  const handleFinishWorkout = () => {
+    console.log(workoutName)
+    console.log(time)
+    console.log(exercises)
   }
 
   return (
@@ -39,7 +48,7 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
           <Button className='bg-light-red px-6 opacity-90' onPress={handleCancelWorkout}>
             <Text className='font-bold text-white'>Cancel</Text>
           </Button>
-          <Button className='bg-light-green px-12' onPress={() => {}}>
+          <Button className='bg-light-green px-12' onPress={handleFinishWorkout}>
             <Text className='font-bold text-white'>Finish</Text>
           </Button>
         </View>
@@ -53,7 +62,7 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
       />
 
       {/* TODO: Add a ... button with extra options */}
-      <WorkoutTimer />
+      <WorkoutTimer {...{ time, setTime }} />
     </View>
   )
 }

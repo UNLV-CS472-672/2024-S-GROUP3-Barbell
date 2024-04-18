@@ -28,3 +28,13 @@ export const ExerciseSchema = z.object({
   category: z.nativeEnum(Category),
   sets: z.array(SetSchema),
 })
+
+export const WorkoutSchema = z.object({
+  id: z.number().int(),
+  name: z.string(),
+  description: z.string().optional(),
+  duration: z.number().int(),
+  finishedAt: z.date(),
+  exercises: z.array(ExerciseSchema),
+  userId: z.number().int(),
+})

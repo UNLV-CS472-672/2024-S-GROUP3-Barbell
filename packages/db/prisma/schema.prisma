@@ -177,15 +177,26 @@ model Workout {
 // * GROUP: Group message
 // ******************************************************************************************
 model Exercise {
-  id       Int       @id @unique @default(autoincrement())
-  name     String    @db.Char(100)
-  note     String?
-  sets     Set[]
-  bodyPart BodyPart
-  category Category
-  workout  Workout[]
-  User     User?     @relation(fields: [userId], references: [id])
-  userId   Int?
+  id           Int           @id @unique @default(autoincrement())
+  name         String        @db.Char(100)
+  note         String?
+  sets         Set[]
+  bodyPart     BodyPart
+  category     Category
+  workout      Workout[]
+  exerciseLogs ExerciseLog[]
+  User         User?         @relation(fields: [userId], references: [id])
+  userId       Int?
+}
+
+model ExerciseLog {
+  id         Int      @id @unique @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  finishedAt DateTime
+
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int
 }
 
 // ******************************************************************************************

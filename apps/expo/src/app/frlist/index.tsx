@@ -7,7 +7,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useGlobalContext } from '~/context/global-context';
 import { api } from '~/utils/trpc/api';
 
-import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
 
 
@@ -132,10 +131,7 @@ const FriendsListScreen = () => {
   if (isLoading) {
 
     return (
-      <div>
-        <RotatingBarbellIcon />
         <ActivityIndicator size="large" color="#0000ff" />
-      </div>
     );
   }
 

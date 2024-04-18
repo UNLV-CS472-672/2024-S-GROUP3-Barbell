@@ -59,7 +59,7 @@ export default function Keypad({
               <TouchableOpacity
                 key={keypadKey}
                 testID={`test-${keypadKey}`}
-                className='m-1 flex-1 justify-center items-center rounded-md bg-white'
+                className='m-1 h-20 flex-1 justify-center items-center rounded-md bg-white'
                 onPress={() => handleKeyPress(keypadKey.toString())}>
                 {btnFace}
               </TouchableOpacity>
@@ -73,7 +73,7 @@ export default function Keypad({
   return !keypadVisible ? (
     <View testID='invisible-test' />
   ) : (
-    <View>
+    <View className="flex bg-slate-200 p-1">
       <View>{keypadRows}</View>
       <View className='h-12 flex-row'>
         <TouchableOpacity

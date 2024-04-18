@@ -11,6 +11,12 @@ const wss = new WebSocketServer({
 
 const handler = applyWSSHandler({ wss, router: appRouter, createContext: createTRPCContext })
 
+console.log('Starting WebSocket Server...')
+
+wss.on('listening', () => {
+  console.log('WebSocket Server listening')
+})
+
 wss.on('connection', (ws) => {
   console.log(`➕➕ Connection (${wss.clients.size})`)
   ws.once('close', () => {
@@ -19,8 +25,9 @@ wss.on('connection', (ws) => {
 })
 console.log('✅ WebSocket Server listening on ws://localhost:3001')
 
-process.on('SIGTERM', () => {
-  console.log('SIGTERM')
+process.on('SIGTERM', (signal) => {
+  console.log('SIGTERM', signal)
   handler.broadcastReconnectNotification()
   wss.close()
+  process.exit()
 })

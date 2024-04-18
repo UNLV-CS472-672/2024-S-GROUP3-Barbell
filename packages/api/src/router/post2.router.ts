@@ -50,7 +50,7 @@ process.on('SIGTERM', () => {
   clearInterval(interval)
 })
 
-export const postRouter = createTRPCRouter({
+export const post2Router = createTRPCRouter({
   add: publicProcedure
     .input(
       z.object({

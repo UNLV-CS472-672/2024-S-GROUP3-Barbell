@@ -14,8 +14,9 @@
 // import type * as trpcNext from '@trpc/server/adapters/next'
 import type { CreateNextContextOptions } from '@trpc/server/adapters/next'
 import type { CreateWSSContextFnOptions } from '@trpc/server/adapters/ws'
+
 import { initTRPC } from '@trpc/server'
-// import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
+import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
 import superjson from 'superjson'
 import { ZodError } from 'zod'
 
@@ -71,24 +72,15 @@ export type Context = Awaited<ReturnType<typeof createContextInner>>
  * @alias createContext
  */
 export async function createTRPCContext(
-  opts: CreateNextContextOptions | CreateWSSContextFnOptions,
+  opts: FetchCreateContextFnOptions | CreateWSSContextFnOptions,
 ) {
   // for API-response caching see https://trpc.io/docs/v11/caching
-  // const source = opts.req.headers.get('x-trpc-source') ?? 'unknown'
+  // const source = opts?.req?.headers!.get('x-trpc-source') ?? 'unknown'
   // console.log('>>> tRPC Request from', source)
 
   // https://trpc.io/docs/server/context#example-for-inner--outer-context
-  const soruce = opts.req.headers['x-trpc-source']
-  console.log('>>> tRPC Request from', soruce)
 
-  const contextInner = await createContextInner({})
-  return {
-    ...contextInner,
-    req: opts.req,
-    res: opts.res,
-    // session: opts.session,
-  }
-  // return await createContextInner({})
+  return await createContextInner({})
 }
 
 /* ------------------------------------------------------------------------------- */

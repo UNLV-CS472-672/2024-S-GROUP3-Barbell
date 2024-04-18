@@ -1,9 +1,7 @@
 'use client'
 
 import type { TRPCLink } from '@trpc/client'
-import type { NextPageContext } from 'next'
 import { useState } from 'react'
-import getConfig from 'next/config'
 
 // import { env } from '@/env.mjs'
 import { api } from '@/utils/api'
@@ -19,9 +17,6 @@ import {
 import SuperJSON from 'superjson'
 
 import type { AppRouter } from '@acme/api'
-
-const { publicRuntimeConfig } = getConfig()
-const { WS_URL } = publicRuntimeConfig
 
 const getBaseUrl = () => {
   if (typeof window !== 'undefined') return window.location.origin // on god
@@ -44,9 +39,10 @@ function getEndingLink(): TRPCLink<AppRouter> {
       },
     })
   }
+  console.log('wsLink, hopefully');
 
   const client = createWSClient({
-    url: WS_URL,
+    url: `ws://localhost:3001`,
   })
 
   return wsLink({

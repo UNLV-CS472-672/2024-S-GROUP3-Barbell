@@ -6,7 +6,6 @@ import { appRouter, createTRPCContext } from '@acme/api'
  * Configure basic CORS headers
  * You should extend this to match your needs
  */
-
 const setCorsHeaders = (res: Response) => {
   res.headers.set('Access-Control-Allow-Origin', '*')
   res.headers.set('Access-Control-Request-Method', '*')
@@ -33,4 +32,5 @@ const handler = async (req: Request) => {
   setCorsHeaders(response)
   return response
 }
+
 export { handler as GET, handler as POST }

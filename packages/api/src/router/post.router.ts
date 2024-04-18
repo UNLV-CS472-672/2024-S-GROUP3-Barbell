@@ -78,4 +78,8 @@ export const postRouter = createTRPCRouter({
         take: input.postCount,
       })
     }),
+
+  /**
+   *
+   */
 })

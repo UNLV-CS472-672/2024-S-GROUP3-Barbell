@@ -75,11 +75,6 @@ export async function createTRPCContext(
   opts: FetchCreateContextFnOptions | CreateWSSContextFnOptions,
 ) {
   // for API-response caching see https://trpc.io/docs/v11/caching
-  // const source = opts?.req?.headers!.get('x-trpc-source') ?? 'unknown'
-  // console.log('>>> tRPC Request from', source)
-
-  // https://trpc.io/docs/server/context#example-for-inner--outer-context
-
   return await createContextInner({})
 }
 

@@ -39,7 +39,7 @@ function getEndingLink(): TRPCLink<AppRouter> {
       },
     })
   }
-  console.log('wsLink, hopefully');
+  console.log('wsLink, hopefully')
 
   const client = createWSClient({
     url: `ws://localhost:3001`,

@@ -28,6 +28,8 @@ import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 
+import { Fontisto } from '@expo/vector-icons'
+
 interface SearchBarProps {
   list: any[] | undefined
   setFilteredList: React.Dispatch<React.SetStateAction<any[] | undefined>>
@@ -52,9 +54,13 @@ export default function SearchBar({
   }, [list, filterBy, searchTerm])
 
   return (
-    <View className='mx-3 rounded-[5px] bg-[#272727]' testID='searchBar'>
+    <View
+      className='mx-3 my-2 flex-row items-center rounded-[5px] bg-[#272727] px-3'
+      testID='searchBar'
+    >
+      <Fontisto name='search' size={24} color='#717171' />
       <TextInput
-        className='placeholder:color-[#717171] top-0 mx-1 px-4 py-[6px] text-[20px] text-white'
+        className='placeholder:color-[#717171] px-3 py-[6px] text-[20px] text-white'
         placeholder={placeholder}
         onChangeText={setSearchTerm}
       />

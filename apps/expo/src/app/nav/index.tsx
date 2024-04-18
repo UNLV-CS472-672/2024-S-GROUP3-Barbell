@@ -31,6 +31,7 @@ const Nav = () => {
           { key: 'Workout Progress', route: '/user/workout-progress' },
           { key: 'Contact Us', route: '/contact-us' },
           { key: 'Privacy Policy', route: '/privacy-policy' },
+          { key: 'Friends List', route: '/frlist' },
           { key: 'Award', route: '/award' },
           { key: 'Spotify', route: '/spotify' },
           { key: 'Tracker', route: '/tracker' },

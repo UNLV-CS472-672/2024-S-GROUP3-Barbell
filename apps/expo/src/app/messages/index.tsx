@@ -12,19 +12,36 @@ import { api } from '~/utils/trpc/api'
 
 export default function MessageView() {
   const p = useLocalSearchParams()
-  if (p['chatId'] == null) {
-    // create chat
+  const { userData } = useGlobalContext()
+
+  // there is no user2 for group chats
+  // the user2Id field is also only used within the friends page
+  // if either case is hit let's just use -1 as the param so we dont use random userId
+  let user2Id: number = 0
+  if (p['type'] == ChatType.GROUP || !p['userId']) {
+    user2Id = -1
+  } else {
+    user2Id = Number(p['userId'])
   }
 
-  const { userData: user } = useGlobalContext()
+  // if the chatId doesn't exist, pass in -1 so we know to create a new chat
+  // else just use expected chatId
+  let chatId: number = 0
+  if (p['chatId'] == null) {
+    chatId = -1
+  } else {
+    chatId = Number(p['chatId'])
+  }
 
   const {
     data: messages,
     isFetching,
     isFetched,
   } = api.notif.getMessagesFromChatIdAndChatType.useQuery({
-    id: Number(p['chatId']),
+    id: chatId,
     type: p['type'] as ChatType,
+    user1Id: userData?.id!,
+    user2Id: user2Id,
   })
   const chattingWith = p['chatName']?.toString().trim()
 
@@ -43,7 +60,7 @@ export default function MessageView() {
           ) : isFetched ? (
             <View className='flex gap-y-3'>
               {messages?.map((message) =>
-                message.senderId == user?.id ? (
+                message.senderId == userData?.id ? (
                   <View
                     key={message.id}
                     className='bg-dark-purple w-1/2 self-end rounded-xl px-4 py-3'

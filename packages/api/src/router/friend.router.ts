@@ -139,14 +139,14 @@ export const friendRouter = createTRPCRouter({
    *
    * @param userId - the id of the user
    * @param friendId - the id of the friend
-   * @return either the chatId if a chat exists between the two users,
-   *         or creates a new chat and returns the chatId of the new chat
    */
   createChatWithFriend: publicProcedure
     .input(z.object({ userId: z.number().int(), friendId: z.number().int() }))
     .mutation(({ ctx, input }) => {
       const { prisma } = ctx
       // Create a new chat if one doesn't exist
+      console.log('userId' + input.userId)
+      console.log('friendId' + input.friendId)
       return prisma.chat.create({
         data: {
           type: ChatType.DIRECT,

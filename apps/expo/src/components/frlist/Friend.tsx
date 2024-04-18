@@ -4,9 +4,6 @@ import { Link } from 'expo-router'
 import { Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { ChatType } from '@prisma/client'
 
-import Button from '~/components/ui/button/button'
-import Label from '~/components/ui/label/Label'
-
 interface FriendProps {
   username: string
   userId: number
@@ -57,7 +54,7 @@ export default function Friend({ username, userId, chatId, name }: FriendProps) 
 
           {/* open messages */}
           <Link
-            href={{ pathname: 'messages/', params: { chatId, username, chatType } }}
+            href={{ pathname: 'messages/', params: { chatId, username, chatType, userId } }}
             asChild={true}
           >
             <TouchableOpacity>

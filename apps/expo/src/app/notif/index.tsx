@@ -24,7 +24,7 @@ export default function NotifScreen() {
       />
 
       {/*notif nav buttons*/}
-      <View className='m-2 flex flex-row items-center'>
+      <View className='mx-2 mb-1 flex flex-row items-center'>
         <TouchableOpacity
           className='ml-1 mr-1 mt-1 flex-1 rounded-lg px-4 py-2 font-bold'
           style={{ backgroundColor: visibleNotifs == 'misc' ? '#48476D' : '#CACACA' }}
@@ -65,9 +65,6 @@ export default function NotifScreen() {
           </Text>
         </TouchableOpacity>
       </View>
-
-      {/*thin line between notifs and nav section*/}
-      <View style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
 
       {/*list of notifications*/}
       <ScrollView className='flex-1'>

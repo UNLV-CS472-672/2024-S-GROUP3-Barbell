@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Friend from '~/components/frlist/Friend'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
+import NavBar from '~/components/ui/nav-bar/NavBar'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
 import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
@@ -22,6 +23,8 @@ export default function FriendsListScreen() {
     id: userData?.id!,
   })
 
+  console.log(data)
+
   const [filteredList, setFilteredList] = useState(data)
 
   const friendComponents = filteredList?.map((friend) => (
@@ -36,13 +39,13 @@ export default function FriendsListScreen() {
 
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
+      <NavBar center={'Friends'} />
       <SearchBar
         filterBy='username'
         list={data}
         setFilteredList={setFilteredList}
-        placeholder='Search friend by username...'
+        placeholder='Search friends'
       />
-      <View style={{ borderBottomWidth: 1, borderBottomColor: '#737272', paddingTop: 5 }} />
 
       <ScrollView>
         {isFetching && <RotatingBarbellIcon />}

@@ -13,7 +13,14 @@ export const notifRouter = createTRPCRouter({
    *  @returns an array of message objects
    */
   getMessagesFromChatIdAndChatType: publicProcedure
-    .input(z.object({ id: z.number().int(), type: z.nativeEnum(ChatType) }))
+    .input(
+      z.object({
+        id: z.number().int(),
+        type: z.nativeEnum(ChatType),
+        user1Id: z.number().int(),
+        user2Id: z.number().int(),
+      }),
+    )
     .query(async ({ ctx, input }) => {
       const { prisma } = ctx
 
@@ -52,7 +59,13 @@ export const notifRouter = createTRPCRouter({
    *  @returns an array of message objects
    */
   markChatAsReadByChatIdAndUserIdAndChatType: publicProcedure
-    .input(z.object({ chatId: z.number().int(), userId: z.number().int(), type: z.nativeEnum(ChatType) }))
+    .input(
+      z.object({
+        chatId: z.number().int(),
+        userId: z.number().int(),
+        type: z.nativeEnum(ChatType),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
       const { prisma } = ctx
 

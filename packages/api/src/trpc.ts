@@ -12,7 +12,6 @@
 
 // import type { inferAsyncReturnType } from "@trpc/server"
 // import type * as trpcNext from '@trpc/server/adapters/next'
-import type { CreateNextContextOptions } from '@trpc/server/adapters/next'
 import type { CreateWSSContextFnOptions } from '@trpc/server/adapters/ws'
 
 import { initTRPC } from '@trpc/server'
@@ -74,6 +73,17 @@ export type Context = Awaited<ReturnType<typeof createContextInner>>
 export async function createTRPCContext(
   opts: FetchCreateContextFnOptions | CreateWSSContextFnOptions,
 ) {
+  // console.log('>>> createTRPCContext', opts.req.headers)
+  // Checking based on the type of the 'req' object
+  // if (opts.req instanceof IncomingMessage) {
+  //   console.log('Handling FetchCreateContextFnOptions')
+  //   const headers = opts.req.headers as IncomingHttpHeaders & { 'x-trpc-source'?: string }
+  //   const source = headers['x-trpc-source']
+  //   console.log('>>> tRPC Request from', source)
+  // } else if (opts.req instanceof Request) {
+  //   console.log('Handling CreateWSSContextFnOptions')
+  // }
+
   // for API-response caching see https://trpc.io/docs/v11/caching
   return await createContextInner({})
 }

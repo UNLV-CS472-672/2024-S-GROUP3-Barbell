@@ -1,10 +1,18 @@
+import type { TRPCLink } from '@trpc/client'
 import React from 'react'
 import Constants from 'expo-constants'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { httpBatchLink, loggerLink } from '@trpc/client'
+import {
+  createWSClient,
+  httpBatchLink,
+  loggerLink,
+  // httpBatchLink,
+  unstable_httpBatchStreamLink,
+  wsLink,
+} from '@trpc/client'
 import { createTRPCReact } from '@trpc/react-query'
-import superjson from 'superjson'
+import SuperJSON from 'superjson'
 
 import type { AppRouter } from '@acme/api'
 
@@ -13,6 +21,35 @@ import type { AppRouter } from '@acme/api'
  */
 export const api = createTRPCReact<AppRouter>()
 export { type RouterInputs, type RouterOutputs } from '@acme/api'
+
+// function getEndingLink(): TRPCLink<AppRouter> {
+//   if (typeof window === 'undefined') {
+//     return unstable_httpBatchStreamLink({
+//       /**
+//        * @link https://trpc.io/docs/v11/data-transformers
+//        */
+//       transformer: SuperJSON,
+//       url: `${getBaseUrl()}/api/trpc`,
+//       async headers() {
+//         const headers = new Headers()
+//         headers.set('x-trpc-source', 'nextjs-react')
+//         return headers
+//       },
+//     })
+//   }
+//   console.log('wsLink, hopefully')
+
+//   const client = createWSClient({
+//     url: `ws://localhost:3001`,
+//   })
+//   return wsLink({
+//     client,
+//     /**
+//      * @link https://trpc.io/docs/v11/data-transformers
+//      */
+//     transformer: SuperJSON,
+//   })
+// }
 
 /**
  * Extend this function when going to production by
@@ -65,7 +102,7 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
           colorMode: 'ansi',
         }),
         httpBatchLink({
-          transformer: superjson,
+          transformer: SuperJSON,
           url: `${getBaseUrl()}/api/trpc`,
           headers() {
             const headers = new Map<string, string>()

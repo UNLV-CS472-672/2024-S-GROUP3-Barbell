@@ -103,10 +103,10 @@ const PickerModal: React.FC<IPickerModalProps> = ({
         },
         modalProps?.style,
       ]}
-      animationIn='bounceIn'
-      animationInTiming={500}
-      animationOut='bounceOut'
-      animationOutTiming={500}
+      animationIn='slideInUp'
+      animationInTiming={300}
+      animationOut='slideOutDown'
+      animationOutTiming={200}
       onBackdropPress={onBackdropPress}
       backdropOpacity={0}
     >

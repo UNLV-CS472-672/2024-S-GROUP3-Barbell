@@ -23,7 +23,7 @@ export const SetSchema = z.object({
 export const ExerciseSchema = z.object({
   id: z.number().int(),
   name: z.string(),
-  note: z.string().optional(),
+  note: z.string().optional().nullable(),
   bodyPart: z.nativeEnum(BodyPart),
   category: z.nativeEnum(Category),
   sets: z.array(SetSchema),
@@ -37,4 +37,10 @@ export const WorkoutSchema = z.object({
   finishedAt: z.date(),
   exercises: z.array(ExerciseSchema),
   userId: z.number().int(),
+})
+
+export const WorkoutTemplateInfoSchema = z.object({
+  workoutTemplateId: z.number().int(),
+  workoutName: z.string(),
+  exercises: z.array(ExerciseSchema),
 })

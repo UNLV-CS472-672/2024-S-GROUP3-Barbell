@@ -87,23 +87,24 @@ model Post {
 // * sentMessages: Notifications sent by the user.
 // ******************************************************************************************
 model User {
-  id                   Int            @id @unique @default(autoincrement())
-  clerkId              String         @unique
-  username             String         @unique @db.Char(20)
+  id                   Int               @id @unique @default(autoincrement())
+  clerkId              String            @unique
+  username             String            @unique @db.Char(20)
   name                 String?
   status               UserStatus?
-  streak               Int            @default(0)
+  streak               Int               @default(0)
   posts                Post[]
   friends              Friend[]
+  exerciseHistory      ExerciseLog[]
   workoutHistory       WorkoutLog[]
-  workouts             Workout[]
+  savedWorkouts        WorkoutTemplate[]
   awards               Award[]
-  notifications        Notification[] @relation("NotificationReceiver")
-  sentMessages         Notification[] @relation("NotificationSender")
-  createdChats         Chat[]         @relation("ChatCreator")
+  notifications        Notification[]    @relation("NotificationReceiver")
+  sentMessages         Notification[]    @relation("NotificationSender")
+  createdChats         Chat[]            @relation("ChatCreator")
   chats                Chat[]
   spotify              SpotifyData?
-  notificationsBanners Boolean        @default(true)
+  notificationsBanners Boolean           @default(true)
   customExercises      Exercise[]
 }
 
@@ -139,12 +140,13 @@ model WorkoutLog {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   finishedAt DateTime
+  duration   Int
 
   user   User @relation(fields: [userId], references: [id])
   userId Int
 
-  workout   Workout @relation(fields: [workoutId], references: [id])
-  workoutId Int
+  workoutTemplate   WorkoutTemplate @relation(fields: [workoutTemplateId], references: [id])
+  workoutTemplateId Int
 }
 
 // ******************************************************************************************
@@ -154,16 +156,14 @@ model WorkoutLog {
 // * Set: Details a specific set within an exercise, including the type of set, the number of repetitions, and the weight used.
 // * Award: Represents achievements or milestones reached by users, with a name, description, and the user who received it.
 // ******************************************************************************************
-model Workout {
+model WorkoutTemplate {
   id           Int          @id @unique @default(autoincrement())
   name         String       @db.Char(100)
   description  String?
-  duration     Int
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
-  finishedAt   DateTime
   likes        Int          @default(0)
-  exercises    Exercise[]
+  exerciseIds  Int[]
   pastWorkouts WorkoutLog[]
 
   user   User @relation(fields: [userId], references: [id])
@@ -180,23 +180,27 @@ model Exercise {
   id           Int           @id @unique @default(autoincrement())
   name         String        @db.Char(100)
   note         String?
-  sets         Set[]
   bodyPart     BodyPart
   category     Category
-  workout      Workout[]
   exerciseLogs ExerciseLog[]
-  User         User?         @relation(fields: [userId], references: [id])
-  userId       Int?
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?
 }
 
 model ExerciseLog {
-  id         Int      @id @unique @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  finishedAt DateTime
+  id        Int      @id @unique @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sets      Set[]
 
   exercise   Exercise @relation(fields: [exerciseId], references: [id])
   exerciseId Int
+
+  workoutTemplateId Int
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
 }
 
 // ******************************************************************************************
@@ -208,13 +212,13 @@ model ExerciseLog {
 // * exercise: The exercise associated with the set.
 // ******************************************************************************************
 model Set {
-  id         String   @id @default(uuid())
-  type       SetType  @default(NORMAL)
-  unilateral Boolean  @default(false)
-  reps       Int[]
-  weight     Float[]
-  exercise   Exercise @relation(fields: [exerciseId], references: [id])
-  exerciseId Int
+  id            String      @id @default(uuid())
+  type          SetType     @default(NORMAL)
+  unilateral    Boolean     @default(false)
+  reps          Int[]
+  weight        Float[]
+  exerciseLog   ExerciseLog @relation(fields: [exerciseLogId], references: [id])
+  exerciseLogId Int
 }
 
 // ******************************************************************************************

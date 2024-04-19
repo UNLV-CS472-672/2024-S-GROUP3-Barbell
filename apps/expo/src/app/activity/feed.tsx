@@ -19,7 +19,6 @@ const ActivityFeed = () => {
 
   if (!friendsActivitiesLoading) {
     activities = friendsWorkoutLogs?.map((workoutLog) => {
-      console.debug(workoutLog.createdAt);
       return <Activity user={workoutLog.user} workout={workoutLog.workout} workoutLog={workoutLog}></Activity>;
     }) ?? [];
   }

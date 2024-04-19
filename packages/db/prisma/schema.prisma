@@ -137,9 +137,7 @@ model Friend {
 // ******************************************************************************************
 model WorkoutLog {
   id         Int      @id @unique @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  finishedAt DateTime
+  finishedAt DateTime @default(now())
   duration   Int
 
   user   User @relation(fields: [userId], references: [id])

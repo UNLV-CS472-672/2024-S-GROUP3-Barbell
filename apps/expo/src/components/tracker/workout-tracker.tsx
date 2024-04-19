@@ -13,7 +13,6 @@ import WorkoutTrackerHeader from '~/components/tracker/workout-tracker-header'
 import Button from '~/components/ui/button/button'
 import { api } from '~/utils/trpc/api'
 import {
-  areTemplatesDifferent,
   extractExerciseData,
   extractWorkoutName,
   extractWorkoutTemplate,
@@ -44,14 +43,6 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workou
     setWorkoutName(extractWorkoutName(data))
   }, [data])
 
-  const handleFinishWorkout = () => {
-    if (areTemplatesDifferent(workoutTemplate, workoutName, exercises)) {
-      console.log('Different')
-    } else {
-      console.log('Same')
-    }
-  }
-
   // TODO: Move note attribute to exerciseLog schema
 
   // TODO: Fix the keyboard avoid view with the inputs
@@ -64,7 +55,7 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workou
       ) : (
         <>
           <WorkoutTrackerHeader
-            {...{ bottomSheetRef, workoutName, setWorkoutName, exercises, handleFinishWorkout }}
+            {...{ bottomSheetRef, workoutName, setWorkoutName, exercises, workoutTemplate }}
           />
 
           <ScrollView>

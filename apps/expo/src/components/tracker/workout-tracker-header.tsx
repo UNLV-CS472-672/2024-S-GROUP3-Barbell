@@ -9,13 +9,16 @@ import { TExercise } from '~/components/tracker/workout-tracker'
 import Button from '~/components/ui/button/button'
 import { useGlobalContext } from '~/context/global-context'
 import colors from '~/styles/colors'
+import { api } from '~/utils/trpc/api'
+import { areTemplatesDifferent, TWorkoutTemplateInfo } from '~/utils/workout-tracker-utils'
+import PickerModal from '../ui/picker-modal/picker-modal'
 
 export interface IWorkoutTrackerHeaderProps {
   bottomSheetRef: React.RefObject<CustomBottomSheetModalRef>
   workoutName: string
   setWorkoutName: React.Dispatch<React.SetStateAction<string>>
   exercises: TExercise[]
-  handleFinishWorkout: () => void
+  workoutTemplate: TWorkoutTemplateInfo | null
 }
 
 const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
@@ -23,49 +26,85 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
   workoutName,
   setWorkoutName,
   exercises,
-  handleFinishWorkout,
+  workoutTemplate,
 }) => {
-  const { setIsWorkingOut } = useGlobalContext()
+  const { setIsWorkingOut, userData } = useGlobalContext()
   const [time, setTime] = useState(0)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const workoutLogMutator = api.workoutLog.createNewWorkoutLog.useMutation()
 
   const handleCancelWorkout = () => {
     setIsWorkingOut(false)
     bottomSheetRef.current?.dismiss()
   }
 
-  // const handleFinishWorkout = () => {
-  //   console.log(workoutName)
-  //   console.log(time)
-  //   console.log(exercises)
-  // }
+  const handleFinishWorkout = () => {
+    if (areTemplatesDifferent(workoutTemplate, workoutName, exercises)) {
+      console.log('Different')
+      setIsModalVisible(true)
+      return
+    }
+
+    workoutLogMutator.mutate({
+      duration: time,
+      userId: userData!.id,
+      workoutTemplateId: workoutTemplate!.workoutTemplateId,
+    })
+    setIsWorkingOut(false)
+    bottomSheetRef.current?.dismiss()
+
+    console.log('Same')
+  }
 
   return (
-    <View className='mx-2'>
-      <View className='mt-2 flex flex-row items-center justify-between'>
-        {/* TODO: Implement Rest Timer Component functionality */}
-        <Button color='dark' size='icon' className='p-3'>
-          <Ionicons name='timer-outline' size={26} color={colors.bottomav.icon} />
-        </Button>
-        <View className='flex flex-row justify-end gap-x-4'>
-          <Button className='bg-light-red px-6 opacity-90' onPress={handleCancelWorkout}>
-            <Text className='font-bold text-white'>Cancel</Text>
+    <>
+      <View className='mx-2'>
+        <View className='mt-2 flex flex-row items-center justify-between'>
+          {/* TODO: Implement Rest Timer Component functionality */}
+          <Button color='dark' size='icon' className='p-3'>
+            <Ionicons name='timer-outline' size={26} color={colors.bottomav.icon} />
           </Button>
-          <Button className='bg-light-green px-12' onPress={handleFinishWorkout}>
-            <Text className='font-bold text-white'>Finish</Text>
-          </Button>
+          <View className='flex flex-row justify-end gap-x-4'>
+            <Button className='bg-light-red px-6 opacity-90' onPress={handleCancelWorkout}>
+              <Text className='font-bold text-white'>Cancel</Text>
+            </Button>
+            <Button className='bg-light-green px-12' onPress={handleFinishWorkout}>
+              <Text className='font-bold text-white'>Finish</Text>
+            </Button>
+          </View>
         </View>
-      </View>
-      <TextInput
-        placeholder='Workout Name'
-        onChangeText={setWorkoutName}
-        value={workoutName}
-        className='font-koulen justify-center py-2 text-3xl text-slate-200' // FIXME: Styling issues with placeholder and koulen
-        multiline
-      />
+        <TextInput
+          placeholder='Workout Name'
+          onChangeText={setWorkoutName}
+          value={workoutName}
+          className='font-koulen justify-center py-2 text-3xl text-slate-200' // FIXME: Styling issues with placeholder and koulen
+          multiline
+        />
 
-      {/* TODO: Add a ... button with extra options */}
-      <WorkoutTimer {...{ time, setTime }} />
-    </View>
+        {/* TODO: Add a ... button with extra options */}
+        <WorkoutTimer {...{ time, setTime }} />
+      </View>
+
+      <PickerModal
+        title='Your finished workout is different from the template. What would you like to do?'
+        data={[
+          'Create new workout template',
+          'Update existing workout template',
+          'Discard changes',
+          'Cancel',
+        ]}
+        isVisible={isModalVisible}
+        onPress={() => {
+          setIsModalVisible(false)
+        }}
+        onCancelPress={() => {
+          setIsModalVisible(false)
+        }}
+        onBackdropPress={() => {
+          setIsModalVisible(false)
+        }}
+      />
+    </>
   )
 }
 

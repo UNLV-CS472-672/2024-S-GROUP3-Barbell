@@ -1,6 +1,38 @@
-// import {  z } from 'zod'
+import { z } from 'zod'
 
-// import { createTRPCRouter, publicProcedure } from '../trpc'
+import { createTRPCRouter, publicProcedure } from '../trpc'
+
+export const workoutLogRouter = createTRPCRouter({
+  createNewWorkoutLog: publicProcedure
+    .input(
+      z.object({
+        duration: z.number().int(),
+        userId: z.number().int(),
+        workoutTemplateId: z.number().int(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      const { prisma } = ctx
+
+      console.log(input)
+
+      return prisma.workoutLog.create({
+        data: {
+          duration: input.duration,
+          workoutTemplate: {
+            connect: {
+              id: input.workoutTemplateId,
+            },
+          },
+          user: {
+            connect: {
+              id: input.userId,
+            },
+          },
+        },
+      })
+    }),
+})
 
 // export const workoutRouter = createTRPCRouter({
 //     createNewWorkoutLog: publicProcedure.input(z.object()).mutation(async ({ ctx, input }) => {
@@ -22,7 +54,6 @@
 //         })
 //     }
 // }),
-
 
 //     createNewWorkout: publicProcedure
 //     .input(

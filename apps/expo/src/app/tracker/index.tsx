@@ -12,9 +12,12 @@ import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 
 const Tracker = () => {
-  const { userData } = useGlobalContext()
+  const { userData, isWorkingOut, setIsWorkingOut } = useGlobalContext()
   const bottomSheetRef = useRef<CustomBottomSheetModalRef>(null)
-  const handlePresentModalPress = () => bottomSheetRef.current?.present()
+  const handlePresentModalPress = () => {
+    bottomSheetRef.current?.present()
+    setIsWorkingOut(true)
+  }
 
   if (!userData) {
     console.log('No user data in tracker page')
@@ -32,14 +35,16 @@ const Tracker = () => {
     <SafeAreaView>
       <Button className='mt-16' value='Present Modal' onPress={handlePresentModalPress}></Button>
       {/* <Text>{data![0]?.name}</Text> */}
-      <CustomBottomSheetModal
-        ref={bottomSheetRef}
-        customSnapPoints={['93%']}
-        startIndex={0}
-        renderBackdrop
-      >
-        <WorkoutTracker bottomSheetRef={bottomSheetRef} workoutTemplateId={1} />
-      </CustomBottomSheetModal>
+      {isWorkingOut && (
+        <CustomBottomSheetModal
+          ref={bottomSheetRef}
+          customSnapPoints={['93%']}
+          startIndex={0}
+          renderBackdrop
+        >
+          <WorkoutTracker bottomSheetRef={bottomSheetRef} workoutTemplateId={1} />
+        </CustomBottomSheetModal>
+      )}
     </SafeAreaView>
   )
 }

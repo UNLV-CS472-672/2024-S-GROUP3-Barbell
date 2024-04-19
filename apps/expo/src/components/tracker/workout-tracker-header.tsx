@@ -10,7 +10,11 @@ import Button from '~/components/ui/button/button'
 import { useGlobalContext } from '~/context/global-context'
 import colors from '~/styles/colors'
 import { api } from '~/utils/trpc/api'
-import { areTemplatesDifferent, TWorkoutTemplateInfo } from '~/utils/workout-tracker-utils'
+import {
+  areTemplatesDifferent,
+  prepareExercisesForApi,
+  TWorkoutTemplateInfo,
+} from '~/utils/workout-tracker-utils'
 import PickerModal from '../ui/picker-modal/picker-modal'
 
 export interface IWorkoutTrackerHeaderProps {
@@ -30,7 +34,9 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
 }) => {
   const { setIsWorkingOut, userData } = useGlobalContext()
   const [time, setTime] = useState(0)
-  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isDifferentWorkoutModalVisible, setIsDifferentWorkoutModalVisible] = useState(false)
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false)
+
   const createNewWorkoutLog = api.workoutLog.createNewWorkoutLog.useMutation()
   const createNewWorkoutLogAndUpdateValues =
     api.workoutLog.createNewWorkoutLogAndUpdateValues.useMutation()
@@ -41,6 +47,14 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
   }
 
   const handleFinishWorkout = () => {
+    exercises = prepareExercisesForApi(exercises)
+    console.log('filtered exercises', exercises)
+
+    if (!exercises.length) {
+      setIsErrorModalVisible(true)
+      return
+    }
+
     if (areTemplatesDifferent(workoutTemplate, workoutName, exercises)) {
       createNewWorkoutLogAndUpdateValues.mutate({
         duration: time,
@@ -52,7 +66,7 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
         },
       })
       console.log('Different')
-      setIsModalVisible(true)
+      setIsDifferentWorkoutModalVisible(true)
       return
     }
 
@@ -104,15 +118,30 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
           'Discard changes',
           'Cancel',
         ]}
-        isVisible={isModalVisible}
+        isVisible={isDifferentWorkoutModalVisible}
         onPress={() => {
-          setIsModalVisible(false)
+          setIsDifferentWorkoutModalVisible(false)
         }}
         onCancelPress={() => {
-          setIsModalVisible(false)
+          setIsDifferentWorkoutModalVisible(false)
         }}
         onBackdropPress={() => {
-          setIsModalVisible(false)
+          setIsDifferentWorkoutModalVisible(false)
+        }}
+      />
+
+      <PickerModal
+        title='Your workout is empty. Would you like to cancel it?'
+        data={['Yes, cancel workout', 'No, continue workout']}
+        isVisible={isErrorModalVisible}
+        onPress={() => {
+          setIsErrorModalVisible(false)
+        }}
+        onCancelPress={() => {
+          setIsErrorModalVisible(false)
+        }}
+        onBackdropPress={() => {
+          setIsErrorModalVisible(false)
         }}
       />
     </>

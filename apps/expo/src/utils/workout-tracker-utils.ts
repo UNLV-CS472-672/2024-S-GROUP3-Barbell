@@ -84,3 +84,18 @@ export const areTemplatesDifferent = (
 
   return false
 }
+
+export const prepareExercisesForApi = (exercises: TExercise[]): TExercise[] => {
+  const exercisesWithNonEmptySets = exercises.map((exercise) => {
+    const sets = exercise.sets.filter((set) => {
+      if (set.unilateral) return set.weight[0] && set.reps[0] && set.weight[1] && set.reps[1]
+      return set.weight[0] && set.reps[0]
+    })
+
+    return { ...exercise, sets }
+  })
+
+  const nonEmptyExercises = exercisesWithNonEmptySets.filter((exercise) => exercise.sets.length > 0)
+
+  return nonEmptyExercises
+}

@@ -1,11 +1,9 @@
+import { ChatType, User } from '@prisma/client'
 import { z } from 'zod'
 
 import { createTRPCRouter, publicProcedure } from '../trpc'
 
-import { ChatType } from '@prisma/client'
-
 export const friendRouter = createTRPCRouter({
-
   /**
    * Get all friends
    */
@@ -77,77 +75,61 @@ export const friendRouter = createTRPCRouter({
   }),
 
   /**
-  * get a user's friends
-  */
-  getFriends: publicProcedure
+   * get a user's friends
+   */
+  getFriendsWithChatIdFromUserId: publicProcedure
     .input(z.object({ id: z.number().int() }))
     .query(async ({ ctx, input }) => {
-      const friendsList = await ctx.prisma.friend.findMany({
-        where: {
-          userId: input.id,
-        },
-      })
+      interface UserWithChatId extends User {
+        chatId: number | null
+      }
 
-      const friendIds: number[] = friendsList.map((item) => {
-        return item.friendId
-      })
+      try {
+        const friendsList = await ctx.prisma.friend.findMany({
+          where: {
+            userId: input.id,
+          },
+          select: {
+            friendId: true,
+          },
+        })
 
-      return ctx.prisma.user.findMany({
-        where: {
-          id: { in: friendIds },
-        },
-      })
+        // convert to number array
+        const friendIds: number[] = friendsList.map((friend) => friend.friendId)
+
+        // get friends as users
+        const usersList = await ctx.prisma.user.findMany({
+          where: {
+            id: { in: friendIds },
+          },
+        })
+
+        // find corresponding chat for user if it exists
+        const usersWithChatId = await Promise.all(
+          usersList.map(async (user) => {
+            const chatIdWithUsers = await ctx.prisma.chat.findFirst({
+              where: {
+                type: ChatType.DIRECT,
+                AND: [{ users: { some: { id: input.id } } }, { users: { some: { id: user.id } } }],
+              },
+              select: {
+                id: true,
+              },
+            })
+
+            const userWithChatId: UserWithChatId = {
+              ...user,
+              chatId: chatIdWithUsers ? chatIdWithUsers.id : null,
+            }
+
+            return userWithChatId
+          }),
+        )
+
+        return usersWithChatId
+      } catch (error) {
+        console.error('Error fetching friends with chatId:', error)
+        throw new Error('Failed to fetch friends with chatId')
+      }
     }),
-
-  /**
-  * @remarks 
-  * This will route to the message between the user and the friend
-  * 
-  * @param userId - the id of the user
-  * @param friendId - the id of the friend
-  * @return either the chatId if a chat exists between the two users,
-  *         or creates a new chat and returns the chatId of the new chat
-  */
-  getChatIdByFriendId: publicProcedure
-  .input(z.object({ userId: z.number().int(), friendId: z.number().int() }))
-  .mutation(async ({ ctx, input }) => {
-    const { prisma } = ctx;
-
-    let chat = await prisma.chat.findFirst({
-      where: {
-        type: ChatType.DIRECT,
-        users: {
-          every: {
-            id: {
-              in: [input.userId, input.friendId],
-            },
-          },
-        },
-      },
-      select: {
-        id: true,
-      },
-    });
-
-    if (!chat) {
-      // Create a new chat if one doesn't exist
-      chat = await prisma.chat.create({
-        data: {
-          type: ChatType.DIRECT,
-          users: {
-            connect: [
-              { id: input.userId },
-              { id: input.friendId },
-            ],
-          },
-          createdByUserId: input.userId,
-        },
-        select: {
-          id: true,
-        },
-      });
-    }
-
-    return chat.id;
-  }),
 })

@@ -1,159 +1,56 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react'
+import { View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { Route, router } from 'expo-router';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-import { useGlobalContext } from '~/context/global-context';
-import { api } from '~/utils/trpc/api';
-
+import Friend from '~/components/frlist/Friend'
+import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
+import TopNavBar from '~/components/ui/nav-bar/NavBar'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1E1E1E',
-  },
-  friendItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  iconContainer: {
-    marginRight: 12,
-  },
-  username: {
-    fontSize: 16,
-    color: '#fff',
-  },
-  actionButton: {
-    paddingHorizontal: 8,
-    color: '#fff',
-  },
-});
+import { useGlobalContext } from '~/context/global-context'
+import { api } from '~/utils/trpc/api'
 
 interface Friend {
-  id: number;
-  username: string;
+  id: number
+  name: string | null
+  username: string
+  chatId?: number | null
 }
 
-const handleNavigateToProfile = (userId: number) => {
-  router.push(`/user/${userId}` as Route<string>);
-};
+export default function FriendsListScreen() {
+  const { userData } = useGlobalContext()
+  const { data, isFetched, isFetching } = api.friend.getFriendsWithChatIdFromUserId.useQuery({
+    id: userData?.id!,
+  })
 
-const handleNavigateToMessages = async (friend: Friend) => {
-  const { userData } = useGlobalContext();
-  const mutation = api.friend.getChatIdByFriendId.useMutation();
+  console.log(data)
 
-  // Use mutateAsync to perform the mutation and wait for the result
-  const chatId = await mutation.mutateAsync({
-    userId: userData?.id ?? 0,
-    friendId: friend.id,
-  });
+  const [filteredList, setFilteredList] = useState(data)
 
-  if (chatId) {
-    router.push(`/messages/${chatId}` as Route<string>);
-  } else {
-    // Handle any error that may occur during chat creation
-    console.error('Failed to create a new chat');
-  }
-};
-
-const FriendsListScreen = () => {
-  const [friends, setFriends] = useState<Friend[]>([]);
-  const [filteredFriends, setFilteredFriends] = useState<Friend[]>([]);
-  const { userData } = useGlobalContext();
-  console.log('userData:', userData);
-
-  const { data: friendsData, isLoading, error } = api.friend.getFriends.useQuery(
-    { id: userData?.id ?? 0 },
-    { enabled: !!userData?.id }
-  );
-
-  const deleteFriendMutation = api.friend.delete.useMutation();
-
-  useEffect(() => {
-    if (friendsData) {
-      const transformedData = friendsData.map((friend) => ({
-        id: friend.id,
-        name: friend.name,
-        username: friend.username,
-      }));
-  
-      setFriends(transformedData);
-      setFilteredFriends(transformedData);
-    }
-  }, [friendsData]);
-
-  const handleRemoveFriend = useCallback(
-    async (userId: number) => {
-      try {
-        await deleteFriendMutation.mutateAsync({ id: userId });
-        setFriends(friends.filter(friend => friend.id !== userId));
-        setFilteredFriends(filteredFriends.filter(friend => friend.id !== userId));
-      } catch (error) {
-        console.error('Error removing friend:', error);
-      }
-    },
-    [deleteFriendMutation, friends, filteredFriends]
-  );
-
-  const renderFriendItem = ({ item }: { item: Friend }) => {
-    return (
-      <View style={styles.friendItem}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <MaterialCommunityIcons
-            style={styles.iconContainer}
-            name="face-man-profile"
-            size={36}
-            color="#CACACA"
-          />
-          <Text style={styles.username}>{item.username}</Text>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={() => handleNavigateToMessages(item)}>
-            <Text style={styles.actionButton}>Message</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleNavigateToProfile(item.id)}>
-            <Text style={styles.actionButton}>Profile</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleRemoveFriend(item.id)}>
-            <Text style={styles.actionButton}>Remove</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
-
-  if (isLoading) {
-
-    return (
-        <ActivityIndicator size="large" color="#0000ff" />
-    );
-  }
-
-  if (error) {
-    return <Text>{error.message}</Text>;
-  }
+  const friendComponents = filteredList?.map((friend) => (
+    <Friend
+      chatId={friend.chatId}
+      userId={friend.id}
+      username={friend.username}
+      key={friend.id}
+      name={friend.name}
+    />
+  ))
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
+      <TopNavBar center={'Friends'} />
       <SearchBar
-        list={friends}
-        setFilteredList={setFilteredFriends as React.Dispatch<React.SetStateAction<any[] | undefined>>}
-        filterBy="username"
-        placeholder="Search For Friend By Username..."
+        filterBy='username'
+        list={data}
+        setFilteredList={setFilteredList}
+        placeholder='Search friends'
       />
-      <FlatList
-        data={filteredFriends}
-        renderItem={renderFriendItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </View>
-  );
-};
 
-export default FriendsListScreen;
+      <ScrollView>
+        {isFetching && <RotatingBarbellIcon />}
+        {isFetched && friendComponents}
+      </ScrollView>
+    </SafeAreaView>
+  )
+}

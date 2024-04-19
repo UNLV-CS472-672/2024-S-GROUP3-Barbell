@@ -70,7 +70,7 @@ const otherItems: NavigationListItem[] = [
   {
     title: 'Privacy Policy',
     iconName: 'shield-alt',
-    onPress: () => router.push('/'),
+    onPress: () => router.push('/privacy-policy'),
   },
 ]
 

@@ -11,14 +11,17 @@ const ActivityFeed = () => {
   let activities: any[] = [];
   const { userData } = useGlobalContext();
   const { data: friends, isLoading: friendsIsLoading } = api.friend.getFriends.useQuery({ userId: userData?.id ?? 0 });
-  const { data: friendsActivities, isLoading: friendsActivitiesLoading } = api.workout.getActivityFeedWorkouts
+  const { data: friendsWorkoutLogs, isLoading: friendsActivitiesLoading } = api.workout.getActivityFeedWorkouts
           .useQuery(
             { friendIds: friends?.map(friend => friend.friendId) ?? [], count: ACTIVITY_FEED_ITEM_LIMIT },
             { enabled: !friendsIsLoading }
           );
 
   if (!friendsActivitiesLoading) {
-    activities = friendsActivities?.map((workout) => <Activity workout={workout}></Activity>) ?? []
+    activities = friendsWorkoutLogs?.map((workoutLog) => {
+      console.debug(workoutLog.createdAt);
+      return <Activity user={workoutLog.user} workout={workoutLog.workout} workoutLog={workoutLog}></Activity>;
+    }) ?? [];
   }
 
   return (

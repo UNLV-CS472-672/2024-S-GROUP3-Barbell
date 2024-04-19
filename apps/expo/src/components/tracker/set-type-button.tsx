@@ -1,5 +1,7 @@
 import { memo, useCallback, useState } from 'react'
+import { Text, View } from 'react-native'
 
+import { AntDesign } from '@expo/vector-icons'
 import { SetType } from '@prisma/client'
 import { produce } from 'immer'
 
@@ -57,15 +59,6 @@ const SetTypeButton: React.FC<ISetTypeButtonProps> = memo(
       setModalVisible(true)
     }
 
-    const handleOnPickerModalPress = useCallback((selectedItem: SetType) => {
-      workoutUpdater(
-        produce((draft) => {
-          draft[exerciseIndex]!.sets[setIndex]!.type = selectedItem
-        }),
-      )
-      setModalVisible(false)
-    }, [])
-
     return (
       <>
         <Button
@@ -76,16 +69,50 @@ const SetTypeButton: React.FC<ISetTypeButtonProps> = memo(
         />
         <PickerModal
           title='Set Type'
-          data={[SetType.WARMUP, SetType.NORMAL, SetType.FAILURE, SetType.DROPSET]}
           isVisible={isModalVisible}
-          onPress={(selectedItem) => handleOnPickerModalPress(selectedItem as SetType)}
-          onCancelPress={() => {
-            setModalVisible(false)
-          }}
           onBackdropPress={() => {
             setModalVisible(false)
           }}
-        />
+        >
+          <View className='flex items-center justify-center gap-y-2 px-4 pb-8'>
+            <Button className='flex w-full flex-row justify-between px-4 py-5' color='dark'>
+              <View className='flex flex-row items-center gap-x-4'>
+                <Text className='text-xl font-bold text-orange-600'>W</Text>
+                <Text className='text-xl text-white'>Warm-up Set</Text>
+              </View>
+              <Button className='bg-neutral-800 p-2'>
+                <AntDesign name='question' size={24} color='white' />
+              </Button>
+            </Button>
+            <Button className='flex w-full flex-row justify-between px-4 py-5' color='dark'>
+              <View className='flex flex-row items-center gap-x-4'>
+                <Text className='text-xl font-bold text-blue-600'>D</Text>
+                <Text className='text-xl text-white'>Drop Set</Text>
+              </View>
+              <Button className='bg-neutral-800 p-2'>
+                <AntDesign name='question' size={24} color='white' />
+              </Button>
+            </Button>
+            <Button className='flex w-full flex-row justify-between px-4 py-5' color='dark'>
+              <View className='flex flex-row items-center gap-x-4'>
+                <Text className='text-xl font-bold text-red-600'>F</Text>
+                <Text className='text-xl text-white'>Failure Set</Text>
+              </View>
+              <Button className='bg-neutral-800 p-2'>
+                <AntDesign name='question' size={24} color='white' />
+              </Button>
+            </Button>
+            <Button className='flex w-full flex-row justify-between px-4 py-5' color='dark'>
+              <View className='flex flex-row items-center gap-x-4'>
+                <Text className='text-xl font-bold text-white'>N</Text>
+                <Text className='text-xl text-white'>Normal Set</Text>
+              </View>
+              <Button className='bg-neutral-800 p-2'>
+                <AntDesign name='question' size={24} color='white' />
+              </Button>
+            </Button>
+          </View>
+        </PickerModal>
       </>
     )
   },

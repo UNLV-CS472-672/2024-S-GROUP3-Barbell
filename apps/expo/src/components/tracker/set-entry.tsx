@@ -38,7 +38,7 @@ const DeleteButton: React.FC<IDeleteButtonProps> = ({ handlePress }) => {
 }
 
 const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex, setIndex }) => {
-  const [isUnilateral, setIsUnilateral] = useState(false)
+  const [isUnilateral, setIsUnilateral] = useState(set.unilateral)
   const [completed, setCompleted] = useState(false)
   const [inErrorState, setInErrorState] = useState({
     weight: false,

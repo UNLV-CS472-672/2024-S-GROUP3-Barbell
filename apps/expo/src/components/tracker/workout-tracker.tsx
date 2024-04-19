@@ -47,7 +47,7 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workou
 
   // TODO: Fix the keyboard avoid view with the inputs
   return (
-    <View>
+    <View className='flex-1 pb-10'>
       {isFetching ? (
         <View className='flex h-[90%] items-center justify-center'>
           <RotatingBarbellIcon size={46} />
@@ -69,7 +69,7 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workou
 
             {/* TODO: Implement this */}
             <Button className='mx-2 mt-8'>
-              <Text className='text-center font-bold text-white'>Add Exercises</Text>
+              <Text className='py-1 text-center font-bold text-white'>Add Exercises</Text>
             </Button>
           </ScrollView>
         </>

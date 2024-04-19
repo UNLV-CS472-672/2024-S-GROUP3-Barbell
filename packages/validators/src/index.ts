@@ -16,6 +16,7 @@ export const SetSchema = z.object({
   type: z.nativeEnum(SetType),
   reps: z.array(z.number().int()),
   weight: z.array(z.number()),
+  exerciseLogId: z.number().int(),
   exerciseId: z.number().int(),
   unilateral: z.boolean().default(false),
 })

@@ -31,7 +31,9 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
   const { setIsWorkingOut, userData } = useGlobalContext()
   const [time, setTime] = useState(0)
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const workoutLogMutator = api.workoutLog.createNewWorkoutLog.useMutation()
+  const createNewWorkoutLog = api.workoutLog.createNewWorkoutLog.useMutation()
+  const createNewWorkoutLogAndUpdateValues =
+    api.workoutLog.createNewWorkoutLogAndUpdateValues.useMutation()
 
   const handleCancelWorkout = () => {
     setIsWorkingOut(false)
@@ -40,12 +42,21 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
 
   const handleFinishWorkout = () => {
     if (areTemplatesDifferent(workoutTemplate, workoutName, exercises)) {
+      createNewWorkoutLogAndUpdateValues.mutate({
+        duration: time,
+        userId: userData!.id,
+        workoutData: {
+          workoutTemplateId: workoutTemplate!.workoutTemplateId,
+          workoutName,
+          exercises,
+        },
+      })
       console.log('Different')
       setIsModalVisible(true)
       return
     }
 
-    workoutLogMutator.mutate({
+    createNewWorkoutLog.mutate({
       duration: time,
       userId: userData!.id,
       workoutTemplateId: workoutTemplate!.workoutTemplateId,

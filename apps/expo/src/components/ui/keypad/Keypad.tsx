@@ -43,38 +43,46 @@ export default function Keypad({
 
   const { height } = Dimensions.get('window')
 
-  const keypadArrangement = [[1,2,3], [4,5,6], [7,8,9], ['.', 0, 'backspace']];
-  const keyFontSize = 24;
+  const keypadArrangement = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    ['.', 0, 'backspace'],
+  ]
+  const keyFontSize = 24
 
-  const keypadRows = keypadArrangement.map(row => {
+  const keypadRows = keypadArrangement.map((row) => {
     return (
       <View className='flex-1 flex-row justify-between' key={row.toString()}>
-        {
-          row.map(keypadKey => {
-            let btnFace = <Text style={{ fontSize: keyFontSize }} className='text-center'>{keypadKey}</Text>;
-            if (keypadKey === 'backspace') {
-              btnFace = <Ionicons name='backspace-outline' size={keyFontSize} color='black' />;
-            }
-            return (
-              <TouchableOpacity
-                key={keypadKey}
-                testID={`test-${keypadKey}`}
-                className='m-1 h-20 flex-1 justify-center items-center rounded-md bg-white'
-                onPress={() => handleKeyPress(keypadKey.toString())}>
-                {btnFace}
-              </TouchableOpacity>
-            )
-          })
-        }
+        {row.map((keypadKey) => {
+          let btnFace = (
+            <Text style={{ fontSize: keyFontSize }} className='text-center'>
+              {keypadKey}
+            </Text>
+          )
+          if (keypadKey === 'backspace') {
+            btnFace = <Ionicons name='backspace-outline' size={keyFontSize} color='black' />
+          }
+          return (
+            <TouchableOpacity
+              key={keypadKey}
+              testID={`test-${keypadKey}`}
+              className='m-1 flex-1 items-center justify-center rounded-md bg-white'
+              onPress={() => handleKeyPress(keypadKey.toString())}
+            >
+              {btnFace}
+            </TouchableOpacity>
+          )
+        })}
       </View>
     )
-  });
+  })
 
   return !keypadVisible ? (
     <View testID='invisible-test' />
   ) : (
-    <View className="flex bg-slate-200 p-1">
-      <View>{keypadRows}</View>
+    <View className='flex bg-slate-200 p-1' style={{ height: height * 0.35 }}>
+      <View className='flex-1'>{keypadRows}</View>
       <View className='h-12 flex-row'>
         <TouchableOpacity
           testID='test-minimize'

@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar'
 
 import { Koulen_400Regular, useFonts } from '@expo-google-fonts/koulen'
 
-import { TRPCProvider } from '~/utils/api'
+import { TRPCProvider } from '~/utils/trpc/api'
 
 import 'expo-dev-client'
 import '~/styles.css'
@@ -38,7 +38,7 @@ import AuthScreen from '~/app/auth'
 import GlobalContextProvider from '~/context/global-context'
 import { DashboardHeader } from '~/layouts/headers/dashboard-header'
 import { FriendsHeader } from '~/layouts/headers/friends-header'
-import { InboxHeader } from '~/layouts/headers/inbox-headers'
+// import { InboxHeader } from '~/layouts/headers/inbox-headers'
 import { WorkoutHeader } from '~/layouts/headers/workout-headers'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY

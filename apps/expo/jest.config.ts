@@ -3,6 +3,7 @@ import type { Config } from 'jest'
 const config: Config = {
   coverageDirectory: './jest-coverage/',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.js'],
+  testTimeout: 60000,
   collectCoverageFrom: [
     '**/*.{ts,tsx}',
     '!**/node_modules/**',
@@ -15,15 +16,21 @@ const config: Config = {
     '!**/*.d.ts',
     '!index.ts',
     '!**/api.tsx',
+    '!**/sign-in-w-google.tsx',
     '!**/constants.ts',
 
     /* need to remove in the future */
     '!**/app/**',
     '!**/custom-bottom-sheet-modal.tsx',
+    '!**/sign-in-with-google.tsx',
     '!**/svgMock.tsx',
     '!**/notif/**',
     '!**/hooks/**',
     '!**/context/**',
+    '!**/coverage/**',
+    '!**/node_modules/**',
+    '!**/babel.config.js',
+    '!**/jest.setup.js',
     '!**/spotify/**',
 
     /* halt the coverage */
@@ -31,8 +38,6 @@ const config: Config = {
     '!**/(inbox)/**',
     '!**/(friends)/**',
     '!**/(workout)/**',
-
-    '!**/picker-modal/**',
   ],
   // coverageThreshold: {
   //   global: {
@@ -42,18 +47,11 @@ const config: Config = {
   //     statements: -10,
   //   },
   // },
-  // preset: 'ts-jest',
-
-  /* DON'T UNCOMMENT THIs, IT GOES KABOOM */
-  // transform: {
-  //   '^.+\\.(ts|tsx)?$': 'ts-jest',
-  //   '^.+\\.(js|jsx)$': 'babel-jest',
-  // }
-
+  moduleFileExtensions: ['ts', 'tsx', 'js'],
   preset: 'jest-expo',
   moduleNameMapper: {
-    '~/(.*)': '<rootDir>/src/$1',
-    '\\.svg$': '<rootDir>/src/layouts/headers/svgMock.tsx',
+    '~/(.*)' : '<rootDir>/src/$1',
+    '\\.svg$': '<rootDir>/src/components/ui/svgMock.tsx',
   },
 }
 

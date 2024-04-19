@@ -1,12 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { Animated, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 // screen dimensions
 // Scaled based on screenWidth and screenHeight
@@ -19,7 +12,7 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 //     value={useState()}
 //     onValueChange={() => set(!On)}
 // />
-export default function FrontBackSwitch ({
+export default function FrontBackSwitch({
   value,
   onValueChange,
   label,
@@ -27,7 +20,7 @@ export default function FrontBackSwitch ({
   value: boolean
   onValueChange: () => void
   label: string
-})  {
+}) {
   // Use useRef to persist the animated value without reinitializing it on every render
   const animation = useRef(new Animated.Value(value ? 1 : 0)).current
 
@@ -59,33 +52,47 @@ export default function FrontBackSwitch ({
   return (
     <View style={styles.toggleContainer}>
       <TouchableOpacity onPress={onValueChange} activeOpacity={1}>
-
-
         <Animated.View style={[styles.switch, { backgroundColor }]}>
           {/* Animated the marginLeft of the circle */}
-          <Animated.View
-            style={[styles.circle, { marginLeft: circleTransform }]}
-          />
+          <Animated.View style={[styles.circle, { marginLeft: circleTransform }]} />
         </Animated.View>
 
-        <Text style={{fontSize: screenWidth * 0.04, textAlign: 'center',
-          margin: 10, position: 'absolute', color: '#CACACA',
-          width: screenWidth * 0.7, height: screenWidth * 0.1,
-          top: 0, left: 0-(screenWidth*0.4)/2  }}>FRONT
+        <Text
+          style={{
+            fontSize: screenWidth * 0.04,
+            textAlign: 'center',
+            margin: 10,
+            position: 'absolute',
+            color: '#CACACA',
+            width: screenWidth * 0.7,
+            height: screenWidth * 0.1,
+            top: 0,
+            left: 0 - (screenWidth * 0.4) / 2,
+          }}
+        >
+          FRONT
         </Text>
 
-        <Text style={{fontSize: screenWidth * 0.04, textAlign: 'center',
-          margin: 10, position: 'absolute', color: '#CACACA',
-          width: screenWidth * 0.7, height: screenWidth * 0.1,
-          top: 0, left: (screenWidth*0.3)/2  }}>BACK
+        <Text
+          style={{
+            fontSize: screenWidth * 0.04,
+            textAlign: 'center',
+            margin: 10,
+            position: 'absolute',
+            color: '#CACACA',
+            width: screenWidth * 0.7,
+            height: screenWidth * 0.1,
+            top: 0,
+            left: (screenWidth * 0.3) / 2,
+          }}
+        >
+          BACK
         </Text>
-
       </TouchableOpacity>
       <Text style={styles.label}>{label}</Text>
     </View>
   )
 }
-
 
 // For rectangle shape
 const styles = StyleSheet.create({
@@ -119,5 +126,5 @@ const styles = StyleSheet.create({
     // Overlap
     fontSize: screenWidth * 0.04,
     color: '#CACACA',
-  }
+  },
 })

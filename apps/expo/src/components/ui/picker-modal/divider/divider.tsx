@@ -13,7 +13,7 @@ interface IDividerProps {
 }
 
 const Divider: React.FC<IDividerProps> = ({ style }) => {
-  return <View style={[styles.dividerStyle, style]} />
+  return <View style={[styles.dividerStyle, style]} testID='divider'/>
 }
 
 export default Divider

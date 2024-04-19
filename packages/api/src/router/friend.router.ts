@@ -132,32 +132,4 @@ export const friendRouter = createTRPCRouter({
         throw new Error('Failed to fetch friends with chatId')
       }
     }),
-
-  /**
-   * @remarks
-   * This will route to the message between the user and the friend
-   *
-   * @param userId - the id of the user
-   * @param friendId - the id of the friend
-   */
-  createChatWithFriend: publicProcedure
-    .input(z.object({ userId: z.number().int(), friendId: z.number().int() }))
-    .mutation(({ ctx, input }) => {
-      const { prisma } = ctx
-      // Create a new chat if one doesn't exist
-      console.log('userId' + input.userId)
-      console.log('friendId' + input.friendId)
-      return prisma.chat.create({
-        data: {
-          type: ChatType.DIRECT,
-          users: {
-            connect: [{ id: input.userId }, { id: input.friendId }],
-          },
-          createdByUserId: input.userId,
-        },
-        select: {
-          id: true,
-        },
-      })
-    }),
 })

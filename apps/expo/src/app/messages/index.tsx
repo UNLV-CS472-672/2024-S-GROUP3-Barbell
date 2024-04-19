@@ -24,11 +24,11 @@ export default function MessageView() {
     user2Id = Number(p['userId'])
   }
 
-  // if the chatId doesn't exist, pass in -1 so we know to create a new chat
+  // if the chatId doesn't exist, pass in 0 so we know to create a new chat
   // else just use expected chatId
-  let chatId: number = 0
+  let chatId: number
   if (p['chatId'] == null) {
-    chatId = -1
+    chatId = 0
   } else {
     chatId = Number(p['chatId'])
   }

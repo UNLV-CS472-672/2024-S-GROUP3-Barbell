@@ -27,7 +27,7 @@ interface NavBarProps {
   right?: any
 }
 
-export default function NavBar({
+export default function TopNavBar({
   left = (
     <Ionicons
       testID='left-button'

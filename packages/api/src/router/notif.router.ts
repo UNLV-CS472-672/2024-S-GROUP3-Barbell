@@ -1,4 +1,4 @@
-import { ChatType } from '@prisma/client'
+import { ChatType, User } from '@prisma/client'
 import { z } from 'zod'
 
 import { createTRPCRouter, publicProcedure } from '../trpc'
@@ -24,7 +24,15 @@ export const notifRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const { prisma } = ctx
 
-      const chat = await prisma.chat.findFirst({
+      const users = await prisma.user.findMany({
+        where: {
+          id: {
+            in: [input.user1Id, input.user2Id],
+          },
+        },
+      })
+
+      const chat = await prisma.chat.upsert({
         where: {
           type: input.type,
           id: input.id,
@@ -33,6 +41,14 @@ export const notifRouter = createTRPCRouter({
           id: true,
           users: true,
         },
+        create: {
+          type: input.type,
+          createdByUserId: input.user1Id,
+          users: {
+            connect: users.map((user: User) => ({ id: user.id })),
+          },
+        },
+        update: {},
       })
 
       if (chat == undefined) {

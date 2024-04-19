@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DmNotifs from '~/components/notif/dmNotifs/dmNotifs'
 import GcNotifs from '~/components/notif/gcNotifs/gcNotifs'
 import MiscNotifs from '~/components/notif/miscNotifs/miscNotifs'
-import NavBar from '~/components/ui/nav-bar/NavBar'
+import TopNavBar from '~/components/ui/nav-bar/NavBar'
 
 export type notifsType = 'misc' | 'dm' | 'gc'
 
@@ -18,7 +18,7 @@ export default function NotifScreen() {
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
       {/*header w/ back and new message buttons*/}
-      <NavBar
+      <TopNavBar
         center={'Notifications'}
         right={<MaterialCommunityIcons name='message-plus-outline' size={20} color='#CACACA' />}
       />

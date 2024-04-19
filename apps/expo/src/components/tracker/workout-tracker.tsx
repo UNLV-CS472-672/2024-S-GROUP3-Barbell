@@ -6,12 +6,18 @@ import { CustomBottomSheetModalRef } from '^/apps/expo/src/components/ui/bottom-
 import { ExerciseSchema } from '^/packages/validators/src'
 import { z } from 'zod'
 
+import type { TWorkoutTemplateInfo } from '~/utils/workout-tracker-utils'
+import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import ExerciseEntry from '~/components/tracker/exercise-entry'
 import WorkoutTrackerHeader from '~/components/tracker/workout-tracker-header'
 import Button from '~/components/ui/button/button'
 import { api } from '~/utils/trpc/api'
-import { extractExerciseData, extractWorkoutName } from '~/utils/workoutApiReponseExtractor'
-import RotatingBarbellIcon from '../notif/RotatingBarbellIcon'
+import {
+  areTemplatesDifferent,
+  extractExerciseData,
+  extractWorkoutName,
+  extractWorkoutTemplate,
+} from '~/utils/workout-tracker-utils'
 
 export type TExercise = z.infer<typeof ExerciseSchema>
 
@@ -20,19 +26,33 @@ export interface IWorkoutTrackerProps {
   workoutTemplateId: number
 }
 
+// TODO: Fix exercise ids to exercise in schema workoutTemplate
+
 const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workoutTemplateId }) => {
   const { data, isFetching } = api.workoutTemplate.getWorkoutTemplateInfoById.useQuery({
     id: workoutTemplateId,
   })
 
+  const [workoutTemplate, setWorkoutTemplate] = useState<TWorkoutTemplateInfo | null>(null)
   const [exercises, setExercises] = useState<TExercise[]>([])
   const [workoutName, setWorkoutName] = useState('')
 
   useEffect(() => {
     console.log(data)
+    setWorkoutTemplate(extractWorkoutTemplate(data))
     setExercises(extractExerciseData(data))
     setWorkoutName(extractWorkoutName(data))
   }, [data])
+
+  const handleFinishWorkout = () => {
+    if (areTemplatesDifferent(workoutTemplate, workoutName, exercises)) {
+      console.log('Different')
+    } else {
+      console.log('Same')
+    }
+  }
+
+  // TODO: Move note attribute to exerciseLog schema
 
   // TODO: Fix the keyboard avoid view with the inputs
   return (
@@ -43,7 +63,9 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workou
         </View>
       ) : (
         <>
-          <WorkoutTrackerHeader {...{ bottomSheetRef, workoutName, setWorkoutName, exercises }} />
+          <WorkoutTrackerHeader
+            {...{ bottomSheetRef, workoutName, setWorkoutName, exercises, handleFinishWorkout }}
+          />
 
           <ScrollView>
             {exercises.map((exercise, exerciseIndex) => (

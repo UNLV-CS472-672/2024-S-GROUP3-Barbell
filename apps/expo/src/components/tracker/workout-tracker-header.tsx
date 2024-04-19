@@ -15,6 +15,7 @@ export interface IWorkoutTrackerHeaderProps {
   workoutName: string
   setWorkoutName: React.Dispatch<React.SetStateAction<string>>
   exercises: TExercise[]
+  handleFinishWorkout: () => void
 }
 
 const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
@@ -22,6 +23,7 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
   workoutName,
   setWorkoutName,
   exercises,
+  handleFinishWorkout,
 }) => {
   const { setIsWorkingOut } = useGlobalContext()
   const [time, setTime] = useState(0)
@@ -31,11 +33,11 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
     bottomSheetRef.current?.dismiss()
   }
 
-  const handleFinishWorkout = () => {
-    console.log(workoutName)
-    console.log(time)
-    console.log(exercises)
-  }
+  // const handleFinishWorkout = () => {
+  //   console.log(workoutName)
+  //   console.log(time)
+  //   console.log(exercises)
+  // }
 
   return (
     <View className='mx-2'>

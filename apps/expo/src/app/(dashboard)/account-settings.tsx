@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { router } from 'expo-router'
+import { Route, router } from 'expo-router'
 
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 
@@ -70,7 +70,7 @@ const otherItems: NavigationListItem[] = [
   {
     title: 'Privacy Policy',
     iconName: 'shield-alt',
-    onPress: () => router.push('/privacy-policy'),
+    onPress: () => router.push('/privacy-policy' as Route<string>),
   },
 ]
 

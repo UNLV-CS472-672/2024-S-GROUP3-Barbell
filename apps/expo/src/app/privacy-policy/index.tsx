@@ -28,11 +28,15 @@ const PrivacyPolicy = () => {
             <ScrollView>
                 <View>
                     <Text className="text-2xl text-slate-200" style={{fontSize:30, textAlign: 'center'}}>Privacy Policy</Text>
-                    <Text className="text-2xl text-slate-200" style={{fontSize:25}}> We love having your data!! 😊</Text>
-                    <Text className="text-2xl text-slate-200">At Barbell, we are passionate about helping you achieve your fitness goals, but we are equally passionate about collecting your data. Our privacy policy is designed to ensure that we gather as much information about you as possible. </Text>
-                    <Text className="text-2xl text-slate-200">When you use our app, we track your every move, both inside and outside the gym. We love to know your location, your workout routines, and even your eating habits.</Text>
-                    <Text className="text-2xl text-slate-200">By agreeing to our privacy policy, you are giving us permission to use your data in any way we see fit, including sharing it with third parties who may or may not have your best interests at heart.</Text>
-                    <Text className="text-2xl text-slate-200">But don't worry, we promise to keep your data safe and secure, just like we promise to keep your muscles growing. So go ahead and download Barbell today, and let us collect all the data we need to help you reach your fitness goals!</Text>
+                    <Text className="text-2xl text-slate-200" style={{fontSize:15, textAlign: 'center'}}>Effective Date: [4/19/2024]</Text>
+                    <Text className="text-2xl text-slate-200">Welcome to Barbell, your ultimate companion for fitness and workout routines. At Barbell, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and protect your information when you use our mobile application ("App") and services.</Text>
+                    <Text className="text-2xl text-slate-200" style={{fontSize: 25}}>Information We Collect:</Text>
+                    <Text className="text-2xl text-slate-200"></Text>
+                    <Text className="text-2xl text-slate-200"></Text>
+                    <Text className="text-2xl text-slate-200"></Text>
+                    <Text className="text-2xl text-slate-200"></Text>
+                    <Text className="text-2xl text-slate-200"></Text>
+                    <Text className="text-2xl text-slate-200"></Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }} className={tailwindClasses.mainTile}>
                         <Text className="text-2xl text-slate-200"> Please let us track you 🥺</Text>
                         <View style={{ padding: 0, }}>

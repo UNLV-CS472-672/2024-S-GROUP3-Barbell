@@ -39,10 +39,10 @@ const PrivacyPolicy = () => {
             Privacy Policy
           </Text>
 
-          <View style={{ paddingHorizontal:30, flexDirection:'row' }}>
+          <View style={{ paddingHorizontal: 30, flexDirection: 'row' }}>
             <Label text='Legal Document' textColor='#CFCFCF' backgroundColor='#48476D' />
-            <Text>  </Text>
-             <Label text='Human-Friendly' textColor='#CFCFCF' backgroundColor='#48476D' />
+            <Text> </Text>
+            <Label text='Human-Friendly' textColor='#CFCFCF' backgroundColor='#48476D' />
           </View>
 
           <Text

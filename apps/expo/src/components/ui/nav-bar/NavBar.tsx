@@ -27,7 +27,7 @@ interface NavBarProps {
   right?: any
 }
 
-export default function TopNavBar({
+export default function NavBar({
   left = (
     <Ionicons
       testID='left-button'
@@ -41,30 +41,25 @@ export default function TopNavBar({
   right = <View />,
 }: NavBarProps) {
   return (
-    <View>
-      <View className='flex-row items-center justify-between px-5 py-3'>
-        <View testID='left-test' className='basis-1/3 items-start'>
-          {typeof left == 'string' && (
-            <Text style={{ color: '#CACACA', fontSize: 16 }}>{left}</Text>
-          )}
-          {typeof left != 'string' && left}
-        </View>
-
-        <View testID='center-test' className='basis-1/3 items-center'>
-          {typeof center == 'string' && (
-            <Text style={{ color: '#CACACA', fontSize: 20 }}>{center}</Text>
-          )}
-          {typeof center != 'string' && center}
-        </View>
-
-        <View testID='right-test' className='basis-1/3 items-end'>
-          {typeof right == 'string' && (
-            <Text style={{ color: '#CACACA', fontSize: 16 }}>{right}</Text>
-          )}
-          {typeof right != 'string' && right}
-        </View>
+    <View className='flex-row items-center justify-between px-5'>
+      <View testID='left-test' className='basis-1/3 items-start'>
+        {typeof left == 'string' && <Text style={{ color: '#CACACA', fontSize: 16 }}>{left}</Text>}
+        {typeof left != 'string' && left}
       </View>
-      <View style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
+
+      <View testID='center-test' className='basis-1/3 items-center'>
+        {typeof center == 'string' && (
+          <Text style={{ color: '#CACACA', fontSize: 20 }}>{center}</Text>
+        )}
+        {typeof center != 'string' && center}
+      </View>
+
+      <View testID='right-test' className='basis-1/3 items-end'>
+        {typeof right == 'string' && (
+          <Text style={{ color: '#CACACA', fontSize: 16 }}>{right}</Text>
+        )}
+        {typeof right != 'string' && right}
+      </View>
     </View>
   )
 }

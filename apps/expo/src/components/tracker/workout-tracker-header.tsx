@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Text, TextInput, View } from 'react-native'
+import { Route, router } from 'expo-router'
 
 import { Ionicons } from '@expo/vector-icons'
 import { CustomBottomSheetModalRef } from '^/apps/expo/src/components/ui/bottom-sheet/custom-bottom-sheet-modal'
@@ -34,51 +35,71 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
 }) => {
   const { setIsWorkingOut, userData } = useGlobalContext()
   const [time, setTime] = useState(0)
+  const [isNormalModalVisible, setIsNormalModalVisible] = useState(false)
   const [isDifferentWorkoutModalVisible, setIsDifferentWorkoutModalVisible] = useState(false)
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false)
+  const apiUtils = api.useUtils()
 
-  const createNewWorkoutLog = api.workoutLog.createNewWorkoutLog.useMutation()
+  const createNewWorkoutLog = api.workoutLog.createNewWorkoutLog.useMutation({
+    onSuccess: () => {
+      apiUtils.user.getUserWorkoutHistory.invalidate() // workout completion needs to grab most recent workoutLog data
+    },
+  })
+
   const createNewWorkoutLogAndUpdateValues =
-    api.workoutLog.createNewWorkoutLogAndUpdateValues.useMutation()
+    api.workoutLog.createNewWorkoutLogAndUpdateValues.useMutation({
+      onSuccess: () => {
+        apiUtils.workoutTemplate.invalidate() // workoutTemplate needs to grab most recent exerciseLog data
+        apiUtils.user.getUserWorkoutHistory.invalidate()
+      },
+    })
 
   const handleCancelWorkout = () => {
     setIsWorkingOut(false)
     bottomSheetRef.current?.dismiss()
   }
 
+  const sendUserToWorkoutCompletion = () => {
+    bottomSheetRef.current?.dismiss()
+    setIsWorkingOut(false)
+    router.push({
+      pathname: '/workout-completion' as Route<string>,
+      params: {
+        workoutName,
+        exercises: JSON.stringify(exercises),
+        duration: time,
+        dateFinished: new Date().toDateString(),
+      },
+    })
+  }
+
   const handleFinishWorkout = () => {
     exercises = prepareExercisesForApi(exercises)
-    console.log('filtered exercises', exercises)
 
     if (!exercises.length) {
       setIsErrorModalVisible(true)
       return
     }
-
     if (areTemplatesDifferent(workoutTemplate, workoutName, exercises)) {
-      createNewWorkoutLogAndUpdateValues.mutate({
-        duration: time,
-        userId: userData!.id,
-        workoutData: {
-          workoutTemplateId: workoutTemplate!.workoutTemplateId,
-          workoutName,
-          exercises,
-        },
-      })
-      console.log('Different')
       setIsDifferentWorkoutModalVisible(true)
       return
     }
 
-    createNewWorkoutLog.mutate({
+    setIsNormalModalVisible(true)
+  }
+
+  const handleUpdateValuesOnly = () => {
+    createNewWorkoutLogAndUpdateValues.mutate({
       duration: time,
       userId: userData!.id,
-      workoutTemplateId: workoutTemplate!.workoutTemplateId,
+      workoutData: {
+        workoutTemplateId: workoutTemplate!.workoutTemplateId,
+        workoutName,
+        exercises,
+      },
     })
-    setIsWorkingOut(false)
-    bottomSheetRef.current?.dismiss()
-
-    console.log('Same')
+    setIsDifferentWorkoutModalVisible(false)
+    sendUserToWorkoutCompletion()
   }
 
   return (
@@ -111,39 +132,106 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
       </View>
 
       <PickerModal
-        title='Your finished workout is different from the template. What would you like to do?'
-        data={[
-          'Create new workout template',
-          'Update existing workout template',
-          'Discard changes',
-          'Cancel',
-        ]}
+        title='Update Template'
+        subTitle='Your workout template has been modified. What would you like to do?'
         isVisible={isDifferentWorkoutModalVisible}
-        onPress={() => {
-          setIsDifferentWorkoutModalVisible(false)
-        }}
-        onCancelPress={() => {
-          setIsDifferentWorkoutModalVisible(false)
-        }}
         onBackdropPress={() => {
           setIsDifferentWorkoutModalVisible(false)
         }}
-      />
+      >
+        <View className='gap-y-3 px-4 py-4'>
+          <Button onPress={handleUpdateValuesOnly}>
+            <Text className='text-center font-semibold text-white'>Update Values Only</Text>
+
+            {/* // TODO: Implement this */}
+            {/* <Text className='text-center text-white'>{`Update values for ${2} set`}</Text> */}
+          </Button>
+
+          {/* TODO: implement this */}
+          {/* <Button className='bg-light-red'>
+            <Text className='text-center font-semibold text-white'>Update Template</Text>
+            <Text className='text-center text-white'>Add 2 exercises</Text>
+          </Button> */}
+
+          <Button
+            color='dark'
+            onPress={() => {
+              setIsDifferentWorkoutModalVisible(false)
+              sendUserToWorkoutCompletion()
+              createNewWorkoutLog.mutate({
+                duration: time,
+                userId: userData!.id,
+                workoutTemplateId: workoutTemplate!.workoutTemplateId,
+              })
+            }}
+          >
+            <Text className='py-1 text-center font-semibold text-white'>
+              Keep Original Template
+            </Text>
+          </Button>
+        </View>
+      </PickerModal>
 
       <PickerModal
         title='Your workout is empty. Would you like to cancel it?'
-        data={['Yes, cancel workout', 'No, continue workout']}
         isVisible={isErrorModalVisible}
-        onPress={() => {
-          setIsErrorModalVisible(false)
-        }}
-        onCancelPress={() => {
-          setIsErrorModalVisible(false)
-        }}
         onBackdropPress={() => {
           setIsErrorModalVisible(false)
         }}
-      />
+      >
+        <View className='gap-y-4 px-6 pb-4'>
+          <Button
+            value='Continue Workout'
+            color='dark'
+            className='py-4'
+            onPress={() => {
+              setIsErrorModalVisible(false)
+            }}
+          />
+          <Button
+            className='bg-light-red py-4'
+            value='Cancel Workout'
+            onPress={() => {
+              bottomSheetRef.current?.dismiss()
+              setIsErrorModalVisible(false)
+              setIsWorkingOut(false)
+            }}
+          />
+        </View>
+      </PickerModal>
+
+      <PickerModal
+        title='Finish workout?'
+        isVisible={isNormalModalVisible}
+        onBackdropPress={() => {
+          setIsNormalModalVisible(false)
+        }}
+      >
+        <View className='gap-y-4 px-6 pb-4'>
+          <Button
+            className='bg-light-green py-4'
+            onPress={() => {
+              setIsNormalModalVisible(false)
+              sendUserToWorkoutCompletion()
+              createNewWorkoutLog.mutate({
+                duration: time,
+                userId: userData!.id,
+                workoutTemplateId: workoutTemplate!.workoutTemplateId,
+              })
+            }}
+          >
+            <Text className='text-center font-semibold text-white'>Finish workout</Text>
+          </Button>
+          <Button
+            className='py-4'
+            color='dark'
+            value='Cancel'
+            onPress={() => {
+              setIsNormalModalVisible(false)
+            }}
+          />
+        </View>
+      </PickerModal>
     </>
   )
 }

@@ -82,7 +82,7 @@ export const workoutTemplateRouter = createTRPCRouter({
                 weight: set.weight,
                 unilateral: set.unilateral,
                 exerciseId: exercise.id,
-                exerciseLogId: exercise.exerciseLogs[0]!.id,
+                // exerciseLogId: exercise.exerciseLogs[0]!.id,
               }
             }),
           }

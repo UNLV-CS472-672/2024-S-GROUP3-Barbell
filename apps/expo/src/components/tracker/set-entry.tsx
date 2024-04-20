@@ -86,7 +86,7 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
         }),
       )
     },
-    [completed, isUnilateral],
+    [completed, isUnilateral, exerciseIndex],
   )
 
   const handleRepsChange = useCallback(
@@ -126,7 +126,7 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
         }),
       )
     },
-    [completed, isUnilateral],
+    [completed, isUnilateral, exerciseIndex],
   )
 
   const handleCompletedPress = () => {
@@ -173,7 +173,7 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
         sets.splice(setIndex, 1)
       }),
     )
-  }, [])
+  }, [exerciseIndex])
 
   const styleTextInput = (completed: boolean, inErrorState: boolean) => {
     if (completed) {
@@ -224,7 +224,7 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
       }),
     )
     setIsUnilateral((prev) => !prev)
-  }, [isUnilateral, inErrorState])
+  }, [isUnilateral, inErrorState, exerciseIndex])
 
   const isDisabled = () => {
     if (isUnilateral) {

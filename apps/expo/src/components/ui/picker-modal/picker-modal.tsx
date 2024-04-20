@@ -28,10 +28,8 @@ const PickerModal: React.FC<IPickerModalProps> = ({
 }) => {
   const Picker = () => (
     <View style={[styles.mainContent]}>
-      <Text className='py-6 text-center text-xl font-bold text-white'>{title}</Text>
-      {subTitle && (
-        <Text className='py-6 text-center text-lg font-bold text-white'>{subTitle}</Text>
-      )}
+      <Text className='p-6 text-center text-xl font-bold text-white'>{title}</Text>
+      {subTitle && <Text className='px-4 pb-6 text-center text-lg text-slate-200'>{subTitle}</Text>}
       <View>{children}</View>
     </View>
   )
@@ -40,13 +38,7 @@ const PickerModal: React.FC<IPickerModalProps> = ({
     <Modal
       isVisible={isVisible}
       {...modalProps}
-      style={[
-        {
-          marginBottom: 300,
-          marginLeft: 20,
-        },
-        modalProps?.style,
-      ]}
+      style={[{ marginBottom: 20 }, modalProps?.style]}
       animationIn='slideInUp'
       animationInTiming={300}
       animationOut='slideOutDown'

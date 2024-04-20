@@ -40,24 +40,29 @@ const SetTypeButton: React.FC<ISetTypeButtonProps> = memo(
         return 'bg-transparent'
       }
 
-      if (set.type === SetType.WARMUP) {
-        return 'bg-orange-600'
+      switch (set.type) {
+        case SetType.WARMUP:
+          return 'bg-orange-600'
+        case SetType.FAILURE:
+          return 'bg-red-600'
+        case SetType.DROPSET:
+          return 'bg-blue-600'
+        default:
+          return 'bg-slate-900'
       }
-
-      if (set.type === SetType.FAILURE) {
-        return 'bg-red-600'
-      }
-
-      if (set.type === SetType.DROPSET) {
-        return 'bg-blue-600'
-      }
-
-      return 'bg-slate-900'
     }
 
-    const handleOnButtonPress = () => {
-      setModalVisible(true)
-    }
+    const handleSetTypeChange = useCallback(
+      (type: SetType) => {
+        workoutUpdater(
+          produce((draft) => {
+            draft[exerciseIndex]!.sets[setIndex]!.type = type
+          }),
+        )
+        setModalVisible(false)
+      },
+      [exerciseIndex, setIndex, workoutUpdater],
+    )
 
     return (
       <>
@@ -65,7 +70,7 @@ const SetTypeButton: React.FC<ISetTypeButtonProps> = memo(
           value={calculateValue()}
           className={`h-9 w-full ${styleButton()}`}
           color='dark'
-          onPress={handleOnButtonPress}
+          onPress={() => setModalVisible(true)}
         />
         <PickerModal
           title='Set Type'
@@ -75,7 +80,11 @@ const SetTypeButton: React.FC<ISetTypeButtonProps> = memo(
           }}
         >
           <View className='flex items-center justify-center gap-y-2 px-4 pb-8'>
-            <Button className='flex w-full flex-row justify-between px-4 py-5' color='dark'>
+            <Button
+              className='flex w-full flex-row justify-between px-4 py-5'
+              color='dark'
+              onPress={() => handleSetTypeChange(SetType.WARMUP)}
+            >
               <View className='flex flex-row items-center gap-x-4'>
                 <Text className='text-xl font-bold text-orange-600'>W</Text>
                 <Text className='text-xl text-white'>Warm-up Set</Text>
@@ -84,7 +93,11 @@ const SetTypeButton: React.FC<ISetTypeButtonProps> = memo(
                 <AntDesign name='question' size={24} color='white' />
               </Button>
             </Button>
-            <Button className='flex w-full flex-row justify-between px-4 py-5' color='dark'>
+            <Button
+              className='flex w-full flex-row justify-between px-4 py-5'
+              color='dark'
+              onPress={() => handleSetTypeChange(SetType.DROPSET)}
+            >
               <View className='flex flex-row items-center gap-x-4'>
                 <Text className='text-xl font-bold text-blue-600'>D</Text>
                 <Text className='text-xl text-white'>Drop Set</Text>
@@ -93,7 +106,11 @@ const SetTypeButton: React.FC<ISetTypeButtonProps> = memo(
                 <AntDesign name='question' size={24} color='white' />
               </Button>
             </Button>
-            <Button className='flex w-full flex-row justify-between px-4 py-5' color='dark'>
+            <Button
+              className='flex w-full flex-row justify-between px-4 py-5'
+              color='dark'
+              onPress={() => handleSetTypeChange(SetType.FAILURE)}
+            >
               <View className='flex flex-row items-center gap-x-4'>
                 <Text className='text-xl font-bold text-red-600'>F</Text>
                 <Text className='text-xl text-white'>Failure Set</Text>
@@ -102,7 +119,11 @@ const SetTypeButton: React.FC<ISetTypeButtonProps> = memo(
                 <AntDesign name='question' size={24} color='white' />
               </Button>
             </Button>
-            <Button className='flex w-full flex-row justify-between px-4 py-5' color='dark'>
+            <Button
+              className='flex w-full flex-row justify-between px-4 py-5'
+              color='dark'
+              onPress={() => handleSetTypeChange(SetType.NORMAL)}
+            >
               <View className='flex flex-row items-center gap-x-4'>
                 <Text className='text-xl font-bold text-white'>N</Text>
                 <Text className='text-xl text-white'>Normal Set</Text>

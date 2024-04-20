@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect } from 'react'
 import { NativeSyntheticEvent, Text, TextInput, TextInputChangeEventData, View } from 'react-native'
 
-import { Ionicons } from '@expo/vector-icons'
+import { Feather, Ionicons } from '@expo/vector-icons'
 import { SetType } from '@prisma/client'
 import { produce } from 'immer'
 import { v4 as uuid } from 'uuid'
@@ -10,6 +10,7 @@ import type { TExercise } from '~/components/tracker/workout-tracker'
 import SetEntry from '~/components/tracker/set-entry'
 import SetEntryHeader from '~/components/tracker/set-entry-header'
 import Button from '~/components/ui/button/button'
+import colors from '~/styles/colors'
 
 export interface IExerciseEntryProps {
   exercise: TExercise
@@ -70,9 +71,22 @@ const ExerciseEntry: React.FC<IExerciseEntryProps> = memo(
       )
     }, [])
 
+    const handleDeleteExercise = useCallback(() => {
+      workoutUpdater(
+        produce((draft) => {
+          draft.splice(exerciseIndex, 1)
+        }),
+      )
+    }, [exerciseIndex])
+
     return (
       <View className='mb-2 mt-3'>
-        <Text className='mb-2 px-2 text-2xl font-semibold text-[#7B7FF3]'>{exercise.name}</Text>
+        <View className='mb-3 flex flex-row items-center justify-between'>
+          <Text className='flex-1 px-2 text-2xl font-semibold text-[#7B7FF3]'>{exercise.name}</Text>
+          <Button className='mr-4 p-2' color='icon' onPress={handleDeleteExercise}>
+            <Feather name='trash-2' size={20} color={colors.tracker.cancel} />
+          </Button>
+        </View>
         <SetEntryHeader />
         <View
           className={`mx-2 mb-1 flex flex-row items-center gap-x-2 rounded-lg px-2 py-1 opacity-70 
@@ -83,7 +97,7 @@ const ExerciseEntry: React.FC<IExerciseEntryProps> = memo(
           </View>
           <TextInput
             className='flex-1 text-white placeholder:text-slate-200'
-            value={exercise.note}
+            value={exercise.note || ''}
             onChange={handleNoteInputChange}
             multiline
             placeholder='Add a note...'

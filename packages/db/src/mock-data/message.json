@@ -178,14 +178,5 @@
     "read": true,
     "chatId": 6,
     "senderId": 8
-  },
-  {
-    "id": 21,
-    "createdAt": "2022-04-19T15:49:09.197Z",
-    "updatedAt": "2022-04-19T15:49:09.197Z",
-    "content": "Bozo",
-    "read": true,
-    "chatId": 6,
-    "senderId": 9
   }
 ]

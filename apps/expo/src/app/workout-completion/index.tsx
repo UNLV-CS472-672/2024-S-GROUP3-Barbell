@@ -9,6 +9,7 @@ import { TExercise } from '~/components/tracker/workout-tracker'
 import Button from '~/components/ui/button/button'
 import { useGlobalContext } from '~/context/global-context'
 import colors from '~/styles/colors'
+import { formatForWorkoutCompletion } from '~/utils/timerFormatter'
 import { api } from '~/utils/trpc/api'
 
 const WorkoutCompletion: React.FC = () => {
@@ -55,7 +56,9 @@ const WorkoutCompletion: React.FC = () => {
                 <Text className='mt-3 text-slate-200'>{dateFinished}</Text>
                 <View className='mt-1 flex flex-row items-center gap-x-2'>
                   <Ionicons name='time' size={16} color={colors.bottomav.icon} />
-                  <Text className='text-slate-200'>{duration}</Text>
+                  <Text className='text-slate-200'>
+                    {formatForWorkoutCompletion(Number(duration))}
+                  </Text>
                 </View>
                 <View className='mt-2 flex'>
                   <Text className='mb-1 font-bold text-white'>Exercise</Text>

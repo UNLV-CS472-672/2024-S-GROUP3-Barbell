@@ -41,6 +41,7 @@ const Nav = () => {
           { key: '(friends)', route: '/(friends)' },
           { key: 'MuscleGroup', route: '/muscleGroup' },
           { key: 'completion', route: '/workout-completion' },
+          { key: 'KeypadDemo', route: '/keypadDemo' },
         ]}
         renderItem={({ item }) => (
           <Button

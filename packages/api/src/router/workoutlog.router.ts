@@ -1,6 +1,5 @@
-import {z} from 'zod'
-
 import { createTRPCRouter, publicProcedure } from '../trpc'
+import {z} from 'zod'
 
 export const workoutLogRouter = createTRPCRouter({
 
@@ -17,7 +16,7 @@ export const workoutLogRouter = createTRPCRouter({
    )
    .query(async ({ctx, input}) => {
         const {prisma} = ctx
-        const workoutLog = await prisma.workoutLog.findUnique({
+        return await prisma.workoutLog.findUnique({
             where: {
                 id: input.id
             }
@@ -36,7 +35,7 @@ export const workoutLogRouter = createTRPCRouter({
     )
     .query(async ({ctx, input}) => {
         const {prisma} = ctx
-        const workoutLogs = await prisma.workoutLog.findMany({
+        return await prisma.workoutLog.findMany({
             where: {
                 userId: input.userId
             },
@@ -54,7 +53,6 @@ export const workoutLogRouter = createTRPCRouter({
     createNewWorkoutLog: publicProcedure
     .input(
         z.object({
-            finishedAt: z.date().optional(), //As is default to now()
             duration: z.number().int(),
             userId: z.number().int(),
             workoutTemplateId: z.number().int()
@@ -65,7 +63,6 @@ export const workoutLogRouter = createTRPCRouter({
         // Just create a new workout log
         return prisma.workoutLog.create({
             data: {
-                finishedAt: input.finishedAt,
                 duration: input.duration,
                 userId: input.userId,
                 workoutTemplateId: input.workoutTemplateId
@@ -86,7 +83,8 @@ export const workoutLogRouter = createTRPCRouter({
     .input(
         z.object({
             id: z.number().int(),
-            finishedAt: z.date().optional(), //Should only be updated
+            finishedAt: z.date().optional(), //Should only be updated when finished
+            duration: z.number().int().optional(), // Don't like it being optional
         })
     )
     .mutation(async ({ctx, input}) => {
@@ -95,11 +93,10 @@ export const workoutLogRouter = createTRPCRouter({
         return prisma.workoutLog.update({
             where: {
                 id: input.id,
-                userId: input.userId,
-
             },
             data : {
-                finishedAt: input.finishedAt
+                finishedAt: input.finishedAt,
+                duration: input.duration // From tracker
             }
         })
     })

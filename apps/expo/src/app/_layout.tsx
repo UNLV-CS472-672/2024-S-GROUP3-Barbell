@@ -189,6 +189,14 @@ function RootLayoutBottomNav() {
           ),
         }}
       />
+
+      {/* workout-completion */}
+      <Stack.Screen
+        name='workout-completion'
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   )
 }

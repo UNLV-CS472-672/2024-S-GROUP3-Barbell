@@ -31,7 +31,7 @@ jest.mock('~/context/global-context', () => ({
 // Mock the Friend component
 jest.mock('~/components/frlist/Friend', () => ({
   __esModule: true,
-  default: require('../__mocks__/Friend').default,
+  default: require('~/__mocks__/friend').default,
 }))
 
 // supress any console.logs

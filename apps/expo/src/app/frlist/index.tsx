@@ -22,7 +22,7 @@ export default function FriendsListScreen() {
     id: userData?.id!,
   })
 
-  console.log(data)
+  // console.log(data)
 
   const [filteredList, setFilteredList] = useState(data)
 

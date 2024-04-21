@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar Component renders correctly and matches snapshot 1`] = `
+<View
+  className="mx-3 my-2 flex-row items-center rounded-[5px] bg-[#272727] px-3"
+  testID="searchBar"
+>
+  <Text />
+  <TextInput
+    className="placeholder:color-[#717171] px-3 py-[6px] text-[20px] text-white"
+    collapsable={false}
+    handlerTag={1}
+    handlerType="NativeViewGestureHandler"
+    onChangeText={[Function]}
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    placeholder="Search..."
+  />
+</View>
+`;

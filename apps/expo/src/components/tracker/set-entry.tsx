@@ -131,7 +131,6 @@ const SetEntry: React.FC<ISetEntryProps> = ({ set, workoutUpdater, exerciseIndex
 
   const handleCompletedPress = () => {
     const { weight, reps } = set
-    console.log(weight, reps)
 
     // Non unilateral sets
     if ((weight.length < 2 && reps.length < 2) || !isUnilateral) {

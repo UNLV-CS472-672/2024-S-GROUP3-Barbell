@@ -12,16 +12,21 @@ import colors from '~/styles/colors'
 import { formatForWorkoutCompletion } from '~/utils/timerFormatter'
 import { api } from '~/utils/trpc/api'
 
+export type WorkoutCompletionParams = {
+  workoutName: string
+  exercises: string
+  duration: string
+  dateFinished: string
+}
+
 const WorkoutCompletion: React.FC = () => {
   const { userData } = useGlobalContext()
   const { data, isFetching } = api.user.getUserWorkoutHistory.useQuery({
     userId: userData!.id,
   })
 
-  const { workoutName, exercises, duration, dateFinished } = useLocalSearchParams() // TODO: type this
-  console.log('workoutName', workoutName)
-  console.log('exercises', exercises)
-  console.log('duration', duration)
+  const { workoutName, exercises, duration, dateFinished } =
+    useLocalSearchParams<WorkoutCompletionParams>()
   const parsedExercises: TExercise[] = JSON.parse(exercises as string)
 
   return (
@@ -47,7 +52,11 @@ const WorkoutCompletion: React.FC = () => {
                 </View>
                 <View className='mt-6 flex items-center justify-center'>
                   <Text className='text-2xl font-bold text-white'>Workout Completed</Text>
-                  <Text className='mt-2 text-lg text-white'>{`You have completed ${data?.workoutHistory.length} workouts.`}</Text>
+                  {data && (
+                    <Text className='mt-2 text-lg text-white'>
+                      You have completed {data.workoutHistory.length} workouts.
+                    </Text>
+                  )}
                 </View>
               </View>
 
@@ -57,14 +66,14 @@ const WorkoutCompletion: React.FC = () => {
                 <View className='mt-1 flex flex-row items-center gap-x-2'>
                   <Ionicons name='time' size={16} color={colors.bottomav.icon} />
                   <Text className='text-slate-200'>
-                    {formatForWorkoutCompletion(Number(duration))}
+                    {formatForWorkoutCompletion(parseInt(duration))}
                   </Text>
                 </View>
                 <View className='mt-2 flex'>
                   <Text className='mb-1 font-bold text-white'>Exercise</Text>
                   {parsedExercises.map((exercise) => (
                     <Text key={exercise.id} className='text-slate-200'>
-                      {`${exercise.sets.length} x ${exercise.name}`}
+                      {exercise.sets.length} x {exercise.name}
                     </Text>
                   ))}
                 </View>

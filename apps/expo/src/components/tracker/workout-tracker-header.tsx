@@ -5,6 +5,7 @@ import { Route, router } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import { CustomBottomSheetModalRef } from '^/apps/expo/src/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 
+import { WorkoutCompletionParams } from '~/app/workout-completion'
 import WorkoutTimer from '~/components/tracker/workout-timer'
 import { TExercise } from '~/components/tracker/workout-tracker'
 import Button from '~/components/ui/button/button'
@@ -67,9 +68,9 @@ const WorkoutTrackerHeader: React.FC<IWorkoutTrackerHeaderProps> = ({
       params: {
         workoutName,
         exercises: JSON.stringify(exercises),
-        duration: time,
+        duration: time.toString(),
         dateFinished: new Date().toDateString(),
-      },
+      } as WorkoutCompletionParams,
     })
   }
 

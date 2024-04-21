@@ -39,7 +39,6 @@ const ExerciseEntry: React.FC<IExerciseEntryProps> = memo(
       const { sets } = exercise
       // If there doesn't exists a set from a previous workout, then we start this new exercise with one default set
       if (sets.length === 0) {
-        console.log('adding default set')
         handleEmptySet()
       }
     }, [])

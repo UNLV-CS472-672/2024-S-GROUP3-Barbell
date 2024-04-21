@@ -34,6 +34,15 @@ jest.mock('~/components/frlist/Friend', () => ({
   default: require('../__mocks__/Friend').default,
 }))
 
+// supress any console.logs
+beforeAll(() => {
+  jest.spyOn(console, 'log').mockImplementation(() => {})
+})
+
+afterAll(() => {
+  jest.restoreAllMocks()
+})
+
 describe('FriendsListScreen', () => {
   let useGlobalContextMock: jest.MockedFunction<typeof useGlobalContext>
   let getFriendsWithChatIdQueryMock: jest.MockedFunction<

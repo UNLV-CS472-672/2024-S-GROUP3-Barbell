@@ -103,6 +103,9 @@ export default function RootLayout() {
     return null
   }
 
+  // console.log(process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_ID)
+  // console.log(process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_SECRET)
+
   const isDevelopment = process.env.NODE_ENV === 'development'
 
   return (

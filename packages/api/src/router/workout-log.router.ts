@@ -1,6 +1,6 @@
+import { WorkoutTemplateInfoSchema } from '^/packages/validators/src'
 import { z } from 'zod'
 
-import { WorkoutTemplateInfoSchema } from '../../../validators/src'
 import { createTRPCRouter, publicProcedure } from '../trpc'
 
 export const workoutLogRouter = createTRPCRouter({

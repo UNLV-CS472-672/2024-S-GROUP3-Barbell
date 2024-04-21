@@ -166,77 +166,37 @@ export default function NewWorkoutMuscleGroup() {
               case 'adductors':
               case 'hamstring':
                 // Upper leg
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Upper leg')
-                break
-
               case 'tibialis':
               case 'calves':
                 // Lower leg
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+              case 'gluteal':
+                // Glute
+                // Leg
                 setBodyPartSelected({
                   slug: e.slug,
                   intensity: 2,
                   color: 'defaultColor',
                   pathArray: e.pathArray,
                 })
-                setUserSelection('Lower leg')
+                setUserSelection('Leg')
                 break
 
               case 'trapezius':
                 // Conflit with upper back
                 // Go with the figma design
                 // Upper back
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Upper back')
-                break
-
               case 'upper-back':
                 // Lat
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Lat')
-                break
-
               case 'lower-back':
                 // Lower back
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
+                // Back
                 setBodyPartSelected({
                   slug: e.slug,
                   intensity: 2,
                   color: 'defaultColor',
                   pathArray: e.pathArray,
                 })
-                setUserSelection('Lower back')
-                break
-
-              case 'gluteal':
-                // Glute
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Glute')
+                setUserSelection('Back')
                 break
 
               default:

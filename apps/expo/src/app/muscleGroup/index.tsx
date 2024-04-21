@@ -1,6 +1,6 @@
 import type { BodyPart } from 'react-native-body-highlighter'
 import React, { useState } from 'react'
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native'
 import Body from 'react-native-body-highlighter'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
@@ -9,6 +9,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
+import NavBar from '~/components/ui/nav-bar/NavBar'
 import { Gender, useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 
@@ -66,10 +67,12 @@ export default function NewWorkoutMuscleGroup() {
   // })
 
   // Define the initial state with default values
+  // intensity used as bool in lib
+  // intensity == 0, use val at colors[index 0]
   const [bodyPartSelected, setBodyPartSelected] = useState<BodyPart>({
     color: 'defaultColor',
     slug: 'chest',
-    intensity: 2,
+    intensity: 0,
     pathArray: [],
   })
 
@@ -88,10 +91,11 @@ export default function NewWorkoutMuscleGroup() {
   const [tmp1, setTmp1] = useState({})
   const [userSelection, setUserSelection] = useState('')
 
+  // NavBar gives odd view
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
       <View className='flex flex-row justify-between px-5'>
-        <Ionicons onPress={() => router.back()} name='chevron-back' size={24} color='#CACACA' />
+        <Ionicons onPress={() => router.back()} name='chevron-back' size={20} color='#CACACA' />
         <Text style={{ color: '#CACACA', fontSize: 20 }}>Select a muscle group</Text>
         <Text></Text>
       </View>
@@ -265,6 +269,7 @@ export default function NewWorkoutMuscleGroup() {
           scale={maxScale}
           frontOnly={false}
           backOnly={false}
+          colors={['#454545', '#74b9ff']}
         />
       </View>
 

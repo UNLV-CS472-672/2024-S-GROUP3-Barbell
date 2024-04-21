@@ -1,11 +1,12 @@
 import { expect, test } from '@jest/globals'
+
 import { prisma } from '@acme/db'
 
 // ...
 
 test('FRIEND /getFriendsWithChatIdFromUserId', async () => {
-  const userId = 1;
-  
+  const userId = 1
+
   // Create test data
   const user1 = await prisma.user.create({
     data: {
@@ -13,7 +14,7 @@ test('FRIEND /getFriendsWithChatIdFromUserId', async () => {
       username: 'john123',
       // other user fields...
     },
-  });
+  })
 
   const user2 = await prisma.user.create({
     data: {
@@ -21,21 +22,21 @@ test('FRIEND /getFriendsWithChatIdFromUserId', async () => {
       username: 'jane456',
       // other user fields...
     },
-  });
+  })
 
   await prisma.friend.create({
     data: {
       userId: userId,
       friendId: user1.id,
     },
-  });
+  })
 
   await prisma.friend.create({
     data: {
       userId: userId,
       friendId: user2.id,
     },
-  });
+  })
 
   await prisma.chat.create({
     data: {
@@ -45,16 +46,18 @@ test('FRIEND /getFriendsWithChatIdFromUserId', async () => {
       },
       createdByUserId: userId,
     },
-  });
+  })
 
   // Call the API function
   const friends = await prisma.user.findMany({
     where: {
       id: {
-        in: (await prisma.friend.findMany({
-          where: { userId: userId },
-          select: { friendId: true },
-        })).map((friend) => friend.friendId),
+        in: (
+          await prisma.friend.findMany({
+            where: { userId: userId },
+            select: { friendId: true },
+          })
+        ).map((friend) => friend.friendId),
       },
     },
     include: {
@@ -66,12 +69,12 @@ test('FRIEND /getFriendsWithChatIdFromUserId', async () => {
         take: 1,
       },
     },
-  });
+  })
 
   // Add assertions
-  expect(friends).toBeDefined();
-  expect(friends.length).toBe(2);
+  expect(friends).toBeDefined()
+  expect(friends.length).toBe(2)
   if (friends[0] && friends[0].chats) {
-    expect(friends[0].chats.length).toBeLessThanOrEqual(1);
+    expect(friends[0].chats.length).toBeLessThanOrEqual(1)
   }
-});
+})

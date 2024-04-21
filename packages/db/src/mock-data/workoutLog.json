@@ -85,7 +85,7 @@
         "updatedAt": "2024-04-26T19:01:55.966Z",
         "finishedAt": "2024-04-26T19:01:55.966Z",
         "userId": 5,
-        "workoutId": 2 
+        "workoutId": 2
     },
     {
         "id": 12,
@@ -151,5 +151,4 @@
         "userId": 1,
         "workoutId": 3
     }
-
 ]

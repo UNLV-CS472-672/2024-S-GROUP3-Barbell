@@ -1,34 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MessageInput 1`] = `
+exports[`GenderSwitch should match snapshot 1`] = `
 <View
   style={
     {
       "alignItems": "center",
       "flexDirection": "row",
-      "height": "auto",
-      "marginBottom": 10,
-      "paddingHorizontal": 10,
+      "marginBottom": 11.25,
     }
   }
 >
-  <TextInput
-    keyboardAppearance="dark"
-    placeholder="Message..."
-    placeholderTextColor="#CACACA"
-    style={
-      {
-        "backgroundColor": "#1C1B1B",
-        "borderColor": "#FFFFFF",
-        "borderRadius": 20,
-        "borderWidth": 1,
-        "color": "white",
-        "flex": 1,
-        "opacity": 0.9,
-        "padding": 10,
-      }
-    }
-  />
   <View
     accessibilityState={
       {
@@ -49,7 +30,7 @@ exports[`MessageInput 1`] = `
     }
     accessible={true}
     collapsable={false}
-    focusable={false}
+    focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -64,18 +45,30 @@ exports[`MessageInput 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         {
-          "backgroundColor": "#48476D",
-          "borderColor": "#FFFFFF",
-          "borderRadius": 20,
-          "borderWidth": 1,
-          "marginLeft": 10,
-          "padding": 10,
+          "backgroundColor": "rgba(121, 121, 121, 1)",
+          "borderRadius": 18.75,
+          "height": 37.5,
+          "justifyContent": "center",
+          "marginRight": 7.5,
+          "width": 112.5,
         }
       }
     >
-      <Text />
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "#48476D",
+            "borderRadius": 37.5,
+            "height": 26.250000000000004,
+            "marginLeft": 7.5,
+            "width": 26.250000000000004,
+          }
+        }
+      />
     </View>
   </View>
 </View>

@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 import Activity from '.'
-import { ACTIVITY_FEED_ITEM_LIMIT } from '../../utils/constants'
+import { ACTIVITY_FEED_ITEM_LIMIT } from '~/utils/constants'
 
 const ActivityFeed = () => {
   let activities: any[] = []

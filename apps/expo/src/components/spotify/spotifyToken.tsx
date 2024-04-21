@@ -100,7 +100,7 @@ export interface SpotifyUserData {
 // Each one is valid for only an hour, 3600 seconds.
 // Recall unix is in milliseconds
 // Recall not PKCE
-async function tokensInit(code: string) {
+export async function tokensInit(code: string) {
   if (code != SecureStore.getItem('code')) {
     // Mismatched from local storage to passed parameter
     throw new Error('Auth codes mismatch in token init. Local does not match passed argument.')
@@ -149,6 +149,7 @@ async function tokensInit(code: string) {
 //  1) Tokens init, get refresh and access first time. Only run when refresh doesn't already exist.
 //  2) Use refresh. This one is done when we have the refresh already, and we use that token to get a new access token.
 export async function getAccessToken() {
+  console.log("Getting access token")
   // Just check to see which function to call.
   // If we don't have a refresh, we clearly don't have an access token either
   const refresh = SecureStore.getItem('refreshToken')
@@ -249,6 +250,10 @@ async function getAccessWithRefresh(refToken: string) {
 // Step: 0 Finally update the user data using an accessToken.
 // Ensure this function converts SpotifyData to SpotifyUserData and returns it.
 export async function getTrackData(): Promise<SpotifyUserData> {
+  // We need to get access token first
+  await getAccessToken()
+
+  // That makes these lines not as important but we can keep em for now.
   const accessToken = await SecureStore.getItemAsync('accessToken')
   if (!accessToken) {
     throw new Error('Access Token is not available.')

@@ -8,6 +8,7 @@ import * as WebBrowser from 'expo-web-browser'
 
 import { spotifyCredentials } from '~/utils/constants'
 import { api } from '~/utils/trpc/api'
+import { tokensInit } from '~/components/spotify/spotifyToken'
 
 
 WebBrowser.maybeCompleteAuthSession()
@@ -56,7 +57,10 @@ export function SignInSpotify() {
       const { code } = response.params
       // Now store it. Check if code already existed first.
       if (!(code === undefined) && SecureStore.getItem('code') === undefined) {
-        SecureStore.setItem('code', code)
+        SecureStore.setItem('code', code) 
+        // Now invoke the tokensInit function as we just need to init tokens here
+        // Cant use the async part so uhhh not sure what to do about that
+        tokensInit(code);
       } else if (code === undefined) {
         throw new Error('Authentication code not generated during auth.')
       } else {

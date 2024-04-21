@@ -1,5 +1,6 @@
-import { WorkoutTemplateInfoSchema } from '^/packages/validators/src'
 import { z } from 'zod'
+
+import { WorkoutTemplateInfoSchema } from '@acme/validators'
 
 import { createTRPCRouter, publicProcedure } from '../trpc'
 

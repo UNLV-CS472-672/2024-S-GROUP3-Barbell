@@ -9,7 +9,7 @@ import workoutLog from '../mock-data/workoutLog.json'
 import message from '../mock-data/message.json'
 import notification from '../mock-data/notification.json'
 import post from '../mock-data/post.json'
-import set from '../mock-data/set.json'
+// import set from '../mock-data/set.json'
 import spotify from '../mock-data/spotify.json'
 import users from '../mock-data/user.json'
 import workout from '../mock-data/workout.json'
@@ -61,8 +61,8 @@ const loaddb = async () => {
     await prisma.workoutLog.deleteMany()
     logger('delete', 'workoutLog')
 
-    await prisma.workout.deleteMany()
-    logger('delete', 'workout')
+    await prisma.workoutTemplate.deleteMany()
+    logger('delete', 'workoutTemplate')
 
     await prisma.friend.deleteMany()
     logger('delete', 'friend')
@@ -125,10 +125,10 @@ const loaddb = async () => {
     logger('add', 'exercise')
 
     /* */
-    for (let i = 0; i < workout.length; i++) {
-      await prisma.workout.create({ data: workout[i] as any });
-    }
-    logger('add', 'workout')
+    // for (let i = 0; i < workout.length; i++) {
+    //   await prisma.workoutLog.create({ data: workout[i] as Prisma.WorkoutLogCreateInput });
+    // }
+    // logger('add', 'workout')
 
     /*  */
     await prisma.chat.createMany({
@@ -155,16 +155,16 @@ const loaddb = async () => {
     logger('add', 'friend')
 
     /*  */
-    await prisma.workoutLog.createMany({
-      data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
-    })
-    logger('add', 'log')
+    // await prisma.workoutLog.createMany({
+    //   data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
+    // })
+    // logger('add', 'log')
 
     /*  */
-    await prisma.set.createMany({
-      data: set as Prisma.SetCreateManyInput[],
-    })
-    logger('add', 'set')
+    // await prisma.set.createMany({
+    //   data: set as Prisma.SetCreateManyInput[],
+    // })
+    // logger('add', 'set')
 
   } catch (error) {
     console.error(error)

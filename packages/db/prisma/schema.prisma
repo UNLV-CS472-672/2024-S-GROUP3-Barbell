@@ -61,6 +61,12 @@ enum ChatType {
   GROUP
 }
 
+enum Gender {
+  MALE
+  FEMALE
+  PREFERNOTTOSAY
+}
+
 model Post {
   id        Int      @id @unique @default(autoincrement())
   title     String
@@ -85,6 +91,7 @@ model Post {
 // * awards: Awards granted to the user.
 // * notifications: Notifications received by the user.
 // * sentMessages: Notifications sent by the user.
+// * gender: User gender, default to prefer not to say.
 // ******************************************************************************************
 model User {
   id                   Int               @id @unique @default(autoincrement())
@@ -106,6 +113,7 @@ model User {
   spotify              SpotifyData?
   notificationsBanners Boolean           @default(true)
   customExercises      Exercise[]
+  gender               Gender?        @default(PREFERNOTTOSAY)
 }
 
 // ******************************************************************************************

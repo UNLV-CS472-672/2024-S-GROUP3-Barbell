@@ -1,24 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { Animated, Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native'
 
 // screen dimensions
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 
 // Use as react native switch
 // Same syntax
-export default function Toggle ({
-                                  value,
-                                  onValueChange,
-                                }: {
+export default function Toggle({
+  value,
+  onValueChange,
+}: {
   value: boolean
   onValueChange: () => void
-})  {
+}) {
   // Use useRef to persist the animated value without reinitializing it on every render
   const animation = useRef(new Animated.Value(value ? 1 : 0)).current
 
@@ -48,15 +42,12 @@ export default function Toggle ({
       <TouchableOpacity onPress={onValueChange} activeOpacity={1}>
         <Animated.View style={[styles.switch, { backgroundColor }]}>
           {/* Animated the marginLeft of the circle */}
-          <Animated.View
-            style={[styles.circle, { marginLeft: circleTransform }]}
-          />
+          <Animated.View style={[styles.circle, { marginLeft: circleTransform }]} />
         </Animated.View>
       </TouchableOpacity>
     </View>
   )
 }
-
 
 // Should default to user gender
 
@@ -86,5 +77,5 @@ const styles = StyleSheet.create({
     height: screenWidth * 0.035,
     borderRadius: screenWidth * 0.05,
     backgroundColor: '#48476D',
-  }
+  },
 })

@@ -1,15 +1,15 @@
 import type { BodyPart } from 'react-native-body-highlighter'
-
 import React, { useState } from 'react'
-import { Dimensions, Text, View, StyleSheet } from 'react-native'
-import { router } from 'expo-router'
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import Body from 'react-native-body-highlighter'
-import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
-import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { router } from 'expo-router'
 
-import { useGlobalContext, Gender} from '~/context/global-context'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+
+import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
+import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
+import { Gender, useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 
 export type muscleSelectDev =
@@ -53,7 +53,7 @@ export default function NewWorkoutMuscleGroup() {
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
   // <Svg viewBox={viewBox} height={400 * scale} width={200 * scale}>
   // Dynamically resize by reversing the work done in react-native-body-highlighter
-  const maxScale = (screenHeight-96) / (400+96)
+  const maxScale = (screenHeight - 96) / (400 + 96)
   // const maxScale = (screenHeight-96) / (400+64)
   const { userData } = useGlobalContext()
   // Is female: true, Else: false
@@ -84,30 +84,24 @@ export default function NewWorkoutMuscleGroup() {
   const toggleGenderSwitch = () => setGender((previousState) => !previousState)
 
   //let tmp = "";
-  let sameGroup = {};
+  let sameGroup = {}
   const [tmp1, setTmp1] = useState({})
-  const [userSelection, setUserSelection] = useState("");
+  const [userSelection, setUserSelection] = useState('')
 
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
-      <View className="flex flex-row justify-between px-5">
-        <Ionicons
-          onPress={() => router.back()}
-          name="chevron-back"
-          size={24}
-          color="#CACACA"
-        />
+      <View className='flex flex-row justify-between px-5'>
+        <Ionicons onPress={() => router.back()} name='chevron-back' size={24} color='#CACACA' />
         <Text style={{ color: '#CACACA', fontSize: 20 }}>Select a muscle group</Text>
         <Text></Text>
       </View>
 
-      <View className="flex-1"
-            style = {{alignItems: "center", justifyContent: "center",
-              position: "relative", bottom: 45}}>
+      <View
+        className='flex-1'
+        style={{ alignItems: 'center', justifyContent: 'center', position: 'relative', bottom: 45 }}
+      >
         <Body
-
-          onBodyPartPress={(e) =>
-          {
+          onBodyPartPress={(e) => {
             switch (e.slug) {
               case 'deltoids':
                 // Shoulder
@@ -256,45 +250,39 @@ export default function NewWorkoutMuscleGroup() {
               color: 'defaultColor',
               pathArray: e.pathArray,
             })
-          }
-          }
-
-          data={
-            [
-              /*
+          }}
+          data={[
+            /*
             { slug: "chest", intensity: 1 },
             { slug: "abs", intensity: 2 },
             { slug: "upper-back", intensity: 1 },
             { slug: "lower-back", intensity: 2 },*/
-              // tmp1,
-              bodyPartSelected
-            ]}
-
-          gender={genderSelection ?   "female" : "male"}
-          side={isBackSideEnabled ? "back" : "front"}
+            // tmp1,
+            bodyPartSelected,
+          ]}
+          gender={genderSelection ? 'female' : 'male'}
+          side={isBackSideEnabled ? 'back' : 'front'}
           scale={maxScale}
           frontOnly={false}
           backOnly={false}
         />
       </View>
 
-
       {/* Bottom section */}
-      <View className="flex flex-row"
-            style={{gap: 0.1 * screenWidth, position: "absolute", bottom: 11}}>
-
-        <View className="flex-1"
-              style={{alignItems: "center", justifyContent: "center"}}>
-
-          <View className={"p-1"}>
+      <View
+        className='flex flex-row'
+        style={{ gap: 0.1 * screenWidth, position: 'absolute', bottom: 11 }}
+      >
+        <View className='flex-1' style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <View className={'p-1'}>
             <Text style={{ color: '#CACACA', fontSize: 20 }}>
               Muscle Group Selected: {userSelection}
             </Text>
           </View>
 
-          <View className={"flex flex-row p-1"}>
+          <View className={'flex flex-row p-1'}>
             <Text style={{ color: '#CACACA', fontSize: 20 }}>
-              Currently Selecting: {genderSelection ? "Female  " : "Male      "}
+              Currently Selecting: {genderSelection ? 'Female  ' : 'Male      '}
             </Text>
 
             <GenderSwitch onValueChange={toggleGenderSwitch} value={genderSelection} />
@@ -304,16 +292,9 @@ export default function NewWorkoutMuscleGroup() {
               {maxScale}
             </Text>*/}
 
-          <FrontBackSwitch
-            onValueChange={toggleSwitch}
-            value={isBackSideEnabled}
-            label={''}
-          />
-
+          <FrontBackSwitch onValueChange={toggleSwitch} value={isBackSideEnabled} label={''} />
         </View>
       </View>
-
     </SafeAreaView>
   )
 }
-

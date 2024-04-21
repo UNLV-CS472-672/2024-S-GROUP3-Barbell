@@ -1,10 +1,10 @@
 import React from 'react'
-import {StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native'
-import { router } from 'expo-router'
+import { StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import ExerciseList from '~/components/workout/exerciseList'
+
 import NavBar from '~/components/ui/nav-bar/NavBar'
-import Nav from '~/app/nav'
+import ExerciseList from '~/components/workout/exerciseList'
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -14,25 +14,15 @@ const styles = StyleSheet.create({
 })
 
 export default function createNew() {
-  
   return (
     <SafeAreaView style={styles.container}>
-      <View className="flex-row justify-evenly h-[60px] items-center">
-        <NavBar
-        center={'Exercises'}
-        right={'Next'}
-        />
+      <View className='h-[60px] flex-row items-center justify-evenly'>
+        <NavBar center={'Exercises'} right={'Next'} />
       </View>
 
       <View>
         <ExerciseList />
-        <TouchableOpacity className="px-4 py-[6px] rounded-[5px] fixed border-[#CACACA] bg-[#424242]" >
-            <Text className="rounded-[5px] text-[20px] text-[#FFFFFF] text-center">
-              Start Freeform Workout
-            </Text>
-        </TouchableOpacity>
       </View>
-      
     </SafeAreaView>
   )
 }

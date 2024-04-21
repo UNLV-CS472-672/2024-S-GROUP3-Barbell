@@ -15,7 +15,8 @@
  * The rest of the fields will default to empty.
  */
 
-import { Text, View } from 'react-native'
+import { platform } from 'os'
+import { Platform, Text, View } from 'react-native'
 import { router } from 'expo-router'
 
 import { Ionicons } from '@expo/vector-icons'
@@ -42,7 +43,11 @@ export default function TopNavBar({
 }: NavBarProps) {
   return (
     <View>
-      <View className='flex-row items-center justify-between px-5 py-3'>
+      <View
+        className={`flex-row items-center justify-between px-5 pb-3 ${
+          Platform.OS == 'android' ? 'pt-7' : 'pt-1'
+        }`}
+      >
         <View testID='left-test' className='basis-1/3 items-start'>
           {typeof left == 'string' && (
             <Text style={{ color: '#CACACA', fontSize: 16 }}>{left}</Text>

@@ -8,7 +8,10 @@
     "updatedAt": "2024-03-20T10:00:00.000Z",
     "finishedAt": "2024-03-20T11:00:00.000Z",
     "likes": 15,
-    "userId": 1
+    "userId": 1,
+    "exercises": {
+      "connect": [{ "id": 1 }, { "id": 2 }, { "id": 3 }]
+    }
   },
   {
     "id": 2,
@@ -19,7 +22,10 @@
     "updatedAt": "2024-03-21T10:00:00.000Z",
     "finishedAt": "2024-03-21T10:45:00.000Z",
     "likes": 20,
-    "userId": 2
+    "userId": 2,
+    "exercises": {
+      "connect": [{ "id": 4}, { "id": 5 }, { "id": 6 }]
+    }
   },
   {
     "id": 3,
@@ -31,33 +37,5 @@
     "finishedAt": "2024-03-22T10:50:00.000Z",
     "likes": 10,
     "userId": 3
-  },
-  {
-    "id": 4,
-    "name": "Friend 1 completed workout",
-    "description": "Did some cardio n stuff",
-    "duration": 50,
-    "createdAt": "2024-04-12T10:00:00.000Z",
-    "updatedAt": "2024-04-12T10:00:00.000Z",
-    "finishedAt": "2024-04-12T10:50:00.000Z",
-    "likes": 1,
-    "userId": 1,
-    "exercises": {
-      "connect": [{ "id": 1 }, { "id": 2 }, { "id": 3 }]
-    }
-  },
-  {
-    "id": 5,
-    "name": "Friend 2 completed workout",
-    "description": "Did some weight lifting n stuff",
-    "duration": 50,
-    "createdAt": "2024-04-13T10:00:00.000Z",
-    "updatedAt": "2024-04-13T10:00:00.000Z",
-    "finishedAt": "2024-04-13T10:50:00.000Z",
-    "likes": 2,
-    "userId": 2,
-    "exercises": {
-      "connect": [{ "id": 4}, { "id": 5 }, { "id": 6 }]
-    }
   }
 ]

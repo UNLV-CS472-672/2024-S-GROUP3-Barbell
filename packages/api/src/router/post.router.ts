@@ -22,6 +22,7 @@ export const postRouter = createTRPCRouter({
   create: publicProcedure
     .input(
       z.object({
+        authorId: z.number().int(),
         title: z.string().min(1),
         content: z.string().min(1),
       }),

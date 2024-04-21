@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
-import { Tabs } from 'expo-router'
+import { Route, Tabs, router } from 'expo-router'
 
 import { DashboardHeader } from '^/apps/expo/src/layouts/headers/dashboard-header'
 import CircleMinus from '~assets/svgs/circle-minus.svg'
@@ -30,6 +30,8 @@ const Layout = () => {
 
   /* states */
   const [isVisible, setVisible] = React.useState(false)
+
+  const routes = ['', '', '/post/new'];
 
   return (
     <>
@@ -136,9 +138,9 @@ const Layout = () => {
         // style={{ }}
         title='Would you like to?'
         isVisible={isVisible}
-        data={['Start Saved Workout', 'Create New Workout']}
+        data={['Start Saved Workout', 'Create New Workout', 'Create New Post']}
         onPress={(selectedItem: string | number, index: number) => {
-          console.log({ selectedItem, index })
+          router.push(routes[index] as Route<string>);
         }}
         cancelButtonTextStyle={{ fontSize: 18 }}
         onCancelPress={() => {

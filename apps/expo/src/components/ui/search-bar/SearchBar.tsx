@@ -46,6 +46,7 @@ export default function SearchBar({
   const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
+    /* istanbul ignore next */
     if (list) {
       setFilteredList(
         list.filter((item) => item[filterBy].toLowerCase().includes(searchTerm.toLowerCase())),

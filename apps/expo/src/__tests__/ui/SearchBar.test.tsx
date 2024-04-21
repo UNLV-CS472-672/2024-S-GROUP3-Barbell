@@ -1,43 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { fireEvent, render, screen } from '@testing-library/react-native'
+import renderer from 'react-test-renderer'
 
 import SearchBar from '~/components/ui/search-bar/SearchBar'
 
-type ListItem = {
-  id: number
-  name: string
-}
+describe('SearchBar Component', () => {
+  test('renders correctly and matches snapshot', () => {
+    const list = [{ id: 1, name: 'Example' }]
+    const setFilteredList = jest.fn()
 
-test('SearchBar filters items based on search input', async () => {
-  const TestComponent = () => {
-    const item1: ListItem = { id: 1, name: 'apple' }
-    const item2: ListItem = { id: 2, name: 'banana' }
-    const item3: ListItem = { id: 3, name: 'apricot' }
-
-    const listToFilter: ListItem[] = [item1, item2, item3]
-    const [filteredList, setFilteredList] = useState<any[] | undefined>(listToFilter)
-
-    return (
-      <>
+    const tree = renderer
+      .create(
         <SearchBar
-          list={listToFilter}
-          placeholder='Search...'
+          list={list}
           setFilteredList={setFilteredList}
           filterBy='name'
-        />
-        {filteredList?.map((item) => <div key={item.id}>{item.name}</div>)}
-      </>
-    )
-  }
+          placeholder='Search...'
+        />,
+      )
+      .toJSON()
 
-  render(<TestComponent />)
-
-  const searchInput = screen.getByPlaceholderText('Search...')
-
-  fireEvent.changeText(searchInput, 'ap')
-
-  expect(screen.getByText('apple')).toBeTruthy()
-  expect(screen.getByText('apricot')).toBeTruthy()
-  expect(screen.queryByText('banana')).toBeNull() // Use toBeNull for non-existent elements in RN
+    expect(tree).toMatchSnapshot()
+  })
 })

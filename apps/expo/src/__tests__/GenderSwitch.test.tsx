@@ -1,6 +1,5 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
-import Toggle from '~/components/toggle/toggle'
 import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
 
 describe('GenderSwitch', () => {

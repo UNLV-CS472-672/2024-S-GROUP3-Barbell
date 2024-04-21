@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Text, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -22,7 +23,8 @@ const NewPost = () => {
   const [content, setContent] = useState('');
   const { mutateAsync: createPost, error } = api.post.create.useMutation({
     async onSuccess() {
-      alert('post created'); // TODO: redirect home?
+      alert('post created!');
+      router.navigate('/');
     }
   });
 

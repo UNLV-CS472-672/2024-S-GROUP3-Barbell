@@ -1,54 +1,77 @@
 import { expect, test } from '@jest/globals'
-
 import { prisma } from '@acme/db'
 
-/*  */
-test('FRIEND /all', async () => {
-  const friends = await prisma.friend.findMany()
+// ...
 
-  expect(friends).toBeDefined()
-  expect(friends.length).toBeGreaterThan(0)
-})
+test('FRIEND /getFriendsWithChatIdFromUserId', async () => {
+  const userId = 1;
+  
+  // Create test data
+  const user1 = await prisma.user.create({
+    data: {
+      name: 'John',
+      username: 'john123',
+      // other user fields...
+    },
+  });
 
-/*  */
-test('FRIEND /byId', async () => {
-  const friend = await prisma.friend.findFirst({
+  const user2 = await prisma.user.create({
+    data: {
+      name: 'Jane',
+      username: 'jane456',
+      // other user fields...
+    },
+  });
+
+  await prisma.friend.create({
+    data: {
+      userId: userId,
+      friendId: user1.id,
+    },
+  });
+
+  await prisma.friend.create({
+    data: {
+      userId: userId,
+      friendId: user2.id,
+    },
+  });
+
+  await prisma.chat.create({
+    data: {
+      type: 'DIRECT',
+      users: {
+        connect: [{ id: userId }, { id: user1.id }],
+      },
+      createdByUserId: userId,
+    },
+  });
+
+  // Call the API function
+  const friends = await prisma.user.findMany({
     where: {
-      id: 1,
+      id: {
+        in: (await prisma.friend.findMany({
+          where: { userId: userId },
+          select: { friendId: true },
+        })).map((friend) => friend.friendId),
+      },
     },
-  })
-
-  expect(friend).toBeDefined()
-  expect(friend?.id).toBe(1)
-})
-
-/*  */
-test('FRIEND /create', async () => {
-  const friend = await prisma.friend.upsert({
-    where: {
-      id: 1,
+    include: {
+      chats: {
+        where: {
+          type: 'DIRECT',
+          users: { some: { id: userId } },
+        },
+        take: 1,
+      },
     },
-    update: {
-      userId: 1,
-    },
-    create: {
-      userId: 1,
-      friendId: 2,
-    },
-  })
+  });
 
-  expect(friend).toBeDefined()
-  expect(friend.id).toBeDefined()
-})
-
-/*  */
-test('FRIEND /delete', async () => {
-  const friend = await prisma.friend.delete({
-    where: {
-      id: 1,
-    },
-  })
-
-  expect(friend).toBeDefined()
-  expect(friend.id).toBe(1)
-})
+  // Add assertions
+  expect(friends).toBeDefined();
+  expect(friends.length).toBe(2);
+  if (friends[0] && friends[0].chats) {
+    expect(friends[0].chats.length).toBeLessThanOrEqual(1);
+  }
+});

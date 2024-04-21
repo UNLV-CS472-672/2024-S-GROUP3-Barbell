@@ -43,7 +43,7 @@ export default function Friend({ username, userId, chatId, name }: FriendProps) 
           {/* TODO: view profile */}
           <View className='mx-3'>
             <Link href={'/'} asChild={true}>
-              <TouchableOpacity>
+              <TouchableOpacity testID='profile-button'>
                 <Ionicons name='person-outline' size={30} color='#CACACA' />
               </TouchableOpacity>
             </Link>
@@ -54,7 +54,7 @@ export default function Friend({ username, userId, chatId, name }: FriendProps) 
             href={{ pathname: 'messages/', params: { chatId, username, type, userId } }}
             asChild={true}
           >
-            <TouchableOpacity>
+            <TouchableOpacity testID='message-button'>
               <Feather name='message-square' size={30} color='#CACACA' />
             </TouchableOpacity>
           </Link>

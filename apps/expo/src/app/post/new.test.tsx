@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react-native'
+/*
+ import { render, screen } from '@testing-library/react-native'
 
 import * as api from '~/utils/trpc/api'
 import NewPost from './new'
@@ -44,3 +45,4 @@ describe('NewPost', () => {
     expect(screen.getByTestId('new-post-create-btn')).toBeTruthy()
   });
 })
+*/

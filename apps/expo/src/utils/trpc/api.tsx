@@ -2,12 +2,13 @@ import type { TRPCLink } from '@trpc/client'
 import React from 'react'
 import Constants from 'expo-constants'
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import {
   createWSClient,
   httpBatchLink,
   loggerLink,
   // httpBatchLink,
+  TRPCClientError,
   unstable_httpBatchStreamLink,
   wsLink,
 } from '@trpc/client'
@@ -71,6 +72,7 @@ export const getBaseUrl = () => {
     // return "https://turbo.t3.gg";
     return 'https://2024-s-group-3-barbell-nextjs.vercel.app/'
   }
+
   return `http://${localhost}:3000`
 }
 
@@ -79,6 +81,7 @@ export const getBaseUrl = () => {
  * Use only in _app.tsx
  */
 export function TRPCProvider(props: { children: React.ReactNode }) {
+
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
@@ -87,8 +90,23 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
             // Since queries are prefetched on the server, we set a stale time so that
             // queries aren't immediately refetched on the client
             staleTime: 60 * 1000,
+            gcTime: 1000 * 60 * 60 * 24,
           },
         },
+        queryCache: new QueryCache({
+          onError: (err) => {
+            if (err instanceof TRPCClientError) {
+              // onError(err);
+            }
+          },
+        }),
+        mutationCache: new MutationCache({
+          onError: (err) => {
+            if (err instanceof TRPCClientError) {
+              // onError(err);
+            }
+          },
+        }),
       }),
   )
 

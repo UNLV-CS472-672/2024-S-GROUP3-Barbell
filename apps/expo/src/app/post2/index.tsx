@@ -31,13 +31,24 @@ function AddMessageForm({ onMessagePost }: { onMessagePost: () => void }) {
 
   return (
     <>
-      <View className='rounded-lg bg-gray-800 p-5'>
+      <TouchableOpacity
+        onPress={postMessage}
+        style={{
+          backgroundColor: '#16a085',
+          borderRadius: 5,
+          padding: 10,
+          justifyContent: 'center',
+        }}
+      >
+        <Text className='text-center text-white'>Submit</Text>
+      </TouchableOpacity>
+      <View className='mb-10 rounded-lg bg-gray-800 p-5'>
         <TextInput
           multiline
           value={message}
           onChangeText={setMessage}
           placeholder='Type your message...'
-          className='min-h-[40px] flex-1 bg-transparent text-white'
+          className='min-h-[40px] bg-transparent text-white'
           autoFocus
           onSubmitEditing={postMessage}
           onKeyPress={(e) => {
@@ -51,9 +62,7 @@ function AddMessageForm({ onMessagePost }: { onMessagePost: () => void }) {
             isTyping.mutate({ typing: false })
           }}
         />
-        <TouchableOpacity onPress={postMessage} className='mt-2 rounded bg-green-500 p-2 py-4'>
-          <Text className='text-center text-white'>Submit</Text>
-        </TouchableOpacity>
+
         {addPost.error && <Text style={{ color: 'red' }}>{addPost.error.message}</Text>}
       </View>
     </>
@@ -129,18 +138,13 @@ export default function IndexPage() {
   const [currentlyTyping, setCurrentlyTyping] = useState<string[]>([])
 
   // subscribe to who is typing
+  // FIX: this never got invoke
   api.post2.whoIsTyping.useSubscription(undefined, {
     onData(data) {
-      console.log('data currently typing i', data)
       setCurrentlyTyping(data)
     },
-    onStarted() {
-      console.log('started')
-    },
-    onError(err) {
-      console.error('Subscription error:', err)
-    }
   })
+
 
   return (
     <View className='bg-dark-purple flex h-[90%] flex-1 flex-col md:flex-row'>
@@ -179,7 +183,7 @@ export default function IndexPage() {
         onMessagePost={() => scrollTargetRef.current?.scrollTo({ behavior: 'smooth', top: 0 })}
       />
 
-      <Text>
+      <Text className='mb-5'>
         {currentlyTyping.length > 0
           ? `${currentlyTyping.join(', ')} is typing...`
           : 'No one is typing'}

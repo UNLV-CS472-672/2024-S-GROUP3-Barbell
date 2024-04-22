@@ -1,6 +1,5 @@
 import type { TRPCLink } from '@trpc/client'
 import React from 'react'
-import { AppState, AppStateStatus, Platform } from 'react-native'
 import Constants from 'expo-constants'
 
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -24,9 +23,6 @@ import type { AppRouter } from '@acme/api'
 export const api = createTRPCReact<AppRouter>()
 export { type RouterInputs, type RouterOutputs } from '@acme/api'
 
-function onAppStateChange(status: AppStateStatus) {
-  console.log('AppState', status)
-}
 /**
  * Extend this function when going to production by
  * setting the baseUrl to your production API URL.
@@ -49,6 +45,7 @@ export const getBaseUrl = (ws = false) => {
 
   if (!localhost) {
     // return "https://turbo.t3.gg";
+    console.log('localhost not found')
     return 'https://2024-s-group-3-barbell-nextjs.vercel.app/'
   }
 
@@ -202,12 +199,6 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
       ],
     }),
   )
-
-  React.useEffect(() => {
-    const subscription = AppState.addEventListener('change', onAppStateChange)
-
-    return () => subscription.remove()
-  })
 
   return (
     <api.Provider client={trpcClient} queryClient={queryClient}>

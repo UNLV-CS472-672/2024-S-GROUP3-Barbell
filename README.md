@@ -95,6 +95,8 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 - [ ] [isn't this amazing SafeAreaView, Fk you](https://github.com/marklawlor/nativewind/issues/628)
 - [ ] [Spotify API got HANDS](https://stackoverflow.com/questions/71631183/spotify-403-user-not-registered-in-the-developer-dashboard)
 - [ ] [Spotify API got HANDS, same thing](https://www.reddit.com/r/learnprogramming/comments/11warb8/need_help_with_spotify_api/)
+- [ ] [It seems the router didn't regconize our config](https://github.com/kristerkari/react-native-svg-transformer/issues/333)
+- [ ] [Strange "warning" as mentioned above](https://www.reddit.com/r/expo/comments/1aif2w2/strange_error_missing_transformrouterroot_option/)
 
 In case you encountered, Failed to get localhost. Please point to your production server.
 

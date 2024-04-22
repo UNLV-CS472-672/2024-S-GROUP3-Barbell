@@ -25,31 +25,6 @@ function AddMessageForm({ onMessagePost }: { onMessagePost: () => void }) {
 
   const isTyping = api.post2.isTyping.useMutation()
 
-  // const userName = session?.user?.name;
-  // if (!userName) {
-  //   return (
-  //     <div className="flex w-full justify-between rounded bg-gray-800 px-3 py-2 text-lg text-gray-200">
-  //       <p className="font-bold">
-  //         You have to{' '}
-  //         <button
-  //           className="inline font-bold underline"
-  //           onClick={() => signIn()}
-  //         >
-  //           sign in
-  //         </button>{' '}
-  //         to write.
-  //       </p>
-  //       <button
-  //         onClick={() => signIn()}
-  //         data-testid="signin"
-  //         className="h-full rounded bg-indigo-500 px-4"
-  //       >
-  //         Sign In
-  //       </button>
-  //     </div>
-  //   );
-  // }
-
   return (
     <>
       <form
@@ -157,7 +132,6 @@ export default function IndexPage() {
   }, [scrollTargetRef])
   useEffect(() => {
     scrollToBottomOfList()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // subscribe to new posts and add

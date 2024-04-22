@@ -51,6 +51,9 @@ process.on('SIGTERM', () => {
 })
 
 export const post2Router = createTRPCRouter({
+  /**
+   *
+   */
   add: publicProcedure
     .input(
       z.object({
@@ -73,6 +76,9 @@ export const post2Router = createTRPCRouter({
       return post
     }),
 
+  /**
+   *
+   */
   isTyping: publicProcedure.input(z.object({ typing: z.boolean() })).mutation(({ input, ctx }) => {
     // const { name } = ctx.user;
     if (!input.typing) {
@@ -85,6 +91,9 @@ export const post2Router = createTRPCRouter({
     ee.emit('isTypingUpdate')
   }),
 
+  /**
+   *
+   */
   infinite: publicProcedure
     .input(
       z.object({
@@ -108,7 +117,6 @@ export const post2Router = createTRPCRouter({
       let nextCursor: typeof cursor | null = null
       if (items.length > take) {
         const prev = items.shift()
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         nextCursor = prev!.createdAt
       }
       return {
@@ -117,6 +125,9 @@ export const post2Router = createTRPCRouter({
       }
     }),
 
+  /**
+   *
+   */
   onAdd: publicProcedure.subscription(() => {
     return observable<Post>((emit) => {
       const onAdd = (data: Post) => {
@@ -129,6 +140,9 @@ export const post2Router = createTRPCRouter({
     })
   }),
 
+  /**
+   *
+   */
   whoIsTyping: publicProcedure.subscription(() => {
     let prev: string[] | null = null
     return observable<string[]>((emit) => {

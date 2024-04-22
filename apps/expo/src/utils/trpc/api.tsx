@@ -56,26 +56,26 @@ export const getBaseUrl = (ws = false) => {
  * @returns terminating ws link for the trpc client
  * @see https://trpc.io/docs/client/links/splitLink (the illustration demonstrates how it is)
  */
-// function wsLinkClient(): TRPCLink<AppRouter> {
-//   // TODO: memo this func
-//   const client = createWSClient({
-//     url: getBaseUrl(true),
-//     onOpen: () => {
-//       console.log('ws open')
-//     },
-//     onClose: (cause) => {
-//       console.log('ws close', cause)
-//     },
-//   })
+function wsLinkClient(): TRPCLink<AppRouter> {
+  // TODO: memo this func
+  const client = createWSClient({
+    url: getBaseUrl(true),
+    onOpen: () => {
+      console.log('ws open')
+    },
+    onClose: (cause) => {
+      console.log('ws close', cause)
+    },
+  })
 
-//   return wsLink({
-//     client,
-//     /**
-//      * @link https://trpc.io/docs/v11/data-transformers
-//      */
-//     transformer: SuperJSON,
-//   })
-// }
+  return wsLink({
+    client,
+    /**
+     * @link https://trpc.io/docs/v11/data-transformers
+     */
+    transformer: SuperJSON,
+  })
+}
 
 /**
  * @returns terminating link for the trpc client
@@ -83,19 +83,19 @@ export const getBaseUrl = (ws = false) => {
  * request that's sent to a single tRPC procedure.
  * @see https://trpc.io/docs/client/links/splitLink (the illustration demonstrates how it is)
  */
-// function httpLinkClient(): TRPCLink<AppRouter> {
-//   // TODO: memo this func
-//   return httpBatchLink({
-//     transformer: SuperJSON,
-//     // url: getApiUrl(),
-//     url: `${getBaseUrl()}/api/trpc`,
-//     headers() {
-//       const headers = new Map<string, string>()
-//       headers.set('x-trpc-source', 'expo-react')
-//       return Object.fromEntries(headers)
-//     },
-//   })
-// }
+function httpLinkClient(): TRPCLink<AppRouter> {
+  // TODO: memo this func
+  return httpBatchLink({
+    transformer: SuperJSON,
+    // url: getApiUrl(),
+    url: `${getBaseUrl()}/api/trpc`,
+    headers() {
+      const headers = new Map<string, string>()
+      headers.set('x-trpc-source', 'expo-react')
+      return Object.fromEntries(headers)
+    },
+  })
+}
 
 /**
  * A wrapper for your app that provides the TRPC context.
@@ -131,41 +131,41 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
       }),
   )
 
-  /*  */
-  const httpLinkClient = React.useMemo(() => {
-    return httpBatchLink({
-      transformer: SuperJSON,
-      // url: getApiUrl(),
-      url: `${getBaseUrl()}/api/trpc`,
-      headers() {
-        const headers = new Map<string, string>()
-        headers.set('x-trpc-source', 'expo-react')
-        return Object.fromEntries(headers)
-      },
-    })
-  }, [])
+  // /*  */
+  // const httpLinkClient = React.useMemo(() => {
+  //   return httpBatchLink({
+  //     transformer: SuperJSON,
+  //     // url: getApiUrl(),
+  //     url: `${getBaseUrl()}/api/trpc`,
+  //     headers() {
+  //       const headers = new Map<string, string>()
+  //       headers.set('x-trpc-source', 'expo-react')
+  //       return Object.fromEntries(headers)
+  //     },
+  //   })
+  // }, [])
 
-  /*  */
-  const wsLinkClient = React.useMemo(() => {
-    // TODO: memo this func
-    const client = createWSClient({
-      url: getBaseUrl(true),
-      onOpen: () => {
-        console.log('ws open')
-      },
-      onClose: (cause) => {
-        console.log('ws close', cause)
-      },
-    })
+  // /*  */
+  // const wsLinkClient = React.useMemo(() => {
+  //   // TODO: memo this func
+  //   const client = createWSClient({
+  //     url: getBaseUrl(true),
+  //     onOpen: () => {
+  //       console.log('ws open')
+  //     },
+  //     onClose: (cause) => {
+  //       console.log('ws close', cause)
+  //     },
+  //   })
 
-    return wsLink({
-      client,
-      /**
-       * @link https://trpc.io/docs/v11/data-transformers
-       */
-      transformer: SuperJSON,
-    })
-  }, [])
+  //   return wsLink({
+  //     client,
+  //     /**
+  //      * @link https://trpc.io/docs/v11/data-transformers
+  //      */
+  //     transformer: SuperJSON,
+  //   })
+  // }, [])
 
   /* tbd */
   const [trpcClient] = React.useState(() =>
@@ -192,8 +192,8 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
         /* version 2 */
         splitLink({
           condition: ({ type }) => type === 'subscription',
-          true: wsLinkClient,
-          false: httpLinkClient,
+          true: wsLinkClient(),
+          false: httpLinkClient(),
         }),
       ],
     }),

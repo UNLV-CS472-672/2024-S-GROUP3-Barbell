@@ -156,69 +156,9 @@ export default function IndexPage() {
 
   return (
     <>
-      <Head>
-        <title>Prisma Starter</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
       <div className='flex h-screen flex-col md:flex-row'>
-        <section className='flex w-full flex-col bg-gray-800 md:w-72'>
-          <div className='flex-1 overflow-y-hidden'>
-            <div className='flex h-full flex-col divide-y divide-gray-700'>
-              <header className='p-4'>
-                <h1 className='text-3xl font-bold text-gray-50'>tRPC WebSocket starter</h1>
-                <p className='text-sm text-gray-400'>
-                  Showcases WebSocket + subscription support
-                  <br />
-                  <a
-                    className='text-gray-100 underline'
-                    href='https://github.com/trpc/examples-next-prisma-starter-websockets'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    View Source on GitHub
-                  </a>
-                </p>
-              </header>
-              <div className='hidden flex-1 space-y-6 overflow-y-auto p-4 text-gray-400 md:block'>
-                <article className='space-y-2'>
-                  <h2 className='text-lg text-gray-200'>Introduction</h2>
-                  <ul className='list-inside list-disc space-y-2'>
-                    <li>Open inspector and head to Network tab</li>
-                    <li>All client requests are handled through WebSockets</li>
-                    <li>
-                      We have a simple backend subscription on new messages that adds the newly
-                      added message to the current state
-                    </li>
-                  </ul>
-                </article>
-                {/* {userName && (
-                  <article>
-                    <h2 className='text-lg text-gray-200'>User information</h2>
-                    <ul className='space-y-2'>
-                      <li className='text-lg'>
-                        You&apos;re{' '}
-                        <input
-                          id='name'
-                          name='name'
-                          type='text'
-                          disabled
-                          className='bg-transparent'
-                          value={userName}
-                        />
-                      </li>
-                      <li>
-                        <button onClick={() => signOut()}>Sign Out</button>
-                      </li>
-                    </ul>
-                  </article>
-                )} */}
-              </div>
-            </div>
-          </div>
-          <div className='hidden h-16 shrink-0 md:block'></div>
-        </section>
         <div className='flex-1 overflow-y-hidden md:h-screen'>
-          <section className='flex h-full flex-col justify-end space-y-4 bg-gray-700 p-4'>
+          <section className='flex h-full flex-col justify-end space-y-4 bg-gray-700 p-4 px-20'>
             <div className='space-y-4 overflow-y-auto'>
               <button
                 data-testid='loadMore'

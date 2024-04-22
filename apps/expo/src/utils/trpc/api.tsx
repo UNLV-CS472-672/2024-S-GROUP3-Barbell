@@ -73,6 +73,7 @@ export const getBaseUrl = () => {
     return 'https://2024-s-group-3-barbell-nextjs.vercel.app/'
   }
 
+  // console.log('localhost', localhost)
   return `http://${localhost}:3000`
 }
 
@@ -81,7 +82,6 @@ export const getBaseUrl = () => {
  * Use only in _app.tsx
  */
 export function TRPCProvider(props: { children: React.ReactNode }) {
-
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
@@ -96,14 +96,14 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
         queryCache: new QueryCache({
           onError: (err) => {
             if (err instanceof TRPCClientError) {
-              // onError(err);
+              console.log('TRPCClientError', err)
             }
           },
         }),
         mutationCache: new MutationCache({
           onError: (err) => {
             if (err instanceof TRPCClientError) {
-              // onError(err);
+              console.log('TRPCClientError', err)
             }
           },
         }),

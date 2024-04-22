@@ -85,7 +85,7 @@ export type Context = Awaited<ReturnType<typeof createContextInner>>
  */
 export async function createTRPCContext(opts: FetchCreateContextFnOptions) {
   const source = opts.req.headers.get('x-trpc-source') ?? 'unknown'
-  console.log('>>> tRPC Request from', source)
+  console.log('>>> tRPC Request from 🐧🐧🐧', source)
 
   return await createContextInner({
     wsOpts: undefined,
@@ -98,7 +98,7 @@ export async function createTRPCContext(opts: FetchCreateContextFnOptions) {
  * @returns
  */
 export async function createWssContext(opts: CreateWSSContextFnOptions) {
-  console.log('>>> tRPC Request from WebSocket')
+  console.log('>>> tRPC Request from 🧯 WebSocket')
 
   return await createContextInner({
     wsOpts: opts,

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react-native'
 
 import * as api from '~/utils/trpc/api'
-import NewPost from '~/app/post/new'
+import Post from '~/app/post/index'
 
 jest.mock('~/context/global-context', () => ({
   useGlobalContext: () => ({
@@ -13,6 +13,8 @@ jest.mock('~/context/global-context', () => ({
 }))
 
 const mockApi = api as { api: any }
+const mockUser = {};
+const mockPost = {};
 
 jest.mock('~/utils/trpc/api', () => ({
   __esModule: true,
@@ -29,17 +31,12 @@ jest.mock('~/utils/trpc/api', () => ({
 
 describe('NewPost', () => {
   it('should render NewPost component', () => {
-    render(<NewPost />)
-    expect(screen.getByTestId('new-post-container')).toBeTruthy()
+    render(<Post post={mockPost} user={mockUser} />)
+    expect(screen.getByTestId('post-container')).toBeTruthy()
   });
 
-  it('should have one input', () => {
-    render(<NewPost />)
-    expect(screen.getByTestId('new-post-content-input')).toBeTruthy()
-  });
-
-  it('should have one create button', () => {
-    render(<NewPost />)
-    expect(screen.getByTestId('new-post-create-btn')).toBeTruthy()
+  it('should display the post content', () => {
+    render(<Post post={mockPost} user={mockUser} />)
+    expect(screen.getByTestId('test-content')).toBeTruthy()
   });
 })

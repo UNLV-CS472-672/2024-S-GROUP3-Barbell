@@ -5,14 +5,14 @@ import award from '../mock-data/award.json'
 import chat from '../mock-data/chat.json'
 import exercise from '../mock-data/exercise.json'
 import friend from '../mock-data/friend.json'
-import workoutLog from '../mock-data/workoutLog.json'
 import message from '../mock-data/message.json'
 import notification from '../mock-data/notification.json'
 import post from '../mock-data/post.json'
 // import set from '../mock-data/set.json'
 import spotify from '../mock-data/spotify.json'
 import users from '../mock-data/user.json'
-import workout from '../mock-data/workout.json'
+import workoutLog from '../mock-data/workoutLog.json'
+import workout from '../mock-data/workoutTemplate.json'
 
 /**
  * @param type logging type
@@ -52,8 +52,8 @@ const loaddb = async () => {
     await prisma.set.deleteMany()
     logger('delete', 'set')
 
-    await prisma.set.deleteMany()
-    logger('delete', 'set')
+    await prisma.exerciseLog.deleteMany()
+    logger('delete', 'exerciseLog')
 
     await prisma.exercise.deleteMany()
     logger('delete', 'exercise')
@@ -125,10 +125,12 @@ const loaddb = async () => {
     logger('add', 'exercise')
 
     /* */
-    // for (let i = 0; i < workout.length; i++) {
-    //   await prisma.workoutLog.create({ data: workout[i] as Prisma.WorkoutLogCreateInput });
-    // }
-    // logger('add', 'workout')
+    for (let i = 0; i < workout.length; i++) {
+      await prisma.workoutTemplate.createMany({
+        data: workout[i] as Prisma.WorkoutTemplateCreateManyInput[],
+      })
+    }
+    logger('add', 'workoutTemplate')
 
     /*  */
     await prisma.chat.createMany({
@@ -153,19 +155,6 @@ const loaddb = async () => {
       data: friend as Prisma.FriendCreateManyInput[],
     })
     logger('add', 'friend')
-
-    /*  */
-    // await prisma.workoutLog.createMany({
-    //   data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
-    // })
-    // logger('add', 'log')
-
-    /*  */
-    // await prisma.set.createMany({
-    //   data: set as Prisma.SetCreateManyInput[],
-    // })
-    // logger('add', 'set')
-
   } catch (error) {
     console.error(error)
     process.exit(1)

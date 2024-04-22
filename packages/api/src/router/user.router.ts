@@ -1,3 +1,4 @@
+import { ChatType, NotificationType } from '@prisma/client'
 import { z } from 'zod'
 
 import { UpdateUserSchema } from '../../../validators/src'
@@ -92,42 +93,108 @@ export const userRouter = createTRPCRouter({
    * get user by id + extra info for profile page
    */
   getProfileInfoById: publicProcedure
-    .input(z.object({ id: z.number() }))
+    .input(z.object({ viewingProfileId: z.number().int(), loggedInUserId: z.number().int() }))
     .query(async ({ ctx, input }) => {
       interface ProfileInfo {
         username: string | undefined
         streak: number | undefined
         name: string | undefined | null
+        posts: any
+        postCount: number | undefined
         workoutCount: number
+        friendStatus: boolean | 'REQUESTED' | 'PENDING'
+        chatId: number | undefined
+        friendNotifSenderId: number | undefined | null
+        friendNotifReceiverId: number | undefined
+        friendNotifId: number | undefined
       }
 
       const userInfo = await ctx.prisma.user.findFirst({
         where: {
-          id: input.id,
+          id: input.viewingProfileId,
         },
         select: {
           username: true,
           streak: true,
           name: true,
+          posts: true,
         },
       })
 
       const workoutInfo = await ctx.prisma.workoutLog.findMany({
         where: {
-          userId: input.id,
+          userId: input.viewingProfileId,
         },
         select: {
           workoutId: true,
         },
       })
 
+      const friend = await ctx.prisma.friend.findFirst({
+        where: {
+          userId: input.loggedInUserId,
+          friendId: input.viewingProfileId,
+        },
+        select: {
+          id: true,
+        },
+      })
+
+      const friendNotif = await ctx.prisma.notification.findFirst({
+        where: {
+          senderId: {
+            in: [input.loggedInUserId, input.viewingProfileId],
+          },
+          AND: {
+            receiverId: {
+              in: [input.loggedInUserId, input.viewingProfileId],
+            },
+          },
+          type: NotificationType.FRIEND_REQUEST,
+        },
+        select: {
+          senderId: true,
+          receiverId: true,
+          id: true,
+        },
+      })
+
+      let friendStatus: boolean | 'REQUESTED' | 'PENDING' = false
+      if (friend) {
+        friendStatus = true
+      } else if (!friend && friendNotif?.senderId == input.loggedInUserId) {
+        friendStatus = 'REQUESTED'
+      } else if (!friend && friendNotif?.senderId == input.viewingProfileId) {
+        friendStatus = 'PENDING'
+      }
+
       const workoutCount = workoutInfo.length
+
+      const chat = await ctx.prisma.chat.findFirst({
+        where: {
+          type: ChatType.DIRECT,
+          AND: [
+            { users: { some: { id: input.viewingProfileId } } },
+            { users: { some: { id: input.loggedInUserId } } },
+          ],
+        },
+        select: {
+          id: true,
+        },
+      })
 
       const profileInfo: ProfileInfo = {
         username: userInfo?.username,
         streak: userInfo?.streak,
         name: userInfo?.name,
+        postCount: userInfo?.posts.length,
+        posts: userInfo?.posts,
         workoutCount: workoutCount,
+        friendStatus: friendStatus,
+        chatId: chat?.id,
+        friendNotifSenderId: friendNotif?.senderId,
+        friendNotifReceiverId: friendNotif?.receiverId,
+        friendNotifId: friendNotif?.id,
       }
       return profileInfo
     }),

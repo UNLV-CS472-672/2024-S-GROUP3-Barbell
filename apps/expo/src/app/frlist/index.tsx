@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useFocusEffect } from 'expo-router'
 
 import Friend from '~/components/frlist/Friend'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
@@ -18,11 +19,10 @@ interface Friend {
 
 export default function FriendsListScreen() {
   const { userData } = useGlobalContext()
-  const { data, isFetched, isFetching } = api.friend.getFriendsWithChatIdFromUserId.useQuery({
-    id: userData?.id!,
-  })
-
-  // console.log(data)
+  const { data, isFetched, isFetching, refetch } =
+    api.friend.getFriendsWithChatIdFromUserId.useQuery({
+      id: userData?.id!,
+    })
 
   const [filteredList, setFilteredList] = useState(data)
 
@@ -35,6 +35,12 @@ export default function FriendsListScreen() {
       name={friend.name}
     />
   ))
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch()
+    }, []),
+  )
 
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>

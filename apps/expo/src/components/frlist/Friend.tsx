@@ -12,6 +12,7 @@ interface FriendProps {
 }
 export default function Friend({ username, userId, chatId, name }: FriendProps) {
   const type: string = ChatType.DIRECT
+  const chatName: string = username.trim()
 
   const nameComponent =
     name == null ? (
@@ -40,9 +41,9 @@ export default function Friend({ username, userId, chatId, name }: FriendProps) 
 
         {/* buttons */}
         <View className='ml-5 flex-row items-center justify-between'>
-          {/* TODO: view profile */}
+          {/* view profile */}
           <View className='mx-3'>
-            <Link href={'/'} asChild={true}>
+            <Link href={{ pathname: 'profile/', params: { userId, username } }} asChild={true}>
               <TouchableOpacity testID='profile-button'>
                 <Ionicons name='person-outline' size={30} color='#CACACA' />
               </TouchableOpacity>
@@ -51,7 +52,7 @@ export default function Friend({ username, userId, chatId, name }: FriendProps) 
 
           {/* open messages */}
           <Link
-            href={{ pathname: 'messages/', params: { chatId, username, type, userId } }}
+            href={{ pathname: 'messages/', params: { chatId, chatName, type, userId } }}
             asChild={true}
           >
             <TouchableOpacity testID='message-button'>

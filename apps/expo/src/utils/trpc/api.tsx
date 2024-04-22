@@ -84,19 +84,19 @@ function wsLinkClient(): TRPCLink<AppRouter> {
  * request that's sent to a single tRPC procedure.
  * @see https://trpc.io/docs/client/links/splitLink (the illustration demonstrates how it is)
  */
-function httpLinkClient(): TRPCLink<AppRouter> {
-  // TODO: memo this func
-  return httpBatchLink({
-    transformer: SuperJSON,
-    // url: getApiUrl(),
-    url: `${getBaseUrl()}/api/trpc`,
-    headers() {
-      const headers = new Map<string, string>()
-      headers.set('x-trpc-source', 'expo-react')
-      return Object.fromEntries(headers)
-    },
-  })
-}
+// function httpLinkClient(): TRPCLink<AppRouter> {
+//   // TODO: memo this func
+//   return httpBatchLink({
+//     transformer: SuperJSON,
+//     // url: getApiUrl(),
+//     url: `${getBaseUrl()}/api/trpc`,
+//     headers() {
+//       const headers = new Map<string, string>()
+//       headers.set('x-trpc-source', 'expo-react')
+//       return Object.fromEntries(headers)
+//     },
+//   })
+// }
 
 /**
  * A wrapper for your app that provides the TRPC context.

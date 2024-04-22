@@ -4,26 +4,26 @@
     "clerkId": "1",
     "username": "Learn decide toward.",
     "name": "Joseph Barnes",
-    "status": "BUSY",
-    "streak": 861,
-    "gender": "PREFERNOTTOSAY"
+    "status": "ONLINE",
+    "streak": 427,
+    "gender": "FEMALE"
   },
   {
     "id": 2,
     "clerkId": "2",
     "username": "Store dinner Mr.",
     "name": "Lisa Rosales",
-    "status": "ACTIVE",
-    "streak": 386,
-    "gender": "PREFERNOTTOSAY"
+    "status": "OFFLINE",
+    "streak": 381,
+    "gender": "FEMALE"
   },
   {
     "id": 3,
     "clerkId": "3",
     "username": "Protect treat go.",
     "name": "Kathleen Lewis",
-    "status": "ONLINE",
-    "streak": 889,
+    "status": "ACTIVE",
+    "streak": 955,
     "gender": "MALE"
   },
   {
@@ -31,17 +31,17 @@
     "clerkId": "4",
     "username": "Approach others.",
     "name": "Deborah Davidson",
-    "status": "OFFLINE",
-    "streak": 982,
-    "gender": "PREFERNOTTOSAY"
+    "status": "BUSY",
+    "streak": 289,
+    "gender": "MALE"
   },
   {
     "id": 5,
     "clerkId": "5",
     "username": "Station always.",
     "name": "Brian Campbell",
-    "status": "OFFLINE",
-    "streak": 616,
+    "status": "ACTIVE",
+    "streak": 863,
     "gender": "PREFERNOTTOSAY"
   },
   {
@@ -49,9 +49,9 @@
     "clerkId": "6",
     "username": "Billion effect two.",
     "name": "Kenneth Davis",
-    "status": "ONLINE",
-    "streak": 278,
-    "gender": "FEMALE"
+    "status": "ACTIVE",
+    "streak": 519,
+    "gender": "MALE"
   },
   {
     "id": 7,
@@ -59,7 +59,7 @@
     "username": "Media church what.",
     "name": "David Williams",
     "status": "OFFLINE",
-    "streak": 418,
+    "streak": 645,
     "gender": "MALE"
   },
   {
@@ -67,26 +67,17 @@
     "clerkId": "8",
     "username": "Over arm manage me.",
     "name": "Jessica Wright",
-    "status": "ONLINE",
-    "streak": 408,
-    "gender": "FEMALE"
+    "status": "BUSY",
+    "streak": 383,
+    "gender": "PREFERNOTTOSAY"
   },
   {
     "id": 9,
     "clerkId": "9",
     "username": "Price team bill go.",
     "name": "Ashley Hayes",
-    "status": "ACTIVE",
-    "streak": 116,
-    "gender": "PREFERNOTTOSAY"
-  },
-  {
-    "id": 10,
-    "clerkId": "10",
-    "username": "Himself.",
-    "name": "Dorothy Johnson",
     "status": "ONLINE",
-    "streak": 292,
+    "streak": 475,
     "gender": "PREFERNOTTOSAY"
   }
 ]

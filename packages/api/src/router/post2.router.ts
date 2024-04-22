@@ -147,7 +147,7 @@ export const post2Router = createTRPCRouter({
     let prev: string[] | null = null
     return observable<string[]>((emit) => {
       const onIsTypingUpdate = () => {
-        console.log('currentlyTyping whoIstyping', currentlyTyping)
+        // console.log('currentlyTyping whoIstyping', currentlyTyping)
         const newData = Object.keys(currentlyTyping)
 
         if (!prev || prev.toString() !== newData.toString()) {
@@ -157,10 +157,10 @@ export const post2Router = createTRPCRouter({
       }
 
       // tjos mpt get invoke?
-      console.log('onIsTypingUpdate in whoIsTyping');
+      // console.log('onIsTypingUpdate in whoIsTyping');
       ee.on('isTypingUpdate', onIsTypingUpdate)
       return () => {
-        console.log('off onIsTypingUpdate in whoIsTyping');
+        // console.log('off onIsTypingUpdate in whoIsTyping');
         ee.off('isTypingUpdate', onIsTypingUpdate)
       }
     })

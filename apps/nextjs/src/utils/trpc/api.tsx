@@ -1,7 +1,7 @@
 'use client'
 
 import type { TRPCLink } from '@trpc/client'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -118,6 +118,27 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
   //   },
   // })
 
+  const wsLinkClient = useMemo(() => {
+    // TODO: memo this func
+    const client = createWSClient({
+      url: `ws://localhost:3001`,
+      onOpen: () => {
+        console.log('ws open')
+      },
+      onClose: (cause) => {
+        console.log('ws close', cause)
+      },
+    })
+
+    return wsLink({
+      client,
+      /**
+       * @link https://trpc.io/docs/v11/data-transformers
+       */
+      transformer: SuperJSON,
+    })
+  }, [])
+
   /*  */
   const [trpcClient] = useState(() =>
     api.createClient({
@@ -140,7 +161,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         // }),
 
         /* version 2 */
-        getEndingLink(),
+        // getEndingLink(),
 
         /* version 3 */
         // wsClient
@@ -150,6 +171,9 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         //       false: httpLink,
         //     })
         //   : httpLink,
+
+        /* version 4 */
+        wsLinkClient,
       ],
     }),
   )

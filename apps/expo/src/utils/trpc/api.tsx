@@ -191,11 +191,14 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
         // }),
 
         /* version 2 */
-        splitLink({
-          condition: ({ type }) => type === 'subscription',
-          true: wsLinkClient(),
-          false: httpLinkClient(),
-        }),
+        // splitLink({
+        //   condition: ({ type }) => type === 'subscription',
+        //   true: wsLinkClient(),
+        //   false: httpLinkClient(),
+        // }),
+
+        /* version 3 */
+        wsLinkClient(),
       ],
     }),
   )

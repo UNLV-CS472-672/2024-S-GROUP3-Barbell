@@ -7,6 +7,7 @@ import { appRouter, createWssContext } from '@acme/api'
 
 const wss = new WebSocketServer({
   port: 3001,
+
 })
 
 const handler = applyWSSHandler({ wss, router: appRouter, createContext: createWssContext })

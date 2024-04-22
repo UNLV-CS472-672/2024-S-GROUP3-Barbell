@@ -200,37 +200,37 @@ class Notification(Model):
 
 # Generate chats
 data = [Chats(fake, i).to_json() for i in range(1, conversation_rows)]
-with open(f'outputTest/{Chats.file_name}.json', 'w') as f:
+with open(f'../../newGenData/{Chats.file_name}.json', 'w') as f:
     print(f'writing generated data to: {f.name}')
     f.write(json.dumps(data))
 
 # NOT USING THESE BUT WILL EXIST AND CAN BE REFINED 
 data = [Exercises(fake, i).to_json() for i in range(1, num_exercises)]
-with open(f'outputTest/{Exercises.file_name}.json', 'w') as f:
+with open(f'../../newGenData/{Exercises.file_name}.json', 'w') as f:
     print(f'writing generated data to: {f.name}')
     f.write(json.dumps(data))
 
 # Generate friends
 data = [Friend(fake).to_json() for i in range(1, user_rows)]
-with open(f'outputTest/{Friend.file_name}.json', 'w') as f:
+with open(f'../../newGenData/{Friend.file_name}.json', 'w') as f:
     print(f'writing generated data to: {f.name}')
     f.write(json.dumps(data))
 
 # Generating messages
 data = [Messages(fake, i).to_json() for i in range(1, num_messages)]
-with open(f'outputTest/{Messages.file_name}.json', 'w') as f:
+with open(f'../../newGenData/{Messages.file_name}.json', 'w') as f:
     print(f'writing generated data to: {f.name}')
     f.write(json.dumps(data))
 
 # Generating notifications:
 data = [Notification(fake, i).to_json() for i in range(1, num_notifs)]
-with open(f'outputTest/{Notification.file_name}.json', 'w') as f:
+with open(f'../../newGenData/{Notification.file_name}.json', 'w') as f:
     print(f'writing generated data to: {f.name}')
     f.write(json.dumps(data))
 
 # Generate posts : DONE AND WORKS
 data = [Posts(fake, i).to_json() for i in range(1, post_rows)]
-with open(f'outputTest/{Posts.file_name}.json', 'w') as f:
+with open(f'../../newGenData/{Posts.file_name}.json', 'w') as f:
     print(f'writing generated data to: {f.name}')
     f.write(json.dumps(data))
 
@@ -239,20 +239,20 @@ with open(f'outputTest/{Posts.file_name}.json', 'w') as f:
 
 # GENERATING USERS KINDA HARD NGL IDK IF THIS IS RIGHT BUT WHATEVER
 data = [User(fake, i).to_json() for i in range(1, user_rows)]
-with open(f'outputTest/{User.file_name}.json', 'w') as f:
+with open(f'../../newGenData/{User.file_name}.json', 'w') as f:
     print(f'writing generated data to: {f.name}')
     f.write(json.dumps(data))
 
 
 # Generate workouttemplates: DONE AND WORKS I THINK?
 data = [WorkoutTemplate(fake, i).to_json() for i in range(1, workout_template_rows)]
-with open(f'outputTest/{WorkoutTemplate.file_name}.json', 'w') as f:
+with open(f'../../newGenData/{WorkoutTemplate.file_name}.json', 'w') as f:
     print(f'writing generated data to: {f.name}')
     f.write(json.dumps(data))
 
 # Generate WorkoutLogs : DONE AND WORKS
 data = [WorkoutLog(fake, i).to_json() for i in range(1, workout_log_rows)]
-with open(f'outputTest/{WorkoutLog.file_name}.json', 'w') as f:
+with open(f'../../newGenData/{WorkoutLog.file_name}.json', 'w') as f:
     print(f'writing generated data to: {f.name}')
     f.write(json.dumps(data))
 

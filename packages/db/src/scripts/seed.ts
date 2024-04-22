@@ -1,8 +1,24 @@
 import { Prisma } from '@prisma/client'
 
+//  This version uses the old data
+// import { prisma } from '..'
+// import award from '../mock-data/award.json'
+// import chat from '../mock-data/chat.json'
+// import exercise from '../mock-data/exercise.json'
+// import friend from '../mock-data/friend.json'
+// import workoutLog from '../mock-data/workoutLog.json'
+// import message from '../mock-data/message.json'
+// import notification from '../mock-data/notification.json'
+// import post from '../mock-data/post.json'
+// import set from '../mock-data/set.json'
+// import spotify from '../mock-data/spotify.json'
+// import users from '../mock-data/user.json'
+// import workout from '../mock-data/workout.json'
+
+// This one uses the new data in newGenData
 import { prisma } from '..'
 import award from '../mock-data/award.json'
-import chat from '../mock-data/chat.json'
+import chat from '../newGenData/chat.json'
 import exercise from '../mock-data/exercise.json'
 import friend from '../mock-data/friend.json'
 import workoutLog from '../mock-data/workoutLog.json'

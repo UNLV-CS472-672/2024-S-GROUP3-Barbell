@@ -1,0 +1,11 @@
+[
+  { "userId": 7, "friendId": 2 },
+  { "userId": 9, "friendId": 4 },
+  { "userId": 3, "friendId": 2 },
+  { "userId": 9, "friendId": 5 },
+  { "userId": 7, "friendId": 2 },
+  { "userId": 3, "friendId": 1 },
+  { "userId": 3, "friendId": 2 },
+  { "userId": 3, "friendId": 5 },
+  { "userId": 5, "friendId": 7 }
+]

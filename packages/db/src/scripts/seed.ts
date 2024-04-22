@@ -29,7 +29,7 @@ import notification from '../newGenData/notification.json'
 import post from '../newGenData/post.json'
 import users from '../newGenData/user.json'
 import workoutLog from '../newGenData/workoutLog.json'
-import workout from '../newGenData/workoutTemplate.json'
+import workoutTemplate from '../newGenData/workoutTemplate.json'
 
 /**
  * @param type logging type
@@ -171,19 +171,24 @@ const loaddb = async () => {
     })
     logger('add', 'friend')
 
+    await prisma.workoutTemplate.createMany({
+      data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
+    })
+    logger('add', 'workoutTemplate')
+
     /*  */
     await prisma.workoutLog.createMany({
       data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
     })
-    logger('add', 'log')
+    logger('add', 'workoutlog')
 
     /*  */
     // await prisma.set.createMany({
-    //   data: set as Prisma.SetCreateManyInput[],
-    // })
-    // logger('add', 'set')
-  } catch (error) {
-    console.error(error)
+      //   data: set as Prisma.SetCreateManyInput[],
+      // })
+      // logger('add', 'set')
+    } catch (error) {
+      console.error(error)
     process.exit(1)
   } finally {
     await prisma.$disconnect()

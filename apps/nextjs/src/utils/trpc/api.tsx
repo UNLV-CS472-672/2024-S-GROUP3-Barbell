@@ -57,14 +57,14 @@ export const getWsUrl = () => {
   return null // When running in SSR, we aren't using subscriptions <-- yea, no clue
 }
 
-const wsUrl = getWsUrl()
+// const wsUrl = getWsUrl()
 
-const wsClient =
-  wsUrl !== null
-    ? createWSClient({
-        url: wsUrl,
-      })
-    : null
+// const wsClient =
+//   wsUrl !== null
+//     ? createWSClient({
+//         url: wsUrl,
+//       })
+//     : null
 
 function getEndingLink(): TRPCLink<AppRouter> {
   if (typeof window === 'undefined') {
@@ -110,18 +110,18 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
       }),
   )
 
-  const httpLink = unstable_httpBatchStreamLink({
-    /**
-     * @link https://trpc.io/docs/v11/data-transformers
-     */
-    transformer: SuperJSON,
-    url: `${getBaseUrl()}/api/trpc`,
-    async headers() {
-      const headers = new Headers()
-      headers.set('x-trpc-source', 'nextjs-react')
-      return headers
-    },
-  })
+  // const httpLink = unstable_httpBatchStreamLink({
+  //   /**
+  //    * @link https://trpc.io/docs/v11/data-transformers
+  //    */
+  //   transformer: SuperJSON,
+  //   url: `${getBaseUrl()}/api/trpc`,
+  //   async headers() {
+  //     const headers = new Headers()
+  //     headers.set('x-trpc-source', 'nextjs-react')
+  //     return headers
+  //   },
+  // })
 
   /*  */
   const [trpcClient] = useState(() =>
@@ -145,16 +145,16 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         // }),
 
         /* version 2 */
-        // getEndingLink(),
+        getEndingLink(),
 
         /* version 3 */
-        wsClient
-          ? splitLink({
-              condition: ({ type }) => type === 'subscription',
-              true: wsLink({ client: wsClient, transformer: SuperJSON }),
-              false: httpLink,
-            })
-          : httpLink,
+        // wsClient
+        //   ? splitLink({
+        //       condition: ({ type }) => type === 'subscription',
+        //       true: wsLink({ client: wsClient, transformer: SuperJSON }),
+        //       false: httpLink,
+        //     })
+        //   : httpLink,
       ],
     }),
   )

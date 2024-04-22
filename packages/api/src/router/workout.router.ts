@@ -241,7 +241,7 @@ export const workoutRouter = createTRPCRouter({
     )
     .query(({ ctx, input }) => {
       const { prisma } = ctx;
-      return prisma.workout.findMany({
+      return prisma.workoutLog.findMany({
         where: {
           userId: {
             in: input.friendIds
@@ -253,7 +253,11 @@ export const workoutRouter = createTRPCRouter({
         },
         include: {
           user: true,
-          exercises: true
+          workout: {
+            include: {
+              exercises: true
+            }
+          }
         }
       })
     })

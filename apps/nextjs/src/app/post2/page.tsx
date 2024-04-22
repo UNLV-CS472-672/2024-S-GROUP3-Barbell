@@ -120,6 +120,7 @@ export default function IndexPage() {
     addMessages(msgs)
   }, [postsQuery.data?.pages, addMessages])
 
+  /*  */
   const scrollToBottomOfList = useCallback(() => {
     if (scrollTargetRef.current == null) {
       return
@@ -130,6 +131,8 @@ export default function IndexPage() {
       block: 'end',
     })
   }, [scrollTargetRef])
+
+  /*  */
   useEffect(() => {
     scrollToBottomOfList()
   }, [])

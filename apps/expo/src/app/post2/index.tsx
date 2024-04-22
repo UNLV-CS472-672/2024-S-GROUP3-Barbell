@@ -31,53 +31,33 @@ function AddMessageForm({ onMessagePost }: { onMessagePost: () => void }) {
 
   return (
     <>
-      <View style={{ padding: 20, backgroundColor: '#444', borderRadius: 5 }}>
+      <View className='rounded-lg bg-gray-800 p-5'>
         <TextInput
           multiline
           value={message}
           onChangeText={setMessage}
           placeholder='Type your message...'
-          style={{
-            flex: 1,
-            minHeight: 40,
-            color: 'white',
-            borderBottomWidth: 0,
-          }}
+          className='min-h-[40px] flex-1 bg-transparent text-white'
           autoFocus
-          // onSubmitEditing={enterToPostMessage ? postMessage : null}
           onSubmitEditing={postMessage}
+          onKeyPress={(e) => {
+            if (e.nativeEvent.key === 'Enter' && enterToPostMessage) {
+              void postMessage()
+            }
+            isTyping.mutate({ typing: true })
+          }}
           onBlur={() => {
-            setEnterToPostMessage(true)
+            Keyboard.dismiss()
             isTyping.mutate({ typing: false })
           }}
-          onKeyPress={({ nativeEvent }) => {
-            if (nativeEvent.key === 'Enter' && !enterToPostMessage) {
-              Keyboard.dismiss() // prevent double submission on 'Enter'
-            }
-          }}
         />
-        <TouchableOpacity
-          onPress={postMessage}
-          style={{
-            marginTop: 10,
-            borderRadius: 5,
-            padding: 10,
-          }}
-        >
-          <Text style={{ color: 'white', textAlign: 'center' }}>Submit</Text>
+        <TouchableOpacity onPress={postMessage} className='mt-2 rounded bg-green-500 p-2 py-4'>
+          <Text className='text-center text-white'>Submit</Text>
         </TouchableOpacity>
         {addPost.error && <Text style={{ color: 'red' }}>{addPost.error.message}</Text>}
       </View>
     </>
   )
-}
-
-type Post = {
-  id: string
-  name: string
-  source: string
-  text: string
-  createdAt: Date
 }
 
 export default function IndexPage() {
@@ -148,39 +128,62 @@ export default function IndexPage() {
 
   const [currentlyTyping, setCurrentlyTyping] = useState<string[]>([])
 
+  // subscribe to who is typing
   api.post2.whoIsTyping.useSubscription(undefined, {
     onData(data) {
+      console.log('data currently typing i', data)
       setCurrentlyTyping(data)
     },
+    onStarted() {
+      console.log('started')
+    },
+    onError(err) {
+      console.error('Subscription error:', err)
+    }
   })
 
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <ScrollView style={styles.messageContainer}>
-          {messages?.map((item) => (
-            <View key={item.id} style={styles.message}>
-              <Text style={styles.messageText}>{item.text}</Text>
-              <Text style={styles.dateText}>
-                {new Date(item.createdAt).toLocaleDateString('en-GB')}
-              </Text>
-            </View>
-          ))}
-        </ScrollView>
-        <TouchableOpacity
-          onPress={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-          style={[styles.loadMoreButton, isFetchingNextPage && styles.disabledButton]}
-        >
-          <Text style={styles.buttonText}>
-            {isFetchingNextPage
-              ? 'Loading more...'
-              : hasNextPage
-                ? 'Load More'
-                : 'Nothing more to load'}
-          </Text>
-        </TouchableOpacity>
-      </View>
+    <View className='bg-dark-purple flex h-[90%] flex-1 flex-col md:flex-row'>
+      {/*  */}
+      <TouchableOpacity
+        onPress={() => fetchNextPage()}
+        disabled={!hasNextPage || isFetchingNextPage}
+        className='rounded bg-indigo-500 px-4 py-2 text-white disabled:opacity-40'
+      >
+        <Text className=''>
+          {isFetchingNextPage
+            ? 'Loading more...'
+            : hasNextPage
+              ? 'Load More'
+              : 'Nothing more to load'}
+        </Text>
+      </TouchableOpacity>
+
+      {/*  */}
+      <ScrollView
+        // ref={scrollTargetRef}
+        className='flex-1 overflow-y-auto'
+        contentContainerStyle={styles.messageContentContainer}
+      >
+        {messages?.map((item) => (
+          <View key={item.id} style={styles.message}>
+            <Text style={styles.messageText}>{item.text}</Text>
+            <Text style={styles.dateText}>
+              {new Date(item.createdAt).toLocaleDateString('en-GB')}
+            </Text>
+          </View>
+        ))}
+      </ScrollView>
+
+      <AddMessageForm
+        onMessagePost={() => scrollTargetRef.current?.scrollTo({ behavior: 'smooth', top: 0 })}
+      />
+
+      <Text>
+        {currentlyTyping.length > 0
+          ? `${currentlyTyping.join(', ')} is typing...`
+          : 'No one is typing'}
+      </Text>
     </View>
   )
 }
@@ -188,48 +191,13 @@ export default function IndexPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-  },
-  sidebar: {
-    width: 250,
-    backgroundColor: '#2c3e50',
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-  header: {
-    padding: 20,
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#ecf0f1',
-  },
-  introText: {
-    fontSize: 16,
-    color: '#bdc3c7',
-    marginBottom: 10,
-  },
-  linkText: {
-    color: '#3498db',
-    textDecorationLine: 'underline',
-  },
-  titleText: {
-    fontSize: 20,
-    color: '#ecf0f1',
-    padding: 20,
-  },
-  listText: {
-    fontSize: 16,
-    color: '#ecf0f1',
-    paddingLeft: 40,
-  },
-  content: {
-    flex: 1,
     backgroundColor: '#34495e',
+    paddingBottom: 25,
   },
   messageContainer: {
     flex: 1,
+  },
+  messageContentContainer: {
     padding: 10,
   },
   message: {
@@ -246,19 +214,29 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#7f8c8d',
   },
-  loadMoreButton: {
+  inputContainer: {
+    flexDirection: 'row',
     padding: 10,
-    backgroundColor: '#16a085',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
-    borderRadius: 5,
+    backgroundColor: '#2c3e50',
   },
-  disabledButton: {
-    opacity: 0.5,
-  },
-  buttonText: {
-    fontSize: 16,
+  textInput: {
+    flex: 1,
+    minHeight: 40,
     color: 'white',
+    borderWidth: 1,
+    borderColor: '#555',
+    padding: 10,
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  submitButton: {
+    justifyContent: 'center',
+    backgroundColor: '#16a085',
+    borderRadius: 5,
+    padding: 10,
+  },
+  submitButtonText: {
+    color: 'white',
+    textAlign: 'center',
   },
 })

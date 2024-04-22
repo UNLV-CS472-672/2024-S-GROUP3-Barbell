@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react-native'
 
-import * as api from '~/utils/trpc/api'
 import Post from '~/app/post/index'
 
 jest.mock('~/context/global-context', () => ({
@@ -12,7 +11,6 @@ jest.mock('~/context/global-context', () => ({
   }),
 }))
 
-const mockApi = api as { api: any }
 const mockUser = {};
 const mockPost = {};
 
@@ -29,8 +27,8 @@ jest.mock('~/utils/trpc/api', () => ({
   },
 }))
 
-describe('NewPost', () => {
-  it('should render NewPost component', () => {
+describe('Post', () => {
+  it('should render Post component', () => {
     render(<Post post={mockPost} user={mockUser} />)
     expect(screen.getByTestId('post-container')).toBeTruthy()
   });

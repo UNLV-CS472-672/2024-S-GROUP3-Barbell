@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Head from 'next/head'
 
-import { api } from '@/utils/api'
+import { api } from '@/utils/trpc/api'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function AddMessageForm({ onMessagePost }: { onMessagePost: () => void }) {

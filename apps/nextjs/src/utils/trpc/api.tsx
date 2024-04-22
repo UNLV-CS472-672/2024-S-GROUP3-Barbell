@@ -3,8 +3,6 @@
 import type { TRPCLink } from '@trpc/client'
 import { useState } from 'react'
 
-// import { env } from '@/env.mjs'
-import { api } from '@/utils/trpc/api'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {
@@ -14,9 +12,16 @@ import {
   unstable_httpBatchStreamLink,
   wsLink,
 } from '@trpc/client'
+import { createTRPCReact } from '@trpc/react-query'
 import SuperJSON from 'superjson'
 
 import type { AppRouter } from '@acme/api'
+
+/**
+ * A set of typesafe hooks for consuming your API.
+ */
+export const api = createTRPCReact<AppRouter>()
+export { type RouterInputs, type RouterOutputs } from '@acme/api'
 
 const getBaseUrl = () => {
   if (typeof window !== 'undefined') return window.location.origin // on god
@@ -53,6 +58,8 @@ function getEndingLink(): TRPCLink<AppRouter> {
     transformer: SuperJSON,
   })
 }
+
+
 
 export function TRPCReactProvider(props: { children: React.ReactNode; headers?: Headers }) {
   /*  */

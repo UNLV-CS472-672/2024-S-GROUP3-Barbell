@@ -5,7 +5,7 @@ import '@/styles/globals.css'
 
 import { headers } from 'next/headers'
 
-import { TRPCReactProvider } from '@/app/providers'
+import { TRPCReactProvider } from '@/utils/trpc/api'
 import { ClerkProvider } from '@clerk/nextjs'
 
 const fontSans = Inter({
@@ -39,8 +39,11 @@ export const metadata: Metadata = {
 export default function Layout(props: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning={true}>
-        <body className={['font-sans', fontSans.variable].join(' ')} suppressHydrationWarning={true}>
+      <html lang='en' suppressHydrationWarning={true}>
+        <body
+          className={['font-sans', fontSans.variable].join(' ')}
+          suppressHydrationWarning={true}
+        >
           <TRPCReactProvider headers={headers()}>{props.children}</TRPCReactProvider>
         </body>
       </html>

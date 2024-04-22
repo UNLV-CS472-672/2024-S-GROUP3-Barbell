@@ -28,6 +28,7 @@ export function CreatePostForm() {
           await createPost({
             title,
             content,
+            authorId: 1,
           })
           setTitle('')
           setContent('')

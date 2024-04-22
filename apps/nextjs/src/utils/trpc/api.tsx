@@ -104,6 +104,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         defaultOptions: {
           queries: {
             staleTime: 5 * 1000,
+            gcTime: 24 * 60 * 60 * 1000,
           },
         },
       }),

@@ -59,12 +59,12 @@ class Model:
 # GOOD TO GO I THINK
 class Posts(Model):
     file_name = 'post'
-    fields = ['id', 'title', 'content', 'published', 'authorId']
+    fields = ['id', 'content', 'published', 'authorId']
 
     def __init__(self, fake, id):
         self.id = id
         self.clerkId = id
-        self.title = fake.text(max_nb_chars=20)
+        # self.title = fake.text(max_nb_chars=20)
 
         # LOOK INTO MAKING MORE DYNAMIC POST TITLES
         self.content = fake.text(max_nb_chars=100)

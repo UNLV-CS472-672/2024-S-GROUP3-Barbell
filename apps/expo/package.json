@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "clean": "git clean -xdf .expo .turbo node_modules",
-    "dev:wss": "pnpm with-env tsx watch src/server/ws-dev-server.ts --tsconfig tsconfig.server.json",
-    "dev:expo": "expo run:android",
-    "dev": "run-p dev:*",
+    "dev": "expo run:android",
     "dev:android": "expo start --android",
     "dev:ios": "expo start --ios",
     "android": "expo run:android",
@@ -14,8 +12,7 @@
     "lint": "eslint .",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "typecheck": "tsc --noEmit",
-    "jest": "jest --coverage -u",
-    "with-env": "dotenv -e ../../.env --"
+    "jest": "jest --coverage -u"
   },
   "dependencies": {
     "@clerk/clerk-expo": "1.0.1-snapshot.v498dc07",

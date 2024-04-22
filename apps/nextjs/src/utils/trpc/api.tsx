@@ -5,14 +5,7 @@ import { useState } from 'react'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import {
-  createWSClient,
-  loggerLink,
-  // httpBatchLink,
-  splitLink,
-  unstable_httpBatchStreamLink,
-  wsLink,
-} from '@trpc/client'
+import { createWSClient, loggerLink, unstable_httpBatchStreamLink, wsLink } from '@trpc/client'
 import { createTRPCReact } from '@trpc/react-query'
 import SuperJSON from 'superjson'
 
@@ -25,7 +18,8 @@ export const api = createTRPCReact<AppRouter>()
 export { type RouterInputs, type RouterOutputs } from '@acme/api'
 
 /**
- *
+ * nextjs able to deployed through Vercel, so our getBaseUrl will be slightly
+ * different from the expo version
  * @returns
  */
 const getBaseUrl = () => {
@@ -38,24 +32,24 @@ const getBaseUrl = () => {
  *
  * @returns
  */
-export const getWsUrl = () => {
-  if (typeof window !== 'undefined') {
-    const { protocol, host } = window.location
-    const [hostname] = host.split(':')
+// export const getWsUrl = () => {
+//   if (typeof window !== 'undefined') {
+//     const { protocol, host } = window.location
+//     const [hostname] = host.split(':')
 
-    // how tf would we develop that shit on the net
-    if (protocol === 'https:') {
-      // TODO: deployed, where is that shit be
-      return ``
-    }
+//     // how tf would we develop that shit on the net
+//     if (protocol === 'https:') {
+//       // TODO: deployed, where is that shit be
+//       return ``
+//     }
 
-    // LOCAL HOST
-    console.log('hostname', hostname)
-    return `ws://${hostname}:3001/ws`
-  }
+//     // LOCAL HOST
+//     console.log('hostname', hostname)
+//     return `ws://${hostname}:3001/ws`
+//   }
 
-  return null // When running in SSR, we aren't using subscriptions <-- yea, no clue
-}
+//   return null // When running in SSR, we aren't using subscriptions <-- yea, no clue
+// }
 
 // const wsUrl = getWsUrl()
 
@@ -81,6 +75,7 @@ function getEndingLink(): TRPCLink<AppRouter> {
       },
     })
   }
+
   console.log('wsLink, hopefully')
 
   const client = createWSClient({

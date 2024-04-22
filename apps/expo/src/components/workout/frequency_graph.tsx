@@ -10,22 +10,21 @@ import { Line } from 'react-native-svg'
 // To get the user's data, in particular the WorkoutLogs
 import { api } from '~/utils/trpc/api'
 
-const chartConfig = {
-    backgroundGradientFrom: "#48476D",
-    backgroundGradientFromOpacity: 1,
-    backgroundGradientTo: "#48476D",
-    backgroundGradientToOpacity: 1,
-    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-    strokeWidth: 1, // optional, default 3
-    barPercentage: 0.5,
-    useShadowColorFromDataset: false // optional
-};
 
 // Just use react-native-chart-kit to display the user's workout across each month for current year.
 export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}){
     // Start by getting the current year. Shouldn't be too hard, just use date time
     // Query the entirety of it and just store the value
 
+    const chartConfig = {
+        backgroundGradientFrom: "#48476D",
+        backgroundGradientTo: "#48476D",
+        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        propsForBackgroundLines: {
+    
+        }
+    };
+    
 
     // Psuedocode:
     //  For object in returned data
@@ -35,9 +34,9 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
     // That populates the below values.
 
     // Test with random data: Currently april so uh go up until april
-    const values = [33, 12, 23, 5, 16, 34, 20, 13, 7, 0, 0, 0]
+    const values = [33, 12, 23, 5, 16, 34, 20, 13, 7, 3, 5, 13]
     const screenWidth = Dimensions.get("screen").width * 0.9
-    const screenHeight = Dimensions.get("screen").height * 0.25
+    const screenHeight = Dimensions.get("screen").height * 0.3
 
     const data = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"," Dec"],
@@ -59,6 +58,15 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
                 height = {screenHeight}
                 verticalLabelRotation={45}
                 chartConfig={chartConfig}
+                withShadow={false}
+                withInnerLines={false}
+                segments={5}
+                fromZero={true}
+                yLabelsOffset={15}
+                xLabelsOffset={0}
+                style={{
+                    
+                }}
             />
         </View>
     )

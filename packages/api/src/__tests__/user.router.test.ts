@@ -7,7 +7,7 @@ import { AppRouter } from '../root'
 import { createContextInner } from '../trpc'
 
 describe('USER', async () => {
-  const ctx = await createContextInner({})
+  const ctx = await createContextInner()
   const caller = createCaller(ctx)
 
   /* Or this */

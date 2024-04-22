@@ -1,18 +1,16 @@
-import type { inferProcedureInput } from '@trpc/server'
+import { describe, expect, it } from 'vitest'
 
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-
-import { createCaller, RouterInputs, RouterOutputs } from '../..'
-import { AppRouter } from '../root'
+import { createCaller, RouterInputs } from '../..'
 import { createContextInner } from '../trpc'
 
 describe('POST', async () => {
-  const ctx = await createContextInner({})
+  const ctx = await createContextInner()
   const caller = createCaller(ctx)
 
   const input: RouterInputs['post']['create'] = {
     title: 'Another Post',
     content: 'This is.',
+    authorId: 1,
   }
 
   it('/byId && /create', async () => {

@@ -38,7 +38,7 @@ type APIOpts = {
   wsOpts: undefined
 }
 
-type OuterOpts = WSOpts | APIOpts
+type OuterOpts = WSOpts | APIOpts | undefined
 
 /**
  * > 1. CONTEXT
@@ -67,7 +67,7 @@ type CreateInnerContextOptions = OuterOpts & {
  * - this is useful for testing when we don't want to mock Next.js' request/response
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
-export async function createContextInner(_opts: CreateInnerContextOptions) {
+export async function createContextInner(_opts?: CreateInnerContextOptions) {
   return {
     _opts,
     prisma,

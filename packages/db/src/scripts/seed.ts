@@ -141,12 +141,6 @@ const loaddb = async () => {
     })
     logger('add', 'exercise')
 
-    /* */
-    // for (let i = 0; i < workout.length; i++) {
-    //   await prisma.workoutLog.create({ data: workout[i] as Prisma.WorkoutLogCreateInput });
-    // }
-    // logger('add', 'workout')
-
     /*  */
     await prisma.chat.createMany({
       data: chat as Prisma.ChatCreateManyInput[],

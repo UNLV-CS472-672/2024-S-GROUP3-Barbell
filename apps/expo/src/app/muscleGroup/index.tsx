@@ -1,15 +1,15 @@
 import type { BodyPart } from 'react-native-body-highlighter'
 import React, { useState } from 'react'
-import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Pressable, Text, View } from 'react-native'
 import Body from 'react-native-body-highlighter'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+
+import { Ionicons } from '@expo/vector-icons'
+
 import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
-import NavBar from '~/components/ui/nav-bar/NavBar'
 import { Gender, useGlobalContext } from '~/context/global-context'
-import { api } from '~/utils/trpc/api'
 
 export type muscleSelectDev =
   | 'abs'
@@ -36,13 +36,7 @@ export type muscleSelectDev =
   | 'triceps'
   | 'upper-back'
 
-export type muscleSelectUser =
-  | 'Shoulder'
-  | 'Chest'
-  | 'Arm'
-  | 'Core'
-  | 'Leg'
-  | 'Back'
+export type muscleSelectUser = 'Shoulder' | 'Chest' | 'Arm' | 'Core' | 'Leg' | 'Back'
 
 export default function NewWorkoutMuscleGroup() {
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
@@ -121,7 +115,9 @@ export default function NewWorkoutMuscleGroup() {
       <View className='flex flex-row justify-between px-5'>
         <Ionicons onPress={() => router.back()} name='chevron-back' size={20} color='#CACACA' />
         <Text style={{ color: '#CACACA', fontSize: 20 }}>Select a muscle group</Text>
-        <Text></Text>
+        <Pressable onPress={() => router.back()}>
+          <Text style={{ color: '#CACACA', fontSize: 20 }}>Next</Text>
+        </Pressable>
       </View>
 
       <View
@@ -299,19 +295,19 @@ export default function NewWorkoutMuscleGroup() {
                 // Arm
                 if (userSelection != 'Arm') {
                   setBodyPartSelected({
-                    slug: e.slug,
+                    slug: 'biceps',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup1({
-                    slug: e.slug,
+                    slug: 'triceps',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup2({
-                    slug: e.slug,
+                    slug: 'forearm',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
@@ -381,13 +377,13 @@ export default function NewWorkoutMuscleGroup() {
                 // Core
                 if (userSelection != 'Core') {
                   setBodyPartSelected({
-                    slug: e.slug,
+                    slug: 'abs',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup1({
-                    slug: e.slug,
+                    slug: 'obliques',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
@@ -461,46 +457,46 @@ export default function NewWorkoutMuscleGroup() {
               case 'quadriceps':
               case 'adductors':
               case 'hamstring':
-                // Upper leg
+              // Upper leg
               case 'tibialis':
               case 'calves':
-                // Lower leg
+              // Lower leg
               case 'gluteal':
                 // Glute
                 // Leg
                 if (userSelection != 'Leg') {
                   setBodyPartSelected({
-                    slug: e.slug,
+                    slug: 'quadriceps',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup1({
-                    slug: e.slug,
+                    slug: 'adductors',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup2({
-                    slug: e.slug,
+                    slug: 'hamstring',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup3({
-                    slug: e.slug,
+                    slug: 'tibialis',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup4({
-                    slug: e.slug,
+                    slug: 'calves',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup5({
-                    slug: e.slug,
+                    slug: 'gluteal',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
@@ -548,29 +544,29 @@ export default function NewWorkoutMuscleGroup() {
                 break
 
               case 'trapezius':
-                // Conflict with upper back
-                // Go with the figma design
-                // Upper back
+              // Conflict with upper back
+              // Go with the figma design
+              // Upper back
               case 'upper-back':
-                // Lat
+              // Lat
               case 'lower-back':
                 // Lower back
                 // Back
                 if (userSelection != 'Back') {
                   setBodyPartSelected({
-                    slug: e.slug,
+                    slug: 'trapezius',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup1({
-                    slug: e.slug,
+                    slug: 'upper-back',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,
                   })
                   setSameGroup2({
-                    slug: e.slug,
+                    slug: 'lower-back',
                     intensity: 2,
                     color: 'defaultColor',
                     pathArray: e.pathArray,

@@ -93,6 +93,10 @@ export async function createTRPCContext(opts: FetchCreateContextFnOptions) {
   })
 }
 
+/**
+ * @param opts this thing need for ws (for some on god reason)
+ * @returns
+ */
 export async function createWssContext(opts: CreateWSSContextFnOptions) {
   console.log('>>> tRPC Request from WebSocket')
 

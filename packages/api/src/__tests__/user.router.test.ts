@@ -1,9 +1,6 @@
-import type { inferProcedureInput } from '@trpc/server'
+import { describe, expect, it } from 'vitest'
 
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-
-import { createCaller, RouterInputs, RouterOutputs } from '../..'
-import { AppRouter } from '../root'
+import { createCaller, RouterInputs } from '../..'
 import { createContextInner } from '../trpc'
 
 describe('USER', async () => {

@@ -9,7 +9,7 @@ import { api } from '~/utils/trpc/api';
 const inputStyles = {
   borderWidth: 1,
   borderColor: '#FFFFFF',
-  borderRadius: 20,
+  borderRadius: 10,
   padding: 10,
   margin: 5,
   color: 'white',
@@ -29,12 +29,13 @@ const NewPost = () => {
   });
 
   return (
-    <SafeAreaView style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: '#1e1e1e', flex: 1 }} testID="new-post-container">
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 80}
         style={{ flex: 1 }}
       >
+        {/*<NavBar center='New Post' /> TODO: need taylor's changes to be merged first */}
         <Text className="text-3xl text-slate-200 text-center mb-4">New Post</Text>
         <Text className='text-slate-200'>Title</Text>
         <TextInput
@@ -42,6 +43,7 @@ const NewPost = () => {
           keyboardAppearance='dark'
           value={title}
           onChangeText={setTitle}
+          testID="new-post-title-input"
         ></TextInput>
         <Text className='text-slate-200'>Content</Text>
         <TextInput
@@ -50,11 +52,13 @@ const NewPost = () => {
           keyboardAppearance='dark'
           value={content}
           onChangeText={setContent}
+          testID="new-post-content-input"
         ></TextInput>
         <Button
           value="Create"
           className="p-4 mx-2 my-4"
           onPress={() => createPost({ title, content, authorId: userData!.id })}
+          testID="new-post-create-btn"
         ></Button>
       </KeyboardAvoidingView>
     </SafeAreaView>

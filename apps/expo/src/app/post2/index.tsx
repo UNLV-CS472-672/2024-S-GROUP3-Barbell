@@ -52,13 +52,19 @@ function AddMessageForm({ onMessagePost }: { onMessagePost: () => void }) {
           autoFocus
           onSubmitEditing={postMessage}
           onKeyPress={(e) => {
+            if (e.nativeEvent.key === 'Shift') {
+              setEnterToPostMessage(false)
+            }
+
             if (e.nativeEvent.key === 'Enter' && enterToPostMessage) {
               void postMessage()
             }
             isTyping.mutate({ typing: true })
           }}
+
           onBlur={() => {
             Keyboard.dismiss()
+            setEnterToPostMessage(true)
             isTyping.mutate({ typing: false })
           }}
         />
@@ -143,6 +149,7 @@ export default function IndexPage() {
     onData(data) {
       setCurrentlyTyping(data)
     },
+    enabled: true,
   })
 
 

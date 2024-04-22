@@ -175,6 +175,8 @@ export default function IndexPage() {
                     ? 'Load More'
                     : 'Nothing more to load'}
               </button>
+
+
               <div className='space-y-4'>
                 {messages?.map((item) => (
                   <article key={item.id} className=' text-gray-50'>
@@ -204,7 +206,10 @@ export default function IndexPage() {
                 ))}
                 <div ref={scrollTargetRef}></div>
               </div>
+
+
             </div>
+
             <div className='w-full'>
               <AddMessageForm onMessagePost={() => scrollToBottomOfList()} />
               <p className='h-2 italic text-gray-400'>

@@ -4,9 +4,7 @@ import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native'
 import Body from 'react-native-body-highlighter'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
-
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
-
 import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
 import NavBar from '~/components/ui/nav-bar/NavBar'
@@ -43,12 +41,8 @@ export type muscleSelectUser =
   | 'Chest'
   | 'Arm'
   | 'Core'
-  | 'Upper leg'
-  | 'Lower leg'
-  | 'Upper back'
-  | 'Lat'
-  | 'Lower back'
-  | 'Glute'
+  | 'Leg'
+  | 'Back'
 
 export default function NewWorkoutMuscleGroup() {
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
@@ -60,16 +54,49 @@ export default function NewWorkoutMuscleGroup() {
   // Is female: true, Else: false
   let genderTmp = false
 
-  // const [bodyPartSelected, setBodyPartSelected] = useState({
-  //   /*
-  //   slug: "biceps",
-  //   intensity: 2,*/
-  // })
-
   // Define the initial state with default values
   // intensity used as bool in lib
   // intensity == 0, use val at colors[index 0]
   const [bodyPartSelected, setBodyPartSelected] = useState<BodyPart>({
+    color: 'defaultColor',
+    slug: 'chest',
+    intensity: 0,
+    pathArray: [],
+  })
+
+  // Use FIFO order
+  // Having a function seems too much
+  // Make sure no junk data in same group
+  // The merge function in react-native-body-highlighter will handle duplicates
+  const [sameGroup1, setSameGroup1] = useState<BodyPart>({
+    color: 'defaultColor',
+    slug: 'chest',
+    intensity: 0,
+    pathArray: [],
+  })
+
+  const [sameGroup2, setSameGroup2] = useState<BodyPart>({
+    color: 'defaultColor',
+    slug: 'chest',
+    intensity: 0,
+    pathArray: [],
+  })
+
+  const [sameGroup3, setSameGroup3] = useState<BodyPart>({
+    color: 'defaultColor',
+    slug: 'chest',
+    intensity: 0,
+    pathArray: [],
+  })
+
+  const [sameGroup4, setSameGroup4] = useState<BodyPart>({
+    color: 'defaultColor',
+    slug: 'chest',
+    intensity: 0,
+    pathArray: [],
+  })
+
+  const [sameGroup5, setSameGroup5] = useState<BodyPart>({
     color: 'defaultColor',
     slug: 'chest',
     intensity: 0,
@@ -86,9 +113,6 @@ export default function NewWorkoutMuscleGroup() {
 
   const toggleGenderSwitch = () => setGender((previousState) => !previousState)
 
-  //let tmp = "";
-  let sameGroup = {}
-  const [tmp1, setTmp1] = useState({})
   const [userSelection, setUserSelection] = useState('')
 
   // NavBar gives odd view
@@ -109,57 +133,329 @@ export default function NewWorkoutMuscleGroup() {
             switch (e.slug) {
               case 'deltoids':
                 // Shoulder
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Shoulder')
-
-                // setTmp1({ slug: "chest", intensity: 2 })
-                // sameGroup = bodyPartSelected;
-                // sameGroup.slug = "chest";
+                if (userSelection != 'Shoulder') {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('Shoulder')
+                } else {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('')
+                }
                 break
 
               case 'chest':
                 // Chest
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Chest')
+                if (userSelection != 'chest') {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('chest')
+                } else {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('')
+                }
                 break
 
               case 'biceps':
               case 'triceps':
               case 'forearm':
                 // Arm
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Arm')
+                if (userSelection != 'Arm') {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('Arm')
+                } else {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('')
+                }
                 break
 
               case 'abs':
               case 'obliques':
                 // Core
-                // setBodyPartSelected({ slug: e.slug, intensity: 2 })
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Core')
+                if (userSelection != 'Core') {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('Core')
+                } else {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('')
+                }
                 break
 
               case 'quadriceps':
@@ -172,17 +468,87 @@ export default function NewWorkoutMuscleGroup() {
               case 'gluteal':
                 // Glute
                 // Leg
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Leg')
+                if (userSelection != 'Leg') {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('Leg')
+                } else {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('')
+                }
                 break
 
               case 'trapezius':
-                // Conflit with upper back
+                // Conflict with upper back
                 // Go with the figma design
                 // Upper back
               case 'upper-back':
@@ -190,39 +556,140 @@ export default function NewWorkoutMuscleGroup() {
               case 'lower-back':
                 // Lower back
                 // Back
-                setBodyPartSelected({
-                  slug: e.slug,
-                  intensity: 2,
-                  color: 'defaultColor',
-                  pathArray: e.pathArray,
-                })
-                setUserSelection('Back')
+                if (userSelection != 'Back') {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 2,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('Back')
+                } else {
+                  setBodyPartSelected({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup1({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup2({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup3({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup4({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setSameGroup5({
+                    slug: e.slug,
+                    intensity: 0,
+                    color: 'defaultColor',
+                    pathArray: e.pathArray,
+                  })
+                  setUserSelection('')
+                }
                 break
 
               default:
-                // Do Nothing
+                // Show Nothing, reset model
                 // Not supported
+                setBodyPartSelected({
+                  slug: e.slug,
+                  intensity: 0,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setSameGroup1({
+                  slug: e.slug,
+                  intensity: 0,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setSameGroup2({
+                  slug: e.slug,
+                  intensity: 0,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setSameGroup3({
+                  slug: e.slug,
+                  intensity: 0,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setSameGroup4({
+                  slug: e.slug,
+                  intensity: 0,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                setSameGroup5({
+                  slug: e.slug,
+                  intensity: 0,
+                  color: 'defaultColor',
+                  pathArray: e.pathArray,
+                })
+                // Please Select Another
                 setUserSelection('')
                 break
             }
 
             // DO NOT SELECT
             // Get out
-            setBodyPartSelected({
-              slug: e.slug,
-              intensity: 2,
-              color: 'defaultColor',
-              pathArray: e.pathArray,
-            })
           }}
           data={[
-            /*
-            { slug: "chest", intensity: 1 },
-            { slug: "abs", intensity: 2 },
-            { slug: "upper-back", intensity: 1 },
-            { slug: "lower-back", intensity: 2 },*/
-            // tmp1,
+            // The Body Part shown first overwrites what come after if slug field are the same
             bodyPartSelected,
+            sameGroup1,
+            sameGroup2,
+            sameGroup3,
+            sameGroup4,
+            sameGroup5,
           ]}
           gender={genderSelection ? 'female' : 'male'}
           side={isBackSideEnabled ? 'back' : 'front'}

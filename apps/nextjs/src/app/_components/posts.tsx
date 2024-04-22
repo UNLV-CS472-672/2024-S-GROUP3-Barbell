@@ -8,12 +8,10 @@ import { api } from '@/utils/api'
 export function CreatePostForm() {
   const utils = api.useUtils()
 
-  const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
   const { mutateAsync: createPost, error } = api.post.create.useMutation({
     async onSuccess() {
-      setTitle('')
       setContent('')
       await utils.post.all.invalidate()
     },
@@ -26,10 +24,8 @@ export function CreatePostForm() {
         e.preventDefault()
         try {
           await createPost({
-            title,
             content,
           })
-          setTitle('')
           setContent('')
           await utils.post.all.invalidate()
         } catch {
@@ -39,13 +35,8 @@ export function CreatePostForm() {
     >
       <input
         className='mb-2 rounded bg-white/10 p-2 text-white'
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
         placeholder='Title'
       />
-      {error?.data?.zodError?.fieldErrors.title && (
-        <span className='mb-2 text-red-500'>{error.data.zodError.fieldErrors.title}</span>
-      )}
       <input
         className='mb-2 rounded bg-white/10 p-2 text-white'
         value={content}
@@ -99,7 +90,6 @@ export function PostCard(props: { post: RouterOutputs['post']['all'][number] }) 
   return (
     <div className='flex flex-row rounded-lg bg-white/10 p-4 transition-all hover:scale-[101%]'>
       <div className='flex-grow'>
-        <h2 className='text-2xl font-bold text-pink-400'>{props.post.title}</h2>
         <p className='mt-2 text-sm'>{props.post.content}</p>
       </div>
       <div>

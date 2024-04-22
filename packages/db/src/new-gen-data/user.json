@@ -1,1 +1,83 @@
-[{"id": 1, "clerkId": "1", "username": "Learn decide toward.", "name": "Joseph Barnes", "status": "BUSY", "streak": 797, "gender": "PREFERNOTTOSAY"}, {"id": 2, "clerkId": "2", "username": "Store dinner Mr.", "name": "Lisa Rosales", "status": "ACTIVE", "streak": 483, "gender": "MALE"}, {"id": 3, "clerkId": "3", "username": "Protect treat go.", "name": "Kathleen Lewis", "status": "ONLINE", "streak": 279, "gender": "PREFERNOTTOSAY"}, {"id": 4, "clerkId": "4", "username": "Approach others.", "name": "Deborah Davidson", "status": "ACTIVE", "streak": 622, "gender": "PREFERNOTTOSAY"}, {"id": 5, "clerkId": "5", "username": "Station always.", "name": "Brian Campbell", "status": "BUSY", "streak": 920, "gender": "PREFERNOTTOSAY"}, {"id": 6, "clerkId": "6", "username": "Billion effect two.", "name": "Kenneth Davis", "status": "BUSY", "streak": 130, "gender": "PREFERNOTTOSAY"}, {"id": 7, "clerkId": "7", "username": "Media church what.", "name": "David Williams", "status": "ACTIVE", "streak": 687, "gender": "FEMALE"}, {"id": 8, "clerkId": "8", "username": "Over arm manage me.", "name": "Jessica Wright", "status": "OFFLINE", "streak": 758, "gender": "MALE"}, {"id": 9, "clerkId": "9", "username": "Price team bill go.", "name": "Ashley Hayes", "status": "BUSY", "streak": 81, "gender": "PREFERNOTTOSAY"}]
+[
+  {
+    "id": 1,
+    "clerkId": "1",
+    "username": "Learn decide toward.",
+    "name": "Joseph Barnes",
+    "status": "BUSY",
+    "streak": 797,
+    "gender": "PREFERNOTTOSAY"
+  },
+  {
+    "id": 2,
+    "clerkId": "2",
+    "username": "Store dinner Mr.",
+    "name": "Lisa Rosales",
+    "status": "ACTIVE",
+    "streak": 483,
+    "gender": "MALE"
+  },
+  {
+    "id": 3,
+    "clerkId": "3",
+    "username": "Protect treat go.",
+    "name": "Kathleen Lewis",
+    "status": "ONLINE",
+    "streak": 279,
+    "gender": "PREFERNOTTOSAY"
+  },
+  {
+    "id": 4,
+    "clerkId": "4",
+    "username": "Approach others.",
+    "name": "Deborah Davidson",
+    "status": "ACTIVE",
+    "streak": 622,
+    "gender": "PREFERNOTTOSAY"
+  },
+  {
+    "id": 5,
+    "clerkId": "5",
+    "username": "Station always.",
+    "name": "Brian Campbell",
+    "status": "BUSY",
+    "streak": 920,
+    "gender": "PREFERNOTTOSAY"
+  },
+  {
+    "id": 6,
+    "clerkId": "6",
+    "username": "Billion effect two.",
+    "name": "Kenneth Davis",
+    "status": "BUSY",
+    "streak": 130,
+    "gender": "PREFERNOTTOSAY"
+  },
+  {
+    "id": 7,
+    "clerkId": "7",
+    "username": "Media church what.",
+    "name": "David Williams",
+    "status": "ACTIVE",
+    "streak": 687,
+    "gender": "FEMALE"
+  },
+  {
+    "id": 8,
+    "clerkId": "8",
+    "username": "Over arm manage me.",
+    "name": "Jessica Wright",
+    "status": "OFFLINE",
+    "streak": 758,
+    "gender": "MALE"
+  },
+  {
+    "id": 9,
+    "clerkId": "9",
+    "username": "Price team bill go.",
+    "name": "Ashley Hayes",
+    "status": "BUSY",
+    "streak": 81,
+    "gender": "PREFERNOTTOSAY"
+  }
+]

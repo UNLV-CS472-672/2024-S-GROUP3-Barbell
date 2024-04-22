@@ -1,1 +1,11 @@
-[{"userId": 7, "friendId": 1}, {"userId": 2, "friendId": 6}, {"userId": 9, "friendId": 3}, {"userId": 8, "friendId": 7}, {"userId": 5, "friendId": 4}, {"userId": 8, "friendId": 7}, {"userId": 4, "friendId": 8}, {"userId": 5, "friendId": 1}, {"userId": 6, "friendId": 7}]
+[
+  { "userId": 7, "friendId": 1 },
+  { "userId": 2, "friendId": 6 },
+  { "userId": 9, "friendId": 3 },
+  { "userId": 8, "friendId": 7 },
+  { "userId": 5, "friendId": 4 },
+  { "userId": 8, "friendId": 7 },
+  { "userId": 4, "friendId": 8 },
+  { "userId": 5, "friendId": 1 },
+  { "userId": 6, "friendId": 7 }
+]

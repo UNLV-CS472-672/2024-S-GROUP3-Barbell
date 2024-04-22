@@ -35,7 +35,7 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
     // That populates the below values.
 
     // Test with random data: Currently april so uh go up until april
-    const values = [33, 12, 23, 5, 0, 0, 0, 0, 0, 0, 0, 0]
+    const values = [33, 12, 23, 5, 16, 34, 20, 13, 7, 0, 0, 0]
     const screenWidth = Dimensions.get("screen").width * 0.9
     const screenHeight = Dimensions.get("screen").height * 0.25
 
@@ -44,7 +44,7 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
         datasets: [
             {
                 data: values,
-                color: (opacity = 1 ) => `rgba(135, 64, 244, ${opacity})`, // Optional
+                color: (opacity = 1 ) => `rgba(255, 255, 255, ${opacity})`, // Optional
                 strokeWidth: 3
             }
         ],

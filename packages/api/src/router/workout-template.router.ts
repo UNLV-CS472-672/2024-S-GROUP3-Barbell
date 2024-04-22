@@ -74,17 +74,19 @@ export const workoutTemplateRouter = createTRPCRouter({
             bodyPart: exercise.bodyPart,
             category: exercise.category,
             note: exercise.note,
-            sets: exercise.exerciseLogs[0]?.sets.map((set) => {
-              return {
-                id: set.id,
-                type: set.type,
-                reps: set.reps,
-                weight: set.weight,
-                unilateral: set.unilateral,
-                exerciseId: exercise.id,
-                // exerciseLogId: exercise.exerciseLogs[0]!.id,
-              }
-            }),
+            sets: exercise.exerciseLogs[0]
+              ? exercise.exerciseLogs[0]?.sets.map((set) => {
+                  return {
+                    id: set.id,
+                    type: set.type,
+                    reps: set.reps,
+                    weight: set.weight,
+                    unilateral: set.unilateral,
+                    exerciseId: exercise.id,
+                    // exerciseLogId: exercise.exerciseLogs[0]!.id,
+                  }
+                })
+              : [],
           }
         }),
       }

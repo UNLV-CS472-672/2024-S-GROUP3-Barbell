@@ -7,8 +7,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {
   createWSClient,
-  // httpBatchLink,
   loggerLink,
+  // httpBatchLink,
+  splitLink,
   unstable_httpBatchStreamLink,
   wsLink,
 } from '@trpc/client'
@@ -23,11 +24,47 @@ import type { AppRouter } from '@acme/api'
 export const api = createTRPCReact<AppRouter>()
 export { type RouterInputs, type RouterOutputs } from '@acme/api'
 
+/**
+ *
+ * @returns
+ */
 const getBaseUrl = () => {
-  if (typeof window !== 'undefined') return window.location.origin // on god
+  if (typeof window !== 'undefined') return window.location.origin
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}` // deployed on vercel baby
   return `http://localhost:${process.env.PORT ?? 3000}`
 }
+
+/**
+ *
+ * @returns
+ */
+export const getWsUrl = () => {
+  if (typeof window !== 'undefined') {
+    const { protocol, host } = window.location
+    const [hostname] = host.split(':')
+
+    // how tf would we develop that shit on the net
+    if (protocol === 'https:') {
+      // TODO: deployed, where is that shit be
+      return ``
+    }
+
+    // LOCAL HOST
+    console.log('hostname', hostname)
+    return `ws://${hostname}:3001/ws`
+  }
+
+  return null // When running in SSR, we aren't using subscriptions <-- yea, no clue
+}
+
+const wsUrl = getWsUrl()
+
+const wsClient =
+  wsUrl !== null
+    ? createWSClient({
+        url: wsUrl,
+      })
+    : null
 
 function getEndingLink(): TRPCLink<AppRouter> {
   if (typeof window === 'undefined') {
@@ -59,8 +96,6 @@ function getEndingLink(): TRPCLink<AppRouter> {
   })
 }
 
-
-
 export function TRPCReactProvider(props: { children: React.ReactNode; headers?: Headers }) {
   /*  */
   const [queryClient] = useState(
@@ -74,6 +109,19 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
       }),
   )
 
+  const httpLink = unstable_httpBatchStreamLink({
+    /**
+     * @link https://trpc.io/docs/v11/data-transformers
+     */
+    transformer: SuperJSON,
+    url: `${getBaseUrl()}/api/trpc`,
+    async headers() {
+      const headers = new Headers()
+      headers.set('x-trpc-source', 'nextjs-react')
+      return headers
+    },
+  })
+
   /*  */
   const [trpcClient] = useState(() =>
     api.createClient({
@@ -83,6 +131,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
             process.env.NODE_ENV === 'development' ||
             (op.direction === 'down' && op.result instanceof Error),
         }),
+        /* verison 1 */
         // https://trpc.io/docs/client/links/httpBatchStreamLink
         // unstable_httpBatchStreamLink({
         //   transformer: SuperJSON,
@@ -94,8 +143,17 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         //   },
         // }),
 
-        /* another one here */
-        getEndingLink(),
+        /* version 2 */
+        // getEndingLink(),
+
+        /* version 3 */
+        wsClient
+          ? splitLink({
+              condition: ({ type }) => type === 'subscription',
+              true: wsLink({ client: wsClient, transformer: SuperJSON }),
+              false: httpLink,
+            })
+          : httpLink,
       ],
     }),
   )

@@ -1,173 +1,173 @@
 [
   {
     "id": 1,
-    "createdAt": "2024-01-22T18:46:28.366949Z",
+    "createdAt": "2024-01-22T18:50:02.582110Z",
     "content": "Majority back model.",
-    "type": "OFFLINE",
+    "type": "NUDGE",
     "read": true,
+    "receiverId": 7,
+    "senderId": 5
+  },
+  {
+    "id": 2,
+    "createdAt": "2024-03-11T09:54:44.906414Z",
+    "content": "Career election few turn think tree amount.",
+    "type": "NUDGE",
+    "read": true,
+    "receiverId": 1,
+    "senderId": 8
+  },
+  {
+    "id": 3,
+    "createdAt": "2024-04-08T17:34:27.391659Z",
+    "content": "Quality fill final oil Congress according senior if.",
+    "type": "SYS",
+    "read": false,
     "receiverId": 5,
     "senderId": 9
   },
   {
-    "id": 2,
-    "createdAt": "2024-03-11T09:43:12.516788Z",
-    "content": "Career election few turn think tree amount.",
+    "id": 4,
+    "createdAt": "2024-01-24T22:55:31.110955Z",
+    "content": "Talk want it manage heavy investment.",
     "type": "SYS",
     "read": true,
-    "receiverId": 2,
-    "senderId": 3
-  },
-  {
-    "id": 3,
-    "createdAt": "2024-04-08T17:18:16.531528Z",
-    "content": "Quality fill final oil Congress according senior if.",
-    "type": "OFFLINE",
-    "read": false,
     "receiverId": 7,
     "senderId": 6
   },
   {
-    "id": 4,
-    "createdAt": "2024-01-24T22:51:35.553005Z",
-    "content": "Talk want it manage heavy investment.",
-    "type": "ONLINE",
-    "read": true,
-    "receiverId": 4,
-    "senderId": 2
-  },
-  {
     "id": 5,
-    "createdAt": "2024-03-26T07:18:48.478955Z",
+    "createdAt": "2024-03-26T07:32:47.398116Z",
     "content": "Side environment speak let guy son last early.",
-    "type": "ONLINE",
+    "type": "NUDGE",
     "read": false,
-    "receiverId": 4,
-    "senderId": 7
+    "receiverId": 8,
+    "senderId": 4
   },
   {
     "id": 6,
-    "createdAt": "2024-04-19T05:39:53.109317Z",
+    "createdAt": "2024-04-19T05:57:47.378026Z",
     "content": "Sound market best only know fish.",
-    "type": "SYS",
+    "type": "LIKE",
     "read": true,
-    "receiverId": 9,
+    "receiverId": 8,
     "senderId": 4
   },
   {
     "id": 7,
-    "createdAt": "2024-03-14T23:52:22.174886Z",
+    "createdAt": "2024-03-15T00:04:29.866940Z",
     "content": "Evening green require bring.",
-    "type": "SYS",
+    "type": "LIKE",
     "read": true,
-    "receiverId": 1,
-    "senderId": 7
+    "receiverId": 9,
+    "senderId": 3
   },
   {
     "id": 8,
-    "createdAt": "2024-02-06T01:20:37.138424Z",
+    "createdAt": "2024-02-06T01:26:31.726708Z",
     "content": "Finally task ten country power police.",
-    "type": "ONLINE",
+    "type": "SYS",
     "read": true,
-    "receiverId": 5,
-    "senderId": 2
+    "receiverId": 2,
+    "senderId": 7
   },
   {
     "id": 9,
-    "createdAt": "2024-04-04T22:12:00.157501Z",
+    "createdAt": "2024-04-04T22:27:33.686099Z",
     "content": "Little drive require time.",
-    "type": "ONLINE",
+    "type": "LIKE",
     "read": false,
-    "receiverId": 5,
-    "senderId": 2
+    "receiverId": 8,
+    "senderId": 1
   },
   {
     "id": 10,
-    "createdAt": "2024-01-12T20:11:21.327447Z",
+    "createdAt": "2024-01-12T20:13:17.778502Z",
     "content": "Season hospital machine cell cell TV.",
-    "type": "SYS",
-    "read": true,
-    "receiverId": 4,
-    "senderId": 2
-  },
-  {
-    "id": 11,
-    "createdAt": "2024-03-11T18:33:37.052148Z",
-    "content": "Parent behind bank oil describe section.",
-    "type": "OFFLINE",
+    "type": "FRIEND_REQUEST",
     "read": true,
     "receiverId": 7,
-    "senderId": 4
-  },
-  {
-    "id": 12,
-    "createdAt": "2024-04-04T14:53:38.280958Z",
-    "content": "Top most reflect shake phone positive.",
-    "type": "NUDGE",
-    "read": false,
-    "receiverId": 2,
-    "senderId": 9
-  },
-  {
-    "id": 13,
-    "createdAt": "2024-01-30T04:59:39.474908Z",
-    "content": "Trouble stay beat PM.",
-    "type": "ONLINE",
-    "read": false,
-    "receiverId": 4,
     "senderId": 8
   },
   {
-    "id": 14,
-    "createdAt": "2024-02-10T00:47:09.078427Z",
-    "content": "Than probably before might someone young learn.",
-    "type": "SYS",
+    "id": 11,
+    "createdAt": "2024-03-11T18:45:13.064164Z",
+    "content": "Parent behind bank oil describe section.",
+    "type": "NUDGE",
     "read": true,
+    "receiverId": 5,
+    "senderId": 6
+  },
+  {
+    "id": 12,
+    "createdAt": "2024-04-04T15:09:08.815775Z",
+    "content": "Top most reflect shake phone positive.",
+    "type": "LIKE",
+    "read": false,
+    "receiverId": 6,
+    "senderId": 1
+  },
+  {
+    "id": 13,
+    "createdAt": "2024-01-30T05:04:26.718439Z",
+    "content": "Trouble stay beat PM.",
+    "type": "LIKE",
+    "read": false,
     "receiverId": 1,
     "senderId": 3
   },
   {
-    "id": 15,
-    "createdAt": "2024-01-16T16:14:12.748507Z",
-    "content": "Matter upon assume trouble.",
-    "type": "ONLINE",
-    "read": false,
-    "receiverId": 5,
-    "senderId": 4
+    "id": 14,
+    "createdAt": "2024-02-10T00:53:42.775668Z",
+    "content": "Than probably before might someone young learn.",
+    "type": "NUDGE",
+    "read": true,
+    "receiverId": 2,
+    "senderId": 3
   },
   {
-    "id": 16,
-    "createdAt": "2024-02-18T14:40:20.754886Z",
-    "content": "Seem building care door natural produce.",
-    "type": "SYS",
-    "read": true,
-    "receiverId": 9,
+    "id": 15,
+    "createdAt": "2024-01-16T16:16:46.917533Z",
+    "content": "Matter upon assume trouble.",
+    "type": "FRIEND_REQUEST",
+    "read": false,
+    "receiverId": 2,
     "senderId": 6
   },
   {
-    "id": 17,
-    "createdAt": "2024-03-07T00:33:52.356532Z",
-    "content": "Top worry there similar adult range true.",
-    "type": "ONLINE",
+    "id": 16,
+    "createdAt": "2024-02-18T14:48:18.817417Z",
+    "content": "Seem building care door natural produce.",
+    "type": "NUDGE",
     "read": true,
-    "receiverId": 3,
+    "receiverId": 9,
     "senderId": 5
   },
   {
+    "id": 17,
+    "createdAt": "2024-03-07T00:44:41.656983Z",
+    "content": "Top worry there similar adult range true.",
+    "type": "FRIEND_REQUEST",
+    "read": true,
+    "receiverId": 3,
+    "senderId": 8
+  },
+  {
     "id": 18,
-    "createdAt": "2024-01-22T21:51:14.159088Z",
+    "createdAt": "2024-01-22T21:54:49.636076Z",
     "content": "Remember body keep body lay work no.",
-    "type": "ONLINE",
+    "type": "LIKE",
     "read": false,
-    "receiverId": 5,
-    "senderId": 9
+    "receiverId": 4,
+    "senderId": 5
   },
   {
     "id": 19,
-    "createdAt": "2024-03-02T04:34:05.150287Z",
+    "createdAt": "2024-03-02T04:44:06.919355Z",
     "content": "Thank fish somebody dinner former manager.",
-    "type": "SYS",
+    "type": "FRIEND_REQUEST",
     "read": false,
-    "receiverId": 3,
-    "senderId": 4
+    "receiverId": 5,
+    "senderId": 3
   }
 ]

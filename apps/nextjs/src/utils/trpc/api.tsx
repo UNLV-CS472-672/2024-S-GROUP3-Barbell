@@ -1,7 +1,7 @@
 'use client'
 
 import type { TRPCLink } from '@trpc/client'
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -91,6 +91,32 @@ function getEndingLink(): TRPCLink<AppRouter> {
   })
 }
 
+export const getWsUrl = () => {
+  if (typeof window !== 'undefined') {
+    const { protocol, host } = window.location
+    const [hostname] = host.split(':')
+
+    if (protocol === 'https:') {
+      return ``
+    }
+
+    return `ws://${hostname}:3001`
+  }
+
+  return null // When running in SSR, we aren't using subscriptions
+}
+
+const wsUrl = getWsUrl()
+
+const wsClient =
+  wsUrl !== null
+    ? createWSClient({
+        url: wsUrl,
+      })
+    : null
+
+
+
 export function TRPCReactProvider(props: { children: React.ReactNode; headers?: Headers }) {
   /*  */
   const [queryClient] = useState(
@@ -119,7 +145,25 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
   // })
 
   const wsLinkClient = useMemo(() => {
-    // TODO: memo this func
+    if (typeof window !== 'undefined') {
+      const client = createWSClient({
+        url: ``,
+        onOpen: () => {
+          console.log('ws open')
+        },
+        onClose: (cause) => {
+          console.log('ws close', cause)
+        },
+      })
+
+      return wsLink({
+        client,
+        /**
+         * @link https://trpc.io/docs/v11/data-transformers
+         */
+        transformer: SuperJSON,
+      })
+    }
     const client = createWSClient({
       url: `ws://localhost:3001`,
       onOpen: () => {

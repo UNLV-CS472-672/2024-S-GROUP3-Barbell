@@ -1,1 +1,74 @@
-[{"id": 1, "createdAt": "2024-04-04T11:09:52.338367Z", "updatedAt": "2024-04-21T22:52:19.648155", "name": "Son voice kitchen.", "createdByUserId": 9, "type": "GROUP"}, {"id": 2, "createdAt": "2024-01-29T23:09:29.947710Z", "updatedAt": "2024-04-21T22:52:19.648231", "name": "Much mention.", "createdByUserId": 9, "type": "GROUP"}, {"id": 3, "createdAt": "2024-04-12T17:20:29.745008Z", "updatedAt": "2024-04-21T22:52:19.648294", "name": "Themselves floor me.", "createdByUserId": 7, "type": "GROUP"}, {"id": 4, "createdAt": "2024-03-06T06:18:21.854252Z", "updatedAt": "2024-04-21T22:52:19.648347", "name": "Whatever discover.", "createdByUserId": 8, "type": "GROUP"}, {"id": 5, "createdAt": "2024-01-16T13:55:55.429267Z", "updatedAt": "2024-04-21T22:52:19.648396", "name": "Challenge someone.", "createdByUserId": 7, "type": "DIRECT"}, {"id": 6, "createdAt": "2024-03-10T04:14:29.653756Z", "updatedAt": "2024-04-21T22:52:19.648439", "name": "Enough where no.", "createdByUserId": 2, "type": "DIRECT"}, {"id": 7, "createdAt": "2024-03-31T15:19:46.292997Z", "updatedAt": "2024-04-21T22:52:19.648479", "name": "Week choice force.", "createdByUserId": 7, "type": "GROUP"}, {"id": 8, "createdAt": "2024-03-22T15:30:17.226246Z", "updatedAt": "2024-04-21T22:52:19.648518", "name": "Way to return give.", "createdByUserId": 4, "type": "GROUP"}, {"id": 9, "createdAt": "2024-03-03T15:01:40.947252Z", "updatedAt": "2024-04-21T22:52:19.648566", "name": "Health leader four.", "createdByUserId": 2, "type": "GROUP"}]
+[
+  {
+    "id": 1,
+    "createdAt": "2024-04-04T11:09:52.338367Z",
+    "updatedAt": "2024-04-21T22:52:19.648155",
+    "name": "Son voice kitchen.",
+    "createdByUserId": 9,
+    "type": "GROUP"
+  },
+  {
+    "id": 2,
+    "createdAt": "2024-01-29T23:09:29.947710Z",
+    "updatedAt": "2024-04-21T22:52:19.648231",
+    "name": "Much mention.",
+    "createdByUserId": 9,
+    "type": "GROUP"
+  },
+  {
+    "id": 3,
+    "createdAt": "2024-04-12T17:20:29.745008Z",
+    "updatedAt": "2024-04-21T22:52:19.648294",
+    "name": "Themselves floor me.",
+    "createdByUserId": 7,
+    "type": "GROUP"
+  },
+  {
+    "id": 4,
+    "createdAt": "2024-03-06T06:18:21.854252Z",
+    "updatedAt": "2024-04-21T22:52:19.648347",
+    "name": "Whatever discover.",
+    "createdByUserId": 8,
+    "type": "GROUP"
+  },
+  {
+    "id": 5,
+    "createdAt": "2024-01-16T13:55:55.429267Z",
+    "updatedAt": "2024-04-21T22:52:19.648396",
+    "name": "Challenge someone.",
+    "createdByUserId": 7,
+    "type": "DIRECT"
+  },
+  {
+    "id": 6,
+    "createdAt": "2024-03-10T04:14:29.653756Z",
+    "updatedAt": "2024-04-21T22:52:19.648439",
+    "name": "Enough where no.",
+    "createdByUserId": 2,
+    "type": "DIRECT"
+  },
+  {
+    "id": 7,
+    "createdAt": "2024-03-31T15:19:46.292997Z",
+    "updatedAt": "2024-04-21T22:52:19.648479",
+    "name": "Week choice force.",
+    "createdByUserId": 7,
+    "type": "GROUP"
+  },
+  {
+    "id": 8,
+    "createdAt": "2024-03-22T15:30:17.226246Z",
+    "updatedAt": "2024-04-21T22:52:19.648518",
+    "name": "Way to return give.",
+    "createdByUserId": 4,
+    "type": "GROUP"
+  },
+  {
+    "id": 9,
+    "createdAt": "2024-03-03T15:01:40.947252Z",
+    "updatedAt": "2024-04-21T22:52:19.648566",
+    "name": "Health leader four.",
+    "createdByUserId": 2,
+    "type": "GROUP"
+  }
+]

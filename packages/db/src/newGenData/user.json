@@ -79,5 +79,14 @@
     "status": "ACTIVE",
     "streak": 116,
     "gender": "PREFERNOTTOSAY"
+  },
+  {
+    "id": 10,
+    "clerkId": "10",
+    "username": "Himself.",
+    "name": "Dorothy Johnson",
+    "status": "ONLINE",
+    "streak": 292,
+    "gender": "PREFERNOTTOSAY"
   }
 ]

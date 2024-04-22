@@ -18,18 +18,17 @@ import { Prisma } from '@prisma/client'
 // This one uses the new data in newGenData
 import { prisma } from '..'
 import award from '../mock-data/award.json'
-import chat from '../newGenData/chat.json'
-import exercise from '../newGenData/exercise.json'
-import friend from '../newGenData/friend.json'
-import workoutLog from '../newGenData/workoutLog.json'
-import message from '../newGenData/message.json'
-import notification from '../newGenData/notification.json'
-import post from '../newGenData/post.json'
-
 // No longer used in new schema i believe
 // import set from '../mock-data/set.json'
 import spotify from '../mock-data/spotify.json'
+import chat from '../newGenData/chat.json'
+import exercise from '../newGenData/exercise.json'
+import friend from '../newGenData/friend.json'
+import message from '../newGenData/message.json'
+import notification from '../newGenData/notification.json'
+import post from '../newGenData/post.json'
 import users from '../newGenData/user.json'
+import workoutLog from '../newGenData/workoutLog.json'
 import workout from '../newGenData/workoutTemplate.json'
 
 /**
@@ -136,54 +135,53 @@ const loaddb = async () => {
     })
     logger('add', 'notification')
 
-    /*  */
-    await prisma.exercise.createMany({
-      data: exercise as Prisma.ExerciseCreateManyInput[],
-    })
-    logger('add', 'exercise')
+    // /*  */
+    // await prisma.exercise.createMany({
+    //   data: exercise as Prisma.ExerciseCreateManyInput[],
+    // })
+    // logger('add', 'exercise')
 
-    /* */
-    // for (let i = 0; i < workout.length; i++) {
-    //   await prisma.workoutLog.create({ data: workout[i] as Prisma.WorkoutLogCreateInput });
-    // }
-    // logger('add', 'workout')
+    // /* */
+    // // for (let i = 0; i < workout.length; i++) {
+    // //   await prisma.workoutLog.create({ data: workout[i] as Prisma.WorkoutLogCreateInput });
+    // // }
+    // // logger('add', 'workout')
 
-    /*  */
-    await prisma.chat.createMany({
-      data: chat as Prisma.ChatCreateManyInput[],
-    })
-    logger('add', 'chat')
+    // /*  */
+    // await prisma.chat.createMany({
+    //   data: chat as Prisma.ChatCreateManyInput[],
+    // })
+    // logger('add', 'chat')
 
-    /*  */
-    await prisma.message.createMany({
-      data: message as Prisma.MessageCreateManyInput[],
-    })
-    logger('add', 'message')
+    // /*  */
+    // await prisma.message.createMany({
+    //   data: message as Prisma.MessageCreateManyInput[],
+    // })
+    // logger('add', 'message')
 
-    /*  */
-    await prisma.award.createMany({
-      data: award as Prisma.AwardCreateManyInput[],
-    })
-    logger('add', 'award')
+    // /*  */
+    // await prisma.award.createMany({
+    //   data: award as Prisma.AwardCreateManyInput[],
+    // })
+    // logger('add', 'award')
 
-    /*  */
-    await prisma.friend.createMany({
-      data: friend as Prisma.FriendCreateManyInput[],
-    })
-    logger('add', 'friend')
+    // /*  */
+    // await prisma.friend.createMany({
+    //   data: friend as Prisma.FriendCreateManyInput[],
+    // })
+    // logger('add', 'friend')
 
-    /*  */
-    await prisma.workoutLog.createMany({
-       data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
-     })
-     logger('add', 'log')
+    // /*  */
+    // await prisma.workoutLog.createMany({
+    //   data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
+    // })
+    // logger('add', 'log')
 
     /*  */
     // await prisma.set.createMany({
     //   data: set as Prisma.SetCreateManyInput[],
     // })
     // logger('add', 'set')
-
   } catch (error) {
     console.error(error)
     process.exit(1)

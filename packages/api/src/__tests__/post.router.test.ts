@@ -11,7 +11,6 @@ describe('POST', async () => {
   const caller = createCaller(ctx)
 
   const input: RouterInputs['post']['create'] = {
-    title: 'Another Post',
     content: 'This is.',
     authorId: 1
   }
@@ -20,11 +19,9 @@ describe('POST', async () => {
     const create = await caller.post.create(input)
     const byId = await caller.post.byId({ id: create.id })
 
-    expect(create.title).toMatchObject(input.title)
     expect(create.content).toMatchObject(input.content)
     expect(create.authorId).toMatchObject(input.authorId)
 
-    expect(byId?.title).toMatchObject(input.title)
     expect(byId?.content).toMatchObject(input.content)
     expect(byId?.authorId).toMatchObject(input.authorId)
 

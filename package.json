@@ -32,7 +32,8 @@
     "@babel/core": "^7.20.0",
     "@turbo/gen": "^1.12.4",
     "turbo": "^1.13.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "react-native-calendars": "^1.1304.1"
   },
   "prettier": "@acme/prettier-config",
   "pnpm": {

@@ -28,6 +28,18 @@ export default function getErrorMessage(error: unknown) {
   else return String(error)
 }
 
+type WSOpts = {
+  fetchOpts: undefined
+  wsOpts: CreateWSSContextFnOptions
+}
+
+type APIOpts = {
+  fetchOpts: FetchCreateContextFnOptions
+  wsOpts: undefined
+}
+
+type OuterOpts = WSOpts | APIOpts
+
 /**
  * > 1. CONTEXT
  *
@@ -39,7 +51,7 @@ export default function getErrorMessage(error: unknown) {
  * @see https://trpc.io/docs/server/context
  */
 // interface CreateContextOptions extends Partial<CreateNextContextOptions> {
-interface CreateContextOptions {
+type CreateInnerContextOptions = OuterOpts & {
   // session: Session | null
 }
 
@@ -55,8 +67,9 @@ interface CreateContextOptions {
  * - this is useful for testing when we don't want to mock Next.js' request/response
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
-export async function createContextInner(_opts?: CreateContextOptions) {
+export async function createContextInner(_opts: CreateInnerContextOptions) {
   return {
+    _opts,
     prisma,
   }
 }
@@ -70,22 +83,23 @@ export type Context = Awaited<ReturnType<typeof createContextInner>>
  * @see https://create.t3.gg/en/usage/trpc#-pagesapitrpctrpcts
  * @alias createContext
  */
-export async function createTRPCContext(
-  opts: FetchCreateContextFnOptions | CreateWSSContextFnOptions,
-) {
-  // console.log('>>> createTRPCContext', opts.req.headers)
-  // Checking based on the type of the 'req' object
-  // if (opts.req instanceof IncomingMessage) {
-  //   console.log('Handling FetchCreateContextFnOptions')
-  //   const headers = opts.req.headers as IncomingHttpHeaders & { 'x-trpc-source'?: string }
-  //   const source = headers['x-trpc-source']
-  //   console.log('>>> tRPC Request from', source)
-  // } else if (opts.req instanceof Request) {
-  //   console.log('Handling CreateWSSContextFnOptions')
-  // }
+export async function createTRPCContext(opts: FetchCreateContextFnOptions) {
+  const source = opts.req.headers.get('x-trpc-source') ?? 'unknown'
+  console.log('>>> tRPC Request from', source)
 
-  // for API-response caching see https://trpc.io/docs/v11/caching
-  return await createContextInner({})
+  return await createContextInner({
+    wsOpts: undefined,
+    fetchOpts: opts,
+  })
+}
+
+export async function createWssContext(opts: CreateWSSContextFnOptions) {
+  console.log('>>> tRPC Request from WebSocket')
+
+  return await createContextInner({
+    wsOpts: opts,
+    fetchOpts: undefined,
+  })
 }
 
 /* ------------------------------------------------------------------------------- */

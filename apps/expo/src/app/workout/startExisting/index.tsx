@@ -15,26 +15,13 @@ const styles = StyleSheet.create({
 export default function startExisting() {
   return (
     <SafeAreaView style={styles.container}>
-      <View className='h-[60px] flex-row items-center justify-evenly'>
+      <View>
         <NavBar center={'Workouts'} right={'Next'} />
       </View>
 
       <View className='mb-[25px] py-[20px]'>
         <WorkoutList />
       </View>
-
-      <View
-        style={{
-          height: 1,
-          backgroundColor: '#CACACA',
-          marginHorizontal: 13,
-          opacity: 0.3,
-          top: 10,
-        }}
-      />
-      <ScrollView className='mb-[25px] py-[20px]'>
-        <WorkoutList />
-      </ScrollView>
     </SafeAreaView>
   )
 }

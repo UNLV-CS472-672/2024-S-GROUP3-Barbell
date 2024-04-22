@@ -19,16 +19,18 @@ import { Prisma } from '@prisma/client'
 import { prisma } from '..'
 import award from '../mock-data/award.json'
 import chat from '../newGenData/chat.json'
-import exercise from '../mock-data/exercise.json'
-import friend from '../mock-data/friend.json'
-import workoutLog from '../mock-data/workoutLog.json'
-import message from '../mock-data/message.json'
-import notification from '../mock-data/notification.json'
-import post from '../mock-data/post.json'
-import set from '../mock-data/set.json'
+import exercise from '../newGenData/exercise.json'
+import friend from '../newGenData/friend.json'
+import workoutLog from '../newGenData/workoutLog.json'
+import message from '../newGenData/message.json'
+import notification from '../newGenData/notification.json'
+import post from '../newGenData/post.json'
+
+// No longer used in new schema i believe
+// import set from '../mock-data/set.json'
 import spotify from '../mock-data/spotify.json'
-import users from '../mock-data/user.json'
-import workout from '../mock-data/workout.json'
+import users from '../newGenData/user.json'
+import workout from '../newGenData/workoutTemplate.json'
 
 /**
  * @param type logging type
@@ -77,8 +79,8 @@ const loaddb = async () => {
     await prisma.workoutLog.deleteMany()
     logger('delete', 'workoutLog')
 
-    await prisma.workout.deleteMany()
-    logger('delete', 'workout')
+    await prisma.workoutTemplate.deleteMany()
+    logger('delete', 'workoutTemplate')
 
     await prisma.friend.deleteMany()
     logger('delete', 'friend')
@@ -141,10 +143,10 @@ const loaddb = async () => {
     logger('add', 'exercise')
 
     /* */
-    for (let i = 0; i < workout.length; i++) {
-      await prisma.workout.create({ data: workout[i] as any });
-    }
-    logger('add', 'workout')
+    // for (let i = 0; i < workout.length; i++) {
+    //   await prisma.workoutLog.create({ data: workout[i] as Prisma.WorkoutLogCreateInput });
+    // }
+    // logger('add', 'workout')
 
     /*  */
     await prisma.chat.createMany({
@@ -172,15 +174,15 @@ const loaddb = async () => {
 
     /*  */
     await prisma.workoutLog.createMany({
-      data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
-    })
-    logger('add', 'log')
+       data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
+     })
+     logger('add', 'log')
 
     /*  */
-    await prisma.set.createMany({
-      data: set as Prisma.SetCreateManyInput[],
-    })
-    logger('add', 'set')
+    // await prisma.set.createMany({
+    //   data: set as Prisma.SetCreateManyInput[],
+    // })
+    // logger('add', 'set')
 
   } catch (error) {
     console.error(error)

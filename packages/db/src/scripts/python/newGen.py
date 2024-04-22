@@ -82,7 +82,7 @@ class User(Model):
 
     def __init__(self, fake, id):
         self.id = id
-        self.clerkId = id
+        self.clerkId = str(id)
 
         # Look into making it more dynamic
         self.username = fake.text(max_nb_chars=20)

@@ -68,13 +68,13 @@ enum Gender {
 }
 
 model Post {
-  id        Int     @id @unique @default(autoincrement())
+  id        Int      @id @unique @default(autoincrement())
   title     String
   content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
+  published Boolean  @default(false)
+  author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
-  createdAt  DateTime @default(now())
+  createdAt DateTime @default(now())
 }
 
 // ******************************************************************************************
@@ -94,23 +94,24 @@ model Post {
 // * gender: User gender, default to prefer not to say.
 // ******************************************************************************************
 model User {
-  id                   Int            @id @unique @default(autoincrement())
-  clerkId              String?        @unique
-  username             String         @unique @db.Char(20)
+  id                   Int               @id @unique @default(autoincrement())
+  clerkId              String            @unique
+  username             String            @unique @db.Char(20)
   name                 String?
   status               UserStatus?
-  streak               Int            @default(0)
+  streak               Int               @default(0)
   posts                Post[]
   friends              Friend[]
+  exerciseHistory      ExerciseLog[]
   workoutHistory       WorkoutLog[]
-  workouts             Workout[]
+  savedWorkouts        WorkoutTemplate[]
   awards               Award[]
-  notifications        Notification[] @relation("NotificationReceiver")
-  sentMessages         Notification[] @relation("NotificationSender")
-  createdChats         Chat[]         @relation("ChatCreator")
+  notifications        Notification[]    @relation("NotificationReceiver")
+  sentMessages         Notification[]    @relation("NotificationSender")
+  createdChats         Chat[]            @relation("ChatCreator")
   chats                Chat[]
   spotify              SpotifyData?
-  notificationsBanners Boolean        @default(true)
+  notificationsBanners Boolean           @default(true)
   customExercises      Exercise[]
   gender               Gender?        @default(PREFERNOTTOSAY)
 }
@@ -144,15 +145,14 @@ model Friend {
 // ******************************************************************************************
 model WorkoutLog {
   id         Int      @id @unique @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  finishedAt DateTime
+  finishedAt DateTime @default(now())
+  duration   Int
 
   user   User @relation(fields: [userId], references: [id])
   userId Int
 
-  workout   Workout @relation(fields: [workoutId], references: [id])
-  workoutId Int
+  workoutTemplate   WorkoutTemplate @relation(fields: [workoutTemplateId], references: [id])
+  workoutTemplateId Int
 }
 
 // ******************************************************************************************
@@ -162,17 +162,15 @@ model WorkoutLog {
 // * Set: Details a specific set within an exercise, including the type of set, the number of repetitions, and the weight used.
 // * Award: Represents achievements or milestones reached by users, with a name, description, and the user who received it.
 // ******************************************************************************************
-model Workout {
-  id            Int          @id @unique @default(autoincrement())
-  name          String       @db.Char(100)
-  description   String?
-  duration      Int
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  finishedAt    DateTime
-  likes         Int          @default(0)
-  exercises     Exercise[]
-  past_workouts WorkoutLog[]
+model WorkoutTemplate {
+  id           Int          @id @unique @default(autoincrement())
+  name         String       @db.Char(100)
+  description  String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  likes        Int          @default(0)
+  exerciseIds  Int[]
+  pastWorkouts WorkoutLog[]
 
   user   User @relation(fields: [userId], references: [id])
   userId Int
@@ -185,15 +183,30 @@ model Workout {
 // * GROUP: Group message
 // ******************************************************************************************
 model Exercise {
-  id        Int       @id @unique @default(autoincrement())
-  name      String    @db.Char(100)
-  note      String?
+  id           Int           @id @unique @default(autoincrement())
+  name         String        @db.Char(100)
+  note         String?
+  bodyPart     BodyPart
+  category     Category
+  exerciseLogs ExerciseLog[]
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?
+}
+
+model ExerciseLog {
+  id        Int      @id @unique @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   sets      Set[]
-  body_part BodyPart
-  category  Category
-  workout   Workout[]
-  User      User?     @relation(fields: [userId], references: [id])
-  userId    Int?
+
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int
+
+  workoutTemplateId Int
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
 }
 
 // ******************************************************************************************
@@ -205,12 +218,13 @@ model Exercise {
 // * exercise: The exercise associated with the set.
 // ******************************************************************************************
 model Set {
-  id         Int      @id @unique @default(autoincrement())
-  type       SetType  @default(NORMAL)
-  reps       Int
-  weight     Float
-  exercise   Exercise @relation(fields: [exerciseId], references: [id])
-  exerciseId Int
+  id            String      @id @default(uuid())
+  type          SetType     @default(NORMAL)
+  unilateral    Boolean     @default(false)
+  reps          Int[]
+  weight        Float[]
+  exerciseLog   ExerciseLog @relation(fields: [exerciseLogId], references: [id])
+  exerciseLogId Int
 }
 
 // ******************************************************************************************

@@ -1,12 +1,6 @@
-import React from 'react'
-
 import { render, screen } from '@testing-library/react-native'
 
 import WorkoutTracker from '~/components/tracker/workout-tracker'
-
-// jest.mock('^/packages/validators/src', () => ({
-//   validate: jest.fn(() => ({})),
-// }))
 
 jest.mock('uuid', () => ({
   v4: jest.fn(() => '1'),
@@ -17,6 +11,17 @@ jest.mock('~/context/global-context', () => ({
     userData: {},
     isWorkingOut: false,
     setIsWorkingOut: jest.fn(),
+  })),
+}))
+
+jest.mock('@acme/validators', () => ({
+  ExerciseSchema: jest.fn(() => ({
+    id: 1,
+    name: 'Bench Press',
+    note: '',
+    bodyPart: 'CHEST',
+    category: 'BARBELL',
+    sets: [],
   })),
 }))
 

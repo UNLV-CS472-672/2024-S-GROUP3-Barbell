@@ -11,6 +11,31 @@ jest.mock('~/context/global-context', () => ({
   })),
 }))
 
+jest.mock('~/utils/trpc/api', () => ({
+  api: {
+    workoutTemplate: {
+      getWorkoutTemplateInfoById: {
+        useQuery: jest.fn(() => ({
+          data: {
+            id: 1,
+            name: 'Test Workout',
+            exercises: [
+              {
+                id: 1,
+                name: 'Bench Press',
+                sets: [],
+                note: '',
+                bodyPart: 'CHEST',
+                category: 'BARBELL',
+              },
+            ],
+          },
+        })),
+      },
+    },
+  },
+}))
+
 describe('WorkoutTrackerHeader', () => {
   const mockRef = {
     current: null,

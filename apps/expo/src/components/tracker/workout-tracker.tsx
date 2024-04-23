@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
-import { ExerciseSchema } from '^/packages/validators/src'
 import { z } from 'zod'
+
+import { ExerciseSchema } from '@acme/validators'
 
 import type { TWorkoutTemplateInfo } from '~/utils/workout-tracker-utils'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'

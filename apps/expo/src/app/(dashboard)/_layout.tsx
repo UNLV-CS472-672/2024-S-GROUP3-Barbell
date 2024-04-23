@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
-import { Route, Tabs, router } from 'expo-router'
+import { Route, router, Tabs } from 'expo-router'
 
 import { DashboardHeader } from '^/apps/expo/src/layouts/headers/dashboard-header'
 import CircleMinus from '~assets/svgs/circle-minus.svg'
@@ -31,7 +31,7 @@ const Layout = () => {
   /* states */
   const [isVisible, setVisible] = React.useState(false)
 
-  const routes = ['', '', '/post/new'];
+  const routes = ['', '', '/post/new']
 
   return (
     <>
@@ -140,7 +140,7 @@ const Layout = () => {
         isVisible={isVisible}
         data={['Start Saved Workout', 'Create New Workout', 'Create New Post']}
         onPress={(selectedItem: string | number, index: number) => {
-          router.push(routes[index] as Route<string>);
+          router.push(routes[index] as Route<string>)
         }}
         cancelButtonTextStyle={{ fontSize: 18 }}
         onCancelPress={() => {

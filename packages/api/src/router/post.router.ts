@@ -31,7 +31,7 @@ export const postRouter = createTRPCRouter({
       return ctx.prisma.post.upsert({
         where: { id: 1 },
         update: input,
-        create: input
+        create: input,
       })
     }),
   /**
@@ -70,7 +70,7 @@ export const postRouter = createTRPCRouter({
           author: true,
           content: true,
           id: true,
-          createdAt: true
+          createdAt: true,
         },
         orderBy: {
           createdAt: 'desc',

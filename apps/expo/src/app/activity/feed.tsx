@@ -3,23 +3,36 @@ import { FlatList } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { useGlobalContext } from '~/context/global-context'
+import { ACTIVITY_FEED_ITEM_LIMIT } from '~/utils/constants'
 import { api } from '~/utils/trpc/api'
 import Activity from '.'
-import { ACTIVITY_FEED_ITEM_LIMIT } from '~/utils/constants'
 
 const ActivityFeed = () => {
-  let activities: any[] = [];
-  const { userData } = useGlobalContext();
-  const { data: friends, isLoading: friendsIsLoading } = api.friend.getFriends.useQuery({ userId: userData?.id ?? 0 });
-  const { data: friendsWorkoutLogs, isLoading: friendsActivitiesLoading } = api.workout.getActivityFeedWorkouts.useQuery(
-    { friendIds: friends?.map(friend => friend.friendId) ?? [], count: ACTIVITY_FEED_ITEM_LIMIT },
-    { enabled: !friendsIsLoading }
-  );
+  let activities: any[] = []
+  const { userData } = useGlobalContext()
+  const { data: friends, isLoading: friendsIsLoading } = api.friend.getFriends.useQuery({
+    userId: userData?.id ?? 0,
+  })
+  const { data: friendsWorkoutLogs, isLoading: friendsActivitiesLoading } =
+    api.workout.getActivityFeedWorkouts.useQuery(
+      {
+        friendIds: friends?.map((friend) => friend.friendId) ?? [],
+        count: ACTIVITY_FEED_ITEM_LIMIT,
+      },
+      { enabled: !friendsIsLoading },
+    )
 
   if (!friendsActivitiesLoading) {
-    activities = friendsWorkoutLogs?.map(workoutLog => {
-      return <Activity user={workoutLog.user} workout={workoutLog.workout} workoutLog={workoutLog}></Activity>;
-    }) ?? [];
+    activities =
+      friendsWorkoutLogs?.map((workoutLog) => {
+        return (
+          <Activity
+            user={workoutLog.user}
+            workout={workoutLog.workout}
+            workoutLog={workoutLog}
+          ></Activity>
+        )
+      }) ?? []
   }
 
   return (

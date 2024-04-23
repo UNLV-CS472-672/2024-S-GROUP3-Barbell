@@ -50,7 +50,7 @@ const config: Config = {
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   preset: 'jest-expo',
   moduleNameMapper: {
-    '~/(.*)' : '<rootDir>/src/$1',
+    '~/(.*)': '<rootDir>/src/$1',
     '\\.svg$': '<rootDir>/src/components/ui/svgMock.tsx',
   },
 }

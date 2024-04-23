@@ -149,7 +149,7 @@ function AppContent() {
 /*  */
 function RootLayoutBottomNav() {
   return (
-    <Stack>
+    <Stack >
       <Stack.Screen
         name='(dashboard)'
         options={{
@@ -190,6 +190,14 @@ function RootLayoutBottomNav() {
               <FriendsHeader />
             </View>
           ),
+        }}
+      />
+
+      {/* workout-completion */}
+      <Stack.Screen
+        name='workout-completion'
+        options={{
+          headerShown: false,
         }}
       />
     </Stack>

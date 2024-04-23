@@ -97,6 +97,7 @@ Tasks are assigned to team members by their first name. For tasks with multiple 
 - [ ] [Spotify API got HANDS, same thing](https://www.reddit.com/r/learnprogramming/comments/11warb8/need_help_with_spotify_api/)
 - [ ] [It seems the router didn't regconize our config](https://github.com/kristerkari/react-native-svg-transformer/issues/333)
 - [ ] [Strange "warning" as mentioned above](https://www.reddit.com/r/expo/comments/1aif2w2/strange_error_missing_transformrouterroot_option/)
+- [ ] [Prisma ew ew error](https://github.com/prisma/studio/issues/1195)
 
 In case you encountered, Failed to get localhost. Please point to your production server.
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Text, View } from 'react-native'
 
 import formatTime from '~/utils/timerFormatter'

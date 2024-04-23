@@ -78,4 +78,33 @@ export const postRouter = createTRPCRouter({
         take: input.postCount,
       })
     }),
+
+  /**
+   *  @remarks
+   *  This returns the user-specified most recent posts from all friends for a user
+   *
+   *  @param  id - the id of the user
+   *  @param  postCount - the number of posts to get
+   *  @returns an array of the [#] most recent posts from the user's friends
+   */
+  getUsersPostsByIdAndPostCount: publicProcedure
+    .input(z.object({ id: z.number().int(), posts: z.number().int() }))
+    .query(async ({ ctx, input }) => {
+      return ctx.prisma.post.findMany({
+        where: {
+          authorId: input.id,
+        },
+        select: {
+          author: true,
+          content: true,
+          title: true,
+          id: true,
+          createdAt: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: input.posts,
+      })
+    }),
 })

@@ -12,7 +12,7 @@ interface MessageButtonProps {
   userId: number
 }
 
-const MessageButton = ({ chatId, userId, username }: MessageButtonProps) => {
+export default function MessageButton({ chatId, userId, username }: MessageButtonProps) {
   const type = ChatType.DIRECT
   const chatName = username
 
@@ -31,5 +31,3 @@ const MessageButton = ({ chatId, userId, username }: MessageButtonProps) => {
     </View>
   )
 }
-
-export default MessageButton

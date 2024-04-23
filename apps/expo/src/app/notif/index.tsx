@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Link } from 'expo-router'
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
@@ -14,13 +15,18 @@ export type notifsType = 'misc' | 'dm' | 'gc'
 
 export default function NotifScreen() {
   const [visibleNotifs, setVisibleNotifs] = useState<notifsType>('misc')
+  const refetch: number = 1
 
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
       {/*header w/ back and new message buttons*/}
       <NavBar
         center={'Notifications'}
-        right={<MaterialCommunityIcons name='message-plus-outline' size={20} color='#CACACA' />}
+        right={
+          <Link href={{ pathname: 'frlist/', params: { refetch } }} asChild={true}>
+            <MaterialCommunityIcons name='message-plus-outline' size={20} color='#CACACA' />
+          </Link>
+        }
       />
 
       {/*notif nav buttons*/}

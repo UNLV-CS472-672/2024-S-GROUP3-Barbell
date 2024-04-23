@@ -12,13 +12,13 @@ interface IncomingFriendAlertProps {
   setFriendStatus: Dispatch<SetStateAction<boolean | 'PENDING' | 'REQUESTED'>>
 }
 
-const IncomingFriendAlert = ({
+export default function IncomingFriendAlert({
   username,
   senderId,
   receiverId,
   notifId,
   setFriendStatus,
-}: IncomingFriendAlertProps) => {
+}: IncomingFriendAlertProps) {
   const handleAcceptFriend = () => {
     setComponent(<></>)
     setFriendStatus(true)
@@ -70,5 +70,3 @@ const IncomingFriendAlert = ({
 
   return component
 }
-
-export default IncomingFriendAlert

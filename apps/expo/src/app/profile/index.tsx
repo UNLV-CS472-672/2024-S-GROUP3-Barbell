@@ -12,6 +12,8 @@ import FriendStatus from '~/components/profile/FriendStatus'
 import HeaderElement from '~/components/profile/HeaderElement'
 import IncomingFriendAlert from '~/components/profile/IncomingFriendAlert'
 import MessageButton from '~/components/profile/MessageButton'
+import ProfilePosts from '~/components/profile/ProfilePosts'
+import ViewSwitcher from '~/components/profile/ViewSwitcher'
 import NavBar from '~/components/ui/nav-bar/NavBar'
 import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
@@ -35,6 +37,8 @@ export default function ProfileView() {
   useEffect(() => {
     refetch()
   }, [friendStatus])
+
+  const [viewPosts, setViewPosts] = useState<boolean>(true)
 
   const profileContents = (
     <ScrollView className='h-[100%]'>
@@ -73,6 +77,10 @@ export default function ProfileView() {
             username={viewingProfileUsername}
             userId={viewingProfileId}
           />
+        </View>
+        <ViewSwitcher viewPosts={viewPosts} setViewPosts={setViewPosts} />
+        <View>
+          {viewPosts && <ProfilePosts id={viewingProfileId} username={viewingProfileUsername} />}
         </View>
       </View>
     </ScrollView>

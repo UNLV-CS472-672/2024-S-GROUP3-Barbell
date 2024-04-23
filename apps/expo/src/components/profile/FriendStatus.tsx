@@ -6,7 +6,7 @@ interface FriendStatusProps {
   friendStatus: boolean | 'REQUESTED' | 'PENDING' | undefined
 }
 
-const FriendStatus = ({ friendStatus }: FriendStatusProps) => {
+export default function FriendStatus({ friendStatus }: FriendStatusProps) {
   let friendStatusText: string
   if (friendStatus == 'REQUESTED') {
     friendStatusText = 'Requested'
@@ -38,5 +38,3 @@ const FriendStatus = ({ friendStatus }: FriendStatusProps) => {
     </View>
   )
 }
-
-export default FriendStatus

@@ -30,6 +30,9 @@ import post from '../new-gen-data/post.json'
 import users from '../new-gen-data/user.json'
 import workoutLog from '../new-gen-data/workoutLog.json'
 import workoutTemplate from '../new-gen-data/workoutTemplate.json'
+import users from '../mock-data/user.json'
+import workoutLog from '../mock-data/workoutLog.json'
+import workout from '../mock-data/workoutTemplate.json'
 
 /**
  * @param type logging type
@@ -69,8 +72,8 @@ const loaddb = async () => {
     await prisma.set.deleteMany()
     logger('delete', 'set')
 
-    await prisma.set.deleteMany()
-    logger('delete', 'set')
+    await prisma.exerciseLog.deleteMany()
+    logger('delete', 'exerciseLog')
 
     await prisma.exercise.deleteMany()
     logger('delete', 'exercise')
@@ -78,6 +81,8 @@ const loaddb = async () => {
     await prisma.workoutLog.deleteMany()
     logger('delete', 'workoutLog')
 
+    await prisma.workoutTemplate.deleteMany()
+    logger('delete', 'workoutTemplate')
     await prisma.workoutTemplate.deleteMany()
     logger('delete', 'workoutTemplate')
 
@@ -141,6 +146,14 @@ const loaddb = async () => {
     })
     logger('add', 'exercise')
 
+    /* */
+    for (let i = 0; i < workout.length; i++) {
+      await prisma.workoutTemplate.createMany({
+        data: workout[i] as Prisma.WorkoutTemplateCreateManyInput[],
+      })
+    }
+    logger('add', 'workoutTemplate')
+
     /*  */
     await prisma.chat.createMany({
       data: chat as Prisma.ChatCreateManyInput[],
@@ -164,25 +177,8 @@ const loaddb = async () => {
       data: friend as Prisma.FriendCreateManyInput[],
     })
     logger('add', 'friend')
-
-    await prisma.workoutTemplate.createMany({
-      data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
-    })
-    logger('add', 'workoutTemplate')
-
-    /*  */
-    await prisma.workoutLog.createMany({
-      data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
-    })
-    logger('add', 'workoutlog')
-
-    /*  */
-    // await prisma.set.createMany({
-      //   data: set as Prisma.SetCreateManyInput[],
-      // })
-      // logger('add', 'set')
-    } catch (error) {
-      console.error(error)
+  } catch (error) {
+    console.error(error)
     process.exit(1)
   } finally {
     await prisma.$disconnect()
@@ -191,3 +187,4 @@ const loaddb = async () => {
 
 /* main */
 loaddb().catch((e) => console.error(e))
+

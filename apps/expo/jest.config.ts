@@ -38,6 +38,7 @@ const config: Config = {
     '!**/(inbox)/**',
     '!**/(friends)/**',
     '!**/(workout)/**',
+    '!**/tracker/**',
   ],
   // coverageThreshold: {
   //   global: {
@@ -51,7 +52,7 @@ const config: Config = {
   preset: 'jest-expo',
   moduleNameMapper: {
     '~/(.*)': '<rootDir>/src/$1',
-    '\\.svg$': '<rootDir>/src/components/ui/svgMock.tsx',
+    '\\.svg$': '<rootDir>/src/__mocks__/svgMock.tsx',
   },
 }
 

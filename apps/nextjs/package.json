@@ -5,7 +5,9 @@
   "scripts": {
     "build": "pnpm with-env next build",
     "clean": "git clean -xdf .next .turbo node_modules",
-    "dev": "pnpm with-env next dev",
+    "dev:wss": "pnpm with-env tsx watch src/server/ws-dev-server.ts --tsconfig tsconfig.server.json",
+    "dev:next": "pnpm with-env next dev",
+    "dev": "run-p dev:*",
     "lint": "dotenv -v SKIP_ENV_VALIDATION=1 next lint",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "start": "pnpm with-env next start",
@@ -30,6 +32,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "2.2.1",
+    "ws": "^8.16.0",
     "zod": ">=3.22.3"
   },
   "devDependencies": {
@@ -40,6 +43,7 @@
     "@types/node": "^18.18.13",
     "@types/react": "^18.2.75",
     "@types/react-dom": "^18.2.17",
+    "@types/ws": "^8.5.10",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.53.0",
     "prettier": "^3.1.0",

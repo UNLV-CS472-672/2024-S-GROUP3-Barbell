@@ -1,9 +1,9 @@
 'use client'
 
-import type { RouterOutputs } from '@/utils/api'
+import type { RouterOutputs } from '@/utils/trpc/api'
 import { useState } from 'react'
 
-import { api } from '@/utils/api'
+import { api } from '@/utils/trpc/api'
 
 export function CreatePostForm() {
   const utils = api.useUtils()
@@ -25,6 +25,7 @@ export function CreatePostForm() {
         try {
           await createPost({
             content,
+            authorId: 1,
           })
           setContent('')
           await utils.post.all.invalidate()

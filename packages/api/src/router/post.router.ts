@@ -27,12 +27,14 @@ export const postRouter = createTRPCRouter({
       }),
     )
     .mutation(({ ctx, input }) => {
-      // return ctx.prisma.post.create({ data: input })
-      return ctx.prisma.post.upsert({
-        where: { id: 1 },
-        update: input,
-        create: input,
+      return ctx.prisma.post.create({
+        data: input,
       })
+      // return ctx.prisma.post.upsert({
+      //   where: { id: 1 },
+      //   update: input,
+      //   create: input,
+      // })
     }),
   /**
    *
@@ -78,4 +80,8 @@ export const postRouter = createTRPCRouter({
         take: input.postCount,
       })
     }),
+
+  /**
+   *
+   */
 })

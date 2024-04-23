@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "name": "Full Body Routine",
+    "description": "A comprehensive workout targeting all major muscle groups. Ideal for beginners and intermediate fitness levels.",
+    "createdAt": "2024-03-20T10:00:00.000Z",
+    "updatedAt": "2024-03-20T10:00:00.000Z",
+    "likes": 15,
+    "userId": 9,
+    "exerciseIds": [1,2,3]
+  }
+
+]

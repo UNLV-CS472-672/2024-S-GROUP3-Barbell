@@ -2,9 +2,6 @@
   "extends": "@acme/tsconfig/base.json",
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
-    "paths": {
-      "^/*": ["../../*"], // monorepo root
-    },
   },
   "include": ["."],
   "exclude": ["node_modules"]

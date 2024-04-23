@@ -45,6 +45,7 @@ const Nav = () => {
           { key: 'completion', route: '/workout-completion' },
           { key: 'KeypadDemo', route: '/keypadDemo' },
           { key: 'post2', route: '/post2' },
+          { key: 'Rest Timer', route: '/rest-timer' },
         ]}
         renderItem={({ item }) => (
           <Button

@@ -2,6 +2,7 @@ import { exerciseRouter } from './router/exercise.router'
 import { friendRouter } from './router/friend.router'
 import { notifRouter } from './router/notif.router'
 import { postRouter } from './router/post.router'
+import { post2Router } from './router/post2.router'
 import { spotifyRouter } from './router/spotify.router'
 import { userRouter } from './router/user.router'
 import { workoutLogRouter } from './router/workout-log.router'
@@ -13,6 +14,7 @@ import { createTRPCRouter, publicProcedure } from './trpc'
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
+  post2: post2Router,
   user: userRouter,
   notif: notifRouter,
   spotify: spotifyRouter,

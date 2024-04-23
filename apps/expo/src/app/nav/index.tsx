@@ -31,8 +31,10 @@ const Nav = () => {
           { key: 'Workout Progress', route: '/user/workout-progress' },
           { key: 'Contact Us', route: '/contact-us' },
           { key: 'Privacy Policy', route: '/privacy-policy' },
+          { key: 'Friends List', route: '/frlist' },
           { key: 'Award', route: '/award' },
           { key: 'Spotify', route: '/spotify' },
+          { key: 'FriendsList', route: '/frlist' },
           { key: 'Tracker', route: '/tracker' },
           { key: 'Show Activity', route: '/activity' },
           { key: 'Activity Feed', route: '/activity/feed' },
@@ -42,6 +44,7 @@ const Nav = () => {
           { key: 'MuscleGroup', route: '/muscleGroup' },
           { key: 'completion', route: '/workout-completion' },
           { key: 'KeypadDemo', route: '/keypadDemo' },
+          { key: 'post2', route: '/post2' },
         ]}
         renderItem={({ item }) => (
           <Button

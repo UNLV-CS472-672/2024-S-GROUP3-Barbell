@@ -130,7 +130,7 @@ model User {
   spotify              SpotifyData?
   notificationsBanners Boolean           @default(true)
   customExercises      Exercise[]
-  gender               Gender?        @default(PREFERNOTTOSAY)
+  gender               Gender?           @default(PREFERNOTTOSAY)
 }
 
 // ******************************************************************************************

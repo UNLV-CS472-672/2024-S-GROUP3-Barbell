@@ -113,6 +113,9 @@ importers:
       expo-updates:
         specifier: ~0.24.12
         version: 0.24.12(expo@50.0.15)
+      immer:
+        specifier: ^10.0.4
+        version: 10.0.4
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@18.18.13)
@@ -198,6 +201,9 @@ importers:
       '@acme/tsconfig':
         specifier: workspace:^
         version: link:../../tooling/typescript
+      '@acme/validators':
+        specifier: workspace:^
+        version: link:../../packages/validators
       '@babel/core':
         specifier: ^7.23.9
         version: 7.23.9
@@ -10970,6 +10976,10 @@ packages:
     hasBin: true
     dependencies:
       queue: 6.0.2
+
+  /immer@10.0.4:
+    resolution: {integrity: sha512-cuBuGK40P/sk5IzWa9QPUaAdvPHjkk1c+xYsd9oZw+YQQEV+10G0P5uMpGctZZKnyQ+ibRO08bD25nWLmYi2pw==}
+    dev: false
 
   /import-fresh@2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}

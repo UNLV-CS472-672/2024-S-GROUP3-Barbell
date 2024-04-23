@@ -2,24 +2,24 @@
   {
     "id": 1,
     "name": "Arnold Dumbbell Press",
-    "note": "targets shoulders and triceps.",
-    "body_part": "SHOULDERS",
+    "note": " targets shoulders and triceps.",
+    "bodyPart": "SHOULDERS",
     "category": "DUMBBELL",
-    "userId": 7
+    "userId": 1
   },
   {
     "id": 2,
     "name": "Seated Barbell Twist",
-    "note": "targets the abdominal muscles.",
-    "body_part": "CORE",
+    "note": " targets the abdominal muscles.",
+    "bodyPart": "CORE",
     "category": "BARBELL",
-    "userId": 4
+    "userId": 3
   },
   {
     "id": 3,
     "name": "Calf-Machine Shoulder Shrug",
     "note": "targets the traps.",
-    "body_part": "BACK",
+    "bodyPart": "BACK",
     "category": "MACHINE",
     "userId": 2
   },
@@ -27,31 +27,31 @@
     "id": 4,
     "name": "Bodyweight Squat",
     "note": "targets the quadriceps, glutes, and hamstrings.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "BODYWEIGHT",
-    "userId": 9
+    "userId": 1
   },
   {
     "id": 5,
     "name": "Band Assisted Pull-up",
     "note": "targets the lats, abdominals, forearms, and the middle back.",
-    "body_part": "BACK",
+    "bodyPart": "BACK",
     "category": "ASSISTED_BODYWEIGHT",
-    "userId": 3
+    "userId": 2
   },
   {
     "id": 6,
     "name": "Weighted Sissy Squat",
     "note": "targets the quadriceps, calves, glutes, and the hamstrings.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "WEIGHTED_BODYWEIGHT",
-    "userId": 5
+    "userId": 3
   },
   {
     "id": 7,
     "name": "Treadmill Run",
     "note": null,
-    "body_part": "OTHER",
+    "bodyPart": "OTHER",
     "category": "CARDIO",
     "userId": 1
   },
@@ -59,47 +59,47 @@
     "id": 8,
     "name": "Plank",
     "note": "trains the abdominals.",
-    "body_part": "CORE",
+    "bodyPart": "CORE",
     "category": "DURATION",
-    "userId": 6
+    "userId": 1
   },
   {
     "id": 9,
     "name": "Pullups",
     "note": "targets the lats, biceps, and the middle back.",
-    "body_part": "BACK",
+    "bodyPart": "BACK",
     "category": "REPS_ONLY",
-    "userId": 8
+    "userId": 2
   },
   {
     "id": 10,
     "name": "World's Greatest Stretch",
     "note": "This is a stretch designed to target the hamstrings, calves, glutes, and quadriceps",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "OTHER",
-    "userId": 2
+    "userId": 3
   },
   {
     "id": 11,
     "name": "Dumbbell Bicep Curl",
     "note": "targets the biceps and forearms.",
-    "body_part": "ARMS",
+    "bodyPart": "ARMS",
     "category": "DUMBBELL",
-    "userId": 7
+    "userId": 2
   },
   {
     "id": 12,
     "name": "Incline Bench Press",
     "note": "targets the chest, shoulders, and triceps.",
-    "body_part": "CHEST",
+    "bodyPart": "CHEST",
     "category": "BARBELL",
-    "userId": 5
+    "userId": 2
   },
   {
     "id": 13,
     "name": "Farmer's Walk",
     "note": "targets multiple body parts, including the forearms, traps, the core, and legs.",
-    "body_part": "FULL_BODY",
+    "bodyPart": "FULL_BODY",
     "category": "WEIGHTED_BODYWEIGHT",
     "userId": 3
   },
@@ -107,7 +107,7 @@
     "id": 14,
     "name": "Deadlift",
     "note": "targets the lower back, glutes, hamstrings, and forearms.",
-    "body_part": "BACK",
+    "bodyPart": "BACK",
     "category": "BARBELL",
     "userId": 6
   },
@@ -115,7 +115,7 @@
     "id": 15,
     "name": "Russian Twist",
     "note": "targets the obliques and core muscles.",
-    "body_part": "CORE",
+    "bodyPart": "CORE",
     "category": "BODYWEIGHT",
     "userId": 4
   },
@@ -123,7 +123,7 @@
     "id": 16,
     "name": "Leg Press",
     "note": "targets the quadriceps, hamstrings, and glutes.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "MACHINE",
     "userId": 8
   },
@@ -131,7 +131,7 @@
     "id": 17,
     "name": "Dumbbell Shoulder Press",
     "note": "targets the shoulders and triceps.",
-    "body_part": "SHOULDERS",
+    "bodyPart": "SHOULDERS",
     "category": "DUMBBELL",
     "userId": 2
   },
@@ -139,7 +139,7 @@
     "id": 18,
     "name": "Bench Press",
     "note": "targets the chest, shoulders, and triceps.",
-    "body_part": "CHEST",
+    "bodyPart": "CHEST",
     "category": "BARBELL",
     "userId": 1
   },
@@ -147,7 +147,7 @@
     "id": 19,
     "name": "Barbell Squat",
     "note": "targets the quadriceps, glutes, hamstrings, and lower back.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "BARBELL",
     "userId": 9
   },
@@ -155,7 +155,7 @@
     "id": 20,
     "name": "Push-up",
     "note": "targets the chest, shoulders, and triceps.",
-    "body_part": "CHEST",
+    "bodyPart": "CHEST",
     "category": "BODYWEIGHT",
     "userId": 3
   },
@@ -163,7 +163,7 @@
     "id": 21,
     "name": "Chin-up",
     "note": "targets the lats, biceps, and the middle back.",
-    "body_part": "BACK",
+    "bodyPart": "BACK",
     "category": "BODYWEIGHT",
     "userId": 7
   },
@@ -171,7 +171,7 @@
     "id": 22,
     "name": "Dumbbell Lateral Raise",
     "note": "targets the shoulders.",
-    "body_part": "SHOULDERS",
+    "bodyPart": "SHOULDERS",
     "category": "DUMBBELL",
     "userId": 2
   },
@@ -179,7 +179,7 @@
     "id": 23,
     "name": "Tricep Dip",
     "note": "targets the triceps.",
-    "body_part": "ARMS",
+    "bodyPart": "ARMS",
     "category": "BODYWEIGHT",
     "userId": 8
   },
@@ -187,7 +187,7 @@
     "id": 24,
     "name": "Barbell Row",
     "note": "targets the upper back, lats, and biceps.",
-    "body_part": "BACK",
+    "bodyPart": "BACK",
     "category": "BARBELL",
     "userId": 4
   },
@@ -195,7 +195,7 @@
     "id": 25,
     "name": "Hammer Curl",
     "note": "targets the biceps and forearms.",
-    "body_part": "ARMS",
+    "bodyPart": "ARMS",
     "category": "DUMBBELL",
     "userId": 6
   },
@@ -203,7 +203,7 @@
     "id": 26,
     "name": "Romanian Deadlift",
     "note": "targets the hamstrings, glutes, and lower back.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "BARBELL",
     "userId": 1
   },
@@ -211,7 +211,7 @@
     "id": 27,
     "name": "Leg Curl",
     "note": "targets the hamstrings.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "MACHINE",
     "userId": 9
   },
@@ -219,7 +219,7 @@
     "id": 28,
     "name": "Lat Pulldown",
     "note": "targets the lats, biceps, and middle back.",
-    "body_part": "BACK",
+    "bodyPart": "BACK",
     "category": "MACHINE",
     "userId": 2
   },
@@ -227,7 +227,7 @@
     "id": 29,
     "name": "Skull Crusher",
     "note": "targets the triceps.",
-    "body_part": "ARMS",
+    "bodyPart": "ARMS",
     "category": "BARBELL",
     "userId": 5
   },
@@ -235,7 +235,7 @@
     "id": 30,
     "name": "Reverse Fly",
     "note": "targets the rear deltoids.",
-    "body_part": "SHOULDERS",
+    "bodyPart": "SHOULDERS",
     "category": "DUMBBELL",
     "userId": 3
   },
@@ -243,7 +243,7 @@
     "id": 31,
     "name": "Chest Fly",
     "note": "targets the chest.",
-    "body_part": "CHEST",
+    "bodyPart": "CHEST",
     "category": "MACHINE",
     "userId": 7
   },
@@ -251,7 +251,7 @@
     "id": 32,
     "name": "Calf Raise",
     "note": "targets the calves.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "MACHINE",
     "userId": 8
   },
@@ -259,7 +259,7 @@
     "id": 33,
     "name": "Bicep Hammer Curl",
     "note": "targets the biceps and forearms.",
-    "body_part": "ARMS",
+    "bodyPart": "ARMS",
     "category": "DUMBBELL",
     "userId": 6
   },
@@ -267,7 +267,7 @@
     "id": 34,
     "name": "Leg Extension",
     "note": "targets the quadriceps.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "MACHINE",
     "userId": 4
   },
@@ -275,7 +275,7 @@
     "id": 35,
     "name": "Chest Press",
     "note": "targets the chest.",
-    "body_part": "CHEST",
+    "bodyPart": "CHEST",
     "category": "MACHINE",
     "userId": 2
   },
@@ -283,7 +283,7 @@
     "id": 36,
     "name": "Single Leg Deadlift",
     "note": "targets the hamstrings, glutes, and lower back.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "DUMBBELL",
     "userId": 1
   },
@@ -291,7 +291,7 @@
     "id": 37,
     "name": "Close Grip Bench Press",
     "note": "targets the triceps.",
-    "body_part": "ARMS",
+    "bodyPart": "ARMS",
     "category": "BARBELL",
     "userId": 9
   },
@@ -299,7 +299,7 @@
     "id": 38,
     "name": "Front Raise",
     "note": "targets the shoulders.",
-    "body_part": "SHOULDERS",
+    "bodyPart": "SHOULDERS",
     "category": "DUMBBELL",
     "userId": 6
   },
@@ -307,7 +307,7 @@
     "id": 39,
     "name": "Overhead Tricep Extension",
     "note": "targets the triceps.",
-    "body_part": "ARMS",
+    "bodyPart": "ARMS",
     "category": "DUMBBELL",
     "userId": 3
   },
@@ -315,7 +315,7 @@
     "id": 40,
     "name": "Leg Raise",
     "note": "targets the lower abs.",
-    "body_part": "CORE",
+    "bodyPart": "CORE",
     "category": "BODYWEIGHT",
     "userId": 2
   },
@@ -323,7 +323,7 @@
     "id": 41,
     "name": "Squat Jump",
     "note": "targets the quadriceps, hamstrings, and glutes.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "BODYWEIGHT",
     "userId": 7
   },
@@ -331,7 +331,7 @@
     "id": 42,
     "name": "Pike Push-up",
     "note": "targets the shoulders, triceps, and chest.",
-    "body_part": "SHOULDERS",
+    "bodyPart": "SHOULDERS",
     "category": "BODYWEIGHT",
     "userId": 4
   },
@@ -339,7 +339,7 @@
     "id": 43,
     "name": "Plank Leg Lift",
     "note": "targets the core, particularly the lower abs and obliques.",
-    "body_part": "CORE",
+    "bodyPart": "CORE",
     "category": "BODYWEIGHT",
     "userId": 8
   },
@@ -347,7 +347,7 @@
     "id": 44,
     "name": "Incline Dumbbell Press",
     "note": "targets the upper chest.",
-    "body_part": "CHEST",
+    "bodyPart": "CHEST",
     "category": "DUMBBELL",
     "userId": 6
   },
@@ -355,7 +355,7 @@
     "id": 45,
     "name": "Reverse Lunges",
     "note": "targets the quadriceps, glutes, and hamstrings.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "BODYWEIGHT",
     "userId": 3
   },
@@ -363,7 +363,7 @@
     "id": 46,
     "name": "Decline Bench Press",
     "note": "targets the lower chest.",
-    "body_part": "CHEST",
+    "bodyPart": "CHEST",
     "category": "BARBELL",
     "userId": 5
   },
@@ -371,7 +371,7 @@
     "id": 47,
     "name": "Side Plank",
     "note": "targets the obliques and core muscles.",
-    "body_part": "CORE",
+    "bodyPart": "CORE",
     "category": "BODYWEIGHT",
     "userId": 1
   },
@@ -379,7 +379,7 @@
     "id": 48,
     "name": "Cable Crunch",
     "note": "targets the abdominals.",
-    "body_part": "CORE",
+    "bodyPart": "CORE",
     "category": "MACHINE",
     "userId": 9
   },
@@ -387,7 +387,7 @@
     "id": 49,
     "name": "Arnold Dumbbell Curl",
     "note": "targets the biceps.",
-    "body_part": "ARMS",
+    "bodyPart": "ARMS",
     "category": "DUMBBELL",
     "userId": 2
   },
@@ -395,7 +395,7 @@
     "id": 50,
     "name": "Jumping Jacks",
     "note": "targets the whole body, particularly the cardiovascular system.",
-    "body_part": "FULL_BODY",
+    "bodyPart": "FULL_BODY",
     "category": "BODYWEIGHT",
     "userId": 8
   },
@@ -403,7 +403,7 @@
     "id": 51,
     "name": "Dumbbell Deadlift",
     "note": "targets the lower back, glutes, hamstrings, and forearms.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "DUMBBELL",
     "userId": 4
   },
@@ -411,7 +411,7 @@
     "id": 52,
     "name": "Chest Dips",
     "note": "targets the chest and triceps.",
-    "body_part": "CHEST",
+    "bodyPart": "CHEST",
     "category": "BODYWEIGHT",
     "userId": 3
   },
@@ -419,7 +419,7 @@
     "id": 53,
     "name": "Box Jumps",
     "note": "targets the legs and cardiovascular system.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "BODYWEIGHT",
     "userId": 6
   },
@@ -427,7 +427,7 @@
     "id": 54,
     "name": "Seated Dumbbell Shoulder Press",
     "note": "targets the shoulders and triceps.",
-    "body_part": "SHOULDERS",
+    "bodyPart": "SHOULDERS",
     "category": "DUMBBELL",
     "userId": 1
   },
@@ -435,7 +435,7 @@
     "id": 55,
     "name": "Bent Over Row",
     "note": "targets the middle back, lats, and biceps.",
-    "body_part": "BACK",
+    "bodyPart": "BACK",
     "category": "BARBELL",
     "userId": 5
   },
@@ -443,7 +443,7 @@
     "id": 56,
     "name": "Reverse Crunch",
     "note": "targets the lower abs.",
-    "body_part": "CORE",
+    "bodyPart": "CORE",
     "category": "BODYWEIGHT",
     "userId": 7
   },
@@ -451,7 +451,7 @@
     "id": 57,
     "name": "Standing Calf Raise",
     "note": "targets the calves.",
-    "body_part": "LEGS",
+    "bodyPart": "LEGS",
     "category": "MACHINE",
     "userId": 2
   },
@@ -459,7 +459,7 @@
     "id": 58,
     "name": "Incline Dumbbell Fly",
     "note": "targets the upper chest.",
-    "body_part": "CHEST",
+    "bodyPart": "CHEST",
     "category": "DUMBBELL",
     "userId": 9
   },
@@ -467,7 +467,7 @@
     "id": 59,
     "name": "Tricep Kickback",
     "note": "targets the triceps.",
-    "body_part": "ARMS",
+    "bodyPart": "ARMS",
     "category": "DUMBBELL",
     "userId": 1
   },
@@ -475,7 +475,7 @@
     "id": 60,
     "name": "Reverse Grip Bent Over Row",
     "note": "targets the lower lats, middle back, and biceps.",
-    "body_part": "BACK",
+    "bodyPart": "BACK",
     "category": "BARBELL",
     "userId": 8
   }

@@ -42,6 +42,7 @@ const Nav = () => {
           { key: '(inbox)', route: '/(inbox)' },
           { key: '(friends)', route: '/(friends)' },
           { key: 'MuscleGroup', route: '/muscleGroup' },
+          { key: 'completion', route: '/workout-completion' },
           { key: 'KeypadDemo', route: '/keypadDemo' },
           { key: 'post2', route: '/post2' },
         ]}

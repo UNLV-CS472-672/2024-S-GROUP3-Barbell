@@ -1,154 +1,135 @@
 [
-    {
-        "id": 1,
-        "createdAt": "2023-12-10T20:38:10.917Z",
-        "updatedAt": "2023-12-10T22:10:01.234Z",
-        "finishedAt": "2023-12-10T22:10:01.234Z",
-        "userId": 1,
-        "workoutId": 1
-    },
-    {
-        "id": 2,
-        "createdAt": "2024-02-04T12:58:57.567Z",
-        "updatedAt": "2024-02-04T13:45:10.000Z",
-        "finishedAt": "2024-02-04T13:45:10.000Z",
-        "userId": 2,
-        "workoutId": 2
-    },
-    {
-        "id": 3,
-        "createdAt": "2021-03-05T19:30:48.075Z",
-        "updatedAt": "2021-03-05T21:40:10.705Z",
-        "finishedAt": "2021-03-05T21:40:10.705Z",
-        "userId": 3,
-        "workoutId": 3
-    },
-    {
-        "id": 4,
-        "createdAt": "2022-07-22T15:41:38.286Z",
-        "updatedAt": "2022-07-22T18:01:09.002Z",
-        "finishedAt": "2022-07-22T18:01:09.002Z",
-        "userId": 4,
-        "workoutId": 1
-    },
-    {
-        "id": 5,
-        "createdAt": "2023-07-16T13:00:55.394Z",
-        "updatedAt": "2023-07-16T14:59:10.853Z",
-        "finishedAt": "2023-07-16T13:59:10.853Z",
-        "userId": 5,
-        "workoutId": 1
-    },
-    {
-        "id": 6,
-        "createdAt": "2024-01-16T14:23:36.417Z",
-        "updatedAt": "2024-01-16T15:10:10.000Z",
-        "finishedAt": "2024-01-16T15:10:10.000Z",
-        "userId": 6,
-        "workoutId": 2
-    },
-    {
-        "id": 7,
-        "createdAt": "2020-10-02T18:50:47.158Z",
-        "updatedAt": "2020-10-02T19:50:28.267Z",
-        "finishedAt": "2020-10-02T19:50:28.267Z",
-        "userId": 7,
-        "workoutId": 3
-    },
-    {
-        "id": 8,
-        "createdAt": "2022-02-06T10:20:51.151Z",
-        "updatedAt": "2022-02-06T12:30:01.453Z",
-        "finishedAt": "2022-02-06T12:30:01.453Z",
-        "userId": 8,
-        "workoutId": 2
-    },
-    {
-        "id": 9,
-        "createdAt": "2021-12-25T15:06:25.714Z",
-        "updatedAt": "2021-12-25T18:22:26.214Z",
-        "finishedAt": "2021-12-25T18:22:26.214Z",
-        "userId": 9,
-        "workoutId": 1
-    },
-    {
-        "id": 10,
-        "createdAt": "2020-08-18T00:40:28.230Z",
-        "updatedAt": "2020-08-18T01:55:13.028Z",
-        "finishedAt": "2020-08-18T01:55:13.028Z",
-        "userId": 10,
-        "workoutId": 2
-    },
-    {
-        "id": 11,
-        "createdAt": "2024-04-26T16:41:24.206Z",
-        "updatedAt": "2024-04-26T19:01:55.966Z",
-        "finishedAt": "2024-04-26T19:01:55.966Z",
-        "userId": 5,
-        "workoutId": 2
-    },
-    {
-        "id": 12,
-        "createdAt": "2023-12-10T20:38:10.917Z",
-        "updatedAt": "2023-12-10T22:10:01.234Z",
-        "finishedAt": "2023-12-10T22:10:01.234Z",
-        "userId": 1,
-        "workoutId": 1
-    },
-    {
-        "id": 13,
-        "createdAt": "2024-02-04T12:58:57.567Z",
-        "updatedAt": "2024-02-04T13:45:10.000Z",
-        "finishedAt": "2024-02-04T13:45:10.000Z",
-        "userId": 2,
-        "workoutId": 2
-    },
-    {
-        "id": 14,
-        "createdAt": "2021-03-05T19:30:48.075Z",
-        "updatedAt": "2021-03-05T21:40:10.705Z",
-        "finishedAt": "2021-03-05T21:40:10.705Z",
-        "userId": 3,
-        "workoutId": 3
-    },
-    {
-        "id": 15,
-        "createdAt": "2022-07-22T15:41:38.286Z",
-        "updatedAt": "2022-07-22T18:01:09.002Z",
-        "finishedAt": "2022-07-22T18:01:09.002Z",
-        "userId": 4,
-        "workoutId": 1
-    },
-    {
-        "id": 16,
-        "createdAt": "2023-07-16T13:00:55.394Z",
-        "updatedAt": "2023-07-16T14:59:10.853Z",
-        "finishedAt": "2023-07-16T13:59:10.853Z",
-        "userId": 5,
-        "workoutId": 1
-    },
-    {
-        "id": 17,
-        "createdAt": "2024-01-16T14:23:36.417Z",
-        "updatedAt": "2024-01-16T15:10:10.000Z",
-        "finishedAt": "2024-01-16T15:10:10.000Z",
-        "userId": 6,
-        "workoutId": 2
-    },
-    {
-        "id": 18,
-        "createdAt": "2020-10-02T18:50:47.158Z",
-        "updatedAt": "2020-10-02T19:50:28.267Z",
-        "finishedAt": "2020-10-02T19:50:28.267Z",
-        "userId": 5,
-        "workoutId": 3
-    },
-    {
-        "id": 19,
-        "createdAt": "2023-08-27T05:19:23.415Z",
-        "updatedAt": "2023-08-27T07:30:01.453Z",
-        "finishedAt": "2023-08-27T07:30:01.453Z",
-        "userId": 1,
-        "workoutId": 3
-    }
+  {
+    "id": 1,
+    "finishedAt": "2023-12-10T22:10:01.234Z",
+    "userId": 1,
+    "duration": 3660,
+    "workoutTemplateId": 1
+  },
+  {
+    "id": 2,
+    "finishedAt": "2024-02-04T13:45:10.000Z",
+    "userId": 2,
+    "duration": 3660,
+    "workoutTemplateId": 2
+  },
+  {
+    "id": 3,
+    "finishedAt": "2021-03-05T21:40:10.705Z",
+    "userId": 3,
+    "duration": 3660,
+    "workoutTemplateId": 3
+  },
+  {
+    "id": 4,
+    "finishedAt": "2022-07-22T18:01:09.002Z",
+    "userId": 4,
+    "duration": 3660,
+    "workoutTemplateId": 1
+  },
+  {
+    "id": 5,
+    "finishedAt": "2023-07-16T13:59:10.853Z",
+    "userId": 5,
+    "duration": 3660,
+    "workoutTemplateId": 1
+  },
+  {
+    "id": 6,
+    "finishedAt": "2024-01-16T15:10:10.000Z",
+    "userId": 6,
+    "duration": 3660,
+    "workoutTemplateId": 2
+  },
+  {
+    "id": 7,
+    "finishedAt": "2020-10-02T19:50:28.267Z",
+    "userId": 7,
+    "duration": 3660,
+    "workoutTemplateId": 3
+  },
+  {
+    "id": 8,
+    "finishedAt": "2022-02-06T12:30:01.453Z",
+    "userId": 8,
+    "duration": 3660,
+    "workoutTemplateId": 2
+  },
+  {
+    "id": 9,
+    "finishedAt": "2021-12-25T18:22:26.214Z",
+    "userId": 9,
+    "duration": 3660,
+    "workoutTemplateId": 1
+  },
+  {
+    "id": 10,
+    "finishedAt": "2020-08-18T01:55:13.028Z",
+    "userId": 10,
+    "duration": 3660,
+    "workoutTemplateId": 2
+  },
+  {
+    "id": 11,
+    "finishedAt": "2024-04-26T19:01:55.966Z",
+    "userId": 5,
+    "duration": 3660,
+    "workoutTemplateId": 2
+  },
+  {
+    "id": 12,
+    "finishedAt": "2023-12-10T22:10:01.234Z",
+    "userId": 1,
+    "duration": 3660,
+    "workoutTemplateId": 1
+  },
+  {
+    "id": 13,
+    "finishedAt": "2024-02-04T13:45:10.000Z",
+    "userId": 2,
+    "duration": 3660,
+    "workoutTemplateId": 2
+  },
+  {
+    "id": 14,
+    "finishedAt": "2021-03-05T21:40:10.705Z",
+    "userId": 3,
+    "duration": 3660,
+    "workoutTemplateId": 3
+  },
+  {
+    "id": 15,
+    "finishedAt": "2022-07-22T18:01:09.002Z",
+    "userId": 4,
+    "duration": 3660,
+    "workoutTemplateId": 1
+  },
+  {
+    "id": 16,
+    "finishedAt": "2023-07-16T13:59:10.853Z",
+    "userId": 5,
+    "duration": 3660,
+    "workoutTemplateId": 1
+  },
+  {
+    "id": 17,
+    "finishedAt": "2024-01-16T15:10:10.000Z",
+    "userId": 6,
+    "duration": 3660,
+    "workoutTemplateId": 2
+  },
+  {
+    "id": 18,
+    "finishedAt": "2020-10-02T19:50:28.267Z",
+    "userId": 5,
+    "duration": 3660,
+    "workoutTemplateId": 3
+  },
+  {
+    "id": 19,
+    "finishedAt": "2023-08-27T07:30:01.453Z",
+    "userId": 1,
+    "duration": 3660,
+    "workoutTemplateId": 3
+  }
 ]

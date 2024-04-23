@@ -5,8 +5,4 @@
     }
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "discord.enabled": true,
-  "editor.cursorBlinking": "solid",
-  "editor.cursorStyle": "block",
-  "terminal.integrated.cursorBlinking": true
 }

@@ -40,11 +40,11 @@ export default function MessageView() {
     data: messages,
     isFetching,
     isFetched,
-  } = api.notif.getMessagesFromChatIdAndChatType2.useQuery({
+  } = api.notif.getMessagesFromChatIdAndChatType.useQuery({
     id: Number(p['chatId']),
     type: p['type'] as ChatType,
-    // user1Id: user?.id!,
-    // user2Id: Number(p['userId']),
+    user1Id: user?.id!,
+    user2Id: Number(p['userId']),
   })
 
   const chattingWith = p['chatName']?.toString().trim()

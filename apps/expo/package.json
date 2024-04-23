@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "clean": "git clean -xdf .expo .turbo node_modules",
-    "dev": "expo start --go",
-    "dev:android": "expo start --android --go",
+    "dev": "expo run:android",
+    "dev:android": "expo start --android",
     "dev:ios": "expo start --ios",
     "android": "expo run:android",
     "ios": "expo run:ios",
@@ -64,7 +64,8 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "3.3.5",
     "utf8": "^3.0.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
     "@acme/api": "workspace:^",
@@ -81,7 +82,6 @@
     "@types/babel__core": "^7.20.5",
     "@types/base-64": "^1.0.2",
     "@types/jest": "^29.5.12",
-    "@types/ramda": "^0.29.12",
     "@types/react": "^18.2.75",
     "@types/react-test-renderer": "^18.0.7",
     "@types/utf8": "^3.0.3",
@@ -93,8 +93,8 @@
     "react-devtools-core": "^5.0.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5.3.3",
-    "react-native-calendars": "^1.1304.1"
-
+    "react-native-calendars": "^1.1304.1",
+    "@types/ws": "^8.5.10"
   },
   "eslintConfig": {
     "root": true,

@@ -88,8 +88,18 @@ export const postRouter = createTRPCRouter({
    *  @returns an array of the [#] most recent posts from the user's friends
    */
   getUsersPostsByIdAndPostCount: publicProcedure
-    .input(z.object({ id: z.number().int(), posts: z.number().int() }))
+    .input(
+      z.object({
+        id: z.number().int(),
+        posts: z.number().int(),
+        page: z.number().int().optional(),
+      }),
+    )
     .query(async ({ ctx, input }) => {
+      const pageSize = input.posts
+      const pageNumber = input.page || 1
+      const skip = (pageNumber - 1) * pageSize
+
       return ctx.prisma.post.findMany({
         where: {
           authorId: input.id,
@@ -104,7 +114,8 @@ export const postRouter = createTRPCRouter({
         orderBy: {
           createdAt: 'desc',
         },
-        take: input.posts,
+        skip,
+        take: pageSize,
       })
     }),
 })

@@ -140,6 +140,9 @@ importers:
       react-native-body-highlighter:
         specifier: 3.0.0-beta.6
         version: 3.0.0-beta.6(react-native@0.73.6)(react@18.2.0)
+      react-native-countdown-circle-timer:
+        specifier: ^3.2.1
+        version: 3.2.1(react-native-svg@14.1.0)(react-native@0.73.6)(react@18.2.0)
       react-native-dotenv:
         specifier: ^3.4.10
         version: 3.4.10(@babel/runtime@7.23.9)
@@ -14284,6 +14287,18 @@ packages:
       react-native: '*'
     dependencies:
       ramda: 0.29.1
+      react: 18.2.0
+      react-native: 0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
+      react-native-svg: 14.1.0(react-native@0.73.6)(react@18.2.0)
+    dev: false
+
+  /react-native-countdown-circle-timer@3.2.1(react-native-svg@14.1.0)(react-native@0.73.6)(react@18.2.0):
+    resolution: {integrity: sha512-iHiOgipG0hMprerswqUCUfjGo9hL0UhKNS0BGh4o6yY9Lu7f3VXQ7EJt757Obwn74AiF5MOHURIdqldoGnVrDw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-native: '>=0.50.0'
+      react-native-svg: '>=6.2.1'
+    dependencies:
       react: 18.2.0
       react-native: 0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
       react-native-svg: 14.1.0(react-native@0.73.6)(react@18.2.0)

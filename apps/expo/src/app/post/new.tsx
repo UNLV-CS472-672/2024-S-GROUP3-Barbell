@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Text, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Button from '~/components/ui/button/button';
+import NavBar from '~/components/ui/nav-bar/NavBar';
 import { useGlobalContext } from '~/context/global-context';
 import { api } from '~/utils/trpc/api';
 
@@ -19,7 +20,6 @@ const inputStyles = {
 
 const NewPost = () => {
   const { userData } = useGlobalContext();
-  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const { mutateAsync: createPost, error } = api.post.create.useMutation({
     async onSuccess() {
@@ -35,18 +35,10 @@ const NewPost = () => {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 80}
         style={{ flex: 1 }}
       >
-        {/*<NavBar center='New Post' /> TODO: need taylor's changes to be merged first */}
-        <Text className="text-3xl text-slate-200 text-center mb-4">New Post</Text>
-        <Text className='text-slate-200'>Title</Text>
+        <NavBar center='New Post' />
         <TextInput
-          style={inputStyles}
-          keyboardAppearance='dark'
-          value={title}
-          onChangeText={setTitle}
-          testID="new-post-title-input"
-        ></TextInput>
-        <Text className='text-slate-200'>Content</Text>
-        <TextInput
+          placeholder="write something!"
+          placeholderTextColor="#CACACA"
           style={{ ...inputStyles, minHeight: 100 }}
           multiline={true}
           keyboardAppearance='dark'
@@ -57,7 +49,7 @@ const NewPost = () => {
         <Button
           value="Create"
           className="p-4 mx-2 my-4"
-          onPress={() => createPost({ title, content, authorId: userData!.id })}
+          onPress={() => createPost({ content, authorId: userData!.id })}
           testID="new-post-create-btn"
         ></Button>
       </KeyboardAvoidingView>

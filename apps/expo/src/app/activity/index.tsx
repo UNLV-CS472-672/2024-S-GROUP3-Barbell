@@ -7,9 +7,9 @@ export interface ActivityProps {
   workoutLog: any;
 }
 
-const Activity: React.FC<ActivityProps> = ({ user, workout, workoutLog }) => {
-  const formatDate = (date: Date) => date.toLocaleDateString();
+const formatDate = (date: Date) => date?.toLocaleDateString();
 
+const Activity: React.FC<ActivityProps> = ({ user, workout, workoutLog }) => {
   return (
     <View className="mx-3 p-3 text-bb-slate-100" style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }}>
       <View className="flex-row justify-between items-baseline">

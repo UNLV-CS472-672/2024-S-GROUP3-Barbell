@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react-native'
 
 import * as api from '~/utils/trpc/api'
-import NewPost from '../../app/post/new'
+import NewPost from '~/app/post/new'
 
 jest.mock('~/context/global-context', () => ({
   useGlobalContext: () => ({
@@ -33,9 +33,8 @@ describe('NewPost', () => {
     expect(screen.getByTestId('new-post-container')).toBeTruthy()
   });
 
-  it('should have two inputs', () => {
+  it('should have one input', () => {
     render(<NewPost />)
-    expect(screen.getByTestId('new-post-title-input')).toBeTruthy()
     expect(screen.getByTestId('new-post-content-input')).toBeTruthy()
   });
 

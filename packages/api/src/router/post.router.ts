@@ -23,7 +23,6 @@ export const postRouter = createTRPCRouter({
     .input(
       z.object({
         authorId: z.number().int(),
-        title: z.string().min(1),
         content: z.string().min(1),
       }),
     )
@@ -32,7 +31,7 @@ export const postRouter = createTRPCRouter({
       return ctx.prisma.post.upsert({
         where: { id: 1 },
         update: input,
-        create: input,
+        create: input
       })
     }),
   /**
@@ -70,8 +69,8 @@ export const postRouter = createTRPCRouter({
         select: {
           author: true,
           content: true,
-          title: true,
           id: true,
+          createdAt: true
         },
         orderBy: {
           createdAt: 'desc',

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Alert, Button, Text, TextInput, View } from 'react-native'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
@@ -7,21 +7,14 @@ const CountdownTimer = () => {
   const [seconds, setSeconds] = useState('')
   const [time, setTime] = useState(0) // Initial time set to 0 seconds
   const [isTimerRunning, setIsTimerRunning] = useState(false)
-  const [key, setKey] = useState(0) // Key for resetting CountdownCircleTimer
+  const [remainingTime, setRemainingTime] = useState(0) // Track remaining time for pause/resume
 
-  useEffect(() => {
-    if (!isTimerRunning) {
-      // Reset the timer when it's not running
-      setKey((prevKey) => prevKey + 1) // Change key to trigger reset
-    }
-  }, [isTimerRunning])
-
-  const formatTime = (remainingTime) => {
+  const formatTime = (remainingTime: any) => {
     const mins = Math.floor(remainingTime / 60)
     const secs = remainingTime % 60
-    const formattedMinutes = mins < 10 ? `0${mins}` : mins
-    const formattedSeconds = secs < 10 ? `0${secs}` : secs
-    return `${formattedMinutes}:${formattedSeconds}`
+    const formattedMins = mins < 10 ? `0${mins}` : mins
+    const formattedSecs = secs < 10 ? `0${secs}` : secs
+    return `${formattedMins}:${formattedSecs}`
   }
 
   const handleTimerClick = () => {
@@ -31,6 +24,7 @@ const CountdownTimer = () => {
       return
     }
     setTime(totalSeconds)
+    setRemainingTime(totalSeconds)
     setIsTimerRunning(true)
   }
 
@@ -38,15 +32,28 @@ const CountdownTimer = () => {
     // Show pop-up when timer runs out
     Alert.alert('Time is up!')
     setIsTimerRunning(false)
+    setRemainingTime(0) // Reset remaining time when timer completes
   }
 
-  const handleMinutesChange = (text) => {
+  const handlePauseResumeTimer = () => {
+    setIsTimerRunning((prevIsTimerRunning) => !prevIsTimerRunning)
+  }
+
+  const handleResetTimer = () => {
+    setIsTimerRunning(false)
+    setTime(0)
+    setRemainingTime(0)
+    setMinutes('')
+    setSeconds('')
+  }
+
+  const handleMinutesChange = (text: any) => {
     if (/^\d+$/.test(text) || text === '') {
       setMinutes(text)
     }
   }
 
-  const handleSecondsChange = (text) => {
+  const handleSecondsChange = (text: any) => {
     const value = parseInt(text)
     if (/^\d+$/.test(text) || text === '') {
       if (value >= 0 && value <= 59) {
@@ -62,13 +69,13 @@ const CountdownTimer = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <CountdownCircleTimer
-        key={key} // Ensure re-rendering when key changes to reset timer
         isPlaying={isTimerRunning}
         duration={time}
         onComplete={handleTimerComplete}
         size={200}
         strokeWidth={12}
-        colors={['#004777']}
+        colors={isTimerRunning ? ['#004777'] : ['#CCCCCC']} // Set colors to gray when timer is reset
+        key={remainingTime} // Ensure re-rendering when remainingTime changes
       >
         {({ remainingTime }) => (
           <View>
@@ -83,7 +90,7 @@ const CountdownTimer = () => {
           style={{ borderBottomWidth: 1, width: 100, textAlign: 'center' }}
           value={minutes}
           onChangeText={handleMinutesChange}
-          editable={!isTimerRunning}
+          editable={!isTimerRunning} // Disable editing when timer is running
         />
         <Text>:</Text>
         <TextInput
@@ -92,11 +99,29 @@ const CountdownTimer = () => {
           style={{ borderBottomWidth: 1, width: 100, textAlign: 'center' }}
           value={seconds}
           onChangeText={handleSecondsChange}
-          editable={!isTimerRunning}
+          editable={!isTimerRunning} // Disable editing when timer is running
         />
       </View>
       <View style={{ marginTop: 20 }}>
-        <Button title='Start Timer' onPress={handleTimerClick} disabled={isTimerRunning} />
+        <Button
+          title='Start Timer'
+          onPress={handleTimerClick}
+          disabled={isTimerRunning || remainingTime > 0} // Disable if timer is running or there's remaining time
+        />
+      </View>
+      <View style={{ marginTop: 10 }}>
+        <Button
+          title={isTimerRunning ? 'Pause Timer' : 'Resume Timer'}
+          onPress={handlePauseResumeTimer}
+          disabled={!isTimerRunning && remainingTime === 0} // Disable if no timer is running or no time remaining
+        />
+      </View>
+      <View style={{ marginTop: 10 }}>
+        <Button
+          title='Reset Timer'
+          onPress={handleResetTimer}
+          disabled={!isTimerRunning && remainingTime === 0}
+        />
       </View>
     </View>
   )

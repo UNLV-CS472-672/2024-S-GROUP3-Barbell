@@ -1,9 +1,7 @@
-// import type { Route } from 'expo-router'
 import React from 'react'
 import { Button, FlatList, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Route, router } from 'expo-router'
-import { Href } from 'expo-router/build/link/href'
 
 const styles = StyleSheet.create({
   container: {
@@ -35,7 +33,6 @@ const Nav = () => {
           { key: 'Spotify', route: '/spotify' },
           { key: 'Tracker', route: '/tracker' },
           { key: 'Activity Feed', route: '/activity/feed' },
-          { key: 'Show Post', route: '/post' },
           { key: 'Post Feed', route: '/post/feed' },
           { key: '(workout)', route: '/(workout)' },
           { key: '(inbox)', route: '/(inbox)' },

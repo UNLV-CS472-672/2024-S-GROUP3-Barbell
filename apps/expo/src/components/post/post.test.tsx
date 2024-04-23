@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react-native'
 
-import Post from '~/app/post/index'
+import Post from '~/app/post/post'
 
 jest.mock('~/context/global-context', () => ({
   useGlobalContext: () => ({

@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
-import Post from '.'
+import Post from './post'
 import { POSTS_FEED_ITEM_LIMIT } from '~/utils/constants'
 import NavBar from '~/components/ui/nav-bar/NavBar'
 

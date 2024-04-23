@@ -60,14 +60,16 @@ const WorkoutCompletion: React.FC = () => {
                 </View>
               </View>
 
-              <View className='rounded-lg border border-slate-200 p-3'>
+              <View className='border-1 rounded-lg border border-slate-200 p-3'>
                 <Text className='text-lg font-bold text-white'>{workoutName}</Text>
                 <Text className='mt-3 text-slate-200'>{dateFinished}</Text>
                 <View className='mt-1 flex flex-row items-center gap-x-2'>
                   <Ionicons name='time' size={16} color={colors.bottomav.icon} />
-                  <Text className='text-slate-200'>
-                    {formatForWorkoutCompletion(parseInt(duration))}
-                  </Text>
+                  {duration && (
+                    <Text className='text-slate-200'>
+                      {formatForWorkoutCompletion(parseInt(duration))}
+                    </Text>
+                  )}
                 </View>
                 <View className='mt-2 flex'>
                   <Text className='mb-1 font-bold text-white'>Exercise</Text>

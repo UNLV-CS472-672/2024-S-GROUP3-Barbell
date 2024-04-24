@@ -52,10 +52,6 @@ export const notifRouter = createTRPCRouter({
         update: {},
       })
 
-      if (chat == undefined) {
-        return []
-      }
-
       return prisma.message.findMany({
         where: {
           chatId: chat.id,

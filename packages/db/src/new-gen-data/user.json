@@ -1,83 +1,72 @@
 [
   {
-    "id": 1,
-    "clerkId": "1",
-    "username": "Fight guy start.",
-    "name": "Cynthia Calhoun",
-    "status": "OFFLINE",
-    "streak": 693,
-    "gender": "MALE"
-  },
-  {
-    "id": 2,
-    "clerkId": "2",
-    "username": "Hold stage speech.",
-    "name": "William Lowe",
+    "username": "userOne",
+    "name": "User One",
     "status": "ACTIVE",
-    "streak": 716,
-    "gender": "FEMALE"
+    "streak": 10,
+    "clerkId": "1"
   },
   {
-    "id": 3,
-    "clerkId": "3",
-    "username": "Hospital history.",
-    "name": "Isaac Sosa",
-    "status": "OFFLINE",
-    "streak": 603,
-    "gender": "FEMALE"
-  },
-  {
-    "id": 4,
-    "clerkId": "4",
-    "username": "Entire such citizen.",
-    "name": "Charlene Taylor",
+    "username": "userTwo",
+    "name": "User Two",
     "status": "BUSY",
-    "streak": 268,
-    "gender": "PREFERNOTTOSAY"
+    "streak": 5,
+    "clerkId": "2"
   },
   {
-    "id": 5,
-    "clerkId": "5",
-    "username": "Test mouth step.",
-    "name": "Kevin Hansen",
-    "status": "BUSY",
-    "streak": 205,
-    "gender": "PREFERNOTTOSAY"
-  },
-  {
-    "id": 6,
-    "clerkId": "6",
-    "username": "Pressure big.",
-    "name": "David Baker",
+    "username": "userThree",
+    "name": "User Three",
     "status": "ONLINE",
-    "streak": 135,
-    "gender": "MALE"
+    "streak": 7,
+    "clerkId": "3"
   },
   {
-    "id": 7,
-    "clerkId": "7",
-    "username": "Crime indicate kid.",
-    "name": "Chase Foley",
-    "status": "ACTIVE",
-    "streak": 153,
-    "gender": "MALE"
+    "username": "userFour",
+    "name": "User Four",
+    "status": "OFFLINE",
+    "streak": 2,
+    "clerkId": "4"
   },
   {
-    "id": 8,
-    "clerkId": "8",
-    "username": "Country great line.",
-    "name": "Robert Adams",
-    "status": "ACTIVE",
-    "streak": 68,
-    "gender": "MALE"
+    "username": "userFive",
+    "name": "User Five",
+    "status": "ONLINE",
+    "streak": 12,
+    "clerkId": "5"
   },
   {
-    "id": 9,
-    "clerkId": "9",
-    "username": "Recognize he tell.",
-    "name": "Daniel Moore",
+    "username": "userSix",
+    "name": "User Six",
     "status": "ACTIVE",
-    "streak": 700,
-    "gender": "PREFERNOTTOSAY"
+    "streak": 8,
+    "clerkId": "6"
+  },
+  {
+    "username": "userSeven",
+    "name": "User Seven",
+    "status": "BUSY",
+    "streak": 3,
+    "clerkId": "7"
+  },
+  {
+    "username": "userEight",
+    "name": "User Eight",
+    "status": "ACTIVE",
+    "streak": 9,
+    "clerkId": "8"
+  },
+  {
+    "username": "userNine",
+    "name": "User Nine",
+    "status": "ACTIVE",
+    "streak": 4,
+    "clerkId": "9"
+  },
+  {
+    "username": "userTen",
+    "name": "User Ten",
+    "status": "OFFLINE",
+    "streak": 6,
+    "clerkId": "10"
   }
 ]

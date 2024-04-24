@@ -32,6 +32,8 @@ const Layout = () => {
   /* states */
   const [isVisible, setVisible] = React.useState(false)
 
+  const routes = ['', '', '/post/new']
+
   return (
     <>
       <Tabs

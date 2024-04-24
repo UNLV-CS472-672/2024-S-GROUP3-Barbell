@@ -2,7 +2,7 @@ import React from 'react'
 
 import { fireEvent, render } from '@testing-library/react-native'
 
-import Keypad from './Keypad'
+import Keypad from '../../components/ui/keypad/Keypad'
 
 describe('Keypad component', () => {
   it('renders correctly with visible keypad', () => {

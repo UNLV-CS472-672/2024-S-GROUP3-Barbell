@@ -6,6 +6,7 @@
     "build": "pnpm with-env next build",
     "clean": "git clean -xdf .next .turbo node_modules",
     "dev:wss": "pnpm with-env tsx watch src/server/ws-dev-server.ts --tsconfig tsconfig.server.json",
+    "dev:wss-server": "pnpm with-env tsx watch src/server/ws-prod-server.ts --tsconfig tsconfig.server.json",
     "dev:next": "pnpm with-env next dev",
     "dev": "run-p dev:*",
     "lint": "dotenv -v SKIP_ENV_VALIDATION=1 next lint",

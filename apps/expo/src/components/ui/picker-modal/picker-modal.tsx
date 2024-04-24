@@ -2,7 +2,6 @@ import * as React from 'react'
 import { StyleProp, Text, TextStyle, View, ViewStyle } from 'react-native'
 import Modal, { ModalProps } from 'react-native-modal'
 
-import { IActionButtonProps } from '~/components/ui/picker-modal/action-button/action-button'
 import styles from '~/components/ui/picker-modal/picker-modal.style'
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>

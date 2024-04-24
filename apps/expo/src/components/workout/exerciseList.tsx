@@ -43,6 +43,9 @@ export default function ExerciseList() {
     </View>
   )
 
+  const [equipment, setEquipment] = useState([])
+
+
   return (
     <View>
       <SearchBar
@@ -81,7 +84,8 @@ export default function ExerciseList() {
       <View className='pt-1' style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
       {isFetching && <RotatingBarbellIcon />}
       {isFetched && VisibleComp == 'exercise' && exercises}
-      {isFetched && VisibleComp == 'equipment' && <EquipmentFilter />}
+      {isFetched && VisibleComp == 'equipment' && <EquipmentFilter setEquipment={setEquipment} />}
+      console.log(equipSelect)
     </View>
   )
 }

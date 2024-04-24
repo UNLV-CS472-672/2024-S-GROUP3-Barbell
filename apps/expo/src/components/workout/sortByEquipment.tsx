@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 import { Text, Touchable, TouchableOpacity, View } from 'react-native'
 
-export default function EquipmentFilter() {
+interface EquipmentFilterProps {
+  setEquipment: any
+}
+
+export default function EquipmentFilter({ setEquipment }: EquipmentFilterProps) {
   const equipmentNameList = ['Dumbbell', 'Barbell', 'Bodyweight', 'Machine', 'Other']
 
   const [equipSelect, setSelect] = useState<{ [eid: string]: boolean }>({})
 
-  const selectToggle = (eid: string) => {
+  const selectToggle = (equipmentName: string) => {
     setSelect((prevState) => ({
       ...prevState,
 
-      [eid]: !prevState[eid],
+      [equipmentName]: !prevState[equipmentName],
     }))
   }
 

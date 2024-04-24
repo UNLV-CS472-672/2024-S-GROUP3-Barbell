@@ -137,15 +137,12 @@ importers:
       react-native-body-highlighter:
         specifier: 3.0.0-beta.6
         version: 3.0.0-beta.6(react-native@0.73.6)(react@18.2.0)
-<<<<<<< HEAD
       react-native-chart-kit:
         specifier: ^6.12.0
         version: 6.12.0(react-native-svg@14.1.0)(react-native@0.73.6)(react@18.2.0)
-=======
       react-native-countdown-circle-timer:
         specifier: ^3.2.1
         version: 3.2.1(react-native-svg@14.1.0)(react-native@0.73.6)(react@18.2.0)
->>>>>>> main
       react-native-dotenv:
         specifier: ^3.4.10
         version: 3.4.10(@babel/runtime@7.23.9)

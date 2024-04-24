@@ -100,13 +100,10 @@
     "react-devtools-core": "^5.0.0",
     "react-native-calendars": "^1.1304.1",
     "ts-jest": "^29.1.2",
-<<<<<<< HEAD
     "typescript": "^5.3.3"
-=======
     "typescript": "^5.3.3",
     "react-native-calendars": "^1.1304.1",
     "@types/ws": "^8.5.10"
->>>>>>> main
   },
   "eslintConfig": {
     "root": true,

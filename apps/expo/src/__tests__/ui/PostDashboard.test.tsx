@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react-native'
 
+import PostDashboard from '~/components/post/PostDashboard'
 import * as api from '~/utils/trpc/api'
-import PostDashboard from './PostDashboard'
 
 jest.mock('~/context/global-context', () => ({
   useGlobalContext: jest.fn(() => ({

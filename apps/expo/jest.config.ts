@@ -16,8 +16,7 @@ const config: Config = {
     '!**/*.d.ts',
     '!index.ts',
     '!**/api.tsx',
-    '!**/sign-in-w-google.tsx',
-    '!**/constants.ts',
+    // '!**/constants.ts',
 
     /* need to remove in the future */
     '!**/app/**',

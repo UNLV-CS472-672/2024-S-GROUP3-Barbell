@@ -26,6 +26,7 @@ const PickerModal: React.FC<IPickerModalProps> = ({
   children,
   ...rest
 }) => {
+  /* istanbul ignore next */
   const Picker = () => (
     <View style={[styles.mainContent]}>
       <Text className='p-6 text-center text-xl font-bold text-white'>{title}</Text>

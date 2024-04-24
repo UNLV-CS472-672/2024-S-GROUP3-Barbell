@@ -43,12 +43,11 @@ export const getBaseUrl = (ws = false) => {
 
   // TODO: configure ws url, on deployed environment
 
-  if (!localhost) {
-    // return "https://turbo.t3.gg";
-    console.log('localhost not found')
-    return 'https://2024-s-group-3-barbell-nextjs.vercel.app/'
-  }
+  /* deployed */
+  if (!localhost && !ws) return 'https://2024-s-group-3-barbell-nextjs.vercel.app/'
+  if (!localhost && ws) return 'https://2024-s-group-3-barbell-nextjs.vercel.app/3001'
 
+  /* local */
   if (ws) return `ws://${localhost}:3001/ws`
   return `http://${localhost}:3000`
 }

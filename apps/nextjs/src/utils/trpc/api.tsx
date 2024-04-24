@@ -23,8 +23,8 @@ export { type RouterInputs, type RouterOutputs } from '@acme/api'
  * @returns
  */
 const getBaseUrl = () => {
-  if (typeof window !== 'undefined') return window.location.origin
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}` // deployed on vercel baby
+  if (typeof window !== 'undefined') return ''                            // relative path
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`  // deployed on vercel baby
   return `http://localhost:${process.env.PORT ?? 3000}`
 }
 

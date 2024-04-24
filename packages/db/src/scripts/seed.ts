@@ -130,8 +130,8 @@ const loaddb = async () => {
     logger('add', 'spotify')
 
     /*  */
-    // await prisma.post.createMany({ data: post })
-    // logger('add', 'post')
+    await prisma.post.createMany({ data: post })
+    logger('add', 'post')
 
     /*  */
     await prisma.notification.createMany({

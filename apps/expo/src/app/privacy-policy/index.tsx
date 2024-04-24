@@ -14,35 +14,18 @@ const tailwindClasses = {
 }
 
 const PrivacyPolicy = () => {
-  const [isEnabled, setIsEnabled] = useState(false)
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState)
-
-  const privacyToggleSwitch = async () => {}
   // The privacy policy was AI generated via a prompt to chatGPT, the link to the prompt is below
   // https://chat.openai.com/share/edbfaba8-f225-4168-8d86-c8263ed9ddc5
   return (
-    <SafeAreaView
-      className='bg-bb-slate-100 flex-1'
-      style={{ backgroundColor: '#1e1e1e', flex: 1 }}
-    >
+    <SafeAreaView style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
       <ScrollView>
         <View>
-          <Text
-            className='text-2xl text-slate-200'
-            style={{
-              fontSize: 40,
-              textAlign: 'center',
-              paddingHorizontal: 10,
-              fontWeight: 'bold',
-            }}
-          >
-            Privacy Policy
-          </Text>
+          <Text className='text-center text-5xl font-bold text-slate-200'>Privacy Policy</Text>
 
-          <View style={{ paddingHorizontal: 30, flexDirection: 'row' }}>
-            <Label text='Legal Document' textColor='#CFCFCF' backgroundColor='#48476D' />
+          <View className='mx-auto mt-2 flex-row'>
+            <Label text='Data Collection' textColor='#CFCFCF' backgroundColor='#48476D' />
             <Text> </Text>
-            <Label text='Human-Friendly' textColor='#CFCFCF' backgroundColor='#48476D' />
+            <Label text='Third-Party Integration' textColor='#CFCFCF' backgroundColor='#48476D' />
           </View>
 
           <Text
@@ -57,7 +40,6 @@ const PrivacyPolicy = () => {
               Barbell, we are committed to protecting your privacy and ensuring the security of your
               personal information. This Privacy Policy outlines how we collect, use, disclose, and
               protect your information when you use our mobile application ("App") and services.
-              {'\n\n'}
             </Text>
           </View>
 
@@ -82,7 +64,7 @@ const PrivacyPolicy = () => {
               identifier, operating system, and mobile network information.{'\n\n'}d. Location
               Information:{'\n\t\t\t'} With your consent, we may collect and process information
               about your precise or approximate location when you use certain features of the App,
-              such as mapping your running routes.{'\n\n'}
+              such as mapping your running routes.
             </Text>
           </View>
 
@@ -106,7 +88,7 @@ const PrivacyPolicy = () => {
               enhances social interaction within the fitness community, and you may choose to opt
               out at any time from user settings should you change your mind.{'\n\n'}d. Analytics:
               {'\n\t\t\t'} We may use aggregated and anonymized data for analytical purposes to
-              improve the performance and functionality of the App.{'\n\n'}
+              improve the performance and functionality of the App.
             </Text>
           </View>
 
@@ -123,7 +105,7 @@ const PrivacyPolicy = () => {
               hosting services, analytics providers, and customer support.{'\n\n'}b. Legal
               Compliance:
               {'\n\t\t\t'} We may disclose your information in response to legal obligations, such
-              as complying with subpoenas, court orders, or other legal processes.{'\n\n'}
+              as complying with subpoenas, court orders, or other legal processes.
             </Text>
           </View>
 
@@ -139,7 +121,6 @@ const PrivacyPolicy = () => {
               unauthorized access, use, or disclosure. However, no method of transmission over the
               internet or electronic storage is 100% secure. Therefore, we cannot guarantee absolute
               security.
-              {'\n\n'}
             </Text>
           </View>
 
@@ -157,7 +138,6 @@ const PrivacyPolicy = () => {
               features or services within the App.{'\n\n'}c. Access and Rectification:{'\n\t\t\t'}{' '}
               You have the right to access and correct inaccuracies in your personal information
               held by Barbell.
-              {'\n\n'}
             </Text>
           </View>
 
@@ -173,7 +153,7 @@ const PrivacyPolicy = () => {
               Barbell is not intended for individuals under the age of 13. We do not knowingly
               collect personal information from children under 13. If you are a parent or guardian
               and believe that your child has provided us with personal information, please contact
-              us immediately.{'\n\n'}
+              us immediately.
             </Text>
           </View>
 
@@ -187,21 +167,7 @@ const PrivacyPolicy = () => {
             <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
               {'\n\t\t\t'} We reserve the right to update or modify this Privacy Policy at any time.
               We will notify you of any material changes by posting the updated policy on our
-              website or through other communication channels.{'\n\n'}
-            </Text>
-          </View>
-
-          <View className={tailwindClasses.mainTile}>
-            <Text
-              className='text-2xl text-slate-200'
-              style={{ fontSize: 25, paddingHorizontal: 10 }}
-            >
-              8. Contact Us
-            </Text>
-            <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
-              {'\n\t\t\t'}
-              If you have any questions or concerns about this Privacy Policy or our practices
-              regarding your personal information, please contact us at barbell@gmail.com.{'\n\n'}
+              website or through other communication channels.
             </Text>
           </View>
 

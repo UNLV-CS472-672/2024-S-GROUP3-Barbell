@@ -15,7 +15,6 @@
  * The rest of the fields will default to empty.
  */
 
-import { platform } from 'os'
 import { Platform, Text, View } from 'react-native'
 import { router } from 'expo-router'
 
@@ -48,23 +47,29 @@ export default function NavBar({
           Platform.OS == 'android' ? 'pt-7' : 'pt-1'
         }`}
       >
-        <View testID='left-test' className='basis-1/3 items-start'>
+        <View testID='left-test' className='basis-1/12 items-start'>
           {typeof left == 'string' && (
-            <Text style={{ color: '#CACACA', fontSize: 16 }}>{left}</Text>
+            <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 16 }}>
+              {left}
+            </Text>
           )}
           {typeof left != 'string' && left}
         </View>
 
-        <View testID='center-test' className='basis-1/3 items-center'>
+        <View testID='center-test' className='flex-1 basis-5/6 items-center'>
           {typeof center == 'string' && (
-            <Text style={{ color: '#CACACA', fontSize: 20 }}>{center}</Text>
+            <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 20 }}>
+              {center}
+            </Text>
           )}
           {typeof center != 'string' && center}
         </View>
 
-        <View testID='right-test' className='basis-1/3 items-end'>
+        <View testID='right-test' className='basis-1/12 items-end'>
           {typeof right == 'string' && (
-            <Text style={{ color: '#CACACA', fontSize: 16 }}>{right}</Text>
+            <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 16 }}>
+              {right}
+            </Text>
           )}
           {typeof right != 'string' && right}
         </View>

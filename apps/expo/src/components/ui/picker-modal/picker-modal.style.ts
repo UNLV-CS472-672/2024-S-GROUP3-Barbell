@@ -36,16 +36,15 @@ export default StyleSheet.create<Style>({
     justifyContent: 'center',
     alignSelf: 'center',
   },
-
   cancelButtonStyle: {
-    height: 55, 
+    height: 55,
     width: ScreenWidth * 0.95,
     backgroundColor: '#232323',
     borderRadius: 12,
     marginTop: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'center', 
+    alignSelf: 'center',
   },
   cancelButtonTextStyle: {
     fontSize: 16,

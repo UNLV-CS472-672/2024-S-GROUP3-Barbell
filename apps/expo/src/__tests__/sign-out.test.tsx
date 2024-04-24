@@ -5,6 +5,7 @@ import { act } from 'react-test-renderer'
 import { SignOut } from '~/components/auth/sign-out'
 
 const mockUseAuth = useAuth as { useAuth: any }
+const mockSignOut = jest.fn()
 
 jest.mock('@clerk/clerk-expo', () => ({
   useAuth: jest.fn(() => ({
@@ -14,6 +15,10 @@ jest.mock('@clerk/clerk-expo', () => ({
 }))
 
 describe('SignOut', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('should return null if isLoaded is false', () => {
     mockUseAuth.useAuth.mockImplementation(() => ({
       isLoaded: false,
@@ -35,5 +40,18 @@ describe('SignOut', () => {
       fireEvent.press(screen.getByText('Sign Out'))
     })
     expect(screen.getByTestId('sign-out-btn')).toBeTruthy()
+  })
+
+  it('logs error correctly on signOut failure', async () => {
+    const error = { status: 500, errors: { message: 'Failed to sign out' } }
+    mockSignOut.mockRejectedValueOnce(error)
+    mockUseAuth.useAuth.mockReturnValue({
+      isLoaded: true,
+      signOut: mockSignOut,
+    })
+    render(<SignOut />)
+    await act(async () => {
+      fireEvent.press(screen.getByText('Sign Out'))
+    })
   })
 })

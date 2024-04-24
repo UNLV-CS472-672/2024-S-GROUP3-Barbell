@@ -1,34 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { fireEvent, render, screen } from '@testing-library/react-native'
+import renderer from 'react-test-renderer'
 
 import SearchBar from '~/components/ui/search-bar/SearchBar'
 
-test('SearchBar', async () => {
-  const TestComponent = () => {
-    const item1 = {
-      id: 1,
-      name: 'ab',
-    }
-    const item2 = {
-      id: 2,
-      name: 'abc',
-    }
-    const item3 = {
-      id: 3,
-      name: 'bac',
-    }
+describe('SearchBar Component', () => {
+  test('renders correctly and matches snapshot', () => {
+    const list = [{ id: 1, name: 'Example' }]
+    const setFilteredList = jest.fn()
 
-    const listToFilter = [item1, item2, item3]
-    const [filteredList, setFilteredList] = useState<any[] | undefined>(listToFilter)
-    return <SearchBar list={listToFilter} placeholder="Search..." setFilteredList={setFilteredList} filterBy="name" />
-  }
+    const tree = renderer
+      .create(
+        <SearchBar
+          list={list}
+          setFilteredList={setFilteredList}
+          filterBy='name'
+          placeholder='Search...'
+        />,
+      )
+      .toJSON()
 
-  render(<TestComponent />)
-
-  // Find the search input
-  const searchInput = screen.getByPlaceholderText('Search...')
-
-  // Simulate typing in the search input
-  fireEvent.changeText(searchInput, 'a') // Type 'a'
+    expect(tree).toMatchSnapshot()
+  })
 })

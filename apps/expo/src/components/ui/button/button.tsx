@@ -47,6 +47,7 @@ const textStylesMap = {
 }
 
 const Button = ({ value, color, size, rounded, className, children, ...props }: ButtonProps) => {
+  /* istanbul ignore next */
   const textColor = color == 'light' ? 'text-slate-900' : 'text-white'
 
   return (

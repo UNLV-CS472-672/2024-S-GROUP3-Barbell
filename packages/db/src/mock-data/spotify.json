@@ -1,6 +1,5 @@
 [
   {
-    "id": 25,
     "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647",
     "albumName": "Lover",
     "artist": "Taylor Swift",
@@ -10,10 +9,9 @@
     "timePlayed": 67,
     "timeTotal": 171,
     "artistURL": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
-    "userID": 3
+    "userID": 2
   },
   {
-    "id": 13,
     "albumImageURL": "https://i.scdn.co/image/ab67616d0000b2739416ed64daf84936d89e671c",
     "albumName": "Views",
     "artist": "Drake",
@@ -23,10 +21,9 @@
     "timePlayed": 0,
     "timeTotal": 174,
     "artistURL": "https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4",
-    "userID": 4
+    "userID": 3
   },
   {
-    "id": 36,
     "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273b2b6670e3aca9bcd55fbabbb",
     "albumName": "Something in the Orange",
     "artist": "Zach Bryan",
@@ -36,10 +33,9 @@
     "timePlayed": 228,
     "timeTotal": 114,
     "artistURL": "https://open.spotify.com/artist/40ZNYROS4zLfyyBSs2PGe2",
-    "userID": 5
+    "userID": 4
   },
   {
-    "id": 99,
     "albumImageURL": "https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a",
     "albumName": "Evolve",
     "artist": "Imagine Dragons",
@@ -49,10 +45,9 @@
     "timePlayed": 63,
     "timeTotal": 204,
     "artistURL": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q",
-    "userID": 6
+    "userID": 5
   },
   {
-    "id": 49,
     "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273b2b2747c89d2157b0b29fb6a",
     "albumName": "Night Visions",
     "artist": "Imagine Dragons",
@@ -62,10 +57,9 @@
     "timePlayed": 96,
     "timeTotal": 175,
     "artistURL": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q",
-    "userID": 7
+    "userID": 6
   },
   {
-    "id": 58,
     "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647",
     "albumName": "Lover",
     "artist": "Taylor Swift",
@@ -75,10 +69,9 @@
     "timePlayed": 67,
     "timeTotal": 171,
     "artistURL": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
-    "userID": 8
+    "userID": 7
   },
   {
-    "id": 27,
     "albumImageURL": "https://i.scdn.co/image/ab67616d0000b2739416ed64daf84936d89e671c",
     "albumName": "Views",
     "artist": "Drake",
@@ -88,10 +81,9 @@
     "timePlayed": 0,
     "timeTotal": 174,
     "artistURL": "https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4",
-    "userID": 9
+    "userID": 8
   },
   {
-    "id": 63,
     "albumImageURL": "https://i.scdn.co/image/ab67616d0000b273b2b6670e3aca9bcd55fbabbb",
     "albumName": "Something in the Orange",
     "artist": "Zach Bryan",
@@ -101,6 +93,6 @@
     "timePlayed": 228,
     "timeTotal": 114,
     "artistURL": "https://open.spotify.com/artist/40ZNYROS4zLfyyBSs2PGe2",
-    "userID": 10
+    "userID": 9
   }
 ]

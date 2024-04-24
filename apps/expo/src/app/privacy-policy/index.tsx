@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Label from '~/components/ui/label/Label'
+import NavBar from '~/components/ui/nav-bar/NavBar'
 
 const tailwindClasses = {
   mainTile: 'm-4 p-4 rounded-lg bg-bb-dark-gray',
@@ -20,12 +21,22 @@ const PrivacyPolicy = () => {
     <SafeAreaView style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
       <ScrollView>
         <View>
-          <Text className='text-center text-5xl font-bold text-slate-200'>Privacy Policy</Text>
+          <NavBar center={'Privacy Policy'} />
 
           <View className='mx-auto mt-2 flex-row'>
-            <Label text='Data Collection' textColor='#CFCFCF' backgroundColor='#48476D' />
+            <Label
+              text='Data Collection'
+              textColor='#CFCFCF'
+              backgroundColor='#48476D'
+              fontSize={15}
+            />
             <Text> </Text>
-            <Label text='Third-Party Integration' textColor='#CFCFCF' backgroundColor='#48476D' />
+            <Label
+              text='Third-Party Integration'
+              textColor='#CFCFCF'
+              backgroundColor='#48476D'
+              fontSize={15}
+            />
           </View>
 
           <Text

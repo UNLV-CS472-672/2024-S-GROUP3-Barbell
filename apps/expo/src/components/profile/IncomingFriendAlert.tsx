@@ -19,6 +19,14 @@ export default function IncomingFriendAlert({
   notifId,
   setFriendStatus,
 }: IncomingFriendAlertProps) {
+  const inv = api.useUtils()
+  const friendsMutation = api.friend.makeFriendsReceiverIdSenderId.useMutation({
+    async onSuccess() {
+      inv.notif.getMiscNotifsWithSenderUsernameFromUserId.invalidate()
+      inv.friend.getFriendsWithChatIdFromUserId.invalidate()
+    },
+  })
+
   const handleAcceptFriend = () => {
     setComponent(<></>)
     setFriendStatus(true)
@@ -60,13 +68,6 @@ export default function IncomingFriendAlert({
       </View>
     </View>,
   )
-
-  const inv = api.useUtils()
-  const friendsMutation = api.friend.makeFriendsReceiverIdSenderId.useMutation({
-    async onSuccess() {
-      inv.notif.getMiscNotifsWithSenderUsernameFromUserId.invalidate()
-    },
-  })
 
   return component
 }

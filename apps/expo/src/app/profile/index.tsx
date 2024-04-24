@@ -69,7 +69,7 @@ export default function ProfileView() {
           </View>
         </View>
         <Text className='mx-4 font-bold text-slate-200'>{data?.name}</Text>
-        <View className='flex-1 flex-row justify-between'>
+        <View className='my-2 flex-1 flex-row justify-between'>
           <FriendStatus friendStatus={friendStatus} />
           <MessageButton
             chatId={data?.chatId}

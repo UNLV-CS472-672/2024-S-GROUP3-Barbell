@@ -62,10 +62,14 @@ export default function ProfilePosts({ id, username }: ProfilePostsProps) {
   }, [data])
 
   const MoreButton = () => {
-    return (
-      <View className='my-10 h-[30px] items-center justify-center'>
+    return isFetching ? (
+      <View className='my-10 h-[50px] items-center justify-center'>
+        <RotatingBarbellIcon />
+      </View>
+    ) : (
+      <View className='my-10 h-[50px] items-center justify-center'>
         <Text className='text-center text-[#8987d4]' onPress={() => setPostIndex(postIndex + 1)}>
-          {isFetching ? '' : 'More'}
+          More
         </Text>
       </View>
     )
@@ -73,11 +77,8 @@ export default function ProfilePosts({ id, username }: ProfilePostsProps) {
 
   return (
     <View className='flex-1'>
-      {isFetching && <RotatingBarbellIcon />}
-      {posts &&
-        posts
-          .map((post: any) => <Post key={post.id} post={post} username={username} />)
-          .concat(<MoreButton key={-1} />)}
+      {posts && posts.map((post: any) => <Post key={post.id} post={post} username={username} />)}
+      {<MoreButton />}
     </View>
   )
 }

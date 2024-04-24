@@ -22,14 +22,16 @@ export default function FriendStatus({ friendStatus }: FriendStatusProps) {
     <View className='flex-1'>
       <TouchableOpacity>
         <View
-          className={`my-3 ml-4 mr-2 h-[30px] flex-1 items-center justify-center rounded-md bg-[#${
-            friendStatus == true || friendStatus == 'PENDING' ? 'CACACA' : '48476D'
-          }]`}
+          className='my-3 ml-4 mr-2 h-[30px] flex-1 items-center justify-center rounded-md'
+          style={{
+            backgroundColor:
+              friendStatus == true || friendStatus == 'PENDING' ? '#CACACA' : '#48476D',
+          }}
         >
           <Text
-            className={`text-[#${
-              friendStatus == true || friendStatus == 'PENDING' ? '272727' : 'CACACA'
-            }]`}
+            style={{
+              color: friendStatus == true || friendStatus == 'PENDING' ? '#272727' : '#CACACA',
+            }}
           >
             {friendStatusText}
           </Text>

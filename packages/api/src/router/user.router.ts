@@ -157,7 +157,7 @@ export const userRouter = createTRPCRouter({
         friendStatus = 'PENDING'
       }
 
-      const workoutCount = workoutInfo.workoutHistory.length
+      const workoutCount = Number(workoutInfo?.workoutHistory.length)
 
       const chat = await ctx.prisma.chat.findFirst({
         where: {
@@ -208,7 +208,7 @@ export const userRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const pageSize = input.workouts
       const pageNumber = input.page || 1
-      const skip = (pageNumber - 1) * pageSize
+      const skip = (pageNumber - 1) * Number(pageSize)
 
       return ctx.prisma.workoutLog.findMany({
         where: {

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { render, screen } from '@testing-library/react-native'
 
-import Label from './Label'
+import Label from '../../components/ui/label/Label'
 
 test('Label', async () => {
   const expectedLabelText = 'Label'

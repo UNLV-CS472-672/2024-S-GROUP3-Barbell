@@ -10,40 +10,40 @@ export const exerciseRouter = createTRPCRouter({
    * @params input - an object of the different inputs an exercise input needs to be created (name, note, bodyPart, category, and workoutId)
    * @returns the newly created exercise object.
    */
-  createNewExercise: publicProcedure
-    .input(
-      z.object({
-        name: z.string(),
-        note: z.string().optional(),
-        sets: z.array(
-          z.object({
-            type: z.nativeEnum(SetType),
-            reps: z.number().int(),
-            weight: z.number(),
-            exerciseId: z.number().int(),
-          }),
-        ),
-        body_part: z.nativeEnum(BodyPart),
-        category: z.nativeEnum(Category),
-        workoutId: z.number().int(),
-      }),
-    )
-    .mutation(async ({ ctx, input }) => {
-      const { prisma } = ctx
+  // createNewExercise: publicProcedure
+  //   .input(
+  //     z.object({
+  //       name: z.string(),
+  //       note: z.string().optional(),
+  //       sets: z.array(
+  //         z.object({
+  //           type: z.nativeEnum(SetType),
+  //           reps: z.number().int(),
+  //           weight: z.number(),
+  //           exerciseId: z.number().int(),
+  //         }),
+  //       ),
+  //       body_part: z.nativeEnum(BodyPart),
+  //       category: z.nativeEnum(Category),
+  //       workoutId: z.number().int(),
+  //     }),
+  //   )
+  //   .mutation(async ({ ctx, input }) => {
+  //     const { prisma } = ctx
 
-      return prisma.exercise.create({
-        data: {
-          name: input.name,
-          note: input.note,
-          sets: {
-            create: input.sets,
-          },
-          body_part: input.body_part,
-          category: input.category,
-          // workoutId: input.workoutId,
-        },
-      })
-    }),
+  //     return prisma.exercise.create({
+  //       data: {
+  //         name: input.name,
+  //         note: input.note,
+  //         sets: {
+  //           create: input.sets,
+  //         },
+  //         body_part: input.body_part,
+  //         category: input.category,
+  //         // workoutId: input.workoutId,
+  //       },
+  //     })
+  //   }),
 
   /**
    * This function returns all the exercises in the database
@@ -84,56 +84,56 @@ export const exerciseRouter = createTRPCRouter({
    *  @params input - the updated info for the exercise as well as the id of the exercise
    *  @returns the updated exercise object
    */
-  updateExerciseFromExericseID: publicProcedure
-    .input(
-      z.object({
-        id: z.number().int(),
-        name: z.string().optional(),
-        note: z.string().optional(),
-        sets: z
-          .array(
-            z.object({
-              id: z.number(),
-              type: z.nativeEnum(SetType),
-              reps: z.number().int(),
-              weight: z.number(),
-              exerciseId: z.number().int(),
-            }),
-          )
-          .optional(),
-        body_part: z.nativeEnum(BodyPart).optional(),
-        category: z.nativeEnum(Category).optional(),
-        workoutId: z.number().int().optional(),
-      }),
-    )
-    .mutation(async ({ ctx, input }) => {
-      const { prisma } = ctx
+  // updateExerciseFromExericseID: publicProcedure
+  //   .input(
+  //     z.object({
+  //       id: z.number().int(),
+  //       name: z.string().optional(),
+  //       note: z.string().optional(),
+  //       sets: z
+  //         .array(
+  //           z.object({
+  //             id: z.number(),
+  //             type: z.nativeEnum(SetType),
+  //             reps: z.number().int(),
+  //             weight: z.number(),
+  //             exerciseId: z.number().int(),
+  //           }),
+  //         )
+  //         .optional(),
+  //       body_part: z.nativeEnum(BodyPart).optional(),
+  //       category: z.nativeEnum(Category).optional(),
+  //       workoutId: z.number().int().optional(),
+  //     }),
+  //   )
+  //   .mutation(async ({ ctx, input }) => {
+  //     const { prisma } = ctx
 
-      return prisma.exercise.update({
-        where: {
-          id: input.id,
-        },
-        data: {
-          name: input.name,
-          note: input.note,
-          sets: {
-            updateMany: input.sets?.map((set) => ({
-              where: {
-                id: set.id,
-              },
-              data: {
-                type: set.type,
-                reps: set.reps,
-                weight: set.weight,
-              },
-            })),
-          },
-          body_part: input.body_part,
-          category: input.category,
-          // workoutId: input.workoutId,
-        },
-      })
-    }),
+  //     return prisma.exercise.update({
+  //       where: {
+  //         id: input.id,
+  //       },
+  //       data: {
+  //         name: input.name,
+  //         note: input.note,
+  //         sets: {
+  //           updateMany: input.sets?.map((set) => ({
+  //             where: {
+  //               id: set.id,
+  //             },
+  //             data: {
+  //               type: set.type,
+  //               reps: set.reps,
+  //               weight: set.weight,
+  //             },
+  //           })),
+  //         },
+  //         body_part: input.body_part,
+  //         category: input.category,
+  //         // workoutId: input.workoutId,
+  //       },
+  //     })
+  //   }),
 
   /**
    * This function deletes an exercise given its ID
@@ -160,28 +160,28 @@ export const exerciseRouter = createTRPCRouter({
    *  @returns an array of all the sets related to the exercise
    */
 
-  getAllSetsFromExerciseID: publicProcedure
-    .input(
-      z.object({
-        id: z.number().int(),
-      }),
-    )
-    .query(async ({ ctx, input }) => {
-      const { prisma } = ctx
+  // getAllSetsFromExerciseID: publicProcedure
+  //   .input(
+  //     z.object({
+  //       id: z.number().int(),
+  //     }),
+  //   )
+  //   .query(async ({ ctx, input }) => {
+  //     const { prisma } = ctx
 
-      const exerc = await prisma.exercise.findFirst({
-        where: {
-          id: input.id,
-        },
-        include: {
-          sets: true,
-        },
-      })
+  //     const exerc = await prisma.exercise.findFirst({
+  //       where: {
+  //         id: input.id,
+  //       },
+  //       include: {
+  //         sets: true,
+  //       },
+  //     })
 
-      if (!exerc || !exerc.sets) {
-        return []
-      }
+  //     if (!exerc || !exerc.sets) {
+  //       return []
+  //     }
 
-      return exerc.sets
-    }),
+  //     return exerc.sets
+  //   }),
 })

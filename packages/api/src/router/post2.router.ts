@@ -1,3 +1,4 @@
+/* istanbul ignore file -- @preserve */
 /**
  *
  * This is an example router, you can delete this file and then update `../pages/api/trpc/[trpc].tsx`

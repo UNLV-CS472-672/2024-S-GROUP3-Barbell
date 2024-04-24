@@ -4,7 +4,7 @@ import { router } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import { fireEvent, render } from '@testing-library/react-native'
 
-import NavBar from './NavBar'
+import NavBar from '../components/ui/nav-bar/NavBar'
 
 jest.mock('expo-router', () => ({
   router: {

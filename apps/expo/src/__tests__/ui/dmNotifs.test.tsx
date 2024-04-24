@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react-native'
 
 import * as api from '~/utils/trpc/api'
-import DmNotifs from './dmNotifs'
+import DmNotifs from '../../components/notif/dmNotifs/dmNotifs'
 
 jest.mock('~/context/global-context', () => ({
   useGlobalContext: () => ({

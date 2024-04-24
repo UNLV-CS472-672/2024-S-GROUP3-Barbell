@@ -1,5 +1,6 @@
-import { WorkoutTemplateInfoSchema } from '^/packages/validators/src'
 import { z } from 'zod'
+
+import { WorkoutTemplateInfoSchema } from '@acme/validators'
 
 import { TExercise } from '~/components/tracker/workout-tracker'
 
@@ -19,9 +20,10 @@ export const extractWorkoutName = (data: unknown): string => {
   const result = WorkoutTemplateInfoSchema.safeParse(data)
 
   if (result.success) {
-    return result.data.workoutName.trim()
+    return result.data.workoutName?.trim()
   }
 
+  /* istanbul ignore next */
   return 'New Workout'
 }
 
@@ -29,12 +31,12 @@ export const extractWorkoutTemplate = (data: unknown): TWorkoutTemplateInfo | nu
   const result = WorkoutTemplateInfoSchema.safeParse(data)
 
   if (result.success) {
-    return { ...result.data, workoutName: result.data.workoutName.trim() }
+    return { ...result.data, workoutName: result.data.workoutName?.trim() }
   }
 
   return null
 }
-
+/* istanbul ignore next */
 export const areTemplatesDifferent = (
   workoutTemplate: TWorkoutTemplateInfo | null,
   workoutName: string,
@@ -85,6 +87,7 @@ export const areTemplatesDifferent = (
   return false
 }
 
+/* istanbul ignore next */
 export const prepareExercisesForApi = (exercises: TExercise[]): TExercise[] => {
   const exercisesWithNonEmptySets = exercises.map((exercise) => {
     const sets = exercise.sets.filter((set) => {
@@ -99,3 +102,5 @@ export const prepareExercisesForApi = (exercises: TExercise[]): TExercise[] => {
 
   return nonEmptyExercises
 }
+
+

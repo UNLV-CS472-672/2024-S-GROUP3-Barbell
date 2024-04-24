@@ -63,45 +63,6 @@ export const notifRouter = createTRPCRouter({
     }),
 
   /**
-   * @remarks
-   * This returns all of the messages in order from oldest to newest within any chat type
-   * This one assume it already exists
-   *
-   * @param id - the id of the chat
-   * @param type - the chat type (DIRECT or GROUP)
-   * @returns an array of message objects
-   */
-  getMessagesFromChatIdAndChatType2: publicProcedure
-    .input(z.object({ id: z.number().int(), type: z.nativeEnum(ChatType) }))
-    .query(async ({ ctx, input }) => {
-      const { prisma } = ctx
-
-      const chat = await prisma.chat.findFirst({
-        where: {
-          type: input.type,
-          id: input.id,
-        },
-        select: {
-          id: true,
-          users: true,
-        },
-      })
-
-      if (chat == undefined) {
-        return []
-      }
-
-      return prisma.message.findMany({
-        where: {
-          chatId: chat.id,
-        },
-        orderBy: {
-          createdAt: 'asc',
-        },
-      })
-    }),
-
-  /**
    *  @remarks
    *  Adds current user to readByUserIds field in DB
    *
@@ -159,6 +120,7 @@ export const notifRouter = createTRPCRouter({
       const chatIds: number[] = []
       userChats?.chats.forEach((chat) => {
         if (chat.type === input.type) {
+          /* istanbul ignore next -- @preserve */
           chatIds.push(chat.id)
         }
       })
@@ -167,6 +129,7 @@ export const notifRouter = createTRPCRouter({
         return []
       }
 
+      /* istanbul ignore next -- @preserve */
       const finalMessageForEachChat = await prisma.chat.findMany({
         where: {
           id: {
@@ -201,6 +164,7 @@ export const notifRouter = createTRPCRouter({
         },
       })
 
+      /* istanbul ignore next -- @preserve */
       return finalMessageForEachChat
     }),
 

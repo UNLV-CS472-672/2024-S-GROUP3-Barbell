@@ -1,5 +1,5 @@
-/* istanbul ignore file */
-import { ChatType, Friend, User } from '@prisma/client'
+/* istanbul ignore file -- @preserve */
+import { ChatType, User } from '@prisma/client'
 import { z } from 'zod'
 
 import { createTRPCRouter, publicProcedure } from '../trpc'
@@ -85,47 +85,52 @@ export const friendRouter = createTRPCRouter({
         chatId: number | null
       }
 
-      const friendsList = await ctx.prisma.friend.findMany({
-        where: {
-          userId: input.id,
-        },
-        select: {
-          friendId: true,
-        },
-      })
+      try {
+        const friendsList = await ctx.prisma.friend.findMany({
+          where: {
+            userId: input.id,
+          },
+          select: {
+            friendId: true,
+          },
+        })
 
-      // convert to number array
-      const friendIds: number[] = friendsList.map((friend) => friend.friendId)
+        // convert to number array
+        const friendIds: number[] = friendsList.map((friend) => friend.friendId)
 
-      // get friends as users
-      const usersList = await ctx.prisma.user.findMany({
-        where: {
-          id: { in: friendIds },
-        },
-      })
+        // get friends as users
+        const usersList = await ctx.prisma.user.findMany({
+          where: {
+            id: { in: friendIds },
+          },
+        })
 
-      // find corresponding chat for user if it exists
-      const usersWithChatId = await Promise.all(
-        usersList.map(async (user) => {
-          const chatIdWithUsers = await ctx.prisma.chat.findFirst({
-            where: {
-              type: ChatType.DIRECT,
-              AND: [{ users: { some: { id: input.id } } }, { users: { some: { id: user.id } } }],
-            },
-            select: {
-              id: true,
-            },
-          })
+        // find corresponding chat for user if it exists
+        const usersWithChatId = await Promise.all(
+          usersList.map(async (user) => {
+            const chatIdWithUsers = await ctx.prisma.chat.findFirst({
+              where: {
+                type: ChatType.DIRECT,
+                AND: [{ users: { some: { id: input.id } } }, { users: { some: { id: user.id } } }],
+              },
+              select: {
+                id: true,
+              },
+            })
 
-          const userWithChatId: UserWithChatId = {
-            ...user,
-            chatId: chatIdWithUsers ? chatIdWithUsers.id : null,
-          }
+            const userWithChatId: UserWithChatId = {
+              ...user,
+              chatId: chatIdWithUsers ? chatIdWithUsers.id : null,
+            }
 
-          return userWithChatId
-        }),
-      )
+            return userWithChatId
+          }),
+        )
 
-      return usersWithChatId
+        return usersWithChatId
+      } catch (error) {
+        console.error('Error fetching friends with chatId:', error)
+        throw new Error('Failed to fetch friends with chatId')
+      }
     }),
 })

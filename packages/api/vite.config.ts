@@ -18,9 +18,6 @@ export default defineConfig({
         '**/html/**',
         '**/vitest-coverage/**',
         '**/jest-coverage/**',
-
-        'src/root.ts',
-        'src/trpc.ts',
       ],
       reportsDirectory: 'vitest-coverage',
     },

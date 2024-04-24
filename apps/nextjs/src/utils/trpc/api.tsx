@@ -5,7 +5,13 @@ import { useMemo, useState } from 'react'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { createWSClient, loggerLink, unstable_httpBatchStreamLink, wsLink } from '@trpc/client'
+import {
+  createWSClient,
+  loggerLink,
+  splitLink,
+  unstable_httpBatchStreamLink,
+  wsLink,
+} from '@trpc/client'
 import { createTRPCReact } from '@trpc/react-query'
 import SuperJSON from 'superjson'
 
@@ -44,49 +50,52 @@ export const getWsUrl = () => {
   // return null // When running in SSR, we aren't using subscriptions
 }
 
-function getEndingLink(): TRPCLink<AppRouter> {
-  if (typeof window === 'undefined') {
-    return unstable_httpBatchStreamLink({
-      /**
-       * @link https://trpc.io/docs/v11/data-transformers
-       */
-      transformer: SuperJSON,
-      url: `${getBaseUrl()}/api/trpc`,
-      async headers() {
-        const headers = new Headers()
-        headers.set('x-trpc-source', 'nextjs-react')
-        return headers
-      },
-    })
-  }
+// function getEndingLink(): TRPCLink<AppRouter> {
+//   if (typeof window === 'undefined') {
+//     return unstable_httpBatchStreamLink({
+//       /**
+//        * @link https://trpc.io/docs/v11/data-transformers
+//        */
+//       transformer: SuperJSON,
+//       url: `${getBaseUrl()}/api/trpc`,
+//       async headers() {
+//         const headers = new Headers()
+//         headers.set('x-trpc-source', 'nextjs-react')
+//         return headers
+//       },
+//     })
+//   }
 
-  console.log('wsLink, hopefully')
+//   console.log('wsLink, hopefully')
 
-  // FIXED: wsLink url
-  const client = createWSClient({
-    url: getWsUrl(),
-  })
+//   // FIXED: wsLink url
+//   const client = createWSClient({
+//     url: getWsUrl(),
+//   })
 
-  return wsLink({
-    client,
-    /**
-     * @link https://trpc.io/docs/v11/data-transformers
-     */
-    transformer: SuperJSON,
-  })
-}
+//   return wsLink({
+//     client,
+//     /**
+//      * @link https://trpc.io/docs/v11/data-transformers
+//      */
+//     transformer: SuperJSON,
+//   })
+// }
 
-// const wsUrl = getWsUrl()
+const wsUrl = getWsUrl()
 
-// const wsClientIfEmpty = createWSClient({
-//   url: wsUrl ?? '',
-//   onOpen: () => {
-//     console.log('ws open')
-//   },
-//   onClose: (cause) => {
-//     console.log('ws close', cause)
-//   },
-// })
+const wsClient =
+  wsUrl !== null
+    ? createWSClient({
+        url: wsUrl,
+        onOpen: () => {
+          console.log('ws open')
+        },
+        onClose: (cause) => {
+          console.log('ws close', cause)
+        },
+      })
+    : null
 
 export function TRPCReactProvider(props: { children: React.ReactNode; headers?: Headers }) {
   /*  */
@@ -102,18 +111,18 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
       }),
   )
 
-  // const httpLink = unstable_httpBatchStreamLink({
-  //   /**
-  //    * @link https://trpc.io/docs/v11/data-transformers
-  //    */
-  //   transformer: SuperJSON,
-  //   url: `${getBaseUrl()}/api/trpc`,
-  //   async headers() {
-  //     const headers = new Headers()
-  //     headers.set('x-trpc-source', 'nextjs-react')
-  //     return headers
-  //   },
-  // })
+  const httpLink = unstable_httpBatchStreamLink({
+    /**
+     * @link https://trpc.io/docs/v11/data-transformers
+     */
+    transformer: SuperJSON,
+    url: `${getBaseUrl()}/api/trpc`,
+    async headers() {
+      const headers = new Headers()
+      headers.set('x-trpc-source', 'nextjs-react')
+      return headers
+    },
+  })
 
   // const wsLinkClient = useMemo(() => {
   //   const client = createWSClient({
@@ -157,16 +166,16 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         // }),
 
         /* version 2 */
-        getEndingLink(),
+        // getEndingLink(),
 
         /* version 3 */
-        // wsClient
-        //   ? splitLink({
-        //       condition: ({ type }) => type === 'subscription',
-        //       true: wsLink({ client: wsClient, transformer: SuperJSON }),
-        //       false: httpLink,
-        //     })
-        //   : httpLink,
+        wsClient
+          ? splitLink({
+              condition: ({ type }) => type === 'subscription',
+              true: wsLink({ client: wsClient, transformer: SuperJSON }),
+              false: httpLink,
+            })
+          : httpLink,
 
         /* version 4 */
         // wsLinkClient,

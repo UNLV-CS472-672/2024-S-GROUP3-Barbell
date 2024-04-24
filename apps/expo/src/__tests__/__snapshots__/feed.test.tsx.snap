@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Activity Component renders correctly with given props 1`] = `
+<View
+  className="text-bb-slate-100 mx-3 p-3"
+  style={
+    {
+      "borderBottomColor": "#737272",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <View
+    className="flex-row items-baseline justify-between"
+  >
+    <Text
+      className="mb-1 text-2xl font-bold text-slate-200"
+    >
+      John Doe
+    </Text>
+    <Text
+      className="text-lg text-slate-200"
+    >
+      4/20/2023
+    </Text>
+  </View>
+  <View
+    className="flex-row items-baseline justify-between"
+  >
+    <Text
+      className="m-2 text-lg text-slate-200"
+    >
+      Morning Routine
+    </Text>
+  </View>
+  <Text
+    className="m-2 text-slate-200"
+  >
+    A quick workout to get the day started
+  </Text>
+  <View
+    className="my-3 flex-row"
+  >
+    <View
+      className="flex-1"
+    >
+      <Text
+        className="text-slate-200"
+      >
+        Exercises:
+      </Text>
+      <RCTScrollView
+        data={
+          [
+            {
+              "name": "Push-ups",
+            },
+            {
+              "name": "Sit-ups",
+            },
+          ]
+        }
+        getItem={[Function]}
+        getItemCount={[Function]}
+        keyExtractor={[Function]}
+        onContentSizeChange={[Function]}
+        onLayout={[Function]}
+        onMomentumScrollBegin={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={0.0001}
+        stickyHeaderIndices={[]}
+        viewabilityConfigCallbackPairs={[]}
+      >
+        <View>
+          <View
+            onFocusCapture={[Function]}
+            onLayout={[Function]}
+            style={null}
+          >
+            <Text
+              className="mx-3 text-slate-200"
+            >
+              Push-ups
+            </Text>
+          </View>
+          <View
+            onFocusCapture={[Function]}
+            onLayout={[Function]}
+            style={null}
+          >
+            <Text
+              className="mx-3 text-slate-200"
+            >
+              Sit-ups
+            </Text>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+    <View
+      className="flex-row items-end justify-items-end"
+    >
+      <Text />
+    </View>
+  </View>
+</View>
+`;

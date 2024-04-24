@@ -8,9 +8,9 @@ export interface ActivityProps {
   workoutLog: any
 }
 
-const formatDate = (date: Date) => date?.toLocaleDateString()
-
 const Activity: React.FC<ActivityProps> = ({ user, workout, workoutLog }) => {
+  const formatDate = (date: Date) => date.toLocaleDateString()
+
   return (
     <View
       className='text-bb-slate-100 mx-3 p-3'

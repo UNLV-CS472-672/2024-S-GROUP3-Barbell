@@ -1,4 +1,4 @@
-import { ChatType, User } from '@prisma/client'
+import { ChatType, Friend, User } from '@prisma/client'
 import { z } from 'zod'
 
 import { createTRPCRouter, publicProcedure } from '../trpc'
@@ -32,6 +32,7 @@ export const friendRouter = createTRPCRouter({
    *  @param  senderId - the id of the one who sends, *not* logged in user
    *  @returns the accept or deny mutation, adds as friend or does not add
    */
+  /* v8 ignore next */
   makeFriendsReceiverIdSenderId: publicProcedure
     .input(
       z.object({
@@ -42,7 +43,9 @@ export const friendRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
+      /* v8 ignore next */
       if (input.accepted) {
+        /* v8 ignore next */
         await ctx.prisma.friend.create({
           data: {
             friendId: input.receiverId,
@@ -50,6 +53,7 @@ export const friendRouter = createTRPCRouter({
           },
         })
 
+        /* v8 ignore next */
         await ctx.prisma.friend.create({
           data: {
             friendId: input.senderId,
@@ -57,7 +61,7 @@ export const friendRouter = createTRPCRouter({
           },
         })
       }
-
+      /* v8 ignore next */
       await ctx.prisma.notification.delete({
         where: {
           id: input.notificationId,

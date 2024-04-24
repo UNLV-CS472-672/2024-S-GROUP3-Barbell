@@ -7,13 +7,12 @@ describe('USER', async () => {
   const ctx = await createContextInner()
   const caller = createCaller(ctx)
 
-  it('/byId && /create', async () => {
+  it('/byId', async () => {
     const newUser = await caller.user.create({
       clerkId: 'clerk123',
       username: 'newuser',
       name: 'New User',
     })
-
 
     expect(newUser.clerkId).toBe('clerk123')
     expect(newUser.username).toBeDefined()
@@ -22,6 +21,21 @@ describe('USER', async () => {
     const byId = await caller.user.byId({ id: newUser.id })
     expect(byId?.id).toBe(newUser.id)
 
+    await caller.user.delete({ id: newUser.id })
+  })
+
+  it('/create', async () => {
+    const newUser = await caller.user.create({
+      clerkId: 'clerk123',
+      username: 'newuser',
+      name: 'New User',
+    })
+
+    expect(newUser.clerkId).toBe('clerk123')
+    expect(newUser.username).toBeDefined()
+    expect(newUser.name).toBe('New User')
+
+    // Cleanup
     await caller.user.delete({ id: newUser.id })
   })
 
@@ -68,6 +82,7 @@ describe('USER', async () => {
 
     const findDeletedUser = await caller.user.byId({ id: userToBeDeleted.id })
     expect(findDeletedUser).toBeNull() // Ensuring the user cannot be fetched post-deletion.
+
   })
 
   it('/getUserWorkoutHistory', async () => {
@@ -78,5 +93,8 @@ describe('USER', async () => {
     })
     const workoutHistory = await caller.user.getUserWorkoutHistory({ userId: userWithWorkout.id })
     expect(workoutHistory).toBeInstanceOf(Object) // We just check for an object since the actual content might vary.
+
+    // Cleanup
+    await caller.user.delete({ id: userWithWorkout.id })
   })
 })

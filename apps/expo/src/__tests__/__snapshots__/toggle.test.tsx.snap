@@ -6,7 +6,6 @@ exports[`Toggle component should match snapshop 1`] = `
     {
       "alignItems": "center",
       "flexDirection": "row",
-      "marginBottom": 11.25,
     }
   }
   testID="toggle-container"
@@ -50,10 +49,10 @@ exports[`Toggle component should match snapshop 1`] = `
       style={
         {
           "backgroundColor": "rgba(58, 58, 58, 1)",
-          "borderRadius": 18.75,
-          "height": 37.5,
+          "borderRadius": 26.250000000000004,
+          "height": 52.50000000000001,
           "justifyContent": "center",
-          "marginRight": 7.5,
+          "paddingEnd": 63,
           "width": 112.5,
         }
       }
@@ -65,9 +64,9 @@ exports[`Toggle component should match snapshop 1`] = `
           {
             "backgroundColor": "#D9D9D9",
             "borderRadius": 37.5,
-            "height": 26.250000000000004,
+            "height": 33.75,
             "marginLeft": 7.5,
-            "width": 26.250000000000004,
+            "width": 33.75,
           }
         }
         testID="toggle-circle"

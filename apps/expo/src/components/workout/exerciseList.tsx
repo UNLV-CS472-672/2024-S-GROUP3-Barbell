@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
@@ -12,6 +12,42 @@ export type componenttype = 'exercise' | 'equipment' | 'bodyparts'
 export default function ExerciseList() {
   const { data, isFetched, isFetching } = api.exercise.getAllExercises.useQuery()
   const [VisibleComp, setVisibleComp] = useState<componenttype>('exercise')
+  const [list, setList] = useState<any>(data)
+
+  const [equipmentList, setEquipmentList] = useState<string[]>([])
+  const [filterByEquipment, setFilterByEquipment] = useState<string[]>([])
+  const handleFilterByEquipment = () => {
+    setVisibleComp('exercise')
+    setFilterByEquipment(equipmentList)
+  }
+
+  useEffect(() => {
+    setList(data)
+  }, [data])
+
+  useEffect(() => {
+    if (equipmentList.length > 0) {
+      // if equipmentList has items, filter data based on equipmentList
+      setFilteredList(
+        data?.filter((workout) =>
+          equipmentList.includes(
+            workout.category.charAt(0).toUpperCase() + workout.category.slice(1).toLowerCase(),
+          ),
+        ),
+      )
+      setList(
+        data?.filter((workout) =>
+          equipmentList.includes(
+            workout.category.charAt(0).toUpperCase() + workout.category.slice(1).toLowerCase(),
+          ),
+        ),
+      )
+    } else {
+      // if equipmentList is empty, set filteredList to the original data
+      setFilteredList(data)
+      setList(data)
+    }
+  }, [equipmentList])
 
   const [selectExercise, setSelect] = useState<{ [eid: number]: boolean }>({})
 
@@ -43,14 +79,11 @@ export default function ExerciseList() {
     </View>
   )
 
-  const [equipment, setEquipment] = useState([])
-
-
   return (
     <View>
       <SearchBar
         filterBy='name'
-        list={data}
+        list={list}
         placeholder='Search exercise by name...'
         setFilteredList={setFilteredList}
       />
@@ -70,7 +103,7 @@ export default function ExerciseList() {
           <TouchableOpacity
             className='ml-1 mr-1 mt-1 flex-1 rounded-lg  bg-[#C4C4C4] px-4 py-2 font-bold'
             onPress={() => {
-              setVisibleComp('exercise')
+              handleFilterByEquipment()
             }}
           >
             <Text className='text-center'>Select Exercises</Text>
@@ -84,8 +117,9 @@ export default function ExerciseList() {
       <View className='pt-1' style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
       {isFetching && <RotatingBarbellIcon />}
       {isFetched && VisibleComp == 'exercise' && exercises}
-      {isFetched && VisibleComp == 'equipment' && <EquipmentFilter setEquipment={setEquipment} />}
-      console.log(equipSelect)
+      {isFetched && VisibleComp == 'equipment' && (
+        <EquipmentFilter setEquipmentList={setEquipmentList} equipmentList={equipmentList} />
+      )}
     </View>
   )
 }

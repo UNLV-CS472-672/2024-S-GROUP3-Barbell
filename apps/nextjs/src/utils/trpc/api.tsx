@@ -22,42 +22,42 @@ export { type RouterInputs, type RouterOutputs } from '@acme/api'
  * different from the expo version
  * @returns
  */
-// const getBaseUrl = () => {
-//   if (typeof window !== 'undefined') return window.location.origin
-//   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}` // deployed on vercel baby
-//   return `http://localhost:${process.env.PORT ?? 3000}`
-// }
+const getBaseUrl = () => {
+  if (typeof window !== 'undefined') return window.location.origin
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}` // deployed on vercel baby
+  return `http://localhost:${process.env.PORT ?? 3000}`
+}
 
-// function getEndingLink(): TRPCLink<AppRouter> {
-//   if (typeof window === 'undefined') {
-//     return unstable_httpBatchStreamLink({
-//       /**
-//        * @link https://trpc.io/docs/v11/data-transformers
-//        */
-//       transformer: SuperJSON,
-//       url: `${getBaseUrl()}/api/trpc`,
-//       async headers() {
-//         const headers = new Headers()
-//         headers.set('x-trpc-source', 'nextjs-react')
-//         return headers
-//       },
-//     })
-//   }
+function getEndingLink(): TRPCLink<AppRouter> {
+  if (typeof window === 'undefined') {
+    return unstable_httpBatchStreamLink({
+      /**
+       * @link https://trpc.io/docs/v11/data-transformers
+       */
+      transformer: SuperJSON,
+      url: `${getBaseUrl()}/api/trpc`,
+      async headers() {
+        const headers = new Headers()
+        headers.set('x-trpc-source', 'nextjs-react')
+        return headers
+      },
+    })
+  }
 
-//   console.log('wsLink, hopefully')
+  console.log('wsLink, hopefully')
 
-//   const client = createWSClient({
-//     url: `ws://localhost:3001`,
-//   })
+  const client = createWSClient({
+    url: `ws://localhost:3001`,
+  })
 
-//   return wsLink({
-//     client,
-//     /**
-//      * @link https://trpc.io/docs/v11/data-transformers
-//      */
-//     transformer: SuperJSON,
-//   })
-// }
+  return wsLink({
+    client,
+    /**
+     * @link https://trpc.io/docs/v11/data-transformers
+     */
+    transformer: SuperJSON,
+  })
+}
 
 export const getWsUrl = () => {
   if (typeof window !== 'undefined') {
@@ -113,45 +113,25 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
   //   },
   // })
 
-  const wsLinkClient = useMemo(() => {
-    if (typeof window !== 'undefined') {
-      const client = createWSClient({
-        url: ``,
-        onOpen: () => {
-          console.log('ws open')
-        },
-        onClose: (cause) => {
-          console.log('ws close', cause)
-        },
-      })
+  // const wsLinkClient = useMemo(() => {
+  //   const client = createWSClient({
+  //     url: `ws://localhost:3001`,
+  //     onOpen: () => {
+  //       console.log('ws open')
+  //     },
+  //     onClose: (cause) => {
+  //       console.log('ws close', cause)
+  //     },
+  //   })
 
-      return wsLink({
-        client,
-        /**
-         * @link https://trpc.io/docs/v11/data-transformers
-         */
-        transformer: SuperJSON,
-      })
-    }
-
-    const client = createWSClient({
-      url: `ws://localhost:3001`,
-      onOpen: () => {
-        console.log('ws open')
-      },
-      onClose: (cause) => {
-        console.log('ws close', cause)
-      },
-    })
-
-    return wsLink({
-      client,
-      /**
-       * @link https://trpc.io/docs/v11/data-transformers
-       */
-      transformer: SuperJSON,
-    })
-  }, [])
+  //   return wsLink({
+  //     client,
+  //     /**
+  //      * @link https://trpc.io/docs/v11/data-transformers
+  //      */
+  //     transformer: SuperJSON,
+  //   })
+  // }, [])
 
   /*  */
   const [trpcClient] = useState(() =>
@@ -175,7 +155,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         // }),
 
         /* version 2 */
-        // getEndingLink(),
+        getEndingLink(),
 
         /* version 3 */
         // wsClient
@@ -187,7 +167,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         //   : httpLink,
 
         /* version 4 */
-        wsLinkClient,
+        // wsLinkClient,
       ],
 
       /* version 5 */

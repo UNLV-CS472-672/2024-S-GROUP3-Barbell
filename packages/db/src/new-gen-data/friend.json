@@ -7,5 +7,11 @@
   { "userId": 3, "friendId": 9 },
   { "userId": 2, "friendId": 4 },
   { "userId": 3, "friendId": 4 },
-  { "userId": 4, "friendId": 5 }
+  { "userId": 4, "friendId": 5 },
+  { "userId": 9, "friendId": 1 },
+  { "userId": 9, "friendId": 2 },
+  { "userId": 9, "friendId": 3 },
+  { "userId": 9, "friendId": 4 },
+  { "userId": 9, "friendId": 5 },
+  { "userId": 9, "friendId": 6 }
 ]

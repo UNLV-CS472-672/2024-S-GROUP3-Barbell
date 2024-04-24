@@ -12,7 +12,7 @@ describe('POST', async () => {
     authorId: 1
   }
 
-  it('/byId && /create', async () => {
+  it('/byId', async () => {
     const create = await caller.post.create(input)
     const byId = await caller.post.byId({ id: create.id })
 
@@ -27,5 +27,30 @@ describe('POST', async () => {
 
     expect(all).toBeDefined()
     expect(delete_post).toMatchObject(create)
+  })
+
+  it('/create', async () => {
+    const create = await caller.post.create(input)
+    expect(create).toBeDefined()
+
+    // cleanup
+    await caller.post.delete({ id: create.id })
+  })
+
+  it('/all', async () => {
+    const all = await caller.post.all()
+    expect(all).toBeDefined()
+  })
+
+  it('/delete', async () => {
+    const create = await caller.post.create(input)
+    const delete_post = await caller.post.delete({ id: create.id })
+
+    expect(delete_post).toMatchObject(create)
+  })
+
+  it('/getRecentPostsByUserIdAndPostCount', async () => {
+    const create = await caller.post.getRecentPostsByUserIdAndPostCount({ id: 1, postCount: 1 })
+    expect(create).toBeDefined()
   })
 })

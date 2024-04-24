@@ -1,19 +1,15 @@
+import * as WebBrowser from 'expo-web-browser'
 import React, { useState } from 'react'
 import { Alert, Text } from 'react-native'
-import * as WebBrowser from 'expo-web-browser'
 
 import { useOAuth } from '@clerk/clerk-expo'
 import { AntDesign } from '@expo/vector-icons'
-import { getRedirectUrl } from 'expo-auth-session'
-import 'react-native-get-random-values'
-
-import * as AuthSession from 'expo-auth-session'
-import { router } from 'expo-router'
-
+// import 'react-native-get-random-values'
 import Button from '~/components/ui/button/button'
 import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
 import { getBaseUrl } from '~/utils/trpc/api'
 
+/* istanbul ignore next*/
 WebBrowser.maybeCompleteAuthSession()
 
 const SignInWithGoogle = () => {
@@ -57,6 +53,7 @@ const SignInWithGoogle = () => {
   }, [])
 
   return (
+    /* istanbul ignore next*/
     <Button
       testID='sign-in-with-google-btn'
       onPress={() => SignInWithGoogleOAuth()}

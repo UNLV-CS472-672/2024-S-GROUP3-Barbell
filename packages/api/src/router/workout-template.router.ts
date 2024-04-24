@@ -91,7 +91,7 @@ export const workoutTemplateRouter = createTRPCRouter({
         }),
       }
 
-      console.log(response)
+      // console.log(response)
 
       return response
     }),

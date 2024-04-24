@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "username": "userOne",
     "name": "User One",
     "status": "ACTIVE",
@@ -8,7 +7,6 @@
     "clerkId": "1"
   },
   {
-    "id": 2,
     "username": "userTwo",
     "name": "User Two",
     "status": "BUSY",
@@ -16,7 +14,6 @@
     "clerkId": "2"
   },
   {
-    "id": 3,
     "username": "userThree",
     "name": "User Three",
     "status": "ONLINE",
@@ -24,7 +21,6 @@
     "clerkId": "3"
   },
   {
-    "id": 4,
     "username": "userFour",
     "name": "User Four",
     "status": "OFFLINE",
@@ -32,7 +28,6 @@
     "clerkId": "4"
   },
   {
-    "id": 5,
     "username": "userFive",
     "name": "User Five",
     "status": "ONLINE",
@@ -40,7 +35,6 @@
     "clerkId": "5"
   },
   {
-    "id": 6,
     "username": "userSix",
     "name": "User Six",
     "status": "ACTIVE",
@@ -48,7 +42,6 @@
     "clerkId": "6"
   },
   {
-    "id": 7,
     "username": "userSeven",
     "name": "User Seven",
     "status": "BUSY",
@@ -56,7 +49,6 @@
     "clerkId": "7"
   },
   {
-    "id": 8,
     "username": "userEight",
     "name": "User Eight",
     "status": "ACTIVE",
@@ -64,7 +56,6 @@
     "clerkId": "8"
   },
   {
-    "id": 9,
     "username": "userNine",
     "name": "User Nine",
     "status": "ACTIVE",
@@ -72,7 +63,6 @@
     "clerkId": "9"
   },
   {
-    "id": 10,
     "username": "userTen",
     "name": "User Ten",
     "status": "OFFLINE",

@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "createdAt": "2024-04-04T14:29:11.040629Z",
     "updatedAt": "2024-04-22T02:48:21.488205Z",
     "name": "Son voice kitchen.",
@@ -8,7 +7,6 @@
     "type": "GROUP"
   },
   {
-    "id": 2,
     "createdAt": "2024-01-30T00:10:36.726727Z",
     "updatedAt": "2024-04-22T02:48:21.488289Z",
     "name": "Much mention.",
@@ -16,7 +14,6 @@
     "type": "GROUP"
   },
   {
-    "id": 3,
     "createdAt": "2024-04-12T20:57:13.779615Z",
     "updatedAt": "2024-04-22T02:48:21.488337Z",
     "name": "Themselves floor me.",
@@ -24,7 +21,6 @@
     "type": "GROUP"
   },
   {
-    "id": 4,
     "createdAt": "2024-03-06T08:36:03.710695Z",
     "updatedAt": "2024-04-22T02:48:21.488387Z",
     "name": "Whatever discover.",
@@ -32,7 +28,6 @@
     "type": "GROUP"
   },
   {
-    "id": 5,
     "createdAt": "2024-01-16T14:28:47.823480Z",
     "updatedAt": "2024-04-22T02:48:21.488435Z",
     "name": "Challenge someone.",
@@ -40,7 +35,6 @@
     "type": "DIRECT"
   },
   {
-    "id": 6,
     "createdAt": "2024-03-10T06:40:26.995487Z",
     "updatedAt": "2024-04-22T02:48:21.488479Z",
     "name": "Enough where no.",
@@ -48,7 +42,6 @@
     "type": "DIRECT"
   },
   {
-    "id": 7,
     "createdAt": "2024-03-31T18:31:00.589494Z",
     "updatedAt": "2024-04-22T02:48:21.488520Z",
     "name": "Week choice force.",
@@ -56,7 +49,6 @@
     "type": "DIRECT"
   },
   {
-    "id": 8,
     "createdAt": "2024-03-22T18:22:33.103465Z",
     "updatedAt": "2024-04-22T02:48:21.488560Z",
     "name": "Way to return give.",
@@ -64,7 +56,6 @@
     "type": "DIRECT"
   },
   {
-    "id": 9,
     "createdAt": "2024-03-03T17:13:49.028574Z",
     "updatedAt": "2024-04-22T02:48:21.488607Z",
     "name": "Health leader four.",

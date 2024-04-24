@@ -1,0 +1,52 @@
+{
+  "name": "@acme/server",
+  "private": true,
+  "version": "0.1.0",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm with-env tsx watch src/index.ts --tsconfig tsconfig.server.json",
+    "start": "pnpm with-env tsx src/index.ts",
+    "clean": "git clean -xdf .turbo node_modules",
+    "lint": "eslint .",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "typecheck": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "devDependencies": {
+    "@acme/api": "workspace:^0.1.0",
+    "@acme/db": "workspace:^0.1.0",
+    "@acme/eslint-config": "workspace:^0.2.0",
+    "@acme/prettier-config": "workspace:^0.1.0",
+    "@acme/tsconfig": "workspace:^0.1.0",
+    "eslint": "^8.53.0",
+    "typescript": "^5.3.3",
+    "@types/ws": "^8.5.10"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@acme/eslint-config/base"
+    ]
+  },
+  "prettier": "@acme/prettier-config",
+  "dependencies": {
+    "@acme/api": "workspace:^0.1.0",
+    "@acme/db": "workspace:^0.1.0",
+    "ws": "^8.16.0",
+    "@trpc/client": "next",
+    "@trpc/react-query": "next",
+    "@trpc/next": "next",
+    "@trpc/server": "next",
+    "tsx": "4.7.2",
+    "typescript": "^5.4.5"
+  }
+}

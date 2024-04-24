@@ -1,5 +1,3 @@
-// import { createContext } from './context';
-// import { appRouter } from './routers/_app';
 import { applyWSSHandler } from '@trpc/server/adapters/ws'
 import { WebSocketServer } from 'ws'
 
@@ -7,7 +5,6 @@ import { appRouter, createWssContext } from '@acme/api'
 
 const wss = new WebSocketServer({
   port: 3001,
-
 })
 
 const handler = applyWSSHandler({ wss, router: appRouter, createContext: createWssContext })

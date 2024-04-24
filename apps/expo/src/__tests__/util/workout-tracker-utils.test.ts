@@ -105,6 +105,24 @@ describe('Workout template functions', () => {
     const workoutTemplate = extractWorkoutTemplate(mockData)
     expect(workoutTemplate).toBeNull()
   })
+
+  describe('Workout template functions', () => {
+    // ... existing tests ...
+
+    // areTemplatesDifferent tests with workoutTemplateId
+    test('areTemplatesDifferent returns true for different workoutTemplateId', () => {
+      const workoutTemplate1 = {
+        workoutTemplateId: 1,
+        workoutName: 'Old Workout',
+        exercises: [],
+      }
+      const workoutTemplate2 = {
+        workoutTemplateId: 2,
+        workoutName: 'Old Workout',
+        exercises: [],
+      }
+      const areDifferent = areTemplatesDifferent(workoutTemplate1, 'Old Workout', [])
+      expect(areDifferent).toBe(false)
+    })
+  })
 })
-
-

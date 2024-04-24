@@ -71,7 +71,7 @@ export default function ExerciseList() {
               style={{ backgroundColor: selectExercise[exercise.id] ? '#303030' : '#1E1E1E' }}
               onPress={() => selectToggle(exercise.id)}
             >
-              <Text className='my-[12px] text-[20px] text-slate-200'>{exercise.name}</Text>
+              <Text className='mx-3 my-[12px] text-[20px] text-slate-200'>{exercise.name}</Text>
             </TouchableOpacity>
           </View>
         ))}

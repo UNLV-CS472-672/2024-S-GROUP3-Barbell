@@ -23,6 +23,11 @@ describe('FRIEND', async () => {
     expect(friend).toBeDefined()
   })
 
+  it('/getFriends', async () => {
+    const friend = await caller.friend.getFriends({ userId: 1 })
+    expect(friend).toBeDefined()
+  })
+
   // TODO: uncomment this
   // it('/makeFriendsReceiverIdSenderId', async () => {
   //   const deletedNotif = await caller.friend.makeFriendsReceiverIdSenderId({

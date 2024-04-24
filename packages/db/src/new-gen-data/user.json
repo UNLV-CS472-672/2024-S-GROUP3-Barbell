@@ -70,5 +70,13 @@
     "status": "ACTIVE",
     "streak": 700,
     "gender": "PREFERNOTTOSAY"
+  },
+  {
+    "clerkId": "10",
+    "username": "brother.",
+    "name": "Daniel <e",
+    "status": "ACTIVE",
+    "streak": 700,
+    "gender": "PREFERNOTTOSAY"
   }
 ]

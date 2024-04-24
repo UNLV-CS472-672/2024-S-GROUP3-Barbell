@@ -59,7 +59,9 @@ export default function ProfileWorkouts({ id, username, workoutCount }: ProfileW
       </View>
     ) : (
       <View className='my-10 h-[50px] items-center justify-center'>
-        <Text className='text-center text-[#424242]'>All workouts loaded</Text>
+        <Text className='text-center text-[#424242]'>
+          {workoutCount == 0 ? 'No workouts to show' : 'All workouts loaded'}
+        </Text>
       </View>
     )
   }
@@ -72,8 +74,17 @@ export default function ProfileWorkouts({ id, username, workoutCount }: ProfileW
     <View className='flex-1'>
       {workouts &&
         workouts.map((workout: any) => (
-          <View className='pb-3' key={workout.id}>
-            <Text className='text-[#CACACA]'>{workout.workoutTemplate.description}</Text>
+          <View
+            className='text-bb-slate-100 mx-3 p-3'
+            key={workout.id}
+            style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }}
+          >
+            <View className='flex-row items-start justify-between'>
+              <Text className='text-xl font-bold text-slate-200'>{username}</Text>
+              <TimeAgo createdAt={workout.finishedAt}></TimeAgo>
+            </View>
+            <Text className='font-bold text-[#8987d4]'>{workout.workoutTemplate.name}</Text>
+            <Text className='mt-1 text-slate-200'>{workout.workoutTemplate.description}</Text>
           </View>
         ))}
       <MoreButton />

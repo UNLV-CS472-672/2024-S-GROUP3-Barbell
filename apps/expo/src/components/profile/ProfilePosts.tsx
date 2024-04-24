@@ -80,7 +80,9 @@ export default function ProfilePosts({ id, username, postCount }: ProfilePostsPr
       </View>
     ) : (
       <View className='my-10 h-[50px] items-center justify-center'>
-        <Text className='text-center text-[#424242]'>All posts loaded</Text>
+        <Text className='text-center text-[#424242]'>
+          {postCount == 0 ? 'No posts to show' : 'All posts loaded'}
+        </Text>
       </View>
     )
   }

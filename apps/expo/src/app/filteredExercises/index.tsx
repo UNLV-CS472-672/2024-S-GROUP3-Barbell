@@ -8,6 +8,8 @@ import { muscleSelectUser } from '~/app/muscleGroup'
 import NavBar from '~/components/ui/nav-bar/NavBar'
 import { api } from '~/utils/trpc/api'
 
+import { Ionicons } from '@expo/vector-icons'
+
 export default function FilteredExercises(muscle = muscleSelectUser.NoSelection) {
   const [addCount, setAddCount] = useState(0)
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
@@ -17,7 +19,7 @@ export default function FilteredExercises(muscle = muscleSelectUser.NoSelection)
 
   // ------------------------------------------
   // This is set to no selection for testing
-  // remove after
+  // remove when everything done
   muscle = muscleSelectUser.NoSelection
   // ------------------------------------------
 
@@ -48,25 +50,30 @@ export default function FilteredExercises(muscle = muscleSelectUser.NoSelection)
 
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
-      <NavBar
-        center={'Select Exercises'}
-        right={
-          <Pressable onPress={() => router.back()}>
-            {addCount == 0 ? (
-              <Text style={{ color: '#CACACA', fontSize: 20 }}>Add</Text>
-            ) : (
-              <Text style={{ color: '#CACACA', fontSize: 20 }}>Add{addCount}</Text>
-            )}
-          </Pressable>
-        }
-      />
-      {/*<View className='flex flex-row justify-between px-5'>*/}
-      {/*  <Ionicons onPress={() => router.back()} name='chevron-back' size={20} color='#CACACA' />*/}
-      {/*  <Text style={{ color: '#CACACA', fontSize: 20 }}>Select exercise</Text>*/}
-      {/*  <Pressable onPress={() => router.back()}>*/}
-      {/*    <Text style={{ color: '#CACACA', fontSize: 20 }}>Add{addCount}</Text>*/}
-      {/*  </Pressable>*/}
-      {/*</View>*/}
+      {/*<NavBar*/}
+      {/*  center={'Select Exercises'}*/}
+      {/*  right={*/}
+      {/*    <Pressable onPress={() => router.back()}>*/}
+      {/*      {addCount == 0 ? (*/}
+      {/*        <Text style={{ color: '#CACACA', fontSize: 20 }}>Add</Text>*/}
+      {/*      ) : (*/}
+      {/*        <Text style={{ color: '#CACACA', fontSize: 20 }}>Add{addCount}</Text>*/}
+      {/*      )}*/}
+      {/*    </Pressable>*/}
+      {/*  }*/}
+      {/*/>*/}
+
+      <View className='flex flex-row justify-between px-5'>
+        <Ionicons onPress={() => router.back()} name='chevron-back' size={20} color='#CACACA' />
+        <Text style={{ color: '#CACACA', fontSize: 20 }}>Select exercise</Text>
+        <Pressable onPress={() => router.back()}>
+          {addCount == 0 ? (
+            <Text style={{ color: '#CACACA', fontSize: 20 }}>Add</Text>
+          ) : (
+            <Text style={{ color: '#CACACA', fontSize: 20 }}>Add{addCount}</Text>
+          )}
+        </Pressable>
+      </View>
 
       {/*<View className='flex flex-row items-center'>*/}
       {/*  <Image*/}

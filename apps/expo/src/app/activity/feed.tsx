@@ -15,14 +15,12 @@ const ActivityFeed = () => {
     api.friend.getFriendsWithChatIdFromUserId.useQuery({
       id: userData?.id ?? 0,
     })
-  console.log('userData', userData)
 
-  console.log('friends', friends)
 
   const { data: friendsWorkoutLogs, isLoading: friendsActivitiesLoading } =
     api.workoutLog.getActivityFeedWorkouts.useQuery(
       {
-        friendIds: friends?.map((friend) => friend.id) ?? [],
+        friendIds: friends?.map((friend) => friend.friendId) ?? [],
         count: ACTIVITY_FEED_ITEM_LIMIT,
       },
       { enabled: !friendsIsLoading },

@@ -16,7 +16,7 @@
 
     "db:studio": "pnpm db:prisma && cd packages/db && pnpm with-env prisma studio -p 6969",
     "db:seed": "cd packages/db && pnpm with-env tsx src/scripts/seed.ts",
-    "db:prisma": "cd packages/db && pnpm prisma generate && pnpm with-env prisma db push",
+    "db:prisma": "cd packages/db && pnpm prisma generate && pnpm with-env prisma db push --force-reset",
     "db:migrate": "cd packages/db && pnpm with-env prisma migrate dev --name init",
 
     "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",

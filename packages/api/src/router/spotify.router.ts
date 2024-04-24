@@ -49,7 +49,6 @@ export const spotifyRouter = createTRPCRouter({
     )
     .mutation(({ ctx, input }) => {
       const { prisma } = ctx
-
       return prisma.spotifyData.create({
         data: {
           albumImageURL: input.albumImageURL,
@@ -122,11 +121,19 @@ export const spotifyRouter = createTRPCRouter({
     .input(z.object({ id: z.number().int() }))
     .query(async ({ ctx, input }) => {
       const { prisma } = ctx
-
-      return prisma.spotifyData.delete({
+      // find first
+      const spotifyData = await prisma.spotifyData.findFirst({
         where: {
           userID: input.id,
         },
       })
+
+      if (spotifyData) {
+        return prisma.spotifyData.delete({
+          where: {
+            userID: input.id,
+          },
+        })
+      }
     }),
 })

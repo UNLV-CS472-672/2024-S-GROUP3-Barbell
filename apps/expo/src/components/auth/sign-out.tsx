@@ -2,8 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 
 import { useAuth } from '@clerk/clerk-expo'
-
-import Button from '../ui/button/button'
+import Button from '~/components/ui/button/button'
 
 export const SignOut = () => {
   const { isLoaded, signOut } = useAuth()
@@ -16,8 +15,8 @@ export const SignOut = () => {
     try {
       await signOut()
     } catch (err: any) {
-      console.log('Error:> ' + err?.status || '')
-      console.log('Error:> ' + err?.errors ? JSON.stringify(err.errors) : err)
+      // console.log('Error:> ' + err?.status || '')
+      // console.log('Error:> ' + err?.errors ? JSON.stringify(err.errors) : err)
     }
   }
 

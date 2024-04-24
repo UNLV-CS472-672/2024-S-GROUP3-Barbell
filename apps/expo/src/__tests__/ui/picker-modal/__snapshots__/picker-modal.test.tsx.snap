@@ -127,7 +127,11 @@ exports[`PickerModal renders correctly and matches snapshot 1`] = `
         >
           Select an Option
         </Text>
-        <View />
+        <View>
+          <Text>
+            Child content goes here
+          </Text>
+        </View>
       </View>
     </View>
   </View>

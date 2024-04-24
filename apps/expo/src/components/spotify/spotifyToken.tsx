@@ -1,9 +1,16 @@
 // USING THIS AUTH FLOW: https://developer.spotify.com/documentation/web-api/tutorials/code-flow
 
+import { makeRedirectUri } from 'expo-auth-session'
 import * as SecureStore from 'expo-secure-store'
 
-import { spotifyCredentials } from '~/utils/constants'
-import { api } from '~/utils/trpc/api'
+export const spotifyCredentials = {
+  clientID: process.env.EXPO_PUCLIC_SPOTIFY_CLIENT_ID ?? '',
+  clientSecret: process.env.EXPO_PUCLIC_SPOTIFY_CLIENT_SECRET ?? '',
+  redirectUri: makeRedirectUri({
+    scheme: 'expo',
+    path: 'redirect',
+  }), // Got this from using makeRedirectUri
+}
 
 // Define the interface for the external URLs object
 export interface ExternalUrls {
@@ -149,7 +156,7 @@ export async function tokensInit(code: string) {
 //  1) Tokens init, get refresh and access first time. Only run when refresh doesn't already exist.
 //  2) Use refresh. This one is done when we have the refresh already, and we use that token to get a new access token.
 export async function getAccessToken() {
-  console.log("Getting access token")
+  console.log('Getting access token')
   // Just check to see which function to call.
   // If we don't have a refresh, we clearly don't have an access token either
   const refresh = SecureStore.getItem('refreshToken')

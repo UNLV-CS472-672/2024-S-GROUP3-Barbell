@@ -19,7 +19,6 @@ import { Prisma } from '@prisma/client'
 import { prisma } from '..'
 import award from '../mock-data/award.json'
 // No longer used in new schema i believe
-// import set from '../mock-data/set.json'
 import spotify from '../mock-data/spotify.json'
 import chat from '../new-gen-data/chat.json'
 import exercise from '../mock-data/exercise.json'
@@ -32,7 +31,7 @@ import workoutLog from '../new-gen-data/workoutLog.json'
 import workoutTemplate from '../new-gen-data/workoutTemplate.json'
 // import users from '../mock-data/user.json'
 // import workoutLog from '../mock-data/workoutLog.json'
-import workout from '../mock-data/workoutTemplate.json'
+// import workout from '../mock-data/workoutTemplate.json'
 
 /**
  * @param type logging type
@@ -131,8 +130,8 @@ const loaddb = async () => {
     logger('add', 'spotify')
 
     /*  */
-    await prisma.post.createMany({ data: post })
-    logger('add', 'post')
+    // await prisma.post.createMany({ data: post })
+    // logger('add', 'post')
 
     /*  */
     await prisma.notification.createMany({
@@ -152,20 +151,20 @@ const loaddb = async () => {
     logger('add', 'WorkoutTemplate')
 
     /* */
-    await prisma.workoutLog.createMany({
-      data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
-    })
-    logger('add', 'WorkoutLogs')
-
-    
-
-    // /* */
     // for (let i = 0; i < workout.length; i++) {
     //   await prisma.workoutTemplate.createMany({
     //     data: workout[i] as Prisma.WorkoutTemplateCreateManyInput[],
     //   })
     // }
-    // logger('add', 'workoutTemplate')
+    await prisma.workoutTemplate.createMany({
+      data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
+    })
+    logger('add', 'workoutTemplate')
+
+    await prisma.workoutLog.createMany({
+      data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
+    })
+    logger('add', 'workoutLog')
 
     /*  */
     await prisma.chat.createMany({

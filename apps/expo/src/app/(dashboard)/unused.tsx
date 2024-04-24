@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
-import { cn } from '^/packages/ui/src/cn'
 
+import { cn } from '^/packages/ui/src/cn'
 
 /**
  * @depraecated

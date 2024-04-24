@@ -22,9 +22,8 @@ export const postRouter = createTRPCRouter({
   create: publicProcedure
     .input(
       z.object({
-        // title: z.string().min(1),
-        content: z.string().min(1),
         authorId: z.number().int(),
+        content: z.string().min(1),
       }),
     )
     .mutation(({ ctx, input }) => {
@@ -72,8 +71,8 @@ export const postRouter = createTRPCRouter({
         select: {
           author: true,
           content: true,
-          // title: true,
           id: true,
+          createdAt: true,
         },
         orderBy: {
           createdAt: 'desc',

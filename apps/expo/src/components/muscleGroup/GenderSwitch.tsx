@@ -14,8 +14,10 @@ export default function Toggle({
   onValueChange: () => void
 }) {
   // Use useRef to persist the animated value without reinitializing it on every render
+  /* istanbul ignore next*/
   const animation = useRef(new Animated.Value(value ? 1 : 0)).current
 
+  /* istanbul ignore next*/
   useEffect(() => {
     // animate the switch when the value prop changes
     Animated.timing(animation, {

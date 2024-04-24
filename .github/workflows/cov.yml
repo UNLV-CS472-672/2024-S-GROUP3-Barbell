@@ -32,12 +32,11 @@ jobs:
       - name: Install root dependencies
         run: pnpm install --no-frozen-lockfile
 
-      
-      - name: Setup Prisma Schema
+      - name: Setup Prisma Schema, Migrate, and Seed
         working-directory: .
         run: |
-          cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push
-        
+          pnpm db:prisma && pnpm db:seed
+
       # - name: Run tests and collect coverage
       #   run: |
       #     pnpm run jest
@@ -66,10 +65,10 @@ jobs:
           directory: ./apps/expo/jest-coverage/
           fail_ci_if_error: true
 
-      # - name: Upload api coverage reports to Codecov
-      #   uses: codecov/codecov-action@v4.0.1
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     slug: UNLV-CS472-672/2024-S-GROUP3-Barbell
-      #     directory: ./packages/api/vitest-coverage/
-      #     fail_ci_if_error: true
+      - name: Upload api coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: UNLV-CS472-672/2024-S-GROUP3-Barbell
+          directory: ./packages/api/vitest-coverage/
+          fail_ci_if_error: true

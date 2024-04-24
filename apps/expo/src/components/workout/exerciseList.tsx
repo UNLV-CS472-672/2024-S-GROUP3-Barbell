@@ -29,14 +29,14 @@ export default function ExerciseList() {
     if (equipmentList.length > 0) {
       // if equipmentList has items, filter data based on equipmentList
       setFilteredList(
-        data?.filter((workout) =>
+        data?.filter((workout: any) =>
           equipmentList.includes(
             workout.category.charAt(0).toUpperCase() + workout.category.slice(1).toLowerCase(),
           ),
         ),
       )
       setList(
-        data?.filter((workout) =>
+        data?.filter((workout: any) =>
           equipmentList.includes(
             workout.category.charAt(0).toUpperCase() + workout.category.slice(1).toLowerCase(),
           ),
@@ -101,17 +101,17 @@ export default function ExerciseList() {
         )}
         {VisibleComp == 'equipment' && (
           <TouchableOpacity
-            className='ml-1 mr-1 mt-1 flex-1 rounded-lg  bg-[#C4C4C4] px-4 py-2 font-bold'
+            className='ml-1 mr-1 mt-1 flex-1 rounded-lg  bg-[#48476D] px-4 py-2 font-bold'
             onPress={() => {
               handleFilterByEquipment()
             }}
           >
-            <Text className='text-center'>Select Exercises</Text>
+            <Text className='text-center text-[#CACACA]'>Select Exercises</Text>
           </TouchableOpacity>
         )}
 
-        <TouchableOpacity className='ml-1 mr-1 mt-1 flex-1 rounded-lg bg-[#48476D] px-4 py-2 font-bold'>
-          <Text className='text-center text-[#CACACA]'>Use Diagram</Text>
+        <TouchableOpacity className='ml-1 mr-1 mt-1 flex-1 rounded-lg bg-[#C4C4C4] px-4 py-2 font-bold'>
+          <Text className='text-center text-[#272727]'>Use Diagram</Text>
         </TouchableOpacity>
       </View>
       <View className='pt-1' style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />

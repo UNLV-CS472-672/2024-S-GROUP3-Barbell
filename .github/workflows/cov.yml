@@ -35,7 +35,7 @@ jobs:
       - name: Setup Prisma Schema, Migrate, and Seed
         working-directory: .
         run: |
-          cd packages/db && pnpm prisma generate && pnpm dotenv -e ../../.env prisma db push --force-reset && pnpm db:seed
+          cd packages/db && pnpm prisma generate && pnpm with-env prisma db push --force-reset
 
       # - name: Run tests and collect coverage
       #   run: |

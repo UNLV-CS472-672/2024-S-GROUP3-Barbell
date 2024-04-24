@@ -85,8 +85,7 @@ model Post2 {
 }
 
 model Post {
-  id        Int      @id @unique @default(autoincrement())
-  // Removed: title     String
+  id        Int     @id @unique @default(autoincrement())
   content   String?
   published Boolean  @default(false)
   author    User?    @relation(fields: [authorId], references: [id])

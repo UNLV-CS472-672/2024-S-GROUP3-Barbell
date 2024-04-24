@@ -5,13 +5,7 @@ import { useMemo, useState } from 'react'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import {
-  createWSClient,
-  loggerLink,
-  splitLink,
-  unstable_httpBatchStreamLink,
-  wsLink,
-} from '@trpc/client'
+import { createWSClient, loggerLink, unstable_httpBatchStreamLink, wsLink, splitLink } from '@trpc/client'
 import { createTRPCReact } from '@trpc/react-query'
 import SuperJSON from 'superjson'
 
@@ -40,7 +34,7 @@ export const getWsUrl = () => {
     const [hostname] = host.split(':')
 
     if (protocol === 'https:') {
-      return `https://2024-s-group-3-barbell-nextjs.vercel.app/3001`
+      return `wss://starfish-app-z8v32.ondigitalocean.app/`
     }
 
     return `ws://${hostname}:3001`
@@ -73,6 +67,8 @@ function getEndingLink(): TRPCLink<AppRouter> {
     url: getWsUrl(),
   })
 
+  console.log('AND THE LINK IS: ', getWsUrl())
+
   return wsLink({
     client,
     /**
@@ -82,20 +78,17 @@ function getEndingLink(): TRPCLink<AppRouter> {
   })
 }
 
-// const wsUrl = getWsUrl()
+const wsUrl = getWsUrl()
 
-// const wsClient =
-//   wsUrl !== null
-//     ? createWSClient({
-//         url: wsUrl,
-//         onOpen: () => {
-//           console.log('ws open')
-//         },
-//         onClose: (cause) => {
-//           console.log('ws close', cause)
-//         },
-//       })
-//     : null
+const wsClient = createWSClient({
+  url: wsUrl ?? '',
+  onOpen: () => {
+    console.log('ws open')
+  },
+  onClose: (cause) => {
+    console.log('ws close', cause)
+  },
+})
 
 export function TRPCReactProvider(props: { children: React.ReactNode; headers?: Headers }) {
   /*  */
@@ -111,38 +104,38 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
       }),
   )
 
-  // const httpLink = unstable_httpBatchStreamLink({
-  //   /**
-  //    * @link https://trpc.io/docs/v11/data-transformers
-  //    */
-  //   transformer: SuperJSON,
-  //   url: `${getBaseUrl()}/api/trpc`,
-  //   async headers() {
-  //     const headers = new Headers()
-  //     headers.set('x-trpc-source', 'nextjs-react')
-  //     return headers
-  //   },
-  // })
+  const httpLink = unstable_httpBatchStreamLink({
+    /**
+     * @link https://trpc.io/docs/v11/data-transformers
+     */
+    transformer: SuperJSON,
+    url: `${getBaseUrl()}/api/trpc`,
+    async headers() {
+      const headers = new Headers()
+      headers.set('x-trpc-source', 'nextjs-react')
+      return headers
+    },
+  })
 
-  const wsLinkClient = useMemo(() => {
-    const client = createWSClient({
-      url: `ws://localhost:3001`,
-      onOpen: () => {
-        console.log('ws open')
-      },
-      onClose: (cause) => {
-        console.log('ws close', cause)
-      },
-    })
+  // const wsLinkClient = useMemo(() => {
+  //   const client = createWSClient({
+  //     url: getWsUrl(),
+  //     onOpen: () => {
+  //       console.log('ws open')
+  //     },
+  //     onClose: (cause) => {
+  //       console.log('ws close', cause)
+  //     },
+  //   })
 
-    return wsLink({
-      client,
-      /**
-       * @link https://trpc.io/docs/v11/data-transformers
-       */
-      transformer: SuperJSON,
-    })
-  }, [])
+  //   return wsLink({
+  //     client,
+  //     /**
+  //      * @link https://trpc.io/docs/v11/data-transformers
+  //      */
+  //     transformer: SuperJSON,
+  //   })
+  // }, [])
 
   /*  */
   const [trpcClient] = useState(() =>
@@ -169,16 +162,16 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         // getEndingLink(),
 
         /* version 3 */
-        // wsClient
-        //   ? splitLink({
-        //       condition: ({ type }) => type === 'subscription',
-        //       true: wsLink({ client: wsClient, transformer: SuperJSON }),
-        //       false: httpLink,
-        //     })
-        //   : httpLink,
+        wsClient
+          ? splitLink({
+              condition: ({ type }) => type === 'subscription',
+              true: wsLink({ client: wsClient, transformer: SuperJSON }),
+              false: httpLink,
+            })
+          : httpLink,
 
         /* version 4 */
-        wsLinkClient,
+        // wsLinkClient,
       ],
 
       /* version 5 */

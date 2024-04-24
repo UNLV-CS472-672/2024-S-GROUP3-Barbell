@@ -3,7 +3,6 @@ import { Text, View } from 'react-native'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import TimeAgo from '~/components/timeAgo/TimeAgo'
-import Button from '~/components/ui/button/button'
 import { api } from '~/utils/trpc/api'
 
 interface PostProps {
@@ -35,14 +34,15 @@ const Post = ({ post, username }: PostProps) => {
 interface ProfilePostsProps {
   id: number
   username: string
+  postCount: number
 }
 
-export default function ProfilePosts({ id, username }: ProfilePostsProps) {
+export default function ProfilePosts({ id, username, postCount }: ProfilePostsProps) {
   const postAmount = 5
   const [postIndex, setPostIndex] = useState<number>(1)
   const { data, isFetching } = api.post.getUsersPostsByIdAndPostCount.useQuery({
     id: id,
-    posts: 5,
+    posts: postAmount,
     page: postIndex,
   })
 
@@ -54,8 +54,14 @@ export default function ProfilePosts({ id, username }: ProfilePostsProps) {
         if (existingPosts === undefined) {
           return data
         } else {
-          // concat new posts to the existing posts
-          return [...existingPosts, ...data]
+          // Create a set of existing post IDs
+          const existingPostIds = new Set(existingPosts.map((post: any) => post.id))
+
+          // Filter out duplicate posts from data
+          const newData = data.filter((post: any) => !existingPostIds.has(post.id))
+
+          // Concatenate new posts to the existing posts
+          return [...existingPosts, ...newData]
         }
       })
     }
@@ -66,11 +72,15 @@ export default function ProfilePosts({ id, username }: ProfilePostsProps) {
       <View className='my-10 h-[50px] items-center justify-center'>
         <RotatingBarbellIcon />
       </View>
-    ) : (
+    ) : posts?.length != postCount ? (
       <View className='my-10 h-[50px] items-center justify-center'>
         <Text className='text-center text-[#8987d4]' onPress={() => setPostIndex(postIndex + 1)}>
           More
         </Text>
+      </View>
+    ) : (
+      <View className='my-10 h-[50px] items-center justify-center'>
+        <Text className='text-center text-[#424242]'>All posts loaded</Text>
       </View>
     )
   }

@@ -13,6 +13,7 @@ import HeaderElement from '~/components/profile/HeaderElement'
 import IncomingFriendAlert from '~/components/profile/IncomingFriendAlert'
 import MessageButton from '~/components/profile/MessageButton'
 import ProfilePosts from '~/components/profile/ProfilePosts'
+import ProfileWorkouts from '~/components/profile/ProfileWorkouts'
 import ViewSwitcher from '~/components/profile/ViewSwitcher'
 import NavBar from '~/components/ui/nav-bar/NavBar'
 import { useGlobalContext } from '~/context/global-context'
@@ -79,7 +80,20 @@ export default function ProfileView() {
           />
         </View>
         <ViewSwitcher viewPosts={viewPosts} setViewPosts={setViewPosts} />
-        {viewPosts && <ProfilePosts id={viewingProfileId} username={viewingProfileUsername} />}
+        {viewPosts && (
+          <ProfilePosts
+            id={viewingProfileId}
+            username={viewingProfileUsername}
+            postCount={data?.postCount!}
+          />
+        )}
+        {!viewPosts && (
+          <ProfileWorkouts
+            id={viewingProfileId}
+            username={viewingProfileUsername}
+            workoutCount={data?.workoutCount!}
+          />
+        )}
       </View>
     </ScrollView>
   )

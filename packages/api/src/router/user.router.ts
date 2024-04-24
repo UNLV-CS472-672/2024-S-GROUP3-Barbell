@@ -37,13 +37,6 @@ export const userRouter = createTRPCRouter({
         return user
       }
 
-      // return await prisma.user.create({
-      //   data: {
-      //     clerkId: input.clerkId,
-      //     username: input.username,
-      //     name: input.name,
-      //   },
-      // })
       return await prisma.user.upsert({
         where: { clerkId: input.clerkId },
         update: {
@@ -121,13 +114,9 @@ export const userRouter = createTRPCRouter({
         },
       })
 
-      const workoutInfo = await ctx.prisma.workoutLog.findMany({
-        where: {
-          userId: input.viewingProfileId,
-        },
-        select: {
-          workoutId: true,
-        },
+      const workoutInfo = await ctx.prisma.user.findFirst({
+        where: { id: input.viewingProfileId },
+        select: { workoutHistory: true },
       })
 
       const friend = await ctx.prisma.friend.findFirst({
@@ -168,7 +157,7 @@ export const userRouter = createTRPCRouter({
         friendStatus = 'PENDING'
       }
 
-      const workoutCount = workoutInfo.length
+      const workoutCount = workoutInfo.workoutHistory.length
 
       const chat = await ctx.prisma.chat.findFirst({
         where: {
@@ -205,6 +194,38 @@ export const userRouter = createTRPCRouter({
       return ctx.prisma.user.findFirst({
         where: { id: input.userId },
         select: { workoutHistory: true },
+      })
+    }),
+
+  getUserWorkoutHistoryPaginated: publicProcedure
+    .input(
+      z.object({
+        id: z.number().int(),
+        workouts: z.number().int().optional(),
+        page: z.number().int().optional(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const pageSize = input.workouts
+      const pageNumber = input.page || 1
+      const skip = (pageNumber - 1) * pageSize
+
+      return ctx.prisma.workoutLog.findMany({
+        where: {
+          userId: input.id,
+        },
+        orderBy: {
+          finishedAt: 'desc',
+        },
+        select: {
+          finishedAt: true,
+          id: true,
+          user: true,
+          userId: true,
+          workoutTemplate: true,
+        },
+        skip,
+        take: pageSize,
       })
     }),
 })

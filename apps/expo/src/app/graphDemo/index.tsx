@@ -6,16 +6,13 @@ import { useGlobalContext } from '~/context/global-context'
 export default function GraphDemo() {
     const {userData} = useGlobalContext()
     if(!userData){
-        console.log("No user data.")
         return null
     }
-    console.log("Here?")
 
     // Context exists so we chilling
     
     return(
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Just testing out this funny lil graph. Yippee!</Text>
             <DisplayWorkoutFrequencyGraph userID={userData.id}/>
         </View>
     )

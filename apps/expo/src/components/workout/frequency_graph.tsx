@@ -27,7 +27,7 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
     
         }
     };
-    const values = new Array<number>(12).fill(0);
+    let values = new Array<number>(12).fill(0);
 
     const screenWidth = Dimensions.get("screen").width * 0.9
     const screenHeight = Dimensions.get("screen").height * 0.3
@@ -45,18 +45,17 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
     const {data: logData, isFetching} = api.user.getUserWorkoutHistory.useQuery({userId: userID});
 
     const currYear = new Date().getFullYear()
-    console.log(currYear, " is the current year!")
-
-    // Check all the values
-    console.log("Here")
     if(!(logData===undefined)){
         for(let i = 0; i < logData!.workoutHistory.length; i++){
+            let year = logData!.workoutHistory[i]!.finishedAt.getFullYear()
+            if(year===currYear){
+                // Valid log, check month and increment
+                let month:number = logData!.workoutHistory[i]!.finishedAt.getMonth() // Starts at 0 indexing for Jan
+                values[month]++
+            }
         }
     }
-
-    // Test with random data: Currently april so uh go up until april
     
-
     const data = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"," Dec"],
         datasets: [
@@ -84,9 +83,6 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
                 fromZero={true}
                 yLabelsOffset={15}
                 xLabelsOffset={-10}
-                style={{
-                    
-                }}
             />
             </>
 }

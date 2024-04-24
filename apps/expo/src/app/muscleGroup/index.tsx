@@ -10,6 +10,8 @@ import { Ionicons } from '@expo/vector-icons'
 import FrontBackSwitch from '~/components/muscleGroup/FrontBackSwitch'
 import GenderSwitch from '~/components/muscleGroup/GenderSwitch'
 import { Gender, useGlobalContext } from '~/context/global-context'
+import FilteredExercises from '~/app/filteredExercises'
+import {NavigationContainer} from '@react-navigation/native';
 
 export type muscleSelectDev =
   | 'abs'
@@ -36,7 +38,17 @@ export type muscleSelectDev =
   | 'triceps'
   | 'upper-back'
 
-export type muscleSelectUser = 'Shoulder' | 'Chest' | 'Arm' | 'Core' | 'Leg' | 'Back'
+export enum muscleSelectUser {
+  Shoulder,
+  Chest,
+  Arm,
+  Core,
+  Leg,
+  Back,
+  NoSelection,
+}
+
+//{ 'Shoulder' | 'Chest' | 'Arm' | 'Core' | 'Leg' | 'Back' }
 
 export default function NewWorkoutMuscleGroup() {
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
@@ -108,6 +120,7 @@ export default function NewWorkoutMuscleGroup() {
   const toggleGenderSwitch = () => setGender((previousState) => !previousState)
 
   const [userSelection, setUserSelection] = useState('')
+  const [passNext, setPassNext] = useState<muscleSelectUser>(muscleSelectUser.NoSelection)
 
   // NavBar gives odd view
   return (

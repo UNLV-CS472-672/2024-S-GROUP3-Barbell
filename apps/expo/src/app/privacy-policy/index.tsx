@@ -8,7 +8,7 @@ import NavBar from '~/components/ui/nav-bar/NavBar'
 
 const tailwindClasses = {
   mainTile: 'm-4 p-4 rounded-lg bg-bb-dark-gray',
-  mainTileTitle: 'text-2xl text-slate-200',
+  mainTileTitle: 'text-base text-slate-200',
   mainTileItem: 'flex-row',
   navigationListItemLabel: 'flex-auto m-2 self-center text-slate-200',
   navigationListItemChevron: 'self-center text-slate-200',
@@ -28,25 +28,25 @@ const PrivacyPolicy = () => {
               text='Data Collection'
               textColor='#CFCFCF'
               backgroundColor='#48476D'
-              fontSize={15}
+              fontSize={13}
             />
             <Text> </Text>
             <Label
               text='Third-Party Integration'
               textColor='#CFCFCF'
               backgroundColor='#48476D'
-              fontSize={15}
+              fontSize={13}
             />
           </View>
 
           <Text
-            className='text-2xl text-slate-200'
-            style={{ fontSize: 15, textAlign: 'center', paddingHorizontal: 10 }}
+            className='text-sm text-slate-200'
+            style={{ textAlign: 'center', paddingHorizontal: 10 }}
           >
-            {'\n'}Effective Date: [4/19/2024]{'\n'}
+            {'\n'}Effective Date: [4/19/2024]
           </Text>
           <View className={tailwindClasses.mainTile}>
-            <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
+            <Text className='text-base text-slate-200' style={{ paddingHorizontal: 10 }}>
               Welcome to Barbell, your ultimate companion for fitness and workout routines. At
               Barbell, we are committed to protecting your privacy and ensuring the security of your
               personal information. This Privacy Policy outlines how we collect, use, disclose, and
@@ -55,14 +55,11 @@ const PrivacyPolicy = () => {
           </View>
 
           <View className={tailwindClasses.mainTile}>
-            <Text
-              className='text-2xl text-slate-200'
-              style={{ fontSize: 25, paddingHorizontal: 10 }}
-            >
+            <Text className='text-lg text-slate-200' style={{ paddingHorizontal: 10 }}>
               1. Information We Collect
             </Text>
 
-            <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
+            <Text className='text-base text-slate-200' style={{ paddingHorizontal: 10 }}>
               {'\n'}a. Personal Information: {'\n\t\t\t'} When you create an account with Barbell,
               we may collect personal information such as your name, email address, age, gender, and
               profile picture. Additionally, if you choose to link your Spotify account, we may
@@ -80,13 +77,10 @@ const PrivacyPolicy = () => {
           </View>
 
           <View className={tailwindClasses.mainTile}>
-            <Text
-              className='text-2xl text-slate-200'
-              style={{ fontSize: 25, paddingHorizontal: 10 }}
-            >
+            <Text className='text-lg text-slate-200' style={{ paddingHorizontal: 10 }}>
               2. How We Use Your Information
             </Text>
-            <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
+            <Text className='text-base text-slate-200' style={{ paddingHorizontal: 10 }}>
               {'\n'}a. Personalization:{'\n\t\t\t'} We use the information collected to personalize
               your experience with the App, including suggesting workout routines, tracking
               progress, and providing relevant content.{'\n\n'}b. Social Sharing:{'\n\t\t\t'} Your
@@ -104,13 +98,10 @@ const PrivacyPolicy = () => {
           </View>
 
           <View className={tailwindClasses.mainTile}>
-            <Text
-              className='text-2xl text-slate-200'
-              style={{ fontSize: 25, paddingHorizontal: 10 }}
-            >
+            <Text className='text-lg text-slate-200' style={{ paddingHorizontal: 10 }}>
               3. Information Sharing and Disclosure
             </Text>
-            <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
+            <Text className='text-base text-slate-200' style={{ paddingHorizontal: 10 }}>
               {'\n'}Third-Party Service Providers:{'\n\t\t\t'} We may share your information with
               trusted third-party service providers who assist us in operating the App, such as
               hosting services, analytics providers, and customer support.{'\n\n'}b. Legal
@@ -121,13 +112,10 @@ const PrivacyPolicy = () => {
           </View>
 
           <View className={tailwindClasses.mainTile}>
-            <Text
-              className='text-2xl text-slate-200'
-              style={{ fontSize: 25, paddingHorizontal: 10 }}
-            >
+            <Text className='text-lg text-slate-200' style={{ paddingHorizontal: 10 }}>
               4. Data Security
             </Text>
-            <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
+            <Text className='text-base text-slate-200' style={{ paddingHorizontal: 10 }}>
               {'\n\t\t\t'} Barbell takes reasonable measures to protect your information from
               unauthorized access, use, or disclosure. However, no method of transmission over the
               internet or electronic storage is 100% secure. Therefore, we cannot guarantee absolute
@@ -136,13 +124,10 @@ const PrivacyPolicy = () => {
           </View>
 
           <View className={tailwindClasses.mainTile}>
-            <Text
-              className='text-2xl text-slate-200'
-              style={{ fontSize: 25, paddingHorizontal: 10 }}
-            >
+            <Text className='text-lg text-slate-200' style={{ paddingHorizontal: 10 }}>
               5. Your Choices and Rights
             </Text>
-            <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
+            <Text className='text-base text-slate-200' style={{ paddingHorizontal: 10 }}>
               {'\n'}a. Account Settings:{'\n\t\t\t'} You have the option to review and update your
               account information and privacy settings within the App.{'\n\n'}b. Opt-Out:
               {'\n\t\t\t'} You may choose not to share certain information or opt-out of specific
@@ -153,13 +138,10 @@ const PrivacyPolicy = () => {
           </View>
 
           <View className={tailwindClasses.mainTile}>
-            <Text
-              className='text-2xl text-slate-200'
-              style={{ fontSize: 25, paddingHorizontal: 10 }}
-            >
+            <Text className='text-lg text-slate-200' style={{ paddingHorizontal: 10 }}>
               6. Children's Privacy
             </Text>
-            <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
+            <Text className='text-base text-slate-200' style={{ paddingHorizontal: 10 }}>
               {'\n\t\t\t'}
               Barbell is not intended for individuals under the age of 13. We do not knowingly
               collect personal information from children under 13. If you are a parent or guardian
@@ -169,13 +151,10 @@ const PrivacyPolicy = () => {
           </View>
 
           <View className={tailwindClasses.mainTile}>
-            <Text
-              className='text-2xl text-slate-200'
-              style={{ fontSize: 25, paddingHorizontal: 10 }}
-            >
+            <Text className='text-lg text-slate-200' style={{ paddingHorizontal: 10 }}>
               7. Changes to this Privacy Policy
             </Text>
-            <Text className='text-2xl text-slate-200' style={{ paddingHorizontal: 10 }}>
+            <Text className='text-base text-slate-200' style={{ paddingHorizontal: 10 }}>
               {'\n\t\t\t'} We reserve the right to update or modify this Privacy Policy at any time.
               We will notify you of any material changes by posting the updated policy on our
               website or through other communication channels.

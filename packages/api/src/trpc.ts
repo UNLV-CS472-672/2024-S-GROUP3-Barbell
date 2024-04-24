@@ -11,7 +11,8 @@
  */
 
 // import type { inferAsyncReturnType } from "@trpc/server"
-import type * as trpcNext from '@trpc/server/adapters/next'
+// import type * as trpcNext from '@trpc/server/adapters/next'
+import type { CreateWSSContextFnOptions } from '@trpc/server/adapters/ws'
 
 import { initTRPC } from '@trpc/server'
 import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
@@ -27,6 +28,18 @@ export default function getErrorMessage(error: unknown) {
   else return String(error)
 }
 
+type WSOpts = {
+  fetchOpts: undefined
+  wsOpts: CreateWSSContextFnOptions
+}
+
+type APIOpts = {
+  fetchOpts: FetchCreateContextFnOptions
+  wsOpts: undefined
+}
+
+type OuterOpts = WSOpts | APIOpts | undefined
+
 /**
  * > 1. CONTEXT
  *
@@ -37,7 +50,8 @@ export default function getErrorMessage(error: unknown) {
  *
  * @see https://trpc.io/docs/server/context
  */
-interface CreateContextOptions {
+// interface CreateContextOptions extends Partial<CreateNextContextOptions> {
+type CreateInnerContextOptions = OuterOpts & {
   // session: Session | null
 }
 
@@ -53,8 +67,9 @@ interface CreateContextOptions {
  * - this is useful for testing when we don't want to mock Next.js' request/response
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
-export async function createContextInner(_opts: CreateContextOptions) {
+export async function createContextInner(_opts?: CreateInnerContextOptions) {
   return {
+    _opts,
     prisma,
   }
 }
@@ -66,18 +81,34 @@ export type Context = Awaited<ReturnType<typeof createContextInner>>
 /**
  * @param opts this thing need for nextjs (for some on god reason)
  * @see https://create.t3.gg/en/usage/trpc#-pagesapitrpctrpcts
+ * @alias createContext
  */
-export async function createTRPCContext(opts: FetchCreateContextFnOptions): Promise<Context> {
-  // for API-response caching see https://trpc.io/docs/v11/caching
+export async function createTRPCContext(opts: FetchCreateContextFnOptions) {
   const source = opts.req.headers.get('x-trpc-source') ?? 'unknown'
-  console.log('>>> tRPC Request from', source)
+  console.log('>>> tRPC Request from 🐧🐧🐧', source)
 
-  return await createContextInner({})
+  return await createContextInner({
+    wsOpts: undefined,
+    fetchOpts: opts,
+  })
+}
+
+/**
+ * @param opts this thing need for ws (for some on god reason)
+ * @returns
+ */
+export async function createWssContext(opts: CreateWSSContextFnOptions) {
+  console.log('>>> tRPC Request from 🧯 WebSocket')
+
+  return await createContextInner({
+    wsOpts: opts,
+    fetchOpts: undefined,
+  })
 }
 
 /* ------------------------------------------------------------------------------- */
 
-/**
+/**o
  * > 2. INITIALIZATION
  *
  * This is where the trpc api is initialized, connecting the context and

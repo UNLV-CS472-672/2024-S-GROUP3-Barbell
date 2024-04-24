@@ -55,7 +55,6 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
         username: clerkUserData.username ? clerkUserData.username : generateUsername(),
         name: clerkUserData.fullName ? clerkUserData.fullName : 'User',
       })
-
       setUserData({
         id: response.id,
         clerkId: response.clerkId!,

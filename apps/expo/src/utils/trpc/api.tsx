@@ -1,9 +1,19 @@
+import type { TRPCLink } from '@trpc/client'
 import React from 'react'
 import Constants from 'expo-constants'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { httpBatchLink, loggerLink } from '@trpc/client'
+
+import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import {
+  createWSClient,
+  httpBatchLink,
+  loggerLink,
+  splitLink,
+  TRPCClientError,
+  // unstable_httpBatchStreamLink,
+  wsLink,
+} from '@trpc/client'
 import { createTRPCReact } from '@trpc/react-query'
-import superjson from 'superjson'
+import SuperJSON from 'superjson'
 
 import type { AppRouter } from '@acme/api'
 
@@ -16,8 +26,10 @@ export { type RouterInputs, type RouterOutputs } from '@acme/api'
 /**
  * Extend this function when going to production by
  * setting the baseUrl to your production API URL.
+ *
+ * Deployed tactic, (tbd) cause I'm unsure if vercel can handle this
  */
-export const getBaseUrl = () => {
+export const getBaseUrl = (ws = false) => {
   /**
    * Gets the IP address of your host-machine. If it cannot automatically find it,
    * you'll have to manually set it. NOTE: Port 3000 should work for most but confirm
@@ -27,23 +39,71 @@ export const getBaseUrl = () => {
    * baseUrl to your production API URL.
    */
   const debuggerHost = Constants.expoConfig?.hostUri
-  let localhost = debuggerHost?.split(':')[0]
-  // const uri = Constants.manifest2?.extra?.expoGo?.debuggerHost
+  const localhost = debuggerHost?.split(':')[0]
+
+  // TODO: configure ws url, on deployed environment
 
   if (!localhost) {
-    throw new Error(
-      'Failed to get localhost. Please point to your production server.',
-    )
-  } 
+    // return "https://turbo.t3.gg";
+    console.log('localhost not found')
+    return 'https://2024-s-group-3-barbell-nextjs.vercel.app/'
+  }
 
+  if (ws) return `ws://${localhost}:3001/ws`
   return `http://${localhost}:3000`
 }
+
+/**
+ * @returns terminating ws link for the trpc client
+ * @see https://trpc.io/docs/client/links/splitLink (the illustration demonstrates how it is)
+ */
+function wsLinkClient(): TRPCLink<AppRouter> {
+  // TODO: memo this func
+  const client = createWSClient({
+    url: getBaseUrl(true),
+    onOpen: () => {
+      console.log('ws open')
+    },
+    onClose: (cause) => {
+      console.log('ws close', cause)
+    },
+  })
+
+  return wsLink({
+    client,
+    /**
+     * @link https://trpc.io/docs/v11/data-transformers
+     */
+    transformer: SuperJSON,
+  })
+}
+
+/**
+ * @returns terminating link for the trpc client
+ * It batches an array of individual tRPC operations into a single HTTP
+ * request that's sent to a single tRPC procedure.
+ * @see https://trpc.io/docs/client/links/splitLink (the illustration demonstrates how it is)
+ */
+// function httpLinkClient(): TRPCLink<AppRouter> {
+//   // TODO: memo this func
+//   return httpBatchLink({
+//     transformer: SuperJSON,
+//     // url: getApiUrl(),
+//     url: `${getBaseUrl()}/api/trpc`,
+//     headers() {
+//       const headers = new Map<string, string>()
+//       headers.set('x-trpc-source', 'expo-react')
+//       return Object.fromEntries(headers)
+//     },
+//   })
+// }
 
 /**
  * A wrapper for your app that provides the TRPC context.
  * Use only in _app.tsx
  */
 export function TRPCProvider(props: { children: React.ReactNode }) {
+  /*  */
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
@@ -52,11 +112,63 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
             // Since queries are prefetched on the server, we set a stale time so that
             // queries aren't immediately refetched on the client
             staleTime: 60 * 1000,
+            gcTime: 1000 * 60 * 60 * 24,
           },
         },
+        queryCache: new QueryCache({
+          onError: (err) => {
+            if (err instanceof TRPCClientError) {
+              console.log('TRPCClientError', err)
+            }
+          },
+        }),
+        mutationCache: new MutationCache({
+          onError: (err) => {
+            if (err instanceof TRPCClientError) {
+              console.log('TRPCClientError', err)
+            }
+          },
+        }),
       }),
   )
 
+  // /*  */
+  // const httpLinkClient = React.useMemo(() => {
+  //   return httpBatchLink({
+  //     transformer: SuperJSON,
+  //     // url: getApiUrl(),
+  //     url: `${getBaseUrl()}/api/trpc`,
+  //     headers() {
+  //       const headers = new Map<string, string>()
+  //       headers.set('x-trpc-source', 'expo-react')
+  //       return Object.fromEntries(headers)
+  //     },
+  //   })
+  // }, [])
+
+  // /*  */
+  // const wsLinkClient = React.useMemo(() => {
+  //   // TODO: memo this func
+  //   const client = createWSClient({
+  //     url: getBaseUrl(true),
+  //     onOpen: () => {
+  //       console.log('ws open')
+  //     },
+  //     onClose: (cause) => {
+  //       console.log('ws close', cause)
+  //     },
+  //   })
+
+  //   return wsLink({
+  //     client,
+  //     /**
+  //      * @link https://trpc.io/docs/v11/data-transformers
+  //      */
+  //     transformer: SuperJSON,
+  //   })
+  // }, [])
+
+  /* tbd */
   const [trpcClient] = React.useState(() =>
     api.createClient({
       links: [
@@ -66,24 +178,34 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
             (opts.direction === 'down' && opts.result instanceof Error),
           colorMode: 'ansi',
         }),
-        httpBatchLink({
-          transformer: superjson,
-          url: `${getBaseUrl()}/api/trpc`,
-          headers() {
-            const headers = new Map<string, string>()
-            headers.set('x-trpc-source', 'expo-react')
-            return Object.fromEntries(headers)
-          },
-        }),
+
+        /* version 1 */
+        // httpBatchLink({
+        //   transformer: SuperJSON,
+        //   url: `${getBaseUrl()}/api/trpc`,
+        //   headers() {
+        //     const headers = new Map<string, string>()
+        //     headers.set('x-trpc-source', 'expo-react')
+        //     return Object.fromEntries(headers)
+        //   },
+        // }),
+
+        /* version 2 */
+        // splitLink({
+        //   condition: ({ type }) => type === 'subscription',
+        //   true: wsLinkClient(),
+        //   false: httpLinkClient(),
+        // }),
+
+        /* version 3 */
+        wsLinkClient(),
       ],
     }),
   )
 
   return (
     <api.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        {props.children}
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{props.children}</QueryClientProvider>
     </api.Provider>
   )
 }

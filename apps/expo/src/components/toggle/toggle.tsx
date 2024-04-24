@@ -1,15 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Animated, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-
-// screen dimensions
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
-
-// Use <Toggle
-//        strRightSide={"defaultOn = TRUE"}
-//        defaultOn={useState(true)}
-//     />
-// All props are optional
-// Scaled based on screenWidth and screenHeight
 
 // Custom onValueChange Component - With Animation
 // Call as follows:
@@ -18,22 +8,21 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 //     value={useState()}
 //     onValueChange={() => set(!On)}
 // />
-export default function Toggle({
-  value,
-  onValueChange,
-  label,
-}: {
+export interface ToggleProps {
   value: boolean
   onValueChange: () => void
-  label: string
-}) {
+  label?: string
+}
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
+
+export const Toggle: React.FC<ToggleProps> = ({ value, onValueChange, label }) => {
   // Use useRef to persist the animated value without reinitializing it on every render
   const animation = useRef(new Animated.Value(value ? 1 : 0)).current
 
   useEffect(() => {
-    // animate the switch when the value prop changes
     Animated.timing(animation, {
-      toValue: value ? 1 : 0, // Animate to 1 if enabled, else to 0
+      toValue: value ? 1 : 0,
       duration: 150,
       useNativeDriver: false, // since we're animating a non-native property (marginLeft keke)
     }).start()
@@ -103,18 +92,17 @@ const styles = StyleSheet.create({
   toggleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: screenWidth * 0.015,
   },
   switch: {
     width: screenWidth * 0.15,
-    height: screenWidth * 0.05,
-    borderRadius: screenWidth * 0.025,
+    height: screenWidth * 0.07,
+    borderRadius: screenWidth * 0.035,
     justifyContent: 'center',
-    marginRight: screenWidth * 0.01,
+    paddingEnd: 63,
   },
   circle: {
-    width: screenWidth * 0.035,
-    height: screenWidth * 0.035,
+    width: screenWidth * 0.045,
+    height: screenWidth * 0.045,
     borderRadius: screenWidth * 0.05,
     backgroundColor: '#D9D9D9',
   },
@@ -123,3 +111,5 @@ const styles = StyleSheet.create({
     color: '#CACACA',
   },
 })
+
+export default Toggle

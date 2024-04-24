@@ -60,11 +60,13 @@ export const userRouter = createTRPCRouter({
   /**
    * get user by clerkId
    */
-  getIdByClerkId: publicProcedure.input(z.object({ clerkId: z.string() })).query(({ ctx, input }) => {
-    return ctx.prisma.user.findFirst({ where: { clerkId: input.clerkId } }).then((user) => {
-      return user?.id
-    })
-  }),
+  getIdByClerkId: publicProcedure
+    .input(z.object({ clerkId: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.user.findFirst({ where: { clerkId: input.clerkId } }).then((user) => {
+        return user?.id
+      })
+    }),
 
   /**
    * update user
@@ -85,4 +87,13 @@ export const userRouter = createTRPCRouter({
   delete: publicProcedure.input(z.object({ id: z.number() })).mutation(({ ctx, input }) => {
     return ctx.prisma.user.delete({ where: { id: input.id } })
   }),
+
+  getUserWorkoutHistory: publicProcedure
+    .input(z.object({ userId: z.number() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.user.findFirst({
+        where: { id: input.userId },
+        select: { workoutHistory: true },
+      })
+    }),
 })

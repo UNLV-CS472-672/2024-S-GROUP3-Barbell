@@ -22,17 +22,20 @@ export const postRouter = createTRPCRouter({
   create: publicProcedure
     .input(
       z.object({
-        title: z.string().min(1),
+        // title: z.string().min(1),
         content: z.string().min(1),
+        authorId: z.number().int(),
       }),
     )
     .mutation(({ ctx, input }) => {
-      // return ctx.prisma.post.create({ data: input })
-      return ctx.prisma.post.upsert({
-        where: { id: 1 },
-        update: input,
-        create: input,
+      return ctx.prisma.post.create({
+        data: input,
       })
+      // return ctx.prisma.post.upsert({
+      //   where: { id: 1 },
+      //   update: input,
+      //   create: input,
+      // })
     }),
   /**
    *
@@ -69,7 +72,7 @@ export const postRouter = createTRPCRouter({
         select: {
           author: true,
           content: true,
-          title: true,
+          // title: true,
           id: true,
         },
         orderBy: {
@@ -78,4 +81,8 @@ export const postRouter = createTRPCRouter({
         take: input.postCount,
       })
     }),
+
+  /**
+   *
+   */
 })

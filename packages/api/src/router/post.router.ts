@@ -23,7 +23,6 @@ export const postRouter = createTRPCRouter({
     .input(
       z.object({
         content: z.string().min(1),
-        authorId: z.number().int(),
       }),
     )
     .mutation(({ ctx, input }) => {
@@ -66,8 +65,8 @@ export const postRouter = createTRPCRouter({
         select: {
           author: true,
           content: true,
-          // title: true,
           id: true,
+          createdAt: true,
         },
         orderBy: {
           createdAt: 'desc',

@@ -50,52 +50,52 @@ export const getWsUrl = () => {
   // return null // When running in SSR, we aren't using subscriptions
 }
 
-// function getEndingLink(): TRPCLink<AppRouter> {
-//   if (typeof window === 'undefined') {
-//     return unstable_httpBatchStreamLink({
-//       /**
-//        * @link https://trpc.io/docs/v11/data-transformers
-//        */
-//       transformer: SuperJSON,
-//       url: `${getBaseUrl()}/api/trpc`,
-//       async headers() {
-//         const headers = new Headers()
-//         headers.set('x-trpc-source', 'nextjs-react')
-//         return headers
-//       },
-//     })
-//   }
+function getEndingLink(): TRPCLink<AppRouter> {
+  if (typeof window === 'undefined') {
+    return unstable_httpBatchStreamLink({
+      /**
+       * @link https://trpc.io/docs/v11/data-transformers
+       */
+      transformer: SuperJSON,
+      url: `${getBaseUrl()}/api/trpc`,
+      async headers() {
+        const headers = new Headers()
+        headers.set('x-trpc-source', 'nextjs-react')
+        return headers
+      },
+    })
+  }
 
-//   console.log('wsLink, hopefully')
+  console.log('wsLink, hopefully')
 
-//   // FIXED: wsLink url
-//   const client = createWSClient({
-//     url: getWsUrl(),
-//   })
+  // FIXED: wsLink url
+  const client = createWSClient({
+    url: getWsUrl(),
+  })
 
-//   return wsLink({
-//     client,
-//     /**
-//      * @link https://trpc.io/docs/v11/data-transformers
-//      */
-//     transformer: SuperJSON,
-//   })
-// }
+  return wsLink({
+    client,
+    /**
+     * @link https://trpc.io/docs/v11/data-transformers
+     */
+    transformer: SuperJSON,
+  })
+}
 
-const wsUrl = getWsUrl()
+// const wsUrl = getWsUrl()
 
-const wsClient =
-  wsUrl !== null
-    ? createWSClient({
-        url: wsUrl,
-        onOpen: () => {
-          console.log('ws open')
-        },
-        onClose: (cause) => {
-          console.log('ws close', cause)
-        },
-      })
-    : null
+// const wsClient =
+//   wsUrl !== null
+//     ? createWSClient({
+//         url: wsUrl,
+//         onOpen: () => {
+//           console.log('ws open')
+//         },
+//         onClose: (cause) => {
+//           console.log('ws close', cause)
+//         },
+//       })
+//     : null
 
 export function TRPCReactProvider(props: { children: React.ReactNode; headers?: Headers }) {
   /*  */
@@ -111,38 +111,38 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
       }),
   )
 
-  const httpLink = unstable_httpBatchStreamLink({
-    /**
-     * @link https://trpc.io/docs/v11/data-transformers
-     */
-    transformer: SuperJSON,
-    url: `${getBaseUrl()}/api/trpc`,
-    async headers() {
-      const headers = new Headers()
-      headers.set('x-trpc-source', 'nextjs-react')
-      return headers
-    },
-  })
+  // const httpLink = unstable_httpBatchStreamLink({
+  //   /**
+  //    * @link https://trpc.io/docs/v11/data-transformers
+  //    */
+  //   transformer: SuperJSON,
+  //   url: `${getBaseUrl()}/api/trpc`,
+  //   async headers() {
+  //     const headers = new Headers()
+  //     headers.set('x-trpc-source', 'nextjs-react')
+  //     return headers
+  //   },
+  // })
 
-  // const wsLinkClient = useMemo(() => {
-  //   const client = createWSClient({
-  //     url: `ws://localhost:3001`,
-  //     onOpen: () => {
-  //       console.log('ws open')
-  //     },
-  //     onClose: (cause) => {
-  //       console.log('ws close', cause)
-  //     },
-  //   })
+  const wsLinkClient = useMemo(() => {
+    const client = createWSClient({
+      url: `ws://localhost:3001`,
+      onOpen: () => {
+        console.log('ws open')
+      },
+      onClose: (cause) => {
+        console.log('ws close', cause)
+      },
+    })
 
-  //   return wsLink({
-  //     client,
-  //     /**
-  //      * @link https://trpc.io/docs/v11/data-transformers
-  //      */
-  //     transformer: SuperJSON,
-  //   })
-  // }, [])
+    return wsLink({
+      client,
+      /**
+       * @link https://trpc.io/docs/v11/data-transformers
+       */
+      transformer: SuperJSON,
+    })
+  }, [])
 
   /*  */
   const [trpcClient] = useState(() =>
@@ -169,16 +169,16 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         // getEndingLink(),
 
         /* version 3 */
-        wsClient
-          ? splitLink({
-              condition: ({ type }) => type === 'subscription',
-              true: wsLink({ client: wsClient, transformer: SuperJSON }),
-              false: httpLink,
-            })
-          : httpLink,
+        // wsClient
+        //   ? splitLink({
+        //       condition: ({ type }) => type === 'subscription',
+        //       true: wsLink({ client: wsClient, transformer: SuperJSON }),
+        //       false: httpLink,
+        //     })
+        //   : httpLink,
 
         /* version 4 */
-        // wsLinkClient,
+        wsLinkClient,
       ],
 
       /* version 5 */

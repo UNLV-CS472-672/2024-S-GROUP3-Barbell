@@ -1,7 +1,7 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
-import { Tabs } from 'expo-router'
+import { router, Tabs } from 'expo-router'
 
 import { DashboardHeader } from '^/apps/expo/src/layouts/headers/dashboard-header'
 import CircleMinus from '~assets/svgs/circle-minus.svg'
@@ -9,6 +9,7 @@ import CirclePlus from '~assets/svgs/circle-plus.svg'
 import HomeLogo from '~assets/svgs/home.svg'
 import Profile from '~assets/svgs/profile.svg'
 
+import Button from '~/components/ui/button/button'
 // import type { CustomBottomSheetModalRef } from '~/components/ui/custom-bottom-sheet-modal'
 // import Button from '~/components/ui/button/button'
 // import CustomBottomSheetModal from '~/components/ui/custom-bottom-sheet-modal'
@@ -133,21 +134,31 @@ const Layout = () => {
       </CustomBottomSheetModal> */}
 
       <PickerModal
-        // style={{ }}
         title='Would you like to?'
         isVisible={isVisible}
-        data={['Start Saved Workout', 'Create New Workout']}
-        onPress={(selectedItem: string | number, index: number) => {
-          console.log({ selectedItem, index })
-        }}
-        cancelButtonTextStyle={{ fontSize: 18 }}
-        onCancelPress={() => {
-          setVisible(false)
-        }}
         onBackdropPress={() => {
           setVisible(false)
         }}
-      />
+      >
+        <View className='flex gap-y-4 px-4 pb-4'>
+          <Button
+            color='dark'
+            onPress={() => {
+              router.push('(workout)/')
+              setVisible(false)
+            }}
+          >
+            <Text className='py-2 text-center text-lg font-semibold text-white'>
+              Create a new workout
+            </Text>
+          </Button>
+          <Button color='dark'>
+            <Text className='py-2 text-center text-lg font-semibold text-white'>
+              Start an existing workout
+            </Text>
+          </Button>
+        </View>
+      </PickerModal>
     </>
   )
 }

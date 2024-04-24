@@ -1,19 +1,30 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 
-import Button from '~/components/ui/button/button'
+import { Ionicons } from '@expo/vector-icons'
 
-// FIXME: Dashboard start here
-const Workout = () => {
+import NavBar from '~/components/ui/nav-bar/NavBar'
+import ExerciseList from '~/components/workout/exerciseList'
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1E1E1E',
+  },
+})
+
+export default function CreateNewWorkout() {
   return (
-    <SafeAreaView style={{ backgroundColor: '#1E1E1E', flex: 1 }}>
+    <SafeAreaView style={styles.container}>
+      <View className='h-[60px] flex-row items-center justify-evenly'>
+        <NavBar center={'Exercises'} right={'Next'} />
+      </View>
+
       <View>
-        <Text className='text-center text-white'>Workout screen ye</Text>
+        <ExerciseList />
       </View>
     </SafeAreaView>
   )
 }
-
-export default Workout

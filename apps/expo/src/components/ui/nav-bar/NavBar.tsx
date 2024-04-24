@@ -15,7 +15,7 @@
  * The rest of the fields will default to empty.
  */
 
-import { Text, View } from 'react-native'
+import { Platform, Text, View } from 'react-native'
 import { router } from 'expo-router'
 
 import { Ionicons } from '@expo/vector-icons'

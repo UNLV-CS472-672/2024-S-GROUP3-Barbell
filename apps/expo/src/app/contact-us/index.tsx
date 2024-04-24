@@ -1,5 +1,6 @@
 import React from 'react'
-import { Linking, SafeAreaView, Text, View } from 'react-native'
+import { Linking, Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Feather, Fontisto, SimpleLineIcons } from '@expo/vector-icons'
 

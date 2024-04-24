@@ -35,7 +35,7 @@ jobs:
       - name: Setup Prisma Schema, Migrate, and Seed
         working-directory: .
         run: |
-          pnpm db:prisma && pnpm db:seed
+          pnpm db:prisma-ci && pnpm db:seed
 
       # - name: Run tests and collect coverage
       #   run: |

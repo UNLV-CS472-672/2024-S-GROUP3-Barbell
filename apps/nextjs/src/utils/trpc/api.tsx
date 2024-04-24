@@ -28,6 +28,22 @@ const getBaseUrl = () => {
   return `http://localhost:${process.env.PORT ?? 3000}`
 }
 
+export const getWsUrl = () => {
+  if (typeof window !== 'undefined') {
+    const { protocol, host } = window.location
+    const [hostname] = host.split(':')
+
+    if (protocol === 'https:') {
+      return `https://2024-s-group-3-barbell-nextjs.vercel.app/3001`
+    }
+
+    return `ws://${hostname}:3001`
+  }
+
+  return ''
+  // return null // When running in SSR, we aren't using subscriptions
+}
+
 function getEndingLink(): TRPCLink<AppRouter> {
   if (typeof window === 'undefined') {
     return unstable_httpBatchStreamLink({
@@ -46,8 +62,9 @@ function getEndingLink(): TRPCLink<AppRouter> {
 
   console.log('wsLink, hopefully')
 
+  // FIXED: wsLink url
   const client = createWSClient({
-    url: `ws://localhost:3001`,
+    url: getWsUrl(),
   })
 
   return wsLink({
@@ -57,21 +74,6 @@ function getEndingLink(): TRPCLink<AppRouter> {
      */
     transformer: SuperJSON,
   })
-}
-
-export const getWsUrl = () => {
-  if (typeof window !== 'undefined') {
-    const { protocol, host } = window.location
-    const [hostname] = host.split(':')
-
-    if (protocol === 'https:') {
-      return ``
-    }
-
-    return `ws://${hostname}:3001`
-  }
-
-  return null // When running in SSR, we aren't using subscriptions
 }
 
 // const wsUrl = getWsUrl()

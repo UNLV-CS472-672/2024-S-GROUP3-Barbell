@@ -6,9 +6,11 @@ import { useGlobalContext } from '~/context/global-context'
 export default function GraphDemo() {
     const {userData} = useGlobalContext()
     if(!userData){
+        console.log("No user data.")
         return null
     }
-    
+    console.log("Here?")
+
     // Context exists so we chilling
     
     return(

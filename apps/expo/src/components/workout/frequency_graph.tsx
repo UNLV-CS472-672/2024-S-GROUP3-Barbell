@@ -9,12 +9,15 @@ import { Line } from 'react-native-svg'
 
 // To get the user's data, in particular the WorkoutLogs
 import { api } from '~/utils/trpc/api'
+import RotatingBarbellIcon from '../notif/RotatingBarbellIcon'
+
+enum MONTHS {
+    JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC
+}
 
 
 // Just use react-native-chart-kit to display the user's workout across each month for current year.
 export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}){
-    // Start by getting the current year. Shouldn't be too hard, just use date time
-    // Query the entirety of it and just store the value
 
     const chartConfig = {
         backgroundGradientFrom: "#48476D",
@@ -24,7 +27,10 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
     
         }
     };
-    
+    const values = new Array<number>(12).fill(0);
+
+    const screenWidth = Dimensions.get("screen").width * 0.9
+    const screenHeight = Dimensions.get("screen").height * 0.3
 
     // Psuedocode:
     //  For object in returned data
@@ -33,10 +39,23 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
     //          switch(month) monthValue++;
     // That populates the below values.
 
+    // Start by getting the current year. Shouldn't be too hard, just use date time
+    // Query the entirety of it and just store the value
+
+    const {data: logData, isFetching} = api.user.getUserWorkoutHistory.useQuery({userId: userID});
+
+    const currYear = new Date().getFullYear()
+    console.log(currYear, " is the current year!")
+
+    // Check all the values
+    console.log("Here")
+    if(!(logData===undefined)){
+        for(let i = 0; i < logData!.workoutHistory.length; i++){
+        }
+    }
+
     // Test with random data: Currently april so uh go up until april
-    const values = [33, 12, 23, 5, 16, 34, 20, 13, 7, 3, 5, 13]
-    const screenWidth = Dimensions.get("screen").width * 0.9
-    const screenHeight = Dimensions.get("screen").height * 0.3
+    
 
     const data = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"," Dec"],
@@ -50,24 +69,27 @@ export default function DisplayWorkoutFrequencyGraph({userID} : {userID: number}
     };
 
     return(
-        <View>
+        <View>{isFetching ? <View><RotatingBarbellIcon /></View> : 
+            <>
             <Text>Line Chart for User: {userID}</Text>
             <LineChart 
                 data = {data}
                 width = {screenWidth}
                 height = {screenHeight}
-                verticalLabelRotation={45}
+                verticalLabelRotation={55}
                 chartConfig={chartConfig}
                 withShadow={false}
                 withInnerLines={false}
                 segments={5}
                 fromZero={true}
                 yLabelsOffset={15}
-                xLabelsOffset={0}
+                xLabelsOffset={-10}
                 style={{
                     
                 }}
             />
+            </>
+}
         </View>
     )
 }

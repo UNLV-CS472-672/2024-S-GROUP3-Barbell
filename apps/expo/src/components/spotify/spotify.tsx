@@ -2,7 +2,6 @@ import { Image, Text, View } from 'react-native'
 
 // Use to show the progress of the song using a bar
 import SongProgress from '~/components/spotify/song-progress'
-
 import { api } from '~/utils/trpc/api'
 
 export default function Spotify({ inputID }: { inputID: number }) {
@@ -31,9 +30,12 @@ export default function Spotify({ inputID }: { inputID: number }) {
     <View style={{ width: 300 }}>
       <Text style={{ fontWeight: 'bold', height: 25 }}>LISTENING TO SPOTIFY</Text>
       <View style={{ flexDirection: 'row', height: 130, alignContent: 'center' }}>
-        <Image source={{ uri: albumImageURL }} className="h-36 w-36" />
+        <Image source={{ uri: albumImageURL }} className='h-36 w-36' />
         <View>
-          <Text style={{ fontWeight: 'bold', height: 30, verticalAlign: 'bottom' }}> {songTitle}</Text>
+          <Text style={{ fontWeight: 'bold', height: 30, verticalAlign: 'bottom' }}>
+            {' '}
+            {songTitle}
+          </Text>
           <Text style={{ height: 25, verticalAlign: 'bottom' }}> by {artists}</Text>
           <Text style={{ height: 25, verticalAlign: 'bottom' }}> on {album}</Text>
         </View>

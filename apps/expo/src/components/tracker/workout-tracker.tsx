@@ -1,22 +1,80 @@
+import { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 
+import { z } from 'zod'
+
+import { ExerciseSchema } from '@acme/validators'
+
+import type { TWorkoutTemplateInfo } from '~/utils/workout-tracker-utils'
+import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import ExerciseEntry from '~/components/tracker/exercise-entry'
 import WorkoutTrackerHeader from '~/components/tracker/workout-tracker-header'
+import { CustomBottomSheetModalRef } from '~/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 import Button from '~/components/ui/button/button'
-import { CustomBottomSheetModalRef } from '^/apps/expo/src/components/ui/bottom-sheet/custom-bottom-sheet-modal'
+import { api } from '~/utils/trpc/api'
+import {
+  extractExerciseData,
+  extractWorkoutName,
+  extractWorkoutTemplate,
+} from '~/utils/workout-tracker-utils'
+
+export type TExercise = z.infer<typeof ExerciseSchema>
 
 export interface IWorkoutTrackerProps {
   bottomSheetRef: React.RefObject<CustomBottomSheetModalRef>
+  workoutTemplateId: number
 }
 
-const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef }) => {
+// TODO: Fix exercise ids to exercise in schema workoutTemplate
+
+const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workoutTemplateId }) => {
+  const { data, isFetching } = api.workoutTemplate.getWorkoutTemplateInfoById.useQuery({
+    id: workoutTemplateId,
+  })
+
+  const [workoutTemplate, setWorkoutTemplate] = useState<TWorkoutTemplateInfo | null>(null)
+  const [exercises, setExercises] = useState<TExercise[]>([])
+  const [workoutName, setWorkoutName] = useState('')
+
+  useEffect(() => {
+    console.log(data)
+    setWorkoutTemplate(extractWorkoutTemplate(data))
+    setExercises(extractExerciseData(data))
+    setWorkoutName(extractWorkoutName(data))
+  }, [data])
+
+  // TODO: Move note attribute to exerciseLog schema
+
+  // TODO: Fix the keyboard avoid view with the inputs
   return (
-    <View>
-      <WorkoutTrackerHeader bottomSheetRef={bottomSheetRef} />
-      <ExerciseEntry />
-      <Button className="mx-2 mt-8">
-        <Text className="text-center font-bold text-white">Add Exercises</Text>
-      </Button>
+    <View className='flex-1 pb-10'>
+      {isFetching ? (
+        <View className='flex h-[90%] items-center justify-center'>
+          <RotatingBarbellIcon size={46} />
+        </View>
+      ) : (
+        <>
+          <WorkoutTrackerHeader
+            {...{ bottomSheetRef, workoutName, setWorkoutName, exercises, workoutTemplate }}
+          />
+
+          <ScrollView>
+            {exercises.map((exercise, exerciseIndex) => (
+              <ExerciseEntry
+                key={exercise.id}
+                {...{ exercise, exerciseIndex }}
+                workoutUpdater={setExercises}
+              />
+            ))}
+
+            {/* TODO: Implement this */}
+            <Button className='mx-2 mt-8'>
+              <Text className='py-1 text-center font-bold text-white'>Add Exercises</Text>
+            </Button>
+          </ScrollView>
+        </>
+      )}
     </View>
   )
 }

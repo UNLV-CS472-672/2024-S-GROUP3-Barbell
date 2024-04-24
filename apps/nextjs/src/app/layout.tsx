@@ -5,7 +5,7 @@ import '@/styles/globals.css'
 
 import { headers } from 'next/headers'
 
-import { TRPCReactProvider } from '@/app/providers'
+import { TRPCReactProvider } from '@/utils/trpc/api'
 import { ClerkProvider } from '@clerk/nextjs'
 
 const fontSans = Inter({
@@ -23,24 +23,27 @@ export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Barbell',
   description: 'Simple monorepo with shared backend for web & mobile apps',
-  openGraph: {
-    title: 'Barbell',
-    description: 'Simple monorepo with shared backend for web & mobile apps',
-    url: 'https://create-t3-turbo.vercel.app',
-    siteName: 'Barbell',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@barbell',
-    creator: '@barbell',
-  },
+  // openGraph: {
+  //   title: 'Barbell',
+  //   description: 'Simple monorepo with shared backend for web & mobile apps',
+  //   url: 'https://create-t3-turbo.vercel.app',
+  //   siteName: 'Barbell',
+  // },
+  // twitter: {
+  //   card: 'summary_large_image',
+  //   site: '@barbell',
+  //   creator: '@barbell',
+  // },
 }
 
 export default function Layout(props: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning={true}>
-        <body className={['font-sans', fontSans.variable].join(' ')} suppressHydrationWarning={true}>
+      <html lang='en' suppressHydrationWarning={true}>
+        <body
+          className={['font-sans', fontSans.variable].join(' ')}
+          suppressHydrationWarning={true}
+        >
           <TRPCReactProvider headers={headers()}>{props.children}</TRPCReactProvider>
         </body>
       </html>

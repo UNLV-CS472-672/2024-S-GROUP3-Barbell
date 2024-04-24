@@ -83,12 +83,10 @@ exports[`PickerModal renders correctly and matches snapshot 1`] = `
         "flex": 1,
         "justifyContent": "center",
         "margin": 37.5,
-        "marginBottom": 200,
-        "marginLeft": 20,
-        "opacity": 0,
+        "marginBottom": 20,
         "transform": [
           {
-            "scale": 0.3,
+            "translateY": 1334,
           },
         ],
       }
@@ -121,138 +119,17 @@ exports[`PickerModal renders correctly and matches snapshot 1`] = `
               "paddingTop": 8,
               "width": 675,
             },
-            undefined,
           ]
         }
       >
-        <View
-          style={
-            [
-              {
-                "backgroundColor": "#3b3b3b",
-                "height": 1,
-                "width": "100%",
-              },
-              undefined,
-            ]
-          }
-          testID="divider"
-        />
-        <View
-          accessibilityValue={
-            {
-              "max": undefined,
-              "min": undefined,
-              "now": undefined,
-              "text": undefined,
-            }
-          }
-          accessible={true}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            [
-              {
-                "alignItems": "center",
-                "height": 75,
-                "justifyContent": "center",
-              },
-              {
-                "paddingBottom": 8,
-              },
-              {
-                "borderBottomLeftRadius": 0,
-                "borderBottomRightRadius": 0,
-              },
-            ]
-          }
-          testID="action-button"
+        <Text
+          className="p-6 text-center text-xl font-bold text-white"
         >
-          <Text
-            className="font-koulen"
-            style={
-              [
-                {
-                  "color": "#fff",
-                },
-                {
-                  "fontSize": 24,
-                },
-              ]
-            }
-          >
-            Option 1
-          </Text>
-        </View>
-        <View
-          style={
-            [
-              {
-                "backgroundColor": "#3b3b3b",
-                "height": 1,
-                "width": "100%",
-              },
-              undefined,
-            ]
-          }
-          testID="divider"
-        />
-        <View
-          accessibilityValue={
-            {
-              "max": undefined,
-              "min": undefined,
-              "now": undefined,
-              "text": undefined,
-            }
-          }
-          accessible={true}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            [
-              {
-                "alignItems": "center",
-                "height": 75,
-                "justifyContent": "center",
-              },
-              {
-                "paddingBottom": 0,
-              },
-              {
-                "borderBottomLeftRadius": 12,
-                "borderBottomRightRadius": 12,
-              },
-            ]
-          }
-          testID="action-button"
-        >
-          <Text
-            className="font-koulen"
-            style={
-              [
-                {
-                  "color": "#fff",
-                },
-                {
-                  "fontSize": 24,
-                },
-              ]
-            }
-          >
-            Option 2
+          Select an Option
+        </Text>
+        <View>
+          <Text>
+            Child content goes here
           </Text>
         </View>
       </View>

@@ -5,9 +5,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 interface RotatingBarbellIconProps {
   color?: ColorValue
+  size?: number
 }
 
-export default function RotatingBarbellIcon({ color = '#CACACA' }: RotatingBarbellIconProps) {
+export default function RotatingBarbellIcon({
+  color = '#CACACA',
+  size = 30,
+}: RotatingBarbellIconProps) {
   const spinValue = new Animated.Value(0)
 
   useEffect(() => {
@@ -29,7 +33,7 @@ export default function RotatingBarbellIcon({ color = '#CACACA' }: RotatingBarbe
   return (
     <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 20 }}>
       <Animated.View style={{ transform: [{ rotate: spin }] }}>
-        <MaterialCommunityIcons name="dumbbell" size={30} color={color} />
+        <MaterialCommunityIcons name='dumbbell' {...{ size, color }} />
       </Animated.View>
     </View>
   )

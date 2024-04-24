@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite'
+import { configDefaults, defineConfig } from 'vitest/config'
 
 /**
  * @thienguen
@@ -18,13 +18,16 @@ export default defineConfig({
         '**/html/**',
         '**/vitest-coverage/**',
         '**/jest-coverage/**',
+
+        'src/root.ts',
+        'src/trpc.ts',
       ],
       reportsDirectory: 'vitest-coverage',
     },
     exclude: [
+      ...configDefaults.exclude,
+
       '**/node_modules/**',
-      '**/__test__/**',
-      '**/__test__/**',
       '**/html/**',
       '**/coverage/**',
       '**/jest-coverage/**',

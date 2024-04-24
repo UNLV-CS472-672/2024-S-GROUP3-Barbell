@@ -103,6 +103,9 @@ export default function RootLayout() {
     return null
   }
 
+  // console.log(process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_ID)
+  // console.log(process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_SECRET)
+
   const isDevelopment = process.env.NODE_ENV === 'development'
 
   return (
@@ -146,7 +149,7 @@ function AppContent() {
 /*  */
 function RootLayoutBottomNav() {
   return (
-    <Stack>
+    <Stack >
       <Stack.Screen
         name='(dashboard)'
         options={{
@@ -187,6 +190,14 @@ function RootLayoutBottomNav() {
               <FriendsHeader />
             </View>
           ),
+        }}
+      />
+
+      {/* workout-completion */}
+      <Stack.Screen
+        name='workout-completion'
+        options={{
+          headerShown: false,
         }}
       />
     </Stack>

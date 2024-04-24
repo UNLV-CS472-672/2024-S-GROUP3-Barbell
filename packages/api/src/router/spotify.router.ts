@@ -14,15 +14,17 @@ export const spotifyRouter = createTRPCRouter({
    * @params id - unique id used to determine which row to return from query
    *
    */
-  getSpotifyDataFromUserId: publicProcedure.input(z.object({ id: z.number().int() })).query(async ({ ctx, input }) => {
-    const { prisma } = ctx
+  getSpotifyDataFromUserId: publicProcedure
+    .input(z.object({ id: z.number().int() }))
+    .query(async ({ ctx, input }) => {
+      const { prisma } = ctx
 
-    return prisma.spotifyData.findUnique({
-      where: {
-        userID: input.id,
-      },
-    })
-  }),
+      return prisma.spotifyData.findUnique({
+        where: {
+          userID: input.id,
+        },
+      })
+    }),
 
   /**
    * This function creates a new SpotifyData entry based on the provided userID
@@ -47,7 +49,6 @@ export const spotifyRouter = createTRPCRouter({
     )
     .mutation(({ ctx, input }) => {
       const { prisma } = ctx
-
       return prisma.spotifyData.create({
         data: {
           albumImageURL: input.albumImageURL,
@@ -120,11 +121,19 @@ export const spotifyRouter = createTRPCRouter({
     .input(z.object({ id: z.number().int() }))
     .query(async ({ ctx, input }) => {
       const { prisma } = ctx
-
-      return prisma.spotifyData.delete({
+      // find first
+      const spotifyData = await prisma.spotifyData.findFirst({
         where: {
           userID: input.id,
         },
       })
+
+      if (spotifyData) {
+        return prisma.spotifyData.delete({
+          where: {
+            userID: input.id,
+          },
+        })
+      }
     }),
 })

@@ -7,43 +7,41 @@
   "packageManager": "pnpm@8.11.0",
   "scripts": {
     "build": "turbo build",
-    "with-env": "dotenv -e ../../.env --",
     "dev": "turbo dev --parallel --filter=!@acme/expo",
     "tui": "turbo dev --parallel --experimental-ui",
     "scan": "pnpm exec turbo scan",
+
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
+
     "db:studio": "pnpm db:prisma && cd packages/db && pnpm with-env prisma studio -p 6969",
     "db:seed": "cd packages/db && pnpm with-env tsx src/scripts/seed.ts",
     "db:prisma": "cd packages/db && pnpm prisma generate && pnpm with-env prisma db push",
+    "db:prisma-ci": "cd packages/db && pnpm prisma generate && pnpm with-env prisma db push --force-reset",
     "db:migrate": "cd packages/db && pnpm with-env prisma migrate dev --name init",
+
     "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
     "format:fix": "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
+
     "lint": "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
     "lint:fix": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
     "lint:ws": "pnpm dlx sherif@latest",
+
     "typecheck": "turbo typecheck",
     "postinstall": "pnpm lint:ws",
+
     "ios": "expo run:ios",
-    "android": "expo run:android"
+    "android": "expo run:android",
+
+    "with-env": "dotenv -e ../../.env --"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:^",
     "@babel/core": "^7.20.0",
     "@turbo/gen": "^1.12.4",
     "turbo": "^1.13.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "npm-run-all": "^4.1.5"
   },
-  "prettier": "@acme/prettier-config",
-  "pnpm": {
-    "overrides": {
-      "postcss@<8.4.31": ">=8.4.31",
-      "react-devtools-core@<4.28.4": ">=4.28.4",
-      "@tanstack/react-query-next-experimental@>=5.0.0 <5.18.0": ">=5.18.0",
-      "semver@>=7.0.0 <7.5.2": ">=7.5.2",
-      "semver@<5.7.2": ">=5.7.2",
-      "ip@<1.1.9": ">=1.1.9",
-      "tar@<6.2.1": ">=6.2.1"
-    }
-  }
+  "prettier": "@acme/prettier-config"
 }

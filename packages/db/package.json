@@ -18,9 +18,9 @@
     "lint": "eslint .",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "typecheck": "echo 'No typecheck script defined'",
-    "db:migration": "dotenv -e ../../.env -- prisma migrate dev",
-    "db:seed": "dotenv -e ../../.env -- tsx src/seed/seed.ts",
-    "db:push": "dotenv -e ../../.env -- prisma db push",
+    "db:migrate": "dotenv -e ../../.env -- prisma migrate dev --name",
+    "db:seed": "dotenv -e ../../.env -- tsx src/scripts/seed.ts",
+    "db:prisma": "dotenv -e ../../.env -- prisma db push",
     "db:studio": "dotenv -e ../../.env -- prisma studio -p 6969",
     "with-env": "dotenv -e ../../.env --"
   },

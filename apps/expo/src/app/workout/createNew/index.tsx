@@ -4,6 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 import NavBar from '~/components/ui/nav-bar/NavBar'
 import ExerciseList from '~/components/workout/exerciseList'
+import equipmentFilter from '~/components/workout/sortByEquipment'
+import SearchBar from '~/components/ui/search-bar/SearchBar'
 
 const styles = StyleSheet.create({
   container: {
@@ -21,6 +23,7 @@ export default function createNew() {
 
       <View>
         <ExerciseList />
+
       </View>
     </SafeAreaView>
   )

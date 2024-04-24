@@ -15,6 +15,9 @@ const ActivityFeed = () => {
     api.friend.getFriendsWithChatIdFromUserId.useQuery({
       id: userData?.id ?? 0,
     })
+  console.log('userData', userData)
+
+  console.log('friends', friends)
 
   const { data: friendsWorkoutLogs, isLoading: friendsActivitiesLoading } =
     api.workoutLog.getActivityFeedWorkouts.useQuery(
@@ -24,6 +27,8 @@ const ActivityFeed = () => {
       },
       { enabled: !friendsIsLoading },
     )
+
+  console.log('stuff', friendsWorkoutLogs)
 
   if (!friendsActivitiesLoading) {
     activities =

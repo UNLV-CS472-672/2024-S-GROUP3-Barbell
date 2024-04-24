@@ -84,7 +84,7 @@ export default function ExerciseList() {
       <SearchBar
         filterBy='name'
         list={list}
-        placeholder='Search exercise by name...'
+        placeholder='Search exercise'
         setFilteredList={setFilteredList}
       />
 

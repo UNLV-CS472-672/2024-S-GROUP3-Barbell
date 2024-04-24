@@ -1,5 +1,6 @@
 import type { TRPCLink } from '@trpc/client'
 import React from 'react'
+import { Alert } from 'react-native'
 import Constants from 'expo-constants'
 
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -42,10 +43,13 @@ export const getBaseUrl = (ws = false) => {
   const localhost = debuggerHost?.split(':')[0]
 
   // TODO: configure ws url, on deployed environment
+  Alert.alert('localhost', localhost + ' and ws ' + ws)
 
   /* deployed */
   if (!localhost && ws) return 'wss://starfish-app-z8v32.ondigitalocean.app/'
   // if (!localhost) return 'https://2024-s-group-3-barbell-nextjs.vercel.app/
+
+  Alert.alert('localhost', localhost)
 
   /* local */
   if (ws) return `ws://${localhost}:3001/ws`
@@ -61,7 +65,7 @@ function wsLinkClient(): TRPCLink<AppRouter> {
   const client = createWSClient({
     url: getBaseUrl(true),
     onOpen: () => {
-      console.log('ws open')
+      Alert.alert('ws open')
     },
     onClose: (cause) => {
       console.log('ws close', cause)

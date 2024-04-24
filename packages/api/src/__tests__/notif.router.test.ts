@@ -49,4 +49,15 @@ describe('NOTIFICATION', async () => {
     const create = await caller.notif.getMessagePreviewsFromUserIdAndChatType(input4)
     expect(create).toBeDefined()
   })
+
+
+  it('/getMiscNotifsWithSenderUsernameFromUserId', async () => {
+    const create = await caller.notif.getMiscNotifsWithSenderUsernameFromUserId({ id: 1 })
+    expect(create).toBeDefined()
+
+    const create2 = await caller.notif.getMiscNotifsWithSenderUsernameFromUserId({ id: 10021 })
+    expect(create2).toBeDefined()
+  })
+
+
 })

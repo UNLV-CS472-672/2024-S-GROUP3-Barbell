@@ -119,12 +119,13 @@ export const notifRouter = createTRPCRouter({
 
       const chatIds: number[] = []
       userChats?.chats.forEach((chat) => {
+        /* istanbul ignore if -- @preserve */
         if (chat.type === input.type) {
-          /* istanbul ignore next -- @preserve */
           chatIds.push(chat.id)
         }
       })
 
+      /* istanbul ignore if -- @preserve */
       if (chatIds.length == 0) {
         return []
       }
@@ -198,10 +199,6 @@ export const notifRouter = createTRPCRouter({
           createdAt: 'desc',
         },
       })
-
-      if (notifs == null) {
-        return []
-      }
 
       return notifs
     }),

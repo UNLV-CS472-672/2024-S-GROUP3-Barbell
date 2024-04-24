@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 
-import Activity from '~/app/activity'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import TimeAgo from '~/components/timeAgo/TimeAgo'
 import { api } from '~/utils/trpc/api'
@@ -71,7 +70,13 @@ export default function ProfileWorkouts({ id, username, workoutCount }: ProfileW
 
   return (
     <View className='flex-1'>
-      {workouts && workouts.map((workout: any) => <Text key={workout.id}>{workout.id}</Text>)}
+      {workouts &&
+        workouts.map((workout: any) => (
+          <View className='pb-3' key={workout.id}>
+            <Text className='text-[#CACACA]'>{workout.workoutTemplate.description}</Text>
+          </View>
+        ))}
+      <MoreButton />
     </View>
   )
 }

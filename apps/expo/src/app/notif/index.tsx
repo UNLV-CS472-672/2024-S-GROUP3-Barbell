@@ -24,7 +24,7 @@ export default function NotifScreen() {
         center={'Notifications'}
         right={
           <Link href={{ pathname: 'frlist/', params: { refetch } }} asChild={true}>
-            <MaterialCommunityIcons name='message-plus-outline' size={20} color='#CACACA' />
+            <MaterialCommunityIcons name='message-plus-outline' size={24} color='#CACACA' />
           </Link>
         }
       />

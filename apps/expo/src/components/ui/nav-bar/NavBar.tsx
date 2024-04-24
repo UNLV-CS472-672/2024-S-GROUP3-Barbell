@@ -25,6 +25,7 @@ interface NavBarProps {
   left?: any
   center?: any
   right?: any
+  showDivider?: boolean
 }
 
 export default function NavBar({
@@ -33,12 +34,13 @@ export default function NavBar({
       testID='left-button'
       onPress={() => router.back()}
       name='chevron-back'
-      size={20}
+      size={24}
       color='#CACACA'
     />
   ),
   center = <View />,
   right = <View />,
+  showDivider = true,
 }: NavBarProps) {
   return (
     <View>
@@ -74,7 +76,7 @@ export default function NavBar({
           {typeof right != 'string' && right}
         </View>
       </View>
-      <View style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
+      {showDivider && <View style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />}
     </View>
   )
 }

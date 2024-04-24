@@ -20,6 +20,7 @@ import { prisma } from '..'
 import award from '../mock-data/award.json'
 import exercise from '../mock-data/exercise.json'
 // No longer used in new schema i believe
+// import set from '../mock-data/set.json'
 import spotify from '../mock-data/spotify.json'
 import users from '../mock-data/user.json'
 import workout from '../mock-data/workoutTemplate.json'
@@ -147,11 +148,6 @@ const loaddb = async () => {
       data: workout as Prisma.WorkoutTemplateCreateManyInput[],
     })
     logger('add', 'workoutTemplate')
-
-    await prisma.workoutLog.createMany({
-      data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
-    })
-    logger('add', 'workoutLog')
 
     /*  */
     await prisma.chat.createMany({

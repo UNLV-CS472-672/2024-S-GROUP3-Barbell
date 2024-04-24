@@ -152,7 +152,13 @@ const Layout = () => {
               Create a new workout
             </Text>
           </Button>
-          <Button color='dark'>
+          <Button
+            color='dark'
+            onPress={() => {
+              router.push('(workout)/start-saved-workout')
+              setVisible(false)
+            }}
+          >
             <Text className='py-2 text-center text-lg font-semibold text-white'>
               Start an existing workout
             </Text>

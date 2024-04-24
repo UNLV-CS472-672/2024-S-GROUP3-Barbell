@@ -89,11 +89,20 @@ export const userRouter = createTRPCRouter({
   }),
 
   getUserWorkoutHistory: publicProcedure
-    .input(z.object({ userId: z.number() }))
+    .input(z.object({ userId: z.number().int() }))
     .query(({ ctx, input }) => {
       return ctx.prisma.user.findFirst({
         where: { id: input.userId },
         select: { workoutHistory: true },
+      })
+    }),
+
+  getUserSavedWorkouts: publicProcedure
+    .input(z.object({ userId: z.number().int() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.user.findFirst({
+        where: { id: input.userId },
+        select: { savedWorkouts: true },
       })
     }),
 })

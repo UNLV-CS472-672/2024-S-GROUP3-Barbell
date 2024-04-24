@@ -12,11 +12,11 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function startExisting() {
+const StartSavedWorkout: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <NavBar center={'Workouts'} right={'Next'} />
+        <NavBar center='Workouts' />
       </View>
 
       <View className='mb-[25px] py-[20px]'>
@@ -25,3 +25,5 @@ export default function startExisting() {
     </SafeAreaView>
   )
 }
+
+export default StartSavedWorkout

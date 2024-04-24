@@ -1,65 +1,59 @@
 import React, { useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
+import Button from '~/components/ui/button/button'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
+import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 
 export default function WorkoutList() {
-  // Query data
-  const { data, isFetched, isFetching } = api.workout.getAllWorkouts.useQuery()
+  const { userData } = useGlobalContext()
 
-  // Select an exercise
-  const [selectWorkout, setSelect] = useState<{ [wid: number]: boolean }>({})
-  const selectToggle = (wid: number) => {
-    setSelect((prevState) => ({
-      [wid]: !prevState[wid],
-    }))
+  if (!userData) {
+    return null
   }
 
-  const [filteredList, setFilteredList] = useState(data)
+  const {
+    data: workoutTemplates,
+    isFetched,
+    isFetching,
+  } = api.user.getUserSavedWorkouts.useQuery({ userId: userData.id })
 
-  const workouts = (
-    <View>
-      <SearchBar
-        filterBy='name'
-        list={data}
-        placeholder='Search workout by name...'
-        setFilteredList={setFilteredList}
-      />
-      <View className='pt-3' style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
+  console.log('workoutTemplates', workoutTemplates)
 
-      <ScrollView className='h-full'>
-        {filteredList?.map((workout: any) => (
-          <View key={workout.id}>
-            <View className='px-3' key={workout.id}>
-              <TouchableOpacity
-                className='pt-5'
-                style={{ backgroundColor: selectWorkout[workout.id] ? '#303030' : '#1E1E1E' }}
-                onPress={() => selectToggle(workout.id)}
-              >
-                <Text className='px-2 text-[20px] text-slate-200'>{workout.name}</Text>
-                <View className='pt-2' />
-                <Text className='px-4 pb-4 italic text-slate-200 opacity-70'>
-                  {workout.description}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View
-              className='ml-3 mr-3'
-              style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }}
-            />
-          </View>
-        ))}
-      </ScrollView>
-    </View>
-  )
+  const savedWorkouts = workoutTemplates?.savedWorkouts ?? []
+
+  const [filteredList, setFilteredList] = useState(savedWorkouts)
 
   return (
     <View>
-      {isFetched && workouts}
-      {isFetching && <RotatingBarbellIcon />}
+      {isFetching ? (
+        <RotatingBarbellIcon />
+      ) : (
+        <View>
+          <SearchBar
+            filterBy='name'
+            list={savedWorkouts}
+            placeholder='Search workout by name...'
+            setFilteredList={
+              setFilteredList as React.Dispatch<React.SetStateAction<any[] | undefined>>
+            }
+          />
+          <ScrollView>
+            {filteredList?.map((workout) => (
+              <Button key={workout.id}>
+                <Text>{workout.name}</Text>
+                {workout.description && <Text>{workout.description}</Text>}
+                <View>
+                  <Text>{workout.likes}</Text>
+                </View>
+              </Button>
+            ))}
+          </ScrollView>
+        </View>
+      )}
     </View>
   )
 }

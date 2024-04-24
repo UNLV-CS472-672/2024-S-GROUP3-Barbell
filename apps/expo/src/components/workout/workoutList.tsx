@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
+import { router } from 'expo-router'
+
+import { AntDesign } from '@expo/vector-icons'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import Button from '~/components/ui/button/button'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
 import { useGlobalContext } from '~/context/global-context'
+import colors from '~/styles/colors'
 import { api } from '~/utils/trpc/api'
 
 export default function WorkoutList() {
@@ -23,7 +27,7 @@ export default function WorkoutList() {
 
   console.log('workoutTemplates', workoutTemplates)
 
-  const savedWorkouts = workoutTemplates?.savedWorkouts ?? []
+  const savedWorkouts = workoutTemplates ?? []
 
   const [filteredList, setFilteredList] = useState(savedWorkouts)
 
@@ -41,13 +45,34 @@ export default function WorkoutList() {
               setFilteredList as React.Dispatch<React.SetStateAction<any[] | undefined>>
             }
           />
-          <ScrollView>
+          <ScrollView className='px-3'>
             {filteredList?.map((workout) => (
-              <Button key={workout.id}>
-                <Text>{workout.name}</Text>
-                {workout.description && <Text>{workout.description}</Text>}
-                <View>
-                  <Text>{workout.likes}</Text>
+              <Button
+                key={workout.id}
+                className='border-1 border border-slate-200 p-4'
+                color='icon'
+                onPress={() => {
+                  router.replace('(dashboard)/')
+                }}
+              >
+                <View className='flex'>
+                  <Text className='flex-1 text-xl font-bold text-white'>{workout.name}</Text>
+                  <View className='mt-1 flex flex-row items-center gap-x-2'>
+                    <AntDesign name='heart' size={18} color={colors.tracker.cancel} />
+                    <Text className='text-light-red'>{workout.likes}</Text>
+                  </View>
+                </View>
+                {workout.description && (
+                  <Text className='mt-1 text-slate-200'>{workout.description}</Text>
+                )}
+
+                <View className='mt-2'>
+                  <Text className='font-bold text-slate-200'>Exercises</Text>
+                  {workout.exercises.map((exercise) => (
+                    <Text key={exercise.id} className='text-slate-200'>
+                      {exercise.name}
+                    </Text>
+                  ))}
                 </View>
               </Button>
             ))}

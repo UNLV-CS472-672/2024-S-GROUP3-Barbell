@@ -99,10 +99,29 @@ export const userRouter = createTRPCRouter({
 
   getUserSavedWorkouts: publicProcedure
     .input(z.object({ userId: z.number().int() }))
-    .query(({ ctx, input }) => {
-      return ctx.prisma.user.findFirst({
+    .query(async ({ ctx, input }) => {
+      const savedWorkouts = await ctx.prisma.user.findFirst({
         where: { id: input.userId },
         select: { savedWorkouts: true },
       })
+
+      const response = await Promise.all(
+        savedWorkouts?.savedWorkouts?.map(async (workout) => {
+          const exercises = await ctx.prisma.exercise.findMany({
+            where: {
+              id: {
+                in: workout.exerciseIds,
+              },
+            },
+          })
+
+          return {
+            ...workout,
+            exercises,
+          }
+        }) ?? [],
+      )
+
+      return response
     }),
 })

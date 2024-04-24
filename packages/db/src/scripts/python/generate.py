@@ -115,12 +115,12 @@ class Notification(Model):
         self.read = self.bool_rand()
         self.receiverId = self.list_rand(range(1, number_of_rows))
         self.senderId = self.list_rand(range(1, number_of_rows))
-        
+
 
 
 class Post(Model):
     file_name = 'post'
-    fields = ['id', 'title', 'content', 'published', 'authorId']
+    fields = ['id', 'content', 'published', 'authorId']
 
     def __init__(self, fake, id):
         self.id = id
@@ -189,4 +189,3 @@ for klass in klasses:
     with open(f'output/{klass.file_name}.json', 'w') as f:
         print(f'writing generated data to: {f.name}')
         f.write(json.dumps(data))
-

@@ -74,9 +74,25 @@ export const friendRouter = createTRPCRouter({
     })
   }),
 
-  /**
-   * get a user's friends
-   */
+    /**
+    * get a user's friends
+    */
+  getFriends: publicProcedure
+    .input(
+      z.object(
+        { userId: z.number().int() }
+      )
+    )
+    .query(({ ctx, input }) => {
+      return ctx.prisma.friend.findMany(
+        {
+          where: {
+            userId: input.userId
+          }
+        }
+      )
+    }),
+
   getFriendsWithChatIdFromUserId: publicProcedure
     .input(z.object({ id: z.number().int() }))
     .query(async ({ ctx, input }) => {

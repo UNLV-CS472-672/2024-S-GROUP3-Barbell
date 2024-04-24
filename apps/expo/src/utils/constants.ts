@@ -30,3 +30,4 @@ export const FA = {
 }
 
 export const ACTIVITY_FEED_ITEM_LIMIT = 10
+export const POSTS_FEED_ITEM_LIMIT = 10

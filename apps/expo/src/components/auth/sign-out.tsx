@@ -15,10 +15,8 @@ export const SignOut = () => {
     try {
       await signOut()
     } catch (err: any) {
-      /* istanbul ignore next*/
-      console.log('Error:> ' + err?.status || '')
-      /* istanbul ignore next*/
-      console.log('Error:> ' + err?.errors ? JSON.stringify(err.errors) : err)
+      // console.log('Error:> ' + err?.status || '')
+      // console.log('Error:> ' + err?.errors ? JSON.stringify(err.errors) : err)
     }
   }
 

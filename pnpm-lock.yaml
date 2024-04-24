@@ -152,6 +152,12 @@ importers:
       react-native-get-random-values:
         specifier: ^1.8.0
         version: 1.8.0(react-native@0.73.6)
+      react-native-gifted-charts:
+        specifier: ^1.4.10
+        version: 1.4.10(react-native-linear-gradient@2.8.3)(react-native-svg@14.1.0)(react-native@0.73.6)(react@18.2.0)
+      react-native-linear-gradient:
+        specifier: ^2.8.3
+        version: 2.8.3(react-native@0.73.6)(react@18.2.0)
       react-native-modal:
         specifier: ^13.0.1
         version: 13.0.1(react-native@0.73.6)(react@18.2.0)
@@ -10659,6 +10665,16 @@ packages:
     resolution: {integrity: sha512-7yetJWqbS9sbn0vIfliPsFgoXMKn/YMF+Wuiog97x+urnSRRRZ7xB+uVkwGKzRgq9CDFfMQnE9ruL5DHv9c6Xg==}
     engines: {node: '>=6'}
 
+  /gifted-charts-core@0.1.4(react-native@0.73.6)(react@18.2.0):
+    resolution: {integrity: sha512-GDNPXipxLfd55C1DBfgQTw6EsZWCA9rGL9Q90hugTFfw4p2lONPmozZJVfdUShDbcQoVfOv8muI53+G/FUao6A==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      react: 18.2.0
+      react-native: 0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
+    dev: false
+
   /glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -14591,6 +14607,37 @@ packages:
       react-native: '>=0.56'
     dependencies:
       fast-base64-decode: 1.0.0
+      react-native: 0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
+    dev: false
+
+  /react-native-gifted-charts@1.4.10(react-native-linear-gradient@2.8.3)(react-native-svg@14.1.0)(react-native@0.73.6)(react@18.2.0):
+    resolution: {integrity: sha512-9zJbvn4Fp38wgVUF5QVtQJUMRqCVzYXp0knW4IuPJ25BsetganwaXC36F26J9XuhJqtu6KWvWQgKshvIj2N/JA==}
+    peerDependencies:
+      expo-linear-gradient: '*'
+      react: '*'
+      react-native: '*'
+      react-native-linear-gradient: '*'
+      react-native-svg: '*'
+    peerDependenciesMeta:
+      expo-linear-gradient:
+        optional: true
+      react-native-linear-gradient:
+        optional: true
+    dependencies:
+      gifted-charts-core: 0.1.4(react-native@0.73.6)(react@18.2.0)
+      react: 18.2.0
+      react-native: 0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
+      react-native-linear-gradient: 2.8.3(react-native@0.73.6)(react@18.2.0)
+      react-native-svg: 14.1.0(react-native@0.73.6)(react@18.2.0)
+    dev: false
+
+  /react-native-linear-gradient@2.8.3(react-native@0.73.6)(react@18.2.0):
+    resolution: {integrity: sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      react: 18.2.0
       react-native: 0.73.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
     dev: false
 

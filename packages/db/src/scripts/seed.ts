@@ -19,7 +19,6 @@ import { Prisma } from '@prisma/client'
 import { prisma } from '..'
 import award from '../mock-data/award.json'
 // No longer used in new schema i believe
-// import set from '../mock-data/set.json'
 import spotify from '../mock-data/spotify.json'
 import chat from '../new-gen-data/chat.json'
 import exercise from '../new-gen-data/exercise.json'

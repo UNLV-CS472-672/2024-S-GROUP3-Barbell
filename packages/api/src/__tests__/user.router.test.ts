@@ -35,6 +35,12 @@ describe('USER', async () => {
     expect(newUser.username).toBeDefined()
     expect(newUser.name).toBe('New User')
 
+    await caller.user.create({
+      clerkId: 'clerk123',
+      username: 'newuser',
+      name: 'New User',
+    })
+
     // Cleanup
     await caller.user.delete({ id: newUser.id })
   })

@@ -20,6 +20,8 @@ describe('WORKOUT-TEMPLATE', async () => {
 
   it('getWorkoutTemplateInfoById', async () => {
     const create = await caller.workoutTemplate.getWorkoutTemplateInfoById({ id: 1 })
+    await caller.workoutTemplate.getWorkoutTemplateInfoById({ id: 1 })
+    await caller.workoutTemplate.getWorkoutTemplateInfoById({ id: 1 })
     expect(create).toBeDefined()
     await caller.workoutTemplate.getWorkoutTemplateInfoById({ id: 1232 })
   })

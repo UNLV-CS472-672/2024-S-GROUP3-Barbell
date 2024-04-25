@@ -39,17 +39,17 @@ for user in users:
     }
 
 issues_json = []
-for page in range(1,4):
+for page in range(1,10):
     url = f'https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/issues?state=all&per_page=100&page={page}'
     issues_json += get_gh_json(url)
 
 comments_json = []
-for page in range(1,5):
+for page in range(1,10):
     url = f'https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/issues/comments?per_page=100&page={page}'
     comments_json += get_gh_json(url)
 
 pulls_json = []
-for page in range(1,3):
+for page in range(1,10):
     url = f'https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/pulls?state=all&per_page=100&page={page}'
     pulls_json += get_gh_json(url)
 
@@ -57,8 +57,6 @@ for page in range(1,3):
 reviews_json = []
 for idx, pr in enumerate(pulls_json):
     try:
-        user = pr['user']['login']
-        counts[user]['prs'] += 1
         pr_num = pr['number']
         url = f'https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/pulls/{pr_num}/reviews'
         print(f'{idx}: fetching reviews for pr #{pr_num}')

@@ -3,10 +3,10 @@ import json
 import time
 import requests
 
-API_TOKEN = 'set me'
+API_TOKEN = os.environ['API_TOKEN']
 
 def get_gh_json(url):
-    print(f'{idx}: fetching json from url: {url}')
+    print(f'fetching data from url: {url}')
     response = requests.get(url, headers={'Accept': 'application/vnd.github.v3+json', 'Authorization': f'token {API_TOKEN}'})
     if response.status_code == 200:
         return response.json()
@@ -38,44 +38,47 @@ for user in users:
         'issues_comments': 0
     }
 
-# https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/issues?state=all&per_page=100&page=1
-with open('json/dp3/issues.json', 'r') as file:
-    issues_data = file.read()
-    issues_json = json.loads(issues_data)
+issues_json = []
+for page in range(1,4):
+    url = f'https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/issues?state=all&per_page=100&page={page}'
+    issues_json += get_gh_json(url)
 
-# https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/issues/comments?per_page=100&page=4
-with open('json/dp3/comments.json', 'r') as file:
-    comments_data = file.read()
-    comments_json = json.loads(comments_data)
+comments_json = []
+for page in range(1,5):
+    url = f'https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/issues/comments?per_page=100&page={page}'
+    comments_json += get_gh_json(url)
 
-# https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/pulls?state=all&per_page=100&page=2
-with open('json/dp3/pulls.json', 'r') as file:
-    pulls_data = file.read()
-    pulls_json = json.loads(pulls_data)
+pulls_json = []
+for page in range(1,3):
+    url = f'https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/pulls?state=all&per_page=100&page={page}'
+    pulls_json += get_gh_json(url)
 
 # PR reviews can't be mass queried, so we iterate over all the PRs to fetch all reviews per PR
-reviews_file = 'json/dp3/reviews.json'
-if not os.path.exists(reviews_file):
-    reviews = []
-    for idx, pr in enumerate(pulls_json):
-        try:
-            user = pr['user']['login']
-            counts[user]['prs'] += 1
-            pr_num = pr['number']
-            url = f'https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/pulls/{pr_num}/reviews'
-            print(f'{idx}: fetching reviews for pr #{pr_num}')
-            reviews += get_gh_json(url)
-            print(reviews[idx])
-            time.sleep(1)
-        except TypeError as e:
-            print(e)
+reviews_json = []
+for idx, pr in enumerate(pulls_json):
+    try:
+        user = pr['user']['login']
+        counts[user]['prs'] += 1
+        pr_num = pr['number']
+        url = f'https://api.github.com/repos/UNLV-CS472-672/2024-S-GROUP3-Barbell/pulls/{pr_num}/reviews'
+        print(f'{idx}: fetching reviews for pr #{pr_num}')
+        reviews_json += get_gh_json(url)
+        time.sleep(1)
+    except TypeError as e:
+        print(e)
 
-    with open(reviews_file, 'w') as file:
-        json.dump(reviews, file, indent=4)
 
-# now that we know the reviews data exists, read in the contents
-with open(reviews_file, 'r') as file:
-    reviews_json = json.loads(file.read())
+with open('json/dp3/issues.json', 'w') as f:
+    json.dump(issues_json, f, indent=4)
+
+with open('json/dp3/comments.json', 'w') as f:
+    json.dump(comments_json, f, indent=4)
+
+with open('json/dp3/pulls.json', 'w') as f:
+    json.dump(pulls_json, f, indent=4)
+
+with open('json/dp3/reviews.json', 'w') as f:
+    json.dump(reviews_json, f, indent=4)
 
 for pr in pulls_json:
     user = pr['user']['login']

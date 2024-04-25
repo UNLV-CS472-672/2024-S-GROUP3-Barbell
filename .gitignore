@@ -71,3 +71,5 @@ packages/db/src/scripts/python/*
 
 # intellij
 .idea
+
+scripts/json/dp3/*.json

@@ -152,7 +152,7 @@ exports[`FriendRequestNotif should render sender's username and content 1`] = `
         }
         testID="timeAgoText"
       >
-        4 weeks ago
+        5 weeks ago
       </Text>
     </View>
   </View>

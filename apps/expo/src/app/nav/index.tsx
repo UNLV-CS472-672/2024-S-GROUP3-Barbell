@@ -1,9 +1,7 @@
-// import type { Route } from 'expo-router'
 import React from 'react'
 import { Button, FlatList, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Route, router } from 'expo-router'
-import { Href } from 'expo-router/build/link/href'
 
 const styles = StyleSheet.create({
   container: {
@@ -31,15 +29,21 @@ const Nav = () => {
           { key: 'Workout Progress', route: '/user/workout-progress' },
           { key: 'Contact Us', route: '/contact-us' },
           { key: 'Privacy Policy', route: '/privacy-policy' },
+          { key: 'Friends List', route: '/frlist' },
           { key: 'Award', route: '/award' },
           { key: 'Spotify', route: '/spotify' },
+          { key: 'FriendsList', route: '/frlist' },
           { key: 'Tracker', route: '/tracker' },
-          { key: 'Show Activity', route: '/activity' },
           { key: 'Activity Feed', route: '/activity/feed' },
+          { key: 'Post Feed', route: '/post/feed' },
           { key: '(workout)', route: '/(workout)' },
           { key: '(inbox)', route: '/(inbox)' },
           { key: '(friends)', route: '/(friends)' },
           { key: 'MuscleGroup', route: '/muscleGroup' },
+          { key: 'completion', route: '/workout-completion' },
+          { key: 'KeypadDemo', route: '/keypadDemo' },
+          { key: 'post2', route: '/post2' },
+          { key: 'Rest Timer', route: '/rest-timer' },
         ]}
         renderItem={({ item }) => (
           <Button

@@ -2,93 +2,80 @@
 
 exports[`MessageInput 1`] = `
 <View
-  onLayout={[Function]}
   style={
     {
-      "flex": 1,
-      "paddingBottom": 10,
+      "alignItems": "center",
+      "flexDirection": "row",
+      "height": "auto",
+      "marginBottom": 10,
+      "paddingHorizontal": 10,
     }
   }
 >
-  <View
+  <TextInput
+    keyboardAppearance="dark"
+    placeholder="Message..."
+    placeholderTextColor="#CACACA"
     style={
       {
+        "backgroundColor": "#1C1B1B",
+        "borderColor": "#FFFFFF",
+        "borderRadius": 20,
+        "borderWidth": 1,
+        "color": "white",
         "flex": 1,
-        "justifyContent": "flex-end",
+        "opacity": 0.9,
+        "padding": 10,
+      }
+    }
+  />
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "opacity": 1,
       }
     }
   >
     <View
       style={
         {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "paddingHorizontal": 10,
+          "backgroundColor": "#48476D",
+          "borderColor": "#FFFFFF",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "marginLeft": 10,
+          "padding": 10,
         }
       }
     >
-      <TextInput
-        keyboardAppearance="dark"
-        placeholder="Message..."
-        placeholderTextColor="#CACACA"
-        style={
-          {
-            "borderColor": "#272727",
-            "borderRadius": 20,
-            "borderWidth": 1,
-            "color": "white",
-            "flex": 1,
-            "padding": 10,
-          }
-        }
-      />
-      <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": undefined,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={false}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          {
-            "opacity": 1,
-          }
-        }
-      >
-        <View
-          style={
-            {
-              "backgroundColor": "#48476D",
-              "borderRadius": 20,
-              "marginLeft": 10,
-              "padding": 10,
-            }
-          }
-        >
-          <Text />
-        </View>
-      </View>
+      <Text />
     </View>
   </View>
 </View>

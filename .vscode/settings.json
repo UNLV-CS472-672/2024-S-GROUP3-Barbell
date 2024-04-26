@@ -5,5 +5,5 @@
     }
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "discord.enabled": true
+
 }

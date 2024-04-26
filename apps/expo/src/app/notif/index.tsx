@@ -66,9 +66,6 @@ export default function NotifScreen() {
         </TouchableOpacity>
       </View>
 
-      {/*thin line between notifs and nav section*/}
-      <View style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
-
       {/*list of notifications*/}
       <ScrollView className='flex-1'>
         <View>

@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Text, View } from 'react-native'
 
 import formatTime from '~/utils/timerFormatter'
 
-const WorkoutTimer: React.FC = () => {
-  const [time, setTime] = useState(0)
+export interface IWorkoutTimerProps {
+  time: number
+  setTime: React.Dispatch<React.SetStateAction<number>>
+}
 
+const WorkoutTimer: React.FC<IWorkoutTimerProps> = ({ time, setTime }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTime((prevTime) => prevTime + 1)
@@ -15,7 +18,7 @@ const WorkoutTimer: React.FC = () => {
 
   return (
     <View>
-      <Text className="font-bold text-slate-200">{formatTime(time)}</Text>
+      <Text className='font-bold text-slate-200'>{formatTime(time)}</Text>
     </View>
   )
 }

@@ -149,53 +149,20 @@ function AppContent() {
 /*  */
 function RootLayoutBottomNav() {
   return (
-    <Stack>
-      <Stack.Screen
-        name='(dashboard)'
-        options={{
-          header: () => (
-            <View className='bg-slate-900 pt-10'>
-              <DashboardHeader />
-            </View>
-          ),
-        }}
-      />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='(dashboard)' />
 
       {/* new workout? workout view? */}
-      <Stack.Screen
-        name='(workout)'
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen name='(workout)' />
 
       {/* inbox */}
-      <Stack.Screen
-        name='(inbox)'
-        options={{
-          header: () => <View className='bg-slate-900 pt-10'></View>,
-        }}
-      />
+      <Stack.Screen name='(inbox)' />
 
       {/* friends */}
-      <Stack.Screen
-        name='(friends)'
-        options={{
-          header: () => (
-            <View className='bg-slate-900 pt-10'>
-              <FriendsHeader />
-            </View>
-          ),
-        }}
-      />
+      <Stack.Screen name='(friends)' />
 
       {/* workout-completion */}
-      <Stack.Screen
-        name='workout-completion'
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen name='workout-completion' />
     </Stack>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { router } from 'expo-router'
 
@@ -45,12 +45,11 @@ export default function WorkoutList() {
               setFilteredList as React.Dispatch<React.SetStateAction<any[] | undefined>>
             }
           />
-          <ScrollView className='px-3'>
+          <ScrollView className='flex h-full px-3'>
             {filteredList?.map((workout) => (
               <Button
                 key={workout.id}
-                className='border-1 border border-slate-200 p-4'
-                color='icon'
+                className='mb-2 bg-neutral-800 p-4'
                 onPress={() => {
                   router.replace('(dashboard)/')
                 }}

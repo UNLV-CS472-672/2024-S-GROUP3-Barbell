@@ -71,7 +71,7 @@ const accountItems: NavigationListItem[] = [
 ]
 
 const otherItems: NavigationListItem[] = [
-  { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/') },
+  { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('contact-us/') },
   {
     title: 'Privacy Policy',
     iconName: 'shield-alt',

@@ -16,7 +16,7 @@ const StartSavedWorkout: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <NavBar center='Workouts' />
+        <NavBar center='Saved Workouts' />
       </View>
 
       <View className='mb-[25px] py-[20px]'>

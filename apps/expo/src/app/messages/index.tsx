@@ -16,6 +16,7 @@ import { ChatType } from '@prisma/client'
 
 import MessageInput from '~/components/message/messageInput'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
+import NavBar from '~/components/ui/nav-bar/NavBar'
 import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 
@@ -23,6 +24,35 @@ export default function MessageView() {
   const scrollViewRef: React.RefObject<ScrollView> = useRef(null)
   const p = useLocalSearchParams()
   const { userData: user } = useGlobalContext()
+
+  let user2Id: number = 0
+  if (p['type'] == ChatType.GROUP || !p['userId']) {
+    user2Id = -1
+  } else {
+    user2Id = Number(p['userId'])
+  }
+
+  // if the chatId doesn't exist, pass in 0 so we know to create a new chat
+  // else just use expected chatId
+  let chatId: number
+  if (p['chatId'] == null) {
+    chatId = 0
+  } else {
+    chatId = Number(p['chatId'])
+  }
+
+  const {
+    data: messages,
+    isFetching,
+    isFetched,
+  } = api.notif.getMessagesFromChatIdAndChatType.useQuery({
+    id: chatId,
+    type: p['type'] as ChatType,
+    user1Id: user?.id!,
+    user2Id: user2Id,
+  })
+
+  const chattingWith = p['chatName']?.toString().trim()
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
@@ -36,19 +66,6 @@ export default function MessageView() {
     }
   }, [])
 
-  const {
-    data: messages,
-    isFetching,
-    isFetched,
-  } = api.notif.getMessagesFromChatIdAndChatType.useQuery({
-    id: Number(p['chatId']),
-    type: p['type'] as ChatType,
-    user1Id: user?.id!,
-    user2Id: Number(p['userId']),
-  })
-
-  const chattingWith = p['chatName']?.toString().trim()
-
   return (
     <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
       <KeyboardAvoidingView
@@ -56,13 +73,8 @@ export default function MessageView() {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 80}
         style={{ flex: 1 }}
       >
+        <NavBar center={chattingWith} />
         <View style={{ flex: 1, margin: 10 }}>
-          <View className='flex flex-row justify-between px-5'>
-            <Ionicons onPress={() => router.back()} name='chevron-back' size={24} color='#CACACA' />
-            <Text style={{ color: '#CACACA', fontSize: 20 }}>{chattingWith}</Text>
-            <View />
-          </View>
-          <View className='pt-3' style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
           {isFetching ? (
             <RotatingBarbellIcon />
           ) : isFetched ? (

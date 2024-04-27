@@ -59,9 +59,9 @@ export default function SearchBar({
       className='mx-3 my-2 flex-row items-center rounded-xl bg-[#272727] px-3'
       testID='searchBar'
     >
-      <Fontisto name='search' size={24} color='#717171' />
+      <Fontisto name='search' size={18} color='#717171' />
       <TextInput
-        className='placeholder:color-[#717171] w-full px-3 py-3 text-[20px] text-white'
+        className='placeholder:color-[#717171] w-full px-3 py-3 text-[16px] text-white'
         placeholder={placeholder}
         onChangeText={setSearchTerm}
       />

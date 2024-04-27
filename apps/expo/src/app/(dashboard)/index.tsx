@@ -1,12 +1,17 @@
 import React from 'react'
 import { Text, View } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { router } from 'expo-router'
+import { Route, router } from 'expo-router'
+
+import { FontAwesome5 } from '@expo/vector-icons'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import Button from '~/components/ui/button/button'
 import NavBar from '~/components/ui/nav-bar/NavBar'
 import { useGlobalContext } from '~/context/global-context'
+import BarbellTitle from '~/components/ui/nav-bar/BarbellTitle'
+import NavBar from '~/components/ui/nav-bar/NavBar'
 
 const Dashboard = () => {
   const { userData } = useGlobalContext()

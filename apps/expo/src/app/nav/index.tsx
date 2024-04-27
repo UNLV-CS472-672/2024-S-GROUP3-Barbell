@@ -24,7 +24,6 @@ const Nav = () => {
           { key: 'Start Existing Workout', route: '/workout/startExisting' },
           { key: 'Profile', route: '/user' },
           { key: 'Achievements', route: '/user/achievements' },
-          { key: 'Profile View', route: '/profile' },
           { key: 'Activity History', route: '/user/activity-history' },
           { key: 'Personal Data', route: '/user/personal-data' },
           { key: 'Workout Progress', route: '/user/workout-progress' },

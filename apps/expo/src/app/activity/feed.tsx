@@ -1,8 +1,9 @@
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Activity from '~/components/feed/activity'
+import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
+import Label from '~/components/ui/label/Label'
 import { useGlobalContext } from '~/context/global-context'
 import { ACTIVITY_FEED_ITEM_LIMIT } from '~/utils/constants'
 import { api } from '~/utils/trpc/api'
@@ -11,22 +12,18 @@ const ActivityFeed = () => {
   let activities: any[] = []
   const { userData } = useGlobalContext()
 
-  const { data: friends, isLoading: friendsIsLoading } =
-    api.friend.getFriendsWithChatIdFromUserId.useQuery({
-      id: userData?.id ?? 0,
-    })
-
+  const { data: friends, isLoading: friendsIsLoading } = api.friend.getFriendsFromUserId.useQuery({
+    id: userData?.id ?? 0,
+  })
 
   const { data: friendsWorkoutLogs, isLoading: friendsActivitiesLoading } =
     api.workoutLog.getActivityFeedWorkouts.useQuery(
       {
-        friendIds: friends?.map((friend) => friend.friendId) ?? [],
+        friendIds: friends?.map((friend) => friend.id) ?? [],
         count: ACTIVITY_FEED_ITEM_LIMIT,
       },
       { enabled: !friendsIsLoading },
     )
-
-  console.log('stuff', friendsWorkoutLogs)
 
   if (!friendsActivitiesLoading) {
     activities =
@@ -42,13 +39,18 @@ const ActivityFeed = () => {
   }
 
   return (
-    <SafeAreaView
-      className='bg-bb-slate-100 flex-1'
-      style={{ backgroundColor: '#1e1e1e', flex: 1 }}
-    >
-      <Text className='px-2 py-4 text-3xl text-slate-200'>Friend Activities</Text>
-      <FlatList data={activities} renderItem={({ item }) => item} />
-    </SafeAreaView>
+    <View className='bg-dark-purple h-96 rounded-xl'>
+      <View className='p-2'>
+        <Label text='Friend Activities' textColor='white' backgroundColor='#34344F' />
+      </View>
+      {friendsIsLoading || friendsActivitiesLoading ? (
+        <View className='flex h-[70%] items-center justify-center'>
+          <RotatingBarbellIcon />
+        </View>
+      ) : (
+        <FlatList data={activities} renderItem={({ item }) => item} />
+      )}
+    </View>
   )
 }
 

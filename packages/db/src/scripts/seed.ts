@@ -18,20 +18,18 @@ import { Prisma } from '@prisma/client'
 // This one uses the new data in newGenData
 import { prisma } from '..'
 import award from '../mock-data/award.json'
+import exercise from '../mock-data/exercise.json'
 // No longer used in new schema i believe
+// import set from '../mock-data/set.json'
 import spotify from '../mock-data/spotify.json'
+import users from '../mock-data/user.json'
+import workout from '../mock-data/workoutTemplate.json'
+import workoutTemplate from '../mock-data/workoutTemplate.json'
 import chat from '../new-gen-data/chat.json'
-import exercise from '../new-gen-data/exercise.json'
 import friend from '../new-gen-data/friend.json'
 import message from '../new-gen-data/message.json'
 import notification from '../new-gen-data/notification.json'
 import post from '../new-gen-data/post.json'
-import users from '../new-gen-data/user.json'
-import workoutLog from '../new-gen-data/workoutLog.json'
-import workoutTemplate from '../new-gen-data/workoutTemplate.json'
-// import users from '../mock-data/user.json'
-// import workoutLog from '../mock-data/workoutLog.json'
-// import workout from '../mock-data/workoutTemplate.json'
 
 /**
  * @param type logging type
@@ -146,20 +144,10 @@ const loaddb = async () => {
     logger('add', 'exercise')
 
     /* */
-    // for (let i = 0; i < workout.length; i++) {
-    //   await prisma.workoutTemplate.createMany({
-    //     data: workout[i] as Prisma.WorkoutTemplateCreateManyInput[],
-    //   })
-    // }
     await prisma.workoutTemplate.createMany({
-      data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
+      data: workout as Prisma.WorkoutTemplateCreateManyInput[],
     })
     logger('add', 'workoutTemplate')
-
-    await prisma.workoutLog.createMany({
-      data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
-    })
-    logger('add', 'workoutLog')
 
     /*  */
     await prisma.chat.createMany({
@@ -194,4 +182,3 @@ const loaddb = async () => {
 
 /* main */
 loaddb().catch((e) => console.error(e))
-

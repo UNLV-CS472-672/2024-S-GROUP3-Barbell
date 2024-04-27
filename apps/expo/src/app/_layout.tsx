@@ -36,10 +36,6 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
 import AuthScreen from '~/app/auth'
 import GlobalContextProvider from '~/context/global-context'
-import { DashboardHeader } from '~/layouts/headers/dashboard-header'
-import { FriendsHeader } from '~/layouts/headers/friends-header'
-// import { InboxHeader } from '~/layouts/headers/inbox-headers'
-import { WorkoutHeader } from '~/layouts/headers/workout-headers'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -102,9 +98,6 @@ export default function RootLayout() {
   if (!loaded) {
     return null
   }
-
-  // console.log(process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_ID)
-  // console.log(process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_SECRET)
 
   const isDevelopment = process.env.NODE_ENV === 'development'
 

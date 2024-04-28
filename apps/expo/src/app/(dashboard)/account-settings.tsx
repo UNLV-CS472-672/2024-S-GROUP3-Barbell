@@ -1,20 +1,13 @@
 import React, { useState } from 'react'
-import {
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Switch,
-  Text,
-  View,
-} from 'react-native'
+import { StyleSheet, Switch, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Route, router } from 'expo-router'
+import { router } from 'expo-router'
 
 import { Entypo, Feather, Ionicons } from '@expo/vector-icons'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 
+import { SignOut } from '~/components/auth/sign-out'
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import Button from '~/components/ui/button/button'
 import NavBar from '~/components/ui/nav-bar/NavBar'
@@ -120,12 +113,11 @@ const AccountSettings = () => {
         </View>
       ) : (
         <>
-          <NavBar left={<View />} center='My Profile' />
+          <NavBar center='My Profile' />
 
           <ScrollView className='px-3 pt-2'>
             <View className='flex items-center'>
               <View className='flex items-center justify-center'>
-                {/* <View className='h-36 w-36 rounded-full bg-slate-300' /> */}
                 <Ionicons name='person-circle-sharp' size={120} color={colors.silver} />
                 <View className='bg-dark-purple absolute bottom-1 right-2 rounded-full border-[3px] border-[#1e1e1e] p-2'>
                   <Feather name='edit-3' size={16} color={colors.silver} />
@@ -217,6 +209,9 @@ const AccountSettings = () => {
                   ))}
                 </View>
               </View>
+            </View>
+            <View className='mx-auto mt-4 w-1/2'>
+              <SignOut />
             </View>
           </ScrollView>
         </>

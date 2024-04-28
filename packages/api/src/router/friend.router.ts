@@ -70,29 +70,39 @@ export const friendRouter = createTRPCRouter({
   /**
    * Delete a friend
    */
-  delete: publicProcedure.input(z.object({ id: z.number() })).mutation(({ ctx, input }) => {
-    return ctx.prisma.friend.delete({
-      where: { id: input.id },
-    })
-  }),
+  deleteFriend: publicProcedure
+    .input(z.object({ id1: z.number().int(), id2: z.number().int() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.prisma.friend.deleteMany({
+        where: {
+          userId: input.id1,
+          AND: {
+            friendId: input.id2,
+          },
+        },
+      })
 
-    /**
-    * get a user's friends
-    */
+      await ctx.prisma.friend.deleteMany({
+        where: {
+          userId: input.id2,
+          AND: {
+            friendId: input.id1,
+          },
+        },
+      })
+    }),
+
+  /**
+   * get a user's friends
+   */
   getFriends: publicProcedure
-    .input(
-      z.object(
-        { userId: z.number().int() }
-      )
-    )
+    .input(z.object({ userId: z.number().int() }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.friend.findMany(
-        {
-          where: {
-            userId: input.userId
-          }
-        }
-      )
+      return ctx.prisma.friend.findMany({
+        where: {
+          userId: input.userId,
+        },
+      })
     }),
 
   getFriendsWithChatIdFromUserId: publicProcedure

@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
-import {
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Switch,
-  Text,
-  View,
-} from 'react-native'
+import { StyleSheet, Switch, Text, View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 
+import { Entypo, Feather, Ionicons } from '@expo/vector-icons'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 
+import { SignOut } from '~/components/auth/sign-out'
+import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
+import Button from '~/components/ui/button/button'
+import NavBar from '~/components/ui/nav-bar/NavBar'
 import { useGlobalContext } from '~/context/global-context'
 import colors from '~/styles/colors'
 import { FA } from '~/utils/constants'
@@ -46,7 +44,7 @@ const tailwindClasses = {
   mainTile: 'm-4 p-4 rounded-lg bg-bb-dark-gray',
   mainTileTitle: 'text-2xl text-slate-200',
   mainTileItem: 'flex-row',
-  navigationListItemLabel: 'flex-auto m-2 self-center text-slate-200',
+  navigationListItemLabel: 'm-2 self-center text-slate-200',
   navigationListItemChevron: 'self-center text-slate-200',
 }
 
@@ -66,11 +64,11 @@ const accountItems: NavigationListItem[] = [
 ]
 
 const otherItems: NavigationListItem[] = [
-  { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('/') },
+  { title: 'Contact Us', iconName: 'envelope', onPress: () => router.push('contact-us/') },
   {
     title: 'Privacy Policy',
     iconName: 'shield-alt',
-    onPress: () => router.push('/'),
+    onPress: () => router.push('privacy-policy/'),
   },
 ]
 
@@ -107,103 +105,117 @@ const AccountSettings = () => {
     }
   }
 
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size='large' color={colors.primary} />
-      </View>
-    )
-  }
-
-  if (isLoading) {
-    return (
-      <View className='py-10'>
-        <Text>Something</Text>
-        <ActivityIndicator size='large' color={colors.primary} />
-      </View>
-    )
-  }
-
   return (
-    <SafeAreaView
-      className='bg-bb-slate-100 flex-1'
-      style={{ backgroundColor: '#1e1e1e', flex: 1 }}
-    >
-      <View className='bg-bb-dark-gray m-4 flex-row rounded-lg'>
-        <View className='flex-row items-center'>
-          <FontAwesome5
-            name='user'
-            size={FA.xl}
-            className='text-bb-dark-purple p-6'
-            style={{ color: '#48476D' }}
-          />
+    <SafeAreaView style={{ backgroundColor: '#1e1e1e', flex: 1 }}>
+      {isLoading ? (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <RotatingBarbellIcon />
         </View>
-        <View className='flex-3 m-4'>
-          <Text className='text-2xl text-slate-200'>{user?.name}</Text>
-          <Text className='text-md text-slate-200'>Streak: {user?.streak} days</Text>
-        </View>
-      </View>
+      ) : (
+        <>
+          <NavBar center='My Profile' />
 
-      <View className={tailwindClasses.mainTile}>
-        <Text className={tailwindClasses.mainTileTitle}>Account</Text>
-        <View className={tailwindClasses.mainTileItem}>
-          <FlatList
-            data={accountItems}
-            renderItem={({ item }) => (
-              <Pressable onPress={item.onPress} className='flex-row'>
-                <FontAwesome5
-                  name={item.iconName}
-                  size={FA.reg}
-                  style={styles.navigationListItemIcon}
-                />
-                <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
-                <FontAwesome5
-                  name='chevron-right'
-                  className={tailwindClasses.navigationListItemChevron}
-                  style={styles.navigationListItemChevron}
-                />
-              </Pressable>
-            )}
-          />
-        </View>
-      </View>
+          <ScrollView className='px-3 pt-2'>
+            <View className='flex items-center'>
+              <View className='flex items-center justify-center'>
+                <Ionicons name='person-circle-sharp' size={120} color={colors.silver} />
+                <View className='bg-dark-purple absolute bottom-1 right-2 rounded-full border-[3px] border-[#1e1e1e] p-2'>
+                  <Feather name='edit-3' size={16} color={colors.silver} />
+                </View>
+              </View>
+              <View className='mt-2'>
+                <Text className='text-2xl font-semibold text-slate-200'>{user?.name}</Text>
+                <View className='mt-1 flex flex-row items-center justify-center gap-x-2'>
+                  <FontAwesome5 name='fire-alt' size={18} color={colors.tracker.cancel} />
+                  <Text className='text-md text-light-red'>{user?.streak} days</Text>
+                </View>
+              </View>
+            </View>
 
-      <View className={tailwindClasses.mainTile}>
-        <Text className={tailwindClasses.mainTileTitle}>Notifications</Text>
-        <View className={tailwindClasses.mainTileItem}>
-          <Text className={tailwindClasses.navigationListItemLabel}>Banners</Text>
-          <Switch
-            // onValueChange={toggleNotificationSwitch}
-            onChange={toggleNotificationSwitch}
-            value={notificationsSwitchEnabled}
-            trackColor={{ true: colors.purple }}
-            disabled={isFetching}
-            thumbColor={notificationsSwitchEnabled ? colors.purple : colors.silver}
-          />
-        </View>
-      </View>
+            <View className='flex gap-y-5'>
+              <View>
+                <Text className='mb-2 text-xl font-semibold text-slate-200'>Account</Text>
+                <View className='rounded-lg bg-neutral-800 py-1'>
+                  <View className='w-full px-4'>
+                    {accountItems.map((item, idx) => (
+                      <Button
+                        key={idx}
+                        onPress={item.onPress}
+                        color='icon'
+                        className={`flex flex-row items-center justify-between ${
+                          idx !== accountItems.length - 1 && 'border-b'
+                        } border-b-neutral-700 px-1`}
+                      >
+                        <View className='flex flex-row items-center gap-x-3'>
+                          <View className='w-6 items-center '>
+                            <FontAwesome5 name={item.iconName} size={20} color={colors.silver} />
+                          </View>
+                          <Text className={tailwindClasses.navigationListItemLabel}>
+                            {item.title}
+                          </Text>
+                        </View>
 
-      <View className={tailwindClasses.mainTile}>
-        <Text className={tailwindClasses.mainTileTitle}>Other</Text>
-        <FlatList
-          data={otherItems}
-          renderItem={({ item }) => (
-            <Pressable onPress={item.onPress} className='flex-row'>
-              <FontAwesome5
-                name={item.iconName}
-                size={FA.reg}
-                style={styles.navigationListItemIcon}
-              />
-              <Text className={tailwindClasses.navigationListItemLabel}>{item.title}</Text>
-              <FontAwesome5
-                name='chevron-right'
-                className={tailwindClasses.navigationListItemChevron}
-                style={styles.navigationListItemChevron}
-              />
-            </Pressable>
-          )}
-        />
-      </View>
+                        <Ionicons name='chevron-forward' size={20} color={colors.silver} />
+                      </Button>
+                    ))}
+                  </View>
+                </View>
+              </View>
+
+              <View>
+                <Text className='mb-2 text-xl font-semibold text-slate-200'>Notifications</Text>
+
+                <View className='rounded-lg bg-neutral-800 py-1'>
+                  <View className='flex flex-row justify-between px-4 py-2'>
+                    <View className='flex flex-row items-center gap-x-3'>
+                      <View className='flex w-6 items-center justify-center'>
+                        <Entypo name='popup' size={20} color={colors.silver} />
+                      </View>
+                      <Text className={tailwindClasses.navigationListItemLabel}>Banners</Text>
+                    </View>
+                    <Switch
+                      onChange={toggleNotificationSwitch}
+                      value={notificationsSwitchEnabled}
+                      trackColor={{ true: colors.purple }}
+                      disabled={isFetching}
+                      thumbColor={colors.silver}
+                    />
+                  </View>
+                </View>
+              </View>
+
+              <View>
+                <Text className='mb-2 text-xl font-semibold text-slate-200'>Other</Text>
+                <View className='rounded-lg bg-neutral-800 px-4 py-1'>
+                  {otherItems.map((item, idx) => (
+                    <Button
+                      key={idx}
+                      onPress={item.onPress}
+                      color='icon'
+                      className={`flex flex-row items-center justify-between ${
+                        idx !== otherItems.length - 1 && 'border-b'
+                      } border-b-neutral-700 px-1`}
+                    >
+                      <View className='flex flex-row items-center gap-x-3'>
+                        <View className='w-6 items-center'>
+                          <FontAwesome5 name={item.iconName} size={20} color={colors.silver} />
+                        </View>
+                        <Text className={tailwindClasses.navigationListItemLabel}>
+                          {item.title}
+                        </Text>
+                      </View>
+                      <Ionicons name='chevron-forward' size={20} color={colors.silver} />
+                    </Button>
+                  ))}
+                </View>
+              </View>
+            </View>
+            <View className='mx-auto mt-4 w-1/2'>
+              <SignOut />
+            </View>
+          </ScrollView>
+        </>
+      )}
     </SafeAreaView>
   )
 }

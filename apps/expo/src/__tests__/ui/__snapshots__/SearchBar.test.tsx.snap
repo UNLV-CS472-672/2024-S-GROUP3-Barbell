@@ -7,7 +7,7 @@ exports[`SearchBar Component renders correctly and matches snapshot 1`] = `
 >
   <Text />
   <TextInput
-    className="placeholder:color-[#717171] px-3 py-[6px] text-[20px] text-white"
+    className="placeholder:color-[#717171] px-3 py-[6px] text-[16px] text-white"
     collapsable={false}
     handlerTag={1}
     handlerType="NativeViewGestureHandler"

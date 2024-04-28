@@ -76,23 +76,17 @@ export const friendRouter = createTRPCRouter({
     })
   }),
 
-    /**
-    * get a user's friends
-    */
+  /**
+   * get a user's friends
+   */
   getFriends: publicProcedure
-    .input(
-      z.object(
-        { userId: z.number().int() }
-      )
-    )
+    .input(z.object({ userId: z.number().int() }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.friend.findMany(
-        {
-          where: {
-            userId: input.userId
-          }
-        }
-      )
+      return ctx.prisma.friend.findMany({
+        where: {
+          userId: input.userId,
+        },
+      })
     }),
 
   getFriendsWithChatIdFromUserId: publicProcedure
@@ -145,6 +139,38 @@ export const friendRouter = createTRPCRouter({
         )
 
         return usersWithChatId
+      } catch (error) {
+        /* istanbul ignore next -- @preserve */
+        throw new Error('Failed to fetch friends with chatId')
+      }
+    }),
+
+  getFriendsFromUserId: publicProcedure
+    .input(z.object({ id: z.number().int() }))
+    .query(async ({ ctx, input }) => {
+      interface UserWithChatId extends User {
+        chatId: number | null
+      }
+
+      try {
+        const friendsList = await ctx.prisma.friend.findMany({
+          where: {
+            userId: input.id,
+          },
+          select: {
+            friendId: true,
+          },
+        })
+
+        // convert to number array
+        const friendIds: number[] = friendsList.map((friend) => friend.friendId)
+
+        // get friends as users
+        return await ctx.prisma.user.findMany({
+          where: {
+            id: { in: friendIds },
+          },
+        })
       } catch (error) {
         /* istanbul ignore next -- @preserve */
         throw new Error('Failed to fetch friends with chatId')

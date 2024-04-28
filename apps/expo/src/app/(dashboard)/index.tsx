@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Route, router } from 'expo-router'
@@ -39,20 +39,10 @@ const Dashboard = () => {
             </Text>
           </View>
 
-          <View className='mt-6'>
+          <View className='mt-6 gap-y-4 px-4'>
             <PostDashboard />
-            <View className='mt-3 px-4'>
-              <ActivityFeed />
-            </View>
+            <ActivityFeed />
           </View>
-
-          {/* <Button
-            onPress={() => router.push('nav/')}
-            className='my-5 flex h-10 items-center rounded-md bg-blue-500'
-            aria-label='Go to nav'
-          >
-            <Text className='text-white'>Nav</Text>
-          </Button> */}
         </>
       ) : (
         <View className='flex h-full items-center justify-center'>

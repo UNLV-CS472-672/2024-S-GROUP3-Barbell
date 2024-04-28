@@ -38,7 +38,7 @@ export default function PostDashboard() {
   )
 
   return (
-    <View className='mx-3 rounded-2xl bg-white p-2'>
+    <View className='rounded-2xl bg-white p-2'>
       <Label text='Posts' textColor='white' backgroundColor='#A7A7A7' />
       {isFetching && loadingPosts}
       {isFetched && (posts?.length == 0 ? noPosts : posts)}

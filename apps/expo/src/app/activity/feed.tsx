@@ -39,7 +39,7 @@ const ActivityFeed = () => {
   }
 
   return (
-    <View className='bg-dark-purple h-96 rounded-xl'>
+    <View className='bg-dark-purple h-96 rounded-2xl'>
       <View className='p-2'>
         <Label text='Friend Activities' textColor='white' backgroundColor='#34344F' />
       </View>

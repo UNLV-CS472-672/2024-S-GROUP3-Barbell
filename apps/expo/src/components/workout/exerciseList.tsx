@@ -101,7 +101,7 @@ export default function ExerciseList() {
         )}
         {VisibleComp == 'equipment' && (
           <TouchableOpacity
-            className='ml-1 mr-1 mt-1 flex-1 rounded-lg  bg-[#48476D] px-4 py-2 font-bold'
+            className='ml-1 mr-1 mt-1 flex-1 rounded-lg bg-[#48476D] px-4 py-2 font-bold'
             onPress={() => {
               handleFilterByEquipment()
             }}

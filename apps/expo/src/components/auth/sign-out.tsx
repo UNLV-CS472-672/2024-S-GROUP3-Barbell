@@ -2,6 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 
 import { useAuth } from '@clerk/clerk-expo'
+
 import Button from '~/components/ui/button/button'
 
 export const SignOut = () => {
@@ -15,8 +16,7 @@ export const SignOut = () => {
     try {
       await signOut()
     } catch (err: any) {
-      // console.log('Error:> ' + err?.status || '')
-      // console.log('Error:> ' + err?.errors ? JSON.stringify(err.errors) : err)
+      console.error(err)
     }
   }
 
@@ -24,11 +24,10 @@ export const SignOut = () => {
     <View>
       <Button
         testID='sign-out-btn'
-        color='dark'
+        className='bg-light-red'
         value='Sign Out'
         size='xl'
         onPress={() => {
-          // signOut()
           onSignOutPress()
         }}
       />

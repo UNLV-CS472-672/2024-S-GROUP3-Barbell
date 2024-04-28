@@ -1,10 +1,10 @@
-import * as WebBrowser from 'expo-web-browser'
 import React, { useState } from 'react'
 import { Alert, Text } from 'react-native'
+import * as WebBrowser from 'expo-web-browser'
 
 import { useOAuth } from '@clerk/clerk-expo'
 import { AntDesign } from '@expo/vector-icons'
-// import 'react-native-get-random-values'
+
 import Button from '~/components/ui/button/button'
 import { useWarmUpBrowser } from '~/hooks/useWarmUpBrowser'
 import { getBaseUrl } from '~/utils/trpc/api'
@@ -30,7 +30,6 @@ const SignInWithGoogle = () => {
       const { createdSessionId, setActive } = await startGoogleOAuthFlow({
         // redirectUrl: '/oauth-native-callback',
       })
-      // console.log('startOAuthFlow')
 
       console.log(getBaseUrl(), 'getBaseUrl')
 
@@ -58,8 +57,7 @@ const SignInWithGoogle = () => {
       testID='sign-in-with-google-btn'
       onPress={() => SignInWithGoogleOAuth()}
       disabled={!isEnabled}
-      color='dark'
-      className='flex flex-row items-center justify-center gap-x-2'
+      className='flex flex-row items-center justify-center gap-x-2 bg-[#de5246]'
     >
       <AntDesign name='google' size={24} color='white' />
       <Text className='font-koulen text-center text-lg font-semibold text-white'>

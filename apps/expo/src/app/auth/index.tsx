@@ -17,7 +17,6 @@ const AuthScreen = () => {
             BARBELL
           </Text>
           <SignInWithGoogle />
-          <SignOut />
         </View>
       </View>
     </ImageBackground>

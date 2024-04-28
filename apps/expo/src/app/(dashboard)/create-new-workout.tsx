@@ -18,9 +18,7 @@ const styles = StyleSheet.create({
 export default function CreateNewWorkout() {
   return (
     <SafeAreaView style={styles.container}>
-      <View className='h-[60px] flex-row items-center justify-evenly'>
-        <NavBar center={'Exercises'} right={'Next'} />
-      </View>
+      <NavBar center='Exercises' right='Next' />
 
       <View>
         <ExerciseList />

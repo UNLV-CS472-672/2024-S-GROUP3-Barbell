@@ -24,7 +24,6 @@ const Dashboard = () => {
           <NavBar
             left={<View />}
             center={<BarbellTitle />}
-            showDivider={false}
             right={
               <TouchableOpacity
                 testID='message-button'

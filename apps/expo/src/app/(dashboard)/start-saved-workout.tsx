@@ -15,11 +15,9 @@ const styles = StyleSheet.create({
 const StartSavedWorkout: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <NavBar center='Saved Workouts' />
-      </View>
+      <NavBar center='Saved Workouts' />
 
-      <View className='mb-[25px] py-[20px]'>
+      <View className='pt-2'>
         <WorkoutList />
       </View>
     </SafeAreaView>

@@ -9,7 +9,7 @@ import { generateUsername } from '~/utils/usernameGenerator'
 export enum Gender {
   MALE,
   FEMALE,
-  PREFERNOTTOSAY
+  PREFERNOTTOSAY,
 }
 
 // TODO: Finish defining user data
@@ -18,9 +18,6 @@ export interface IUserData {
   clerkId: string
   username: string
   name: string
-  // status: 'ACTIVE' | 'INACTIVE'
-  // streak: number
-  gender: string
 }
 
 export type TGlobalContext = {
@@ -60,7 +57,6 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
         clerkId: response.clerkId!,
         username: response.username,
         name: response.name!,
-        gender: response.gender!
       })
     }
   }, [clerkUserData])
@@ -74,7 +70,6 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
         clerkId: userNineData?.clerkId!,
         username: userNineData?.username!,
         name: userNineData?.name!,
-        gender: userNineData?.gender!
       })
     } else createUserIfNotExist()
   }, [createUserIfNotExist, userNineDataIsFetched])

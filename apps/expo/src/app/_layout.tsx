@@ -36,10 +36,6 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
 import AuthScreen from '~/app/auth'
 import GlobalContextProvider from '~/context/global-context'
-import { DashboardHeader } from '~/layouts/headers/dashboard-header'
-import { FriendsHeader } from '~/layouts/headers/friends-header'
-// import { InboxHeader } from '~/layouts/headers/inbox-headers'
-import { WorkoutHeader } from '~/layouts/headers/workout-headers'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
@@ -103,9 +99,6 @@ export default function RootLayout() {
     return null
   }
 
-  // console.log(process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_ID)
-  // console.log(process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_SECRET)
-
   const isDevelopment = process.env.NODE_ENV === 'development'
 
   return (
@@ -150,56 +143,19 @@ function AppContent() {
 function RootLayoutBottomNav() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name='(dashboard)'
-        options={{
-          header: () => (
-            <View className='bg-slate-900 pt-10'>
-              <DashboardHeader />
-            </View>
-          ),
-        }}
-      />
+      <Stack.Screen name='(dashboard)' />
 
       {/* new workout? workout view? */}
-      <Stack.Screen
-        name='(workout)'
-        options={{
-          header: () => (
-            <View className='bg-slate-900 pt-10'>
-              <WorkoutHeader />
-            </View>
-          ),
-        }}
-      />
+      <Stack.Screen name='(workout)' />
 
       {/* inbox */}
-      <Stack.Screen
-        name='(inbox)'
-        options={{
-          header: () => <View className='bg-slate-900 pt-10'></View>,
-        }}
-      />
+      <Stack.Screen name='(inbox)' />
 
       {/* friends */}
-      <Stack.Screen
-        name='(friends)'
-        options={{
-          header: () => (
-            <View className='bg-slate-900 pt-10'>
-              <FriendsHeader />
-            </View>
-          ),
-        }}
-      />
+      <Stack.Screen name='(friends)' />
 
       {/* workout-completion */}
-      <Stack.Screen
-        name='workout-completion'
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen name='workout-completion' />
     </Stack>
   )
 }

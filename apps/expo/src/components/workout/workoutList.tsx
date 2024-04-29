@@ -1,65 +1,89 @@
 import React, { useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
+import { router } from 'expo-router'
+
+import { AntDesign } from '@expo/vector-icons'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
+import Button from '~/components/ui/button/button'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
+import { useGlobalContext } from '~/context/global-context'
+import colors from '~/styles/colors'
 import { api } from '~/utils/trpc/api'
 
 export default function WorkoutList() {
-  // Query data
-  const { data, isFetched, isFetching } = api.workout.getAllWorkouts.useQuery()
+  const { userData } = useGlobalContext()
 
-  // Select an exercise
-  const [selectWorkout, setSelect] = useState<{ [wid: number]: boolean }>({})
-  const selectToggle = (wid: number) => {
-    setSelect((prevState) => ({
-      [wid]: !prevState[wid],
-    }))
+  if (!userData) {
+    return null
   }
 
-  const [filteredList, setFilteredList] = useState(data)
+  const {
+    data: workoutTemplates,
+    isFetched,
+    isFetching,
+  } = api.user.getUserSavedWorkouts.useQuery({ userId: userData.id })
 
-  const workouts = (
-    <View>
-      <SearchBar
-        filterBy='name'
-        list={data}
-        placeholder='Search workout by name...'
-        setFilteredList={setFilteredList}
-      />
-      <View className='pt-3' style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
+  console.log('workoutTemplates', workoutTemplates)
 
-      <ScrollView className='h-full'>
-        {filteredList?.map((workout: any) => (
-          <View key={workout.id}>
-            <View className='px-3' key={workout.id}>
-              <TouchableOpacity
-                className='pt-5'
-                style={{ backgroundColor: selectWorkout[workout.id] ? '#303030' : '#1E1E1E' }}
-                onPress={() => selectToggle(workout.id)}
-              >
-                <Text className='px-2 text-[20px] text-slate-200'>{workout.name}</Text>
-                <View className='pt-2' />
-                <Text className='px-4 pb-4 italic text-slate-200 opacity-70'>
-                  {workout.description}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View
-              className='ml-3 mr-3'
-              style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }}
-            />
-          </View>
-        ))}
-      </ScrollView>
-    </View>
-  )
+  const savedWorkouts = workoutTemplates ?? []
+
+  const [filteredList, setFilteredList] = useState(savedWorkouts)
 
   return (
     <View>
-      {isFetched && workouts}
-      {isFetching && <RotatingBarbellIcon />}
+      {isFetching ? (
+        <RotatingBarbellIcon />
+      ) : (
+        <View>
+          <SearchBar
+            filterBy='name'
+            list={savedWorkouts}
+            placeholder='Search workout by name...'
+            setFilteredList={
+              setFilteredList as React.Dispatch<React.SetStateAction<any[] | undefined>>
+            }
+          />
+          {filteredList?.length ? (
+            <ScrollView className='flex h-full px-3'>
+              {filteredList?.map((workout) => (
+                <Button
+                  key={workout.id}
+                  className='mb-2 bg-neutral-800 p-4'
+                  onPress={() => {
+                    router.replace('(dashboard)/')
+                  }}
+                >
+                  <View className='flex'>
+                    <Text className='flex-1 text-xl font-bold text-white'>{workout.name}</Text>
+                    <View className='mt-1 flex flex-row items-center gap-x-2'>
+                      <AntDesign name='heart' size={18} color={colors.tracker.cancel} />
+                      <Text className='text-light-red'>{workout.likes}</Text>
+                    </View>
+                  </View>
+                  {workout.description && (
+                    <Text className='mt-1 text-slate-200'>{workout.description}</Text>
+                  )}
+
+                  <View className='mt-2'>
+                    <Text className='font-bold text-slate-200'>Exercises</Text>
+                    {workout.exercises.map((exercise) => (
+                      <Text key={exercise.id} className='text-slate-200'>
+                        {exercise.name}
+                      </Text>
+                    ))}
+                  </View>
+                </Button>
+              ))}
+            </ScrollView>
+          ) : (
+            <View className='flex h-[90%] items-center justify-center'>
+              <Text className='text-slate-200'>No saved workouts</Text>
+            </View>
+          )}
+        </View>
+      )}
     </View>
   )
 }

@@ -1,33 +1,15 @@
 import { Prisma } from '@prisma/client'
 
-//  This version uses the old data
-// import { prisma } from '..'
-// import award from '../mock-data/award.json'
-// import chat from '../mock-data/chat.json'
-// import exercise from '../mock-data/exercise.json'
-// import friend from '../mock-data/friend.json'
-// import workoutLog from '../mock-data/workoutLog.json'
-// import message from '../mock-data/message.json'
-// import notification from '../mock-data/notification.json'
-// import post from '../mock-data/post.json'
-// import set from '../mock-data/set.json'
-// import spotify from '../mock-data/spotify.json'
-// import users from '../mock-data/user.json'
-// import workout from '../mock-data/workout.json'
-
-// This one uses the new data in newGenData
 import { prisma } from '..'
 import award from '../mock-data/award.json'
+import chat from '../mock-data/chat.json'
 import exercise from '../mock-data/exercise.json'
-// No longer used in new schema i believe
-// import set from '../mock-data/set.json'
+import message from '../mock-data/message.json'
 import spotify from '../mock-data/spotify.json'
 import users from '../mock-data/user.json'
-import workout from '../mock-data/workoutTemplate.json'
+import workoutLog from '../mock-data/workoutLog.json'
 import workoutTemplate from '../mock-data/workoutTemplate.json'
-import chat from '../new-gen-data/chat.json'
 import friend from '../new-gen-data/friend.json'
-import message from '../new-gen-data/message.json'
 import notification from '../new-gen-data/notification.json'
 import post from '../new-gen-data/post.json'
 
@@ -145,9 +127,15 @@ const loaddb = async () => {
 
     /* */
     await prisma.workoutTemplate.createMany({
-      data: workout as Prisma.WorkoutTemplateCreateManyInput[],
+      data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
     })
     logger('add', 'workoutTemplate')
+
+    /* */
+    await prisma.workoutLog.createMany({
+      data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
+    })
+    logger('add', 'workoutLog')
 
     /*  */
     await prisma.chat.createMany({

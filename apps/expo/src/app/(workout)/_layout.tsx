@@ -7,10 +7,13 @@ const Layout = () => {
       <Tabs
         screenOptions={{
           tabBarStyle: {
-            height: 0,
+            display: 'none',
           },
           headerShown: false,
           tabBarShowLabel: false,
+          headerStyle: {
+            display: 'none',
+          },
         }}
       >
         {/*  */}

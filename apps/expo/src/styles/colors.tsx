@@ -8,6 +8,7 @@ export default {
   bottomav: {
     nav: '#272727',
     icon: '#CACACA',
+    black: '#171717',
   },
   tracker: {
     cancel: '#9D534F',

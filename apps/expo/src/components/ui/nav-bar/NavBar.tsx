@@ -40,7 +40,7 @@ export default function NavBar({
   ),
   center = <View />,
   right = <View />,
-  showDivider = true,
+  showDivider,
 }: NavBarProps) {
   return (
     <View>
@@ -60,7 +60,11 @@ export default function NavBar({
 
         <View testID='center-test' className='flex-1 basis-2/3 items-center'>
           {typeof center == 'string' && (
-            <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 20 }}>
+            <Text
+              numberOfLines={1}
+              style={{ color: '#CACACA', fontSize: 20 }}
+              className='text-2xl font-semibold text-slate-200'
+            >
               {center}
             </Text>
           )}

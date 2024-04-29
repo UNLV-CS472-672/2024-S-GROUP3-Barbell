@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
-import { router, Tabs } from 'expo-router'
+import { Route, router, Tabs } from 'expo-router'
 
 import CircleMinus from '~assets/svgs/circle-minus.svg'
 import CirclePlus from '~assets/svgs/circle-plus.svg'
@@ -131,7 +131,7 @@ const Layout = () => {
           <Button
             color='dark'
             onPress={() => {
-              router.push('(dashboard)/create-new-workout')
+              router.push('(dashboard)/create-new-workout' as Route<string>)
               setVisible(false)
               setIsPlusActive(false)
             }}

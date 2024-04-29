@@ -15,7 +15,7 @@
  * The rest of the fields will default to empty.
  */
 
-import { Platform, Text, View } from 'react-native'
+import { GestureResponderEvent, Platform, Text, View } from 'react-native'
 import { router } from 'expo-router'
 
 import { Ionicons } from '@expo/vector-icons'
@@ -25,6 +25,7 @@ interface NavBarProps {
   left?: any
   center?: any
   right?: any
+  onPressRight?: ((event: GestureResponderEvent) => void) | undefined
   showDivider?: boolean
 }
 
@@ -41,6 +42,7 @@ export default function NavBar({
   center = <View />,
   right = <View />,
   showDivider,
+  onPressRight,
 }: NavBarProps) {
   return (
     <View>
@@ -73,7 +75,11 @@ export default function NavBar({
 
         <View testID='right-test' className='basis-1/6 items-end'>
           {typeof right == 'string' && (
-            <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 16 }}>
+            <Text
+              numberOfLines={1}
+              onPress={onPressRight}
+              style={{ color: '#CACACA', fontSize: 16 }}
+            >
               {right}
             </Text>
           )}

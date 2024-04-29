@@ -125,6 +125,11 @@ const loaddb = async () => {
     })
     logger('add', 'exercise')
 
+    await prisma.workoutTemplate.createMany({
+      data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
+    })
+    logger('add', 'WorkoutTemplate')
+
     /* */
     await prisma.workoutTemplate.createMany({
       data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],

@@ -8,9 +8,9 @@ import { FontAwesome5 } from '@expo/vector-icons'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import PostDashboard from '~/components/post/PostDashboard'
-import Button from '~/components/ui/button/button'
 import BarbellTitle from '~/components/ui/nav-bar/BarbellTitle'
 import NavBar from '~/components/ui/nav-bar/NavBar'
+import DisplayWorkoutFrequencyGraph from '~/components/workout/frequency_graph'
 import { useGlobalContext } from '~/context/global-context'
 import ActivityFeed from '../activity/feed'
 
@@ -41,7 +41,8 @@ const Dashboard = () => {
 
           <View className='mt-6 gap-y-4 px-4'>
             <PostDashboard />
-            <ActivityFeed />
+            {/* <ActivityFeed /> */}
+            <DisplayWorkoutFrequencyGraph />
           </View>
         </>
       ) : (

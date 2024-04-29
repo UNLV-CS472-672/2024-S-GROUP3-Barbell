@@ -4,15 +4,17 @@ import { ScrollView } from 'react-native-gesture-handler'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
+import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 import EquipmentFilter from './sortByEquipment'
 
 export type componenttype = 'exercise' | 'equipment' | 'bodyparts'
 
-export default function ExerciseList() {
+const ExerciseList: React.FC = () => {
   const { data, isFetched, isFetching } = api.exercise.getAllExercises.useQuery()
   const [VisibleComp, setVisibleComp] = useState<componenttype>('exercise')
   const [list, setList] = useState<any>(data)
+  const { selectedExercises, setSelectedExercises } = useGlobalContext()
 
   const [equipmentList, setEquipmentList] = useState<string[]>([])
   const [filterByEquipment, setFilterByEquipment] = useState<string[]>([])
@@ -49,14 +51,14 @@ export default function ExerciseList() {
     }
   }, [equipmentList])
 
-  const [selectExercise, setSelect] = useState<{ [eid: number]: boolean }>({})
-
   const selectToggle = (eid: number) => {
-    setSelect((prevState) => ({
-      ...prevState,
+    if (selectedExercises.includes(eid)) {
+      setSelectedExercises(selectedExercises.filter((id) => id !== eid))
+    } else {
+      setSelectedExercises([...selectedExercises, eid])
+    }
 
-      [eid]: !prevState[eid],
-    }))
+    console.log('selectedExercises', selectedExercises)
   }
 
   const [filteredList, setFilteredList] = useState(data)
@@ -68,7 +70,9 @@ export default function ExerciseList() {
           <View key={exercise.id}>
             <TouchableOpacity
               className=''
-              style={{ backgroundColor: selectExercise[exercise.id] ? '#303030' : '#1E1E1E' }}
+              style={{
+                backgroundColor: selectedExercises.includes(exercise.id) ? '#303030' : '#1E1E1E',
+              }}
               onPress={() => selectToggle(exercise.id)}
             >
               <Text className='mx-3 my-[12px] text-[20px] text-slate-200'>{exercise.name}</Text>
@@ -123,3 +127,5 @@ export default function ExerciseList() {
     </View>
   )
 }
+
+export default ExerciseList

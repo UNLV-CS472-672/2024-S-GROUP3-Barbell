@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useLocalSearchParams } from 'expo-router'
 
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import { ChatType } from '@prisma/client'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
@@ -55,7 +55,7 @@ export default function ProfileView() {
         )}
         <View className='flex-row'>
           <View className='mx-2 mt-2'>
-            <MaterialCommunityIcons name='face-man-profile' size={80} color='#CACACA' />
+            <Ionicons name='person-circle-sharp' size={80} color='#CACACA' />
           </View>
           <View className='flex-1 flex-row justify-evenly'>
             <HeaderElement field1={data?.streak} field2='Streak' />
@@ -71,7 +71,12 @@ export default function ProfileView() {
         </View>
         <Text className='mx-4 font-bold text-slate-200'>{data?.name}</Text>
         <View className='my-2 flex-1 flex-row justify-between'>
-          <FriendStatus friendStatus={friendStatus} />
+          <FriendStatus
+            friendStatus={friendStatus}
+            setFriendStatus={setFriendStatus}
+            viewingProfileUsername={viewingProfileUsername}
+            viewingProfileId={viewingProfileId}
+          />
           <MessageButton
             chatId={data?.chatId}
             type={ChatType.DIRECT}

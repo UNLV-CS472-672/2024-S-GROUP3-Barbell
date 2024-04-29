@@ -12,6 +12,7 @@ import ExerciseEntry from '~/components/tracker/exercise-entry'
 import WorkoutTrackerHeader from '~/components/tracker/workout-tracker-header'
 import { CustomBottomSheetModalRef } from '~/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 import Button from '~/components/ui/button/button'
+import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 import {
   extractExerciseData,
@@ -23,14 +24,15 @@ export type TExercise = z.infer<typeof ExerciseSchema>
 
 export interface IWorkoutTrackerProps {
   bottomSheetRef: React.RefObject<CustomBottomSheetModalRef>
-  workoutTemplateId: number
 }
 
 // TODO: Fix exercise ids to exercise in schema workoutTemplate
 
-const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workoutTemplateId }) => {
+const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef }) => {
+  const { workoutTemplateId } = useGlobalContext()
+
   const { data, isFetching } = api.workoutTemplate.getWorkoutTemplateInfoById.useQuery({
-    id: workoutTemplateId,
+    id: workoutTemplateId!,
   })
 
   const [workoutTemplate, setWorkoutTemplate] = useState<TWorkoutTemplateInfo | null>(null)
@@ -38,7 +40,6 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workou
   const [workoutName, setWorkoutName] = useState('')
 
   useEffect(() => {
-    console.log(data)
     setWorkoutTemplate(extractWorkoutTemplate(data))
     setExercises(extractExerciseData(data))
     setWorkoutName(extractWorkoutName(data))

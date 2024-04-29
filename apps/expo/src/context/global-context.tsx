@@ -1,8 +1,9 @@
-import type { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, RefObject, SetStateAction } from 'react'
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 import { useClerk } from '@clerk/clerk-expo'
 
+import { CustomBottomSheetModalRef } from '~/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 import { api } from '~/utils/trpc/api'
 import { generateUsername } from '~/utils/usernameGenerator'
 
@@ -25,6 +26,10 @@ export type TGlobalContext = {
   setIsWorkingOut: Dispatch<SetStateAction<boolean>>
   userData: IUserData | null
   isLoadingUserData: boolean
+  bottomSheetRef: RefObject<CustomBottomSheetModalRef> | null
+  setBottomSheetRef: Dispatch<SetStateAction<RefObject<CustomBottomSheetModalRef> | null>>
+  workoutTemplateId: number | null
+  setWorkoutTemplateId: Dispatch<SetStateAction<number | null>>
 }
 
 export const GlobalContext = createContext<TGlobalContext | null>(null)
@@ -36,6 +41,10 @@ interface IGlobalContextProviderProps {
 const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
   const [isWorkingOut, setIsWorkingOut] = useState(false)
   const [userData, setUserData] = useState<IUserData | null>(null)
+  const [bottomSheetRef, setBottomSheetRef] = useState<RefObject<CustomBottomSheetModalRef> | null>(
+    null,
+  )
+  const [workoutTemplateId, setWorkoutTemplateId] = useState<number | null>(null)
   const { user: clerkUserData } = useClerk()
   const createUser = api.user.create.useMutation()
 
@@ -79,6 +88,10 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     setIsWorkingOut,
     userData,
     isLoadingUserData: isLoadingUserNine,
+    bottomSheetRef,
+    setBottomSheetRef,
+    workoutTemplateId,
+    setWorkoutTemplateId,
   }
 
   return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>

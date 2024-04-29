@@ -28,7 +28,7 @@ export default function EquipmentFilter({ setEquipmentList, equipmentList }: Equ
           style={{ backgroundColor: equipmentList.includes(equipment) ? '#303030' : '#1E1E1E' }}
           onPress={() => handleEquipmentList(equipment)}
         >
-          <Text className='my-[12px] px-2 text-[20px] text-slate-200'>{equipment}</Text>
+          <Text className='my-[12px] px-3 text-[20px] text-slate-200'>{equipment}</Text>
         </TouchableOpacity>
       ))}
     </View>

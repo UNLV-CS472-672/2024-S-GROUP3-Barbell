@@ -43,6 +43,7 @@ const Nav = () => {
           { key: 'Frequency Graph Demo', route: '/graphDemo' },
           { key: 'post2', route: '/post2' },
           { key: 'Rest Timer', route: '/rest-timer' },
+          { key: 'Filtered Exercises', route: '/filteredExercises' }
         ]}
         renderItem={({ item }) => (
           <Button

@@ -4,7 +4,7 @@ import { Dimensions, Pressable, Text, View } from 'react-native'
 import Body from 'react-native-body-highlighter'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { router } from 'expo-router'
+import { Link, Route, router } from 'expo-router'
 
 import { Ionicons } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
@@ -42,11 +42,11 @@ export type muscleSelectDev =
   | 'upper-back'
 
 export enum muscleSelectUser {
-  Shoulder,
+  Shoulders,
   Chest,
-  Arm,
+  Arms,
   Core,
-  Leg,
+  Legs,
   Back,
   NoSelection,
 }
@@ -115,7 +115,7 @@ export default function NewWorkoutMuscleGroup() {
   const [isBackSideEnabled, setIsBackSideEnabled] = useState(false)
 
   // Use user data to decide if change view to female
-  genderTmp = userData?.gender == Gender.FEMALE.toString()
+  // genderTmp = userData?.gender == Gender.FEMALE.toString()
   const [genderSelection, setGender] = useState(genderTmp)
 
   const toggleSwitch = () => setIsBackSideEnabled((previousState) => !previousState)
@@ -124,11 +124,17 @@ export default function NewWorkoutMuscleGroup() {
 
   const [userSelection, setUserSelection] = useState('')
   const [passNext, setPassNext] = useState<muscleSelectUser>(muscleSelectUser.NoSelection)
+  const rightText = (
+    <Link href={{ pathname: 'filteredExercises/', params: { userSelection } }}>
+      <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 16 }}>
+        Next
+      </Text>
+    </Link>
+  )
 
-  // NavBar gives odd view
   return (
-    <SafeAreaView style={{ backgroundColor: '#1C1B1B', flex: 1 }}>
-      <NavBar center={'Select muscle group'} right={'Next'} />
+    <SafeAreaView style={{ backgroundColor: '#1E1E1E', flex: 1 }}>
+      <NavBar center={'Select muscle group'} right={rightText} />
 
       <View>
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -137,7 +143,7 @@ export default function NewWorkoutMuscleGroup() {
               switch (e.slug) {
                 case 'deltoids':
                   // Shoulder
-                  if (userSelection != 'Shoulder') {
+                  if (userSelection != 'Shoulders') {
                     setBodyPartSelected({
                       slug: e.slug,
                       intensity: 2,
@@ -174,7 +180,7 @@ export default function NewWorkoutMuscleGroup() {
                       color: 'defaultColor',
                       pathArray: e.pathArray,
                     })
-                    setUserSelection('Shoulder')
+                    setUserSelection('Shoulders')
                   } else {
                     setBodyPartSelected({
                       slug: e.slug,
@@ -301,7 +307,7 @@ export default function NewWorkoutMuscleGroup() {
                 case 'triceps':
                 case 'forearm':
                   // Arm
-                  if (userSelection != 'Arm') {
+                  if (userSelection != 'Arms') {
                     setBodyPartSelected({
                       slug: 'biceps',
                       intensity: 2,
@@ -338,7 +344,7 @@ export default function NewWorkoutMuscleGroup() {
                       color: 'defaultColor',
                       pathArray: e.pathArray,
                     })
-                    setUserSelection('Arm')
+                    setUserSelection('Arms')
                   } else {
                     setBodyPartSelected({
                       slug: e.slug,
@@ -472,7 +478,7 @@ export default function NewWorkoutMuscleGroup() {
                 case 'gluteal':
                   // Glute
                   // Leg
-                  if (userSelection != 'Leg') {
+                  if (userSelection != 'Legs') {
                     setBodyPartSelected({
                       slug: 'quadriceps',
                       intensity: 2,
@@ -509,7 +515,7 @@ export default function NewWorkoutMuscleGroup() {
                       color: 'defaultColor',
                       pathArray: e.pathArray,
                     })
-                    setUserSelection('Leg')
+                    setUserSelection('Legs')
                   } else {
                     setBodyPartSelected({
                       slug: e.slug,

@@ -25,6 +25,7 @@ interface NavBarProps {
   left?: any
   center?: any
   right?: any
+  showDivider?: boolean
 }
 
 export default function NavBar({
@@ -33,12 +34,13 @@ export default function NavBar({
       testID='left-button'
       onPress={() => router.back()}
       name='chevron-back'
-      size={20}
+      size={24}
       color='#CACACA'
     />
   ),
   center = <View />,
   right = <View />,
+  showDivider,
 }: NavBarProps) {
   return (
     <View>
@@ -47,7 +49,7 @@ export default function NavBar({
           Platform.OS == 'android' ? 'pt-7' : 'pt-1'
         }`}
       >
-        <View testID='left-test' className='basis-1/12 items-start'>
+        <View testID='left-test' className='basis-1/6 items-start'>
           {typeof left == 'string' && (
             <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 16 }}>
               {left}
@@ -56,16 +58,20 @@ export default function NavBar({
           {typeof left != 'string' && left}
         </View>
 
-        <View testID='center-test' className='flex-1 basis-5/6 items-center'>
+        <View testID='center-test' className='flex-1 basis-2/3 items-center'>
           {typeof center == 'string' && (
-            <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 20 }}>
+            <Text
+              numberOfLines={1}
+              style={{ color: '#CACACA', fontSize: 20 }}
+              className='text-2xl font-semibold text-slate-200'
+            >
               {center}
             </Text>
           )}
           {typeof center != 'string' && center}
         </View>
 
-        <View testID='right-test' className='basis-1/12 items-end'>
+        <View testID='right-test' className='basis-1/6 items-end'>
           {typeof right == 'string' && (
             <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 16 }}>
               {right}
@@ -74,7 +80,7 @@ export default function NavBar({
           {typeof right != 'string' && right}
         </View>
       </View>
-      <View style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
+      {showDivider && <View style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />}
     </View>
   )
 }

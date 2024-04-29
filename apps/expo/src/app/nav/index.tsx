@@ -40,6 +40,7 @@ const Nav = () => {
           { key: '(friends)', route: '/(friends)' },
           { key: 'MuscleGroup', route: '/muscleGroup' },
           { key: 'KeypadDemo', route: '/keypadDemo' },
+          { key: 'Frequency Graph Demo', route: '/graphDemo' },
           { key: 'post2', route: '/post2' },
           { key: 'Rest Timer', route: '/rest-timer' },
         ]}

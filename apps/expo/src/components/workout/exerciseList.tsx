@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
+import { Link } from 'expo-router'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import SearchBar from '~/components/ui/search-bar/SearchBar'
@@ -110,9 +111,11 @@ export default function ExerciseList() {
           </TouchableOpacity>
         )}
 
-        <TouchableOpacity className='ml-1 mr-1 mt-1 flex-1 rounded-lg bg-[#C4C4C4] px-4 py-2 font-bold'>
-          <Text className='text-center text-[#272727]'>Use Diagram</Text>
-        </TouchableOpacity>
+        <Link href={{ pathname: 'muscleGroup/', params: {} }} asChild={true}>
+          <TouchableOpacity className='ml-1 mr-1 mt-1 flex-1 rounded-lg bg-[#C4C4C4] px-4 py-2 font-bold'>
+            <Text className='text-center text-[#272727]'>Use Diagram</Text>
+          </TouchableOpacity>
+        </Link>
       </View>
       <View className='pt-1' style={{ borderBottomWidth: 1, borderBottomColor: '#737272' }} />
       {isFetching && <RotatingBarbellIcon />}

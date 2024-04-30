@@ -43,16 +43,16 @@ export const getBaseUrl = (ws = false) => {
   const localhost = debuggerHost?.split(':')[0]
 
   // TODO: configure ws url, on deployed environment
-  Alert.alert('localhost', localhost + ' and ws ' + ws)
+  // Alert.alert('localhost', localhost + ' and ws ' + ws)
 
   /* deployed */
-  if (!localhost && ws) return 'wss://starfish-app-z8v32.ondigitalocean.app/'
-  // if (!localhost) return 'https://2024-s-group-3-barbell-nextjs.vercel.app/
+  // if (!localhost && ws) return 'wss://starfish-app-z8v32.ondigitalocean.app/'
+  if (!localhost) return 'https://2024-s-group-3-barbell-nextjs.vercel.app/'
 
-  Alert.alert('localhost', localhost)
+  // Alert.alert('localhost', localhost)
 
   /* local */
-  if (ws) return `ws://${localhost}:3001/ws`
+  // if (ws) return `ws://${localhost}:3001/ws`
   return `http://${localhost}:3000`
 }
 

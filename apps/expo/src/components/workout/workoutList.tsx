@@ -13,19 +13,15 @@ import colors from '~/styles/colors'
 import { api } from '~/utils/trpc/api'
 
 export default function WorkoutList() {
-  const { userData } = useGlobalContext()
+  const { userData, bottomSheetRef, setWorkoutTemplateId } = useGlobalContext()
 
   if (!userData) {
     return null
   }
 
-  const {
-    data: workoutTemplates,
-    isFetched,
-    isFetching,
-  } = api.user.getUserSavedWorkouts.useQuery({ userId: userData.id })
-
-  console.log('workoutTemplates', workoutTemplates)
+  const { data: workoutTemplates, isFetching } = api.user.getUserSavedWorkouts.useQuery({
+    userId: userData.id,
+  })
 
   const savedWorkouts = workoutTemplates ?? []
 
@@ -53,6 +49,8 @@ export default function WorkoutList() {
                   className='mb-2 bg-neutral-800 p-4'
                   onPress={() => {
                     router.replace('(dashboard)/')
+                    setWorkoutTemplateId(workout.id)
+                    bottomSheetRef?.current?.present()
                   }}
                 >
                   <View className='flex'>

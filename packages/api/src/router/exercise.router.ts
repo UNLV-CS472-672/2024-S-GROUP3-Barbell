@@ -78,6 +78,22 @@ export const exerciseRouter = createTRPCRouter({
       })
     }),
 
+  getExercisesFromExerciseIdArray: publicProcedure
+    .input(z.object({ ids: array(z.number().int()) }))
+    .query(async ({ ctx, input }) => {
+      const { prisma } = ctx
+
+      const exercises = await prisma.exercise.findMany({
+        where: {
+          id: {
+            in: input.ids,
+          },
+        },
+      })
+
+      return exercises.flatMap((exercise) => ({ ...exercise, sets: [] }))
+    }),
+
   /**
    * This function updates a specific exercise given an id and some field of the exercise
    *  @params ctx - the context object for this function. It is related to the prisma client used for our database operations.

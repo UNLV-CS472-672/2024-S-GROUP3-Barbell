@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
+import { router } from 'expo-router'
 
+import { produce } from 'immer'
 import { z } from 'zod'
 
 import { ExerciseSchema } from '@acme/validators'
@@ -12,6 +14,7 @@ import ExerciseEntry from '~/components/tracker/exercise-entry'
 import WorkoutTrackerHeader from '~/components/tracker/workout-tracker-header'
 import { CustomBottomSheetModalRef } from '~/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 import Button from '~/components/ui/button/button'
+import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 import {
   extractExerciseData,
@@ -23,33 +26,53 @@ export type TExercise = z.infer<typeof ExerciseSchema>
 
 export interface IWorkoutTrackerProps {
   bottomSheetRef: React.RefObject<CustomBottomSheetModalRef>
-  workoutTemplateId: number
 }
 
-// TODO: Fix exercise ids to exercise in schema workoutTemplate
+const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef }) => {
+  const { workoutTemplateId, selectedExercises } = useGlobalContext()
 
-const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef, workoutTemplateId }) => {
-  const { data, isFetching } = api.workoutTemplate.getWorkoutTemplateInfoById.useQuery({
-    id: workoutTemplateId,
+  // selected exercises
+  const {
+    data: selectedExercisesData,
+    isFetching: exercisesIsFetching,
+    isFetched: exercisesIsFetched,
+    refetch,
+  } = api.exercise.getExercisesFromExerciseIdArray.useQuery({
+    ids: selectedExercises,
+  })
+
+  // workout template exercises
+  const {
+    data: workoutTemplateExercises,
+    isFetching,
+    isFetched,
+  } = api.workoutTemplate.getWorkoutTemplateInfoById.useQuery({
+    id: workoutTemplateId!,
   })
 
   const [workoutTemplate, setWorkoutTemplate] = useState<TWorkoutTemplateInfo | null>(null)
   const [exercises, setExercises] = useState<TExercise[]>([])
   const [workoutName, setWorkoutName] = useState('')
 
+  console.log(workoutTemplateExercises)
+
   useEffect(() => {
-    console.log(data)
-    setWorkoutTemplate(extractWorkoutTemplate(data))
-    setExercises(extractExerciseData(data))
-    setWorkoutName(extractWorkoutName(data))
-  }, [data])
+    setWorkoutTemplate(extractWorkoutTemplate(workoutTemplateExercises))
+    setWorkoutName(extractWorkoutName(workoutTemplateExercises))
+
+    setExercises(
+      produce((draft) => {
+        return [...extractExerciseData(workoutTemplateExercises), ...(selectedExercisesData ?? [])]
+      }),
+    )
+  }, [workoutTemplateExercises])
 
   // TODO: Move note attribute to exerciseLog schema
 
   // TODO: Fix the keyboard avoid view with the inputs
   return (
     <View className='flex-1 pb-10'>
-      {isFetching ? (
+      {isFetching || exercisesIsFetching ? (
         <View className='flex h-[90%] items-center justify-center'>
           <RotatingBarbellIcon size={46} />
         </View>

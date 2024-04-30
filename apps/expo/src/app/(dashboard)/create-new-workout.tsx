@@ -1,12 +1,14 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 
 import { Ionicons } from '@expo/vector-icons'
 
+import Button from '~/components/ui/button/button'
 import NavBar from '~/components/ui/nav-bar/NavBar'
 import ExerciseList from '~/components/workout/exerciseList'
+import { useGlobalContext } from '~/context/global-context'
 
 const styles = StyleSheet.create({
   container: {
@@ -16,9 +18,26 @@ const styles = StyleSheet.create({
 })
 
 export default function CreateNewWorkout() {
+  const { selectedExercises, bottomSheetRef, setWorkoutTemplateId } = useGlobalContext()
+
+  const handleStartWorkout = () => {
+    router.replace('(dashboard)/')
+    setWorkoutTemplateId(0)
+    bottomSheetRef?.current?.present()
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <NavBar center='Exercises' right='Next' />
+      <NavBar
+        center='Exercises'
+        right={
+          <Button color='icon' disabled={!selectedExercises.length} onPress={handleStartWorkout}>
+            <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 16 }}>
+              {selectedExercises.length === 0 ? 'Add' : `Add(${selectedExercises.length})`}
+            </Text>
+          </Button>
+        }
+      />
 
       <View>
         <ExerciseList />

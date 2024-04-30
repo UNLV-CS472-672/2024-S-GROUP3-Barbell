@@ -21,7 +21,7 @@ exports[`Activity Component renders correctly with given props 1`] = `
     <Text
       className="text-lg text-slate-200"
     >
-      4/20/2023
+      4/21/2023
     </Text>
   </View>
   <View

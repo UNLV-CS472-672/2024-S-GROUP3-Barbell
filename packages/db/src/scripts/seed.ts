@@ -1,14 +1,18 @@
 import { Prisma } from '@prisma/client'
 
 import { prisma } from '..'
+
+/*  */
 import award from '../mock-data/award.json'
-import chat from '../mock-data/chat.json'
-import exercise from '../mock-data/exercise.json'
-import message from '../mock-data/message.json'
 import spotify from '../mock-data/spotify.json'
-import users from '../mock-data/user.json'
-import workoutLog from '../mock-data/workoutLog.json'
-import workoutTemplate from '../mock-data/workoutTemplate.json'
+
+/*  */
+import chat from '../new-gen-data/chat.json'
+import exercise from '../new-gen-data/exercise.json'
+import message from '../new-gen-data/message.json'
+import users from '../new-gen-data/user.json'
+import workoutLog from '../new-gen-data/workoutLog.json'
+import workoutTemplate from '../new-gen-data/workoutTemplate.json'
 import friend from '../new-gen-data/friend.json'
 import notification from '../new-gen-data/notification.json'
 import post from '../new-gen-data/post.json'
@@ -60,8 +64,6 @@ const loaddb = async () => {
     await prisma.workoutLog.deleteMany()
     logger('delete', 'workoutLog')
 
-    await prisma.workoutTemplate.deleteMany()
-    logger('delete', 'workoutTemplate')
     await prisma.workoutTemplate.deleteMany()
     logger('delete', 'workoutTemplate')
 
@@ -129,12 +131,6 @@ const loaddb = async () => {
       data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
     })
     logger('add', 'WorkoutTemplate')
-
-    /* */
-    await prisma.workoutTemplate.createMany({
-      data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
-    })
-    logger('add', 'workoutTemplate')
 
     /* */
     await prisma.workoutLog.createMany({

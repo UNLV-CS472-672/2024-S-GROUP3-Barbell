@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -8,6 +8,10 @@ import { FontAwesome5 } from '@expo/vector-icons'
 
 import RotatingBarbellIcon from '~/components/notif/RotatingBarbellIcon'
 import PostDashboard from '~/components/post/PostDashboard'
+import WorkoutTracker from '~/components/tracker/workout-tracker'
+import CustomBottomSheetModal, {
+  CustomBottomSheetModalRef,
+} from '~/components/ui/bottom-sheet/custom-bottom-sheet-modal'
 import BarbellTitle from '~/components/ui/nav-bar/BarbellTitle'
 import NavBar from '~/components/ui/nav-bar/NavBar'
 import DisplayWorkoutFrequencyGraph from '~/components/workout/frequency_graph'
@@ -15,7 +19,13 @@ import { useGlobalContext } from '~/context/global-context'
 import ActivityFeed from '../activity/feed'
 
 const Dashboard = () => {
-  const { userData } = useGlobalContext()
+  const { userData, setBottomSheetRef } = useGlobalContext()
+
+  const bottomSheetRef = useRef<CustomBottomSheetModalRef>(null)
+
+  useEffect(() => {
+    setBottomSheetRef(bottomSheetRef)
+  }, [bottomSheetRef])
 
   return (
     <SafeAreaView style={{ backgroundColor: '#1E1E1E', flex: 1 }}>
@@ -45,6 +55,15 @@ const Dashboard = () => {
               <ActivityFeed />
               <DisplayWorkoutFrequencyGraph />
             </View>
+
+            <CustomBottomSheetModal
+              ref={bottomSheetRef}
+              customSnapPoints={['93%']}
+              startIndex={0}
+              renderBackdrop
+            >
+              <WorkoutTracker {...{ bottomSheetRef }} />
+            </CustomBottomSheetModal>
           </ScrollView>
         </>
       ) : (

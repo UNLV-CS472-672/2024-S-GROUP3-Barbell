@@ -32,7 +32,6 @@ const Nav = () => {
           { key: 'Friends List', route: '/frlist' },
           { key: 'Award', route: '/award' },
           { key: 'Spotify', route: '/spotify' },
-          { key: 'FriendsList', route: '/frlist' },
           { key: 'Tracker', route: '/tracker' },
           { key: 'Activity Feed', route: '/activity/feed' },
           { key: 'Post Feed', route: '/post/feed' },
@@ -40,10 +39,11 @@ const Nav = () => {
           { key: '(inbox)', route: '/(inbox)' },
           { key: '(friends)', route: '/(friends)' },
           { key: 'MuscleGroup', route: '/muscleGroup' },
-          { key: 'completion', route: '/workout-completion' },
           { key: 'KeypadDemo', route: '/keypadDemo' },
+          { key: 'Frequency Graph Demo', route: '/graphDemo' },
           { key: 'post2', route: '/post2' },
           { key: 'Rest Timer', route: '/rest-timer' },
+          { key: 'Filtered Exercises', route: '/filteredExercises' }
         ]}
         renderItem={({ item }) => (
           <Button

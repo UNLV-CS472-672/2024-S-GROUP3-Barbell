@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, View } from 'react-native'
-import { Link } from 'expo-router'
+import { Link, Route } from 'expo-router'
 
 import { Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { ChatType } from '@prisma/client'
@@ -12,6 +12,7 @@ interface FriendProps {
 }
 export default function Friend({ username, userId, chatId, name }: FriendProps) {
   const type: string = ChatType.DIRECT
+  const chatName: string = username.trim()
 
   const nameComponent =
     name == null ? (
@@ -40,9 +41,12 @@ export default function Friend({ username, userId, chatId, name }: FriendProps) 
 
         {/* buttons */}
         <View className='ml-5 flex-row items-center justify-between'>
-          {/* TODO: view profile */}
+          {/* view profile */}
           <View className='mx-3'>
-            <Link href={'/'} asChild={true}>
+            <Link
+              href={{ pathname: 'profile/' as Route<string>, params: { userId, username } }}
+              asChild={true}
+            >
               <TouchableOpacity testID='profile-button'>
                 <Ionicons name='person-outline' size={30} color='#CACACA' />
               </TouchableOpacity>
@@ -51,7 +55,10 @@ export default function Friend({ username, userId, chatId, name }: FriendProps) 
 
           {/* open messages */}
           <Link
-            href={{ pathname: 'messages/', params: { chatId, username, type, userId } }}
+            href={{
+              pathname: 'messages/' as Route<string>,
+              params: { chatId, chatName, type, userId },
+            }}
             asChild={true}
           >
             <TouchableOpacity testID='message-button'>

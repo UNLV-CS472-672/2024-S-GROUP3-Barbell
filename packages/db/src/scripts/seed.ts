@@ -128,17 +128,18 @@ const loaddb = async () => {
     })
     logger('add', 'exercise')
 
+    await prisma.workoutTemplate.createMany({
+      data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
+    })
+    logger('add', 'WorkoutTemplate')
+
     /* */
-    // for (let i = 0; i < workout.length; i++) {
-    //   await prisma.workoutTemplate.createMany({
-    //     data: workout[i] as Prisma.WorkoutTemplateCreateManyInput[],
-    //   })
-    // }
     await prisma.workoutTemplate.createMany({
       data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
     })
     logger('add', 'workoutTemplate')
 
+    /* */
     await prisma.workoutLog.createMany({
       data: workoutLog as Prisma.WorkoutLogCreateManyInput[],
     })
@@ -177,4 +178,3 @@ const loaddb = async () => {
 
 /* main */
 loaddb().catch((e) => console.error(e))
-

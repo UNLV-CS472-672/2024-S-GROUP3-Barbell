@@ -1,22 +1,21 @@
 import { Prisma } from '@prisma/client'
 
-//  This version uses the clean data
 import { prisma } from '..'
-import award from '../new-clean-data/award.json'
-import chat from '../new-clean-data/chat.json'
-import exercise from '../new-clean-data/exercise.json'
-import friend from '../new-clean-data/friend.json'
-import workoutLog from '../new-clean-data/workoutLog.json'
-import message from '../new-clean-data/message.json'
-import notification from '../new-clean-data/notification.json'
-import post from '../new-clean-data/post.json'
-//import set from '../new-clean-data/set.json'
+
+/*  */
+import award from '../mock-data/award.json'
 import spotify from '../mock-data/spotify.json'
-import users from '../new-clean-data/user.json'
-//import workout from '../mock-data/workout.json'
-import workoutTemplate from '../new-clean-data/workoutTemplate.json'
 
-
+/*  */
+import chat from '../new-gen-data/chat.json'
+import exercise from '../new-gen-data/exercise.json'
+import message from '../new-gen-data/message.json'
+import users from '../new-gen-data/user.json'
+import workoutLog from '../new-gen-data/workoutLog.json'
+import workoutTemplate from '../new-gen-data/workoutTemplate.json'
+import friend from '../new-gen-data/friend.json'
+import notification from '../new-gen-data/notification.json'
+import post from '../new-gen-data/post.json'
 
 /**
  * @param type logging type
@@ -132,12 +131,6 @@ const loaddb = async () => {
       data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
     })
     logger('add', 'WorkoutTemplate')
-
-    /* */
-    await prisma.workoutTemplate.createMany({
-      data: workoutTemplate as Prisma.WorkoutTemplateCreateManyInput[],
-    })
-    logger('add', 'workoutTemplate')
 
     /* */
     await prisma.workoutLog.createMany({

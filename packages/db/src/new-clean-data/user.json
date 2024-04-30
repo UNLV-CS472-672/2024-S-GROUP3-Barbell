@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "username": "Bobby_da_Beast",
+    "name": "Bobby Fischer",
+    "status": "ACTIVE",
+    "streak": 10,
+    "clerkId": "1"
+  },
+  {
+    "id": 2,
+    "username": "JerBear",
+    "name": "Jeremiah Findleton",
+    "status": "BUSY",
+    "streak": 5,
+    "clerkId": "2"
+  },
+  {
+    "id": 3,
+    "username": "BoxComboEnjoyer",
+    "name": "Stephanie Rivera",
+    "status": "ONLINE",
+    "streak": 7,
+    "clerkId": "3"
+  },
+  {
+    "id": 4,
+    "username": "LaterallyHim",
+    "name": "Alexander Ramirez",
+    "status": "OFFLINE",
+    "streak": 2,
+    "clerkId": "4"
+  },
+  {
+    "id": 5,
+    "username": "Bar_bella",
+    "name": "Isabelle Nguyen",
+    "status": "ONLINE",
+    "streak": 12,
+    "clerkId": "5"
+  },
+  {
+    "id": 6,
+    "username": "Pumpelope",
+    "name": "Penelope Ng",
+    "status": "ACTIVE",
+    "streak": 8,
+    "clerkId": "6"
+  },
+  {
+    "id": 7,
+    "username": "We_Go_Jim_01",
+    "name": "Jimmy Thomas",
+    "status": "BUSY",
+    "streak": 3,
+    "clerkId": "7"
+  },
+  {
+    "id": 8,
+    "username": "WaffleConez",
+    "name": "William Thurmal",
+    "status": "ACTIVE",
+    "streak": 9,
+    "clerkId": "8"
+  },
+  {
+    "id": 9,
+    "username": "DemPecsSon",
+    "name": "Eric Pecson",
+    "status": "ACTIVE",
+    "streak": 4,
+    "clerkId": "9"
+  },
+  {
+    "id": 10,
+    "username": "02_Macros_02",
+    "name": "Marcos Rodriguez",
+    "status": "OFFLINE",
+    "streak": 6,
+    "clerkId": "10"
+  }
+]

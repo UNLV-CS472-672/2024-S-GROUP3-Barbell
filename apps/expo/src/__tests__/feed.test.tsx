@@ -14,6 +14,7 @@ describe('Activity Component', () => {
     }
     const mockWorkoutLog = {
       createdAt: new Date('2023-04-21'),
+      finishedAt: new Date('2023-04-22'), // Ensure this property exists
     }
 
     const { toJSON } = render(

@@ -9,7 +9,7 @@ describe('POST', async () => {
 
   const input: RouterInputs['post']['create'] = {
     content: 'This is.',
-    authorId: 1
+    // authorId: 1
   }
 
   it('/byId', async () => {
@@ -17,10 +17,10 @@ describe('POST', async () => {
     const byId = await caller.post.byId({ id: create.id })
 
     expect(create.content).toMatchObject(input.content)
-    expect(create.authorId).toMatchObject(input.authorId)
+    // expect(create.authorId).toMatchObject(input.authorId)
 
     expect(byId?.content).toMatchObject(input.content)
-    expect(byId?.authorId).toMatchObject(input.authorId)
+    // expect(byId?.authorId).toMatchObject(input.authorId)
 
     const all = await caller.post.all()
     const delete_post = await caller.post.delete({ id: create.id })

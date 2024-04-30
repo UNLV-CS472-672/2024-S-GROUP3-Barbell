@@ -13,6 +13,7 @@ const ActivityFeed = () => {
 
   const { data: friends, isLoading: friendsIsLoading } = api.friend.getFriendsFromUserId.useQuery({
     id: userData?.id ?? 0,
+
   })
 
   const {

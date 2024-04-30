@@ -50,7 +50,7 @@ const NewPost = () => {
         <Button
           value='Create'
           className='mx-2 my-4 p-4'
-          onPress={() => createPost({ content, authorId: userData!.id })}
+          onPress={() => createPost({ content })}
           testID='new-post-create-btn'
         ></Button>
       </KeyboardAvoidingView>

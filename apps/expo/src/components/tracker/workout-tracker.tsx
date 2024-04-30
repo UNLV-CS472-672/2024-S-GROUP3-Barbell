@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
+import { router } from 'expo-router'
 
+import { produce } from 'immer'
 import { z } from 'zod'
 
 import { ExerciseSchema } from '@acme/validators'
@@ -33,33 +35,37 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef }) => {
   const {
     data: selectedExercisesData,
     isFetching: exercisesIsFetching,
+    isFetched: exercisesIsFetched,
     refetch,
   } = api.exercise.getExercisesFromExerciseIdArray.useQuery({
     ids: selectedExercises,
   })
 
   // workout template exercises
-  const { data: workoutTemplateExercises, isFetching } =
-    api.workoutTemplate.getWorkoutTemplateInfoById.useQuery({
-      id: workoutTemplateId!,
-    })
+  const {
+    data: workoutTemplateExercises,
+    isFetching,
+    isFetched,
+  } = api.workoutTemplate.getWorkoutTemplateInfoById.useQuery({
+    id: workoutTemplateId!,
+  })
 
   const [workoutTemplate, setWorkoutTemplate] = useState<TWorkoutTemplateInfo | null>(null)
-  const [exercises, setExercises] = useState<TExercise[]>(selectedExercisesData ?? [])
+  const [exercises, setExercises] = useState<TExercise[]>([])
   const [workoutName, setWorkoutName] = useState('')
 
-  console.log(selectedExercisesData)
+  console.log(workoutTemplateExercises)
 
   useEffect(() => {
     setWorkoutTemplate(extractWorkoutTemplate(workoutTemplateExercises))
-    if (selectedExercisesData) {
-      setExercises([...exercises, ...extractExerciseData(workoutTemplateExercises)])
-      refetch()
-    } else {
-      setExercises(extractExerciseData(workoutTemplateExercises))
-    }
     setWorkoutName(extractWorkoutName(workoutTemplateExercises))
-  }, [workoutTemplateExercises, selectedExercisesData])
+
+    setExercises(
+      produce((draft) => {
+        return [...extractExerciseData(workoutTemplateExercises), ...(selectedExercisesData ?? [])]
+      }),
+    )
+  }, [workoutTemplateExercises])
 
   // TODO: Move note attribute to exerciseLog schema
 

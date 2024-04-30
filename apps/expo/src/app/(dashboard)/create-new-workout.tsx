@@ -18,14 +18,20 @@ const styles = StyleSheet.create({
 })
 
 export default function CreateNewWorkout() {
-  const { selectedExercises } = useGlobalContext()
+  const { selectedExercises, bottomSheetRef, setWorkoutTemplateId } = useGlobalContext()
+
+  const handleStartWorkout = () => {
+    router.replace('(dashboard)/')
+    setWorkoutTemplateId(0)
+    bottomSheetRef?.current?.present()
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <NavBar
         center='Exercises'
         right={
-          <Button color='icon' disabled={!selectedExercises.length}>
+          <Button color='icon' disabled={!selectedExercises.length} onPress={handleStartWorkout}>
             <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 16 }}>
               {selectedExercises.length === 0 ? 'Add' : `Add(${selectedExercises.length})`}
             </Text>

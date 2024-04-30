@@ -183,15 +183,15 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
         }),
 
         /* version 1 */
-        // httpBatchLink({
-        //   transformer: SuperJSON,
-        //   url: `${getBaseUrl()}/api/trpc`,
-        //   headers() {
-        //     const headers = new Map<string, string>()
-        //     headers.set('x-trpc-source', 'expo-react')
-        //     return Object.fromEntries(headers)
-        //   },
-        // }),
+        httpBatchLink({
+          transformer: SuperJSON,
+          url: `${getBaseUrl()}/api/trpc`,
+          headers() {
+            const headers = new Map<string, string>()
+            headers.set('x-trpc-source', 'expo-react')
+            return Object.fromEntries(headers)
+          },
+        }),
 
         /* version 2 */
         // splitLink({
@@ -201,7 +201,7 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
         // }),
 
         /* version 3 */
-        wsLinkClient(),
+        // wsLinkClient(),
       ],
     }),
   )

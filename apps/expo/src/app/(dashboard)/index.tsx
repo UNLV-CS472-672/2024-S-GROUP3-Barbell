@@ -50,20 +50,21 @@ const Dashboard = () => {
               </Text>
             </View>
 
-          <View className='mt-6 gap-y-4 px-4'>
-            <PostDashboard />
-            {/* <ActivityFeed /> */}
-            {/* <DisplayWorkoutFrequencyGraph /> */}
-          </View>
+            <View className='mt-6 gap-y-4 px-4'>
+              <PostDashboard />
+              <ActivityFeed />
+              <DisplayWorkoutFrequencyGraph />
+            </View>
 
-          <CustomBottomSheetModal
-            ref={bottomSheetRef}
-            customSnapPoints={['93%']}
-            startIndex={0}
-            renderBackdrop
-          >
-            <WorkoutTracker {...{ bottomSheetRef }} />
-          </CustomBottomSheetModal>
+            <CustomBottomSheetModal
+              ref={bottomSheetRef}
+              customSnapPoints={['93%']}
+              startIndex={0}
+              renderBackdrop
+            >
+              <WorkoutTracker {...{ bottomSheetRef }} />
+            </CustomBottomSheetModal>
+          </ScrollView>
         </>
       ) : (
         <View className='flex h-full items-center justify-center'>

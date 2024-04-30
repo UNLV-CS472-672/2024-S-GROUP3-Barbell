@@ -1,0 +1,379 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrivacyPolicy 1`] = `
+<RNCSafeAreaView
+  className="bg-bb-slate-100 flex-1"
+  edges={
+    {
+      "bottom": "additive",
+      "left": "additive",
+      "right": "additive",
+      "top": "additive",
+    }
+  }
+  style={
+    {
+      "backgroundColor": "#1e1e1e",
+      "flex": 1,
+    }
+  }
+>
+  <RCTScrollView
+    collapsable={false}
+    handlerTag={1}
+    handlerType="NativeViewGestureHandler"
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    waitFor={
+      [
+        {
+          "current": null,
+        },
+      ]
+    }
+  >
+    <View>
+      <View>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 30,
+              "paddingHorizontal": 10,
+              "textAlign": "center",
+            }
+          }
+        >
+          Privacy Policy
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 15,
+              "paddingHorizontal": 10,
+              "textAlign": "center",
+            }
+          }
+        >
+          
+
+          Effective Date: [4/19/2024]
+          
+
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          Welcome to Barbell, your ultimate companion for fitness and workout routines. At Barbell, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and protect your information when you use our mobile application ("App") and services.
+          
+
+
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 25,
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          1. Information We Collect
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          
+
+          a. Personal Information: 
+          
+			
+           When you create an account with Barbell, we may collect personal information such as your name, email address, age, gender, and profile picture. Additionally, if you choose to link your Spotify account, we may collect information from Spotify's API, including your current listening activity.
+          
+
+
+          b. Workout Data:
+          
+			
+           Barbell collects information about your workout activities, including exercise routines, duration, intensity, and progress. This data may be shared with friends and the public by default within the App.
+          
+
+
+          c. Device Information:
+          
+			
+           We may collect information about your device, including its unique device identifier, operating system, and mobile network information.
+          
+
+
+          d. Location Information:
+          
+			
+           With your consent, we may collect and process information about your precise or approximate location when you use certain features of the App, such as mapping your running routes.
+          
+
+
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 25,
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          2. How We Use Your Information
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          
+
+          a. Personalization:
+          
+			
+           We use the information collected to personalize your experience with the App, including suggesting workout routines, tracking progress, and providing relevant content.
+          
+
+
+          b. Social Sharing:
+          
+			
+           Your workout data may be shared with friends and the public within the App. However, you have control over the visibility settings of your profile and can adjust the privacy settings accordingly.
+          
+
+
+          c. Integration with Spotify:
+          
+			
+           Integration with Spotify: If you choose to link your Spotify account, we may access your Spotify data through Spotify's API to display your current listening activity to others on the App. This feature enhances social interaction within the fitness community, and you may choose to opt out at any time from user settings should you change your mind.
+          
+
+
+          d. Analytics:
+          
+			
+           We may use aggregated and anonymized data for analytical purposes to improve the performance and functionality of the App.
+          
+
+
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 25,
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          3. Information Sharing and Disclosure
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          
+
+          Third-Party Service Providers:
+          
+			
+           We may share your information with trusted third-party service providers who assist us in operating the App, such as hosting services, analytics providers, and customer support.
+          
+
+
+          b. Legal Compliance:
+          
+			
+           We may disclose your information in response to legal obligations, such as complying with subpoenas, court orders, or other legal processes.
+          
+
+
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 25,
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          4. Data Security
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          
+			
+           Barbell takes reasonable measures to protect your information from unauthorized access, use, or disclosure. However, no method of transmission over the internet or electronic storage is 100% secure. Therefore, we cannot guarantee absolute security.
+          
+
+
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 25,
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          5. Your Choices and Rights
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          
+
+          a. Account Settings:
+          
+			
+           You have the option to review and update your account information and privacy settings within the App.
+          
+
+
+          b. Opt-Out:
+          
+			
+           
+          You may choose not to share certain information or opt-out of specific features or services within the App.
+          
+
+
+          c. Access and Rectification:
+          
+			
+           You have the right to access and correct inaccuracies in your personal information held by Barbell.
+          
+
+
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 25,
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          6. Children's Privacy
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          
+			
+          Barbell is not intended for individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us immediately.
+          
+
+
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 25,
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          7. Changes to this Privacy Policy
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          
+			
+           We reserve the right to update or modify this Privacy Policy at any time. We will notify you of any material changes by posting the updated policy on our website or through other communication channels.
+          
+
+
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "fontSize": 25,
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          8. Contact Us
+        </Text>
+        <Text
+          className="text-2xl text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          
+			
+          If you have any questions or concerns about this Privacy Policy or our practices regarding your personal information, please contact us at barbell@gmail.com.
+          
+
+
+        </Text>
+        <Text
+          className="text-2x1 text-slate-200"
+          style={
+            {
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          By using the Barbell App, you consent to the collection, use, and sharing of your information as described in this Privacy Policy. We encourage you to review this policy periodically for any updates or changes.
+          
+
+
+        </Text>
+      </View>
+    </View>
+  </RCTScrollView>
+</RNCSafeAreaView>
+`;

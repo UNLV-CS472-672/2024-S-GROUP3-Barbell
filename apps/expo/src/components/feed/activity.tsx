@@ -18,7 +18,7 @@ const Activity: React.FC<ActivityProps> = ({ user, workout, workoutLog }) => {
     >
       <View className='flex-row items-baseline justify-between'>
         <Text className='mb-1 text-2xl font-bold text-slate-200'>{user.name}</Text>
-        <Text className='text-lg text-slate-200'>{formatDate(workoutLog.createdAt)}</Text>
+        <Text className='text-lg text-slate-200'>{formatDate(workoutLog.finishedAt)}</Text>
       </View>
       <View className='flex-row items-baseline justify-between'>
         <Text className='m-2 text-lg text-slate-200'>{workout.name}</Text>

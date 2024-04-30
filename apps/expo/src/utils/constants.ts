@@ -18,5 +18,5 @@ export const FA = {
   xl: 48,
 }
 
-export const ACTIVITY_FEED_ITEM_LIMIT = 10
+export const ACTIVITY_FEED_ITEM_LIMIT = 3
 export const POSTS_FEED_ITEM_LIMIT = 10

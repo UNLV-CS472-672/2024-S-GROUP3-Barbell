@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Link, useLocalSearchParams } from 'expo-router'
 
 import NavBar from '~/components/ui/nav-bar/NavBar'
+import { useGlobalContext } from '~/context/global-context'
 import { api } from '~/utils/trpc/api'
 
 export default function FilteredExercises() {
@@ -16,21 +17,21 @@ export default function FilteredExercises() {
 
   const filteredData = data?.filter((exercise) => exercise.bodyPart == muscle)
 
-  const [selectedExercises, setSelctedExercises] = useState<any>([])
+  const { selectedExercises, setSelectedExercises } = useGlobalContext()
 
   const handleSelect = (item: any) => {
     if (!selectedExercises.includes(item)) {
       // add the equipment to the list if it's not already present
-      setSelctedExercises([...selectedExercises, item])
+      setSelectedExercises([...selectedExercises, item])
     } else {
       // remove the equipment from the list if it's already present
       const updatedList = selectedExercises.filter((selectedItem: any) => selectedItem !== item)
-      setSelctedExercises(updatedList)
+      setSelectedExercises(updatedList)
     }
   }
   // REPLACE PATHNAME WITH ACTUAL PATHNAME
   const rightNavText = (
-    <Link href={{ pathname: '', params: { selectedExercises } }}>
+    <Link href={{ pathname: '(dashboard)/' }}>
       <Text numberOfLines={1} style={{ color: '#CACACA', fontSize: 16 }}>
         Add{selectedExercises.length ? '(' + selectedExercises.length + ')' : ''}
       </Text>

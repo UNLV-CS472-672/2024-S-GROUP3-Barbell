@@ -30,6 +30,8 @@ export type TGlobalContext = {
   setBottomSheetRef: Dispatch<SetStateAction<RefObject<CustomBottomSheetModalRef> | null>>
   workoutTemplateId: number | null
   setWorkoutTemplateId: Dispatch<SetStateAction<number | null>>
+  selectedExercises: number[]
+  setSelectedExercises: Dispatch<SetStateAction<number[]>>
 }
 
 export const GlobalContext = createContext<TGlobalContext | null>(null)
@@ -45,6 +47,7 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     null,
   )
   const [workoutTemplateId, setWorkoutTemplateId] = useState<number | null>(null)
+  const [selectedExercises, setSelectedExercises] = useState<number[]>([])
   const { user: clerkUserData } = useClerk()
   const createUser = api.user.create.useMutation()
 
@@ -92,6 +95,8 @@ const GlobalContextProvider = ({ children }: IGlobalContextProviderProps) => {
     setBottomSheetRef,
     workoutTemplateId,
     setWorkoutTemplateId,
+    selectedExercises,
+    setSelectedExercises,
   }
 
   return <GlobalContext.Provider value={globalContextValue}>{children}</GlobalContext.Provider>

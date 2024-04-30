@@ -26,31 +26,47 @@ export interface IWorkoutTrackerProps {
   bottomSheetRef: React.RefObject<CustomBottomSheetModalRef>
 }
 
-// TODO: Fix exercise ids to exercise in schema workoutTemplate
-
 const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef }) => {
-  const { workoutTemplateId } = useGlobalContext()
+  const { workoutTemplateId, selectedExercises } = useGlobalContext()
 
-  const { data, isFetching } = api.workoutTemplate.getWorkoutTemplateInfoById.useQuery({
-    id: workoutTemplateId!,
+  // selected exercises
+  const {
+    data: selectedExercisesData,
+    isFetching: exercisesIsFetching,
+    refetch,
+  } = api.exercise.getExercisesFromExerciseIdArray.useQuery({
+    ids: selectedExercises,
   })
 
+  // workout template exercises
+  const { data: workoutTemplateExercises, isFetching } =
+    api.workoutTemplate.getWorkoutTemplateInfoById.useQuery({
+      id: workoutTemplateId!,
+    })
+
   const [workoutTemplate, setWorkoutTemplate] = useState<TWorkoutTemplateInfo | null>(null)
-  const [exercises, setExercises] = useState<TExercise[]>([])
+  const [exercises, setExercises] = useState<TExercise[]>(selectedExercisesData ?? [])
   const [workoutName, setWorkoutName] = useState('')
 
+  console.log(selectedExercisesData)
+
   useEffect(() => {
-    setWorkoutTemplate(extractWorkoutTemplate(data))
-    setExercises(extractExerciseData(data))
-    setWorkoutName(extractWorkoutName(data))
-  }, [data])
+    setWorkoutTemplate(extractWorkoutTemplate(workoutTemplateExercises))
+    if (selectedExercisesData) {
+      setExercises([...exercises, ...extractExerciseData(workoutTemplateExercises)])
+      refetch()
+    } else {
+      setExercises(extractExerciseData(workoutTemplateExercises))
+    }
+    setWorkoutName(extractWorkoutName(workoutTemplateExercises))
+  }, [workoutTemplateExercises, selectedExercisesData])
 
   // TODO: Move note attribute to exerciseLog schema
 
   // TODO: Fix the keyboard avoid view with the inputs
   return (
     <View className='flex-1 pb-10'>
-      {isFetching ? (
+      {isFetching || exercisesIsFetching ? (
         <View className='flex h-[90%] items-center justify-center'>
           <RotatingBarbellIcon size={46} />
         </View>

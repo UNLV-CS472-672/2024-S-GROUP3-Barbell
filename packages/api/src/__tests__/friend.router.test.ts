@@ -55,7 +55,7 @@ describe('FRIEND', async () => {
   //   })
   // })
 
-  it('/delete', async () => {
+  it('/deleteFriend', async () => {
     const friendCreate = await prisma.friend.create({
       data: {
         userId: 1,
@@ -63,8 +63,14 @@ describe('FRIEND', async () => {
       },
     })
 
-    const friend = await caller.friend.delete({ id: friendCreate.id })
-    expect(friend).toBeDefined()
+    const friendCreate2 = await prisma.friend.create({
+      data: {
+        userId: 2,
+        friendId: 1,
+      },
+    })
+
+    await caller.friend.deleteFriend({ id1: 1, id2: 2 })
   })
 
   it('/getFriendsWithChatIdFromUserId', async () => {

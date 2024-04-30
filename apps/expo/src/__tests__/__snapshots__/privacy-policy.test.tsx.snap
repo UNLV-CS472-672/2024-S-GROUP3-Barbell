@@ -2,7 +2,6 @@
 
 exports[`PrivacyPolicy 1`] = `
 <RNCSafeAreaView
-  className="bg-bb-slate-100 flex-1"
   edges={
     {
       "bottom": "additive",
@@ -14,11 +13,46 @@ exports[`PrivacyPolicy 1`] = `
   style={
     {
       "backgroundColor": "#1e1e1e",
-      "flex": 1,
     }
   }
 >
+  <View>
+    <View
+      className="flex-row items-center justify-between px-5 pb-3 pt-1"
+    >
+      <View
+        className="basis-1/6 items-start"
+        testID="left-test"
+      >
+        <Text />
+      </View>
+      <View
+        className="flex-1 basis-2/3 items-center"
+        testID="center-test"
+      >
+        <Text
+          className="text-2xl font-semibold text-slate-200"
+          numberOfLines={1}
+          style={
+            {
+              "color": "#CACACA",
+              "fontSize": 20,
+            }
+          }
+        >
+          Privacy Policy
+        </Text>
+      </View>
+      <View
+        className="basis-1/6 items-end"
+        testID="right-test"
+      >
+        <View />
+      </View>
+    </View>
+  </View>
   <RCTScrollView
+    className="bg-[#1e1e1e]"
     collapsable={false}
     handlerTag={1}
     handlerType="NativeViewGestureHandler"
@@ -33,37 +67,75 @@ exports[`PrivacyPolicy 1`] = `
     }
   >
     <View>
-      <View>
-        <Text
-          className="text-2xl text-slate-200"
+      <View
+        className="mx-auto mt-2 flex-row"
+      >
+        <View
+          className="rounded-lg px-2 py-1"
           style={
             {
-              "fontSize": 30,
-              "paddingHorizontal": 10,
-              "textAlign": "center",
+              "alignSelf": "flex-start",
+              "backgroundColor": "#48476D",
             }
           }
         >
-          Privacy Policy
+          <Text
+            className="text-[13px] font-bold"
+            numberOfLines={1}
+            style={
+              {
+                "color": "#CFCFCF",
+              }
+            }
+            testID="text-test"
+          >
+            Data Collection
+          </Text>
+        </View>
+        <Text>
+           
         </Text>
-        <Text
-          className="text-2xl text-slate-200"
+        <View
+          className="rounded-lg px-2 py-1"
           style={
             {
-              "fontSize": 15,
-              "paddingHorizontal": 10,
-              "textAlign": "center",
+              "alignSelf": "flex-start",
+              "backgroundColor": "#48476D",
             }
           }
         >
-          
+          <Text
+            className="text-[13px] font-bold"
+            numberOfLines={1}
+            style={
+              {
+                "color": "#CFCFCF",
+              }
+            }
+            testID="text-test"
+          >
+            Third-Party Integration
+          </Text>
+        </View>
+      </View>
+      <Text
+        className="text-sm text-slate-200"
+        style={
+          {
+            "paddingHorizontal": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        
 
-          Effective Date: [4/19/2024]
-          
-
-        </Text>
+        Effective Date: [4/19/2024]
+      </Text>
+      <View
+        className="m-4 p-4 rounded-lg bg-bb-dark-gray"
+      >
         <Text
-          className="text-2xl text-slate-200"
+          className="text-base text-slate-200"
           style={
             {
               "paddingHorizontal": 10,
@@ -71,15 +143,15 @@ exports[`PrivacyPolicy 1`] = `
           }
         >
           Welcome to Barbell, your ultimate companion for fitness and workout routines. At Barbell, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and protect your information when you use our mobile application ("App") and services.
-          
-
-
         </Text>
+      </View>
+      <View
+        className="m-4 p-4 rounded-lg bg-bb-dark-gray"
+      >
         <Text
-          className="text-2xl text-slate-200"
+          className="text-lg text-slate-200"
           style={
             {
-              "fontSize": 25,
               "paddingHorizontal": 10,
             }
           }
@@ -87,7 +159,7 @@ exports[`PrivacyPolicy 1`] = `
           1. Information We Collect
         </Text>
         <Text
-          className="text-2xl text-slate-200"
+          className="text-base text-slate-200"
           style={
             {
               "paddingHorizontal": 10,
@@ -121,15 +193,15 @@ exports[`PrivacyPolicy 1`] = `
           
 			
            With your consent, we may collect and process information about your precise or approximate location when you use certain features of the App, such as mapping your running routes.
-          
-
-
         </Text>
+      </View>
+      <View
+        className="m-4 p-4 rounded-lg bg-bb-dark-gray"
+      >
         <Text
-          className="text-2xl text-slate-200"
+          className="text-lg text-slate-200"
           style={
             {
-              "fontSize": 25,
               "paddingHorizontal": 10,
             }
           }
@@ -137,7 +209,7 @@ exports[`PrivacyPolicy 1`] = `
           2. How We Use Your Information
         </Text>
         <Text
-          className="text-2xl text-slate-200"
+          className="text-base text-slate-200"
           style={
             {
               "paddingHorizontal": 10,
@@ -171,15 +243,15 @@ exports[`PrivacyPolicy 1`] = `
           
 			
            We may use aggregated and anonymized data for analytical purposes to improve the performance and functionality of the App.
-          
-
-
         </Text>
+      </View>
+      <View
+        className="m-4 p-4 rounded-lg bg-bb-dark-gray"
+      >
         <Text
-          className="text-2xl text-slate-200"
+          className="text-lg text-slate-200"
           style={
             {
-              "fontSize": 25,
               "paddingHorizontal": 10,
             }
           }
@@ -187,7 +259,7 @@ exports[`PrivacyPolicy 1`] = `
           3. Information Sharing and Disclosure
         </Text>
         <Text
-          className="text-2xl text-slate-200"
+          className="text-base text-slate-200"
           style={
             {
               "paddingHorizontal": 10,
@@ -207,15 +279,15 @@ exports[`PrivacyPolicy 1`] = `
           
 			
            We may disclose your information in response to legal obligations, such as complying with subpoenas, court orders, or other legal processes.
-          
-
-
         </Text>
+      </View>
+      <View
+        className="m-4 p-4 rounded-lg bg-bb-dark-gray"
+      >
         <Text
-          className="text-2xl text-slate-200"
+          className="text-lg text-slate-200"
           style={
             {
-              "fontSize": 25,
               "paddingHorizontal": 10,
             }
           }
@@ -223,7 +295,7 @@ exports[`PrivacyPolicy 1`] = `
           4. Data Security
         </Text>
         <Text
-          className="text-2xl text-slate-200"
+          className="text-base text-slate-200"
           style={
             {
               "paddingHorizontal": 10,
@@ -233,15 +305,15 @@ exports[`PrivacyPolicy 1`] = `
           
 			
            Barbell takes reasonable measures to protect your information from unauthorized access, use, or disclosure. However, no method of transmission over the internet or electronic storage is 100% secure. Therefore, we cannot guarantee absolute security.
-          
-
-
         </Text>
+      </View>
+      <View
+        className="m-4 p-4 rounded-lg bg-bb-dark-gray"
+      >
         <Text
-          className="text-2xl text-slate-200"
+          className="text-lg text-slate-200"
           style={
             {
-              "fontSize": 25,
               "paddingHorizontal": 10,
             }
           }
@@ -249,7 +321,7 @@ exports[`PrivacyPolicy 1`] = `
           5. Your Choices and Rights
         </Text>
         <Text
-          className="text-2xl text-slate-200"
+          className="text-base text-slate-200"
           style={
             {
               "paddingHorizontal": 10,
@@ -268,8 +340,7 @@ exports[`PrivacyPolicy 1`] = `
           b. Opt-Out:
           
 			
-           
-          You may choose not to share certain information or opt-out of specific features or services within the App.
+           You may choose not to share certain information or opt-out of specific features or services within the App.
           
 
 
@@ -277,15 +348,15 @@ exports[`PrivacyPolicy 1`] = `
           
 			
            You have the right to access and correct inaccuracies in your personal information held by Barbell.
-          
-
-
         </Text>
+      </View>
+      <View
+        className="m-4 p-4 rounded-lg bg-bb-dark-gray"
+      >
         <Text
-          className="text-2xl text-slate-200"
+          className="text-lg text-slate-200"
           style={
             {
-              "fontSize": 25,
               "paddingHorizontal": 10,
             }
           }
@@ -293,7 +364,7 @@ exports[`PrivacyPolicy 1`] = `
           6. Children's Privacy
         </Text>
         <Text
-          className="text-2xl text-slate-200"
+          className="text-base text-slate-200"
           style={
             {
               "paddingHorizontal": 10,
@@ -303,15 +374,15 @@ exports[`PrivacyPolicy 1`] = `
           
 			
           Barbell is not intended for individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us immediately.
-          
-
-
         </Text>
+      </View>
+      <View
+        className="m-4 p-4 rounded-lg bg-bb-dark-gray"
+      >
         <Text
-          className="text-2xl text-slate-200"
+          className="text-lg text-slate-200"
           style={
             {
-              "fontSize": 25,
               "paddingHorizontal": 10,
             }
           }
@@ -319,7 +390,7 @@ exports[`PrivacyPolicy 1`] = `
           7. Changes to this Privacy Policy
         </Text>
         <Text
-          className="text-2xl text-slate-200"
+          className="text-base text-slate-200"
           style={
             {
               "paddingHorizontal": 10,
@@ -329,36 +400,11 @@ exports[`PrivacyPolicy 1`] = `
           
 			
            We reserve the right to update or modify this Privacy Policy at any time. We will notify you of any material changes by posting the updated policy on our website or through other communication channels.
-          
-
-
         </Text>
-        <Text
-          className="text-2xl text-slate-200"
-          style={
-            {
-              "fontSize": 25,
-              "paddingHorizontal": 10,
-            }
-          }
-        >
-          8. Contact Us
-        </Text>
-        <Text
-          className="text-2xl text-slate-200"
-          style={
-            {
-              "paddingHorizontal": 10,
-            }
-          }
-        >
-          
-			
-          If you have any questions or concerns about this Privacy Policy or our practices regarding your personal information, please contact us at barbell@gmail.com.
-          
-
-
-        </Text>
+      </View>
+      <View
+        className="m-4 p-4 rounded-lg bg-bb-dark-gray"
+      >
         <Text
           className="text-2x1 text-slate-200"
           style={
@@ -368,11 +414,18 @@ exports[`PrivacyPolicy 1`] = `
           }
         >
           By using the Barbell App, you consent to the collection, use, and sharing of your information as described in this Privacy Policy. We encourage you to review this policy periodically for any updates or changes.
-          
-
-
         </Text>
       </View>
+      <Text
+        className="text-2x1 text-slate-500"
+        style={
+          {
+            "paddingHorizontal": 10,
+          }
+        }
+      >
+        Last updated: April 20, 2020
+      </Text>
     </View>
   </RCTScrollView>
 </RNCSafeAreaView>

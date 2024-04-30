@@ -1,0 +1,214 @@
+[
+  {
+    "id": 1,
+    "name": "Tricep Day",
+    "description": "In case you missed triceps during arm day.",
+    "createdAt": "2024-03-20T14:30:14.327378Z",
+    "updatedAt": "2024-03-20T14:30:14.327378Z",
+    "likes": 45,
+    "exerciseIds": [1, 2],
+    "userId": 3
+  },
+  {
+    "id": 2,
+    "name": "Push Routine",
+    "description": "Full body workout for push days.",
+    "createdAt": "2024-02-23T18:16:26.271755Z",
+    "updatedAt": "2024-02-23T18:16:26.271755Z",
+    "likes": 7,
+    "exerciseIds": [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+      27, 28, 29, 30, 31
+    ],
+    "userId": 2
+  },
+  {
+    "id": 3,
+    "name": "Pull Day",
+    "description": "Lower body workouts for a pull day.",
+    "createdAt": "2024-01-26T09:19:38.386074Z",
+    "updatedAt": "2024-01-26T09:19:38.386074Z",
+    "likes": 44,
+    "exerciseIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+    "userId": 8
+  },
+  {
+    "id": 4,
+    "name": "Arm Routine",
+    "description": "Hits triceps, biceps, and forearms.",
+    "createdAt": "2024-03-21T10:19:01.069035Z",
+    "updatedAt": "2024-03-21T10:19:01.069035Z",
+    "likes": 32,
+    "exerciseIds": [1, 2, 3, 4],
+    "userId": 1
+  },
+  {
+    "id": 5,
+    "name": "Central.",
+    "description": "Some core workouts for overall strength building",
+    "createdAt": "2024-01-31T06:46:06.370750Z",
+    "updatedAt": "2024-01-31T06:46:06.370750Z",
+    "likes": 76,
+    "exerciseIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+    "userId": 9
+  },
+  {
+    "id": 6,
+    "name": "Back",
+    "description": "Helping to build those lats and deltoids while working on posture",
+    "createdAt": "2024-01-21T19:22:30.318147Z",
+    "updatedAt": "2024-01-21T19:22:30.318147Z",
+    "likes": 13,
+    "exerciseIds": [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+      27, 28, 29, 30, 31, 32
+    ],
+    "userId": 5
+  },
+  {
+    "id": 7,
+    "name": "Neck Day",
+    "description": "It's a LOT of workouts, most of them not relevant. I was just playing around with this feature.",
+    "createdAt": "2024-03-06T19:18:13.128998Z",
+    "updatedAt": "2024-03-06T19:18:13.128998Z",
+    "likes": 6,
+    "exerciseIds": [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+      27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44
+    ],
+    "userId": 8
+  },
+  {
+    "id": 8,
+    "name": "Drop sets",
+    "description": "Four exercises, all drop sets, helps build endurance",
+    "createdAt": "2024-02-11T17:47:09.802902Z",
+    "updatedAt": "2024-02-11T17:47:09.802902Z",
+    "likes": 42,
+    "exerciseIds": [1, 2, 3, 4],
+    "userId": 9
+  },
+  {
+    "id": 9,
+    "name": "Good name.",
+    "description": "An even better description.",
+    "createdAt": "2024-02-09T17:03:22.871147Z",
+    "updatedAt": "2024-02-09T17:03:22.871147Z",
+    "likes": 19,
+    "exerciseIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "userId": 4
+  },
+  {
+    "id": 10,
+    "name": "Casual Full Body",
+    "description": "A full body exercise based on reps, take longer rests to let your body fully recover between sets.",
+    "createdAt": "2024-04-12T06:43:05.527626Z",
+    "updatedAt": "2024-04-12T06:43:05.527626Z",
+    "likes": 69,
+    "exerciseIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "userId": 4
+  },
+  {
+    "id": 11,
+    "name": "Calves",
+    "description": "Gotta build them calves. Genetics can only do so much.",
+    "createdAt": "2024-02-07T07:17:48.512124Z",
+    "updatedAt": "2024-02-07T07:17:48.512124Z",
+    "likes": 10,
+    "exerciseIds": [1, 2, 3, 4],
+    "userId": 5
+  },
+  {
+    "id": 12,
+    "name": "Cable Workouts",
+    "description": "Most of these are not cable workouts. Have fun though!",
+    "createdAt": "2024-01-27T22:44:43.056852Z",
+    "updatedAt": "2024-01-27T22:44:43.056852Z",
+    "likes": 20,
+    "exerciseIds": [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+      27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43
+    ],
+    "userId": 2
+  },
+  {
+    "id": 13,
+    "name": "Super Serious Body Weight Exercises",
+    "description": "A handful of bodyweight exercises to help you build a relative amount of strength.",
+    "createdAt": "2024-04-07T08:29:09.378808Z",
+    "updatedAt": "2024-04-07T08:29:09.378808Z",
+    "likes": 79,
+    "exerciseIds": [1, 2, 3, 4, 5, 6],
+    "userId": 9
+  },
+  {
+    "id": 14,
+    "name": "Cardio",
+    "description": "A lot of drop sets, low resistance. Helps build cardiovascular strength.",
+    "createdAt": "2024-02-18T04:12:30.272517Z",
+    "updatedAt": "2024-02-18T04:12:30.272517Z",
+    "likes": 65,
+    "exerciseIds": [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+    ],
+    "userId": 9
+  },
+  {
+    "id": 15,
+    "name": "Ear Day",
+    "description": "I'm running out of ideas for these things",
+    "createdAt": "2024-02-14T07:20:35.345022Z",
+    "updatedAt": "2024-02-14T07:20:35.345022Z",
+    "likes": 50,
+    "exerciseIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+    "userId": 5
+  },
+  {
+    "id": 16,
+    "name": "Hockey Training",
+    "description": "For off-season strength training sessions.",
+    "createdAt": "2024-03-03T06:26:52.444617Z",
+    "updatedAt": "2024-03-03T06:26:52.444617Z",
+    "likes": 26,
+    "exerciseIds": [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+      27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45
+    ],
+    "userId": 2
+  },
+  {
+    "id": 17,
+    "name": "Advanced Full Body Workout",
+    "description": "Longer full body workout that targets all major muscle groups.",
+    "createdAt": "2024-03-11T15:00:37.957415Z",
+    "updatedAt": "2024-03-11T15:00:37.957415Z",
+    "likes": 92,
+    "exerciseIds": [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+    ],
+    "userId": 4
+  },
+  {
+    "id": 18,
+    "name": "Demon Day",
+    "description": "A workout far beyond your wildest dreams to work off that Caniac combo from yesteryear.",
+    "createdAt": "2024-02-29T08:56:58.163783Z",
+    "updatedAt": "2024-02-29T08:56:58.163783Z",
+    "likes": 5,
+    "exerciseIds": [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+      27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41
+    ],
+    "userId": 8
+  },
+  {
+    "id": 19,
+    "name": "Demon Day Jr.",
+    "description": "To work off that Box combo.",
+    "createdAt": "2024-03-31T23:54:52.769629Z",
+    "updatedAt": "2024-03-31T23:54:52.769629Z",
+    "likes": 74,
+    "exerciseIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+    "userId": 8
+  }
+]

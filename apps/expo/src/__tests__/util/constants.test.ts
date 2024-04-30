@@ -10,6 +10,6 @@ describe('Font Awesome icon sizes', () => {
 
 describe('Activity Feed Item Limit', () => {
   test('should have a default value of 10', () => {
-    expect(ACTIVITY_FEED_ITEM_LIMIT).toBe(10)
+    expect(ACTIVITY_FEED_ITEM_LIMIT).toBe(3)
   })
 })

@@ -146,18 +146,18 @@ export function TRPCReactProvider(props: { children: React.ReactNode; headers?: 
         }),
         /* verison 1 */
         // https://trpc.io/docs/client/links/httpBatchStreamLink
-        // unstable_httpBatchStreamLink({
-        //   transformer: SuperJSON,
-        //   url: getBaseUrl() + '/api/trpc',
-        //   async headers() {
-        //     const headers = new Headers()
-        //     headers.set('x-trpc-source', 'nextjs-react')
-        //     return headers
-        //   },
-        // }),
+        unstable_httpBatchStreamLink({
+          transformer: SuperJSON,
+          url: getBaseUrl() + '/api/trpc',
+          async headers() {
+            const headers = new Headers()
+            headers.set('x-trpc-source', 'nextjs-react')
+            return headers
+          },
+        }),
 
         /* version 2 */
-        getEndingLink(),
+        // getEndingLink(),
 
         /* version 3 */
         // wsClient

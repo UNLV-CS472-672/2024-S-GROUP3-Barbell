@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
 import { Octicons } from '@expo/vector-icons'
 
-export default function MessageInput() {
+export default function MessageInput({ setMsg }: { setMsg: any }) {
+  const [input, setInput] = useState<string>()
+  const handleSend = () => {
+    setMsg(input)
+    setInput('')
+  }
   return (
     <View
       style={{
@@ -16,8 +21,8 @@ export default function MessageInput() {
       }}
     >
       <TextInput
-        placeholder="Message..."
-        placeholderTextColor="#CACACA"
+        placeholder='Message...'
+        placeholderTextColor='#CACACA'
         style={{
           flex: 1,
           borderWidth: 1,
@@ -28,9 +33,11 @@ export default function MessageInput() {
           backgroundColor: '#1C1B1B',
           opacity: 0.9,
         }}
-        keyboardAppearance="dark"
+        value={input}
+        onChangeText={setInput}
+        keyboardAppearance='dark'
       />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleSend}>
         <View
           style={{
             marginLeft: 10,
@@ -41,7 +48,7 @@ export default function MessageInput() {
             borderWidth: 1,
           }}
         >
-          <Octicons name="paper-airplane" size={18} color="#CACACA" />
+          <Octicons name='paper-airplane' size={18} color='#CACACA' />
         </View>
       </TouchableOpacity>
     </View>

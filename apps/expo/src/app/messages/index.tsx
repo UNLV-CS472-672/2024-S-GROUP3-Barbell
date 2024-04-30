@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -41,11 +41,7 @@ export default function MessageView() {
     chatId = Number(p['chatId'])
   }
 
-  const {
-    data: messages,
-    isFetching,
-    isFetched,
-  } = api.notif.getMessagesFromChatIdAndChatType.useQuery({
+  const { data, isFetching, isFetched } = api.notif.getMessagesFromChatIdAndChatType.useQuery({
     id: chatId,
     type: p['type'] as ChatType,
     user1Id: user?.id!,
@@ -53,6 +49,34 @@ export default function MessageView() {
   })
 
   const chattingWith = p['chatName']?.toString().trim()
+
+  const [addMsg, setAddMsg] = useState<any>('')
+  const [messages, setMessages] = useState<any>([
+    {
+      id: 9999,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      content: 'WE GO GYM??',
+      read: false,
+      chatId: 9999,
+      senderId: 9999,
+    },
+  ])
+  useEffect(() => {
+    if (addMsg) {
+      setMessages(
+        messages.concat({
+          content: addMsg,
+          id: 10000,
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+          senderId: user?.id,
+          chatId: 9999,
+          read: true,
+        }),
+      )
+    }
+  }, [addMsg])
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
@@ -86,7 +110,7 @@ export default function MessageView() {
               }
             >
               <View className='h-fit gap-y-3'>
-                {messages?.map((message) =>
+                {messages?.map((message: any) =>
                   message.senderId == user?.id ? (
                     <View
                       key={message.id}
@@ -109,7 +133,7 @@ export default function MessageView() {
             <Text>Issue retrieving messages</Text>
           )}
         </View>
-        <MessageInput />
+        <MessageInput setMsg={setAddMsg} />
       </KeyboardAvoidingView>
     </SafeAreaView>
   )

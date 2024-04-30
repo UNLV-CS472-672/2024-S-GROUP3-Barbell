@@ -37,6 +37,7 @@ const config: Config = {
     '!**/(friends)/**',
     '!**/(workout)/**',
     '!**/tracker/**',
+    '!**/profile/**',
   ],
   // coverageThreshold: {
   //   global: {

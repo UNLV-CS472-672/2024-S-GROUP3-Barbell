@@ -1,0 +1,154 @@
+[
+  {
+    "createdAt": "2024-01-22T19:08:43.077216Z",
+    "content": "Welcome to Barbell!",
+    "type": "SYS",
+    "read": true,
+    "receiverId": 3,
+    "senderId": 5
+  },
+  {
+    "createdAt": "2024-03-11T10:55:06.588390Z",
+    "content": "wants to be your friend!",
+    "type": "FRIEND_REQUEST",
+    "read": true,
+    "receiverId": 2,
+    "senderId": 8
+  },
+  {
+    "createdAt": "2024-04-08T18:59:05.669130Z",
+    "content": "nudged you!",
+    "type": "NUDGE",
+    "read": false,
+    "receiverId": 1,
+    "senderId": 3
+  },
+  {
+    "createdAt": "2024-01-24T23:16:03.243779Z",
+    "content": "wants to be your friend!",
+    "type": "FRIEND_REQUEST",
+    "read": true,
+    "receiverId": 4,
+    "senderId": 1
+  },
+  {
+    "createdAt": "2024-03-26T08:45:55.532037Z",
+    "content": "nudged you!",
+    "type": "NUDGE",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 2
+  },
+  {
+    "createdAt": "2024-04-19T07:31:26.554679Z",
+    "content": "wants to be your friend!",
+    "type": "FRIEND_REQUEST",
+    "read": true,
+    "receiverId": 3,
+    "senderId": 1
+  },
+  {
+    "createdAt": "2024-03-15T01:07:56.205303Z",
+    "content": "Something something Barbell",
+    "type": "SYS",
+    "read": true,
+    "receiverId": 9,
+    "senderId": 8
+  },
+  {
+    "createdAt": "2024-02-06T01:57:26.471418Z",
+    "content": "nudged you!",
+    "type": "NUDGE",
+    "read": true,
+    "receiverId": 1,
+    "senderId": 4
+  },
+  {
+    "createdAt": "2024-04-04T23:48:56.693541Z",
+    "content": "How did you break Barbell man :(",
+    "type": "SYS",
+    "read": false,
+    "receiverId": 1,
+    "senderId": 3
+  },
+  {
+    "createdAt": "2024-01-12T20:23:26.898963Z",
+    "content": "nudged you!",
+    "type": "NUDGE",
+    "read": true,
+    "receiverId": 4,
+    "senderId": 5
+  },
+  {
+    "createdAt": "2024-03-11T19:45:53.693779Z",
+    "content": "nudged you!",
+    "type": "NUDGE",
+    "read": true,
+    "receiverId": 7,
+    "senderId": 6
+  },
+  {
+    "createdAt": "2024-04-04T16:30:16.163649Z",
+    "content": "Whats up, Barbell coming at you live.",
+    "type": "SYS",
+    "read": false,
+    "receiverId": 5,
+    "senderId": 6
+  },
+  {
+    "createdAt": "2024-01-30T05:29:29.202993Z",
+    "content": "nudged you!",
+    "type": "NUDGE",
+    "read": false,
+    "receiverId": 2,
+    "senderId": 1
+  },
+  {
+    "createdAt": "2024-02-10T01:28:02.087576Z",
+    "content": "nudged you!",
+    "type": "NUDGE",
+    "read": true,
+    "receiverId": 5,
+    "senderId": 9
+  },
+  {
+    "createdAt": "2024-01-16T16:30:13.329360Z",
+    "content": "wants to be your friend!",
+    "type": "FRIEND_REQUEST",
+    "read": false,
+    "receiverId": 8,
+    "senderId": 9
+  },
+  {
+    "createdAt": "2024-02-18T15:29:59.418794Z",
+    "content": "nudged you!",
+    "type": "NUDGE",
+    "read": true,
+    "receiverId": 8,
+    "senderId": 3
+  },
+  {
+    "createdAt": "2024-03-07T01:41:17.952440Z",
+    "content": "wants to be your friend!",
+    "type": "FRIEND_REQUEST",
+    "read": true,
+    "receiverId": 3,
+    "senderId": 8
+  },
+  {
+    "createdAt": "2024-01-22T22:13:36.731423Z",
+    "content": "Please please please please Barbell NEEDS you to verify your e-mail.",
+    "type": "SYS",
+    "read": false,
+    "receiverId": 4,
+    "senderId": 8
+  },
+  {
+    "createdAt": "2024-03-02T05:36:34.592434Z",
+    "content": "liked your post!",
+    "type": "LIKE",
+    "read": false,
+    "receiverId": 1,
+    "senderId": 8
+  }
+]

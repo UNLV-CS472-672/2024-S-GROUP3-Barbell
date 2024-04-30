@@ -38,7 +38,7 @@ const UnderDevTag: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.box, { opacity }]}>
+      <Animated.View style={[styles.box, { opacity }]} testID='animated-view'>
         <Entypo name='code' size={24} color='#881337' />
         <Text className='text-2xl font-bold text-rose-900'>Under development</Text>
       </Animated.View>

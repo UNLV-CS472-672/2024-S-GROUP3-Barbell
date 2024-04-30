@@ -9,47 +9,50 @@ import { ACTIVITY_FEED_ITEM_LIMIT } from '~/utils/constants'
 import { api } from '~/utils/trpc/api'
 
 const ActivityFeed = () => {
-  let activities: any[] = []
   const { userData } = useGlobalContext()
 
   const { data: friends, isLoading: friendsIsLoading } = api.friend.getFriendsFromUserId.useQuery({
     id: userData?.id ?? 0,
+
   })
 
-  const { data: friendsWorkoutLogs, isLoading: friendsActivitiesLoading } =
-    api.workoutLog.getActivityFeedWorkouts.useQuery(
-      {
-        friendIds: friends?.map((friend) => friend.id) ?? [],
-        count: ACTIVITY_FEED_ITEM_LIMIT,
-      },
-      { enabled: !friendsIsLoading },
-    )
+  const {
+    data: friendsWorkoutLogs,
+    isFetching: friendsActivitiesLoading,
+    isFetched: friendsActivitiesFetched,
+  } = api.workoutLog.getActivityFeedWorkouts.useQuery(
+    {
+      friendIds: friends?.map((friend) => friend.id) ?? [],
+      count: ACTIVITY_FEED_ITEM_LIMIT,
+    },
+    { enabled: !friendsIsLoading },
+  )
 
-  if (!friendsActivitiesLoading) {
-    activities =
-      friendsWorkoutLogs?.map((workoutLog) => {
-        return (
-          <Activity
-            user={workoutLog.user}
-            workout={workoutLog.workoutTemplate}
-            workoutLog={workoutLog}
-          ></Activity>
-        )
-      }) ?? []
-  }
+  const activities = friendsWorkoutLogs?.map((activity) => (
+    <View key={activity.id} className='py-2'>
+      <Text className='text-[16px] font-bold text-white'>{activity.user.username.trim()}</Text>
+      <Text className='text-white' numberOfLines={1}>
+        {'Finished ' + activity.workoutTemplate.name}
+      </Text>
+    </View>
+  ))
+
+  const noActivityFoundText = (
+    <View className='mb-8 pt-4'>
+      <Text testID='no-posts-test' className='color-white text-center'>
+        No friend activity to display.
+      </Text>
+    </View>
+  )
 
   return (
-    <View className='bg-dark-purple h-96 rounded-2xl'>
+    <View style={{ backgroundColor: '#747474' }} className='rounded-2xl'>
       <View className='p-2'>
-        <Label text='Friend Activities' textColor='white' backgroundColor='#34344F' />
+        <Label text='Friend Activity' textColor='white' backgroundColor='#535353' />
+        {friendsWorkoutLogs && activities}
+        {friendsWorkoutLogs?.length == 0 && noActivityFoundText}
+        {friendsActivitiesLoading && <RotatingBarbellIcon />}
       </View>
-      {friendsIsLoading || friendsActivitiesLoading ? (
-        <View className='flex h-[70%] items-center justify-center'>
-          <RotatingBarbellIcon />
-        </View>
-      ) : (
-        <FlatList data={activities} renderItem={({ item }) => item} />
-      )}
     </View>
   )
 }

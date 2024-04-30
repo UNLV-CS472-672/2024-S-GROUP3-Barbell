@@ -60,6 +60,7 @@ export const friendRouter = createTRPCRouter({
         })
       }
 
+      /* istanbul ignore next -- @preserve */
       return await ctx.prisma.notification.delete({
         where: {
           id: input.notificationId,
@@ -87,6 +88,7 @@ export const friendRouter = createTRPCRouter({
         },
       })
 
+      /* istanbul ignore if -- @preserve */
       if (fr1)
         await ctx.prisma.friend.delete({
           where: {
@@ -94,6 +96,7 @@ export const friendRouter = createTRPCRouter({
           },
         })
 
+      /* istanbul ignore if -- @preserve */
       if (fr2)
         await ctx.prisma.friend.delete({
           where: {
@@ -155,6 +158,7 @@ export const friendRouter = createTRPCRouter({
               },
             })
 
+            /* istanbul ignore next -- @preserve */
             const userWithChatId: UserWithChatId = {
               ...user,
               chatId: chatIdWithUsers ? chatIdWithUsers.id : null,

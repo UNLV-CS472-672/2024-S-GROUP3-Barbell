@@ -43,11 +43,12 @@ const Dashboard = () => {
               </TouchableOpacity>
             }
           />
-          <View className='mt-4 px-4'>
-            <Text className='text-4xl font-semibold text-white'>
-              Hello {userData?.name.split(' ')[0]}!
-            </Text>
-          </View>
+          <ScrollView className='flex-1'>
+            <View className='mt-4 px-4'>
+              <Text className='text-4xl font-semibold text-white'>
+                Hello {userData?.name.split(' ')[0]}!
+              </Text>
+            </View>
 
           <View className='mt-6 gap-y-4 px-4'>
             <PostDashboard />

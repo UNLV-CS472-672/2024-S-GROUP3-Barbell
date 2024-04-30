@@ -81,4 +81,8 @@ describe('FRIEND', async () => {
     // expect to fail
     expect(friend2).toBeDefined()
   })
+
+  it('/getFriendsFromUserId', async () => {
+    const friend = await caller.friend.getFriendsFromUserId({ id: 1 })
+  })
 })

@@ -88,7 +88,6 @@ describe('USER', async () => {
 
     const findDeletedUser = await caller.user.byId({ id: userToBeDeleted.id })
     expect(findDeletedUser).toBeNull() // Ensuring the user cannot be fetched post-deletion.
-
   })
 
   it('/getUserWorkoutHistory', async () => {
@@ -102,5 +101,32 @@ describe('USER', async () => {
 
     // Cleanup
     await caller.user.delete({ id: userWithWorkout.id })
+  })
+
+  it('/getIdByClerkId', async () => {
+    const getClerbyid = await caller.user.getIdByClerkId({ clerkId: '1' })
+  })
+
+  it('/getProfileInfoById', async () => {
+    const getProfileInfo = await caller.user.getProfileInfoById({
+      viewingProfileId: 1,
+      loggedInUserId: 1,
+    })
+  })
+
+  it('/getUserWorkoutHistory', async () => {
+    const getWorkoutHistory = await caller.user.getUserWorkoutHistory({ userId: 1 })
+  })
+
+  it('/getUserSavedWorkouts', async () => {
+    const getSavedWorkouts = await caller.user.getUserSavedWorkouts({ userId: 1 })
+  })
+
+  it('/getUserWorkoutHistoryPaginated', async () => {
+    const getWorkoutHistoryPaginated = await caller.user.getUserWorkoutHistoryPaginated({
+      id: 1,
+      page: 1,
+      workouts: 1
+    })
   })
 })

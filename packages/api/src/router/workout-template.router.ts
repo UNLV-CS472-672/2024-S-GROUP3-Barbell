@@ -95,4 +95,28 @@ export const workoutTemplateRouter = createTRPCRouter({
 
       return response
     }),
+
+  createWorkoutTemplate: publicProcedure
+    .input(
+      z.object({
+        exerciseIds: z.array(z.number().int()),
+        userId: z.number().int(),
+        name: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { prisma } = ctx
+
+      console.log(input)
+
+      const workoutTemplate = await prisma.workoutTemplate.create({
+        data: {
+          exerciseIds: input.exerciseIds,
+          userId: input.userId,
+          name: input.name,
+        },
+      })
+
+      return workoutTemplate.id
+    }),
 })

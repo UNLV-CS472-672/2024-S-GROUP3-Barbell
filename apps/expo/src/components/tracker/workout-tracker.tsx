@@ -32,14 +32,14 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef }) => {
   const { workoutTemplateId, selectedExercises } = useGlobalContext()
 
   // selected exercises
-  const {
-    data: selectedExercisesData,
-    isFetching: exercisesIsFetching,
-    isFetched: exercisesIsFetched,
-    refetch,
-  } = api.exercise.getExercisesFromExerciseIdArray.useQuery({
-    ids: selectedExercises,
-  })
+  // const {
+  //   data: selectedExercisesData,
+  //   isFetching: exercisesIsFetching,
+  //   isFetched: exercisesIsFetched,
+  //   refetch,
+  // } = api.exercise.getExercisesFromExerciseIdArray.useQuery({
+  //   ids: selectedExercises,
+  // })
 
   // workout template exercises
   const {
@@ -60,11 +60,13 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef }) => {
     setWorkoutTemplate(extractWorkoutTemplate(workoutTemplateExercises))
     setWorkoutName(extractWorkoutName(workoutTemplateExercises))
 
-    setExercises(
-      produce((draft) => {
-        return [...extractExerciseData(workoutTemplateExercises), ...(selectedExercisesData ?? [])]
-      }),
-    )
+    setExercises(extractExerciseData(workoutTemplateExercises))
+
+    // setExercises(
+    //   produce((draft) => {
+    //     return [...extractExerciseData(workoutTemplateExercises), ...(selectedExercisesData ?? [])]
+    //   }),
+    // )
   }, [workoutTemplateExercises])
 
   // TODO: Move note attribute to exerciseLog schema
@@ -72,7 +74,7 @@ const WorkoutTracker: React.FC<IWorkoutTrackerProps> = ({ bottomSheetRef }) => {
   // TODO: Fix the keyboard avoid view with the inputs
   return (
     <View className='flex-1 pb-10'>
-      {isFetching || exercisesIsFetching ? (
+      {isFetching ? (
         <View className='flex h-[90%] items-center justify-center'>
           <RotatingBarbellIcon size={46} />
         </View>

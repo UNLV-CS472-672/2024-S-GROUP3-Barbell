@@ -9,6 +9,7 @@ import Button from '~/components/ui/button/button'
 import NavBar from '~/components/ui/nav-bar/NavBar'
 import ExerciseList from '~/components/workout/exerciseList'
 import { useGlobalContext } from '~/context/global-context'
+import { api } from '~/utils/trpc/api'
 
 const styles = StyleSheet.create({
   container: {
@@ -18,11 +19,17 @@ const styles = StyleSheet.create({
 })
 
 export default function CreateNewWorkout() {
-  const { selectedExercises, bottomSheetRef, setWorkoutTemplateId } = useGlobalContext()
+  const { selectedExercises, bottomSheetRef, setWorkoutTemplateId, userData } = useGlobalContext()
+  const workoutTemplateMutator = api.workoutTemplate.createWorkoutTemplate.useMutation()
 
-  const handleStartWorkout = () => {
+  const handleStartWorkout = async () => {
     router.replace('(dashboard)/')
-    setWorkoutTemplateId(0)
+    const workoutTemplateIdResponse = await workoutTemplateMutator.mutateAsync({
+      exerciseIds: selectedExercises,
+      userId: userData?.id!,
+      name: 'New Workout',
+    })
+    setWorkoutTemplateId(workoutTemplateIdResponse)
     bottomSheetRef?.current?.present()
   }
 

@@ -4,18 +4,18 @@ import { prisma } from '..'
 
 /*  */
 import award from '../mock-data/award.json'
-import spotify from '../mock-data/spotify.json'
+// import spotify from '../mock-data/spotify.json'
 
 /*  */
-import chat from '../new-gen-data/chat.json'
-import exercise from '../new-gen-data/exercise.json'
-import message from '../new-gen-data/message.json'
-import users from '../new-gen-data/user.json'
-import workoutLog from '../new-gen-data/workoutLog.json'
-import workoutTemplate from '../new-gen-data/workoutTemplate.json'
-import friend from '../new-gen-data/friend.json'
-import notification from '../new-gen-data/notification.json'
-import post from '../new-gen-data/post.json'
+import chat from '../mock-data/chat.json'
+import exercise from '../mock-data/exercise.json'
+import message from '../mock-data/chat.json'
+import users from '../mock-data/user.json'
+import workoutLog from '../mock-data/workoutLog.json'
+import workoutTemplate from '../mock-data/workoutTemplate.json'
+import friend from '../mock-data/friend.json'
+import notification from '../mock-data/notification.json'
+import post from '../mock-data/post.json'
 
 /**
  * @param type logging type
@@ -106,10 +106,6 @@ const loaddb = async () => {
     logger('add', 'user')
 
     /*  */
-    await prisma.spotifyData.createMany({
-      data: spotify as Prisma.SpotifyDataCreateManyInput[],
-    })
-    logger('add', 'spotify')
 
     /*  */
     await prisma.post.createMany({ data: post })
@@ -144,11 +140,10 @@ const loaddb = async () => {
     })
     logger('add', 'chat')
 
-    /*  */
-    await prisma.message.createMany({
-      data: message as Prisma.MessageCreateManyInput[],
-    })
-    logger('add', 'message')
+    // await prisma.message.createMany({
+    //   data: message as Prisma.MessageCreateManyInput[],
+    // })
+    // logger('add', 'message')
 
     /*  */
     await prisma.award.createMany({
